@@ -237,7 +237,7 @@ footer {
     background-color: var(--color-black);
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    max-width: 1200px;
+    max-width: 1136px;
     margin: 0 auto;
     padding: 0 2rem;
     border-bottom-left-radius: 20px;
