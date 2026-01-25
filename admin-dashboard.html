@@ -61,6 +61,55 @@
         <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
     </footer>
 
+    <!-- Submenu Hover Functionality (non-module script to ensure it runs independently) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle Update Index submenu with hover
+            const updateIndexBtn = document.getElementById('update-index-btn');
+            const submenu = document.getElementById('update-index-submenu');
+            let submenuTimeout = null;
+
+            // Animation timing constants
+            const ANIMATION_DURATION = 300; // Must match CSS transition duration
+            const HIDE_DELAY = 100; // Small delay to prevent flicker when moving between elements
+            const INITIAL_DELAY = 10; // Small delay to ensure display:block is applied before animation
+
+            function showSubmenu() {
+                if (submenuTimeout) {
+                    clearTimeout(submenuTimeout);
+                    submenuTimeout = null;
+                }
+                submenu.style.display = 'block';
+                submenu.style.maxHeight = '0';
+                submenu.style.overflow = 'hidden';
+                // Small delay ensures display:block is applied before starting the animation
+                setTimeout(() => {
+                    submenu.style.transition = 'max-height 0.3s ease-out';
+                    submenu.style.maxHeight = '200px'; // Enough to fit submenu content
+                }, INITIAL_DELAY);
+            }
+
+            function hideSubmenu() {
+                // Small delay prevents menu from disappearing when moving mouse between button and submenu
+                submenuTimeout = setTimeout(() => {
+                    submenu.style.maxHeight = '0';
+                    // Hide after animation completes
+                    setTimeout(() => {
+                        submenu.style.display = 'none';
+                    }, ANIMATION_DURATION);
+                }, HIDE_DELAY);
+            }
+
+            // Show submenu on hover over Update Index button
+            updateIndexBtn.addEventListener('mouseenter', showSubmenu);
+            updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
+
+            // Keep submenu visible when hovering over it
+            submenu.addEventListener('mouseenter', showSubmenu);
+            submenu.addEventListener('mouseleave', hideSubmenu);
+        });
+    </script>
+
     <!-- Firebase SDK and Authentication Check -->
     <script type="module">
         import { checkAuthState, logoutAdmin } from './auth.js';
@@ -95,26 +144,6 @@
             const result = await logoutAdmin();
             if (result.success) {
                 window.location.href = 'hoteladmin.html';
-            }
-        });
-
-        // Toggle Update Index submenu
-        document.getElementById('update-index-btn').addEventListener('click', () => {
-            const submenu = document.getElementById('update-index-submenu');
-            if (submenu.style.display === 'none') {
-                submenu.style.display = 'block';
-                // Slide down animation
-                submenu.style.maxHeight = '0';
-                submenu.style.overflow = 'hidden';
-                setTimeout(() => {
-                    submenu.style.transition = 'max-height 0.3s ease-out';
-                    submenu.style.maxHeight = '200px';
-                }, 10);
-            } else {
-                submenu.style.maxHeight = '0';
-                setTimeout(() => {
-                    submenu.style.display = 'none';
-                }, 300);
             }
         });
 

@@ -239,12 +239,14 @@ footer {
     transition: max-height 0.3s ease-out;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    box-sizing: border-box;
 }
 
 .submenu-content {
-    padding: 1rem;
+    padding: 1rem 0;
     display: flex;
     gap: 0.5rem;
     justify-content: center;
