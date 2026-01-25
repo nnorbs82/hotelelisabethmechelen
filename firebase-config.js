@@ -14,6 +14,7 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-s
 const firebaseConfig = {
   apiKey: "AIzaSyAn-iGtS-XuP4-mEZjq1R-5ms3LkhRuzf8",
   authDomain: "hotelelisabethmechelen-9dd98.firebaseapp.com",
+  databaseURL: "https://hotelelisabethmechelen-9dd98-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "hotelelisabethmechelen-9dd98",
   storageBucket: "hotelelisabethmechelen-9dd98.firebasestorage.app",
   messagingSenderId: "201071640171",
