@@ -5,6 +5,7 @@
     --color-beige: #D4D3C3;
     --color-sage: #959380;
     --color-white: #FFFFFF;
+    --header-height: 80px;
 }
 
 * {
@@ -18,6 +19,7 @@ body {
     background-color: var(--color-white);
     color: var(--color-black);
     line-height: 1.6;
+    padding-top: var(--header-height); /* Account for fixed header height */
 }
 
 /* Header Styles */
@@ -25,6 +27,11 @@ header {
     background-color: var(--color-black);
     padding: 1rem 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 nav {
