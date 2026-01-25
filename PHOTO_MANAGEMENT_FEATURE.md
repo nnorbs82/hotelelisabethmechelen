@@ -36,12 +36,12 @@ The photo management feature allows you to upload, delete, and rearrange photos 
 ### Step 5: Manage Photos
 
 **Reorder Photos:**
-- Use the ↑ (up arrow) button to move a photo up in the order
-- Use the ↓ (down arrow) button to move a photo down in the order
+- Use the "Up" button to move a photo up in the order
+- Use the "Down" button to move a photo down in the order
 - The position number updates automatically
 
 **Delete Photos:**
-- Click the 🗑️ (trash) button on any photo
+- Click the "Delete" button on any photo
 - Confirm the deletion in the popup dialog
 - The photo will be removed from both Storage and Database
 - Remaining photos will automatically reorder

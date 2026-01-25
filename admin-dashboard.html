@@ -215,8 +215,8 @@
                 photoItem.innerHTML = `
                     <img src="${photo.url}" alt="Main banner photo ${index + 1}">
                     <div class="photo-controls">
-                        <button class="btn-icon move-up" data-index="${index}" aria-label="Move photo up" ${index === 0 ? 'disabled' : ''}>▲</button>
-                        <button class="btn-icon move-down" data-index="${index}" aria-label="Move photo down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>▼</button>
+                        <button class="btn-icon move-up" data-index="${index}" aria-label="Move photo up" ${index === 0 ? 'disabled' : ''}>Up</button>
+                        <button class="btn-icon move-down" data-index="${index}" aria-label="Move photo down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>Down</button>
                         <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" aria-label="Delete photo">Delete</button>
                     </div>
                     <div class="photo-order">Position: ${index + 1}</div>
