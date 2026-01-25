@@ -69,6 +69,11 @@
             const submenu = document.getElementById('update-index-submenu');
             let submenuTimeout = null;
 
+            // Animation timing constants
+            const ANIMATION_DURATION = 300; // Must match CSS transition duration
+            const HIDE_DELAY = 100; // Small delay to prevent flicker when moving between elements
+            const INITIAL_DELAY = 10; // Small delay to ensure display:block is applied before animation
+
             function showSubmenu() {
                 if (submenuTimeout) {
                     clearTimeout(submenuTimeout);
@@ -77,19 +82,22 @@
                 submenu.style.display = 'block';
                 submenu.style.maxHeight = '0';
                 submenu.style.overflow = 'hidden';
+                // Small delay ensures display:block is applied before starting the animation
                 setTimeout(() => {
                     submenu.style.transition = 'max-height 0.3s ease-out';
-                    submenu.style.maxHeight = '200px';
-                }, 10);
+                    submenu.style.maxHeight = '200px'; // Enough to fit submenu content
+                }, INITIAL_DELAY);
             }
 
             function hideSubmenu() {
+                // Small delay prevents menu from disappearing when moving mouse between button and submenu
                 submenuTimeout = setTimeout(() => {
                     submenu.style.maxHeight = '0';
+                    // Hide after animation completes
                     setTimeout(() => {
                         submenu.style.display = 'none';
-                    }, 300);
-                }, 100);
+                    }, ANIMATION_DURATION);
+                }, HIDE_DELAY);
             }
 
             // Show submenu on hover over Update Index button
