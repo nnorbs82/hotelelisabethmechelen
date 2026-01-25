@@ -65,7 +65,7 @@
     <script type="module">
         import { checkAuthState, logoutAdmin } from './auth.js';
         import { storage, database } from './firebase-config.js';
-        import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject, listAll } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+        import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
         import { ref as dbRef, set, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         let currentPhotos = [];
@@ -215,9 +215,9 @@
                 photoItem.innerHTML = `
                     <img src="${photo.url}" alt="Main banner photo ${index + 1}">
                     <div class="photo-controls">
-                        <button class="btn-icon move-up" data-index="${index}" title="Move up" ${index === 0 ? 'disabled' : ''}>↑</button>
-                        <button class="btn-icon move-down" data-index="${index}" title="Move down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>↓</button>
-                        <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" title="Delete">🗑️</button>
+                        <button class="btn-icon move-up" data-index="${index}" aria-label="Move photo up" ${index === 0 ? 'disabled' : ''}>▲</button>
+                        <button class="btn-icon move-down" data-index="${index}" aria-label="Move photo down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>▼</button>
+                        <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" aria-label="Delete photo">Delete</button>
                     </div>
                     <div class="photo-order">Position: ${index + 1}</div>
                 `;

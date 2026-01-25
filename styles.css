@@ -302,6 +302,17 @@ footer {
     cursor: not-allowed;
 }
 
+.btn-icon.delete {
+    background-color: #d32f2f;
+    color: var(--color-white);
+    border-color: #d32f2f;
+}
+
+.btn-icon.delete:hover:not(:disabled) {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
 .photo-order {
     text-align: center;
     margin-top: 0.5rem;
