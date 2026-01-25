@@ -172,6 +172,23 @@ nav a:hover {
     min-height: 100vh;
 }
 
+.admin-page header {
+    background-color: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.admin-page header nav {
+    background-color: var(--color-black);
+    padding: 1rem 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.login-page {
+    padding-top: 0;
+    background-color: var(--color-sage);
+}
+
 /* Login Page Specific Styles */
 .login-container {
     display: flex;
@@ -237,7 +254,7 @@ footer {
     background-color: var(--color-black);
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    max-width: min(1136px, calc(100% - 4rem));
+    width: min(1136px, calc(100% - 4rem));
     margin: 0 auto;
     padding: 0 2rem;
     border-bottom-left-radius: 20px;
