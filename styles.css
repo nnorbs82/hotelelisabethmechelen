@@ -120,7 +120,7 @@ nav a:hover {
 .btn-logout {
     background-color: var(--color-black);
     color: var(--color-beige);
-    border: 2px solid transparent;
+    border: 1px solid transparent;
 }
 
 .btn-logout:hover {
