@@ -98,25 +98,41 @@
             }
         });
 
-        // Toggle Update Index submenu
-        document.getElementById('update-index-btn').addEventListener('click', () => {
-            const submenu = document.getElementById('update-index-submenu');
-            if (submenu.style.display === 'none') {
-                submenu.style.display = 'block';
-                // Slide down animation
-                submenu.style.maxHeight = '0';
-                submenu.style.overflow = 'hidden';
-                setTimeout(() => {
-                    submenu.style.transition = 'max-height 0.3s ease-out';
-                    submenu.style.maxHeight = '200px';
-                }, 10);
-            } else {
+        // Handle Update Index submenu with hover
+        const updateIndexBtn = document.getElementById('update-index-btn');
+        const submenu = document.getElementById('update-index-submenu');
+        let submenuTimeout = null;
+
+        function showSubmenu() {
+            if (submenuTimeout) {
+                clearTimeout(submenuTimeout);
+                submenuTimeout = null;
+            }
+            submenu.style.display = 'block';
+            submenu.style.maxHeight = '0';
+            submenu.style.overflow = 'hidden';
+            setTimeout(() => {
+                submenu.style.transition = 'max-height 0.3s ease-out';
+                submenu.style.maxHeight = '200px';
+            }, 10);
+        }
+
+        function hideSubmenu() {
+            submenuTimeout = setTimeout(() => {
                 submenu.style.maxHeight = '0';
                 setTimeout(() => {
                     submenu.style.display = 'none';
                 }, 300);
-            }
-        });
+            }, 100);
+        }
+
+        // Show submenu on hover over Update Index button
+        updateIndexBtn.addEventListener('mouseenter', showSubmenu);
+        updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
+
+        // Keep submenu visible when hovering over it
+        submenu.addEventListener('mouseenter', showSubmenu);
+        submenu.addEventListener('mouseleave', hideSubmenu);
 
         // Show photo management card when Main Banner is clicked
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
