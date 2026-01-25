@@ -6,6 +6,7 @@
     --color-sage: #959380;
     --color-white: #FFFFFF;
     --header-height: 80px;
+    --logo-height: 52px;
 }
 
 * {
@@ -25,19 +26,21 @@ body {
 /* Header Styles */
 header {
     background-color: var(--color-black);
-    padding: 1rem 0;
+    padding: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
+    height: var(--header-height);
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     padding: 0 10px;
 }
 
@@ -45,6 +48,22 @@ nav h1 {
     color: var(--color-beige);
     font-size: 1.8rem;
     margin: 0;
+}
+
+.nav-logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: var(--logo-height);
+    width: auto;
+    display: block;
+}
+
+.nav-logo:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
 }
 
 .nav-buttons {
