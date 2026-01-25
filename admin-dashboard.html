@@ -42,7 +42,7 @@
             <!-- Photo Management Card -->
             <div id="photo-management-card" class="card" style="display: none;">
                 <h2>Main Banner Photo Management</h2>
-                <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. You can add, delete, and rearrange photos.</p>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. Drag and drop photos to reorder them.</p>
                 
                 <div class="photo-upload-section">
                     <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
@@ -255,6 +255,7 @@
 
         function handleDragEnd(e) {
             e.currentTarget.classList.remove('dragging');
+            draggedIndex = null; // Reset to ensure cleanup
             // Remove drag-over class from all items
             document.querySelectorAll('.photo-item').forEach(item => {
                 item.classList.remove('drag-over');
@@ -262,11 +263,8 @@
         }
 
         function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
+            e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
-            return false;
         }
 
         function handleDragEnter(e) {
@@ -274,13 +272,16 @@
         }
 
         function handleDragLeave(e) {
-            e.currentTarget.classList.remove('drag-over');
+            // Only remove drag-over if we're actually leaving the element
+            // Check that relatedTarget is a valid DOM element before using contains
+            if (!e.relatedTarget || 
+                (e.relatedTarget instanceof Node && !e.currentTarget.contains(e.relatedTarget))) {
+                e.currentTarget.classList.remove('drag-over');
+            }
         }
 
         async function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
+            e.stopPropagation();
             e.preventDefault();
 
             const dropIndex = parseInt(e.currentTarget.dataset.index);
@@ -288,8 +289,6 @@
             if (draggedIndex !== null && draggedIndex !== dropIndex) {
                 await reorderPhotos(draggedIndex, dropIndex);
             }
-
-            return false;
         }
 
         // Reorder photos based on drag and drop
@@ -300,11 +299,18 @@
                 const [movedPhoto] = reorderedPhotos.splice(fromIndex, 1);
                 reorderedPhotos.splice(toIndex, 0, movedPhoto);
 
-                // Update order values
-                for (let i = 0; i < reorderedPhotos.length; i++) {
-                    reorderedPhotos[i].order = i;
-                    await set(dbRef(database, `mainBanner/${reorderedPhotos[i].timestamp}`), reorderedPhotos[i]);
-                }
+                // Update order values first
+                reorderedPhotos.forEach((photo, i) => {
+                    photo.order = i;
+                });
+
+                // Prepare all database updates
+                const updates = reorderedPhotos.map((photo) => {
+                    return set(dbRef(database, `mainBanner/${photo.timestamp}`), photo);
+                });
+
+                // Execute all updates in parallel
+                await Promise.all(updates);
 
                 // Reload photos
                 await loadPhotos();
@@ -336,10 +342,18 @@
         // Reindex photos after deletion
         async function reindexPhotos() {
             try {
-                for (let i = 0; i < currentPhotos.length; i++) {
-                    currentPhotos[i].order = i;
-                    await set(dbRef(database, `mainBanner/${currentPhotos[i].timestamp}`), currentPhotos[i]);
-                }
+                // Update order values first
+                currentPhotos.forEach((photo, i) => {
+                    photo.order = i;
+                });
+
+                // Prepare all database updates
+                const updates = currentPhotos.map((photo) => {
+                    return set(dbRef(database, `mainBanner/${photo.timestamp}`), photo);
+                });
+                
+                // Execute all updates in parallel
+                await Promise.all(updates);
             } catch (error) {
                 console.error('Error reindexing photos:', error);
             }
