@@ -7,6 +7,9 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Note: It is safe and expected for the Firebase API key to be in source code.
+// This is a client-side API key designed to be public. Security is enforced
+// through Firebase Security Rules, not by hiding these configuration values.
 const firebaseConfig = {
   apiKey: "AIzaSyAn-iGtS-XuP4-mEZjq1R-5ms3LkhRuzf8",
   authDomain: "hotelelisabethmechelen-9dd98.firebaseapp.com",
