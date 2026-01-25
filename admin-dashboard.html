@@ -9,10 +9,14 @@
 <body>
     <header>
         <nav>
-            <h1>Hotel Elisabeth Mechelen - Admin Dashboard</h1>
-            <ul>
-                <li><a href="#" id="logout-btn">Logout</a></li>
-            </ul>
+            <h1>Admin Dashboard</h1>
+            <div class="nav-buttons">
+                <button class="btn nav-btn" id="update-index-btn">Update Index</button>
+                <button class="btn nav-btn" id="manage-rooms-btn">Manage Rooms</button>
+                <button class="btn nav-btn" id="manage-offers-btn">Manage Offers</button>
+                <button class="btn nav-btn" id="view-bookings-btn">View Bookings</button>
+                <a href="#" id="logout-btn" class="btn nav-btn">Logout</a>
+            </div>
         </nav>
     </header>
 
@@ -29,13 +33,7 @@
                 <p style="margin-top: 1rem; color: var(--color-sage);">This dashboard will be connected to Firebase Realtime Database for dynamic data management.</p>
             </div>
 
-            <div class="card">
-                <h3>Quick Actions</h3>
-                <button class="btn" style="margin: 0.5rem;">Manage Rooms</button>
-                <button class="btn" style="margin: 0.5rem;">Manage Offers</button>
-                <button class="btn" style="margin: 0.5rem;">View Bookings</button>
-                <button class="btn" style="margin: 0.5rem;">Update Content</button>
-            </div>
+
         </div>
     </main>
 

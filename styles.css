@@ -23,7 +23,7 @@ body {
 /* Header Styles */
 header {
     background-color: var(--color-black);
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,13 +31,25 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 0 20px;
 }
 
 nav h1 {
     color: var(--color-beige);
     font-size: 1.8rem;
+    margin: 0;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 nav ul {
