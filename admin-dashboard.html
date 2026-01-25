@@ -18,6 +18,12 @@
                 <button id="logout-btn" class="btn nav-btn btn-logout" aria-label="Logout from admin dashboard">Logout</button>
             </div>
         </nav>
+        <!-- Submenu for Update Index -->
+        <div id="update-index-submenu" class="submenu" style="display: none;">
+            <div class="submenu-content">
+                <button class="btn btn-secondary submenu-btn" id="main-banner-btn">Main Banner</button>
+            </div>
+        </div>
     </header>
 
     <main class="container">
@@ -33,6 +39,20 @@
                 <p style="margin-top: 1rem; color: var(--color-sage);">This dashboard will be connected to Firebase Realtime Database for dynamic data management.</p>
             </div>
 
+            <!-- Photo Management Card -->
+            <div id="photo-management-card" class="card" style="display: none;">
+                <h2>Main Banner Photo Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. You can add, delete, and rearrange photos.</p>
+                
+                <div class="photo-upload-section">
+                    <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="add-photo-btn">Add Photo</button>
+                </div>
+
+                <div id="photo-grid" class="photo-grid">
+                    <!-- Photos will be dynamically added here -->
+                </div>
+            </div>
 
         </div>
     </main>
@@ -44,6 +64,11 @@
     <!-- Firebase SDK and Authentication Check -->
     <script type="module">
         import { checkAuthState, logoutAdmin } from './auth.js';
+        import { storage, database } from './firebase-config.js';
+        import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject, listAll } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+        import { ref as dbRef, set, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        let currentPhotos = [];
 
         // Check if user is authenticated
         checkAuthState((authState) => {
@@ -72,6 +97,216 @@
                 window.location.href = 'hoteladmin.html';
             }
         });
+
+        // Toggle Update Index submenu
+        document.getElementById('update-index-btn').addEventListener('click', () => {
+            const submenu = document.getElementById('update-index-submenu');
+            if (submenu.style.display === 'none') {
+                submenu.style.display = 'block';
+                // Slide down animation
+                submenu.style.maxHeight = '0';
+                submenu.style.overflow = 'hidden';
+                setTimeout(() => {
+                    submenu.style.transition = 'max-height 0.3s ease-out';
+                    submenu.style.maxHeight = '200px';
+                }, 10);
+            } else {
+                submenu.style.maxHeight = '0';
+                setTimeout(() => {
+                    submenu.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        // Show photo management card when Main Banner is clicked
+        document.getElementById('main-banner-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            photoCard.style.display = 'block';
+            // Scroll to the card
+            photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Load existing photos
+            await loadPhotos();
+        });
+
+        // Add photo button
+        document.getElementById('add-photo-btn').addEventListener('click', () => {
+            document.getElementById('photo-upload-input').click();
+        });
+
+        // Handle photo upload
+        document.getElementById('photo-upload-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const addBtn = document.getElementById('add-photo-btn');
+            addBtn.disabled = true;
+            addBtn.textContent = 'Uploading...';
+
+            try {
+                // Generate unique filename
+                const timestamp = Date.now();
+                const filename = `main-banner/${timestamp}-${file.name}`;
+                const fileRef = storageRef(storage, filename);
+
+                // Upload file
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                // Save to database
+                const photoData = {
+                    url: downloadURL,
+                    filename: filename,
+                    timestamp: timestamp,
+                    order: currentPhotos.length
+                };
+
+                await set(dbRef(database, `mainBanner/${timestamp}`), photoData);
+
+                // Reload photos
+                await loadPhotos();
+
+                // Reset input
+                e.target.value = '';
+            } catch (error) {
+                console.error('Error uploading photo:', error);
+                alert('Failed to upload photo. Please try again.');
+            } finally {
+                addBtn.disabled = false;
+                addBtn.textContent = 'Add Photo';
+            }
+        });
+
+        // Load photos from database
+        async function loadPhotos() {
+            try {
+                const snapshot = await get(dbRef(database, 'mainBanner'));
+                currentPhotos = [];
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    currentPhotos = Object.values(data).sort((a, b) => a.order - b.order);
+                }
+
+                renderPhotos();
+            } catch (error) {
+                console.error('Error loading photos:', error);
+            }
+        }
+
+        // Render photos in the grid
+        function renderPhotos() {
+            const grid = document.getElementById('photo-grid');
+            grid.innerHTML = '';
+
+            if (currentPhotos.length === 0) {
+                grid.innerHTML = '<p style="color: var(--color-sage);">No photos uploaded yet. Click "Add Photo" to get started.</p>';
+                return;
+            }
+
+            currentPhotos.forEach((photo, index) => {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <img src="${photo.url}" alt="Main banner photo ${index + 1}">
+                    <div class="photo-controls">
+                        <button class="btn-icon move-up" data-index="${index}" title="Move up" ${index === 0 ? 'disabled' : ''}>↑</button>
+                        <button class="btn-icon move-down" data-index="${index}" title="Move down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>↓</button>
+                        <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" title="Delete">🗑️</button>
+                    </div>
+                    <div class="photo-order">Position: ${index + 1}</div>
+                `;
+                grid.appendChild(photoItem);
+            });
+
+            // Add event listeners for controls
+            document.querySelectorAll('.move-up').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    if (index > 0) {
+                        await swapPhotos(index, index - 1);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.move-down').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    if (index < currentPhotos.length - 1) {
+                        await swapPhotos(index, index + 1);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.delete').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const timestamp = e.target.dataset.timestamp;
+                    const filename = e.target.dataset.filename;
+                    if (confirm('Are you sure you want to delete this photo?')) {
+                        await deletePhoto(timestamp, filename);
+                    }
+                });
+            });
+        }
+
+        // Swap two photos
+        async function swapPhotos(index1, index2) {
+            try {
+                const photo1 = currentPhotos[index1];
+                const photo2 = currentPhotos[index2];
+
+                // Swap order values
+                const tempOrder = photo1.order;
+                photo1.order = photo2.order;
+                photo2.order = tempOrder;
+
+                // Update in database
+                await set(dbRef(database, `mainBanner/${photo1.timestamp}`), photo1);
+                await set(dbRef(database, `mainBanner/${photo2.timestamp}`), photo2);
+
+                // Reload photos
+                await loadPhotos();
+            } catch (error) {
+                console.error('Error swapping photos:', error);
+                alert('Failed to reorder photos. Please try again.');
+            }
+        }
+
+        // Delete photo
+        async function deletePhoto(timestamp, filename) {
+            try {
+                // Delete from storage
+                const fileRef = storageRef(storage, filename);
+                await deleteObject(fileRef);
+
+                // Delete from database
+                await remove(dbRef(database, `mainBanner/${timestamp}`));
+
+                // Reload and reorder remaining photos
+                await loadPhotos();
+                await reorderPhotos();
+            } catch (error) {
+                console.error('Error deleting photo:', error);
+                alert('Failed to delete photo. Please try again.');
+            }
+        }
+
+        // Reorder photos after deletion
+        async function reorderPhotos() {
+            try {
+                for (let i = 0; i < currentPhotos.length; i++) {
+                    currentPhotos[i].order = i;
+                    await set(dbRef(database, `mainBanner/${currentPhotos[i].timestamp}`), currentPhotos[i]);
+                }
+            } catch (error) {
+                console.error('Error reordering photos:', error);
+            }
+        }
     </script>
 </body>
 </html>
