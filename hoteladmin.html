@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Hotel Elisabeth Mechelen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Hotel Elisabeth Mechelen</h2>
+            <h3 style="color: var(--color-sage); text-align: center; margin-bottom: 2rem;">Admin Login</h3>
+            
+            <div id="error-message" class="error-message"></div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%;">Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 1.5rem; color: var(--color-sage);">
+                <a href="index.html" style="color: var(--color-beige); text-decoration: none;">← Back to Website</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK and Authentication -->
+    <script type="module">
+        import { loginAdmin } from './auth.js';
+
+        // Handle form submission
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Logging in...';
+            errorMessage.classList.remove('show');
+            
+            try {
+                // Use Firebase Authentication (credentials are stored in Firebase, not hardcoded)
+                const result = await loginAdmin(email, password);
+                
+                if (result.success) {
+                    // Redirect to admin dashboard (to be created later)
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    // Show error message
+                    errorMessage.textContent = result.error;
+                    errorMessage.classList.add('show');
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Login';
+                }
+            } catch (error) {
+                errorMessage.textContent = 'An unexpected error occurred. Please try again.';
+                errorMessage.classList.add('show');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Login';
+            }
+        });
+    </script>
+</body>
+</html>
