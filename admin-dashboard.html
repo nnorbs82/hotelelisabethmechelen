@@ -61,6 +61,47 @@
         <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
     </footer>
 
+    <!-- Submenu Hover Functionality (non-module script to ensure it runs independently) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle Update Index submenu with hover
+            const updateIndexBtn = document.getElementById('update-index-btn');
+            const submenu = document.getElementById('update-index-submenu');
+            let submenuTimeout = null;
+
+            function showSubmenu() {
+                if (submenuTimeout) {
+                    clearTimeout(submenuTimeout);
+                    submenuTimeout = null;
+                }
+                submenu.style.display = 'block';
+                submenu.style.maxHeight = '0';
+                submenu.style.overflow = 'hidden';
+                setTimeout(() => {
+                    submenu.style.transition = 'max-height 0.3s ease-out';
+                    submenu.style.maxHeight = '200px';
+                }, 10);
+            }
+
+            function hideSubmenu() {
+                submenuTimeout = setTimeout(() => {
+                    submenu.style.maxHeight = '0';
+                    setTimeout(() => {
+                        submenu.style.display = 'none';
+                    }, 300);
+                }, 100);
+            }
+
+            // Show submenu on hover over Update Index button
+            updateIndexBtn.addEventListener('mouseenter', showSubmenu);
+            updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
+
+            // Keep submenu visible when hovering over it
+            submenu.addEventListener('mouseenter', showSubmenu);
+            submenu.addEventListener('mouseleave', hideSubmenu);
+        });
+    </script>
+
     <!-- Firebase SDK and Authentication Check -->
     <script type="module">
         import { checkAuthState, logoutAdmin } from './auth.js';
@@ -97,42 +138,6 @@
                 window.location.href = 'hoteladmin.html';
             }
         });
-
-        // Handle Update Index submenu with hover
-        const updateIndexBtn = document.getElementById('update-index-btn');
-        const submenu = document.getElementById('update-index-submenu');
-        let submenuTimeout = null;
-
-        function showSubmenu() {
-            if (submenuTimeout) {
-                clearTimeout(submenuTimeout);
-                submenuTimeout = null;
-            }
-            submenu.style.display = 'block';
-            submenu.style.maxHeight = '0';
-            submenu.style.overflow = 'hidden';
-            setTimeout(() => {
-                submenu.style.transition = 'max-height 0.3s ease-out';
-                submenu.style.maxHeight = '200px';
-            }, 10);
-        }
-
-        function hideSubmenu() {
-            submenuTimeout = setTimeout(() => {
-                submenu.style.maxHeight = '0';
-                setTimeout(() => {
-                    submenu.style.display = 'none';
-                }, 300);
-            }, 100);
-        }
-
-        // Show submenu on hover over Update Index button
-        updateIndexBtn.addEventListener('mouseenter', showSubmenu);
-        updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
-
-        // Keep submenu visible when hovering over it
-        submenu.addEventListener('mouseenter', showSubmenu);
-        submenu.addEventListener('mouseleave', hideSubmenu);
 
         // Show photo management card when Main Banner is clicked
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
