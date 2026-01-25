@@ -23,11 +23,21 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Welcome to Hotel Elisabeth Mechelen</h2>
-            <p>Experience luxury and comfort in the heart of Mechelen.</p>
-            <a href="rooms.html" class="btn">View Our Rooms</a>
+    <main>
+        <section class="hero-slideshow" aria-label="Hotel Elisabeth main banner">
+            <div class="hero-slider">
+                <div class="hero-track" id="hero-track"></div>
+                <button class="hero-handle hero-handle-left" id="hero-prev" aria-label="Previous banner image" type="button">&#10094;</button>
+                <button class="hero-handle hero-handle-right" id="hero-next" aria-label="Next banner image" type="button">&#10095;</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="card">
+                <h2>Welcome to Hotel Elisabeth Mechelen</h2>
+                <p>Experience luxury and comfort in the heart of Mechelen.</p>
+                <a href="rooms.html" class="btn">View Our Rooms</a>
+            </div>
         </div>
     </main>
 
@@ -40,5 +50,162 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+    <script type="module">
+        import { database, storage } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { ref as storageRef, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+        const heroTrack = document.getElementById('hero-track');
+        const prevButton = document.getElementById('hero-prev');
+        const nextButton = document.getElementById('hero-next');
+        const slideIntervalMs = 10000;
+        const slideTransitionMs = 800;
+        let currentIndex = 0;
+        let slideCount = 0;
+        let autoTimer = null;
+        let useClones = false;
+
+        async function fetchBannerUrls() {
+            const urls = [];
+
+            try {
+                const snapshot = await get(dbRef(database, 'mainBanner'));
+                if (snapshot.exists()) {
+                    const data = Object.values(snapshot.val())
+                        .filter(item => item && item.url)
+                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                    data.forEach(item => urls.push(item.url));
+                }
+            } catch (error) {
+                console.error('Error loading main banner metadata:', error);
+            }
+
+            if (urls.length) {
+                return urls;
+            }
+
+            const folders = ['mainBanner', 'main-banner'];
+            for (const folder of folders) {
+                try {
+                    const listResult = await listAll(storageRef(storage, folder));
+                    if (listResult.items.length) {
+                        const storageUrls = await Promise.all(
+                            listResult.items.map(item => getDownloadURL(item))
+                        );
+                        urls.push(...storageUrls);
+                        break;
+                    }
+                } catch (error) {
+                    console.warn(`Unable to list storage folder ${folder}:`, error);
+                }
+            }
+
+            return urls;
+        }
+
+        function toggleHandles(enabled) {
+            [prevButton, nextButton].forEach(button => {
+                button.disabled = !enabled;
+                button.setAttribute('aria-disabled', (!enabled).toString());
+            });
+        }
+
+        function setTrackPosition(animate = true) {
+            heroTrack.style.transition = animate ? `transform ${slideTransitionMs}ms ease-in-out` : 'none';
+            heroTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function startAutoSlide() {
+            if (slideCount <= 1) {
+                return;
+            }
+            stopAutoSlide();
+            autoTimer = setInterval(() => moveSlide(1), slideIntervalMs);
+        }
+
+        function stopAutoSlide() {
+            if (autoTimer) {
+                clearInterval(autoTimer);
+                autoTimer = null;
+            }
+        }
+
+        function resetAutoSlide() {
+            stopAutoSlide();
+            startAutoSlide();
+        }
+
+        function moveSlide(direction, manual = false) {
+            if (slideCount <= 1) {
+                return;
+            }
+            currentIndex += direction;
+            setTrackPosition(true);
+
+            if (manual) {
+                resetAutoSlide();
+            }
+        }
+
+        function buildSlides(urls) {
+            heroTrack.innerHTML = '';
+            slideCount = urls.length;
+            useClones = slideCount > 1;
+
+            if (!slideCount) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'hero-slide hero-slide-placeholder';
+                placeholder.textContent = 'Main banner images coming soon.';
+                heroTrack.appendChild(placeholder);
+                toggleHandles(false);
+                return;
+            }
+
+            const slidesToRender = [];
+            if (useClones) {
+                slidesToRender.push(urls[slideCount - 1], ...urls, urls[0]);
+                currentIndex = 1;
+            } else {
+                slidesToRender.push(...urls);
+                currentIndex = 0;
+            }
+
+            slidesToRender.forEach((url, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'hero-slide';
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Main banner image ${useClones ? ((index || slideCount) % slideCount) + 1 : index + 1}`;
+                slide.appendChild(img);
+                heroTrack.appendChild(slide);
+            });
+
+            toggleHandles(slideCount > 1);
+            requestAnimationFrame(() => setTrackPosition(false));
+            startAutoSlide();
+        }
+
+        heroTrack.addEventListener('transitionend', () => {
+            if (!useClones) {
+                return;
+            }
+
+            if (currentIndex === 0) {
+                currentIndex = slideCount;
+                setTrackPosition(false);
+            }
+
+            if (currentIndex === slideCount + 1) {
+                currentIndex = 1;
+                setTrackPosition(false);
+            }
+        });
+
+        prevButton.addEventListener('click', () => moveSlide(-1, true));
+        nextButton.addEventListener('click', () => moveSlide(1, true));
+        window.addEventListener('resize', () => setTrackPosition(false));
+
+        fetchBannerUrls().then(buildSlides);
+    </script>
 </body>
 </html>
