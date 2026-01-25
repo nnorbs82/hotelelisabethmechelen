@@ -5,6 +5,7 @@
     --color-beige: #D4D3C3;
     --color-sage: #959380;
     --color-white: #FFFFFF;
+    --header-height: 80px;
 }
 
 * {
@@ -18,7 +19,7 @@ body {
     background-color: var(--color-white);
     color: var(--color-black);
     line-height: 1.6;
-    padding-top: 80px; /* Account for fixed header height */
+    padding-top: var(--header-height); /* Account for fixed header height */
 }
 
 /* Header Styles */
