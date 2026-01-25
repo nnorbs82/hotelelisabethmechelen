@@ -84,6 +84,87 @@ nav a:hover {
     padding: 0 2rem;
 }
 
+/* Hero Slideshow */
+.hero-slideshow {
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    min-height: 420px;
+    background-color: var(--color-black);
+}
+
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.hero-track {
+    display: flex;
+    height: 100%;
+    transform: translateX(0);
+}
+
+.hero-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-slide-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-beige);
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-handle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--color-beige);
+    border: 2px solid var(--color-beige);
+    border-radius: 999px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 2;
+}
+
+.hero-handle:hover:not(:disabled) {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+}
+
+.hero-handle:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.hero-handle-left {
+    left: 1.5rem;
+}
+
+.hero-handle-right {
+    right: 1.5rem;
+}
+
 /* Card Styles */
 .card {
     background-color: var(--color-black);
@@ -245,6 +326,20 @@ footer {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+    }
+
+    .hero-handle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .hero-handle-left {
+        left: 1rem;
+    }
+
+    .hero-handle-right {
+        right: 1rem;
     }
 }
 
