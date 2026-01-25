@@ -6,6 +6,7 @@
     --color-sage: #959380;
     --color-white: #FFFFFF;
     --header-height: 80px;
+    --logo-height: 52px;
 }
 
 * {
@@ -19,7 +20,6 @@ body {
     background-color: var(--color-white);
     color: var(--color-black);
     line-height: 1.6;
-    margin: 0;
     padding-top: var(--header-height); /* Account for fixed header height */
 }
 
@@ -33,7 +33,6 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    margin: 0;
     height: var(--header-height);
 }
 
@@ -54,14 +53,17 @@ nav h1 {
 .nav-logo {
     display: inline-flex;
     align-items: center;
-    height: var(--header-height);
-    padding: 0 10px;
 }
 
 .nav-logo img {
-    height: 52px;
+    height: var(--logo-height);
     width: auto;
     display: block;
+}
+
+.nav-logo:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
 }
 
 .nav-buttons {
@@ -107,7 +109,6 @@ nav a:hover {
     height: calc(100vh - var(--header-height));
     min-height: 420px;
     background-color: var(--color-black);
-    margin: 0;
 }
 
 .hero-slider {
