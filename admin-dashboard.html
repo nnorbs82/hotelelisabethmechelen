@@ -42,7 +42,7 @@
             <!-- Photo Management Card -->
             <div id="photo-management-card" class="card" style="display: none;">
                 <h2>Main Banner Photo Management</h2>
-                <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. You can add, delete, and rearrange photos.</p>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. Drag and drop photos to reorder them.</p>
                 
                 <div class="photo-upload-section">
                     <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
@@ -212,37 +212,27 @@
             currentPhotos.forEach((photo, index) => {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
+                photoItem.draggable = true;
+                photoItem.dataset.index = index;
                 photoItem.innerHTML = `
                     <img src="${photo.url}" alt="Main banner photo ${index + 1}">
                     <div class="photo-controls">
-                        <button class="btn-icon move-up" data-index="${index}" aria-label="Move photo up" ${index === 0 ? 'disabled' : ''}>Up</button>
-                        <button class="btn-icon move-down" data-index="${index}" aria-label="Move photo down" ${index === currentPhotos.length - 1 ? 'disabled' : ''}>Down</button>
                         <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" aria-label="Delete photo">Delete</button>
                     </div>
                     <div class="photo-order">Position: ${index + 1}</div>
                 `;
                 grid.appendChild(photoItem);
+
+                // Add drag event listeners
+                photoItem.addEventListener('dragstart', handleDragStart);
+                photoItem.addEventListener('dragend', handleDragEnd);
+                photoItem.addEventListener('dragover', handleDragOver);
+                photoItem.addEventListener('drop', handleDrop);
+                photoItem.addEventListener('dragenter', handleDragEnter);
+                photoItem.addEventListener('dragleave', handleDragLeave);
             });
 
-            // Add event listeners for controls
-            document.querySelectorAll('.move-up').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const index = parseInt(e.target.dataset.index);
-                    if (index > 0) {
-                        await swapPhotos(index, index - 1);
-                    }
-                });
-            });
-
-            document.querySelectorAll('.move-down').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const index = parseInt(e.target.dataset.index);
-                    if (index < currentPhotos.length - 1) {
-                        await swapPhotos(index, index + 1);
-                    }
-                });
-            });
-
+            // Add event listeners for delete
             document.querySelectorAll('.delete').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     const timestamp = e.target.dataset.timestamp;
@@ -254,25 +244,78 @@
             });
         }
 
-        // Swap two photos
-        async function swapPhotos(index1, index2) {
+        // Drag and drop event handlers
+        let draggedIndex = null;
+
+        function handleDragStart(e) {
+            draggedIndex = parseInt(e.currentTarget.dataset.index);
+            e.currentTarget.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            e.currentTarget.classList.remove('dragging');
+            draggedIndex = null; // Reset to ensure cleanup
+            // Remove drag-over class from all items
+            document.querySelectorAll('.photo-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function handleDragEnter(e) {
+            e.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            // Only remove drag-over if we're actually leaving the element
+            // Check that relatedTarget is a valid DOM element before using contains
+            if (!e.relatedTarget || 
+                (e.relatedTarget instanceof Node && !e.currentTarget.contains(e.relatedTarget))) {
+                e.currentTarget.classList.remove('drag-over');
+            }
+        }
+
+        async function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            const dropIndex = parseInt(e.currentTarget.dataset.index);
+            
+            if (draggedIndex !== null && draggedIndex !== dropIndex) {
+                await reorderPhotos(draggedIndex, dropIndex);
+            }
+        }
+
+        // Reorder photos based on drag and drop
+        async function reorderPhotos(fromIndex, toIndex) {
             try {
-                const photo1 = currentPhotos[index1];
-                const photo2 = currentPhotos[index2];
+                // Create a new array with reordered photos
+                const reorderedPhotos = [...currentPhotos];
+                const [movedPhoto] = reorderedPhotos.splice(fromIndex, 1);
+                reorderedPhotos.splice(toIndex, 0, movedPhoto);
 
-                // Swap order values
-                const tempOrder = photo1.order;
-                photo1.order = photo2.order;
-                photo2.order = tempOrder;
+                // Update order values first
+                reorderedPhotos.forEach((photo, i) => {
+                    photo.order = i;
+                });
 
-                // Update in database
-                await set(dbRef(database, `mainBanner/${photo1.timestamp}`), photo1);
-                await set(dbRef(database, `mainBanner/${photo2.timestamp}`), photo2);
+                // Prepare all database updates
+                const updates = reorderedPhotos.map((photo) => {
+                    return set(dbRef(database, `mainBanner/${photo.timestamp}`), photo);
+                });
+
+                // Execute all updates in parallel
+                await Promise.all(updates);
 
                 // Reload photos
                 await loadPhotos();
             } catch (error) {
-                console.error('Error swapping photos:', error);
+                console.error('Error reordering photos:', error);
                 alert('Failed to reorder photos. Please try again.');
             }
         }
@@ -289,22 +332,30 @@
 
                 // Reload and reorder remaining photos
                 await loadPhotos();
-                await reorderPhotos();
+                await reindexPhotos();
             } catch (error) {
                 console.error('Error deleting photo:', error);
                 alert('Failed to delete photo. Please try again.');
             }
         }
 
-        // Reorder photos after deletion
-        async function reorderPhotos() {
+        // Reindex photos after deletion
+        async function reindexPhotos() {
             try {
-                for (let i = 0; i < currentPhotos.length; i++) {
-                    currentPhotos[i].order = i;
-                    await set(dbRef(database, `mainBanner/${currentPhotos[i].timestamp}`), currentPhotos[i]);
-                }
+                // Update order values first
+                currentPhotos.forEach((photo, i) => {
+                    photo.order = i;
+                });
+
+                // Prepare all database updates
+                const updates = currentPhotos.map((photo) => {
+                    return set(dbRef(database, `mainBanner/${photo.timestamp}`), photo);
+                });
+                
+                // Execute all updates in parallel
+                await Promise.all(updates);
             } catch (error) {
-                console.error('Error reordering photos:', error);
+                console.error('Error reindexing photos:', error);
             }
         }
     </script>
