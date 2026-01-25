@@ -159,6 +159,12 @@ nav a:hover {
     border-color: var(--color-beige);
 }
 
+/* Admin page Background colour */
+.admin-page {
+    background-color: var(--color-sage);
+    min-height: 100vh;
+}
+
 /* Login Page Specific Styles */
 .login-container {
     display: flex;
