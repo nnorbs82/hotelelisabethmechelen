@@ -118,8 +118,8 @@ nav a:hover {
 
 /* Logout Button Specific Styles */
 .btn-logout {
-    background-color: var(--color-beige);
-    color: var(--color-black);
+    background-color: var(--color-black);
+    color: var(--color-beige);
     border: 2px solid transparent;
 }
 
