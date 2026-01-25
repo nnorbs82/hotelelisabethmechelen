@@ -306,6 +306,12 @@ nav a:hover {
     width: 100%;
 }
 
+.login-card .nav-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
 .login-card h2 {
     color: var(--color-beige);
     margin-bottom: 2rem;
