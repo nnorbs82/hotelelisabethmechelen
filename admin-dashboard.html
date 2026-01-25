@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Hotel Elisabeth Mechelen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Hotel Elisabeth Mechelen - Admin Dashboard</h1>
+            <ul>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div id="loading" style="text-align: center; padding: 3rem;">
+            <p>Loading...</p>
+        </div>
+        
+        <div id="dashboard-content" style="display: none;">
+            <div class="card">
+                <h2>Welcome to the Admin Dashboard</h2>
+                <p id="admin-email" style="color: var(--color-sage);"></p>
+                <p>Manage your hotel data, bookings, and content from this dashboard.</p>
+                <p style="margin-top: 1rem; color: var(--color-sage);">This dashboard will be connected to Firebase Realtime Database for dynamic data management.</p>
+            </div>
+
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <button class="btn" style="margin: 0.5rem;">Manage Rooms</button>
+                <button class="btn" style="margin: 0.5rem;">Manage Offers</button>
+                <button class="btn" style="margin: 0.5rem;">View Bookings</button>
+                <button class="btn" style="margin: 0.5rem;">Update Content</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK and Authentication Check -->
+    <script type="module">
+        import { checkAuthState, logoutAdmin } from './auth.js';
+
+        // Check if user is authenticated
+        checkAuthState((authState) => {
+            const loading = document.getElementById('loading');
+            const dashboardContent = document.getElementById('dashboard-content');
+            
+            if (authState.authenticated) {
+                // User is logged in, show dashboard
+                loading.style.display = 'none';
+                dashboardContent.style.display = 'block';
+                
+                // Display admin email
+                document.getElementById('admin-email').textContent = 
+                    `Logged in as: ${authState.user.email}`;
+            } else {
+                // User is not logged in, redirect to login page
+                window.location.href = 'hoteladmin.html';
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logout-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const result = await logoutAdmin();
+            if (result.success) {
+                window.location.href = 'hoteladmin.html';
+            }
+        });
+    </script>
+</body>
+</html>
