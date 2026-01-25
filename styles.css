@@ -111,7 +111,7 @@ nav a:hover {
 .btn-secondary {
     background-color: var(--color-sage);
     color: var(--color-white);
-    border: 1px solid var(--color-sage);
+    border: 2px solid var(--color-sage);
 }
 
 .btn-secondary:hover {
