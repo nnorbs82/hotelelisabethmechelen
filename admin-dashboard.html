@@ -23,6 +23,7 @@
             <div class="submenu-content">
                 <button class="btn btn-secondary submenu-btn" id="main-banner-btn">Main Banner</button>
                 <button class="btn btn-secondary submenu-btn" id="ads-btn">Index Ads</button>
+                <button class="btn btn-secondary submenu-btn" id="about-us-btn">About Us</button>
             </div>
         </div>
     </header>
@@ -77,6 +78,24 @@
                 
                 <div id="ads-container">
                     <!-- Ad items will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- About Us Management Card -->
+            <div id="about-us-management-card" class="card" style="display: none;">
+                <h2>About Us Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Manage the About Us section content displayed on the index page.</p>
+                
+                <!-- Tab Navigation -->
+                <div class="about-us-tabs">
+                    <button class="about-us-tab active" data-tab="title">About Us Title</button>
+                    <button class="about-us-tab" data-tab="left">About Us Left</button>
+                    <button class="about-us-tab" data-tab="right">About Us Right</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="about-us-tab-content">
+                    <!-- Content will be rendered by JavaScript -->
                 </div>
             </div>
 
@@ -765,6 +784,199 @@
             } catch (error) {
                 console.error('Error deleting background:', error);
                 alert('Failed to delete background photo. Please try again.');
+            }
+        }
+
+        // ============ ABOUT US MANAGEMENT ============
+        let aboutUsData = {
+            title: { en: '', nl: '', fr: '' },
+            left: {
+                subtitle1: { en: '', nl: '', fr: '' },
+                subtitle2: { en: '', nl: '', fr: '' },
+                textBody: { en: '', nl: '', fr: '' }
+            },
+            right: {
+                subtitle1: { en: '', nl: '', fr: '' },
+                subtitle2: { en: '', nl: '', fr: '' },
+                textBody: { en: '', nl: '', fr: '' }
+            }
+        };
+
+        let currentAboutUsTab = 'title';
+        let currentAboutUsLang = 'en';
+
+        // Show About Us management card
+        document.getElementById('about-us-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            
+            photoCard.style.display = 'none';
+            adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'block';
+            
+            aboutUsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            await loadAboutUsData();
+            renderAboutUsTab();
+        });
+
+        // Tab switching
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('about-us-tab')) {
+                document.querySelectorAll('.about-us-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAboutUsTab = e.target.dataset.tab;
+                renderAboutUsTab();
+            }
+            
+            if (e.target.classList.contains('about-us-lang-tab')) {
+                document.querySelectorAll('.about-us-lang-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAboutUsLang = e.target.dataset.lang;
+                renderAboutUsTab();
+            }
+        });
+
+        // Load About Us data from Firebase
+        async function loadAboutUsData() {
+            try {
+                const snapshot = await get(dbRef(database, 'aboutUs'));
+                
+                if (snapshot.exists()) {
+                    aboutUsData = snapshot.val();
+                }
+            } catch (error) {
+                console.error('Error loading About Us data:', error);
+            }
+        }
+
+        // Render tab content
+        function renderAboutUsTab() {
+            const container = document.getElementById('about-us-tab-content');
+            
+            // Language tabs
+            const langTabs = `
+                <div class="about-us-lang-tabs">
+                    <button class="about-us-lang-tab ${currentAboutUsLang === 'en' ? 'active' : ''}" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                    <button class="about-us-lang-tab ${currentAboutUsLang === 'nl' ? 'active' : ''}" data-lang="nl" aria-label="Nederlands">🇳🇱 NL</button>
+                    <button class="about-us-lang-tab ${currentAboutUsLang === 'fr' ? 'active' : ''}" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+                </div>
+            `;
+            
+            let content = '';
+            
+            if (currentAboutUsTab === 'title') {
+                const titleValue = aboutUsData.title[currentAboutUsLang] || '';
+                content = `
+                    ${langTabs}
+                    <div class="about-us-form-section">
+                        <h4>About Us Title</h4>
+                        <div class="form-group">
+                            <input type="text" id="about-us-title-input" class="form-control" value="${escapeHtml(titleValue)}" placeholder="Enter title">
+                        </div>
+                    </div>
+                    <button class="btn" id="save-about-us-title-btn">Save Title</button>
+                `;
+            } else if (currentAboutUsTab === 'left') {
+                const sub1 = aboutUsData.left.subtitle1[currentAboutUsLang] || '';
+                const sub2 = aboutUsData.left.subtitle2[currentAboutUsLang] || '';
+                const body = aboutUsData.left.textBody[currentAboutUsLang] || '';
+                
+                content = `
+                    ${langTabs}
+                    <div class="about-us-form-section">
+                        <h4>Subtitle 1</h4>
+                        <div class="form-group">
+                            <input type="text" id="about-us-left-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
+                        </div>
+                    </div>
+                    <div class="about-us-form-section">
+                        <h4>Subtitle 2</h4>
+                        <div class="form-group">
+                            <input type="text" id="about-us-left-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
+                        </div>
+                    </div>
+                    <div class="about-us-form-section">
+                        <h4>Text Body</h4>
+                        <textarea id="about-us-left-body" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                    </div>
+                    <button class="btn" id="save-about-us-left-btn">Save Left Content</button>
+                `;
+            } else if (currentAboutUsTab === 'right') {
+                const sub1 = aboutUsData.right.subtitle1[currentAboutUsLang] || '';
+                const sub2 = aboutUsData.right.subtitle2[currentAboutUsLang] || '';
+                const body = aboutUsData.right.textBody[currentAboutUsLang] || '';
+                
+                content = `
+                    ${langTabs}
+                    <div class="about-us-form-section">
+                        <h4>Subtitle 1</h4>
+                        <div class="form-group">
+                            <input type="text" id="about-us-right-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
+                        </div>
+                    </div>
+                    <div class="about-us-form-section">
+                        <h4>Subtitle 2</h4>
+                        <div class="form-group">
+                            <input type="text" id="about-us-right-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
+                        </div>
+                    </div>
+                    <div class="about-us-form-section">
+                        <h4>Text Body</h4>
+                        <textarea id="about-us-right-body" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                    </div>
+                    <button class="btn" id="save-about-us-right-btn">Save Right Content</button>
+                `;
+            }
+            
+            container.innerHTML = content;
+            
+            // Attach save handlers
+            attachAboutUsSaveHandlers();
+        }
+
+        // Attach save button handlers
+        function attachAboutUsSaveHandlers() {
+            const saveTitleBtn = document.getElementById('save-about-us-title-btn');
+            const saveLeftBtn = document.getElementById('save-about-us-left-btn');
+            const saveRightBtn = document.getElementById('save-about-us-right-btn');
+            
+            if (saveTitleBtn) {
+                saveTitleBtn.addEventListener('click', async () => {
+                    const value = document.getElementById('about-us-title-input').value;
+                    aboutUsData.title[currentAboutUsLang] = value;
+                    await saveAboutUsData();
+                });
+            }
+            
+            if (saveLeftBtn) {
+                saveLeftBtn.addEventListener('click', async () => {
+                    aboutUsData.left.subtitle1[currentAboutUsLang] = document.getElementById('about-us-left-sub1').value;
+                    aboutUsData.left.subtitle2[currentAboutUsLang] = document.getElementById('about-us-left-sub2').value;
+                    aboutUsData.left.textBody[currentAboutUsLang] = document.getElementById('about-us-left-body').value;
+                    await saveAboutUsData();
+                });
+            }
+            
+            if (saveRightBtn) {
+                saveRightBtn.addEventListener('click', async () => {
+                    aboutUsData.right.subtitle1[currentAboutUsLang] = document.getElementById('about-us-right-sub1').value;
+                    aboutUsData.right.subtitle2[currentAboutUsLang] = document.getElementById('about-us-right-sub2').value;
+                    aboutUsData.right.textBody[currentAboutUsLang] = document.getElementById('about-us-right-body').value;
+                    await saveAboutUsData();
+                });
+            }
+        }
+
+        // Save to Firebase
+        async function saveAboutUsData() {
+            try {
+                await set(dbRef(database, 'aboutUs'), aboutUsData);
+                alert('About Us content saved successfully!');
+            } catch (error) {
+                console.error('Error saving About Us data:', error);
+                alert('Failed to save. Please try again.');
             }
         }
     </script>

@@ -890,6 +890,132 @@ footer {
     border-color: var(--color-sage);
 }
 
+/* About Us Tabs */
+.about-us-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-sage);
+}
+
+.about-us-tab {
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--color-beige);
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.about-us-tab:hover {
+    background-color: rgba(212, 211, 195, 0.1);
+}
+
+.about-us-tab.active {
+    border-bottom-color: var(--color-beige);
+    font-weight: bold;
+}
+
+.about-us-lang-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-us-lang-tab {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--color-beige);
+    border: 2px solid var(--color-sage);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.about-us-lang-tab:hover {
+    background-color: rgba(212, 211, 195, 0.2);
+}
+
+.about-us-lang-tab.active {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    border-color: var(--color-beige);
+}
+
+.about-us-form-section {
+    margin-bottom: 2rem;
+}
+
+.about-us-form-section h4 {
+    color: var(--color-beige);
+    margin-bottom: 1rem;
+}
+
+.about-us-form-section textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 0.75rem;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-sage);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* About Us Section */
+.about-us-section {
+    background-color: #000000;
+    color: var(--color-white);
+    padding: 4rem 2rem;
+    margin: 0;
+}
+
+.about-us-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-us-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.3rem;
+    margin-bottom: 4rem;
+    color: var(--color-white);
+}
+
+.about-us-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.about-us-left,
+.about-us-right {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.about-us-subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.15rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-white);
+    text-transform: uppercase;
+}
+
+.about-us-body {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
 @media (min-width: 601px) {
     .index-ads-container {
         min-height: 900px;
@@ -922,5 +1048,15 @@ footer {
     
     .index-ads-left .index-ad-content {
         margin-left: 20px;
+    }
+    
+    .about-us-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .about-us-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
     }
 }

@@ -76,6 +76,10 @@ These rules allow authenticated admin users to read and write photo metadata in 
     "indexBackground": {
       ".read": "auth != null",
       ".write": "auth != null"
+    },
+    "aboutUs": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }
@@ -141,6 +145,10 @@ service firebase.storage {
       ".write": "auth != null"
     },
     "indexBackground": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "aboutUs": {
       ".read": true,
       ".write": "auth != null"
     }

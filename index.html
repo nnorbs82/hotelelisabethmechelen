@@ -53,6 +53,25 @@
         <!-- Index Ads Section -->
         <section id="index-ads-section" style="display: none;"></section>
 
+        <!-- About Us Section -->
+        <section id="about-us-section" class="about-us-section">
+            <div class="about-us-container">
+                <h2 id="about-us-title" class="about-us-title">ELISABETH HOTEL</h2>
+                <div class="about-us-content">
+                    <div class="about-us-left">
+                        <h3 id="about-us-left-subtitle1" class="about-us-subtitle"></h3>
+                        <h3 id="about-us-left-subtitle2" class="about-us-subtitle"></h3>
+                        <p id="about-us-left-body" class="about-us-body"></p>
+                    </div>
+                    <div class="about-us-right">
+                        <h3 id="about-us-right-subtitle1" class="about-us-subtitle"></h3>
+                        <h3 id="about-us-right-subtitle2" class="about-us-subtitle"></h3>
+                        <p id="about-us-right-body" class="about-us-body"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="container">
             <div class="card">
                 <h2>Welcome to Hotel Elisabeth Mechelen</h2>
@@ -336,6 +355,40 @@
 
         // Load ads after banner loads
         loadIndexAds();
+
+        // ============ ABOUT US CONTENT ============
+        // Load About Us content
+        async function loadAboutUsContent() {
+            try {
+                const snapshot = await get(dbRef(database, 'aboutUs'));
+                
+                if (!snapshot.exists()) {
+                    return;
+                }
+                
+                const data = snapshot.val();
+                const currentLang = detectLanguage();
+                
+                // Set title
+                document.getElementById('about-us-title').textContent = data.title[currentLang] || '';
+                
+                // Set left content
+                document.getElementById('about-us-left-subtitle1').textContent = data.left.subtitle1[currentLang] || '';
+                document.getElementById('about-us-left-subtitle2').textContent = data.left.subtitle2[currentLang] || '';
+                document.getElementById('about-us-left-body').textContent = data.left.textBody[currentLang] || '';
+                
+                // Set right content
+                document.getElementById('about-us-right-subtitle1').textContent = data.right.subtitle1[currentLang] || '';
+                document.getElementById('about-us-right-subtitle2').textContent = data.right.subtitle2[currentLang] || '';
+                document.getElementById('about-us-right-body').textContent = data.right.textBody[currentLang] || '';
+                
+            } catch (error) {
+                console.error('Error loading About Us content:', error);
+            }
+        }
+
+        // Load About Us after page loads
+        loadAboutUsContent();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
         // Load and display background image
