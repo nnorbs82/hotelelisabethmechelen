@@ -1,4 +1,7 @@
 // Custom Date Picker for Booking Bar
+// Track all active date pickers
+const activeDatePickers = [];
+
 class DatePicker {
     constructor(inputElement, options = {}) {
         this.input = inputElement;
@@ -12,6 +15,9 @@ class DatePicker {
         this.createPicker();
         this.attachEvents();
         this.updateInputValue();
+        
+        // Register this picker in the global list
+        activeDatePickers.push(this);
     }
 
     createPicker() {
@@ -21,8 +27,10 @@ class DatePicker {
         
         this.picker.innerHTML = `
             <div class="datepicker-header">
+                <button class="datepicker-nav-btn datepicker-prev" aria-label="Previous month">&#10094;</button>
                 <select class="datepicker-month"></select>
                 <select class="datepicker-year"></select>
+                <button class="datepicker-nav-btn datepicker-next" aria-label="Next month">&#10095;</button>
             </div>
             <div class="datepicker-weekdays">
                 <div>Su</div><div>Mo</div><div>Tu</div><div>We</div>
@@ -33,6 +41,8 @@ class DatePicker {
         
         document.body.appendChild(this.picker);
         
+        this.prevBtn = this.picker.querySelector('.datepicker-prev');
+        this.nextBtn = this.picker.querySelector('.datepicker-next');
         this.monthSelect = this.picker.querySelector('.datepicker-month');
         this.yearSelect = this.picker.querySelector('.datepicker-year');
         this.daysContainer = this.picker.querySelector('.datepicker-days');
@@ -120,10 +130,38 @@ class DatePicker {
     }
 
     attachEvents() {
-        // Input click - show picker
+        // Input click - show picker and close others
         this.input.addEventListener('click', (e) => {
             e.stopPropagation();
+            // Close all other pickers
+            activeDatePickers.forEach(picker => {
+                if (picker !== this) {
+                    picker.hide();
+                }
+            });
             this.show();
+        });
+
+        // Navigation buttons
+        this.prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.navigateMonth(-1);
+        });
+
+        this.nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.navigateMonth(1);
+        });
+
+        // Mouse wheel navigation
+        this.picker.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (e.deltaY < 0) {
+                this.navigateMonth(-1);
+            } else if (e.deltaY > 0) {
+                this.navigateMonth(1);
+            }
         });
 
         // Month/Year change
@@ -162,11 +200,46 @@ class DatePicker {
         });
     }
 
+    navigateMonth(direction) {
+        this.currentMonth += direction;
+        if (this.currentMonth > 11) {
+            this.currentMonth = 0;
+            this.currentYear++;
+        } else if (this.currentMonth < 0) {
+            this.currentMonth = 11;
+            this.currentYear--;
+        }
+        this.monthSelect.value = this.currentMonth;
+        this.yearSelect.value = this.currentYear;
+        this.renderDays();
+    }
+
     show() {
-        // Position picker below input
+        // Position picker with smart vertical placement
         const rect = this.input.getBoundingClientRect();
-        this.picker.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+        const pickerHeight = 400; // Approximate picker height
+        const viewportHeight = window.innerHeight;
+        const spaceBelow = viewportHeight - rect.bottom;
+        const spaceAbove = rect.top;
+        
+        // Decide whether to open upward or downward
+        let shouldOpenUpward = false;
+        if (spaceBelow < pickerHeight && spaceAbove > spaceBelow) {
+            shouldOpenUpward = true;
+        }
+        
+        // Position horizontally
         this.picker.style.left = rect.left + window.scrollX + 'px';
+        
+        // Position vertically
+        if (shouldOpenUpward) {
+            this.picker.style.top = (rect.top + window.scrollY - pickerHeight - 5) + 'px';
+            this.picker.style.bottom = 'auto';
+        } else {
+            this.picker.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            this.picker.style.bottom = 'auto';
+        }
+        
         this.picker.style.display = 'block';
         
         // Update to show selected date's month/year
