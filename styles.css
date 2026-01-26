@@ -260,17 +260,23 @@ nav a:hover {
     border-color: var(--color-beige);
 }
 
-/* Logout Button Specific Styles */
+/* LOG OUT Button */
 .btn-logout {
-    background-color: var(--color-black);
-    color: var(--color-beige);
-    border: 2px solid var(--color-beige);
+    background-color: #d32f2f;
+    color: var(--color-white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+    z-index: 10;
 }
 
 .btn-logout:hover {
-    background-color: var(--color-sage);
-    color: var(--color-white);
-    border-color: var(--color-sage);
+    background-color: #b71c1c;
 }
 
 /* Form Styles */
@@ -626,14 +632,21 @@ footer {
     }
 }
 
-/* ============ ADMIN DASHBOARD - VERTICAL MENU SYSTEM ============ */
+/* ============ ADMIN DASHBOARD - VERTICAL CASCADING MENU ============ */
 
-/* Top Header Bar */
+/* Reset admin page body */
+body.admin-page {
+    padding-top: 0;
+    margin: 0;
+}
+
+/* Top Header Bar - Fixed */
 .admin-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    height: 70px;
     background-color: var(--color-black);
     z-index: 1000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -643,9 +656,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    max-width: 100%;
-    position: relative;
+    padding: 0 2rem;
+    height: 100%;
 }
 
 .admin-top-nav h1 {
@@ -669,8 +681,9 @@ footer {
     font-family: 'Raleway', sans-serif;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s;
     letter-spacing: 0.05rem;
+    z-index: 10;
 }
 
 .menu-trigger-btn:hover {
@@ -678,18 +691,19 @@ footer {
     color: var(--color-white);
 }
 
-/* Vertical Sidebar Menu */
+/* Vertical Sidebar Menu - Hidden by Default */
 .vertical-menu {
     position: fixed;
-    top: 70px; /* Below header */
+    top: 70px;
     left: 0;
     width: 250px;
     height: calc(100vh - 70px);
     background-color: #2c2c2c;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-    z-index: 900;
+    z-index: 999;
     overflow-y: auto;
+    overflow-x: visible; /* IMPORTANT: Allow submenu to overflow */
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -697,35 +711,43 @@ footer {
     transform: translateX(0);
 }
 
+/* Menu Navigation */
 .vertical-menu-nav {
-    padding: 1rem 0;
+    padding: 0;
 }
 
 .vertical-menu-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column; /* FORCE VERTICAL STACKING */
 }
 
+/* Menu Items - Vertical Layout */
 .vertical-menu-item {
     position: relative;
+    display: block; /* FORCE BLOCK DISPLAY */
+    width: 100%;
 }
 
+/* Menu Buttons - Full Width */
 .vertical-menu-btn {
     width: 100%;
     background-color: transparent;
     color: var(--color-beige);
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     text-align: left;
     font-size: 1rem;
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s, padding-left 0.3s;
+    transition: all 0.3s;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(212, 211, 195, 0.1);
 }
 
 .vertical-menu-btn:hover {
@@ -738,38 +760,42 @@ footer {
     transition: transform 0.3s;
 }
 
-.vertical-menu-item.has-submenu:hover .arrow {
+.vertical-menu-item.has-submenu:hover .vertical-menu-btn .arrow {
     transform: translateX(5px);
 }
 
-/* Vertical Submenu (cascades to the right) */
+/* Submenu - Fly-out to the RIGHT */
 .vertical-submenu {
     position: absolute;
-    left: 100%;
+    left: 100%; /* Position to the RIGHT of parent */
     top: 0;
     width: 220px;
     background-color: #1a1a1a;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transform: translateX(-10px);
     transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-    z-index: 910;
+    z-index: 1000;
 }
 
-.vertical-menu-item.has-submenu:hover .vertical-submenu,
-.vertical-submenu:hover {
+/* Show submenu on parent hover */
+.vertical-menu-item.has-submenu:hover > .vertical-submenu {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: translateX(0);
 }
 
-/* Keep parent menu visible when hovering submenu */
-.vertical-menu-item.has-submenu:hover,
-.vertical-submenu:hover ~ .vertical-menu-item {
-    background-color: rgba(212, 211, 195, 0.1);
+/* Keep submenu visible when hovering submenu itself */
+.vertical-submenu:hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
+/* Submenu Items */
 .submenu-item {
     width: 100%;
     background-color: transparent;
@@ -781,8 +807,9 @@ footer {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     cursor: pointer;
-    transition: background-color 0.3s, padding-left 0.3s;
+    transition: all 0.3s;
     display: block;
+    border-bottom: 1px solid rgba(212, 211, 195, 0.05);
 }
 
 .submenu-item:hover {
@@ -791,16 +818,7 @@ footer {
     padding-left: 2rem;
 }
 
-/* Show menu when hovering trigger button OR menu itself */
-.menu-trigger-btn:hover ~ #vertical-menu,
-.vertical-menu:hover {
-    transform: translateX(0);
-}
-
-/* Alternative: Use JavaScript to toggle .show class */
-/* This provides more control over the interaction */
-
-/* Scrollbar styling for vertical menu */
+/* Scrollbar for menu */
 .vertical-menu::-webkit-scrollbar {
     width: 8px;
 }
@@ -818,11 +836,53 @@ footer {
     background: var(--color-beige);
 }
 
-/* Adjust main content to not be hidden behind header */
-.admin-page main.container {
-    margin-top: 90px; /* Account for fixed header */
-    margin-left: 0;
-    transition: margin-left 0.3s;
+/* Main Content - CENTERED */
+.admin-main-content {
+    padding-top: 90px; /* Account for fixed header */
+    margin-left: 0; /* NO left margin - content stays centered */
+    min-height: calc(100vh - 90px);
+}
+
+/* Container - Keep centered */
+main.container {
+    max-width: 1200px;
+    margin: 0 auto; /* CENTER THE CONTENT */
+    padding: 2rem;
+}
+
+/* Cards stay centered */
+.card {
+    max-width: 100%;
+    margin: 0 auto 2rem auto; /* CENTER CARDS */
+}
+
+/* Remove any old nav styles that might interfere */
+.nav-buttons {
+    display: none !important; /* Force hide old horizontal nav */
+}
+
+.submenu-content {
+    display: none !important; /* Force hide old submenu */
+}
+
+/* Ensure no flexbox on nav is making things horizontal */
+nav ul {
+    flex-direction: column !important;
+}
+
+/* Photo grid stays centered */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem auto;
+    justify-items: center;
+}
+
+/* Form elements stay centered */
+.form-group {
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
 }
 
 /* OLD HORIZONTAL SUBMENU STYLES - REMOVED */
