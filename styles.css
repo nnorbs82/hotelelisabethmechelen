@@ -531,6 +531,7 @@ footer {
         transform: translateX(-50%);
         width: 90%;
         max-width: 600px;
+        bottom: 20px;
     }
 }
 
@@ -538,7 +539,7 @@ footer {
 @media (max-width: 768px) {
     .booking-bar {
         flex-direction: column;
-        bottom: 100px;
+        bottom: 20px;
         padding: 1rem;
         gap: 0.75rem;
         width: calc(100% - 2rem);
