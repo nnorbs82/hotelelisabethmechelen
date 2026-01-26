@@ -340,6 +340,186 @@ footer {
     margin-top: 3rem;
 }
 
+/* Booking Bar Styles */
+.booking-bar {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--color-beige);
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    z-index: 10;
+    max-width: 90%;
+}
+
+.booking-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.booking-field label {
+    color: var(--color-beige);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.booking-field input {
+    padding: 0.75rem;
+    border: 1px solid var(--color-beige);
+    border-radius: 4px;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-size: 1rem;
+    cursor: pointer;
+    height: 48px;
+}
+
+.booking-field input:focus {
+    outline: none;
+    border-color: var(--color-sage);
+}
+
+.booking-search-btn {
+    flex: 1;
+    margin: 0;
+    height: 48px;
+    white-space: nowrap;
+}
+
+/* Custom Date Picker Styles */
+.datepicker-container {
+    position: absolute;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-beige);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    z-index: 1000;
+    min-width: 280px;
+}
+
+.datepicker-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-black);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.datepicker-month,
+.datepicker-year {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid var(--color-beige);
+    border-radius: 4px;
+    background-color: var(--color-black);
+    color: var(--color-beige);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.datepicker-month:focus,
+.datepicker-year:focus {
+    outline: none;
+    border-color: var(--color-sage);
+}
+
+.datepicker-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--color-black);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.datepicker-weekdays div {
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-beige);
+    font-size: 0.85rem;
+}
+
+.datepicker-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.datepicker-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+    color: var(--color-black);
+}
+
+.datepicker-day:hover:not(.disabled):not(.prev-month):not(.next-month) {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+}
+
+.datepicker-day.selected {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    font-weight: bold;
+}
+
+.datepicker-day.today {
+    border: 2px solid var(--color-sage);
+}
+
+.datepicker-day.prev-month,
+.datepicker-day.next-month {
+    color: rgba(0, 0, 0, 0.3);
+    cursor: default;
+}
+
+.datepicker-day.disabled {
+    color: rgba(0, 0, 0, 0.2);
+    cursor: not-allowed;
+}
+
+/* Mobile Responsive for Booking Bar */
+@media (max-width: 768px) {
+    .booking-bar {
+        flex-direction: column;
+        bottom: 100px;
+        padding: 1rem;
+        gap: 0.75rem;
+        width: calc(100% - 2rem);
+        max-width: calc(100% - 2rem);
+    }
+
+    .booking-field {
+        width: 100%;
+    }
+
+    .booking-search-btn {
+        width: 100%;
+    }
+    
+    .datepicker-container {
+        left: 1rem;
+        transform: none;
+        right: 1rem;
+        max-width: calc(100vw - 2rem);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     nav {

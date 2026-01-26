@@ -31,6 +31,19 @@
                 <div class="hero-track" id="hero-track"></div>
                 <button class="hero-handle hero-handle-left" id="hero-prev" aria-label="Previous banner image" type="button">&#10094;</button>
                 <button class="hero-handle hero-handle-right" id="hero-next" aria-label="Next banner image" type="button">&#10095;</button>
+                
+                <!-- Booking Bar -->
+                <div class="booking-bar">
+                    <div class="booking-field">
+                        <label for="checkin-date">Check-in</label>
+                        <input type="text" id="checkin-date" placeholder="Select date" readonly>
+                    </div>
+                    <div class="booking-field">
+                        <label for="checkout-date">Check-out</label>
+                        <input type="text" id="checkout-date" placeholder="Select date" readonly>
+                    </div>
+                    <button id="search-btn" class="btn booking-search-btn">Search</button>
+                </div>
             </div>
         </section>
 
@@ -209,5 +222,6 @@
 
         fetchBannerUrls().then(buildSlides);
     </script>
+    <script src="booking-bar.js"></script>
 </body>
 </html>
