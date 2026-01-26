@@ -22,7 +22,7 @@
         <div id="update-index-submenu" class="submenu" style="display: none;">
             <div class="submenu-content">
                 <button class="btn btn-secondary submenu-btn" id="main-banner-btn">Main Banner</button>
-                <button class="btn btn-secondary submenu-btn" id="ads-btn">Ads</button>
+                <button class="btn btn-secondary submenu-btn" id="ads-btn">Index Ads</button>
             </div>
         </div>
     </header>
@@ -161,6 +161,8 @@
         // Show photo management card when Main Banner is clicked
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
             const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            adsCard.style.display = 'none';
             photoCard.style.display = 'block';
             // Scroll to the card
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -170,7 +172,9 @@
 
         // Show ads management card when Ads is clicked
         document.getElementById('ads-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
+            photoCard.style.display = 'none';
             adsCard.style.display = 'block';
             // Scroll to the card
             adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
