@@ -47,6 +47,9 @@
             </div>
         </section>
 
+        <!-- Index Ads Section -->
+        <section id="index-ads-section" style="display: none;"></section>
+
         <div class="container">
             <div class="card">
                 <h2>Welcome to Hotel Elisabeth Mechelen</h2>
@@ -221,6 +224,75 @@
         window.addEventListener('resize', () => setTrackPosition(false));
 
         fetchBannerUrls().then(buildSlides);
+
+        // ============ INDEX ADS DISPLAY ============
+        const adsSection = document.getElementById('index-ads-section');
+        
+        // Detect browser language or default to English
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('nl')) return 'nl';
+            if (browserLang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        async function loadIndexAds() {
+            try {
+                const snapshot = await get(dbRef(database, 'indexAds'));
+                
+                if (!snapshot.exists()) {
+                    return; // No ads to display
+                }
+
+                const adsData = snapshot.val();
+                const currentLang = detectLanguage();
+                
+                // Check if we have all three ads with required data
+                const ad1 = adsData.ad1;
+                const ad2 = adsData.ad2;
+                const ad3 = adsData.ad3;
+                
+                if (!ad1 || !ad2 || !ad3) {
+                    return; // Not all ads configured
+                }
+
+                // Render the ads
+                adsSection.innerHTML = `
+                    <div class="index-ads-container">
+                        <div class="index-ads-left" style="background-image: url('${ad1.imageUrl || ''}');">
+                            <div class="index-ad-content">
+                                <div class="index-ad-top-text">${ad1[`topText_${currentLang}`] || ''}</div>
+                                <div class="index-ad-bottom-text">${ad1[`bottomText_${currentLang}`] || ''}</div>
+                                ${ad1.link ? `<a href="${ad1.link}" class="index-ad-button">${ad1[`buttonTitle_${currentLang}`] || 'Learn More'}</a>` : ''}
+                            </div>
+                        </div>
+                        <div class="index-ads-right">
+                            <div class="index-ads-right-top" style="background-image: url('${ad2.imageUrl || ''}');">
+                                <div class="index-ad-content">
+                                    <div class="index-ad-top-text">${ad2[`topText_${currentLang}`] || ''}</div>
+                                    <div class="index-ad-bottom-text">${ad2[`bottomText_${currentLang}`] || ''}</div>
+                                    ${ad2.link ? `<a href="${ad2.link}" class="index-ad-button">${ad2[`buttonTitle_${currentLang}`] || 'Learn More'}</a>` : ''}
+                                </div>
+                            </div>
+                            <div class="index-ads-right-bottom" style="background-image: url('${ad3.imageUrl || ''}');">
+                                <div class="index-ad-content">
+                                    <div class="index-ad-top-text">${ad3[`topText_${currentLang}`] || ''}</div>
+                                    <div class="index-ad-bottom-text">${ad3[`bottomText_${currentLang}`] || ''}</div>
+                                    ${ad3.link ? `<a href="${ad3.link}" class="index-ad-button">${ad3[`buttonTitle_${currentLang}`] || 'Learn More'}</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                adsSection.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading index ads:', error);
+            }
+        }
+
+        // Load ads after banner loads
+        loadIndexAds();
     </script>
     <script src="booking-bar.js"></script>
 </body>
