@@ -484,7 +484,7 @@
             // Safely escape and sanitize all user data
             const imageUrl = sanitizeImageUrl(data.imageUrl);
             const link = escapeHtml(data.link || '');
-            const isOpen = true;
+            const isOpen = false;
             
             adCard.innerHTML = `
                 <div class="ad-item-header">
@@ -552,13 +552,20 @@
             return adCard;
         }
 
+        let adBodies = [];
+        let adToggleButtons = [];
+
         function toggleAdCard(index) {
+            if (!adBodies.length || !adToggleButtons.length) {
+                adBodies = Array.from(document.querySelectorAll('.ad-item-body'));
+                adToggleButtons = Array.from(document.querySelectorAll('.ad-toggle'));
+            }
             const body = document.getElementById(`ad${index}-body`);
             const toggleBtn = document.getElementById(`ad${index}-toggle-btn`);
             const isHidden = body.style.display === 'none';
             // Close all others
-            document.querySelectorAll('.ad-item-body').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.ad-toggle').forEach(btn => btn.textContent = 'Expand');
+            adBodies.forEach(el => el.style.display = 'none');
+            adToggleButtons.forEach(btn => btn.textContent = 'Expand');
             // Open selected
             if (isHidden) {
                 body.style.display = '';
