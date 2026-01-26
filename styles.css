@@ -652,6 +652,10 @@ footer {
     color: var(--color-beige);
     font-size: 1.5rem;
     font-weight: 600;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
 }
 
 /* Menu Trigger Button */
