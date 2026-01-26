@@ -16,11 +16,20 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Raleway', sans-serif;
     background-color: transparent;
     color: var(--color-black);
     line-height: 1.6;
     padding-top: var(--header-height); /* Account for fixed header height */
+}
+
+/* Ensure all text inputs, textareas, and buttons use Raleway */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+}
+
+input, textarea, button {
+    font-family: 'Raleway', sans-serif;
 }
 
 /* Fixed Background Layer (iOS Compatible) */
@@ -62,6 +71,7 @@ nav h1 {
     color: var(--color-beige);
     font-size: 1.8rem;
     margin: 0;
+    font-weight: 600; /* Use SemiBold */
 }
 
 .nav-logo {
@@ -208,6 +218,10 @@ nav a:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.card h2 {
+    font-weight: 600; /* SemiBold for card titles */
+}
+
 /* Button Styles */
 .btn {
     display: inline-block;
@@ -221,6 +235,7 @@ nav a:hover {
     transition: background-color 0.3s, border-color 0.3s;
     font-size: 1rem;
     line-height: normal;
+    font-weight: 500; /* Medium */
 }
 
 .btn:hover {
@@ -890,6 +905,61 @@ footer {
     border-color: var(--color-sage);
 }
 
+/* Ads Tabs */
+.ads-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--color-sage);
+}
+
+.ads-tab {
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--color-beige);
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.ads-tab:hover {
+    background-color: rgba(212, 211, 195, 0.1);
+}
+
+.ads-tab.active {
+    border-bottom-color: var(--color-beige);
+    font-weight: bold;
+}
+
+.ads-lang-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.ads-lang-tab {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--color-beige);
+    border: 2px solid var(--color-sage);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.ads-lang-tab:hover {
+    background-color: rgba(212, 211, 195, 0.2);
+}
+
+.ads-lang-tab.active {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    border-color: var(--color-beige);
+}
+
 /* About Us Tabs */
 .about-us-tabs {
     display: flex;
@@ -973,6 +1043,7 @@ footer {
     color: var(--color-white);
     padding: 4rem 2rem;
     margin: 0;
+    min-height: 600px; /* ADD THIS */
 }
 
 .about-us-container {
@@ -987,6 +1058,7 @@ footer {
     letter-spacing: 0.3rem;
     margin-bottom: 4rem;
     color: var(--color-white);
+    display: block; /* ENSURE IT'S VISIBLE */
 }
 
 .about-us-content {
@@ -1002,7 +1074,7 @@ footer {
 
 .about-us-subtitle {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 400; /* Regular */
     letter-spacing: 0.15rem;
     margin-bottom: 0.5rem;
     color: var(--color-white);

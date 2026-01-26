@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Hotel Elisabeth Mechelen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="admin-page">
     <header>
@@ -76,8 +80,16 @@
                 <h2>Index Ads Management</h2>
                 <p style="color: var(--color-sage); margin-bottom: 1rem;">Manage the three promotional ads displayed on the index page.</p>
                 
-                <div id="ads-container">
-                    <!-- Ad items will be dynamically added here -->
+                <!-- Tab Navigation -->
+                <div class="ads-tabs">
+                    <button class="ads-tab active" data-ad="ad1">Ad Item 1</button>
+                    <button class="ads-tab" data-ad="ad2">Ad Item 2</button>
+                    <button class="ads-tab" data-ad="ad3">Ad Item 3</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="ads-tab-content">
+                    <!-- Content will be rendered by JavaScript -->
                 </div>
             </div>
 
@@ -164,6 +176,38 @@
 
         let currentPhotos = [];
 
+        // Initialize TinyMCE for all textareas with class 'tinymce-editor'
+        function initializeTinyMCE() {
+            // Remove any existing instances
+            tinymce.remove();
+            
+            tinymce.init({
+                selector: '.tinymce-editor, .about-us-section textarea',
+                height: 300,
+                menubar: false,
+                plugins: [
+                    'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview',
+                    'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                    'insertdatetime', 'table', 'help', 'wordcount'
+                ],
+                toolbar: 'undo redo | formatselect | fontfamily fontsize | ' +
+                    'bold italic underline strikethrough | forecolor backcolor | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | removeformat | help',
+                font_family_formats: 'Raleway=Raleway, sans-serif; Arial=arial,helvetica,sans-serif; ' +
+                    'Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; ' +
+                    'Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; ' +
+                    'Tahoma=tahoma,arial,helvetica,sans-serif; Times New Roman=times new roman,times; ' +
+                    'Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; ' +
+                    'Open Sans=Open Sans, sans-serif; Lato=Lato, sans-serif; ' +
+                    'Roboto=Roboto, sans-serif; Montserrat=Montserrat, sans-serif; ' +
+                    'Playfair Display=Playfair Display, serif; Merriweather=Merriweather, serif',
+                font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+                content_style: 'body { font-family: Raleway, sans-serif; font-size: 14px; }',
+                branding: false
+            });
+        }
+
         // Check if user is authenticated
         checkAuthState((authState) => {
             const loading = document.getElementById('loading');
@@ -196,11 +240,16 @@
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            
+            // Hide all cards
             adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            
+            // Show only photo card
             photoCard.style.display = 'block';
-            // Scroll to the card
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // Load existing photos
+            
             await loadPhotos();
             await loadBackgroundPhoto();
         });
@@ -209,11 +258,16 @@
         document.getElementById('ads-btn').addEventListener('click', async () => {
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            
+            // Hide all cards
             photoCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            
+            // Show only ads card
             adsCard.style.display = 'block';
-            // Scroll to the card
             adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // Load existing ads
+            
             await loadAds();
         });
 
@@ -448,13 +502,22 @@
             }
         }
 
-        // ============ INDEX ADS MANAGEMENT ============
+        // ============ INDEX ADS MANAGEMENT (REFACTORED WITH TABS) ============
         const languages = ['en', 'nl', 'fr'];
         const languageLabels = {
             en: { name: 'English', flag: '🇬🇧' },
             nl: { name: 'Dutch', flag: '🇳🇱' },
             fr: { name: 'French', flag: '🇫🇷' }
         };
+
+        let adsData = {
+            ad1: { imageUrl: '', topText_en: '', topText_nl: '', topText_fr: '', bottomText_en: '', bottomText_nl: '', bottomText_fr: '', buttonTitle_en: '', buttonTitle_nl: '', buttonTitle_fr: '', link: '' },
+            ad2: { imageUrl: '', topText_en: '', topText_nl: '', topText_fr: '', bottomText_en: '', bottomText_nl: '', bottomText_fr: '', buttonTitle_en: '', buttonTitle_nl: '', buttonTitle_fr: '', link: '' },
+            ad3: { imageUrl: '', topText_en: '', topText_nl: '', topText_fr: '', bottomText_en: '', bottomText_nl: '', bottomText_fr: '', buttonTitle_en: '', buttonTitle_nl: '', buttonTitle_fr: '', link: '' }
+        };
+
+        let currentAdTab = 'ad1';
+        let currentAdLang = 'en';
 
         // Escape HTML to prevent XSS in attributes
         function escapeHtml(text) {
@@ -476,181 +539,154 @@
             return '';
         }
 
-        // Load ads from Firebase
+        // Tab switching for ads
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('ads-tab')) {
+                document.querySelectorAll('.ads-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAdTab = e.target.dataset.ad;
+                renderAdTab();
+            }
+            
+            if (e.target.classList.contains('ads-lang-tab')) {
+                document.querySelectorAll('.ads-lang-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAdLang = e.target.dataset.lang;
+                renderAdTab();
+            }
+        });
+
+        // Load ads data
         async function loadAds() {
             try {
                 const snapshot = await get(dbRef(database, 'indexAds'));
-                const adsData = snapshot.exists() ? snapshot.val() : {};
                 
-                renderAds(adsData);
+                if (snapshot.exists()) {
+                    adsData = snapshot.val();
+                }
+                
+                renderAdTab();
             } catch (error) {
                 console.error('Error loading ads:', error);
             }
         }
 
-        // Render ads management UI
-        function renderAds(adsData) {
-            const container = document.getElementById('ads-container');
-            container.innerHTML = '';
-
-            for (let i = 1; i <= 3; i++) {
-                const adData = adsData[`ad${i}`] || {};
-                const adItem = createAdItem(i, adData);
-                container.appendChild(adItem);
-            }
-        }
-
-        // Create a single ad item
-        function createAdItem(index, data) {
-            const adCard = document.createElement('div');
-            adCard.className = 'ad-item-card';
+        // Render ad tab content
+        function renderAdTab() {
+            const container = document.getElementById('ads-tab-content');
+            const ad = adsData[currentAdTab];
             
-            // Safely escape and sanitize all user data
-            const imageUrl = sanitizeImageUrl(data.imageUrl);
-            const link = escapeHtml(data.link || '');
-            
-            adCard.innerHTML = `
-                <h3>Ad Item ${index}</h3>
-                
-                <!-- Image Upload Section -->
-                <div class="ad-field">
-                    <label>Image</label>
-                    <input type="file" id="ad${index}-image-input" accept="image/*" style="display: none;">
-                    <button class="btn btn-secondary" id="ad${index}-upload-btn">Upload Image</button>
-                    <div id="ad${index}-image-preview" class="ad-image-preview">
-                        ${imageUrl ? `<img src="${imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
-                    </div>
+            const langTabs = `
+                <div class="ads-lang-tabs">
+                    <button class="ads-lang-tab ${currentAdLang === 'en' ? 'active' : ''}" data-lang="en">🇬🇧 EN</button>
+                    <button class="ads-lang-tab ${currentAdLang === 'nl' ? 'active' : ''}" data-lang="nl">🇳🇱 NL</button>
+                    <button class="ads-lang-tab ${currentAdLang === 'fr' ? 'active' : ''}" data-lang="fr">🇫🇷 FR</button>
                 </div>
-
-                <!-- Multilingual Text Fields -->
-                ${languages.map(lang => `
-                    <div class="ad-multilang-section">
-                        <h4>${languageLabels[lang].flag} ${languageLabels[lang].name}</h4>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-top-text-${lang}">Top Text</label>
-                            <input type="text" id="ad${index}-top-text-${lang}" value="${escapeHtml(data[`topText_${lang}`] || '')}" placeholder="Enter top text">
-                        </div>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-bottom-text-${lang}">Bottom Text</label>
-                            <input type="text" id="ad${index}-bottom-text-${lang}" value="${escapeHtml(data[`bottomText_${lang}`] || '')}" placeholder="Enter bottom text">
-                        </div>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-button-title-${lang}">Button Title</label>
-                            <input type="text" id="ad${index}-button-title-${lang}" value="${escapeHtml(data[`buttonTitle_${lang}`] || '')}" placeholder="Enter button title">
-                        </div>
-                    </div>
-                `).join('')}
-
-                <!-- Link Field (Language-independent) -->
-                <div class="ad-field">
-                    <label for="ad${index}-link">Link (URL)</label>
-                    <input type="text" id="ad${index}-link" value="${link}" placeholder="https://example.com">
-                </div>
-
-                <button class="btn" id="ad${index}-save-btn">Save Ad ${index}</button>
             `;
-
-            // Add event listeners
-            setTimeout(() => {
-                // Image upload
-                const uploadInput = document.getElementById(`ad${index}-image-input`);
-                const uploadBtn = document.getElementById(`ad${index}-upload-btn`);
-                const saveBtn = document.getElementById(`ad${index}-save-btn`);
-
-                uploadBtn.addEventListener('click', () => uploadInput.click());
-                uploadInput.addEventListener('change', (e) => handleAdImageUpload(e, index));
-                saveBtn.addEventListener('click', () => saveAd(index));
-            }, 0);
-
-            return adCard;
+            
+            const content = `
+                ${langTabs}
+                
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" id="ad-image-upload-${currentAdTab}" accept="image/*" style="margin-bottom: 0.5rem;">
+                    ${ad.imageUrl ? `<img src="${ad.imageUrl}" style="max-width: 300px; display: block; margin-top: 0.5rem; border-radius: 4px;">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
+                </div>
+                
+                <div class="form-group">
+                    <label>Top Text</label>
+                    <input type="text" id="ad-top-text" class="form-control" value="${escapeHtml(ad[`topText_${currentAdLang}`] || '')}" placeholder="Enter top text">
+                </div>
+                
+                <div class="form-group">
+                    <label>Bottom Text</label>
+                    <textarea id="ad-bottom-text" class="tinymce-editor">${escapeHtml(ad[`bottomText_${currentAdLang}`] || '')}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Button Title</label>
+                    <input type="text" id="ad-button-title" class="form-control" value="${escapeHtml(ad[`buttonTitle_${currentAdLang}`] || '')}" placeholder="Enter button text">
+                </div>
+                
+                <div class="form-group">
+                    <label>Link URL</label>
+                    <input type="text" id="ad-link" class="form-control" value="${escapeHtml(ad.link || '')}" placeholder="https://...">
+                </div>
+                
+                <button class="btn" id="save-ad-btn">Save Ad</button>
+            `;
+            
+            container.innerHTML = content;
+            
+            // Initialize TinyMCE
+            initializeTinyMCE();
+            
+            // Attach handlers
+            attachAdSaveHandlers();
         }
 
-        // Handle ad image upload
-        async function handleAdImageUpload(event, adIndex) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById(`ad${adIndex}-upload-btn`);
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                const timestamp = Date.now();
-                const filename = `index-ads/ad${adIndex}-${timestamp}-${file.name}`;
-                const fileRef = storageRef(storage, filename);
-
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                // Update preview
-                const preview = document.getElementById(`ad${adIndex}-image-preview`);
-                preview.innerHTML = `<img src="${downloadURL}" alt="Ad ${adIndex} preview">`;
-
-                // Store URL temporarily (will be saved when user clicks Save)
-                preview.dataset.imageUrl = downloadURL;
-                preview.dataset.filename = filename;
-
-                alert('Image uploaded successfully! Click "Save" to apply changes.');
-            } catch (error) {
-                console.error('Error uploading image:', error);
-                alert('Failed to upload image. Please try again.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Image';
-            }
-        }
-
-        // Save ad data
-        async function saveAd(adIndex) {
-            const saveBtn = document.getElementById(`ad${adIndex}-save-btn`);
-            saveBtn.disabled = true;
-            saveBtn.textContent = 'Saving...';
-
-            try {
-                const adData = {};
-
-                // Get image URL
-                const preview = document.getElementById(`ad${adIndex}-image-preview`);
-                adData.imageUrl = preview.dataset.imageUrl || preview.querySelector('img')?.src || '';
-                adData.filename = preview.dataset.filename || '';
-
-                // Get multilingual text fields
-                languages.forEach(lang => {
-                    adData[`topText_${lang}`] = document.getElementById(`ad${adIndex}-top-text-${lang}`).value;
-                    adData[`bottomText_${lang}`] = document.getElementById(`ad${adIndex}-bottom-text-${lang}`).value;
-                    adData[`buttonTitle_${lang}`] = document.getElementById(`ad${adIndex}-button-title-${lang}`).value;
+        // Attach save handlers for ads
+        function attachAdSaveHandlers() {
+            const saveBtn = document.getElementById('save-ad-btn');
+            const imageInput = document.getElementById(`ad-image-upload-${currentAdTab}`);
+            
+            if (imageInput) {
+                imageInput.addEventListener('change', async (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    if (!file.type.startsWith('image/')) {
+                        alert('Please select an image file');
+                        return;
+                    }
+                    
+                    try {
+                        // Delete old image if exists
+                        if (adsData[currentAdTab].imageUrl) {
+                            // Extract filename from URL and delete
+                            // Implementation depends on storage structure
+                        }
+                        
+                        const timestamp = Date.now();
+                        const filename = `index-ads/${currentAdTab}-${timestamp}-${file.name}`;
+                        const fileRef = storageRef(storage, filename);
+                        
+                        await uploadBytes(fileRef, file);
+                        const downloadURL = await getDownloadURL(fileRef);
+                        
+                        adsData[currentAdTab].imageUrl = downloadURL;
+                        
+                        await set(dbRef(database, 'indexAds'), adsData);
+                        
+                        renderAdTab();
+                        alert('Image uploaded successfully!');
+                    } catch (error) {
+                        console.error('Error uploading image:', error);
+                        alert('Failed to upload image.');
+                    }
                 });
-
-                // Get and validate link
-                const linkInput = document.getElementById(`ad${adIndex}-link`).value.trim();
-                // Only allow HTTP(S) URLs or relative paths
-                if (linkInput && !linkInput.startsWith('http://') && !linkInput.startsWith('https://') && !linkInput.startsWith('/')) {
-                    alert('Link must start with http://, https://, or / for relative paths');
-                    saveBtn.disabled = false;
-                    saveBtn.textContent = `Save Ad ${adIndex}`;
-                    return;
-                }
-                adData.link = linkInput;
-                adData.timestamp = Date.now();
-
-                // Save to Firebase
-                await set(dbRef(database, `indexAds/ad${adIndex}`), adData);
-
-                alert(`Ad ${adIndex} saved successfully!`);
-            } catch (error) {
-                console.error('Error saving ad:', error);
-                alert('Failed to save ad. Please try again.');
-            } finally {
-                saveBtn.disabled = false;
-                saveBtn.textContent = `Save Ad ${adIndex}`;
+            }
+            
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    const topText = document.getElementById('ad-top-text').value;
+                    const bottomText = tinymce.get('ad-bottom-text').getContent();
+                    const buttonTitle = document.getElementById('ad-button-title').value;
+                    const link = document.getElementById('ad-link').value;
+                    
+                    adsData[currentAdTab][`topText_${currentAdLang}`] = topText;
+                    adsData[currentAdTab][`bottomText_${currentAdLang}`] = bottomText;
+                    adsData[currentAdTab][`buttonTitle_${currentAdLang}`] = buttonTitle;
+                    adsData[currentAdTab].link = link;
+                    
+                    try {
+                        await set(dbRef(database, 'indexAds'), adsData);
+                        alert('Ad saved successfully!');
+                    } catch (error) {
+                        console.error('Error saving ad:', error);
+                        alert('Failed to save ad.');
+                    }
+                });
             }
         }
 
@@ -899,7 +935,7 @@
                     </div>
                     <div class="about-us-form-section">
                         <h4>Text Body</h4>
-                        <textarea id="about-us-left-body" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                        <textarea id="about-us-left-body" class="tinymce-editor" placeholder="Enter text body">${escapeHtml(body)}</textarea>
                     </div>
                     <button class="btn" id="save-about-us-left-btn">Save Left Content</button>
                 `;
@@ -924,13 +960,16 @@
                     </div>
                     <div class="about-us-form-section">
                         <h4>Text Body</h4>
-                        <textarea id="about-us-right-body" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                        <textarea id="about-us-right-body" class="tinymce-editor" placeholder="Enter text body">${escapeHtml(body)}</textarea>
                     </div>
                     <button class="btn" id="save-about-us-right-btn">Save Right Content</button>
                 `;
             }
             
             container.innerHTML = content;
+            
+            // Initialize TinyMCE after rendering content
+            initializeTinyMCE();
             
             // Attach save handlers
             attachAboutUsSaveHandlers();
@@ -954,7 +993,7 @@
                 saveLeftBtn.addEventListener('click', async () => {
                     aboutUsData.left.subtitle1[currentAboutUsLang] = document.getElementById('about-us-left-sub1').value;
                     aboutUsData.left.subtitle2[currentAboutUsLang] = document.getElementById('about-us-left-sub2').value;
-                    aboutUsData.left.textBody[currentAboutUsLang] = document.getElementById('about-us-left-body').value;
+                    aboutUsData.left.textBody[currentAboutUsLang] = tinymce.get('about-us-left-body').getContent();
                     await saveAboutUsData();
                 });
             }
@@ -963,7 +1002,7 @@
                 saveRightBtn.addEventListener('click', async () => {
                     aboutUsData.right.subtitle1[currentAboutUsLang] = document.getElementById('about-us-right-sub1').value;
                     aboutUsData.right.subtitle2[currentAboutUsLang] = document.getElementById('about-us-right-sub2').value;
-                    aboutUsData.right.textBody[currentAboutUsLang] = document.getElementById('about-us-right-body').value;
+                    aboutUsData.right.textBody[currentAboutUsLang] = tinymce.get('about-us-right-body').getContent();
                     await saveAboutUsData();
                 });
             }
