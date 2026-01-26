@@ -434,18 +434,18 @@
                 const data = snapshot.val();
                 const currentLang = detectLanguage();
                 
-                // Set title (as HTML) - sanitized
-                document.getElementById('about-us-title').innerHTML = DOMPurify.sanitize(data.title[currentLang] || '');
+                // Set title
+                document.getElementById('about-us-title').textContent = data.title[currentLang] || '';
                 
-                // Set left content (as HTML) - sanitized
-                document.getElementById('about-us-left-subtitle1').innerHTML = DOMPurify.sanitize(data.left.subtitle1[currentLang] || '');
-                document.getElementById('about-us-left-subtitle2').innerHTML = DOMPurify.sanitize(data.left.subtitle2[currentLang] || '');
-                document.getElementById('about-us-left-body').innerHTML = DOMPurify.sanitize(data.left.textBody[currentLang] || '');
+                // Set left content
+                document.getElementById('about-us-left-subtitle1').textContent = data.left.subtitle1[currentLang] || '';
+                document.getElementById('about-us-left-subtitle2').textContent = data.left.subtitle2[currentLang] || '';
+                document.getElementById('about-us-left-body').textContent = data.left.textBody[currentLang] || '';
                 
-                // Set right content (as HTML) - sanitized
-                document.getElementById('about-us-right-subtitle1').innerHTML = DOMPurify.sanitize(data.right.subtitle1[currentLang] || '');
-                document.getElementById('about-us-right-subtitle2').innerHTML = DOMPurify.sanitize(data.right.subtitle2[currentLang] || '');
-                document.getElementById('about-us-right-body').innerHTML = DOMPurify.sanitize(data.right.textBody[currentLang] || '');
+                // Set right content
+                document.getElementById('about-us-right-subtitle1').textContent = data.right.subtitle1[currentLang] || '';
+                document.getElementById('about-us-right-subtitle2').textContent = data.right.subtitle2[currentLang] || '';
+                document.getElementById('about-us-right-body').textContent = data.right.textBody[currentLang] || '';
                 
             } catch (error) {
                 console.error('Error loading About Us content:', error);
