@@ -423,6 +423,13 @@
             }
             
             try {
+                // Bounds check for index
+                if (index < 0 || index >= currentPhotos.length) {
+                    console.error('Invalid index:', index);
+                    alert('Invalid photo index.');
+                    return;
+                }
+                
                 const photo = currentPhotos[index];
                 
                 // Delete from storage
@@ -432,7 +439,7 @@
                 }
                 
                 // Delete from database
-                await set(dbRef(database, `mainBanner/${photo.timestamp}`), null);
+                await remove(dbRef(database, `mainBanner/${photo.timestamp}`));
                 
                 // Reload photos
                 await loadPhotos();
@@ -753,7 +760,7 @@
                 }
                 
                 // Delete from database
-                await set(dbRef(database, 'indexBackground'), null);
+                await remove(dbRef(database, 'indexBackground'));
                 
                 // Reload
                 await loadBackgroundPhoto();
