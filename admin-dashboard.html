@@ -658,7 +658,8 @@
                 const backgroundPreview = document.getElementById('background-preview');
                 
                 if (snapshot.exists() && snapshot.val().url) {
-                    const url = snapshot.val().url;
+                    currentBackground = snapshot.val();
+                    const url = currentBackground.url;
                     backgroundPreview.innerHTML = `
                         <div class="photo-item">
                             <img src="${url}" alt="Background photo">
@@ -666,6 +667,7 @@
                         </div>
                     `;
                 } else {
+                    currentBackground = null;
                     backgroundPreview.innerHTML = '<p style="color: var(--color-sage);">No background photo uploaded</p>';
                 }
             } catch (error) {
