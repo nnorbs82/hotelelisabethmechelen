@@ -541,6 +541,18 @@
             }
         }
 
+        // Shared Quill toolbar configuration
+        const quillToolbarOptions = [
+            [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline', 'strike'],
+            [{ 'color': [] }, { 'background': [] }],
+            [{ 'align': [] }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link'],
+            ['clean']
+        ];
+
         // Global Quill editors for ads
         let adsQuillEditors = {};
 
@@ -548,28 +560,17 @@
         function initializeAdsQuillEditors() {
             adsQuillEditors = {};
             
-            const toolbarOptions = [
-                [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'align': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                ['link'],
-                ['clean']
-            ];
-            
             const ad = adsData[currentAdTab];
             
             adsQuillEditors['topText'] = new Quill('#ad-top-text-editor', {
                 theme: 'snow',
-                modules: { toolbar: toolbarOptions }
+                modules: { toolbar: quillToolbarOptions }
             });
             adsQuillEditors['topText'].root.innerHTML = ad[`topText_${currentAdLang}`] || '';
             
             adsQuillEditors['bottomText'] = new Quill('#ad-bottom-text-editor', {
                 theme: 'snow',
-                modules: { toolbar: toolbarOptions }
+                modules: { toolbar: quillToolbarOptions }
             });
             adsQuillEditors['bottomText'].root.innerHTML = ad[`bottomText_${currentAdLang}`] || '';
         }
@@ -993,57 +994,46 @@
         function initializeAboutUsQuillEditors() {
             aboutUsQuillEditors = {};
             
-            const toolbarOptions = [
-                [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
-                ['bold', 'italic', 'underline', 'strike'],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'align': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                ['link'],
-                ['clean']
-            ];
-            
             if (currentAboutUsTab === 'title') {
                 aboutUsQuillEditors['title'] = new Quill('#about-us-title-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['title'].root.innerHTML = aboutUsData.title[currentAboutUsLang] || '';
             } else if (currentAboutUsTab === 'left') {
                 aboutUsQuillEditors['leftSub1'] = new Quill('#about-us-left-sub1-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['leftSub1'].root.innerHTML = aboutUsData.left.subtitle1[currentAboutUsLang] || '';
                 
                 aboutUsQuillEditors['leftSub2'] = new Quill('#about-us-left-sub2-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['leftSub2'].root.innerHTML = aboutUsData.left.subtitle2[currentAboutUsLang] || '';
                 
                 aboutUsQuillEditors['leftBody'] = new Quill('#about-us-left-body-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['leftBody'].root.innerHTML = aboutUsData.left.textBody[currentAboutUsLang] || '';
             } else if (currentAboutUsTab === 'right') {
                 aboutUsQuillEditors['rightSub1'] = new Quill('#about-us-right-sub1-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['rightSub1'].root.innerHTML = aboutUsData.right.subtitle1[currentAboutUsLang] || '';
                 
                 aboutUsQuillEditors['rightSub2'] = new Quill('#about-us-right-sub2-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['rightSub2'].root.innerHTML = aboutUsData.right.subtitle2[currentAboutUsLang] || '';
                 
                 aboutUsQuillEditors['rightBody'] = new Quill('#about-us-right-body-editor', {
                     theme: 'snow',
-                    modules: { toolbar: toolbarOptions }
+                    modules: { toolbar: quillToolbarOptions }
                 });
                 aboutUsQuillEditors['rightBody'].root.innerHTML = aboutUsData.right.textBody[currentAboutUsLang] || '';
             }
