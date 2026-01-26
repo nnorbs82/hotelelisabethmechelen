@@ -707,8 +707,9 @@
                     try {
                         const oldFileRef = storageRef(storage, currentBackground.filename);
                         await deleteObject(oldFileRef);
-                    } catch (error) {
-                        console.log('Old background file not found or already deleted');
+                    } catch (deleteError) {
+                        // Log specific error but don't fail the upload
+                        console.warn('Failed to delete old background file:', deleteError.message || deleteError);
                     }
                 }
                 
@@ -749,7 +750,7 @@
         async function deleteBackgroundPhoto() {
             try {
                 // Delete from storage
-                if (currentBackground.filename) {
+                if (currentBackground && currentBackground.filename) {
                     const fileRef = storageRef(storage, currentBackground.filename);
                     await deleteObject(fileRef);
                 }
