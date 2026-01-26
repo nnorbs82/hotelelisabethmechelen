@@ -597,7 +597,7 @@ footer {
     transition: max-height 0.3s ease-out;
     width: auto;
     margin: 0;
-    padding: 0 1rem;
+    padding: 0;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-sizing: border-box;
