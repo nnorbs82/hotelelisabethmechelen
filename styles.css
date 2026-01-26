@@ -670,7 +670,7 @@ footer {
     background-color: var(--color-sage);
     border-radius: 8px;
     overflow: hidden;
-    border: 2px solid var(--color-sage);
+    border: 2px solid var(--color-black);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     cursor: grab;
     transition: opacity 0.2s, transform 0.2s;

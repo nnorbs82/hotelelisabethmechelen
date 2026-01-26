@@ -651,7 +651,6 @@
         let currentBackground = null;
 
         // Load background photo
-        // Load background photo
         async function loadBackgroundPhoto() {
             try {
                 const snapshot = await get(dbRef(database, 'indexBackground'));
@@ -672,11 +671,6 @@
             } catch (error) {
                 console.error('Error loading background photo:', error);
             }
-        }
-
-        // Render background photo
-        function renderBackgroundPhoto() {
-            loadBackgroundPhoto();
         }
 
         // Upload background photo
