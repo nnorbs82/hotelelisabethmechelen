@@ -8,9 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Quill Rich Text Editor -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body class="admin-page">
     <header>
@@ -62,17 +59,15 @@
                 </div>
                 
                 <!-- Background Photo Section -->
-                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--color-sage);">
-                    <h3 style="color: var(--color-beige); margin-bottom: 1rem;">Background Photo</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload a background image for the index page. This will be displayed behind all content.</p>
+                <div id="background-photo-section">
+                    <h3>Background Photo</h3>
+                    <p style="color: var(--color-sage);">Upload a background image for the website pages.</p>
                     
-                    <div class="photo-upload-section">
-                        <input type="file" id="background-upload-input" accept="image/*" style="display: none;">
-                        <button class="btn" id="add-background-btn">Upload Background</button>
-                    </div>
+                    <input type="file" id="background-upload-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="add-background-btn">Upload Background</button>
                     
-                    <div id="background-preview" class="photo-grid" style="grid-template-columns: 1fr;">
-                        <!-- Background photo will be displayed here -->
+                    <div id="background-preview" style="margin-top: 1rem;">
+                        <!-- Image preview will be displayed here with consistent size -->
                     </div>
                 </div>
             </div>
@@ -541,40 +536,6 @@
             }
         }
 
-        // Shared Quill toolbar configuration
-        const quillToolbarOptions = [
-            [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
-            [{ 'size': ['small', false, 'large', 'huge'] }],
-            ['bold', 'italic', 'underline', 'strike'],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'align': [] }],
-            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            ['link'],
-            ['clean']
-        ];
-
-        // Global Quill editors for ads
-        let adsQuillEditors = {};
-
-        // Initialize Quill for Ads
-        function initializeAdsQuillEditors() {
-            adsQuillEditors = {};
-            
-            const ad = adsData[currentAdTab];
-            
-            adsQuillEditors['topText'] = new Quill('#ad-top-text-editor', {
-                theme: 'snow',
-                modules: { toolbar: quillToolbarOptions }
-            });
-            adsQuillEditors['topText'].root.innerHTML = ad[`topText_${currentAdLang}`] || '';
-            
-            adsQuillEditors['bottomText'] = new Quill('#ad-bottom-text-editor', {
-                theme: 'snow',
-                modules: { toolbar: quillToolbarOptions }
-            });
-            adsQuillEditors['bottomText'].root.innerHTML = ad[`bottomText_${currentAdLang}`] || '';
-        }
-
         // Render ad tab content
         function renderAdTab() {
             const container = document.getElementById('ads-tab-content');
@@ -599,20 +560,17 @@
                 
                 <div class="form-group">
                     <label>Top Text</label>
-                    <div class="quill-container">
-                        <div id="ad-top-text-editor"></div>
-                    </div>
+                    <input type="text" id="ad-top-text" class="form-control" value="${escapeHtml(ad[`topText_${currentAdLang}`] || '')}" placeholder="Enter top text">
                 </div>
                 
                 <div class="form-group">
                     <label>Bottom Text</label>
-                    <div class="quill-container quill-editor-large">
-                        <div id="ad-bottom-text-editor"></div>
-                    </div>
+                    <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Tip: Press Enter to add line spacing between paragraphs</p>
+                    <textarea id="ad-bottom-text" class="admin-textarea" placeholder="Enter bottom text">${escapeHtml(ad[`bottomText_${currentAdLang}`] || '')}</textarea>
                 </div>
                 
                 <div class="form-group">
-                    <label>Button Title (Plain Text)</label>
+                    <label>Button Title</label>
                     <input type="text" id="ad-button-title" class="form-control" value="${escapeHtml(ad[`buttonTitle_${currentAdLang}`] || '')}" placeholder="Enter button text">
                 </div>
                 
@@ -626,10 +584,7 @@
             
             container.innerHTML = content;
             
-            // Initialize Quill editors for ads
-            initializeAdsQuillEditors();
-            
-            // Attach handlers
+            // Attach handlers (no Quill initialization)
             attachAdSaveHandlers();
         }
 
@@ -649,12 +604,6 @@
                     }
                     
                     try {
-                        // Delete old image if exists
-                        if (adsData[currentAdTab].imageUrl) {
-                            // Extract filename from URL and delete
-                            // Implementation depends on storage structure
-                        }
-                        
                         const timestamp = Date.now();
                         const filename = `index-ads/${currentAdTab}-${timestamp}-${file.name}`;
                         const fileRef = storageRef(storage, filename);
@@ -677,8 +626,8 @@
             
             if (saveBtn) {
                 saveBtn.addEventListener('click', async () => {
-                    const topText = adsQuillEditors['topText'].root.innerHTML;
-                    const bottomText = adsQuillEditors['bottomText'].root.innerHTML;
+                    const topText = document.getElementById('ad-top-text').value;
+                    const bottomText = document.getElementById('ad-bottom-text').value;
                     const buttonTitle = document.getElementById('ad-button-title').value;
                     const link = document.getElementById('ad-link').value;
                     
@@ -706,44 +655,24 @@
             try {
                 const snapshot = await get(dbRef(database, 'indexBackground'));
                 
-                if (snapshot.exists()) {
+                const backgroundPreview = document.getElementById('background-preview');
+                
+                if (snapshot.exists() && snapshot.val().url) {
                     currentBackground = snapshot.val();
+                    const url = currentBackground.url;
+                    backgroundPreview.innerHTML = `
+                        <div class="photo-item">
+                            <img src="${url}" alt="Background photo">
+                            <button class="btn-delete" onclick="deleteBackgroundPhoto()">Delete</button>
+                        </div>
+                    `;
                 } else {
                     currentBackground = null;
+                    backgroundPreview.innerHTML = '<p style="color: var(--color-sage);">No background photo uploaded</p>';
                 }
-                
-                renderBackgroundPhoto();
             } catch (error) {
                 console.error('Error loading background photo:', error);
             }
-        }
-
-        // Render background photo
-        function renderBackgroundPhoto() {
-            const preview = document.getElementById('background-preview');
-            preview.innerHTML = '';
-            
-            if (!currentBackground) {
-                preview.innerHTML = '<p style="color: var(--color-sage);">No background photo uploaded yet.</p>';
-                return;
-            }
-            
-            const photoItem = document.createElement('div');
-            photoItem.className = 'photo-item';
-            photoItem.innerHTML = `
-                <img src="${currentBackground.url}" alt="Index page background">
-                <div class="photo-controls">
-                    <button class="btn-icon delete" id="delete-background-btn" aria-label="Delete background photo">Delete</button>
-                </div>
-            `;
-            preview.appendChild(photoItem);
-            
-            // Add delete event listener
-            document.getElementById('delete-background-btn').addEventListener('click', async () => {
-                if (confirm('Are you sure you want to delete the background photo?')) {
-                    await deleteBackgroundPhoto();
-                }
-            });
         }
 
         // Upload background photo
@@ -916,8 +845,8 @@
                     ${langTabs}
                     <div class="about-us-section">
                         <h4>About Us Title</h4>
-                        <div id="title-editor-container" class="quill-container">
-                            <div id="about-us-title-editor"></div>
+                        <div class="form-group">
+                            <input type="text" id="about-us-title-input" class="form-control" value="${escapeHtml(titleValue)}" placeholder="Enter title">
                         </div>
                     </div>
                     <button class="btn" id="save-about-us-title-btn">Save Title</button>
@@ -931,21 +860,20 @@
                     ${langTabs}
                     <div class="about-us-section">
                         <h4>Subtitle 1</h4>
-                        <div class="quill-container">
-                            <div id="about-us-left-sub1-editor"></div>
+                        <div class="form-group">
+                            <input type="text" id="about-us-left-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
                         </div>
                     </div>
                     <div class="about-us-section">
                         <h4>Subtitle 2</h4>
-                        <div class="quill-container">
-                            <div id="about-us-left-sub2-editor"></div>
+                        <div class="form-group">
+                            <input type="text" id="about-us-left-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
                         </div>
                     </div>
                     <div class="about-us-section">
                         <h4>Text Body</h4>
-                        <div class="quill-container quill-editor-large">
-                            <div id="about-us-left-body-editor"></div>
-                        </div>
+                        <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Tip: Press Enter to add line spacing between paragraphs</p>
+                        <textarea id="about-us-left-body" class="admin-textarea" placeholder="Enter text body">${escapeHtml(body)}</textarea>
                     </div>
                     <button class="btn" id="save-about-us-left-btn">Save Left Content</button>
                 `;
@@ -958,21 +886,20 @@
                     ${langTabs}
                     <div class="about-us-section">
                         <h4>Subtitle 1</h4>
-                        <div class="quill-container">
-                            <div id="about-us-right-sub1-editor"></div>
+                        <div class="form-group">
+                            <input type="text" id="about-us-right-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
                         </div>
                     </div>
                     <div class="about-us-section">
                         <h4>Subtitle 2</h4>
-                        <div class="quill-container">
-                            <div id="about-us-right-sub2-editor"></div>
+                        <div class="form-group">
+                            <input type="text" id="about-us-right-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
                         </div>
                     </div>
                     <div class="about-us-section">
                         <h4>Text Body</h4>
-                        <div class="quill-container quill-editor-large">
-                            <div id="about-us-right-body-editor"></div>
-                        </div>
+                        <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Tip: Press Enter to add line spacing between paragraphs</p>
+                        <textarea id="about-us-right-body" class="admin-textarea" placeholder="Enter text body">${escapeHtml(body)}</textarea>
                     </div>
                     <button class="btn" id="save-about-us-right-btn">Save Right Content</button>
                 `;
@@ -980,63 +907,8 @@
             
             container.innerHTML = content;
             
-            // Initialize Quill editors
-            initializeAboutUsQuillEditors();
-            
-            // Attach save handlers
+            // Attach save handlers (no Quill initialization needed)
             attachAboutUsSaveHandlers();
-        }
-
-        // Global Quill editors object for About Us
-        let aboutUsQuillEditors = {};
-
-        // Initialize Quill for About Us
-        function initializeAboutUsQuillEditors() {
-            aboutUsQuillEditors = {};
-            
-            if (currentAboutUsTab === 'title') {
-                aboutUsQuillEditors['title'] = new Quill('#about-us-title-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['title'].root.innerHTML = aboutUsData.title[currentAboutUsLang] || '';
-            } else if (currentAboutUsTab === 'left') {
-                aboutUsQuillEditors['leftSub1'] = new Quill('#about-us-left-sub1-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['leftSub1'].root.innerHTML = aboutUsData.left.subtitle1[currentAboutUsLang] || '';
-                
-                aboutUsQuillEditors['leftSub2'] = new Quill('#about-us-left-sub2-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['leftSub2'].root.innerHTML = aboutUsData.left.subtitle2[currentAboutUsLang] || '';
-                
-                aboutUsQuillEditors['leftBody'] = new Quill('#about-us-left-body-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['leftBody'].root.innerHTML = aboutUsData.left.textBody[currentAboutUsLang] || '';
-            } else if (currentAboutUsTab === 'right') {
-                aboutUsQuillEditors['rightSub1'] = new Quill('#about-us-right-sub1-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['rightSub1'].root.innerHTML = aboutUsData.right.subtitle1[currentAboutUsLang] || '';
-                
-                aboutUsQuillEditors['rightSub2'] = new Quill('#about-us-right-sub2-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['rightSub2'].root.innerHTML = aboutUsData.right.subtitle2[currentAboutUsLang] || '';
-                
-                aboutUsQuillEditors['rightBody'] = new Quill('#about-us-right-body-editor', {
-                    theme: 'snow',
-                    modules: { toolbar: quillToolbarOptions }
-                });
-                aboutUsQuillEditors['rightBody'].root.innerHTML = aboutUsData.right.textBody[currentAboutUsLang] || '';
-            }
         }
 
         // Attach save button handlers
@@ -1047,7 +919,7 @@
             
             if (saveTitleBtn) {
                 saveTitleBtn.addEventListener('click', async () => {
-                    const value = aboutUsQuillEditors['title'].root.innerHTML;
+                    const value = document.getElementById('about-us-title-input').value;
                     aboutUsData.title[currentAboutUsLang] = value;
                     await saveAboutUsData();
                 });
@@ -1055,18 +927,18 @@
             
             if (saveLeftBtn) {
                 saveLeftBtn.addEventListener('click', async () => {
-                    aboutUsData.left.subtitle1[currentAboutUsLang] = aboutUsQuillEditors['leftSub1'].root.innerHTML;
-                    aboutUsData.left.subtitle2[currentAboutUsLang] = aboutUsQuillEditors['leftSub2'].root.innerHTML;
-                    aboutUsData.left.textBody[currentAboutUsLang] = aboutUsQuillEditors['leftBody'].root.innerHTML;
+                    aboutUsData.left.subtitle1[currentAboutUsLang] = document.getElementById('about-us-left-sub1').value;
+                    aboutUsData.left.subtitle2[currentAboutUsLang] = document.getElementById('about-us-left-sub2').value;
+                    aboutUsData.left.textBody[currentAboutUsLang] = document.getElementById('about-us-left-body').value;
                     await saveAboutUsData();
                 });
             }
             
             if (saveRightBtn) {
                 saveRightBtn.addEventListener('click', async () => {
-                    aboutUsData.right.subtitle1[currentAboutUsLang] = aboutUsQuillEditors['rightSub1'].root.innerHTML;
-                    aboutUsData.right.subtitle2[currentAboutUsLang] = aboutUsQuillEditors['rightSub2'].root.innerHTML;
-                    aboutUsData.right.textBody[currentAboutUsLang] = aboutUsQuillEditors['rightBody'].root.innerHTML;
+                    aboutUsData.right.subtitle1[currentAboutUsLang] = document.getElementById('about-us-right-sub1').value;
+                    aboutUsData.right.subtitle2[currentAboutUsLang] = document.getElementById('about-us-right-sub2').value;
+                    aboutUsData.right.textBody[currentAboutUsLang] = document.getElementById('about-us-right-body').value;
                     await saveAboutUsData();
                 });
             }
