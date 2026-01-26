@@ -53,6 +53,21 @@
                 <div id="photo-grid" class="photo-grid">
                     <!-- Photos will be dynamically added here -->
                 </div>
+                
+                <!-- Background Photo Section -->
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--color-sage);">
+                    <h3 style="color: var(--color-beige); margin-bottom: 1rem;">Background Photo</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload a background image for the index page. This will be displayed behind all content.</p>
+                    
+                    <div class="photo-upload-section">
+                        <input type="file" id="background-upload-input" accept="image/*" style="display: none;">
+                        <button class="btn" id="add-background-btn">Upload Background</button>
+                    </div>
+                    
+                    <div id="background-preview" class="photo-grid" style="grid-template-columns: 1fr;">
+                        <!-- Background photo will be displayed here -->
+                    </div>
+                </div>
             </div>
 
             <!-- Index Ads Management Card -->
@@ -168,6 +183,7 @@
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             // Load existing photos
             await loadPhotos();
+            await loadBackgroundPhoto();
         });
 
         // Show ads management card when Ads is clicked
@@ -616,6 +632,139 @@
             } finally {
                 saveBtn.disabled = false;
                 saveBtn.textContent = `Save Ad ${adIndex}`;
+            }
+        }
+
+        // ============ BACKGROUND PHOTO MANAGEMENT ============
+        let currentBackground = null;
+
+        // Load background photo
+        async function loadBackgroundPhoto() {
+            try {
+                const snapshot = await get(dbRef(database, 'indexBackground'));
+                
+                if (snapshot.exists()) {
+                    currentBackground = snapshot.val();
+                } else {
+                    currentBackground = null;
+                }
+                
+                renderBackgroundPhoto();
+            } catch (error) {
+                console.error('Error loading background photo:', error);
+            }
+        }
+
+        // Render background photo
+        function renderBackgroundPhoto() {
+            const preview = document.getElementById('background-preview');
+            preview.innerHTML = '';
+            
+            if (!currentBackground) {
+                preview.innerHTML = '<p style="color: var(--color-sage);">No background photo uploaded yet.</p>';
+                return;
+            }
+            
+            const photoItem = document.createElement('div');
+            photoItem.className = 'photo-item';
+            photoItem.innerHTML = `
+                <img src="${currentBackground.url}" alt="Index page background">
+                <div class="photo-controls">
+                    <button class="btn-icon delete" id="delete-background-btn" aria-label="Delete background photo">Delete</button>
+                </div>
+            `;
+            preview.appendChild(photoItem);
+            
+            // Add delete event listener
+            document.getElementById('delete-background-btn').addEventListener('click', async () => {
+                if (confirm('Are you sure you want to delete the background photo?')) {
+                    await deleteBackgroundPhoto();
+                }
+            });
+        }
+
+        // Upload background photo
+        document.getElementById('add-background-btn').addEventListener('click', () => {
+            document.getElementById('background-upload-input').click();
+        });
+
+        document.getElementById('background-upload-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+            
+            const addBtn = document.getElementById('add-background-btn');
+            addBtn.disabled = true;
+            addBtn.textContent = 'Uploading...';
+            
+            try {
+                // Delete old background if exists
+                if (currentBackground && currentBackground.filename) {
+                    try {
+                        const oldFileRef = storageRef(storage, currentBackground.filename);
+                        await deleteObject(oldFileRef);
+                    } catch (deleteError) {
+                        // Log specific error but don't fail the upload
+                        console.warn('Failed to delete old background file:', deleteError?.message || 'Unknown error');
+                    }
+                }
+                
+                // Upload new background
+                const timestamp = Date.now();
+                const filename = `index-background/${timestamp}-${file.name}`;
+                const fileRef = storageRef(storage, filename);
+                
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+                
+                // Save to database
+                const backgroundData = {
+                    url: downloadURL,
+                    filename: filename,
+                    timestamp: timestamp
+                };
+                
+                await set(dbRef(database, 'indexBackground'), backgroundData);
+                
+                // Reload background
+                await loadBackgroundPhoto();
+                
+                // Reset input
+                e.target.value = '';
+                
+                alert('Background photo uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading background:', error);
+                alert('Failed to upload background photo. Please try again.');
+            } finally {
+                addBtn.disabled = false;
+                addBtn.textContent = 'Upload Background';
+            }
+        });
+
+        // Delete background photo
+        async function deleteBackgroundPhoto() {
+            try {
+                // Delete from storage
+                if (currentBackground && currentBackground.filename) {
+                    const fileRef = storageRef(storage, currentBackground.filename);
+                    await deleteObject(fileRef);
+                }
+                
+                // Delete from database
+                await remove(dbRef(database, 'indexBackground'));
+                
+                // Reload
+                await loadBackgroundPhoto();
+                
+                alert('Background photo deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting background:', error);
+                alert('Failed to delete background photo. Please try again.');
             }
         }
     </script>

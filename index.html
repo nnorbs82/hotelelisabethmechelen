@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
+    
     <header>
         <nav>
             <a class="nav-logo" href="index.html">
@@ -333,6 +336,27 @@
 
         // Load ads after banner loads
         loadIndexAds();
+
+        // ============ PAGE BACKGROUND MANAGEMENT ============
+        // Load and display background image
+        async function loadPageBackground() {
+            try {
+                const snapshot = await get(dbRef(database, 'indexBackground'));
+                
+                if (snapshot.exists()) {
+                    const bgData = snapshot.val();
+                    const bgElement = document.getElementById('page-background');
+                    if (bgElement && bgData.url) {
+                        bgElement.style.backgroundImage = `url('${bgData.url}')`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading page background:', error);
+            }
+        }
+
+        // Load background on page load
+        loadPageBackground();
     </script>
     <script src="booking-bar.js"></script>
 </body>

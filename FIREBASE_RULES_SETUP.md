@@ -31,6 +31,16 @@ service firebase.storage {
     match /main-banner/{fileName} {
       allow write, delete: if request.auth != null;
     }
+    
+    // Allow authenticated users to write/delete files in index-ads folder
+    match /index-ads/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
+    
+    // Allow authenticated users to write/delete files in index-background folder
+    match /index-background/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
   }
 }
 ```
@@ -56,6 +66,14 @@ These rules allow authenticated admin users to read and write photo metadata in 
     ".read": "auth != null",
     ".write": "auth != null",
     "mainBanner": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "indexAds": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "indexBackground": {
       ".read": "auth != null",
       ".write": "auth != null"
     }
@@ -87,6 +105,18 @@ service firebase.storage {
       allow write, delete: if request.auth != null;
     }
     
+    // Allow anyone to read files in index-ads folder
+    match /index-ads/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+    
+    // Allow anyone to read files in index-background folder
+    match /index-background/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+    
     // For all other paths, require authentication
     match /{allPaths=**} {
       allow read: if request.auth != null;
@@ -103,6 +133,14 @@ service firebase.storage {
     ".read": "auth != null",
     ".write": "auth != null",
     "mainBanner": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "indexAds": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "indexBackground": {
       ".read": true,
       ".write": "auth != null"
     }
