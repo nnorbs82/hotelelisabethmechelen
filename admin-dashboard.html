@@ -10,26 +10,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="admin-page">
-    <header>
-        <nav>
+    <header class="admin-header">
+        <nav class="admin-top-nav">
+            <button class="menu-trigger-btn" id="menu-trigger-btn">MENU</button>
             <h1>Admin Dashboard</h1>
-            <div class="nav-buttons">
-                <button class="btn nav-btn" id="update-index-btn" aria-label="Update website index">Update Index</button>
-                <button class="btn nav-btn" id="manage-rooms-btn" aria-label="Manage hotel rooms">Manage Rooms</button>
-                <button class="btn nav-btn" id="manage-offers-btn" aria-label="Manage special offers">Manage Offers</button>
-                <button class="btn nav-btn" id="view-bookings-btn" aria-label="View hotel bookings">View Bookings</button>
-                <button id="logout-btn" class="btn nav-btn btn-logout" aria-label="Logout from admin dashboard">Logout</button>
-            </div>
+            <button id="logout-btn" class="btn nav-btn btn-logout" aria-label="Logout from admin dashboard">LOG OUT</button>
         </nav>
-        <!-- Submenu for Update Index -->
-        <div id="update-index-submenu" class="submenu" style="display: none;">
-            <div class="submenu-content">
-                <button class="btn btn-secondary submenu-btn" id="main-banner-btn">Main Banner</button>
-                <button class="btn btn-secondary submenu-btn" id="ads-btn">Index Ads</button>
-                <button class="btn btn-secondary submenu-btn" id="about-us-btn">About Us</button>
-            </div>
-        </div>
     </header>
+
+    <!-- Vertical Sidebar Menu -->
+    <aside class="vertical-menu" id="vertical-menu">
+        <nav class="vertical-menu-nav">
+            <ul class="vertical-menu-list">
+                <li class="vertical-menu-item has-submenu">
+                    <button class="vertical-menu-btn" data-menu="update-index">
+                        <span>Update Index</span>
+                        <span class="arrow">›</span>
+                    </button>
+                    <div class="vertical-submenu" id="submenu-update-index">
+                        <button class="submenu-item" id="main-banner-btn">Main Banner</button>
+                        <button class="submenu-item" id="ads-btn">Index Ads</button>
+                        <button class="submenu-item" id="about-us-btn">About Us</button>
+                    </div>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-rooms-btn">
+                        <span>Manage Rooms</span>
+                    </button>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-offers-btn">
+                        <span>Manage Offers</span>
+                    </button>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="view-bookings-btn">
+                        <span>View Bookings</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
     <main class="container">
         <div id="loading" style="text-align: center; padding: 3rem;">
@@ -115,52 +136,64 @@
         <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
     </footer>
 
-    <!-- Submenu Hover Functionality (non-module script to ensure it runs independently) -->
+    <!-- Vertical Menu Interaction (non-module script to ensure it runs independently) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Handle Update Index submenu with hover
-            const updateIndexBtn = document.getElementById('update-index-btn');
-            const submenu = document.getElementById('update-index-submenu');
-            let submenuTimeout = null;
+            // ============ VERTICAL MENU INTERACTION ============
+            const menuTriggerBtn = document.getElementById('menu-trigger-btn');
+            const verticalMenu = document.getElementById('vertical-menu');
+            let menuTimeout = null;
 
-            // Animation timing constants
-            const ANIMATION_DURATION = 300; // Must match CSS transition duration
-            const HIDE_DELAY = 100; // Small delay to prevent flicker when moving between elements
-            const INITIAL_DELAY = 10; // Small delay to ensure display:block is applied before animation
+            // Show menu when hovering trigger button
+            menuTriggerBtn.addEventListener('mouseenter', () => {
+                clearTimeout(menuTimeout);
+                verticalMenu.classList.add('show');
+            });
 
-            function showSubmenu() {
-                if (submenuTimeout) {
-                    clearTimeout(submenuTimeout);
-                    submenuTimeout = null;
+            // Hide menu when leaving trigger button (with delay)
+            menuTriggerBtn.addEventListener('mouseleave', () => {
+                menuTimeout = setTimeout(() => {
+                    if (!verticalMenu.matches(':hover')) {
+                        verticalMenu.classList.remove('show');
+                    }
+                }, 200);
+            });
+
+            // Keep menu visible when hovering menu itself
+            verticalMenu.addEventListener('mouseenter', () => {
+                clearTimeout(menuTimeout);
+                verticalMenu.classList.add('show');
+            });
+
+            // Hide menu when leaving menu (with delay to allow submenu hover)
+            verticalMenu.addEventListener('mouseleave', () => {
+                menuTimeout = setTimeout(() => {
+                    verticalMenu.classList.remove('show');
+                }, 300);
+            });
+
+            // Handle submenu parent items
+            document.querySelectorAll('.vertical-menu-item.has-submenu').forEach(item => {
+                const submenu = item.querySelector('.vertical-submenu');
+                
+                item.addEventListener('mouseenter', () => {
+                    clearTimeout(menuTimeout);
+                });
+                
+                if (submenu) {
+                    submenu.addEventListener('mouseenter', () => {
+                        clearTimeout(menuTimeout);
+                    });
+                    
+                    submenu.addEventListener('mouseleave', () => {
+                        menuTimeout = setTimeout(() => {
+                            if (!verticalMenu.matches(':hover')) {
+                                verticalMenu.classList.remove('show');
+                            }
+                        }, 300);
+                    });
                 }
-                submenu.style.display = 'block';
-                submenu.style.maxHeight = '0';
-                submenu.style.overflow = 'hidden';
-                // Small delay ensures display:block is applied before starting the animation
-                setTimeout(() => {
-                    submenu.style.transition = 'max-height 0.3s ease-out';
-                    submenu.style.maxHeight = '200px'; // Enough to fit submenu content
-                }, INITIAL_DELAY);
-            }
-
-            function hideSubmenu() {
-                // Small delay prevents menu from disappearing when moving mouse between button and submenu
-                submenuTimeout = setTimeout(() => {
-                    submenu.style.maxHeight = '0';
-                    // Hide after animation completes
-                    setTimeout(() => {
-                        submenu.style.display = 'none';
-                    }, ANIMATION_DURATION);
-                }, HIDE_DELAY);
-            }
-
-            // Show submenu on hover over Update Index button
-            updateIndexBtn.addEventListener('mouseenter', showSubmenu);
-            updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
-
-            // Keep submenu visible when hovering over it
-            submenu.addEventListener('mouseenter', showSubmenu);
-            submenu.addEventListener('mouseleave', hideSubmenu);
+            });
         });
     </script>
 
@@ -206,6 +239,7 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
             
             // Hide all cards
             adsCard.style.display = 'none';
@@ -214,6 +248,9 @@
             // Show only photo card
             photoCard.style.display = 'block';
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Hide menu after selection
+            verticalMenu.classList.remove('show');
             
             await loadPhotos();
             await loadBackgroundPhoto();
@@ -224,6 +261,7 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -232,6 +270,9 @@
             // Show only ads card
             adsCard.style.display = 'block';
             adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Hide menu after selection
+            verticalMenu.classList.remove('show');
             
             await loadAds();
         });
@@ -798,6 +839,7 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -805,8 +847,33 @@
             
             aboutUsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
+            // Hide menu after selection
+            verticalMenu.classList.remove('show');
+            
             await loadAboutUsData();
             renderAboutUsTab();
+        });
+
+        // Add click handlers for other menu items (Manage Rooms, Manage Offers, View Bookings)
+        document.getElementById('manage-rooms-btn').addEventListener('click', () => {
+            const verticalMenu = document.getElementById('vertical-menu');
+            verticalMenu.classList.remove('show');
+            // Add your rooms management logic here
+            alert('Manage Rooms functionality - to be implemented');
+        });
+
+        document.getElementById('manage-offers-btn').addEventListener('click', () => {
+            const verticalMenu = document.getElementById('vertical-menu');
+            verticalMenu.classList.remove('show');
+            // Add your offers management logic here
+            alert('Manage Offers functionality - to be implemented');
+        });
+
+        document.getElementById('view-bookings-btn').addEventListener('click', () => {
+            const verticalMenu = document.getElementById('vertical-menu');
+            verticalMenu.classList.remove('show');
+            // Add your bookings view logic here
+            alert('View Bookings functionality - to be implemented');
         });
 
         // Tab switching

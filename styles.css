@@ -305,6 +305,8 @@ nav a:hover {
     min-height: 100vh;
 }
 
+/* OLD ADMIN HEADER STYLES - No longer needed with new vertical menu */
+/*
 .admin-page header {
     background-color: transparent;
     padding: 0;
@@ -316,6 +318,7 @@ nav a:hover {
     padding: 1rem 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+*/
 
 .login-page {
     padding-top: 0;
@@ -623,7 +626,208 @@ footer {
     }
 }
 
-/* Submenu Styles */
+/* ============ ADMIN DASHBOARD - VERTICAL MENU SYSTEM ============ */
+
+/* Top Header Bar */
+.admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-black);
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin-top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 100%;
+    position: relative;
+}
+
+.admin-top-nav h1 {
+    color: var(--color-beige);
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+/* Menu Trigger Button */
+.menu-trigger-btn {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+    letter-spacing: 0.05rem;
+}
+
+.menu-trigger-btn:hover {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+}
+
+/* Vertical Sidebar Menu */
+.vertical-menu {
+    position: fixed;
+    top: 70px; /* Below header */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 70px);
+    background-color: #2c2c2c;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 900;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.vertical-menu.show {
+    transform: translateX(0);
+}
+
+.vertical-menu-nav {
+    padding: 1rem 0;
+}
+
+.vertical-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.vertical-menu-item {
+    position: relative;
+}
+
+.vertical-menu-btn {
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-beige);
+    border: none;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, padding-left 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vertical-menu-btn:hover {
+    background-color: rgba(212, 211, 195, 0.15);
+    padding-left: 2rem;
+}
+
+.vertical-menu-btn .arrow {
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.vertical-menu-item.has-submenu:hover .arrow {
+    transform: translateX(5px);
+}
+
+/* Vertical Submenu (cascades to the right) */
+.vertical-submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 220px;
+    background-color: #1a1a1a;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 910;
+}
+
+.vertical-menu-item.has-submenu:hover .vertical-submenu,
+.vertical-submenu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Keep parent menu visible when hovering submenu */
+.vertical-menu-item.has-submenu:hover,
+.vertical-submenu:hover ~ .vertical-menu-item {
+    background-color: rgba(212, 211, 195, 0.1);
+}
+
+.submenu-item {
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-beige);
+    border: none;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background-color 0.3s, padding-left 0.3s;
+    display: block;
+}
+
+.submenu-item:hover {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+    padding-left: 2rem;
+}
+
+/* Show menu when hovering trigger button OR menu itself */
+.menu-trigger-btn:hover ~ #vertical-menu,
+.vertical-menu:hover {
+    transform: translateX(0);
+}
+
+/* Alternative: Use JavaScript to toggle .show class */
+/* This provides more control over the interaction */
+
+/* Scrollbar styling for vertical menu */
+.vertical-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.vertical-menu::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+.vertical-menu::-webkit-scrollbar-thumb {
+    background: var(--color-sage);
+    border-radius: 4px;
+}
+
+.vertical-menu::-webkit-scrollbar-thumb:hover {
+    background: var(--color-beige);
+}
+
+/* Adjust main content to not be hidden behind header */
+.admin-page main.container {
+    margin-top: 90px; /* Account for fixed header */
+    margin-left: 0;
+    transition: margin-left 0.3s;
+}
+
+/* OLD HORIZONTAL SUBMENU STYLES - REMOVED */
+/* The following styles are no longer needed with the vertical menu */
+/*
 .submenu {
     background-color: var(--color-black);
     overflow: hidden;
@@ -650,6 +854,7 @@ footer {
     width: 160px;
     text-align: center;
 }
+*/
 
 /* Photo Management Styles */
 .photo-upload-section {
