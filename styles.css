@@ -513,8 +513,9 @@ footer {
     }
     
     .datepicker-container {
-        left: 50% !important;
-        transform: translateX(-50%);
+        left: 1rem;
+        transform: none;
+        right: 1rem;
         max-width: calc(100vw - 2rem);
     }
 }

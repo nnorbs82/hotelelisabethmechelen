@@ -93,7 +93,7 @@ class DatePicker {
         }
         
         // Next month days to fill the grid
-        const totalCells = daysHTML.split('</div>').length - 1;
+        const totalCells = firstDayWeekday + lastDateOfMonth;
         const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
         for (let day = 1; day <= remainingCells; day++) {
             daysHTML += `<div class="datepicker-day next-month">${day}</div>`;
