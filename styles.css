@@ -945,16 +945,16 @@ footer {
     border-color: var(--color-beige);
 }
 
-.about-us-section {
+.about-us-form-section {
     margin-bottom: 2rem;
 }
 
-.about-us-section h4 {
+.about-us-form-section h4 {
     color: var(--color-beige);
     margin-bottom: 1rem;
 }
 
-.about-us-section textarea {
+.about-us-form-section textarea {
     width: 100%;
     min-height: 200px;
     padding: 0.75rem;
