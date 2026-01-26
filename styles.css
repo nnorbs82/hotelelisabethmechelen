@@ -821,6 +821,9 @@ footer {
 .index-ad-content {
     padding: 20px;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .index-ads-left .index-ad-content {
