@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body class="admin-page">
     <header>
@@ -175,38 +177,6 @@
         import { ref as dbRef, set, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         let currentPhotos = [];
-
-        // Initialize TinyMCE for all textareas with class 'tinymce-editor'
-        function initializeTinyMCE() {
-            // Remove any existing instances
-            tinymce.remove();
-            
-            tinymce.init({
-                selector: '.tinymce-editor, .about-us-section textarea',
-                height: 300,
-                menubar: false,
-                plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview',
-                    'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'table', 'help', 'wordcount'
-                ],
-                toolbar: 'undo redo | formatselect | fontfamily fontsize | ' +
-                    'bold italic underline strikethrough | forecolor backcolor | ' +
-                    'alignleft aligncenter alignright alignjustify | ' +
-                    'bullist numlist outdent indent | removeformat | help',
-                font_family_formats: 'Raleway=Raleway, sans-serif; Arial=arial,helvetica,sans-serif; ' +
-                    'Comic Sans MS=comic sans ms,sans-serif; Courier New=courier new,courier; ' +
-                    'Georgia=georgia,palatino; Helvetica=helvetica; Impact=impact,chicago; ' +
-                    'Tahoma=tahoma,arial,helvetica,sans-serif; Times New Roman=times new roman,times; ' +
-                    'Trebuchet MS=trebuchet ms,geneva; Verdana=verdana,geneva; ' +
-                    'Open Sans=Open Sans, sans-serif; Lato=Lato, sans-serif; ' +
-                    'Roboto=Roboto, sans-serif; Montserrat=Montserrat, sans-serif; ' +
-                    'Playfair Display=Playfair Display, serif; Merriweather=Merriweather, serif',
-                font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
-                content_style: 'body { font-family: Raleway, sans-serif; font-size: 14px; }',
-                branding: false
-            });
-        }
 
         // Check if user is authenticated
         checkAuthState((authState) => {
@@ -571,6 +541,39 @@
             }
         }
 
+        // Global Quill editors for ads
+        let adsQuillEditors = {};
+
+        // Initialize Quill for Ads
+        function initializeAdsQuillEditors() {
+            adsQuillEditors = {};
+            
+            const toolbarOptions = [
+                [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link'],
+                ['clean']
+            ];
+            
+            const ad = adsData[currentAdTab];
+            
+            adsQuillEditors['topText'] = new Quill('#ad-top-text-editor', {
+                theme: 'snow',
+                modules: { toolbar: toolbarOptions }
+            });
+            adsQuillEditors['topText'].root.innerHTML = ad[`topText_${currentAdLang}`] || '';
+            
+            adsQuillEditors['bottomText'] = new Quill('#ad-bottom-text-editor', {
+                theme: 'snow',
+                modules: { toolbar: toolbarOptions }
+            });
+            adsQuillEditors['bottomText'].root.innerHTML = ad[`bottomText_${currentAdLang}`] || '';
+        }
+
         // Render ad tab content
         function renderAdTab() {
             const container = document.getElementById('ads-tab-content');
@@ -595,16 +598,20 @@
                 
                 <div class="form-group">
                     <label>Top Text</label>
-                    <input type="text" id="ad-top-text" class="form-control" value="${escapeHtml(ad[`topText_${currentAdLang}`] || '')}" placeholder="Enter top text">
+                    <div class="quill-container">
+                        <div id="ad-top-text-editor"></div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label>Bottom Text</label>
-                    <textarea id="ad-bottom-text" class="tinymce-editor">${escapeHtml(ad[`bottomText_${currentAdLang}`] || '')}</textarea>
+                    <div class="quill-container quill-editor-large">
+                        <div id="ad-bottom-text-editor"></div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label>Button Title</label>
+                    <label>Button Title (Plain Text)</label>
                     <input type="text" id="ad-button-title" class="form-control" value="${escapeHtml(ad[`buttonTitle_${currentAdLang}`] || '')}" placeholder="Enter button text">
                 </div>
                 
@@ -618,8 +625,8 @@
             
             container.innerHTML = content;
             
-            // Initialize TinyMCE
-            initializeTinyMCE();
+            // Initialize Quill editors for ads
+            initializeAdsQuillEditors();
             
             // Attach handlers
             attachAdSaveHandlers();
@@ -669,8 +676,8 @@
             
             if (saveBtn) {
                 saveBtn.addEventListener('click', async () => {
-                    const topText = document.getElementById('ad-top-text').value;
-                    const bottomText = tinymce.get('ad-bottom-text').getContent();
+                    const topText = adsQuillEditors['topText'].root.innerHTML;
+                    const bottomText = adsQuillEditors['bottomText'].root.innerHTML;
                     const buttonTitle = document.getElementById('ad-button-title').value;
                     const link = document.getElementById('ad-link').value;
                     
@@ -906,10 +913,10 @@
                 const titleValue = aboutUsData.title[currentAboutUsLang] || '';
                 content = `
                     ${langTabs}
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>About Us Title</h4>
-                        <div class="form-group">
-                            <input type="text" id="about-us-title-input" class="form-control" value="${escapeHtml(titleValue)}" placeholder="Enter title">
+                        <div id="title-editor-container" class="quill-container">
+                            <div id="about-us-title-editor"></div>
                         </div>
                     </div>
                     <button class="btn" id="save-about-us-title-btn">Save Title</button>
@@ -921,21 +928,23 @@
                 
                 content = `
                     ${langTabs}
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Subtitle 1</h4>
-                        <div class="form-group">
-                            <input type="text" id="about-us-left-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
+                        <div class="quill-container">
+                            <div id="about-us-left-sub1-editor"></div>
                         </div>
                     </div>
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Subtitle 2</h4>
-                        <div class="form-group">
-                            <input type="text" id="about-us-left-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
+                        <div class="quill-container">
+                            <div id="about-us-left-sub2-editor"></div>
                         </div>
                     </div>
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Text Body</h4>
-                        <textarea id="about-us-left-body" class="tinymce-editor" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                        <div class="quill-container quill-editor-large">
+                            <div id="about-us-left-body-editor"></div>
+                        </div>
                     </div>
                     <button class="btn" id="save-about-us-left-btn">Save Left Content</button>
                 `;
@@ -946,21 +955,23 @@
                 
                 content = `
                     ${langTabs}
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Subtitle 1</h4>
-                        <div class="form-group">
-                            <input type="text" id="about-us-right-sub1" class="form-control" value="${escapeHtml(sub1)}" placeholder="Enter subtitle 1">
+                        <div class="quill-container">
+                            <div id="about-us-right-sub1-editor"></div>
                         </div>
                     </div>
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Subtitle 2</h4>
-                        <div class="form-group">
-                            <input type="text" id="about-us-right-sub2" class="form-control" value="${escapeHtml(sub2)}" placeholder="Enter subtitle 2">
+                        <div class="quill-container">
+                            <div id="about-us-right-sub2-editor"></div>
                         </div>
                     </div>
-                    <div class="about-us-form-section">
+                    <div class="about-us-section">
                         <h4>Text Body</h4>
-                        <textarea id="about-us-right-body" class="tinymce-editor" placeholder="Enter text body">${escapeHtml(body)}</textarea>
+                        <div class="quill-container quill-editor-large">
+                            <div id="about-us-right-body-editor"></div>
+                        </div>
                     </div>
                     <button class="btn" id="save-about-us-right-btn">Save Right Content</button>
                 `;
@@ -968,11 +979,74 @@
             
             container.innerHTML = content;
             
-            // Initialize TinyMCE after rendering content
-            initializeTinyMCE();
+            // Initialize Quill editors
+            initializeAboutUsQuillEditors();
             
             // Attach save handlers
             attachAboutUsSaveHandlers();
+        }
+
+        // Global Quill editors object for About Us
+        let aboutUsQuillEditors = {};
+
+        // Initialize Quill for About Us
+        function initializeAboutUsQuillEditors() {
+            aboutUsQuillEditors = {};
+            
+            const toolbarOptions = [
+                [{ 'font': ['Raleway', 'Arial', 'Georgia', 'Times New Roman', 'Courier New', 'Verdana', 'Helvetica'] }],
+                [{ 'size': ['small', false, 'large', 'huge'] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link'],
+                ['clean']
+            ];
+            
+            if (currentAboutUsTab === 'title') {
+                aboutUsQuillEditors['title'] = new Quill('#about-us-title-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['title'].root.innerHTML = aboutUsData.title[currentAboutUsLang] || '';
+            } else if (currentAboutUsTab === 'left') {
+                aboutUsQuillEditors['leftSub1'] = new Quill('#about-us-left-sub1-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['leftSub1'].root.innerHTML = aboutUsData.left.subtitle1[currentAboutUsLang] || '';
+                
+                aboutUsQuillEditors['leftSub2'] = new Quill('#about-us-left-sub2-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['leftSub2'].root.innerHTML = aboutUsData.left.subtitle2[currentAboutUsLang] || '';
+                
+                aboutUsQuillEditors['leftBody'] = new Quill('#about-us-left-body-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['leftBody'].root.innerHTML = aboutUsData.left.textBody[currentAboutUsLang] || '';
+            } else if (currentAboutUsTab === 'right') {
+                aboutUsQuillEditors['rightSub1'] = new Quill('#about-us-right-sub1-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['rightSub1'].root.innerHTML = aboutUsData.right.subtitle1[currentAboutUsLang] || '';
+                
+                aboutUsQuillEditors['rightSub2'] = new Quill('#about-us-right-sub2-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['rightSub2'].root.innerHTML = aboutUsData.right.subtitle2[currentAboutUsLang] || '';
+                
+                aboutUsQuillEditors['rightBody'] = new Quill('#about-us-right-body-editor', {
+                    theme: 'snow',
+                    modules: { toolbar: toolbarOptions }
+                });
+                aboutUsQuillEditors['rightBody'].root.innerHTML = aboutUsData.right.textBody[currentAboutUsLang] || '';
+            }
         }
 
         // Attach save button handlers
@@ -983,7 +1057,7 @@
             
             if (saveTitleBtn) {
                 saveTitleBtn.addEventListener('click', async () => {
-                    const value = document.getElementById('about-us-title-input').value;
+                    const value = aboutUsQuillEditors['title'].root.innerHTML;
                     aboutUsData.title[currentAboutUsLang] = value;
                     await saveAboutUsData();
                 });
@@ -991,18 +1065,18 @@
             
             if (saveLeftBtn) {
                 saveLeftBtn.addEventListener('click', async () => {
-                    aboutUsData.left.subtitle1[currentAboutUsLang] = document.getElementById('about-us-left-sub1').value;
-                    aboutUsData.left.subtitle2[currentAboutUsLang] = document.getElementById('about-us-left-sub2').value;
-                    aboutUsData.left.textBody[currentAboutUsLang] = tinymce.get('about-us-left-body').getContent();
+                    aboutUsData.left.subtitle1[currentAboutUsLang] = aboutUsQuillEditors['leftSub1'].root.innerHTML;
+                    aboutUsData.left.subtitle2[currentAboutUsLang] = aboutUsQuillEditors['leftSub2'].root.innerHTML;
+                    aboutUsData.left.textBody[currentAboutUsLang] = aboutUsQuillEditors['leftBody'].root.innerHTML;
                     await saveAboutUsData();
                 });
             }
             
             if (saveRightBtn) {
                 saveRightBtn.addEventListener('click', async () => {
-                    aboutUsData.right.subtitle1[currentAboutUsLang] = document.getElementById('about-us-right-sub1').value;
-                    aboutUsData.right.subtitle2[currentAboutUsLang] = document.getElementById('about-us-right-sub2').value;
-                    aboutUsData.right.textBody[currentAboutUsLang] = tinymce.get('about-us-right-body').getContent();
+                    aboutUsData.right.subtitle1[currentAboutUsLang] = aboutUsQuillEditors['rightSub1'].root.innerHTML;
+                    aboutUsData.right.subtitle2[currentAboutUsLang] = aboutUsQuillEditors['rightSub2'].root.innerHTML;
+                    aboutUsData.right.textBody[currentAboutUsLang] = aboutUsQuillEditors['rightBody'].root.innerHTML;
                     await saveAboutUsData();
                 });
             }

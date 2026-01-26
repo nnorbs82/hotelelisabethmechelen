@@ -326,7 +326,7 @@
                     <div class="index-ads-container">
                         <div class="index-ads-left" style="background-image: url('${sanitizeImageUrl(ad1.imageUrl)}');">
                             <div class="index-ad-content">
-                                <div class="index-ad-top-text">${escapeHtml(ad1[`topText_${currentLang}`] || '')}</div>
+                                <div class="index-ad-top-text">${ad1[`topText_${currentLang}`] || ''}</div>
                                 <div class="index-ad-bottom-text">${ad1[`bottomText_${currentLang}`] || ''}</div>
                                 ${renderAdButton(ad1, currentLang)}
                             </div>
@@ -334,14 +334,14 @@
                         <div class="index-ads-right">
                             <div class="index-ads-right-top" style="background-image: url('${sanitizeImageUrl(ad2.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${escapeHtml(ad2[`topText_${currentLang}`] || '')}</div>
+                                    <div class="index-ad-top-text">${ad2[`topText_${currentLang}`] || ''}</div>
                                     <div class="index-ad-bottom-text">${ad2[`bottomText_${currentLang}`] || ''}</div>
                                     ${renderAdButton(ad2, currentLang)}
                                 </div>
                             </div>
                             <div class="index-ads-right-bottom" style="background-image: url('${sanitizeImageUrl(ad3.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${escapeHtml(ad3[`topText_${currentLang}`] || '')}</div>
+                                    <div class="index-ad-top-text">${ad3[`topText_${currentLang}`] || ''}</div>
                                     <div class="index-ad-bottom-text">${ad3[`bottomText_${currentLang}`] || ''}</div>
                                     ${renderAdButton(ad3, currentLang)}
                                 </div>
@@ -372,17 +372,17 @@
                 const data = snapshot.val();
                 const currentLang = detectLanguage();
                 
-                // Set title
-                document.getElementById('about-us-title').textContent = data.title[currentLang] || '';
+                // Set title (as HTML)
+                document.getElementById('about-us-title').innerHTML = data.title[currentLang] || '';
                 
-                // Set left content
-                document.getElementById('about-us-left-subtitle1').textContent = data.left.subtitle1[currentLang] || '';
-                document.getElementById('about-us-left-subtitle2').textContent = data.left.subtitle2[currentLang] || '';
+                // Set left content (as HTML)
+                document.getElementById('about-us-left-subtitle1').innerHTML = data.left.subtitle1[currentLang] || '';
+                document.getElementById('about-us-left-subtitle2').innerHTML = data.left.subtitle2[currentLang] || '';
                 document.getElementById('about-us-left-body').innerHTML = data.left.textBody[currentLang] || '';
                 
-                // Set right content
-                document.getElementById('about-us-right-subtitle1').textContent = data.right.subtitle1[currentLang] || '';
-                document.getElementById('about-us-right-subtitle2').textContent = data.right.subtitle2[currentLang] || '';
+                // Set right content (as HTML)
+                document.getElementById('about-us-right-subtitle1').innerHTML = data.right.subtitle1[currentLang] || '';
+                document.getElementById('about-us-right-subtitle2').innerHTML = data.right.subtitle2[currentLang] || '';
                 document.getElementById('about-us-right-body').innerHTML = data.right.textBody[currentLang] || '';
                 
             } catch (error) {
