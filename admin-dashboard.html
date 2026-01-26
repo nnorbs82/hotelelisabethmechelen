@@ -417,6 +417,14 @@
             fr: { name: 'French', flag: '🇫🇷' }
         };
 
+        // Escape HTML to prevent XSS in attributes
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Load ads from Firebase
         async function loadAds() {
             try {
@@ -445,6 +453,11 @@
         function createAdItem(index, data) {
             const adCard = document.createElement('div');
             adCard.className = 'ad-item-card';
+            
+            // Safely escape all user data
+            const imageUrl = escapeHtml(data.imageUrl || '');
+            const link = escapeHtml(data.link || '');
+            
             adCard.innerHTML = `
                 <h3>Ad Item ${index}</h3>
                 
@@ -454,7 +467,7 @@
                     <input type="file" id="ad${index}-image-input" accept="image/*" style="display: none;">
                     <button class="btn btn-secondary" id="ad${index}-upload-btn">Upload Image</button>
                     <div id="ad${index}-image-preview" class="ad-image-preview">
-                        ${data.imageUrl ? `<img src="${data.imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
+                        ${imageUrl ? `<img src="${imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
                     </div>
                 </div>
 
@@ -465,17 +478,17 @@
                         
                         <div class="ad-field">
                             <label for="ad${index}-top-text-${lang}">Top Text</label>
-                            <input type="text" id="ad${index}-top-text-${lang}" value="${data[`topText_${lang}`] || ''}" placeholder="Enter top text">
+                            <input type="text" id="ad${index}-top-text-${lang}" value="${escapeHtml(data[`topText_${lang}`] || '')}" placeholder="Enter top text">
                         </div>
                         
                         <div class="ad-field">
                             <label for="ad${index}-bottom-text-${lang}">Bottom Text</label>
-                            <input type="text" id="ad${index}-bottom-text-${lang}" value="${data[`bottomText_${lang}`] || ''}" placeholder="Enter bottom text">
+                            <input type="text" id="ad${index}-bottom-text-${lang}" value="${escapeHtml(data[`bottomText_${lang}`] || '')}" placeholder="Enter bottom text">
                         </div>
                         
                         <div class="ad-field">
                             <label for="ad${index}-button-title-${lang}">Button Title</label>
-                            <input type="text" id="ad${index}-button-title-${lang}" value="${data[`buttonTitle_${lang}`] || ''}" placeholder="Enter button title">
+                            <input type="text" id="ad${index}-button-title-${lang}" value="${escapeHtml(data[`buttonTitle_${lang}`] || '')}" placeholder="Enter button title">
                         </div>
                     </div>
                 `).join('')}
@@ -483,7 +496,7 @@
                 <!-- Link Field (Language-independent) -->
                 <div class="ad-field">
                     <label for="ad${index}-link">Link (URL)</label>
-                    <input type="text" id="ad${index}-link" value="${data.link || ''}" placeholder="https://example.com">
+                    <input type="text" id="ad${index}-link" value="${link}" placeholder="https://example.com">
                 </div>
 
                 <button class="btn" id="ad${index}-save-btn">Save Ad ${index}</button>
@@ -565,8 +578,14 @@
                     adData[`buttonTitle_${lang}`] = document.getElementById(`ad${adIndex}-button-title-${lang}`).value;
                 });
 
-                // Get link
-                adData.link = document.getElementById(`ad${adIndex}-link`).value;
+                // Get and validate link
+                const linkInput = document.getElementById(`ad${adIndex}-link`).value.trim();
+                // Only allow HTTP(S) URLs or relative paths
+                if (linkInput && !linkInput.startsWith('http://') && !linkInput.startsWith('https://') && !linkInput.startsWith('/')) {
+                    alert('Link must start with http://, https://, or / for relative paths');
+                    return;
+                }
+                adData.link = linkInput;
                 adData.timestamp = Date.now();
 
                 // Save to Firebase
