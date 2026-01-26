@@ -163,7 +163,6 @@ nav a:hover {
     display: block;
     opacity: 1; /* Force opacity to 1 */
     backface-visibility: hidden; /* Prevent rendering issues */
-    -webkit-backface-visibility: hidden;
 }
 
 .hero-slide-placeholder {

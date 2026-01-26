@@ -152,15 +152,29 @@
         // Handle page visibility changes to prevent black screen when returning from inactive tab
         let slideshowInitialized = false;
 
+        function startSafeguardTimer() {
+            if (slideCount > 1 && !safeguardTimer) {
+                safeguardTimer = setInterval(() => {
+                    if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
+                        console.log('Slideshow timer lost - restarting');
+                        startAutoSlide();
+                    }
+                }, 2000);
+            }
+        }
+
+        function stopSafeguardTimer() {
+            if (safeguardTimer) {
+                clearInterval(safeguardTimer);
+                safeguardTimer = null;
+            }
+        }
+
         document.addEventListener('visibilitychange', function() {
             if (document.hidden) {
                 // Tab is now hidden - pause the slideshow
                 stopAutoSlide();
-                // Clear the safeguard timer when tab is hidden
-                if (safeguardTimer) {
-                    clearInterval(safeguardTimer);
-                    safeguardTimer = null;
-                }
+                stopSafeguardTimer();
             } else {
                 // Tab is now visible again
                 if (slideshowInitialized && slideCount > 0) {
@@ -174,14 +188,7 @@
                     startAutoSlide();
                 }
                 // Restart the safeguard timer when tab becomes visible
-                if (!safeguardTimer && slideCount > 1) {
-                    safeguardTimer = setInterval(() => {
-                        if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
-                            console.log('Slideshow timer lost - restarting');
-                            startAutoSlide();
-                        }
-                    }, 2000);
-                }
+                startSafeguardTimer();
             }
         });
 
@@ -275,14 +282,7 @@
             slideshowInitialized = true;
             
             // Start the safeguard timer if slideshow has multiple slides
-            if (slideCount > 1 && !safeguardTimer) {
-                safeguardTimer = setInterval(() => {
-                    if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
-                        console.log('Slideshow timer lost - restarting');
-                        startAutoSlide();
-                    }
-                }, 2000);
-            }
+            startSafeguardTimer();
         }
 
         heroTrack.addEventListener('transitionend', () => {
