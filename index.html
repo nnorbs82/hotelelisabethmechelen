@@ -108,6 +108,7 @@
         let currentIndex = 0;
         let slideCount = 0;
         let autoTimer = null;
+        let safeguardTimer = null;
         let useClones = false;
 
         async function fetchBannerUrls() {
@@ -155,6 +156,11 @@
             if (document.hidden) {
                 // Tab is now hidden - pause the slideshow
                 stopAutoSlide();
+                // Clear the safeguard timer when tab is hidden
+                if (safeguardTimer) {
+                    clearInterval(safeguardTimer);
+                    safeguardTimer = null;
+                }
             } else {
                 // Tab is now visible again
                 if (slideshowInitialized && slideCount > 0) {
@@ -166,25 +172,18 @@
                     
                     // Restart the auto-slide
                     startAutoSlide();
-                    
-                    // If the track appears stuck, force a refresh
-                    setTimeout(() => {
-                        if (heroTrack.style.transform === '') {
-                            console.log('Slideshow stuck - forcing refresh');
-                            setTrackPosition(false);
+                }
+                // Restart the safeguard timer when tab becomes visible
+                if (!safeguardTimer && slideCount > 1) {
+                    safeguardTimer = setInterval(() => {
+                        if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
+                            console.log('Slideshow timer lost - restarting');
+                            startAutoSlide();
                         }
-                    }, 100);
+                    }, 2000);
                 }
             }
         });
-
-        // Additional safeguard: periodically check if slideshow is running when page is visible
-        setInterval(() => {
-            if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
-                console.log('Slideshow timer lost - restarting');
-                startAutoSlide();
-            }
-        }, 2000); // Check every 2 seconds
 
         function toggleHandles(enabled) {
             [prevButton, nextButton].forEach(button => {
@@ -264,11 +263,6 @@
                 // Add error handling for images that fail to load
                 img.onerror = function() {
                     console.error('Failed to load banner image:', url);
-                    // Optionally add a placeholder or retry logic
-                };
-                
-                img.onload = function() {
-                    console.log('Banner image loaded successfully:', url);
                 };
                 
                 slide.appendChild(img);
@@ -279,6 +273,16 @@
             requestAnimationFrame(() => setTrackPosition(false));
             startAutoSlide();
             slideshowInitialized = true;
+            
+            // Start the safeguard timer if slideshow has multiple slides
+            if (slideCount > 1 && !safeguardTimer) {
+                safeguardTimer = setInterval(() => {
+                    if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
+                        console.log('Slideshow timer lost - restarting');
+                        startAutoSlide();
+                    }
+                }, 2000);
+            }
         }
 
         heroTrack.addEventListener('transitionend', () => {
