@@ -17,10 +17,24 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: var(--color-white);
+    background-color: transparent;
     color: var(--color-black);
     line-height: 1.6;
     padding-top: var(--header-height); /* Account for fixed header height */
+}
+
+/* Fixed Background Layer (iOS Compatible) */
+.page-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Header Styles */
