@@ -76,26 +76,36 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Handle Update Index submenu with hover
-            const updateIndexBtn = document.getElementById('update-index-btn');
-            const submenu = document.getElementById('update-index-submenu');
-            let submenuTimeout = null;
+             const updateIndexBtn = document.getElementById('update-index-btn');
+             const submenu = document.getElementById('update-index-submenu');
+             let submenuTimeout = null;
+            const nav = updateIndexBtn.closest('nav');
 
-            // Animation timing constants
-            const ANIMATION_DURATION = 300; // Must match CSS transition duration
-            const HIDE_DELAY = 100; // Small delay to prevent flicker when moving between elements
-            const INITIAL_DELAY = 10; // Small delay to ensure display:block is applied before animation
+             // Animation timing constants
+             const ANIMATION_DURATION = 300; // Must match CSS transition duration
+             const HIDE_DELAY = 100; // Small delay to prevent flicker when moving between elements
+             const INITIAL_DELAY = 10; // Small delay to ensure display:block is applied before animation
 
-            function showSubmenu() {
-                if (submenuTimeout) {
-                    clearTimeout(submenuTimeout);
-                    submenuTimeout = null;
-                }
-                submenu.style.display = 'block';
-                submenu.style.maxHeight = '0';
-                submenu.style.overflow = 'hidden';
-                // Small delay ensures display:block is applied before starting the animation
-                setTimeout(() => {
-                    submenu.style.transition = 'max-height 0.3s ease-out';
+            function positionSubmenu() {
+                const btnRect = updateIndexBtn.getBoundingClientRect();
+                const navRect = nav ? nav.getBoundingClientRect() : { left: 0 };
+                submenu.style.width = `${btnRect.width}px`;
+                submenu.style.marginLeft = `${btnRect.left - navRect.left}px`;
+                submenu.style.marginRight = '0';
+            }
+
+             function showSubmenu() {
+                 if (submenuTimeout) {
+                     clearTimeout(submenuTimeout);
+                     submenuTimeout = null;
+                 }
+                 submenu.style.display = 'block';
+                positionSubmenu();
+                 submenu.style.maxHeight = '0';
+                 submenu.style.overflow = 'hidden';
+                 // Small delay ensures display:block is applied before starting the animation
+                 setTimeout(() => {
+                     submenu.style.transition = 'max-height 0.3s ease-out';
                     submenu.style.maxHeight = '200px'; // Enough to fit submenu content
                 }, INITIAL_DELAY);
             }
@@ -111,15 +121,17 @@
                 }, HIDE_DELAY);
             }
 
-            // Show submenu on hover over Update Index button
-            updateIndexBtn.addEventListener('mouseenter', showSubmenu);
-            updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
+             // Show submenu on hover over Update Index button
+             updateIndexBtn.addEventListener('mouseenter', showSubmenu);
+             updateIndexBtn.addEventListener('mouseleave', hideSubmenu);
 
-            // Keep submenu visible when hovering over it
-            submenu.addEventListener('mouseenter', showSubmenu);
-            submenu.addEventListener('mouseleave', hideSubmenu);
-        });
-    </script>
+             // Keep submenu visible when hovering over it
+             submenu.addEventListener('mouseenter', showSubmenu);
+             submenu.addEventListener('mouseleave', hideSubmenu);
+
+            window.addEventListener('resize', positionSubmenu);
+         });
+     </script>
 
     <!-- Firebase SDK and Authentication Check -->
     <script type="module">
@@ -158,22 +170,25 @@
             }
         });
 
+        function showManagementCard(cardId) {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            photoCard.style.display = cardId === 'photo' ? 'block' : 'none';
+            adsCard.style.display = cardId === 'ads' ? 'block' : 'none';
+            const target = cardId === 'photo' ? photoCard : adsCard;
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         // Show photo management card when Main Banner is clicked
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
-            const photoCard = document.getElementById('photo-management-card');
-            photoCard.style.display = 'block';
-            // Scroll to the card
-            photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showManagementCard('photo');
             // Load existing photos
             await loadPhotos();
         });
 
         // Show ads management card when Ads is clicked
         document.getElementById('ads-btn').addEventListener('click', async () => {
-            const adsCard = document.getElementById('ads-management-card');
-            adsCard.style.display = 'block';
-            // Scroll to the card
-            adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showManagementCard('ads');
             // Load existing ads
             await loadAds();
         });
@@ -469,49 +484,54 @@
             // Safely escape and sanitize all user data
             const imageUrl = sanitizeImageUrl(data.imageUrl);
             const link = escapeHtml(data.link || '');
+            const isOpen = false;
             
             adCard.innerHTML = `
-                <h3>Ad Item ${index}</h3>
-                
-                <!-- Image Upload Section -->
-                <div class="ad-field">
-                    <label>Image</label>
-                    <input type="file" id="ad${index}-image-input" accept="image/*" style="display: none;">
-                    <button class="btn btn-secondary" id="ad${index}-upload-btn">Upload Image</button>
-                    <div id="ad${index}-image-preview" class="ad-image-preview">
-                        ${imageUrl ? `<img src="${imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
-                    </div>
+                <div class="ad-item-header">
+                    <h3>Ad Item ${index}</h3>
+                    <button class="btn btn-secondary ad-toggle" id="ad${index}-toggle-btn">${isOpen ? 'Collapse' : 'Expand'}</button>
                 </div>
-
-                <!-- Multilingual Text Fields -->
-                ${languages.map(lang => `
-                    <div class="ad-multilang-section">
-                        <h4>${languageLabels[lang].flag} ${languageLabels[lang].name}</h4>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-top-text-${lang}">Top Text</label>
-                            <input type="text" id="ad${index}-top-text-${lang}" value="${escapeHtml(data[`topText_${lang}`] || '')}" placeholder="Enter top text">
-                        </div>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-bottom-text-${lang}">Bottom Text</label>
-                            <input type="text" id="ad${index}-bottom-text-${lang}" value="${escapeHtml(data[`bottomText_${lang}`] || '')}" placeholder="Enter bottom text">
-                        </div>
-                        
-                        <div class="ad-field">
-                            <label for="ad${index}-button-title-${lang}">Button Title</label>
-                            <input type="text" id="ad${index}-button-title-${lang}" value="${escapeHtml(data[`buttonTitle_${lang}`] || '')}" placeholder="Enter button title">
+                <div class="ad-item-body" id="ad${index}-body" style="${isOpen ? '' : 'display:none;'}">
+                    <!-- Image Upload Section -->
+                    <div class="ad-field">
+                        <label>Image</label>
+                        <input type="file" id="ad${index}-image-input" accept="image/*" style="display: none;">
+                        <button class="btn btn-secondary" id="ad${index}-upload-btn">Upload Image</button>
+                        <div id="ad${index}-image-preview" class="ad-image-preview">
+                            ${imageUrl ? `<img src="${imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
                         </div>
                     </div>
-                `).join('')}
 
-                <!-- Link Field (Language-independent) -->
-                <div class="ad-field">
-                    <label for="ad${index}-link">Link (URL)</label>
-                    <input type="text" id="ad${index}-link" value="${link}" placeholder="https://example.com">
+                    <!-- Multilingual Text Fields -->
+                    ${languages.map(lang => `
+                        <div class="ad-multilang-section">
+                            <h4>${languageLabels[lang].flag} ${languageLabels[lang].name}</h4>
+                            
+                            <div class="ad-field">
+                                <label for="ad${index}-top-text-${lang}">Top Text</label>
+                                <input type="text" id="ad${index}-top-text-${lang}" value="${escapeHtml(data[`topText_${lang}`] || '')}" placeholder="Enter top text">
+                            </div>
+                            
+                            <div class="ad-field">
+                                <label for="ad${index}-bottom-text-${lang}">Bottom Text</label>
+                                <input type="text" id="ad${index}-bottom-text-${lang}" value="${escapeHtml(data[`bottomText_${lang}`] || '')}" placeholder="Enter bottom text">
+                            </div>
+                            
+                            <div class="ad-field">
+                                <label for="ad${index}-button-title-${lang}">Button Title</label>
+                                <input type="text" id="ad${index}-button-title-${lang}" value="${escapeHtml(data[`buttonTitle_${lang}`] || '')}" placeholder="Enter button title">
+                            </div>
+                        </div>
+                    `).join('')}
+
+                    <!-- Link Field (Language-independent) -->
+                    <div class="ad-field">
+                        <label for="ad${index}-link">Link (URL)</label>
+                        <input type="text" id="ad${index}-link" value="${link}" placeholder="https://example.com">
+                    </div>
+
+                    <button class="btn" id="ad${index}-save-btn">Save Ad ${index}</button>
                 </div>
-
-                <button class="btn" id="ad${index}-save-btn">Save Ad ${index}</button>
             `;
 
             // Add event listeners
@@ -520,13 +540,40 @@
                 const uploadInput = document.getElementById(`ad${index}-image-input`);
                 const uploadBtn = document.getElementById(`ad${index}-upload-btn`);
                 const saveBtn = document.getElementById(`ad${index}-save-btn`);
+                const toggleBtn = document.getElementById(`ad${index}-toggle-btn`);
+                const body = document.getElementById(`ad${index}-body`);
 
                 uploadBtn.addEventListener('click', () => uploadInput.click());
                 uploadInput.addEventListener('change', (e) => handleAdImageUpload(e, index));
                 saveBtn.addEventListener('click', () => saveAd(index));
+                toggleBtn.addEventListener('click', () => toggleAdCard(index));
             }, 0);
 
             return adCard;
+        }
+
+        let adBodies = [];
+        let adToggleButtons = [];
+
+        function toggleAdCard(index) {
+            if (!adBodies.length || !adToggleButtons.length) {
+                adBodies = Array.from(document.querySelectorAll('.ad-item-body'));
+                adToggleButtons = Array.from(document.querySelectorAll('.ad-toggle'));
+            }
+            const body = document.getElementById(`ad${index}-body`);
+            const toggleBtn = document.getElementById(`ad${index}-toggle-btn`);
+            const isHidden = body.style.display === 'none';
+            // Close all others
+            adBodies.forEach(el => el.style.display = 'none');
+            adToggleButtons.forEach(btn => btn.textContent = 'Expand');
+            // Open selected
+            if (isHidden) {
+                body.style.display = '';
+                toggleBtn.textContent = 'Collapse';
+            } else {
+                body.style.display = 'none';
+                toggleBtn.textContent = 'Expand';
+            }
         }
 
         // Handle ad image upload
