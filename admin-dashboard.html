@@ -198,7 +198,13 @@
             });
 
             // Close menu when clicking any menu item
-            document.querySelectorAll('.submenu-item, .vertical-menu-btn:not(.has-submenu .vertical-menu-btn)').forEach(btn => {
+            document.querySelectorAll('.submenu-item').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    verticalMenu.classList.remove('show');
+                });
+            });
+            
+            document.querySelectorAll('.vertical-menu-item:not(.has-submenu) .vertical-menu-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     verticalMenu.classList.remove('show');
                 });
