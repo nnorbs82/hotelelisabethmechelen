@@ -3,6 +3,9 @@
 const activeDatePickers = [];
 
 class DatePicker {
+    // Approximate height of the date picker for positioning calculations
+    static PICKER_HEIGHT = 400;
+    
     constructor(inputElement, options = {}) {
         this.input = inputElement;
         this.options = options;
@@ -153,16 +156,19 @@ class DatePicker {
             this.navigateMonth(1);
         });
 
-        // Mouse wheel navigation
+        // Mouse wheel navigation - only when picker is visible and has focus
         this.picker.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (e.deltaY < 0) {
-                this.navigateMonth(-1);
-            } else if (e.deltaY > 0) {
-                this.navigateMonth(1);
+            // Only handle wheel events when the picker is actually visible
+            if (this.picker.style.display !== 'none') {
+                e.preventDefault();
+                e.stopPropagation();
+                if (e.deltaY < 0) {
+                    this.navigateMonth(-1);
+                } else if (e.deltaY > 0) {
+                    this.navigateMonth(1);
+                }
             }
-        });
+        }, { passive: false });
 
         // Month/Year change
         this.monthSelect.addEventListener('change', () => {
@@ -217,7 +223,7 @@ class DatePicker {
     show() {
         // Position picker with smart vertical placement
         const rect = this.input.getBoundingClientRect();
-        const pickerHeight = 400; // Approximate picker height
+        const pickerHeight = DatePicker.PICKER_HEIGHT;
         const viewportHeight = window.innerHeight;
         const spaceBelow = viewportHeight - rect.bottom;
         const spaceAbove = rect.top;
@@ -267,6 +273,19 @@ class DatePicker {
 
     getDate() {
         return this.selectedDate;
+    }
+
+    destroy() {
+        // Remove from global array
+        const index = activeDatePickers.indexOf(this);
+        if (index > -1) {
+            activeDatePickers.splice(index, 1);
+        }
+        
+        // Remove picker from DOM
+        if (this.picker && this.picker.parentNode) {
+            this.picker.parentNode.removeChild(this.picker);
+        }
     }
 }
 
