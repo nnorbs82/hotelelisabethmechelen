@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- DOMPurify for sanitizing HTML content -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </head>
 <body>
     <!-- Fixed Background Layer (iOS Compatible) -->
@@ -301,6 +303,11 @@
             return link ? `<a href="${escapeHtml(link)}" class="index-ad-button">${buttonTitle}</a>` : '';
         }
 
+        // Helper to sanitize HTML content from rich text editors
+        function sanitizeHtml(html) {
+            return DOMPurify.sanitize(html || '');
+        }
+
         async function loadIndexAds() {
             try {
                 const snapshot = await get(dbRef(database, 'indexAds'));
@@ -326,23 +333,23 @@
                     <div class="index-ads-container">
                         <div class="index-ads-left" style="background-image: url('${sanitizeImageUrl(ad1.imageUrl)}');">
                             <div class="index-ad-content">
-                                <div class="index-ad-top-text">${ad1[`topText_${currentLang}`] || ''}</div>
-                                <div class="index-ad-bottom-text">${ad1[`bottomText_${currentLang}`] || ''}</div>
+                                <div class="index-ad-top-text">${sanitizeHtml(ad1[`topText_${currentLang}`])}</div>
+                                <div class="index-ad-bottom-text">${sanitizeHtml(ad1[`bottomText_${currentLang}`])}</div>
                                 ${renderAdButton(ad1, currentLang)}
                             </div>
                         </div>
                         <div class="index-ads-right">
                             <div class="index-ads-right-top" style="background-image: url('${sanitizeImageUrl(ad2.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${ad2[`topText_${currentLang}`] || ''}</div>
-                                    <div class="index-ad-bottom-text">${ad2[`bottomText_${currentLang}`] || ''}</div>
+                                    <div class="index-ad-top-text">${sanitizeHtml(ad2[`topText_${currentLang}`])}</div>
+                                    <div class="index-ad-bottom-text">${sanitizeHtml(ad2[`bottomText_${currentLang}`])}</div>
                                     ${renderAdButton(ad2, currentLang)}
                                 </div>
                             </div>
                             <div class="index-ads-right-bottom" style="background-image: url('${sanitizeImageUrl(ad3.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${ad3[`topText_${currentLang}`] || ''}</div>
-                                    <div class="index-ad-bottom-text">${ad3[`bottomText_${currentLang}`] || ''}</div>
+                                    <div class="index-ad-top-text">${sanitizeHtml(ad3[`topText_${currentLang}`])}</div>
+                                    <div class="index-ad-bottom-text">${sanitizeHtml(ad3[`bottomText_${currentLang}`])}</div>
                                     ${renderAdButton(ad3, currentLang)}
                                 </div>
                             </div>
@@ -372,18 +379,18 @@
                 const data = snapshot.val();
                 const currentLang = detectLanguage();
                 
-                // Set title (as HTML)
-                document.getElementById('about-us-title').innerHTML = data.title[currentLang] || '';
+                // Set title (as HTML) - sanitized
+                document.getElementById('about-us-title').innerHTML = DOMPurify.sanitize(data.title[currentLang] || '');
                 
-                // Set left content (as HTML)
-                document.getElementById('about-us-left-subtitle1').innerHTML = data.left.subtitle1[currentLang] || '';
-                document.getElementById('about-us-left-subtitle2').innerHTML = data.left.subtitle2[currentLang] || '';
-                document.getElementById('about-us-left-body').innerHTML = data.left.textBody[currentLang] || '';
+                // Set left content (as HTML) - sanitized
+                document.getElementById('about-us-left-subtitle1').innerHTML = DOMPurify.sanitize(data.left.subtitle1[currentLang] || '');
+                document.getElementById('about-us-left-subtitle2').innerHTML = DOMPurify.sanitize(data.left.subtitle2[currentLang] || '');
+                document.getElementById('about-us-left-body').innerHTML = DOMPurify.sanitize(data.left.textBody[currentLang] || '');
                 
-                // Set right content (as HTML)
-                document.getElementById('about-us-right-subtitle1').innerHTML = data.right.subtitle1[currentLang] || '';
-                document.getElementById('about-us-right-subtitle2').innerHTML = data.right.subtitle2[currentLang] || '';
-                document.getElementById('about-us-right-body').innerHTML = data.right.textBody[currentLang] || '';
+                // Set right content (as HTML) - sanitized
+                document.getElementById('about-us-right-subtitle1').innerHTML = DOMPurify.sanitize(data.right.subtitle1[currentLang] || '');
+                document.getElementById('about-us-right-subtitle2').innerHTML = DOMPurify.sanitize(data.right.subtitle2[currentLang] || '');
+                document.getElementById('about-us-right-body').innerHTML = DOMPurify.sanitize(data.right.textBody[currentLang] || '');
                 
             } catch (error) {
                 console.error('Error loading About Us content:', error);
