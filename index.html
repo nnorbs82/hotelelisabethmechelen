@@ -243,6 +243,22 @@
             return div.innerHTML;
         }
 
+        // Validate and sanitize URL for CSS background-image
+        function sanitizeImageUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage or relative paths
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                // Additional validation: ensure no quotes or parentheses that could break CSS
+                if (trimmed.includes("'") || trimmed.includes('"') || trimmed.includes('(') || trimmed.includes(')')) {
+                    return '';
+                }
+                return trimmed;
+            }
+            return '';
+        }
+
         // Validate URL to prevent javascript: and other malicious schemes
         function sanitizeUrl(url) {
             if (!url) return '';
@@ -251,6 +267,13 @@
                 return trimmed;
             }
             return ''; // Block non-HTTP(S) URLs
+        }
+
+        // Helper to render ad button
+        function renderAdButton(ad, lang) {
+            const link = sanitizeUrl(ad.link);
+            const buttonTitle = escapeHtml(ad[`buttonTitle_${lang}`] || 'Learn More');
+            return link ? `<a href="${escapeHtml(link)}" class="index-ad-button">${buttonTitle}</a>` : '';
         }
 
         async function loadIndexAds() {
@@ -273,29 +296,29 @@
                     return; // Not all ads configured
                 }
 
-                // Render the ads with proper escaping
+                // Render the ads with proper escaping and sanitization
                 adsSection.innerHTML = `
                     <div class="index-ads-container">
-                        <div class="index-ads-left" style="background-image: url('${escapeHtml(ad1.imageUrl || '')}');">
+                        <div class="index-ads-left" style="background-image: url('${sanitizeImageUrl(ad1.imageUrl)}');">
                             <div class="index-ad-content">
                                 <div class="index-ad-top-text">${escapeHtml(ad1[`topText_${currentLang}`] || '')}</div>
                                 <div class="index-ad-bottom-text">${escapeHtml(ad1[`bottomText_${currentLang}`] || '')}</div>
-                                ${ad1.link && sanitizeUrl(ad1.link) ? `<a href="${escapeHtml(sanitizeUrl(ad1.link))}" class="index-ad-button">${escapeHtml(ad1[`buttonTitle_${currentLang}`] || 'Learn More')}</a>` : ''}
+                                ${renderAdButton(ad1, currentLang)}
                             </div>
                         </div>
                         <div class="index-ads-right">
-                            <div class="index-ads-right-top" style="background-image: url('${escapeHtml(ad2.imageUrl || '')}');">
+                            <div class="index-ads-right-top" style="background-image: url('${sanitizeImageUrl(ad2.imageUrl)}');">
                                 <div class="index-ad-content">
                                     <div class="index-ad-top-text">${escapeHtml(ad2[`topText_${currentLang}`] || '')}</div>
                                     <div class="index-ad-bottom-text">${escapeHtml(ad2[`bottomText_${currentLang}`] || '')}</div>
-                                    ${ad2.link && sanitizeUrl(ad2.link) ? `<a href="${escapeHtml(sanitizeUrl(ad2.link))}" class="index-ad-button">${escapeHtml(ad2[`buttonTitle_${currentLang}`] || 'Learn More')}</a>` : ''}
+                                    ${renderAdButton(ad2, currentLang)}
                                 </div>
                             </div>
-                            <div class="index-ads-right-bottom" style="background-image: url('${escapeHtml(ad3.imageUrl || '')}');">
+                            <div class="index-ads-right-bottom" style="background-image: url('${sanitizeImageUrl(ad3.imageUrl)}');">
                                 <div class="index-ad-content">
                                     <div class="index-ad-top-text">${escapeHtml(ad3[`topText_${currentLang}`] || '')}</div>
                                     <div class="index-ad-bottom-text">${escapeHtml(ad3[`bottomText_${currentLang}`] || '')}</div>
-                                    ${ad3.link && sanitizeUrl(ad3.link) ? `<a href="${escapeHtml(sanitizeUrl(ad3.link))}" class="index-ad-button">${escapeHtml(ad3[`buttonTitle_${currentLang}`] || 'Learn More')}</a>` : ''}
+                                    ${renderAdButton(ad3, currentLang)}
                                 </div>
                             </div>
                         </div>

@@ -425,6 +425,18 @@
             return div.innerHTML;
         }
 
+        // Validate and sanitize image URLs
+        function sanitizeImageUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return escapeHtml(trimmed);
+            }
+            return '';
+        }
+
         // Load ads from Firebase
         async function loadAds() {
             try {
@@ -454,8 +466,8 @@
             const adCard = document.createElement('div');
             adCard.className = 'ad-item-card';
             
-            // Safely escape all user data
-            const imageUrl = escapeHtml(data.imageUrl || '');
+            // Safely escape and sanitize all user data
+            const imageUrl = sanitizeImageUrl(data.imageUrl);
             const link = escapeHtml(data.link || '');
             
             adCard.innerHTML = `
@@ -583,6 +595,8 @@
                 // Only allow HTTP(S) URLs or relative paths
                 if (linkInput && !linkInput.startsWith('http://') && !linkInput.startsWith('https://') && !linkInput.startsWith('/')) {
                     alert('Link must start with http://, https://, or / for relative paths');
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = `Save Ad ${adIndex}`;
                     return;
                 }
                 adData.link = linkInput;

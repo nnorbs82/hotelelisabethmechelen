@@ -868,9 +868,7 @@ footer {
     .photo-grid {
         grid-template-columns: 1fr;
     }
-}
-
-@media (max-width: 768px) {
+    
     .index-ads-container {
         flex-direction: column;
         height: auto;
