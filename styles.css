@@ -840,6 +840,7 @@ footer {
     background-color: rgba(0, 0, 0, 0.55);
     padding: 0.5rem 1rem;
     display: inline-block;
+    width: fit-content;
 }
 
 .index-ad-bottom-text {
@@ -849,6 +850,7 @@ footer {
     background-color: rgba(0, 0, 0, 0.55);
     padding: 0.5rem 1rem;
     display: inline-block;
+    width: fit-content;
 }
 
 .index-ad-button {
