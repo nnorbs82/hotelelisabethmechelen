@@ -709,7 +709,7 @@
                         await deleteObject(oldFileRef);
                     } catch (deleteError) {
                         // Log specific error but don't fail the upload
-                        console.warn('Failed to delete old background file:', deleteError.message || deleteError);
+                        console.warn('Failed to delete old background file:', deleteError?.message || 'Unknown error');
                     }
                 }
                 
