@@ -103,11 +103,12 @@
         const heroTrack = document.getElementById('hero-track');
         const prevButton = document.getElementById('hero-prev');
         const nextButton = document.getElementById('hero-next');
-        const slideIntervalMs = 10000;
+        const slideIntervalMs = 5000;
         const slideTransitionMs = 800;
         let currentIndex = 0;
         let slideCount = 0;
         let autoTimer = null;
+        let safeguardTimer = null;
         let useClones = false;
 
         async function fetchBannerUrls() {
@@ -147,6 +148,49 @@
 
             return urls;
         }
+
+        // Handle page visibility changes to prevent black screen when returning from inactive tab
+        let slideshowInitialized = false;
+
+        function startSafeguardTimer() {
+            if (slideCount > 1 && !safeguardTimer) {
+                safeguardTimer = setInterval(() => {
+                    if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
+                        console.log('Slideshow timer lost - restarting');
+                        startAutoSlide();
+                    }
+                }, 2000);
+            }
+        }
+
+        function stopSafeguardTimer() {
+            if (safeguardTimer) {
+                clearInterval(safeguardTimer);
+                safeguardTimer = null;
+            }
+        }
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Tab is now hidden - pause the slideshow
+                stopAutoSlide();
+                stopSafeguardTimer();
+            } else {
+                // Tab is now visible again
+                if (slideshowInitialized && slideCount > 0) {
+                    // Reset the slideshow position and restart
+                    console.log('Tab visible again - restarting slideshow');
+                    
+                    // Force a re-render of the current position
+                    setTrackPosition(false);
+                    
+                    // Restart the auto-slide
+                    startAutoSlide();
+                }
+                // Restart the safeguard timer when tab becomes visible
+                startSafeguardTimer();
+            }
+        });
 
         function toggleHandles(enabled) {
             [prevButton, nextButton].forEach(button => {
@@ -203,6 +247,7 @@
                 placeholder.textContent = 'Main banner images coming soon.';
                 heroTrack.appendChild(placeholder);
                 toggleHandles(false);
+                slideshowInitialized = false;
                 return;
             }
 
@@ -221,6 +266,12 @@
                 const img = document.createElement('img');
                 img.src = url;
                 img.alt = `Main banner image ${useClones ? ((index || slideCount) % slideCount) + 1 : index + 1}`;
+                
+                // Add error handling for images that fail to load
+                img.onerror = function() {
+                    console.error('Failed to load banner image:', url);
+                };
+                
                 slide.appendChild(img);
                 heroTrack.appendChild(slide);
             });
@@ -228,6 +279,10 @@
             toggleHandles(slideCount > 1);
             requestAnimationFrame(() => setTrackPosition(false));
             startAutoSlide();
+            slideshowInitialized = true;
+            
+            // Start the safeguard timer if slideshow has multiple slides
+            startSafeguardTimer();
         }
 
         heroTrack.addEventListener('transitionend', () => {
