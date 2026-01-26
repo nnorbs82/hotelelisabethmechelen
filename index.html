@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Elisabeth Mechelen - Home</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
     <header>
@@ -31,6 +32,19 @@
                 <div class="hero-track" id="hero-track"></div>
                 <button class="hero-handle hero-handle-left" id="hero-prev" aria-label="Previous banner image" type="button">&#10094;</button>
                 <button class="hero-handle hero-handle-right" id="hero-next" aria-label="Next banner image" type="button">&#10095;</button>
+                
+                <!-- Booking Bar -->
+                <div class="booking-bar">
+                    <div class="booking-field">
+                        <label for="checkin-date">Check-in</label>
+                        <input type="text" id="checkin-date" placeholder="Select date" readonly>
+                    </div>
+                    <div class="booking-field">
+                        <label for="checkout-date">Check-out</label>
+                        <input type="text" id="checkout-date" placeholder="Select date" readonly>
+                    </div>
+                    <button id="search-btn" class="btn booking-search-btn">Search</button>
+                </div>
             </div>
         </section>
 
@@ -208,6 +222,56 @@
         window.addEventListener('resize', () => setTrackPosition(false));
 
         fetchBannerUrls().then(buildSlides);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Booking Bar Functionality
+        const checkinInput = document.getElementById('checkin-date');
+        const checkoutInput = document.getElementById('checkout-date');
+        const searchBtn = document.getElementById('search-btn');
+
+        // Initialize Check-in date picker
+        const checkinPicker = flatpickr(checkinInput, {
+            dateFormat: 'Y-m-d',
+            minDate: 'today',
+            monthSelectorType: 'dropdown',
+            yearSelectorType: 'dropdown',
+            onChange: function(selectedDates) {
+                if (selectedDates.length > 0) {
+                    // Set checkout to checkin + 1 day
+                    const nextDay = new Date(selectedDates[0]);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    checkoutPicker.set('minDate', nextDay);
+                    checkoutPicker.setDate(nextDay);
+                }
+            }
+        });
+
+        // Initialize Check-out date picker
+        const checkoutPicker = flatpickr(checkoutInput, {
+            dateFormat: 'Y-m-d',
+            minDate: 'today',
+            monthSelectorType: 'dropdown',
+            yearSelectorType: 'dropdown'
+        });
+
+        // Set default dates
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        checkinPicker.setDate(today);
+        checkoutPicker.setDate(tomorrow);
+
+        // Search button functionality
+        searchBtn.addEventListener('click', function() {
+            const checkinDate = checkinInput.value;
+            const checkoutDate = checkoutInput.value;
+            
+            if (checkinDate && checkoutDate) {
+                const url = `https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e?mewsStart=${checkinDate}&mewsEnd=${checkoutDate}&mewsRoute=rooms`;
+                window.open(url, '_blank');
+            }
+        });
     </script>
 </body>
 </html>
