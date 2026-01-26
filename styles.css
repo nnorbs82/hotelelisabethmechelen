@@ -663,6 +663,7 @@ footer {
     margin-top: 2rem;
 }
 
+/* Ensure photo-item has proper styling */
 .photo-item {
     position: relative;
     width: 200px;
@@ -671,9 +672,14 @@ footer {
     border-radius: 8px;
     overflow: hidden;
     border: 2px solid var(--color-black);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     cursor: grab;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.photo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .photo-item:active {
@@ -693,8 +699,48 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;
     display: block;
+}
+
+/* Photo overlay for delete button */
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    padding: 0.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.photo-item:hover .photo-overlay {
+    opacity: 1;
+}
+
+.btn-delete {
+    background-color: #d32f2f;
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #b71c1c;
+}
+
+/* Background preview uses same photo-item styles */
+#background-preview .photo-item {
+    margin-top: 1rem;
 }
 
 .photo-controls {
@@ -1022,13 +1068,14 @@ footer {
     border-color: var(--color-beige);
 }
 
+/* About Us Management - reduce spacing */
 .about-us-form-section {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem; /* CHANGE FROM 2rem to 1rem */
 }
 
 .about-us-form-section h4 {
     color: var(--color-beige);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; /* CHANGE FROM 1rem to 0.5rem */
 }
 
 .about-us-form-section textarea {
@@ -1042,6 +1089,17 @@ footer {
     font-family: inherit;
     font-size: 1rem;
     resize: vertical;
+    margin-bottom: 0.5rem; /* ADD THIS */
+}
+
+/* Reduce spacing in form groups */
+.about-us-form-section .form-group {
+    margin-bottom: 0.75rem; /* ADD THIS */
+}
+
+/* Remove extra paragraph spacing */
+.about-us-form-section p {
+    margin-bottom: 0.5rem; /* ADD THIS */
 }
 
 /* About Us Section */
