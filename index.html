@@ -103,7 +103,7 @@
         const heroTrack = document.getElementById('hero-track');
         const prevButton = document.getElementById('hero-prev');
         const nextButton = document.getElementById('hero-next');
-        const slideIntervalMs = 10000;
+        const slideIntervalMs = 5000;
         const slideTransitionMs = 800;
         let currentIndex = 0;
         let slideCount = 0;
@@ -147,6 +147,44 @@
 
             return urls;
         }
+
+        // Handle page visibility changes to prevent black screen when returning from inactive tab
+        let slideshowInitialized = false;
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Tab is now hidden - pause the slideshow
+                stopAutoSlide();
+            } else {
+                // Tab is now visible again
+                if (slideshowInitialized && slideCount > 0) {
+                    // Reset the slideshow position and restart
+                    console.log('Tab visible again - restarting slideshow');
+                    
+                    // Force a re-render of the current position
+                    setTrackPosition(false);
+                    
+                    // Restart the auto-slide
+                    startAutoSlide();
+                    
+                    // If the track appears stuck, force a refresh
+                    setTimeout(() => {
+                        if (heroTrack.style.transform === '') {
+                            console.log('Slideshow stuck - forcing refresh');
+                            setTrackPosition(false);
+                        }
+                    }, 100);
+                }
+            }
+        });
+
+        // Additional safeguard: periodically check if slideshow is running when page is visible
+        setInterval(() => {
+            if (!document.hidden && slideshowInitialized && slideCount > 1 && !autoTimer) {
+                console.log('Slideshow timer lost - restarting');
+                startAutoSlide();
+            }
+        }, 2000); // Check every 2 seconds
 
         function toggleHandles(enabled) {
             [prevButton, nextButton].forEach(button => {
@@ -203,6 +241,7 @@
                 placeholder.textContent = 'Main banner images coming soon.';
                 heroTrack.appendChild(placeholder);
                 toggleHandles(false);
+                slideshowInitialized = false;
                 return;
             }
 
@@ -221,6 +260,17 @@
                 const img = document.createElement('img');
                 img.src = url;
                 img.alt = `Main banner image ${useClones ? ((index || slideCount) % slideCount) + 1 : index + 1}`;
+                
+                // Add error handling for images that fail to load
+                img.onerror = function() {
+                    console.error('Failed to load banner image:', url);
+                    // Optionally add a placeholder or retry logic
+                };
+                
+                img.onload = function() {
+                    console.log('Banner image loaded successfully:', url);
+                };
+                
                 slide.appendChild(img);
                 heroTrack.appendChild(slide);
             });
@@ -228,6 +278,7 @@
             toggleHandles(slideCount > 1);
             requestAnimationFrame(() => setTrackPosition(false));
             startAutoSlide();
+            slideshowInitialized = true;
         }
 
         heroTrack.addEventListener('transitionend', () => {
