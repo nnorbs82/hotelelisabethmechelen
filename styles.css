@@ -393,82 +393,104 @@ footer {
     white-space: nowrap;
 }
 
-/* Flatpickr Custom Styles */
-.flatpickr-calendar {
+/* Custom Date Picker Styles */
+.datepicker-container {
+    position: absolute;
     background-color: var(--color-white);
     border: 1px solid var(--color-beige);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    z-index: 1000;
+    min-width: 280px;
 }
 
-.flatpickr-months {
+.datepicker-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
     background-color: var(--color-black);
-    border-radius: 8px 8px 0 0;
+    padding: 0.75rem;
+    border-radius: 8px;
 }
 
-.flatpickr-month {
-    color: var(--color-beige);
-}
-
-.flatpickr-current-month {
-    color: var(--color-beige);
-}
-
-.flatpickr-current-month select {
-    color: var(--color-beige);
-    background-color: var(--color-black);
+.datepicker-month,
+.datepicker-year {
+    flex: 1;
+    padding: 0.5rem;
     border: 1px solid var(--color-beige);
     border-radius: 4px;
-    padding: 0.25rem;
-}
-
-.flatpickr-current-month .flatpickr-monthDropdown-months,
-.flatpickr-current-month .numInputWrapper input {
-    color: var(--color-beige);
     background-color: var(--color-black);
-}
-
-.flatpickr-weekdays {
-    background-color: var(--color-black);
-}
-
-.flatpickr-weekday {
     color: var(--color-beige);
+    font-size: 0.9rem;
+    cursor: pointer;
 }
 
-.flatpickr-day {
-    color: var(--color-black);
-}
-
-.flatpickr-day.today {
-    border-color: var(--color-sage);
-    background-color: rgba(149, 147, 128, 0.2);
-}
-
-.flatpickr-day.selected {
-    background-color: var(--color-beige);
-    color: var(--color-black);
-    border-color: var(--color-beige);
-}
-
-.flatpickr-day.selected:hover {
-    background-color: var(--color-sage);
-    color: var(--color-white);
+.datepicker-month:focus,
+.datepicker-year:focus {
+    outline: none;
     border-color: var(--color-sage);
 }
 
-.flatpickr-day:hover {
+.datepicker-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    background-color: var(--color-black);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.datepicker-weekdays div {
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-beige);
+    font-size: 0.85rem;
+}
+
+.datepicker-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.datepicker-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s, color 0.2s;
+    color: var(--color-black);
+}
+
+.datepicker-day:hover:not(.disabled):not(.prev-month):not(.next-month) {
     background-color: var(--color-beige);
     color: var(--color-black);
 }
 
-.flatpickr-day.prevMonthDay,
-.flatpickr-day.nextMonthDay {
+.datepicker-day.selected {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    font-weight: bold;
+}
+
+.datepicker-day.today {
+    border: 2px solid var(--color-sage);
+}
+
+.datepicker-day.prev-month,
+.datepicker-day.next-month {
     color: rgba(0, 0, 0, 0.3);
+    cursor: default;
 }
 
-.flatpickr-day.disabled {
+.datepicker-day.disabled {
     color: rgba(0, 0, 0, 0.2);
+    cursor: not-allowed;
 }
 
 /* Mobile Responsive for Booking Bar */
@@ -488,6 +510,12 @@ footer {
 
     .booking-search-btn {
         width: 100%;
+    }
+    
+    .datepicker-container {
+        left: 50% !important;
+        transform: translateX(-50%);
+        max-width: calc(100vw - 2rem);
     }
 }
 
