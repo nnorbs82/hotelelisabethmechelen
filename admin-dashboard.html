@@ -322,33 +322,21 @@
                 photoItem.className = 'photo-item';
                 photoItem.draggable = true;
                 photoItem.dataset.index = index;
+                
                 photoItem.innerHTML = `
-                    <img src="${photo.url}" alt="Main banner photo ${index + 1}">
-                    <div class="photo-controls">
-                        <button class="btn-icon delete" data-index="${index}" data-timestamp="${photo.timestamp}" data-filename="${photo.filename}" aria-label="Delete photo">Delete</button>
+                    <img src="${photo.url}" alt="Banner photo ${index + 1}">
+                    <div class="photo-overlay">
+                        <button class="btn-delete" onclick="deletePhoto(${index})">Delete</button>
                     </div>
-                    <div class="photo-order">Position: ${index + 1}</div>
                 `;
-                grid.appendChild(photoItem);
-
+                
                 // Add drag event listeners
                 photoItem.addEventListener('dragstart', handleDragStart);
-                photoItem.addEventListener('dragend', handleDragEnd);
                 photoItem.addEventListener('dragover', handleDragOver);
                 photoItem.addEventListener('drop', handleDrop);
-                photoItem.addEventListener('dragenter', handleDragEnter);
-                photoItem.addEventListener('dragleave', handleDragLeave);
-            });
-
-            // Add event listeners for delete
-            document.querySelectorAll('.delete').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const timestamp = e.target.dataset.timestamp;
-                    const filename = e.target.dataset.filename;
-                    if (confirm('Are you sure you want to delete this photo?')) {
-                        await deletePhoto(timestamp, filename);
-                    }
-                });
+                photoItem.addEventListener('dragend', handleDragEnd);
+                
+                grid.appendChild(photoItem);
             });
         }
 
@@ -428,23 +416,36 @@
             }
         }
 
-        // Delete photo
-        async function deletePhoto(timestamp, filename) {
+        // Add delete photo function
+        async function deletePhoto(index) {
+            if (!confirm('Are you sure you want to delete this photo?')) {
+                return;
+            }
+            
             try {
+                const photo = currentPhotos[index];
+                
                 // Delete from storage
-                const fileRef = storageRef(storage, filename);
-                await deleteObject(fileRef);
-
+                if (photo.filename) {
+                    const fileRef = storageRef(storage, photo.filename);
+                    await deleteObject(fileRef);
+                }
+                
                 // Delete from database
-                await remove(dbRef(database, `mainBanner/${timestamp}`));
-
-                // Reload and reorder remaining photos
+                await set(dbRef(database, `mainBanner/${photo.timestamp}`), null);
+                
+                // Reload photos
                 await loadPhotos();
-                await reindexPhotos();
+                
+                alert('Photo deleted successfully!');
             } catch (error) {
                 console.error('Error deleting photo:', error);
                 alert('Failed to delete photo. Please try again.');
             }
+        }
+        
+        // Make deletePhoto globally accessible
+        window.deletePhoto = deletePhoto;
         }
 
         // Reindex photos after deletion
@@ -565,8 +566,7 @@
                 
                 <div class="form-group">
                     <label>Bottom Text</label>
-                    <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Tip: Press Enter to add line spacing between paragraphs</p>
-                    <textarea id="ad-bottom-text" class="admin-textarea" placeholder="Enter bottom text">${escapeHtml(ad[`bottomText_${currentAdLang}`] || '')}</textarea>
+                    <input type="text" id="ad-bottom-text" class="form-control" value="${escapeHtml(ad[`bottomText_${currentAdLang}`] || '')}" placeholder="Enter bottom text">
                 </div>
                 
                 <div class="form-group">
@@ -663,7 +663,9 @@
                     backgroundPreview.innerHTML = `
                         <div class="photo-item">
                             <img src="${url}" alt="Background photo">
-                            <button class="btn-delete" onclick="deleteBackgroundPhoto()">Delete</button>
+                            <div class="photo-overlay">
+                                <button class="btn-delete" onclick="deleteBackgroundPhoto()">Delete</button>
+                            </div>
                         </div>
                     `;
                 } else {
@@ -738,8 +740,12 @@
             }
         });
 
-        // Delete background photo
+        // Add delete background photo function
         async function deleteBackgroundPhoto() {
+            if (!confirm('Are you sure you want to delete the background photo?')) {
+                return;
+            }
+            
             try {
                 // Delete from storage
                 if (currentBackground && currentBackground.filename) {
@@ -748,16 +754,20 @@
                 }
                 
                 // Delete from database
-                await remove(dbRef(database, 'indexBackground'));
+                await set(dbRef(database, 'indexBackground'), null);
                 
                 // Reload
                 await loadBackgroundPhoto();
                 
                 alert('Background photo deleted successfully!');
             } catch (error) {
-                console.error('Error deleting background:', error);
-                alert('Failed to delete background photo. Please try again.');
+                console.error('Error deleting background photo:', error);
+                alert('Failed to delete background photo.');
             }
+        }
+        
+        // Make deleteBackgroundPhoto globally accessible
+        window.deleteBackgroundPhoto = deleteBackgroundPhoto;
         }
 
         // ============ ABOUT US MANAGEMENT ============
