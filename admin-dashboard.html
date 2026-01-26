@@ -22,6 +22,7 @@
         <div id="update-index-submenu" class="submenu" style="display: none;">
             <div class="submenu-content">
                 <button class="btn btn-secondary submenu-btn" id="main-banner-btn">Main Banner</button>
+                <button class="btn btn-secondary submenu-btn" id="ads-btn">Ads</button>
             </div>
         </div>
     </header>
@@ -51,6 +52,16 @@
 
                 <div id="photo-grid" class="photo-grid">
                     <!-- Photos will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Index Ads Management Card -->
+            <div id="ads-management-card" class="card" style="display: none;">
+                <h2>Index Ads Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Manage the three promotional ads displayed on the index page.</p>
+                
+                <div id="ads-container">
+                    <!-- Ad items will be dynamically added here -->
                 </div>
             </div>
 
@@ -155,6 +166,16 @@
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             // Load existing photos
             await loadPhotos();
+        });
+
+        // Show ads management card when Ads is clicked
+        document.getElementById('ads-btn').addEventListener('click', async () => {
+            const adsCard = document.getElementById('ads-management-card');
+            adsCard.style.display = 'block';
+            // Scroll to the card
+            adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Load existing ads
+            await loadAds();
         });
 
         // Add photo button
@@ -385,6 +406,212 @@
                 await Promise.all(updates);
             } catch (error) {
                 console.error('Error reindexing photos:', error);
+            }
+        }
+
+        // ============ INDEX ADS MANAGEMENT ============
+        const languages = ['en', 'nl', 'fr'];
+        const languageLabels = {
+            en: { name: 'English', flag: '🇬🇧' },
+            nl: { name: 'Dutch', flag: '🇳🇱' },
+            fr: { name: 'French', flag: '🇫🇷' }
+        };
+
+        // Escape HTML to prevent XSS in attributes
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Validate and sanitize image URLs
+        function sanitizeImageUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return escapeHtml(trimmed);
+            }
+            return '';
+        }
+
+        // Load ads from Firebase
+        async function loadAds() {
+            try {
+                const snapshot = await get(dbRef(database, 'indexAds'));
+                const adsData = snapshot.exists() ? snapshot.val() : {};
+                
+                renderAds(adsData);
+            } catch (error) {
+                console.error('Error loading ads:', error);
+            }
+        }
+
+        // Render ads management UI
+        function renderAds(adsData) {
+            const container = document.getElementById('ads-container');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 3; i++) {
+                const adData = adsData[`ad${i}`] || {};
+                const adItem = createAdItem(i, adData);
+                container.appendChild(adItem);
+            }
+        }
+
+        // Create a single ad item
+        function createAdItem(index, data) {
+            const adCard = document.createElement('div');
+            adCard.className = 'ad-item-card';
+            
+            // Safely escape and sanitize all user data
+            const imageUrl = sanitizeImageUrl(data.imageUrl);
+            const link = escapeHtml(data.link || '');
+            
+            adCard.innerHTML = `
+                <h3>Ad Item ${index}</h3>
+                
+                <!-- Image Upload Section -->
+                <div class="ad-field">
+                    <label>Image</label>
+                    <input type="file" id="ad${index}-image-input" accept="image/*" style="display: none;">
+                    <button class="btn btn-secondary" id="ad${index}-upload-btn">Upload Image</button>
+                    <div id="ad${index}-image-preview" class="ad-image-preview">
+                        ${imageUrl ? `<img src="${imageUrl}" alt="Ad ${index} preview">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
+                    </div>
+                </div>
+
+                <!-- Multilingual Text Fields -->
+                ${languages.map(lang => `
+                    <div class="ad-multilang-section">
+                        <h4>${languageLabels[lang].flag} ${languageLabels[lang].name}</h4>
+                        
+                        <div class="ad-field">
+                            <label for="ad${index}-top-text-${lang}">Top Text</label>
+                            <input type="text" id="ad${index}-top-text-${lang}" value="${escapeHtml(data[`topText_${lang}`] || '')}" placeholder="Enter top text">
+                        </div>
+                        
+                        <div class="ad-field">
+                            <label for="ad${index}-bottom-text-${lang}">Bottom Text</label>
+                            <input type="text" id="ad${index}-bottom-text-${lang}" value="${escapeHtml(data[`bottomText_${lang}`] || '')}" placeholder="Enter bottom text">
+                        </div>
+                        
+                        <div class="ad-field">
+                            <label for="ad${index}-button-title-${lang}">Button Title</label>
+                            <input type="text" id="ad${index}-button-title-${lang}" value="${escapeHtml(data[`buttonTitle_${lang}`] || '')}" placeholder="Enter button title">
+                        </div>
+                    </div>
+                `).join('')}
+
+                <!-- Link Field (Language-independent) -->
+                <div class="ad-field">
+                    <label for="ad${index}-link">Link (URL)</label>
+                    <input type="text" id="ad${index}-link" value="${link}" placeholder="https://example.com">
+                </div>
+
+                <button class="btn" id="ad${index}-save-btn">Save Ad ${index}</button>
+            `;
+
+            // Add event listeners
+            setTimeout(() => {
+                // Image upload
+                const uploadInput = document.getElementById(`ad${index}-image-input`);
+                const uploadBtn = document.getElementById(`ad${index}-upload-btn`);
+                const saveBtn = document.getElementById(`ad${index}-save-btn`);
+
+                uploadBtn.addEventListener('click', () => uploadInput.click());
+                uploadInput.addEventListener('change', (e) => handleAdImageUpload(e, index));
+                saveBtn.addEventListener('click', () => saveAd(index));
+            }, 0);
+
+            return adCard;
+        }
+
+        // Handle ad image upload
+        async function handleAdImageUpload(event, adIndex) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const uploadBtn = document.getElementById(`ad${adIndex}-upload-btn`);
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                const timestamp = Date.now();
+                const filename = `index-ads/ad${adIndex}-${timestamp}-${file.name}`;
+                const fileRef = storageRef(storage, filename);
+
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                // Update preview
+                const preview = document.getElementById(`ad${adIndex}-image-preview`);
+                preview.innerHTML = `<img src="${downloadURL}" alt="Ad ${adIndex} preview">`;
+
+                // Store URL temporarily (will be saved when user clicks Save)
+                preview.dataset.imageUrl = downloadURL;
+                preview.dataset.filename = filename;
+
+                alert('Image uploaded successfully! Click "Save" to apply changes.');
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Failed to upload image. Please try again.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Image';
+            }
+        }
+
+        // Save ad data
+        async function saveAd(adIndex) {
+            const saveBtn = document.getElementById(`ad${adIndex}-save-btn`);
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+
+            try {
+                const adData = {};
+
+                // Get image URL
+                const preview = document.getElementById(`ad${adIndex}-image-preview`);
+                adData.imageUrl = preview.dataset.imageUrl || preview.querySelector('img')?.src || '';
+                adData.filename = preview.dataset.filename || '';
+
+                // Get multilingual text fields
+                languages.forEach(lang => {
+                    adData[`topText_${lang}`] = document.getElementById(`ad${adIndex}-top-text-${lang}`).value;
+                    adData[`bottomText_${lang}`] = document.getElementById(`ad${adIndex}-bottom-text-${lang}`).value;
+                    adData[`buttonTitle_${lang}`] = document.getElementById(`ad${adIndex}-button-title-${lang}`).value;
+                });
+
+                // Get and validate link
+                const linkInput = document.getElementById(`ad${adIndex}-link`).value.trim();
+                // Only allow HTTP(S) URLs or relative paths
+                if (linkInput && !linkInput.startsWith('http://') && !linkInput.startsWith('https://') && !linkInput.startsWith('/')) {
+                    alert('Link must start with http://, https://, or / for relative paths');
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = `Save Ad ${adIndex}`;
+                    return;
+                }
+                adData.link = linkInput;
+                adData.timestamp = Date.now();
+
+                // Save to Firebase
+                await set(dbRef(database, `indexAds/ad${adIndex}`), adData);
+
+                alert(`Ad ${adIndex} saved successfully!`);
+            } catch (error) {
+                console.error('Error saving ad:', error);
+                alert('Failed to save ad. Please try again.');
+            } finally {
+                saveBtn.disabled = false;
+                saveBtn.textContent = `Save Ad ${adIndex}`;
             }
         }
     </script>

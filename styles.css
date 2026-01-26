@@ -707,8 +707,188 @@ footer {
     font-weight: bold;
 }
 
+/* Ads Management Styles */
+#ads-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.ad-item-card {
+    background-color: var(--color-sage);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.ad-item-card h3 {
+    color: var(--color-black);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.ad-field {
+    margin-bottom: 1rem;
+}
+
+.ad-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-black);
+    font-weight: bold;
+}
+
+.ad-field input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-black);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--color-white);
+}
+
+.ad-field input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-beige);
+}
+
+.ad-image-preview {
+    margin-top: 0.5rem;
+    min-height: 150px;
+    border: 2px dashed var(--color-black);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ad-image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
+}
+
+.ad-multilang-section {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.ad-multilang-section h4 {
+    color: var(--color-black);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+/* Index Ads Display Styles */
+.index-ads-container {
+    width: 100%;
+    display: flex;
+    height: 500px;
+    margin: 2rem 0;
+}
+
+.index-ads-left {
+    width: 60%;
+    position: relative;
+    border: 2px solid var(--color-black);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.index-ads-right {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.index-ads-right-top,
+.index-ads-right-bottom {
+    height: 50%;
+    position: relative;
+    border: 2px solid var(--color-black);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.index-ad-content {
+    padding: 20px;
+    color: var(--color-white);
+    text-align: left;
+}
+
+.index-ads-left .index-ad-content {
+    margin-left: 100px;
+}
+
+.index-ads-right-top .index-ad-content,
+.index-ads-right-bottom .index-ad-content {
+    padding-left: 20px;
+}
+
+.index-ad-top-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.index-ad-bottom-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.index-ad-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    text-decoration: none;
+    border: 2px solid var(--color-beige);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.index-ad-button:hover {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+    border-color: var(--color-sage);
+}
+
 @media (max-width: 768px) {
     .photo-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .index-ads-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .index-ads-left,
+    .index-ads-right {
+        width: 100%;
+    }
+    
+    .index-ads-left {
+        min-height: 300px;
+    }
+    
+    .index-ads-right-top,
+    .index-ads-right-bottom {
+        min-height: 250px;
+    }
+    
+    .index-ads-left .index-ad-content {
+        margin-left: 20px;
     }
 }
