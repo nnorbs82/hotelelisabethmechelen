@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Elisabeth Mechelen - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -324,7 +327,7 @@
                         <div class="index-ads-left" style="background-image: url('${sanitizeImageUrl(ad1.imageUrl)}');">
                             <div class="index-ad-content">
                                 <div class="index-ad-top-text">${escapeHtml(ad1[`topText_${currentLang}`] || '')}</div>
-                                <div class="index-ad-bottom-text">${escapeHtml(ad1[`bottomText_${currentLang}`] || '')}</div>
+                                <div class="index-ad-bottom-text">${ad1[`bottomText_${currentLang}`] || ''}</div>
                                 ${renderAdButton(ad1, currentLang)}
                             </div>
                         </div>
@@ -332,14 +335,14 @@
                             <div class="index-ads-right-top" style="background-image: url('${sanitizeImageUrl(ad2.imageUrl)}');">
                                 <div class="index-ad-content">
                                     <div class="index-ad-top-text">${escapeHtml(ad2[`topText_${currentLang}`] || '')}</div>
-                                    <div class="index-ad-bottom-text">${escapeHtml(ad2[`bottomText_${currentLang}`] || '')}</div>
+                                    <div class="index-ad-bottom-text">${ad2[`bottomText_${currentLang}`] || ''}</div>
                                     ${renderAdButton(ad2, currentLang)}
                                 </div>
                             </div>
                             <div class="index-ads-right-bottom" style="background-image: url('${sanitizeImageUrl(ad3.imageUrl)}');">
                                 <div class="index-ad-content">
                                     <div class="index-ad-top-text">${escapeHtml(ad3[`topText_${currentLang}`] || '')}</div>
-                                    <div class="index-ad-bottom-text">${escapeHtml(ad3[`bottomText_${currentLang}`] || '')}</div>
+                                    <div class="index-ad-bottom-text">${ad3[`bottomText_${currentLang}`] || ''}</div>
                                     ${renderAdButton(ad3, currentLang)}
                                 </div>
                             </div>
@@ -375,12 +378,12 @@
                 // Set left content
                 document.getElementById('about-us-left-subtitle1').textContent = data.left.subtitle1[currentLang] || '';
                 document.getElementById('about-us-left-subtitle2').textContent = data.left.subtitle2[currentLang] || '';
-                document.getElementById('about-us-left-body').textContent = data.left.textBody[currentLang] || '';
+                document.getElementById('about-us-left-body').innerHTML = data.left.textBody[currentLang] || '';
                 
                 // Set right content
                 document.getElementById('about-us-right-subtitle1').textContent = data.right.subtitle1[currentLang] || '';
                 document.getElementById('about-us-right-subtitle2').textContent = data.right.subtitle2[currentLang] || '';
-                document.getElementById('about-us-right-body').textContent = data.right.textBody[currentLang] || '';
+                document.getElementById('about-us-right-body').innerHTML = data.right.textBody[currentLang] || '';
                 
             } catch (error) {
                 console.error('Error loading About Us content:', error);
