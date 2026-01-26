@@ -139,60 +139,69 @@
     <!-- Vertical Menu Interaction (non-module script to ensure it runs independently) -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // ============ VERTICAL MENU INTERACTION ============
+            // ============ VERTICAL MENU INTERACTION - FIXED ============
             const menuTriggerBtn = document.getElementById('menu-trigger-btn');
             const verticalMenu = document.getElementById('vertical-menu');
             let menuTimeout = null;
 
-            // Show menu when hovering trigger button
+            // Show menu on MENU button hover
             menuTriggerBtn.addEventListener('mouseenter', () => {
                 clearTimeout(menuTimeout);
                 verticalMenu.classList.add('show');
             });
 
-            // Hide menu when leaving trigger button (with delay)
             menuTriggerBtn.addEventListener('mouseleave', () => {
                 menuTimeout = setTimeout(() => {
-                    if (!verticalMenu.matches(':hover')) {
+                    if (!isHoveringMenu()) {
                         verticalMenu.classList.remove('show');
                     }
                 }, 200);
             });
 
-            // Keep menu visible when hovering menu itself
+            // Keep menu visible when hovering menu or submenus
             verticalMenu.addEventListener('mouseenter', () => {
                 clearTimeout(menuTimeout);
-                verticalMenu.classList.add('show');
             });
 
-            // Hide menu when leaving menu (with delay to allow submenu hover)
             verticalMenu.addEventListener('mouseleave', () => {
                 menuTimeout = setTimeout(() => {
                     verticalMenu.classList.remove('show');
                 }, 300);
             });
 
-            // Handle submenu parent items
+            // Check if mouse is over menu or any submenu
+            function isHoveringMenu() {
+                return verticalMenu.matches(':hover') || 
+                       document.querySelector('.vertical-submenu:hover') !== null;
+            }
+
+            // Handle submenu hover - keep parent and submenu visible
             document.querySelectorAll('.vertical-menu-item.has-submenu').forEach(item => {
                 const submenu = item.querySelector('.vertical-submenu');
                 
-                item.addEventListener('mouseenter', () => {
-                    clearTimeout(menuTimeout);
-                });
-                
                 if (submenu) {
+                    // When hovering submenu, keep everything visible
                     submenu.addEventListener('mouseenter', () => {
                         clearTimeout(menuTimeout);
+                        item.classList.add('active');
                     });
                     
                     submenu.addEventListener('mouseleave', () => {
+                        item.classList.remove('active');
                         menuTimeout = setTimeout(() => {
-                            if (!verticalMenu.matches(':hover')) {
+                            if (!isHoveringMenu()) {
                                 verticalMenu.classList.remove('show');
                             }
                         }, 300);
                     });
                 }
+            });
+
+            // Close menu when clicking any menu item
+            document.querySelectorAll('.submenu-item, .vertical-menu-btn:not(.has-submenu .vertical-menu-btn)').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    verticalMenu.classList.remove('show');
+                });
             });
         });
     </script>
