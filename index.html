@@ -301,24 +301,30 @@
                     <div class="index-ads-container">
                         <div class="index-ads-left" style="background-image: url('${sanitizeImageUrl(ad1.imageUrl)}');">
                             <div class="index-ad-content">
-                                <div class="index-ad-top-text">${escapeHtml(ad1[`topText_${currentLang}`] || '')}</div>
-                                <div class="index-ad-bottom-text">${escapeHtml(ad1[`bottomText_${currentLang}`] || '')}</div>
-                                ${renderAdButton(ad1, currentLang)}
+                                <div class="index-ad-text-wrapper">
+                                    <div class="index-ad-top-text">${escapeHtml(ad1[`topText_${currentLang}`] || '')}</div>
+                                    <div class="index-ad-bottom-text">${escapeHtml(ad1[`bottomText_${currentLang}`] || '')}</div>
+                                    ${renderAdButton(ad1, currentLang)}
+                                </div>
                             </div>
                         </div>
                         <div class="index-ads-right">
                             <div class="index-ads-right-top" style="background-image: url('${sanitizeImageUrl(ad2.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${escapeHtml(ad2[`topText_${currentLang}`] || '')}</div>
-                                    <div class="index-ad-bottom-text">${escapeHtml(ad2[`bottomText_${currentLang}`] || '')}</div>
-                                    ${renderAdButton(ad2, currentLang)}
+                                    <div class="index-ad-text-wrapper">
+                                        <div class="index-ad-top-text">${escapeHtml(ad2[`topText_${currentLang}`] || '')}</div>
+                                        <div class="index-ad-bottom-text">${escapeHtml(ad2[`bottomText_${currentLang}`] || '')}</div>
+                                        ${renderAdButton(ad2, currentLang)}
+                                    </div>
                                 </div>
                             </div>
                             <div class="index-ads-right-bottom" style="background-image: url('${sanitizeImageUrl(ad3.imageUrl)}');">
                                 <div class="index-ad-content">
-                                    <div class="index-ad-top-text">${escapeHtml(ad3[`topText_${currentLang}`] || '')}</div>
-                                    <div class="index-ad-bottom-text">${escapeHtml(ad3[`bottomText_${currentLang}`] || '')}</div>
-                                    ${renderAdButton(ad3, currentLang)}
+                                    <div class="index-ad-text-wrapper">
+                                        <div class="index-ad-top-text">${escapeHtml(ad3[`topText_${currentLang}`] || '')}</div>
+                                        <div class="index-ad-bottom-text">${escapeHtml(ad3[`bottomText_${currentLang}`] || '')}</div>
+                                        ${renderAdButton(ad3, currentLang)}
+                                    </div>
                                 </div>
                             </div>
                         </div>
