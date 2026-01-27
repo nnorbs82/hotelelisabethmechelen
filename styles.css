@@ -1653,8 +1653,6 @@ body:not(.admin-page) .nav-logo img {
 /* Individual Cards */
 .ads-bottom-card {
     position: relative;
-    background-size: cover;
-    background-position: center;
     border-radius: 0; /* No border radius */
     overflow: hidden;
     border: none; /* Remove border */
@@ -1767,6 +1765,10 @@ body:not(.admin-page) .nav-logo img {
     .ads-bottom-cards {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+    
+    .ads-bottom-content {
+        padding: 2rem 1rem;
     }
     
     .ads-bottom-card-content {
