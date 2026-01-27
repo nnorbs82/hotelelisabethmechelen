@@ -7,6 +7,7 @@
     --color-white: #FFFFFF;
     --header-height: 80px;
     --logo-height: 40px;
+    --vertical-menu-width: 250px;
 }
 
 * {
@@ -697,14 +698,14 @@ body.admin-page {
     position: fixed;
     top: 70px;
     left: 0;
-    width: 250px;
+    width: var(--vertical-menu-width);
     height: calc(100vh - 70px);
     background-color: #2c2c2c;
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 999;
     overflow-y: auto;
-    overflow-x: visible; /* IMPORTANT: Allow submenu to overflow */
+    overflow-x: visible;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -716,6 +717,10 @@ body.admin-page {
 .vertical-menu-nav {
     padding: 0; /* NO padding at top - start from very top */
     margin: 0;
+    display: block; /* Override generic nav flex display */
+    height: auto; /* Override generic nav height */
+    align-items: initial; /* Override generic nav centering */
+    justify-content: initial; /* Override generic nav spacing */
 }
 
 .vertical-menu-list {
@@ -773,19 +778,19 @@ body.admin-page {
 
 /* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
-    position: absolute;
-    left: 250px; /* EXACTLY at right edge of parent menu (250px width) */
-    top: 0;
+    position: fixed; /* Fixed to avoid overflow clipping */
+    left: var(--vertical-menu-width); /* Right edge of parent menu */
     width: 220px;
-    min-height: 100%; /* At least as tall as parent item */
     background-color: #1a1a1a;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.6); /* Stronger shadow for visibility */
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.9); /* Stronger shadow for visibility */
+    border: 1px solid rgba(212, 211, 195, 0.2); /* Add subtle border for visibility */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transform: translateX(-20px); /* Start slightly left */
     transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
     z-index: 1001; /* ABOVE parent menu */
+    padding: 0.5rem 0;
 }
 
 /* Show submenu on parent hover */
