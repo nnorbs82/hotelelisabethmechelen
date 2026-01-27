@@ -2186,6 +2186,11 @@
             container.innerHTML = roomsHTML;
         }
 
+        // Add new room button event listener
+        document.getElementById('add-new-room-btn')?.addEventListener('click', () => {
+            openRoomModal();
+        });
+
         async function openRoomModal(roomId = null) {
             if (roomModalOpen) return;
 
@@ -2654,11 +2659,6 @@
                 alert('Failed to delete room.');
             }
         };
-
-        // Add new room button
-        document.getElementById('add-new-room-btn').addEventListener('click', () => {
-            openRoomModal();
-        });
 
     </script>
 </body>
