@@ -49,6 +49,11 @@
                         <span>View Bookings</span>
                     </button>
                 </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="set-amenities-btn">
+                        <span>Set Room Amenities</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -139,6 +144,39 @@
                 <!-- Tab Content -->
                 <div id="ads-bottom-tab-content">
                     <!-- Content will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Amenities Management Card -->
+            <div id="amenities-management-card" class="card" style="display: none;">
+                <h2>Room Amenities Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1.5rem;">Manage the master list of room amenities. These can be assigned to individual rooms.</p>
+                
+                <!-- Add New Amenity Section -->
+                <div class="amenity-add-section">
+                    <h3>Add New Amenity</h3>
+                    
+                    <!-- Language Tabs -->
+                    <div class="lang-tabs">
+                        <button class="lang-tab active" data-lang="en">English</button>
+                        <button class="lang-tab" data-lang="nl">Nederlands</button>
+                        <button class="lang-tab" data-lang="fr">Français</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="amenity-name-label">Amenity Name (English)</label>
+                        <input type="text" id="amenity-name-input" class="form-control" placeholder="e.g., Free Wi-Fi">
+                    </div>
+                    
+                    <button class="btn" id="add-amenity-btn">Add Amenity</button>
+                </div>
+                
+                <!-- Existing Amenities List -->
+                <div class="amenities-list-section">
+                    <h3>Existing Amenities</h3>
+                    <div id="amenities-list" class="amenities-grid">
+                        <!-- Amenities will be dynamically loaded here -->
+                    </div>
                 </div>
             </div>
 
@@ -998,6 +1036,227 @@
             // Add your bookings view logic here
             alert('View Bookings functionality - to be implemented');
         });
+
+        // ============ AMENITIES MANAGEMENT ============
+        let currentAmenityLang = 'en';
+        let amenitiesData = {};
+        let editingAmenityId = null;
+
+        // Show amenities management card
+        document.getElementById('set-amenities-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const packageCard = document.getElementById('package-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
+            
+            photoCard.style.display = 'none';
+            adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
+            packageCard.style.display = 'none';
+            amenitiesCard.style.display = 'block';
+            
+            amenitiesCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            verticalMenu.classList.remove('show');
+            
+            await loadAmenities();
+        });
+
+        // Language tab switching
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentAmenityLang = tab.dataset.lang;
+                updateAmenityLabel();
+            });
+        });
+
+        function updateAmenityLabel() {
+            const labels = {
+                en: 'Amenity Name (English)',
+                nl: 'Amenity Name (Nederlands)',
+                fr: 'Amenity Name (Français)'
+            };
+            document.getElementById('amenity-name-label').textContent = labels[currentAmenityLang];
+        }
+
+        // Add new amenity
+        document.getElementById('add-amenity-btn').addEventListener('click', async () => {
+            const input = document.getElementById('amenity-name-input');
+            const name = input.value.trim();
+            
+            if (!name) {
+                alert('Please enter an amenity name');
+                return;
+            }
+            
+            // Create temporary amenity object with all languages
+            const timestamp = Date.now();
+            const amenityId = `amenity_${timestamp}`;
+            
+            // Initialize with current language, others can be edited later
+            const amenityData = {
+                name_en: currentAmenityLang === 'en' ? name : '',
+                name_nl: currentAmenityLang === 'nl' ? name : '',
+                name_fr: currentAmenityLang === 'fr' ? name : '',
+                timestamp: timestamp
+            };
+            
+            try {
+                await set(dbRef(database, `amenitiesMaster/${amenityId}`), amenityData);
+                input.value = '';
+                alert('Amenity added successfully!');
+                await loadAmenities();
+            } catch (error) {
+                console.error('Error adding amenity:', error);
+                alert('Failed to add amenity. Please try again.');
+            }
+        });
+
+        // Load all amenities
+        async function loadAmenities() {
+            try {
+                const snapshot = await get(dbRef(database, 'amenitiesMaster'));
+                
+                if (!snapshot.exists()) {
+                    amenitiesData = {};
+                    renderAmenitiesList();
+                    return;
+                }
+                
+                amenitiesData = snapshot.val();
+                renderAmenitiesList();
+            } catch (error) {
+                console.error('Error loading amenities:', error);
+            }
+        }
+
+        // Render amenities list
+        function renderAmenitiesList() {
+            const container = document.getElementById('amenities-list');
+            
+            if (Object.keys(amenitiesData).length === 0) {
+                container.innerHTML = '<p style="color: var(--color-sage); text-align: center;">No amenities added yet. Add your first amenity above.</p>';
+                return;
+            }
+            
+            let html = '';
+            
+            Object.keys(amenitiesData).forEach(id => {
+                const amenity = amenitiesData[id];
+                const nameEn = amenity.name_en || '—';
+                const nameNl = amenity.name_nl || '—';
+                const nameFr = amenity.name_fr || '—';
+                
+                html += `
+                    <div class="amenity-item">
+                        <div class="amenity-info">
+                            <div class="amenity-name">${escapeHtml(nameEn)}</div>
+                            <div class="amenity-translations">
+                                NL: ${escapeHtml(nameNl)} | FR: ${escapeHtml(nameFr)}
+                            </div>
+                        </div>
+                        <div class="amenity-actions">
+                            <button class="btn-edit-amenity" onclick="editAmenity('${id}')">Edit</button>
+                            <button class="btn-delete-amenity" onclick="deleteAmenity('${id}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Edit amenity
+        window.editAmenity = function(amenityId) {
+            editingAmenityId = amenityId;
+            const amenity = amenitiesData[amenityId];
+            
+            // Create modal
+            const modal = document.createElement('div');
+            modal.className = 'amenity-edit-modal show';
+            modal.innerHTML = `
+                <div class="amenity-edit-content">
+                    <h3>Edit Amenity</h3>
+                    <div class="form-group">
+                        <label>English Name</label>
+                        <input type="text" id="edit-name-en" class="form-control" value="${escapeHtml(amenity.name_en || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Nederlands Name</label>
+                        <input type="text" id="edit-name-nl" class="form-control" value="${escapeHtml(amenity.name_nl || '')}">
+                    </div>
+                    <div class="form-group">
+                        <label>Français Name</label>
+                        <input type="text" id="edit-name-fr" class="form-control" value="${escapeHtml(amenity.name_fr || '')}">
+                    </div>
+                    <div class="amenity-edit-actions">
+                        <button class="btn" onclick="saveAmenityEdit()">Save Changes</button>
+                        <button class="btn btn-cancel" onclick="closeEditModal()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        };
+
+        // Save amenity edit
+        window.saveAmenityEdit = async function() {
+            const nameEn = document.getElementById('edit-name-en').value.trim();
+            const nameNl = document.getElementById('edit-name-nl').value.trim();
+            const nameFr = document.getElementById('edit-name-fr').value.trim();
+            
+            if (!nameEn && !nameNl && !nameFr) {
+                alert('Please enter at least one name');
+                return;
+            }
+            
+            try {
+                await set(dbRef(database, `amenitiesMaster/${editingAmenityId}`), {
+                    name_en: nameEn,
+                    name_nl: nameNl,
+                    name_fr: nameFr,
+                    timestamp: amenitiesData[editingAmenityId].timestamp
+                });
+                
+                closeEditModal();
+                alert('Amenity updated successfully!');
+                await loadAmenities();
+            } catch (error) {
+                console.error('Error updating amenity:', error);
+                alert('Failed to update amenity. Please try again.');
+            }
+        };
+
+        // Close edit modal
+        window.closeEditModal = function() {
+            const modal = document.querySelector('.amenity-edit-modal');
+            if (modal) {
+                modal.remove();
+            }
+            editingAmenityId = null;
+        };
+
+        // Delete amenity
+        window.deleteAmenity = async function(amenityId) {
+            if (!confirm('Are you sure you want to delete this amenity? It will be removed from all rooms that use it.')) {
+                return;
+            }
+            
+            try {
+                await set(dbRef(database, `amenitiesMaster/${amenityId}`), null);
+                alert('Amenity deleted successfully!');
+                await loadAmenities();
+            } catch (error) {
+                console.error('Error deleting amenity:', error);
+                alert('Failed to delete amenity. Please try again.');
+            }
+        };
 
         // Tab switching
         document.addEventListener('click', (e) => {

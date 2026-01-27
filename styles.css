@@ -1983,3 +1983,189 @@ body:not(.admin-page) .nav-logo img {
         display: none;
     }
 }
+
+/* ============ AMENITIES MANAGEMENT STYLES ============ */
+
+.amenity-add-section {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.amenity-add-section h3 {
+    color: var(--color-black);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.lang-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.lang-tab {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 2px solid var(--color-sage);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.lang-tab.active {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+    border-color: var(--color-sage);
+}
+
+.lang-tab:hover:not(.active) {
+    background-color: var(--color-beige);
+}
+
+.amenities-list-section {
+    margin-top: 2rem;
+}
+
+.amenities-list-section h3 {
+    color: var(--color-black);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.amenity-item {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-sage);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.amenity-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.amenity-info {
+    flex: 1;
+}
+
+.amenity-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin-bottom: 0.25rem;
+}
+
+.amenity-translations {
+    font-size: 0.85rem;
+    color: var(--color-sage);
+}
+
+.amenity-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-edit-amenity,
+.btn-delete-amenity {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-edit-amenity {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+}
+
+.btn-edit-amenity:hover {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+}
+
+.btn-delete-amenity {
+    background-color: #d32f2f;
+    color: var(--color-white);
+}
+
+.btn-delete-amenity:hover {
+    background-color: #b71c1c;
+}
+
+/* Edit Modal Styles */
+.amenity-edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.amenity-edit-modal.show {
+    display: flex;
+}
+
+.amenity-edit-content {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.amenity-edit-content h3 {
+    color: var(--color-black);
+    margin-bottom: 1.5rem;
+}
+
+.amenity-edit-content .form-group {
+    margin-bottom: 1rem;
+}
+
+.amenity-edit-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-black);
+    font-weight: 500;
+}
+
+.amenity-edit-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-cancel {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+}
+
+.btn-cancel:hover {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+}
