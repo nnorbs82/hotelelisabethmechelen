@@ -7,6 +7,7 @@
     --color-white: #FFFFFF;
     --header-height: 80px;
     --logo-height: 40px;
+    --vertical-menu-width: 250px;
 }
 
 * {
@@ -697,7 +698,7 @@ body.admin-page {
     position: fixed;
     top: 70px;
     left: 0;
-    width: 250px;
+    width: var(--vertical-menu-width);
     height: calc(100vh - 70px);
     background-color: #2c2c2c;
     transform: translateX(-100%);
@@ -778,7 +779,7 @@ body.admin-page {
 /* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
     position: fixed; /* Fixed to avoid overflow clipping */
-    left: 250px; /* EXACTLY at right edge of parent menu (250px width) */
+    left: var(--vertical-menu-width); /* Right edge of parent menu */
     width: 220px;
     background-color: #1a1a1a;
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.9); /* Stronger shadow for visibility */

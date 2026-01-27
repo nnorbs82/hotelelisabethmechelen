@@ -182,6 +182,8 @@
                 
                 if (submenu && menuBtn) {
                     // Position submenu on hover
+                    // Note: getBoundingClientRect() triggers layout reflow, but this is acceptable
+                    // since it only happens once per mouseenter event (not continuous)
                     const positionSubmenu = () => {
                         const rect = menuBtn.getBoundingClientRect();
                         submenu.style.top = rect.top + 'px';
