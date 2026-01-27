@@ -32,8 +32,33 @@
         <div class="card">
             <h2>Our Rooms</h2>
             <p>Discover our comfortable and elegantly designed rooms.</p>
+            
+            <!-- Language Selector -->
+            <div class="lang-selector" style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center;">
+                <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
+                <button class="lang-btn" data-lang="nl">🇳🇱 Nederlands</button>
+                <button class="lang-btn" data-lang="fr">🇫🇷 Français</button>
+            </div>
+
+            <!-- Rooms Container -->
+            <div id="rooms-container" style="margin: 2rem 0;">
+                <p style="text-align: center; color: var(--color-sage);">Loading rooms...</p>
+            </div>
         </div>
     </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" style="display: none;">
+        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous photo">‹</button>
+        <button class="lightbox-next" aria-label="Next photo">›</button>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="Room photo">
+        </div>
+        <div class="lightbox-thumbnails" id="lightbox-thumbnails">
+            <!-- Thumbnails will be dynamically inserted here -->
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
@@ -44,5 +69,224 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+
+    <!-- Firebase and Rooms Display Script -->
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        let currentLang = 'en';
+        let roomsData = [];
+        let amenitiesData = {};
+        let currentLightboxRoom = null;
+        let currentLightboxIndex = 0;
+
+        // Language selector
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentLang = e.target.dataset.lang;
+                renderRooms();
+            });
+        });
+
+        // Load amenities
+        async function loadAmenities() {
+            try {
+                const amenitiesSnapshot = await get(dbRef(database, 'amenities'));
+                if (amenitiesSnapshot.exists()) {
+                    amenitiesData = amenitiesSnapshot.val();
+                }
+            } catch (error) {
+                console.error('Error loading amenities:', error);
+            }
+        }
+
+        // Load rooms
+        async function loadRooms() {
+            try {
+                const roomsSnapshot = await get(dbRef(database, 'rooms'));
+                if (roomsSnapshot.exists()) {
+                    const roomsObj = roomsSnapshot.val();
+                    roomsData = Object.keys(roomsObj).map(id => ({
+                        id,
+                        ...roomsObj[id]
+                    }));
+                    renderRooms();
+                } else {
+                    document.getElementById('rooms-container').innerHTML = '<p style="text-align: center; color: var(--color-sage);">No rooms available at the moment.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading rooms:', error);
+                document.getElementById('rooms-container').innerHTML = '<p style="text-align: center; color: #d32f2f;">Failed to load rooms.</p>';
+            }
+        }
+
+        // Render rooms
+        function renderRooms() {
+            const container = document.getElementById('rooms-container');
+            
+            if (roomsData.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--color-sage);">No rooms available at the moment.</p>';
+                return;
+            }
+
+            const roomsHTML = roomsData.map(room => {
+                const name = room[`name_${currentLang}`] || room.name_en;
+                const bedType = room[`bedType_${currentLang}`] || room.bedType_en;
+                const description = room[`description_${currentLang}`] || room.description_en;
+                
+                // Get amenities list
+                const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
+                    const amenity = amenitiesData[amenityId];
+                    return amenity ? (amenity[`name_${currentLang}`] || amenity.name_en) : '';
+                }).filter(a => a) : [];
+
+                // Get first photo for card display
+                const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
+
+                return `
+                    <div class="room-card">
+                        ${firstPhoto ? `
+                            <div class="room-photo" style="cursor: pointer;" onclick="openLightbox('${room.id}', 0)">
+                                <img src="${firstPhoto}" alt="${name}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
+                                ${room.photos && room.photos.length > 1 ? `<div class="photo-count">${room.photos.length} photos</div>` : ''}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="room-details">
+                            <h3>${name}</h3>
+                            <p class="room-bed-type"><strong>Bed Type:</strong> ${bedType}</p>
+                            <p class="room-occupancy"><strong>Max Occupancy:</strong> ${room.maxOccupancy} guests</p>
+                            <p class="room-size"><strong>Room Size:</strong> ${room.roomSize} m²</p>
+                            
+                            ${description ? `<p class="room-description">${description}</p>` : ''}
+                            
+                            ${amenitiesList.length > 0 ? `
+                                <div class="room-amenities">
+                                    <strong>Amenities:</strong>
+                                    <ul>
+                                        ${amenitiesList.map(a => `<li>${a}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            ` : ''}
+                            
+                            ${room.photos && room.photos.length > 0 ? `
+                                <button class="btn view-gallery-btn" onclick="openLightbox('${room.id}', 0)">View Gallery</button>
+                            ` : ''}
+                            
+                            ${room.video ? `
+                                <button class="btn" onclick="playVideo('${room.video.url}')">Watch Video</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = roomsHTML;
+        }
+
+        // Lightbox functionality
+        window.openLightbox = function(roomId, photoIndex) {
+            const room = roomsData.find(r => r.id === roomId);
+            if (!room || !room.photos || room.photos.length === 0) return;
+
+            currentLightboxRoom = room;
+            currentLightboxIndex = photoIndex;
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
+
+            // Show current photo
+            lightboxImage.src = room.photos[photoIndex].url;
+
+            // Render thumbnails
+            thumbnailsContainer.innerHTML = room.photos.map((photo, index) => `
+                <img src="${photo.url}" 
+                     class="lightbox-thumbnail ${index === photoIndex ? 'active' : ''}" 
+                     onclick="changeLightboxPhoto(${index})"
+                     alt="Thumbnail ${index + 1}">
+            `).join('');
+
+            lightbox.style.display = 'flex';
+        };
+
+        window.changeLightboxPhoto = function(index) {
+            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
+
+            currentLightboxIndex = index;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = currentLightboxRoom.photos[index].url;
+
+            // Update active thumbnail
+            document.querySelectorAll('.lightbox-thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        };
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            currentLightboxRoom = null;
+            currentLightboxIndex = 0;
+        }
+
+        function nextPhoto() {
+            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
+            const nextIndex = (currentLightboxIndex + 1) % currentLightboxRoom.photos.length;
+            changeLightboxPhoto(nextIndex);
+        }
+
+        function prevPhoto() {
+            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
+            const prevIndex = (currentLightboxIndex - 1 + currentLightboxRoom.photos.length) % currentLightboxRoom.photos.length;
+            changeLightboxPhoto(prevIndex);
+        }
+
+        // Lightbox controls
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-next').addEventListener('click', nextPhoto);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevPhoto);
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextPhoto();
+                if (e.key === 'ArrowLeft') prevPhoto();
+            }
+        });
+
+        // Video player
+        window.playVideo = function(videoUrl) {
+            const videoModal = document.createElement('div');
+            videoModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center;';
+            videoModal.innerHTML = `
+                <div style="position: relative; max-width: 90%; max-height: 90%;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: -40px; right: 0; background: white; border: none; font-size: 30px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%;">&times;</button>
+                    <video src="${videoUrl}" controls autoplay style="max-width: 100%; max-height: 80vh; border-radius: 8px;"></video>
+                </div>
+            `;
+            document.body.appendChild(videoModal);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) videoModal.remove();
+            });
+        };
+
+        // Initialize
+        (async () => {
+            await loadAmenities();
+            await loadRooms();
+        })();
+    </script>
 </body>
 </html>
