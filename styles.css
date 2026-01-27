@@ -734,7 +734,6 @@ body.admin-page {
 
 /* Menu Items - FULL WIDTH, NO CENTERING */
 .vertical-menu-item {
-    position: relative;
     display: block;
     width: 100%; /* FULL width */
     margin: 0;
