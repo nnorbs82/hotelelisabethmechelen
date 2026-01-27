@@ -180,6 +180,22 @@
                 </div>
             </div>
 
+            <!-- Room Management Card -->
+            <div id="room-management-card" class="card" style="display: none;">
+                <h2>Room Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Create, edit, delete, and manage hotel rooms.</p>
+                
+                <!-- Add New Room Button -->
+                <div style="margin: 1rem 0;">
+                    <button class="btn" id="add-room-btn">Add New Room</button>
+                </div>
+                
+                <!-- Room List Container -->
+                <div id="room-list-container">
+                    <!-- Rooms will be rendered here -->
+                </div>
+            </div>
+
             <!-- Package Management Card -->
             <div id="package-management-card" class="card" style="display: none;">
                 <h2>Package Management</h2>
@@ -347,6 +363,8 @@
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
@@ -354,6 +372,8 @@
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
             packageCard.style.display = 'none';
             
             // Show only photo card
@@ -373,6 +393,8 @@
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
@@ -380,6 +402,8 @@
             photoCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
             packageCard.style.display = 'none';
             
             // Show only ads card
@@ -955,12 +979,16 @@
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
             packageCard.style.display = 'none';
             aboutUsCard.style.display = 'block';
             
@@ -979,12 +1007,16 @@
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
             packageCard.style.display = 'none';
             adsBottomCard.style.display = 'block';
             
@@ -998,18 +1030,13 @@
         });
 
         // Add click handlers for other menu items (Manage Rooms, Manage Packages, View Bookings)
-        document.getElementById('manage-rooms-btn').addEventListener('click', () => {
-            const verticalMenu = document.getElementById('vertical-menu');
-            verticalMenu.classList.remove('show');
-            // Add your rooms management logic here
-            alert('Manage Rooms functionality - to be implemented');
-        });
-
-        document.getElementById('manage-packages-btn').addEventListener('click', async () => {
+        document.getElementById('manage-rooms-btn').addEventListener('click', async () => {
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
@@ -1018,6 +1045,37 @@
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            packageCard.style.display = 'none';
+            
+            // Show only room card
+            roomCard.style.display = 'block';
+            roomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Hide menu after selection
+            verticalMenu.classList.remove('show');
+            
+            await loadRoomsData();
+            renderRoomsList();
+        });
+
+        document.getElementById('manage-packages-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
+            const packageCard = document.getElementById('package-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
+            
+            // Hide all cards
+            photoCard.style.display = 'none';
+            adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
             
             // Show only package card
             packageCard.style.display = 'block';
@@ -1049,6 +1107,7 @@
             const aboutUsCard = document.getElementById('about-us-management-card');
             const adsBottomCard = document.getElementById('ads-bottom-management-card');
             const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
@@ -1056,6 +1115,7 @@
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
+            roomCard.style.display = 'none';
             packageCard.style.display = 'none';
             amenitiesCard.style.display = 'block';
             
@@ -2032,6 +2092,559 @@
         // Add new package button
         document.getElementById('add-package-btn').addEventListener('click', () => {
             openPackageModal();
+        });
+
+        // ============ ROOM MANAGEMENT ============
+        let roomsData = [];
+        let roomModalOpen = false;
+
+        // HTML escape function to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Sanitize filename for Firebase Storage
+        function sanitizeFilename(filename) {
+            // Extract the file extension
+            const lastDotIndex = filename.lastIndexOf('.');
+            const name = lastDotIndex > 0 ? filename.substring(0, lastDotIndex) : filename;
+            const ext = lastDotIndex > 0 ? filename.substring(lastDotIndex) : '';
+            
+            // Remove path separators and other potentially problematic characters from name
+            const sanitizedName = name.replace(/[^a-zA-Z0-9_-]/g, '_');
+            // Only allow alphanumeric and underscore in extension
+            const sanitizedExt = ext.replace(/[^a-zA-Z0-9.]/g, '');
+            
+            return sanitizedName + sanitizedExt;
+        }
+
+        async function loadRoomsData() {
+            try {
+                const roomsSnapshot = await get(dbRef(database, 'rooms'));
+                if (roomsSnapshot.exists()) {
+                    const roomsObj = roomsSnapshot.val();
+                    roomsData = Object.keys(roomsObj).map(id => ({
+                        id,
+                        ...roomsObj[id]
+                    }));
+                } else {
+                    roomsData = [];
+                }
+            } catch (error) {
+                console.error('Error loading rooms:', error);
+                alert('Failed to load rooms data.');
+            }
+        }
+
+        function renderRoomsList() {
+            const container = document.getElementById('room-list-container');
+            if (!roomsData || roomsData.length === 0) {
+                container.innerHTML = '<p style="color: var(--color-sage); text-align: center; margin: 2rem 0;">No rooms available. Click "Add New Room" to create one.</p>';
+                return;
+            }
+
+            const roomsHTML = roomsData.map(room => {
+                const escapedId = escapeHtml(room.id);
+                const escapedName = escapeHtml(room.name_en || 'Untitled Room');
+                const escapedBedType = escapeHtml(room.bedType_en || 'N/A');
+                
+                return `
+                <div class="room-item" style="border: 1px solid var(--color-sage); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <h3 style="margin: 0 0 0.5rem 0;">${escapedName}</h3>
+                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Bed Type:</strong> ${escapedBedType}</p>
+                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Max Occupancy:</strong> ${room.maxOccupancy || 'N/A'} guests</p>
+                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Room Size:</strong> ${room.roomSize || 'N/A'} m²</p>
+                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Photos:</strong> ${room.photos ? room.photos.length : 0}</p>
+                            ${room.video ? '<p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Video:</strong> Yes</p>' : ''}
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn" onclick="editRoom('${escapedId}')" style="padding: 0.5rem 1rem;">Edit</button>
+                            <button class="btn" onclick="deleteRoom('${escapedId}')" style="background: #d32f2f; padding: 0.5rem 1rem;">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+
+            container.innerHTML = roomsHTML;
+        }
+
+        async function openRoomModal(roomId = null) {
+            if (roomModalOpen) return;
+
+            const room = roomId ? roomsData.find(r => r.id === roomId) : null;
+            
+            // Load amenities for selection
+            const amenitiesSnapshot = await get(dbRef(database, 'amenities'));
+            let amenitiesList = [];
+            if (amenitiesSnapshot.exists()) {
+                const amenitiesObj = amenitiesSnapshot.val();
+                amenitiesList = Object.keys(amenitiesObj).map(id => ({
+                    id,
+                    ...amenitiesObj[id]
+                }));
+            }
+
+            const modalHTML = `
+                <div id="room-modal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center; overflow-y: auto;">
+                    <div style="background: white; padding: 2rem; border-radius: 8px; max-width: 900px; width: 90%; max-height: 90vh; overflow-y: auto; margin: 2rem;">
+                        <h2>${roomId ? 'Edit Room' : 'Add New Room'}</h2>
+                        
+                        <!-- Language Tabs -->
+                        <div class="room-lang-tabs" style="margin: 1rem 0; display: flex; gap: 0.5rem;">
+                            <button class="room-lang-tab active" data-lang="en">🇬🇧 EN</button>
+                            <button class="room-lang-tab" data-lang="nl">🇳🇱 NL</button>
+                            <button class="room-lang-tab" data-lang="fr">🇫🇷 FR</button>
+                        </div>
+
+                        <!-- Multi-language fields -->
+                        <div id="room-lang-en" class="room-lang-content">
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Name (English) *</label>
+                                <input type="text" id="room-name-en" class="form-input" value="${room ? (room.name_en || '') : ''}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Bed Type (English) *</label>
+                                <input type="text" id="room-bedtype-en" class="form-input" value="${room ? (room.bedType_en || '') : ''}" placeholder="e.g., King Size Bed" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Description (English)</label>
+                                <textarea id="room-description-en" class="admin-textarea">${room ? (room.description_en || '') : ''}</textarea>
+                            </div>
+                        </div>
+
+                        <div id="room-lang-nl" class="room-lang-content" style="display: none;">
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Name (Dutch) *</label>
+                                <input type="text" id="room-name-nl" class="form-input" value="${room ? (room.name_nl || '') : ''}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Bed Type (Dutch) *</label>
+                                <input type="text" id="room-bedtype-nl" class="form-input" value="${room ? (room.bedType_nl || '') : ''}" placeholder="e.g., Kingsize Bed" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Description (Dutch)</label>
+                                <textarea id="room-description-nl" class="admin-textarea">${room ? (room.description_nl || '') : ''}</textarea>
+                            </div>
+                        </div>
+
+                        <div id="room-lang-fr" class="room-lang-content" style="display: none;">
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Name (French) *</label>
+                                <input type="text" id="room-name-fr" class="form-input" value="${room ? (room.name_fr || '') : ''}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Bed Type (French) *</label>
+                                <input type="text" id="room-bedtype-fr" class="form-input" value="${room ? (room.bedType_fr || '') : ''}" placeholder="e.g., Lit King Size" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div style="margin: 1rem 0;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Description (French)</label>
+                                <textarea id="room-description-fr" class="admin-textarea">${room ? (room.description_fr || '') : ''}</textarea>
+                            </div>
+                        </div>
+
+                        <!-- Numeric Fields -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Max Occupancy *</label>
+                                <input type="number" id="room-max-occupancy" class="form-input" value="${room ? (room.maxOccupancy || '') : ''}" min="1" placeholder="e.g., 2" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Size (m²) *</label>
+                                <input type="number" id="room-size" class="form-input" value="${room ? (room.roomSize || '') : ''}" min="1" placeholder="e.g., 25" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                            </div>
+                        </div>
+
+                        <!-- Amenities Selection -->
+                        <div style="margin: 1rem 0;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Amenities</label>
+                            <div id="room-amenities-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.5rem; max-height: 200px; overflow-y: auto; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                                ${amenitiesList.map(amenity => {
+                                    const isChecked = room && room.amenities && room.amenities[amenity.id];
+                                    return `
+                                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <input type="checkbox" value="${amenity.id}" ${isChecked ? 'checked' : ''} style="cursor: pointer;">
+                                            <span>${amenity.name_en || amenity.name_nl || amenity.name_fr}</span>
+                                        </label>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Photo Gallery -->
+                        <div style="margin: 1rem 0;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Photos</label>
+                            <input type="file" id="room-photo-input" accept="image/*" multiple style="display: none;">
+                            <button class="btn" id="room-upload-photo-btn">Upload Photos</button>
+                            <p style="color: var(--color-sage); font-size: 0.9rem; margin-top: 0.5rem;">Drag photos to reorder them</p>
+                            <div id="room-photo-gallery" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                                ${room && room.photos ? room.photos.map((photo, index) => `
+                                    <div class="room-photo-item" data-index="${index}" draggable="true" style="position: relative; cursor: move; border: 2px solid var(--color-sage); border-radius: 4px; overflow: hidden;">
+                                        <img src="${photo.url}" style="width: 100%; height: 150px; object-fit: cover;">
+                                        <button class="btn-delete-photo" data-index="${index}" style="position: absolute; top: 5px; right: 5px; background: #d32f2f; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; padding: 0;">×</button>
+                                    </div>
+                                `).join('') : ''}
+                            </div>
+                        </div>
+
+                        <!-- Video Upload -->
+                        <div style="margin: 1rem 0;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Room Video (Optional)</label>
+                            <input type="file" id="room-video-input" accept="video/*" style="display: none;">
+                            <button class="btn" id="room-upload-video-btn">Upload Video</button>
+                            <div id="room-video-preview" style="margin-top: 1rem;">
+                                ${room && room.video ? `
+                                    <div style="position: relative; display: inline-block;">
+                                        <video src="${room.video.url}" controls style="max-width: 300px; border-radius: 8px;"></video>
+                                        <button class="btn" id="room-delete-video-btn" style="background: #d32f2f; margin-top: 0.5rem;">Delete Video</button>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+                            <button class="btn" id="cancel-room-btn">Cancel</button>
+                            <button class="btn" id="save-room-btn" style="background: var(--color-sage);">Save Room</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            roomModalOpen = true;
+
+            // Language tab switching
+            document.querySelectorAll('.room-lang-tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const lang = e.target.dataset.lang;
+                    document.querySelectorAll('.room-lang-tab').forEach(t => t.classList.remove('active'));
+                    e.target.classList.add('active');
+                    document.querySelectorAll('.room-lang-content').forEach(c => c.style.display = 'none');
+                    document.getElementById(`room-lang-${lang}`).style.display = 'block';
+                });
+            });
+
+            // Photo upload and management
+            let roomPhotos = room && room.photos ? [...room.photos] : [];
+            
+            const uploadPhotoBtn = document.getElementById('room-upload-photo-btn');
+            const photoInput = document.getElementById('room-photo-input');
+            
+            uploadPhotoBtn.addEventListener('click', () => photoInput.click());
+            
+            photoInput.addEventListener('change', async (e) => {
+                const files = Array.from(e.target.files);
+                if (files.length === 0) return;
+
+                uploadPhotoBtn.disabled = true;
+                uploadPhotoBtn.textContent = 'Uploading...';
+
+                try {
+                    for (const file of files) {
+                        const timestamp = Date.now();
+                        const sanitizedName = sanitizeFilename(file.name);
+                        const filename = `room-photos/${timestamp}-${sanitizedName}`;
+                        const fileRef = storageRef(storage, filename);
+                        await uploadBytes(fileRef, file);
+                        const downloadURL = await getDownloadURL(fileRef);
+                        
+                        roomPhotos.push({
+                            url: downloadURL,
+                            filename: filename,
+                            order: roomPhotos.length
+                        });
+                    }
+                    
+                    renderPhotoGallery();
+                    e.target.value = '';
+                } catch (error) {
+                    console.error('Error uploading photos:', error);
+                    alert('Failed to upload photos.');
+                } finally {
+                    uploadPhotoBtn.disabled = false;
+                    uploadPhotoBtn.textContent = 'Upload Photos';
+                }
+            });
+
+            function renderPhotoGallery() {
+                const gallery = document.getElementById('room-photo-gallery');
+                gallery.innerHTML = roomPhotos.map((photo, index) => `
+                    <div class="room-photo-item" data-index="${index}" draggable="true" style="position: relative; cursor: move; border: 2px solid var(--color-sage); border-radius: 4px; overflow: hidden;">
+                        <img src="${photo.url}" style="width: 100%; height: 150px; object-fit: cover;">
+                        <button class="btn-delete-photo" data-index="${index}" style="position: absolute; top: 5px; right: 5px; background: #d32f2f; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; padding: 0;">×</button>
+                    </div>
+                `).join('');
+
+                // Add delete handlers
+                gallery.querySelectorAll('.btn-delete-photo').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const index = parseInt(e.target.dataset.index);
+                        const photo = roomPhotos[index];
+                        
+                        if (confirm('Delete this photo?')) {
+                            try {
+                                await deleteObject(storageRef(storage, photo.filename));
+                                roomPhotos.splice(index, 1);
+                                renderPhotoGallery();
+                            } catch (error) {
+                                console.error('Error deleting photo:', error);
+                                alert('Failed to delete photo.');
+                            }
+                        }
+                    });
+                });
+
+                // Add drag and drop handlers
+                const photoItems = gallery.querySelectorAll('.room-photo-item');
+                let draggedItem = null;
+
+                photoItems.forEach(item => {
+                    item.addEventListener('dragstart', (e) => {
+                        draggedItem = item;
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+
+                    item.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        e.dataTransfer.dropEffect = 'move';
+                    });
+
+                    item.addEventListener('drop', (e) => {
+                        e.preventDefault();
+                        if (draggedItem !== item) {
+                            const fromIndex = parseInt(draggedItem.dataset.index);
+                            const toIndex = parseInt(item.dataset.index);
+                            
+                            const [movedPhoto] = roomPhotos.splice(fromIndex, 1);
+                            roomPhotos.splice(toIndex, 0, movedPhoto);
+                            
+                            renderPhotoGallery();
+                        }
+                    });
+                });
+            }
+
+            renderPhotoGallery();
+
+            // Video upload
+            let roomVideo = room && room.video ? room.video : null;
+            
+            const uploadVideoBtn = document.getElementById('room-upload-video-btn');
+            const videoInput = document.getElementById('room-video-input');
+            const videoPreview = document.getElementById('room-video-preview');
+            
+            uploadVideoBtn.addEventListener('click', () => videoInput.click());
+            
+            videoInput.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                if (!file.type.startsWith('video/')) {
+                    alert('Please select a video file');
+                    return;
+                }
+
+                uploadVideoBtn.disabled = true;
+                uploadVideoBtn.textContent = 'Uploading...';
+
+                try {
+                    const timestamp = Date.now();
+                    const sanitizedName = sanitizeFilename(file.name);
+                    const filename = `room-videos/${timestamp}-${sanitizedName}`;
+                    const fileRef = storageRef(storage, filename);
+                    await uploadBytes(fileRef, file);
+                    const downloadURL = await getDownloadURL(fileRef);
+                    
+                    roomVideo = {
+                        url: downloadURL,
+                        filename: filename
+                    };
+                    
+                    videoPreview.innerHTML = `
+                        <div style="position: relative; display: inline-block;">
+                            <video src="${roomVideo.url}" controls style="max-width: 300px; border-radius: 8px;"></video>
+                            <button class="btn" id="room-delete-video-btn" style="background: #d32f2f; margin-top: 0.5rem;">Delete Video</button>
+                        </div>
+                    `;
+                    
+                    document.getElementById('room-delete-video-btn').addEventListener('click', async () => {
+                        if (confirm('Delete this video?')) {
+                            try {
+                                await deleteObject(storageRef(storage, roomVideo.filename));
+                                roomVideo = null;
+                                videoPreview.innerHTML = '';
+                            } catch (error) {
+                                console.error('Error deleting video:', error);
+                                alert('Failed to delete video.');
+                            }
+                        }
+                    });
+                    
+                    e.target.value = '';
+                } catch (error) {
+                    console.error('Error uploading video:', error);
+                    alert('Failed to upload video.');
+                } finally {
+                    uploadVideoBtn.disabled = false;
+                    uploadVideoBtn.textContent = 'Upload Video';
+                }
+            });
+
+            // Delete video handler for existing video
+            if (room && room.video) {
+                document.getElementById('room-delete-video-btn')?.addEventListener('click', async () => {
+                    if (confirm('Delete this video?')) {
+                        try {
+                            await deleteObject(storageRef(storage, roomVideo.filename));
+                            roomVideo = null;
+                            videoPreview.innerHTML = '';
+                        } catch (error) {
+                            console.error('Error deleting video:', error);
+                            alert('Failed to delete video.');
+                        }
+                    }
+                });
+            }
+
+            // Close modal on background click
+            document.getElementById('room-modal').addEventListener('click', (e) => {
+                if (e.target.id === 'room-modal') {
+                    closeRoomModal();
+                }
+            });
+
+            // Cancel button
+            document.getElementById('cancel-room-btn').addEventListener('click', closeRoomModal);
+
+            // Save button
+            document.getElementById('save-room-btn').addEventListener('click', async () => {
+                const name_en = document.getElementById('room-name-en').value.trim();
+                const name_nl = document.getElementById('room-name-nl').value.trim();
+                const name_fr = document.getElementById('room-name-fr').value.trim();
+                const bedType_en = document.getElementById('room-bedtype-en').value.trim();
+                const bedType_nl = document.getElementById('room-bedtype-nl').value.trim();
+                const bedType_fr = document.getElementById('room-bedtype-fr').value.trim();
+                const description_en = document.getElementById('room-description-en').value.trim();
+                const description_nl = document.getElementById('room-description-nl').value.trim();
+                const description_fr = document.getElementById('room-description-fr').value.trim();
+                const maxOccupancy = parseInt(document.getElementById('room-max-occupancy').value);
+                const roomSize = parseFloat(document.getElementById('room-size').value);
+
+                // Validation
+                if (!name_en || !name_nl || !name_fr) {
+                    alert('Please fill in room name for all languages');
+                    return;
+                }
+                if (!bedType_en || !bedType_nl || !bedType_fr) {
+                    alert('Please fill in bed type for all languages');
+                    return;
+                }
+                if (!maxOccupancy || maxOccupancy < 1) {
+                    alert('Please enter a valid max occupancy');
+                    return;
+                }
+                if (!roomSize || roomSize < 1) {
+                    alert('Please enter a valid room size');
+                    return;
+                }
+
+                // Collect selected amenities
+                const amenities = {};
+                document.querySelectorAll('#room-amenities-list input[type="checkbox"]:checked').forEach(checkbox => {
+                    amenities[checkbox.value] = true;
+                });
+
+                const roomData = {
+                    name_en,
+                    name_nl,
+                    name_fr,
+                    bedType_en,
+                    bedType_nl,
+                    bedType_fr,
+                    description_en,
+                    description_nl,
+                    description_fr,
+                    maxOccupancy,
+                    roomSize,
+                    amenities,
+                    photos: roomPhotos,
+                    ...(roomVideo && { video: roomVideo })
+                };
+
+                const saveBtn = document.getElementById('save-room-btn');
+                saveBtn.disabled = true;
+                saveBtn.textContent = 'Saving...';
+
+                try {
+                    const id = roomId || `room_${Date.now()}`;
+                    await set(dbRef(database, `rooms/${id}`), roomData);
+                    
+                    await loadRoomsData();
+                    renderRoomsList();
+                    closeRoomModal();
+                } catch (error) {
+                    console.error('Error saving room:', error);
+                    alert('Failed to save room.');
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = 'Save Room';
+                }
+            });
+
+            function closeRoomModal() {
+                document.getElementById('room-modal')?.remove();
+                roomModalOpen = false;
+            }
+        }
+
+        window.editRoom = function(roomId) {
+            openRoomModal(roomId);
+        };
+
+        window.deleteRoom = async function(roomId) {
+            if (!confirm('Are you sure you want to delete this room?')) return;
+
+            try {
+                const room = roomsData.find(r => r.id === roomId);
+                
+                // Delete photos from storage
+                if (room.photos) {
+                    for (const photo of room.photos) {
+                        try {
+                            await deleteObject(storageRef(storage, photo.filename));
+                        } catch (error) {
+                            console.error('Error deleting photo:', error);
+                        }
+                    }
+                }
+                
+                // Delete video from storage
+                if (room.video) {
+                    try {
+                        await deleteObject(storageRef(storage, room.video.filename));
+                    } catch (error) {
+                        console.error('Error deleting video:', error);
+                    }
+                }
+                
+                // Delete room from database
+                await remove(dbRef(database, `rooms/${roomId}`));
+                
+                await loadRoomsData();
+                renderRoomsList();
+            } catch (error) {
+                console.error('Error deleting room:', error);
+                alert('Failed to delete room.');
+            }
+        };
+
+        // Add new room button
+        document.getElementById('add-room-btn').addEventListener('click', () => {
+            openRoomModal();
         });
 
     </script>
