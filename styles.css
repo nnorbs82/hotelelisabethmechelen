@@ -779,7 +779,7 @@ body.admin-page {
 /* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
     position: fixed; /* Fixed to avoid overflow clipping */
-    left: calc(var(--vertical-menu-width) + 10px); /* 10px gap from menu edge for clear separation */
+    left: calc(var(--vertical-menu-width) - 1px); /* Overlap by 1px to ensure no gap during hover transition */
     width: 220px;
     background-color: #1a1a1a; /* Slightly lighter than menu for visual distinction */
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.9); /* Stronger shadow for visibility */
