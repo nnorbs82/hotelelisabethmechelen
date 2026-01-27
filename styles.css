@@ -632,9 +632,10 @@ footer {
     }
 }
 
-/* ============ ADMIN DASHBOARD - VERTICAL CASCADING MENU ============ */
+/* ============ ADMIN DASHBOARD STYLES ONLY ============ */
+/* IMPORTANT: These styles ONLY apply to admin pages with .admin-page class */
 
-/* Reset admin page body */
+/* Isolate admin styles */
 body.admin-page {
     padding-top: 0;
     margin: 0;
@@ -711,33 +712,38 @@ body.admin-page {
     transform: translateX(0);
 }
 
-/* Menu Navigation */
+/* Menu Navigation - START FROM TOP */
 .vertical-menu-nav {
-    padding: 0;
+    padding: 0; /* NO padding at top - start from very top */
+    margin: 0;
 }
 
 .vertical-menu-list {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0; /* NO padding - start from top */
     display: flex;
-    flex-direction: column; /* FORCE VERTICAL STACKING */
+    flex-direction: column;
+    align-items: flex-start; /* Align to start (top), NOT center */
 }
 
-/* Menu Items - Vertical Layout */
+/* Menu Items - FULL WIDTH, NO CENTERING */
 .vertical-menu-item {
     position: relative;
-    display: block; /* FORCE BLOCK DISPLAY */
-    width: 100%;
+    display: block;
+    width: 100%; /* FULL width */
+    margin: 0;
+    padding: 0;
 }
 
-/* Menu Buttons - Full Width */
+/* Menu Buttons - TRULY FULL WIDTH */
 .vertical-menu-btn {
-    width: 100%;
+    width: 100%; /* Full width */
     background-color: transparent;
     color: var(--color-beige);
     border: none;
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 1.5rem; /* Padding INSIDE button, not reducing width */
+    margin: 0; /* NO margin */
     text-align: left;
     font-size: 1rem;
     font-family: 'Raleway', sans-serif;
@@ -748,6 +754,7 @@ body.admin-page {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgba(212, 211, 195, 0.1);
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .vertical-menu-btn:hover {
@@ -764,20 +771,21 @@ body.admin-page {
     transform: translateX(5px);
 }
 
-/* Submenu - Fly-out to the RIGHT */
+/* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
     position: absolute;
-    left: 100%; /* Position to the RIGHT of parent */
+    left: 250px; /* EXACTLY at right edge of parent menu (250px width) */
     top: 0;
     width: 220px;
+    min-height: 100%; /* At least as tall as parent item */
     background-color: #1a1a1a;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.6); /* Stronger shadow for visibility */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateX(-10px);
-    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
-    z-index: 1000;
+    transform: translateX(-20px); /* Start slightly left */
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    z-index: 1001; /* ABOVE parent menu */
 }
 
 /* Show submenu on parent hover */
@@ -785,7 +793,7 @@ body.admin-page {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transform: translateX(0);
+    transform: translateX(0); /* Slide into position */
 }
 
 /* Keep submenu visible when hovering submenu itself */
@@ -795,13 +803,14 @@ body.admin-page {
     pointer-events: auto;
 }
 
-/* Submenu Items */
+/* Submenu Items - Full width of submenu panel */
 .submenu-item {
     width: 100%;
     background-color: transparent;
     color: var(--color-beige);
     border: none;
     padding: 1rem 1.5rem;
+    margin: 0;
     text-align: left;
     font-size: 0.95rem;
     font-family: 'Raleway', sans-serif;
@@ -810,12 +819,23 @@ body.admin-page {
     transition: all 0.3s;
     display: block;
     border-bottom: 1px solid rgba(212, 211, 195, 0.05);
+    box-sizing: border-box;
 }
 
 .submenu-item:hover {
     background-color: var(--color-sage);
     color: var(--color-white);
     padding-left: 2rem;
+}
+
+/* Ensure first menu item is at very top */
+.vertical-menu-item:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.vertical-menu-item:first-child .vertical-menu-btn {
+    border-top: none;
 }
 
 /* Scrollbar for menu */
@@ -865,10 +885,73 @@ main.container {
     display: none !important; /* Force hide old submenu */
 }
 
-/* Ensure no flexbox on nav is making things horizontal */
-nav ul {
+/* Ensure admin page vertical menu list is vertical (scoped to admin only) */
+body.admin-page .vertical-menu-nav ul {
     flex-direction: column !important;
 }
+
+/* ============ MAIN WEBSITE NAVIGATION (NOT ADMIN) ============ */
+
+/* Ensure main website nav stays horizontal - NOT affected by admin styles */
+body:not(.admin-page) header {
+    background-color: var(--color-black);
+    padding: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--header-height);
+}
+
+body:not(.admin-page) nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+}
+
+/* Main website nav list - MUST BE HORIZONTAL */
+body:not(.admin-page) nav ul {
+    display: flex !important; /* FORCE horizontal */
+    flex-direction: row !important; /* FORCE row, not column */
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+body:not(.admin-page) nav li {
+    display: inline-block; /* Horizontal list items */
+    margin: 0;
+}
+
+body:not(.admin-page) nav a {
+    color: var(--color-beige);
+    text-decoration: none;
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+body:not(.admin-page) nav a:hover {
+    color: var(--color-white);
+}
+
+/* Ensure nav logo stays on left */
+body:not(.admin-page) .nav-logo {
+    display: inline-flex;
+    align-items: center;
+}
+
+body:not(.admin-page) .nav-logo img {
+    height: var(--logo-height);
+    width: auto;
+    display: block;
+}
+
+/* ============ END MAIN WEBSITE NAVIGATION ============ */
 
 /* Photo grid stays centered */
 .photo-grid {
