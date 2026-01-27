@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages - Hotel Elisabeth Mechelen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght=100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Packages Page Specific Styles */
+        body {
+            background-color: var(--color-beige);
+        }
+
+        .packages-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .packages-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .packages-header h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+        }
+
+        .packages-header p {
+            font-size: 1.2rem;
+            color: var(--color-sage);
+        }
+
+        .package-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .package-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .package-content {
+            padding: 2rem;
+        }
+
+        .package-title {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+        }
+
+        .package-description {
+            font-size: 1.1rem;
+            color: var(--color-sage);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .package-section {
+            margin-bottom: 2rem;
+        }
+
+        .package-section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--color-beige);
+            padding-bottom: 0.5rem;
+        }
+
+        .package-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .package-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--color-sage);
+            line-height: 1.6;
+        }
+
+        .package-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-sage);
+            font-weight: bold;
+        }
+
+        .package-book-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background-color: var(--color-sage);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .package-book-btn:hover {
+            background-color: var(--color-black);
+            transform: scale(1.05);
+        }
+
+        .no-packages {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-sage);
+        }
+
+        .no-packages h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--color-sage);
+        }
+
+        @media (max-width: 768px) {
+            .packages-header h1 {
+                font-size: 2rem;
+            }
+
+            .package-image {
+                height: 250px;
+            }
+
+            .package-title {
+                font-size: 1.5rem;
+            }
+
+            .package-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a class="nav-logo" href="index.html">
+                <img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen logo">
+            </a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="meetings.html">Meetings</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li><a href="attractions.html">Attractions</a></li>
+                <li><a href="photos.html">Photos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="packages-container">
+        <div class="packages-header">
+            <h1>Our Packages</h1>
+            <p>Discover our exclusive deals and special offers for an unforgettable stay</p>
+        </div>
+
+        <div id="loading" class="loading">
+            <p>Loading packages...</p>
+        </div>
+
+        <div id="packages-list">
+            <!-- Packages will be loaded here dynamically -->
+        </div>
+
+        <div id="no-packages" class="no-packages" style="display: none;">
+            <h2>No Packages Available</h2>
+            <p>Check back soon for exciting new offers!</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
+        <p>
+            <a href="privacypolicy.html" style="color: var(--color-beige); margin: 0 1rem;">Privacy Policy</a> | 
+            <a href="termsandconditions.html" style="color: var(--color-beige); margin: 0 1rem;">Terms & Conditions</a> | 
+            <a href="policies.html" style="color: var(--color-beige); margin: 0 1rem;">Hotel Policies</a> | 
+            <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
+        </p>
+    </footer>
+
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Detect browser language
+        function detectLanguage() {
+            const lang = navigator.language || navigator.userLanguage;
+            if (lang.startsWith('nl')) return 'nl';
+            if (lang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        const currentLang = detectLanguage();
+
+        async function loadPackages() {
+            const loadingEl = document.getElementById('loading');
+            const packagesListEl = document.getElementById('packages-list');
+            const noPackagesEl = document.getElementById('no-packages');
+
+            try {
+                const snapshot = await get(ref(database, 'packages'));
+                
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const packages = Object.keys(data)
+                        .map(key => ({ id: key, ...data[key] }))
+                        .filter(pkg => pkg.status === 'active');
+
+                    loadingEl.style.display = 'none';
+
+                    if (packages.length === 0) {
+                        noPackagesEl.style.display = 'block';
+                        return;
+                    }
+
+                    packagesListEl.innerHTML = packages.map(pkg => {
+                        const title = pkg[`title_${currentLang}`] || pkg.title_en || 'Package';
+                        const description = pkg[`description_${currentLang}`] || pkg.description_en || '';
+                        const inclusions = pkg[`inclusions_${currentLang}`] || pkg.inclusions_en || '';
+                        const goodToKnow = pkg[`goodToKnow_${currentLang}`] || pkg.goodToKnow_en || '';
+
+                        const inclusionsList = inclusions.split('\n').filter(item => item.trim());
+                        const goodToKnowList = goodToKnow.split('\n').filter(item => item.trim());
+
+                        return `
+                            <div class="package-card">
+                                ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-image">` : ''}
+                                <div class="package-content">
+                                    <h2 class="package-title">${title}</h2>
+                                    ${description ? `<p class="package-description">${description}</p>` : ''}
+                                    
+                                    ${inclusionsList.length > 0 ? `
+                                        <div class="package-section">
+                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
+                                            <ul class="package-list">
+                                                ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${goodToKnowList.length > 0 ? `
+                                        <div class="package-section">
+                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Goed om te weten' : currentLang === 'fr' ? 'Bon à savoir' : 'Good to Know'}</h3>
+                                            <ul class="package-list">
+                                                ${goodToKnowList.map(item => `<li>${item}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${pkg.bookingLink ? `
+                                        <a href="${pkg.bookingLink}" target="_blank" class="package-book-btn">
+                                            ${currentLang === 'nl' ? 'Boek Nu' : currentLang === 'fr' ? 'Réserver' : 'Book Now'}
+                                        </a>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    loadingEl.style.display = 'none';
+                    noPackagesEl.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading packages:', error);
+                loadingEl.innerHTML = '<p style="color: red;">Failed to load packages. Please try again later.</p>';
+            }
+        }
+
+        // Load packages when page loads
+        document.addEventListener('DOMContentLoaded', loadPackages);
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@ This repository contains the website for Hotel Elisabeth Mechelen, including an 
 ### Main Website Pages
 - `index.html` - Home page
 - `rooms.html` - Rooms information
-- `offers.html` - Special offers
+- `packages.html` - Special packages and offers
 - `facilities.html` - Hotel facilities
 - `meetings.html` - Meetings and events
 - `info.html` - Hotel information
@@ -104,7 +104,7 @@ These values are public and used by the client-side SDK to connect to your Fireb
 1. Add Firebase Realtime Database rules to secure data access
 2. Implement admin dashboard functionality for managing:
    - Room information
-   - Special offers
+   - Package management (completed)
    - Photo uploads
    - Booking management
 3. Add content management system (CMS) features
