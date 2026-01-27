@@ -704,8 +704,7 @@ body.admin-page {
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
     z-index: 999;
-    overflow-y: auto;
-    overflow-x: visible;
+    overflow: visible; /* Allow submenu to fly out - no clipping */
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -718,7 +717,9 @@ body.admin-page {
     padding: 0; /* NO padding at top - start from very top */
     margin: 0;
     display: block; /* Override generic nav flex display */
-    height: auto; /* Override generic nav height */
+    height: 100%; /* Fill parent height */
+    overflow-y: auto; /* Scroll if menu is too long */
+    overflow-x: visible; /* Allow submenu to fly out */
     align-items: initial; /* Override generic nav centering */
     justify-content: initial; /* Override generic nav spacing */
 }
