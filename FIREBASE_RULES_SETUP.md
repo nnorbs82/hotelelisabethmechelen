@@ -41,6 +41,16 @@ service firebase.storage {
     match /index-background/{allPaths=**} {
       allow write, delete: if request.auth != null;
     }
+    
+    // Allow authenticated users to write/delete files in ads-bottom folder
+    match /ads-bottom/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
+    
+    // Allow authenticated users to write/delete files in packages folder
+    match /packages/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
   }
 }
 ```
@@ -78,6 +88,14 @@ These rules allow authenticated admin users to read and write photo metadata in 
       ".write": "auth != null"
     },
     "aboutUs": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "adsBottom": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "packages": {
       ".read": "auth != null",
       ".write": "auth != null"
     }
@@ -121,6 +139,18 @@ service firebase.storage {
       allow write, delete: if request.auth != null;
     }
     
+    // Allow anyone to read files in ads-bottom folder
+    match /ads-bottom/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+    
+    // Allow anyone to read files in packages folder
+    match /packages/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+    
     // For all other paths, require authentication
     match /{allPaths=**} {
       allow read: if request.auth != null;
@@ -150,6 +180,19 @@ service firebase.storage {
     },
     "aboutUs": {
       ".read": true,
+      ".write": "auth != null"
+    },
+    "adsBottom": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "packages": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
+```
       ".write": "auth != null"
     }
   }
