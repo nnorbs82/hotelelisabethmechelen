@@ -178,8 +178,20 @@
             // Handle submenu hover - keep parent and submenu visible
             document.querySelectorAll('.vertical-menu-item.has-submenu').forEach(item => {
                 const submenu = item.querySelector('.vertical-submenu');
+                const menuBtn = item.querySelector('.vertical-menu-btn');
                 
-                if (submenu) {
+                if (submenu && menuBtn) {
+                    // Position submenu on hover
+                    const positionSubmenu = () => {
+                        const rect = menuBtn.getBoundingClientRect();
+                        submenu.style.top = rect.top + 'px';
+                    };
+                    
+                    // Position on mouse enter
+                    item.addEventListener('mouseenter', () => {
+                        positionSubmenu();
+                    });
+                    
                     // When hovering submenu, keep everything visible
                     submenu.addEventListener('mouseenter', () => {
                         clearTimeout(menuTimeout);
