@@ -357,6 +357,12 @@
             }
         });
 
+        // Helper function to ensure dashboard content is visible
+        function ensureDashboardVisible() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+        }
+
         // Show photo management card when Main Banner is clicked
         document.getElementById('main-banner-btn').addEventListener('click', async () => {
             const photoCard = document.getElementById('photo-management-card');
@@ -368,9 +374,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             // Hide all cards
             adsCard.style.display = 'none';
@@ -402,9 +406,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -992,9 +994,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -1024,9 +1024,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -1056,9 +1054,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -1089,9 +1085,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -1135,9 +1129,7 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
-            // Ensure dashboard content is visible
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('dashboard-content').style.display = 'block';
+            ensureDashboardVisible();
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
