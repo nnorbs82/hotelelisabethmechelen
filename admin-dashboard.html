@@ -30,6 +30,7 @@
                     <div class="vertical-submenu" id="submenu-update-index">
                         <button class="submenu-item" id="main-banner-btn">Main Banner</button>
                         <button class="submenu-item" id="ads-btn">Index Ads</button>
+                        <button class="submenu-item" id="ads-bottom-btn">Ads Bottom</button>
                         <button class="submenu-item" id="about-us-btn">About Us</button>
                     </div>
                 </li>
@@ -125,6 +126,25 @@
                 
                 <!-- Tab Content -->
                 <div id="about-us-tab-content">
+                    <!-- Content will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Ads Bottom Management Card -->
+            <div id="ads-bottom-management-card" class="card" style="display: none;">
+                <h2>Ads Bottom Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Manage the three promotional ads displayed at the bottom of the index page.</p>
+                
+                <!-- Tab Navigation -->
+                <div class="ads-bottom-tabs">
+                    <button class="ads-bottom-tab active" data-tab="titles">Titles</button>
+                    <button class="ads-bottom-tab" data-tab="ad1">Ad 1</button>
+                    <button class="ads-bottom-tab" data-tab="ad2">Ad 2</button>
+                    <button class="ads-bottom-tab" data-tab="ad3">Ad 3</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="ads-bottom-tab-content">
                     <!-- Content will be rendered by JavaScript -->
                 </div>
             </div>
@@ -273,11 +293,13 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             // Hide all cards
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
             
             // Show only photo card
             photoCard.style.display = 'block';
@@ -295,11 +317,13 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             // Hide all cards
             photoCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
             
             // Show only ads card
             adsCard.style.display = 'block';
@@ -873,10 +897,12 @@
             const photoCard = document.getElementById('photo-management-card');
             const adsCard = document.getElementById('ads-management-card');
             const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
             aboutUsCard.style.display = 'block';
             
             aboutUsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -886,6 +912,28 @@
             
             await loadAboutUsData();
             renderAboutUsTab();
+        });
+
+        // Show Ads Bottom management card
+        document.getElementById('ads-bottom-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
+            
+            photoCard.style.display = 'none';
+            adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'block';
+            
+            adsBottomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Hide menu after selection
+            verticalMenu.classList.remove('show');
+            
+            await loadAdsBottomData();
+            renderAdsBottomTab();
         });
 
         // Add click handlers for other menu items (Manage Rooms, Manage Offers, View Bookings)
@@ -1067,6 +1115,202 @@
                 alert('About Us content saved successfully!');
             } catch (error) {
                 console.error('Error saving About Us data:', error);
+                alert('Failed to save. Please try again.');
+            }
+        }
+
+        // ============ ADS BOTTOM MANAGEMENT ============
+        let adsBottomData = {
+            titles: {
+                title1_en: '', title1_nl: '', title1_fr: '',
+                title2_en: '', title2_nl: '', title2_fr: '',
+                title3_en: '', title3_nl: '', title3_fr: ''
+            },
+            ad1: {
+                imageUrl: '',
+                title_en: '', title_nl: '', title_fr: '',
+                body_en: '', body_nl: '', body_fr: ''
+            },
+            ad2: {
+                imageUrl: '',
+                title_en: '', title_nl: '', title_fr: '',
+                body_en: '', body_nl: '', body_fr: ''
+            },
+            ad3: {
+                imageUrl: '',
+                title_en: '', title_nl: '', title_fr: '',
+                body_en: '', body_nl: '', body_fr: ''
+            }
+        };
+
+        let currentAdsBottomTab = 'titles';
+        let currentAdsBottomLang = 'en';
+
+        // Tab switching for Ads Bottom
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('ads-bottom-tab')) {
+                document.querySelectorAll('.ads-bottom-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAdsBottomTab = e.target.dataset.tab;
+                renderAdsBottomTab();
+            }
+            
+            if (e.target.classList.contains('ads-bottom-lang-tab')) {
+                document.querySelectorAll('.ads-bottom-lang-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentAdsBottomLang = e.target.dataset.lang;
+                renderAdsBottomTab();
+            }
+        });
+
+        // Load Ads Bottom data from Firebase
+        async function loadAdsBottomData() {
+            try {
+                const snapshot = await get(dbRef(database, 'adsBottom'));
+                
+                if (snapshot.exists()) {
+                    adsBottomData = snapshot.val();
+                }
+            } catch (error) {
+                console.error('Error loading Ads Bottom data:', error);
+            }
+        }
+
+        // Render Ads Bottom tab content
+        function renderAdsBottomTab() {
+            const container = document.getElementById('ads-bottom-tab-content');
+            
+            // Language tabs
+            const langTabs = `
+                <div class="ads-bottom-lang-tabs">
+                    <button class="ads-bottom-lang-tab ${currentAdsBottomLang === 'en' ? 'active' : ''}" data-lang="en">🇬🇧 EN</button>
+                    <button class="ads-bottom-lang-tab ${currentAdsBottomLang === 'nl' ? 'active' : ''}" data-lang="nl">🇳🇱 NL</button>
+                    <button class="ads-bottom-lang-tab ${currentAdsBottomLang === 'fr' ? 'active' : ''}" data-lang="fr">🇫🇷 FR</button>
+                </div>
+            `;
+            
+            let content = '';
+            
+            if (currentAdsBottomTab === 'titles') {
+                const title1 = adsBottomData.titles[`title1_${currentAdsBottomLang}`] || '';
+                const title2 = adsBottomData.titles[`title2_${currentAdsBottomLang}`] || '';
+                const title3 = adsBottomData.titles[`title3_${currentAdsBottomLang}`] || '';
+                
+                content = `
+                    ${langTabs}
+                    <div class="form-group">
+                        <label>Title 1</label>
+                        <input type="text" id="ads-bottom-title1" class="form-control" value="${escapeHtml(title1)}" placeholder="Enter title 1">
+                    </div>
+                    <div class="form-group">
+                        <label>Title 2</label>
+                        <input type="text" id="ads-bottom-title2" class="form-control" value="${escapeHtml(title2)}" placeholder="Enter title 2">
+                    </div>
+                    <div class="form-group">
+                        <label>Title 3</label>
+                        <input type="text" id="ads-bottom-title3" class="form-control" value="${escapeHtml(title3)}" placeholder="Enter title 3">
+                    </div>
+                    <button class="btn" id="save-ads-bottom-titles-btn">Save Titles</button>
+                `;
+            } else {
+                // Ad tab (ad1, ad2, or ad3)
+                const ad = adsBottomData[currentAdsBottomTab];
+                const title = ad[`title_${currentAdsBottomLang}`] || '';
+                const body = ad[`body_${currentAdsBottomLang}`] || '';
+                
+                content = `
+                    ${langTabs}
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input type="file" id="ads-bottom-image-upload-${currentAdsBottomTab}" accept="image/*" style="margin-bottom: 0.5rem;">
+                        ${ad.imageUrl ? `<img src="${ad.imageUrl}" style="max-width: 300px; display: block; margin-top: 0.5rem; border-radius: 4px;">` : '<p style="color: var(--color-sage);">No image uploaded</p>'}
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="ads-bottom-ad-title" class="form-control" value="${escapeHtml(title)}" placeholder="Enter title">
+                    </div>
+                    <div class="form-group">
+                        <label>Body Text</label>
+                        <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Tip: Press Enter to add line spacing between paragraphs</p>
+                        <textarea id="ads-bottom-ad-body" class="admin-textarea" placeholder="Enter body text">${escapeHtml(body)}</textarea>
+                    </div>
+                    <button class="btn" id="save-ads-bottom-ad-btn">Save Ad</button>
+                `;
+            }
+            
+            container.innerHTML = content;
+            
+            // Attach save handlers
+            attachAdsBottomSaveHandlers();
+        }
+
+        // Attach save button handlers for Ads Bottom
+        function attachAdsBottomSaveHandlers() {
+            const saveTitlesBtn = document.getElementById('save-ads-bottom-titles-btn');
+            const saveAdBtn = document.getElementById('save-ads-bottom-ad-btn');
+            
+            if (saveTitlesBtn) {
+                saveTitlesBtn.addEventListener('click', async () => {
+                    adsBottomData.titles[`title1_${currentAdsBottomLang}`] = document.getElementById('ads-bottom-title1').value;
+                    adsBottomData.titles[`title2_${currentAdsBottomLang}`] = document.getElementById('ads-bottom-title2').value;
+                    adsBottomData.titles[`title3_${currentAdsBottomLang}`] = document.getElementById('ads-bottom-title3').value;
+                    await saveAdsBottomData();
+                });
+            }
+            
+            if (saveAdBtn) {
+                const imageInput = document.getElementById(`ads-bottom-image-upload-${currentAdsBottomTab}`);
+                
+                if (imageInput) {
+                    imageInput.addEventListener('change', async (e) => {
+                        const file = e.target.files[0];
+                        if (!file) return;
+                        
+                        if (!file.type.startsWith('image/')) {
+                            alert('Please select an image file');
+                            return;
+                        }
+                        
+                        try {
+                            const timestamp = Date.now();
+                            const filename = `ads-bottom/${currentAdsBottomTab}-${timestamp}-${file.name}`;
+                            const fileRef = storageRef(storage, filename);
+                            
+                            await uploadBytes(fileRef, file);
+                            const downloadURL = await getDownloadURL(fileRef);
+                            
+                            adsBottomData[currentAdsBottomTab].imageUrl = downloadURL;
+                            
+                            await set(dbRef(database, 'adsBottom'), adsBottomData);
+                            
+                            renderAdsBottomTab();
+                            alert('Image uploaded successfully!');
+                        } catch (error) {
+                            console.error('Error uploading image:', error);
+                            alert('Failed to upload image.');
+                        }
+                    });
+                }
+                
+                saveAdBtn.addEventListener('click', async () => {
+                    const title = document.getElementById('ads-bottom-ad-title').value;
+                    const body = document.getElementById('ads-bottom-ad-body').value;
+                    
+                    adsBottomData[currentAdsBottomTab][`title_${currentAdsBottomLang}`] = title;
+                    adsBottomData[currentAdsBottomTab][`body_${currentAdsBottomLang}`] = body;
+                    
+                    await saveAdsBottomData();
+                });
+            }
+        }
+
+        // Save Ads Bottom data to Firebase
+        async function saveAdsBottomData() {
+            try {
+                await set(dbRef(database, 'adsBottom'), adsBottomData);
+                alert('Ads Bottom content saved successfully!');
+            } catch (error) {
+                console.error('Error saving Ads Bottom data:', error);
                 alert('Failed to save. Please try again.');
             }
         }

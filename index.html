@@ -75,6 +75,9 @@
             </div>
         </section>
 
+        <!-- Ads Bottom Section -->
+        <section id="ads-bottom-section" style="display: none;"></section>
+
         <div class="container">
             <div class="card">
                 <h2>Welcome to Hotel Elisabeth Mechelen</h2>
@@ -447,6 +450,66 @@
 
         // Load About Us after page loads
         loadAboutUsContent();
+
+        // ============ ADS BOTTOM SECTION ============
+        async function loadAdsBottom() {
+            try {
+                const snapshot = await get(dbRef(database, 'adsBottom'));
+                
+                if (!snapshot.exists()) {
+                    return; // No data to display
+                }
+                
+                const data = snapshot.val();
+                const adsBottomSection = document.getElementById('ads-bottom-section');
+                
+                // Check if we have all required data
+                if (!data.titles || !data.ad1 || !data.ad2 || !data.ad3) {
+                    return; // Not all data configured
+                }
+                
+                // Render the Ads Bottom section with proper escaping
+                adsBottomSection.innerHTML = `
+                    <div class="ads-bottom-container">
+                        <div class="ads-bottom-overlay"></div>
+                        <div class="ads-bottom-content">
+                            <div class="ads-bottom-titles">
+                                <h2 class="ads-bottom-title">${escapeHtml(data.titles[`title1_${currentLang}`] || '')}</h2>
+                                <h3 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title2_${currentLang}`] || '')}</h3>
+                                <h3 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title3_${currentLang}`] || '')}</h3>
+                            </div>
+                            <div class="ads-bottom-cards">
+                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad1.imageUrl)}');">
+                                    <div class="ads-bottom-card-content">
+                                        <h4>${escapeHtml(data.ad1[`title_${currentLang}`] || '')}</h4>
+                                        <p>${escapeHtml(data.ad1[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                    </div>
+                                </div>
+                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad2.imageUrl)}');">
+                                    <div class="ads-bottom-card-content">
+                                        <h4>${escapeHtml(data.ad2[`title_${currentLang}`] || '')}</h4>
+                                        <p>${escapeHtml(data.ad2[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                    </div>
+                                </div>
+                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad3.imageUrl)}');">
+                                    <div class="ads-bottom-card-content">
+                                        <h4>${escapeHtml(data.ad3[`title_${currentLang}`] || '')}</h4>
+                                        <p>${escapeHtml(data.ad3[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                adsBottomSection.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading Ads Bottom:', error);
+            }
+        }
+        
+        // Load Ads Bottom after page loads
+        loadAdsBottom();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
         // Load and display background image
