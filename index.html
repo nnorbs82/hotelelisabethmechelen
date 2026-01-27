@@ -458,44 +458,44 @@
                 const snapshot = await get(dbRef(database, 'adsBottom'));
                 
                 if (!snapshot.exists()) {
-                    return; // No data to display
+                    return;
                 }
                 
                 const data = snapshot.val();
+                const currentLang = detectLanguage();
                 const adsBottomSection = document.getElementById('ads-bottom-section');
                 
-                // Check if we have all required data
                 if (!data.titles || !data.ad1 || !data.ad2 || !data.ad3) {
-                    return; // Not all data configured
+                    return;
                 }
                 
-                // Render the Ads Bottom section with proper escaping
+                // Render with fixed structure
                 adsBottomSection.innerHTML = `
-                    <div class="ads-bottom-container">
+                    <div class="ads-bottom-container" style="background-image: url('${sanitizeImageUrl(data.backgroundImage || '')}');">
                         <div class="ads-bottom-overlay"></div>
                         <div class="ads-bottom-content">
                             <div class="ads-bottom-titles">
-                                <h2 class="ads-bottom-title">${escapeHtml(data.titles[`title1_${currentLang}`] || '')}</h2>
-                                <h3 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title2_${currentLang}`] || '')}</h3>
+                                <p class="ads-bottom-title">${escapeHtml(data.titles[`title1_${currentLang}`] || '')}</p>
+                                <h2 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title2_${currentLang}`] || '')}</h2>
                                 <h3 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title3_${currentLang}`] || '')}</h3>
                             </div>
                             <div class="ads-bottom-cards">
                                 <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad1.imageUrl)}');">
                                     <div class="ads-bottom-card-content">
                                         <h4>${escapeHtml(data.ad1[`title_${currentLang}`] || '')}</h4>
-                                        <p>${escapeHtml(data.ad1[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                        <p>${escapeHtml(data.ad1[`body_${currentLang}`] || '')}</p>
                                     </div>
                                 </div>
                                 <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad2.imageUrl)}');">
                                     <div class="ads-bottom-card-content">
                                         <h4>${escapeHtml(data.ad2[`title_${currentLang}`] || '')}</h4>
-                                        <p>${escapeHtml(data.ad2[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                        <p>${escapeHtml(data.ad2[`body_${currentLang}`] || '')}</p>
                                     </div>
                                 </div>
                                 <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad3.imageUrl)}');">
                                     <div class="ads-bottom-card-content">
                                         <h4>${escapeHtml(data.ad3[`title_${currentLang}`] || '')}</h4>
-                                        <p>${escapeHtml(data.ad3[`body_${currentLang}`] || '').replace(/\n/g, '<br>')}</p>
+                                        <p>${escapeHtml(data.ad3[`body_${currentLang}`] || '')}</p>
                                     </div>
                                 </div>
                             </div>
