@@ -1592,7 +1592,6 @@ body:not(.admin-page) .nav-logo img {
     min-height: 600px;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
 }
 
 .ads-bottom-overlay {
@@ -1667,7 +1666,7 @@ body:not(.admin-page) .nav-logo img {
     transform: translateY(-5px);
 }
 
-/* Card Content - Icon, Title, Body */
+/* Card Content - Title, Body */
 .ads-bottom-card-content {
     position: relative;
     z-index: 2;
@@ -1676,25 +1675,13 @@ body:not(.admin-page) .nav-logo img {
     display: flex;
     flex-direction: column;
     align-items: center; /* Center all content */
-    justify-content: flex-start; /* Start from top */
+    justify-content: center; /* Center vertically */
     text-align: center; /* Center text */
     background: linear-gradient(
         to bottom, 
         rgba(0, 0, 0, 0.7) 0%, 
         rgba(0, 0, 0, 0.6) 100%
     );
-}
-
-/* Icon at top (if using background image as icon) */
-.ads-bottom-card-content::before {
-    content: '';
-    width: 80px;
-    height: 80px;
-    margin-bottom: 2rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    display: block;
 }
 
 /* Card Title - Below Icon */
