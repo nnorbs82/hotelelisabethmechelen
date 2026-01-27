@@ -1258,13 +1258,6 @@
             }
         };
 
-        // Helper function (if not already defined)
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
         // Tab switching
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('about-us-tab')) {
