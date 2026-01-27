@@ -887,7 +887,7 @@ body.admin-page {
 main.container {
     max-width: 1200px;
     margin: 0 auto; /* CENTER THE CONTENT */
-    padding: 2rem;
+    padding: 80px 2rem 2rem 2rem; /* 80px top gap for management cards */
 }
 
 /* Cards stay centered */
