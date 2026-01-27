@@ -1628,7 +1628,7 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .ads-bottom-subtitle {
-    font-size: 2.5rem; /* LARGE text */
+    font-size: 2rem; /* Same size for both title2 and title3 */
     font-weight: 700;
     color: var(--color-white);
     margin-bottom: 0.5rem;
@@ -1638,7 +1638,7 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .ads-bottom-subtitle:last-child {
-    font-size: 2rem; /* Slightly smaller for second line */
+    font-size: 2rem; /* Same size as title2 */
     font-weight: 600;
 }
 
@@ -1653,13 +1653,12 @@ body:not(.admin-page) .nav-logo img {
 /* Individual Cards */
 .ads-bottom-card {
     position: relative;
-    min-height: 350px;
-    background-size: cover;
-    background-position: center;
     border-radius: 0; /* No border radius */
     overflow: hidden;
     border: none; /* Remove border */
     transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .ads-bottom-card:hover {
@@ -1671,17 +1670,21 @@ body:not(.admin-page) .nav-logo img {
     position: relative;
     z-index: 2;
     padding: 2rem 1.5rem;
-    height: 100%;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center all content */
-    justify-content: center; /* Center vertically */
+    align-items: center; /* Center all content horizontally */
+    justify-content: flex-start; /* Align to top */
     text-align: center; /* Center text */
-    background: linear-gradient(
-        to bottom, 
-        rgba(0, 0, 0, 0.7) 0%, 
-        rgba(0, 0, 0, 0.6) 100%
-    );
+    background: transparent;
+}
+
+/* Card Image - 60x60px at top */
+.ads-bottom-card-content img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-bottom: 50px; /* 50px spacing after image */
 }
 
 /* Card Title - Below Icon */
@@ -1689,7 +1692,7 @@ body:not(.admin-page) .nav-logo img {
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-white);
-    margin-bottom: 1rem;
+    margin-bottom: 50px; /* 50px spacing after title */
     text-transform: uppercase;
     letter-spacing: 0.1rem;
 }
@@ -1760,11 +1763,11 @@ body:not(.admin-page) .nav-logo img {
         gap: 2rem;
     }
     
-    .ads-bottom-card {
-        min-height: 300px;
+    .ads-bottom-content {
+        padding: 2rem 1rem;
     }
     
-    .ads-bottom-content {
+    .ads-bottom-card-content {
         padding: 2rem 1rem;
     }
 }

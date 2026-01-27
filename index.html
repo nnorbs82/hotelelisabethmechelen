@@ -480,20 +480,23 @@
                                 <h3 class="ads-bottom-subtitle">${escapeHtml(data.titles[`title3_${currentLang}`] || '')}</h3>
                             </div>
                             <div class="ads-bottom-cards">
-                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad1.imageUrl)}');">
+                                <div class="ads-bottom-card">
                                     <div class="ads-bottom-card-content">
+                                        <img src="${sanitizeImageUrl(data.ad1.imageUrl)}" alt="${escapeHtml(data.ad1[`title_${currentLang}`] || '')}">
                                         <h4>${escapeHtml(data.ad1[`title_${currentLang}`] || '')}</h4>
                                         <p>${escapeHtml(data.ad1[`body_${currentLang}`] || '')}</p>
                                     </div>
                                 </div>
-                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad2.imageUrl)}');">
+                                <div class="ads-bottom-card">
                                     <div class="ads-bottom-card-content">
+                                        <img src="${sanitizeImageUrl(data.ad2.imageUrl)}" alt="${escapeHtml(data.ad2[`title_${currentLang}`] || '')}">
                                         <h4>${escapeHtml(data.ad2[`title_${currentLang}`] || '')}</h4>
                                         <p>${escapeHtml(data.ad2[`body_${currentLang}`] || '')}</p>
                                     </div>
                                 </div>
-                                <div class="ads-bottom-card" style="background-image: url('${sanitizeImageUrl(data.ad3.imageUrl)}');">
+                                <div class="ads-bottom-card">
                                     <div class="ads-bottom-card-content">
+                                        <img src="${sanitizeImageUrl(data.ad3.imageUrl)}" alt="${escapeHtml(data.ad3[`title_${currentLang}`] || '')}">
                                         <h4>${escapeHtml(data.ad3[`title_${currentLang}`] || '')}</h4>
                                         <p>${escapeHtml(data.ad3[`body_${currentLang}`] || '')}</p>
                                     </div>
