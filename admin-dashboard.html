@@ -340,8 +340,10 @@
                 dashboardContent.style.display = 'block';
                 
                 // Display admin email
-                document.getElementById('admin-email').textContent = 
-                    `Logged in as: ${authState.user.email}`;
+                const adminEmailElement = document.getElementById('admin-email');
+                if (adminEmailElement) {
+                    adminEmailElement.textContent = `Logged in as: ${authState.user.email}`;
+                }
             } else {
                 // User is not logged in, redirect to login page
                 window.location.href = 'hoteladmin.html';
@@ -2155,6 +2157,7 @@
             const container = document.getElementById('room-list-container');
             if (!roomsData || roomsData.length === 0) {
                 container.innerHTML = '<p style="color: var(--color-sage); text-align: center; margin: 2rem 0;">No rooms available. Click "Add New Room" to create one.</p>';
+                attachRoomButtonListeners();
                 return;
             }
 
@@ -2184,6 +2187,19 @@
             }).join('');
 
             container.innerHTML = roomsHTML;
+            attachRoomButtonListeners();
+        }
+
+        // Add event listener for "Add New Room" button
+        // Must be attached after room management card is visible
+        function attachRoomButtonListeners() {
+            const addRoomBtn = document.getElementById('add-new-room-btn');
+            if (addRoomBtn && !addRoomBtn.hasAttribute('data-listener-attached')) {
+                addRoomBtn.addEventListener('click', () => {
+                    openRoomModal();
+                });
+                addRoomBtn.setAttribute('data-listener-attached', 'true');
+            }
         }
 
         // Add new room button event listener
@@ -2197,7 +2213,7 @@
             const room = roomId ? roomsData.find(r => r.id === roomId) : null;
             
             // Load amenities for selection
-            const amenitiesSnapshot = await get(dbRef(database, 'amenities'));
+            const amenitiesSnapshot = await get(dbRef(database, 'amenitiesMaster'));
             let amenitiesList = [];
             if (amenitiesSnapshot.exists()) {
                 const amenitiesObj = amenitiesSnapshot.val();
