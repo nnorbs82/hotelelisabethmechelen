@@ -186,8 +186,12 @@
                     // since it only happens once per mouseenter event (not continuous)
                     const positionSubmenu = () => {
                         const rect = menuBtn.getBoundingClientRect();
+                        const menuRect = verticalMenu.getBoundingClientRect();
                         // Align submenu top edge with button top edge
-                        submenu.style.top = rect.top + 'px';
+                        // Since submenu is position:fixed inside a transformed parent (.vertical-menu),
+                        // it's positioned relative to that parent, not the viewport
+                        // So we subtract the parent menu's top position to get the correct offset
+                        submenu.style.top = (rect.top - menuRect.top) + 'px';
                     };
                     
                     // Position on mouse enter

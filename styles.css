@@ -779,6 +779,7 @@ body.admin-page {
 /* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
     position: fixed; /* Fixed to avoid overflow clipping */
+    top: 0; /* Default top position, will be overridden by JS to align with hovered menu item */
     left: calc(var(--vertical-menu-width) - 1px); /* Overlap by 1px to ensure no gap during hover transition */
     width: 220px;
     background-color: #1a1a1a; /* Slightly lighter than menu for visual distinction */
