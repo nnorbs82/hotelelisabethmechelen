@@ -801,6 +801,14 @@ body.admin-page {
     transform: translateX(0); /* Slide into position */
 }
 
+/* Show submenu when parent has active class (JS-controlled) */
+.vertical-menu-item.has-submenu.active > .vertical-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0); /* Slide into position */
+}
+
 /* Keep submenu visible when hovering submenu itself */
 .vertical-submenu:hover {
     opacity: 1;
