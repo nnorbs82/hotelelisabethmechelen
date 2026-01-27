@@ -1676,11 +1676,7 @@ body:not(.admin-page) .nav-logo img {
     align-items: center; /* Center all content horizontally */
     justify-content: flex-start; /* Align to top */
     text-align: center; /* Center text */
-    background: linear-gradient(
-        to bottom, 
-        rgba(0, 0, 0, 0.7) 0%, 
-        rgba(0, 0, 0, 0.6) 100%
-    );
+    background: transparent;
 }
 
 /* Card Image - 60x60px at top */
