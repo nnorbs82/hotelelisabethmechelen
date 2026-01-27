@@ -81,6 +81,13 @@
         let currentLightboxRoom = null;
         let currentLightboxIndex = 0;
 
+        // HTML escape function to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Language selector
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -133,24 +140,25 @@
             }
 
             const roomsHTML = roomsData.map(room => {
-                const name = room[`name_${currentLang}`] || room.name_en;
-                const bedType = room[`bedType_${currentLang}`] || room.bedType_en;
-                const description = room[`description_${currentLang}`] || room.description_en;
+                const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
+                const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
+                const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
                 
                 // Get amenities list
                 const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
                     const amenity = amenitiesData[amenityId];
-                    return amenity ? (amenity[`name_${currentLang}`] || amenity.name_en) : '';
+                    return amenity ? escapeHtml(amenity[`name_${currentLang}`] || amenity.name_en || '') : '';
                 }).filter(a => a) : [];
 
-                // Get first photo for card display
+                // Get first photo for card display - URLs are trusted from Firebase
                 const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
+                const escapedRoomId = escapeHtml(room.id);
 
                 return `
                     <div class="room-card">
                         ${firstPhoto ? `
-                            <div class="room-photo" style="cursor: pointer;" onclick="openLightbox('${room.id}', 0)">
-                                <img src="${firstPhoto}" alt="${name}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
+                            <div class="room-photo" style="cursor: pointer;" onclick="openLightbox('${escapedRoomId}', 0)">
+                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
                                 ${room.photos && room.photos.length > 1 ? `<div class="photo-count">${room.photos.length} photos</div>` : ''}
                             </div>
                         ` : ''}
@@ -173,11 +181,11 @@
                             ` : ''}
                             
                             ${room.photos && room.photos.length > 0 ? `
-                                <button class="btn view-gallery-btn" onclick="openLightbox('${room.id}', 0)">View Gallery</button>
+                                <button class="btn view-gallery-btn" onclick="openLightbox('${escapedRoomId}', 0)">View Gallery</button>
                             ` : ''}
                             
                             ${room.video ? `
-                                <button class="btn" onclick="playVideo('${room.video.url}')">Watch Video</button>
+                                <button class="btn" onclick="playVideo('${escapeHtml(room.video.url)}')">Watch Video</button>
                             ` : ''}
                         </div>
                     </div>

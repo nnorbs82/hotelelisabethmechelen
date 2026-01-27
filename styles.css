@@ -1955,6 +1955,38 @@ body:not(.admin-page) .nav-logo img {
     font-weight: 600;
 }
 
+/* Room Language Tabs */
+.room-lang-tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.room-lang-tab {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.room-lang-tab:hover {
+    background: #f5f5f5;
+}
+
+.room-lang-tab.active {
+    border-bottom-color: var(--color-sage);
+    font-weight: 600;
+}
+
+.room-lang-content {
+    /* Language content containers */
+}
+
 /* Form Input Styles */
 .form-input {
     font-family: 'Raleway', sans-serif;

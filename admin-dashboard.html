@@ -2098,6 +2098,12 @@
         let roomsData = [];
         let roomModalOpen = false;
 
+        // Sanitize filename for Firebase Storage
+        function sanitizeFilename(filename) {
+            // Remove path separators and other potentially problematic characters
+            return filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+        }
+
         async function loadRoomsData() {
             try {
                 const roomsSnapshot = await get(dbRef(database, 'rooms'));
@@ -2319,7 +2325,8 @@
                 try {
                     for (const file of files) {
                         const timestamp = Date.now();
-                        const filename = `room-photos/${timestamp}-${file.name}`;
+                        const sanitizedName = sanitizeFilename(file.name);
+                        const filename = `room-photos/${timestamp}-${sanitizedName}`;
                         const fileRef = storageRef(storage, filename);
                         await uploadBytes(fileRef, file);
                         const downloadURL = await getDownloadURL(fileRef);
@@ -2425,7 +2432,8 @@
 
                 try {
                     const timestamp = Date.now();
-                    const filename = `room-videos/${timestamp}-${file.name}`;
+                    const sanitizedName = sanitizeFilename(file.name);
+                    const filename = `room-videos/${timestamp}-${sanitizedName}`;
                     const fileRef = storageRef(storage, filename);
                     await uploadBytes(fileRef, file);
                     const downloadURL = await getDownloadURL(fileRef);
