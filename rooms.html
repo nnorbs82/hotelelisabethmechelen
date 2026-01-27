@@ -208,11 +208,11 @@
             const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
 
             // Show current photo
-            lightboxImage.src = room.photos[photoIndex].url;
+            lightboxImage.src = escapeHtml(room.photos[photoIndex].url);
 
             // Render thumbnails
             thumbnailsContainer.innerHTML = room.photos.map((photo, index) => `
-                <img src="${photo.url}" 
+                <img src="${escapeHtml(photo.url)}" 
                      class="lightbox-thumbnail ${index === photoIndex ? 'active' : ''}" 
                      onclick="changeLightboxPhoto(${index})"
                      alt="Thumbnail ${index + 1}">
@@ -226,7 +226,7 @@
 
             currentLightboxIndex = index;
             const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = currentLightboxRoom.photos[index].url;
+            lightboxImage.src = escapeHtml(currentLightboxRoom.photos[index].url);
 
             // Update active thumbnail
             document.querySelectorAll('.lightbox-thumbnail').forEach((thumb, i) => {

@@ -2098,10 +2098,26 @@
         let roomsData = [];
         let roomModalOpen = false;
 
+        // HTML escape function to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Sanitize filename for Firebase Storage
         function sanitizeFilename(filename) {
-            // Remove path separators and other potentially problematic characters
-            return filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+            // Extract the file extension
+            const lastDotIndex = filename.lastIndexOf('.');
+            const name = lastDotIndex > 0 ? filename.substring(0, lastDotIndex) : filename;
+            const ext = lastDotIndex > 0 ? filename.substring(lastDotIndex) : '';
+            
+            // Remove path separators and other potentially problematic characters from name
+            const sanitizedName = name.replace(/[^a-zA-Z0-9_-]/g, '_');
+            // Only allow alphanumeric and underscore in extension
+            const sanitizedExt = ext.replace(/[^a-zA-Z0-9.]/g, '');
+            
+            return sanitizedName + sanitizedExt;
         }
 
         async function loadRoomsData() {
@@ -2129,24 +2145,30 @@
                 return;
             }
 
-            const roomsHTML = roomsData.map(room => `
+            const roomsHTML = roomsData.map(room => {
+                const escapedId = escapeHtml(room.id);
+                const escapedName = escapeHtml(room.name_en || 'Untitled Room');
+                const escapedBedType = escapeHtml(room.bedType_en || 'N/A');
+                
+                return `
                 <div class="room-item" style="border: 1px solid var(--color-sage); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
                     <div style="display: flex; justify-content: space-between; align-items: start;">
                         <div style="flex: 1;">
-                            <h3 style="margin: 0 0 0.5rem 0;">${room.name_en || 'Untitled Room'}</h3>
-                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Bed Type:</strong> ${room.bedType_en || 'N/A'}</p>
+                            <h3 style="margin: 0 0 0.5rem 0;">${escapedName}</h3>
+                            <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Bed Type:</strong> ${escapedBedType}</p>
                             <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Max Occupancy:</strong> ${room.maxOccupancy || 'N/A'} guests</p>
                             <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Room Size:</strong> ${room.roomSize || 'N/A'} m²</p>
                             <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Photos:</strong> ${room.photos ? room.photos.length : 0}</p>
                             ${room.video ? '<p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Video:</strong> Yes</p>' : ''}
                         </div>
                         <div style="display: flex; gap: 0.5rem;">
-                            <button class="btn" onclick="editRoom('${room.id}')" style="padding: 0.5rem 1rem;">Edit</button>
-                            <button class="btn" onclick="deleteRoom('${room.id}')" style="background: #d32f2f; padding: 0.5rem 1rem;">Delete</button>
+                            <button class="btn" onclick="editRoom('${escapedId}')" style="padding: 0.5rem 1rem;">Edit</button>
+                            <button class="btn" onclick="deleteRoom('${escapedId}')" style="background: #d32f2f; padding: 0.5rem 1rem;">Delete</button>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
 
             container.innerHTML = roomsHTML;
         }
