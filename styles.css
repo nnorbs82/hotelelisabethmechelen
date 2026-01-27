@@ -734,7 +734,6 @@ body.admin-page {
 
 /* Menu Items - FULL WIDTH, NO CENTERING */
 .vertical-menu-item {
-    position: relative;
     display: block;
     width: 100%; /* FULL width */
     margin: 0;
@@ -779,22 +778,31 @@ body.admin-page {
 /* Submenu - FLY OUT TO THE RIGHT AS SEPARATE PANEL */
 .vertical-submenu {
     position: fixed; /* Fixed to avoid overflow clipping */
-    left: var(--vertical-menu-width); /* Right edge of parent menu */
+    left: calc(var(--vertical-menu-width) + 10px); /* 10px gap from menu edge for clear separation */
     width: 220px;
-    background-color: #050505;
+    background-color: #1a1a1a; /* Slightly lighter than menu for visual distinction */
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.9); /* Stronger shadow for visibility */
-    border: 1px solid rgba(212, 211, 195, 0.2); /* Add subtle border for visibility */
+    border: 1px solid rgba(212, 211, 195, 0.3); /* Stronger border for clear separation */
+    border-left: 2px solid var(--color-sage); /* Accent border on left for fly-out effect */
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transform: translateX(-20px); /* Start slightly left */
-    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    transform: translateX(-30px); /* Start further left for more dramatic fly-out */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     z-index: 1001; /* ABOVE parent menu */
     padding: 0.5rem 0;
 }
 
 /* Show submenu on parent hover */
 .vertical-menu-item.has-submenu:hover > .vertical-submenu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0); /* Slide into position */
+}
+
+/* Show submenu when parent has active class (JS-controlled) */
+.vertical-menu-item.has-submenu.active > .vertical-submenu {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
