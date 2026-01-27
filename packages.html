@@ -15,77 +15,154 @@
         }
 
         .packages-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
 
         .packages-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .packages-header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 300;
             color: var(--color-black);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .packages-header p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--color-sage);
+            font-weight: 400;
         }
 
+        /* Compact Package Card - Collapsed State */
         .package-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .package-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
-        .package-image {
-            width: 100%;
-            height: 400px;
+        .package-card.expanded {
+            cursor: default;
+        }
+
+        /* Compact Header - Always Visible */
+        .package-header {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            gap: 1.25rem;
+            position: relative;
+        }
+
+        .package-thumbnail {
+            width: 100px;
+            height: 100px;
             object-fit: cover;
+            border-radius: 6px;
+            flex-shrink: 0;
         }
 
-        .package-content {
-            padding: 2rem;
+        .package-summary {
+            flex: 1;
+            min-width: 0;
         }
 
         .package-title {
-            font-size: 2rem;
+            font-size: 1.4rem;
             font-weight: 500;
             color: var(--color-black);
-            margin-bottom: 1rem;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+
+        .package-teaser {
+            font-size: 0.95rem;
+            color: var(--color-sage);
+            line-height: 1.5;
+            max-height: 2.85em; /* Fallback: ~2 lines */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .package-expand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--color-sage);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .package-card:hover .package-expand-icon {
+            background-color: var(--color-black);
+        }
+
+        .package-card.expanded .package-expand-icon {
+            transform: rotate(180deg);
+            background-color: var(--color-black);
+        }
+
+        /* Expanded Content - Hidden by Default */
+        .package-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .package-card.expanded .package-details {
+            max-height: 2500px; /* Large enough for most packages, adjustable if needed */
+        }
+
+        .package-content {
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            border-top: 1px solid var(--color-beige);
+        }
+
+        .package-full-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin: 1.25rem 0;
         }
 
         .package-description {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--color-sage);
             line-height: 1.8;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .package-section {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .package-section-title {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--color-black);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.4rem;
             border-bottom: 2px solid var(--color-beige);
-            padding-bottom: 0.5rem;
         }
 
         .package-list {
@@ -94,11 +171,12 @@
         }
 
         .package-list li {
-            padding: 0.5rem 0;
+            padding: 0.4rem 0;
             padding-left: 1.5rem;
             position: relative;
             color: var(--color-sage);
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .package-list li:before {
@@ -111,16 +189,16 @@
 
         .package-book-btn {
             display: inline-block;
-            padding: 1rem 3rem;
+            padding: 0.875rem 2.5rem;
             background-color: var(--color-sage);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
         }
 
         .package-book-btn:hover {
@@ -150,16 +228,37 @@
                 font-size: 2rem;
             }
 
-            .package-image {
-                height: 250px;
+            .package-header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+
+            .package-thumbnail {
+                width: 100%;
+                height: 180px;
+            }
+
+            .package-expand-icon {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
             }
 
             .package-title {
-                font-size: 1.5rem;
+                font-size: 1.25rem;
+            }
+
+            .package-teaser {
+                font-size: 0.9rem;
             }
 
             .package-content {
-                padding: 1.5rem;
+                padding: 0 1rem 1rem 1rem;
+            }
+
+            .package-full-image {
+                height: 220px;
             }
         }
     </style>
@@ -217,6 +316,9 @@
         import { database } from './firebase-config.js';
         import { ref, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Configuration constants
+        const TEASER_MAX_LENGTH = 120;
+        
         // Detect browser language
         function detectLanguage() {
             const lang = navigator.language || navigator.userLanguage;
@@ -226,6 +328,7 @@
         }
 
         const currentLang = detectLanguage();
+        let currentlyExpandedCard = null;
 
         async function loadPackages() {
             const loadingEl = document.getElementById('loading');
@@ -248,7 +351,7 @@
                         return;
                     }
 
-                    packagesListEl.innerHTML = packages.map(pkg => {
+                    packagesListEl.innerHTML = packages.map((pkg, index) => {
                         const title = pkg[`title_${currentLang}`] || pkg.title_en || 'Package';
                         const description = pkg[`description_${currentLang}`] || pkg.description_en || '';
                         const inclusions = pkg[`inclusions_${currentLang}`] || pkg.inclusions_en || '';
@@ -257,40 +360,74 @@
                         const inclusionsList = inclusions.split('\n').filter(item => item.trim());
                         const goodToKnowList = goodToKnow.split('\n').filter(item => item.trim());
 
+                        // Create teaser from description (first TEASER_MAX_LENGTH characters)
+                        const teaser = description ? 
+                            (description.length > TEASER_MAX_LENGTH ? description.substring(0, TEASER_MAX_LENGTH) + '...' : description) : 
+                            (currentLang === 'nl' ? 'Klik voor meer details' : currentLang === 'fr' ? 'Cliquez pour plus de détails' : 'Click for more details');
+
                         return `
-                            <div class="package-card">
-                                ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-image">` : ''}
-                                <div class="package-content">
-                                    <h2 class="package-title">${title}</h2>
-                                    ${description ? `<p class="package-description">${description}</p>` : ''}
-                                    
-                                    ${inclusionsList.length > 0 ? `
-                                        <div class="package-section">
-                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
-                                            <ul class="package-list">
-                                                ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${goodToKnowList.length > 0 ? `
-                                        <div class="package-section">
-                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Goed om te weten' : currentLang === 'fr' ? 'Bon à savoir' : 'Good to Know'}</h3>
-                                            <ul class="package-list">
-                                                ${goodToKnowList.map(item => `<li>${item}</li>`).join('')}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${pkg.bookingLink ? `
-                                        <a href="${pkg.bookingLink}" target="_blank" class="package-book-btn">
-                                            ${currentLang === 'nl' ? 'Boek Nu' : currentLang === 'fr' ? 'Réserver' : 'Book Now'}
-                                        </a>
-                                    ` : ''}
+                            <div class="package-card" data-package-id="${index}">
+                                <div class="package-header">
+                                    ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-thumbnail">` : ''}
+                                    <div class="package-summary">
+                                        <h2 class="package-title">${title}</h2>
+                                        <p class="package-teaser">${teaser}</p>
+                                    </div>
+                                    <div class="package-expand-icon">▼</div>
+                                </div>
+                                <div class="package-details">
+                                    <div class="package-content">
+                                        ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-full-image">` : ''}
+                                        ${description ? `<p class="package-description">${description}</p>` : ''}
+                                        
+                                        ${inclusionsList.length > 0 ? `
+                                            <div class="package-section">
+                                                <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
+                                                <ul class="package-list">
+                                                    ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
+                                                </ul>
+                                            </div>
+                                        ` : ''}
+                                        
+                                        ${goodToKnowList.length > 0 ? `
+                                            <div class="package-section">
+                                                <h3 class="package-section-title">${currentLang === 'nl' ? 'Goed om te weten' : currentLang === 'fr' ? 'Bon à savoir' : 'Good to Know'}</h3>
+                                                <ul class="package-list">
+                                                    ${goodToKnowList.map(item => `<li>${item}</li>`).join('')}
+                                                </ul>
+                                            </div>
+                                        ` : ''}
+                                        
+                                        ${pkg.bookingLink ? `
+                                            <a href="${pkg.bookingLink}" target="_blank" class="package-book-btn">
+                                                ${currentLang === 'nl' ? 'Boek Nu' : currentLang === 'fr' ? 'Réserver' : 'Book Now'}
+                                            </a>
+                                        ` : ''}
+                                    </div>
                                 </div>
                             </div>
                         `;
                     }).join('');
+
+                    // Add click handlers for expand/collapse
+                    document.querySelectorAll('.package-card').forEach(card => {
+                        const header = card.querySelector('.package-header');
+                        header.addEventListener('click', (e) => {
+                            // Don't toggle if clicking on a link or within a link
+                            if (e.target.closest('a')) return;
+                            
+                            // Close previously expanded card
+                            if (currentlyExpandedCard && currentlyExpandedCard !== card) {
+                                currentlyExpandedCard.classList.remove('expanded');
+                            }
+                            
+                            // Toggle this card
+                            card.classList.toggle('expanded');
+                            
+                            // Update reference to currently expanded card
+                            currentlyExpandedCard = card.classList.contains('expanded') ? card : null;
+                        });
+                    });
                 } else {
                     loadingEl.style.display = 'none';
                     noPackagesEl.style.display = 'block';
