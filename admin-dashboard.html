@@ -368,6 +368,10 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+            
             // Hide all cards
             adsCard.style.display = 'none';
             aboutUsCard.style.display = 'none';
@@ -397,6 +401,10 @@
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
+            
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -984,6 +992,10 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+            
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
             adsBottomCard.style.display = 'none';
@@ -1011,6 +1023,10 @@
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
+            
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -1040,6 +1056,10 @@
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+            
             // Hide all cards
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -1068,6 +1088,10 @@
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
+            
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
             
             // Hide all cards
             photoCard.style.display = 'none';
@@ -1110,6 +1134,10 @@
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
+            
+            // Ensure dashboard content is visible
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
             
             photoCard.style.display = 'none';
             adsCard.style.display = 'none';
@@ -2097,13 +2125,6 @@
         // ============ ROOM MANAGEMENT ============
         let roomsData = [];
         let roomModalOpen = false;
-
-        // HTML escape function to prevent XSS
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
 
         // Sanitize filename for Firebase Storage
         function sanitizeFilename(filename) {
