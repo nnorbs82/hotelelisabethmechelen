@@ -67,8 +67,8 @@
         }
 
         .package-thumbnail {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 6px;
             flex-shrink: 0;
@@ -152,6 +152,29 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Two-column layout for description and inclusions */
+        .package-two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .package-column-description {
+            font-size: 1rem;
+            color: var(--color-sage);
+            line-height: 1.8;
+        }
+
+        .package-column-divider {
+            background-color: var(--color-beige);
+            width: 1px;
+        }
+
+        .package-column-inclusions {
+            /* Styling for inclusions column */
+        }
+
         .package-section {
             margin-bottom: 1.5rem;
         }
@@ -199,6 +222,7 @@
             transition: all 0.3s ease;
             text-align: center;
             margin-top: 0.5rem;
+            float: right;
         }
 
         .package-book-btn:hover {
@@ -259,6 +283,16 @@
 
             .package-full-image {
                 height: 220px;
+            }
+
+            /* Stack columns on mobile */
+            .package-two-column-layout {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .package-column-divider {
+                display: none;
             }
         }
     </style>
@@ -378,14 +412,23 @@
                                 <div class="package-details">
                                     <div class="package-content">
                                         ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-full-image">` : ''}
-                                        ${description ? `<p class="package-description">${description}</p>` : ''}
                                         
-                                        ${inclusionsList.length > 0 ? `
-                                            <div class="package-section">
-                                                <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
-                                                <ul class="package-list">
-                                                    ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
-                                                </ul>
+                                        ${description || inclusionsList.length > 0 ? `
+                                            <div class="package-two-column-layout">
+                                                <div class="package-column-description">
+                                                    ${description ? `<p>${description}</p>` : ''}
+                                                </div>
+                                                <div class="package-column-divider"></div>
+                                                <div class="package-column-inclusions">
+                                                    ${inclusionsList.length > 0 ? `
+                                                        <div class="package-section">
+                                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
+                                                            <ul class="package-list">
+                                                                ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
+                                                            </ul>
+                                                        </div>
+                                                    ` : ''}
+                                                </div>
                                             </div>
                                         ` : ''}
                                         
