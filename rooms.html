@@ -28,24 +28,33 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Our Rooms</h2>
-            <p>Discover our comfortable and elegantly designed rooms.</p>
+    <main class="rooms-main">
+        <div class="rooms-hero">
+            <h1 class="rooms-hero-title">Our Rooms</h1>
+            <p class="rooms-hero-subtitle">Discover elegant comfort and modern luxury</p>
             
             <!-- Language Selector -->
-            <div class="lang-selector" style="margin: 2rem 0; display: flex; gap: 1rem; justify-content: center;">
-                <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-                <button class="lang-btn" data-lang="nl">🇳🇱 Nederlands</button>
-                <button class="lang-btn" data-lang="fr">🇫🇷 Français</button>
-            </div>
-
-            <!-- Rooms Container -->
-            <div id="rooms-container" style="margin: 2rem 0;">
-                <p style="text-align: center; color: var(--color-sage);">Loading rooms...</p>
+            <div class="rooms-lang-selector">
+                <button class="rooms-lang-btn active" data-lang="en">EN</button>
+                <button class="rooms-lang-btn" data-lang="nl">NL</button>
+                <button class="rooms-lang-btn" data-lang="fr">FR</button>
             </div>
         </div>
+
+        <!-- Rooms Grid Container -->
+        <div id="rooms-grid-container" class="rooms-grid" aria-live="polite" aria-atomic="false">
+            <p class="rooms-loading">Loading rooms...</p>
+        </div>
     </main>
+    
+    <!-- Room Details Modal -->
+    <div id="room-modal" class="room-modal" role="dialog" aria-modal="true" aria-labelledby="room-modal-title">
+        <div class="room-modal-overlay"></div>
+        <div class="room-modal-content">
+            <button class="room-modal-close" aria-label="Close">&times;</button>
+            <div id="room-modal-body"></div>
+        </div>
+    </div>
 
     <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox" style="display: none;">
@@ -81,6 +90,17 @@
         let currentLightboxRoom = null;
         let currentLightboxIndex = 0;
 
+        // Internationalization labels
+        const i18n = {
+            bedType: { en: 'Bed Type', nl: 'Bedtype', fr: 'Type de Lit' },
+            maxOccupancy: { en: 'Max Occupancy', nl: 'Max. Bezetting', fr: 'Occupation Max.' },
+            roomSize: { en: 'Room Size', nl: 'Kamergrootte', fr: 'Taille de la Chambre' },
+            description: { en: 'Description', nl: 'Beschrijving', fr: 'Description' },
+            amenities: { en: 'Amenities', nl: 'Voorzieningen', fr: 'Équipements' },
+            viewGallery: { en: 'View Photo Gallery', nl: 'Bekijk Fotogalerij', fr: 'Voir la Galerie Photo' },
+            watchVideo: { en: 'Watch Video Tour', nl: 'Bekijk Videotour', fr: 'Regarder la Vidéo' }
+        };
+
         // HTML escape function to prevent XSS
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -88,10 +108,15 @@
             return div.innerHTML;
         }
 
+        // JavaScript string escape function
+        function escapeJs(text) {
+            return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
+        }
+
         // Language selector
-        document.querySelectorAll('.lang-btn').forEach(btn => {
+        document.querySelectorAll('.rooms-lang-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.rooms-lang-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 currentLang = e.target.dataset.lang;
                 renderRooms();
@@ -122,71 +147,52 @@
                     }));
                     renderRooms();
                 } else {
-                    document.getElementById('rooms-container').innerHTML = '<p style="text-align: center; color: var(--color-sage);">No rooms available at the moment.</p>';
+                    document.getElementById('rooms-grid-container').innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
-                document.getElementById('rooms-container').innerHTML = '<p style="text-align: center; color: #d32f2f;">Failed to load rooms.</p>';
+                document.getElementById('rooms-grid-container').innerHTML = '<p class="rooms-loading" style="color: #d32f2f;">Failed to load rooms.</p>';
             }
         }
 
         // Render rooms
         function renderRooms() {
-            const container = document.getElementById('rooms-container');
+            const container = document.getElementById('rooms-grid-container');
             
             if (roomsData.length === 0) {
-                container.innerHTML = '<p style="text-align: center; color: var(--color-sage);">No rooms available at the moment.</p>';
+                container.innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
                 return;
             }
 
             const roomsHTML = roomsData.map(room => {
                 const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
                 const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
-                const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
                 
-                // Get amenities list
-                const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
-                    const amenity = amenitiesData[amenityId];
-                    return amenity ? escapeHtml(amenity[`name_${currentLang}`] || amenity.name_en || '') : '';
-                }).filter(a => a) : [];
-
-                // Get first photo for card display - URLs are trusted from Firebase
+                // Get first photo for card display
                 const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
                 const escapedRoomId = escapeHtml(room.id);
 
                 return `
-                    <div class="room-card">
-                        ${firstPhoto ? `
-                            <div class="room-photo" style="cursor: pointer;" onclick="openLightbox('${escapedRoomId}', 0)">
-                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
-                                ${room.photos && room.photos.length > 1 ? `<div class="photo-count">${room.photos.length} photos</div>` : ''}
-                            </div>
-                        ` : ''}
-                        
-                        <div class="room-details">
-                            <h3>${name}</h3>
-                            <p class="room-bed-type"><strong>Bed Type:</strong> ${bedType}</p>
-                            <p class="room-occupancy"><strong>Max Occupancy:</strong> ${room.maxOccupancy} guests</p>
-                            <p class="room-size"><strong>Room Size:</strong> ${room.roomSize} m²</p>
-                            
-                            ${description ? `<p class="room-description">${description}</p>` : ''}
-                            
-                            ${amenitiesList.length > 0 ? `
-                                <div class="room-amenities">
-                                    <strong>Amenities:</strong>
-                                    <ul>
-                                        ${amenitiesList.map(a => `<li>${a}</li>`).join('')}
-                                    </ul>
+                    <div class="room-grid-card" onclick="openRoomModal('${escapeJs(escapedRoomId)}')" tabindex="0" role="button" aria-label="View details for ${name}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openRoomModal('${escapeJs(escapedRoomId)}');}">
+                        <div class="room-grid-photo">
+                            ${firstPhoto ? `
+                                <img src="${escapeHtml(firstPhoto)}" alt="${name}">
+                                <div class="room-grid-overlay">
+                                    <span class="room-grid-view">View Details</span>
                                 </div>
-                            ` : ''}
-                            
-                            ${room.photos && room.photos.length > 0 ? `
-                                <button class="btn view-gallery-btn" onclick="openLightbox('${escapedRoomId}', 0)">View Gallery</button>
-                            ` : ''}
-                            
-                            ${room.video ? `
-                                <button class="btn" onclick="playVideo('${escapeHtml(room.video.url)}')">Watch Video</button>
-                            ` : ''}
+                            ` : `
+                                <div class="room-grid-no-photo">
+                                    <span>No Image</span>
+                                </div>
+                            `}
+                        </div>
+                        <div class="room-grid-info">
+                            <h3 class="room-grid-name">${name}</h3>
+                            <p class="room-grid-bed">${bedType}</p>
+                            <div class="room-grid-meta">
+                                <span>${room.maxOccupancy} guests</span>
+                                <span>${room.roomSize} m²</span>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -264,15 +270,27 @@
             }
         });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowRight') nextPhoto();
-                if (e.key === 'ArrowLeft') prevPhoto();
-            }
-        });
+        // Keyboard navigation - consolidated handler
+        let keyboardHandlerInitialized = false;
+        
+        function initializeKeyboardHandler() {
+            if (keyboardHandlerInitialized) return;
+            
+            document.addEventListener('keydown', (e) => {
+                const lightbox = document.getElementById('lightbox');
+                const modal = document.getElementById('room-modal');
+                
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextPhoto();
+                    if (e.key === 'ArrowLeft') prevPhoto();
+                } else if (modal && modal.classList.contains('active')) {
+                    if (e.key === 'Escape') closeRoomModal();
+                }
+            });
+            
+            keyboardHandlerInitialized = true;
+        }
 
         // Video player
         window.playVideo = function(videoUrl) {
@@ -290,10 +308,124 @@
             });
         };
 
+        // Room Modal functionality
+        let lastFocusedElement = null;
+
+        window.openRoomModal = function(roomId) {
+            const room = roomsData.find(r => r.id === roomId);
+            if (!room) return;
+
+            // Store the element that triggered the modal
+            lastFocusedElement = document.activeElement;
+
+            const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
+            const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
+            const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
+            
+            // Get amenities list
+            const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
+                const amenity = amenitiesData[amenityId];
+                return amenity ? escapeHtml(amenity[`name_${currentLang}`] || amenity.name_en || '') : '';
+            }).filter(a => a) : [];
+
+            const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
+            const escapedRoomId = escapeJs(room.id);
+
+            const modalBody = document.getElementById('room-modal-body');
+            modalBody.innerHTML = `
+                <div class="room-modal-header">
+                    ${firstPhoto ? `
+                        <div class="room-modal-hero" style="cursor: pointer;" onclick="openLightbox('${escapedRoomId}', 0)">
+                            <img src="${escapeHtml(firstPhoto)}" alt="${name}">
+                            ${room.photos && room.photos.length > 1 ? `
+                                <div class="room-modal-photo-badge">${room.photos.length} photos - Click to view gallery</div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                    <h2 class="room-modal-title" id="room-modal-title">${name}</h2>
+                </div>
+                
+                <div class="room-modal-details">
+                    <div class="room-modal-specs">
+                        <div class="room-modal-spec">
+                            <span class="room-modal-spec-label">${i18n.bedType[currentLang]}</span>
+                            <span class="room-modal-spec-value">${bedType}</span>
+                        </div>
+                        <div class="room-modal-spec">
+                            <span class="room-modal-spec-label">${i18n.maxOccupancy[currentLang]}</span>
+                            <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
+                        </div>
+                        <div class="room-modal-spec">
+                            <span class="room-modal-spec-label">${i18n.roomSize[currentLang]}</span>
+                            <span class="room-modal-spec-value">${room.roomSize} m²</span>
+                        </div>
+                    </div>
+                    
+                    ${description ? `
+                        <div class="room-modal-description">
+                            <h3>${i18n.description[currentLang]}</h3>
+                            <p>${description}</p>
+                        </div>
+                    ` : ''}
+                    
+                    ${amenitiesList.length > 0 ? `
+                        <div class="room-modal-amenities">
+                            <h3>${i18n.amenities[currentLang]}</h3>
+                            <ul class="room-modal-amenities-list">
+                                ${amenitiesList.map(a => `<li>${a}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="room-modal-actions">
+                        ${room.photos && room.photos.length > 0 ? `
+                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">${i18n.viewGallery[currentLang]}</button>
+                        ` : ''}
+                        ${room.video ? `
+                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${i18n.watchVideo[currentLang]}</button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('room-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Focus on close button for keyboard accessibility
+            setTimeout(() => {
+                document.querySelector('.room-modal-close').focus();
+            }, 100);
+        };
+
+        function closeRoomModal() {
+            document.getElementById('room-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Return focus to the element that opened the modal
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
+        }
+
+        // Room modal controls - only set up once
+        let modalControlsInitialized = false;
+        
+        function initializeModalControls() {
+            if (modalControlsInitialized) return;
+            
+            document.querySelector('.room-modal-close').addEventListener('click', closeRoomModal);
+            document.querySelector('.room-modal-overlay').addEventListener('click', closeRoomModal);
+            
+            modalControlsInitialized = true;
+        }
+
         // Initialize
         (async () => {
             await loadAmenities();
             await loadRooms();
+            initializeModalControls();
+            initializeKeyboardHandler();
         })();
     </script>
 </body>
