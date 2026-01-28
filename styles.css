@@ -2915,7 +2915,7 @@ body:not(.admin-page) .nav-logo img {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--color-sage);
+    color: var(--color-black);
     font-weight: 600;
     font-size: 1.1rem;
 }
