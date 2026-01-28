@@ -48,7 +48,7 @@
     </main>
     
     <!-- Room Details Modal -->
-    <div id="room-modal" class="room-modal">
+    <div id="room-modal" class="room-modal" role="dialog" aria-modal="true" aria-labelledby="room-modal-title">
         <div class="room-modal-overlay"></div>
         <div class="room-modal-content">
             <button class="room-modal-close" aria-label="Close">&times;</button>
@@ -95,6 +95,11 @@
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // JavaScript string escape function
+        function escapeJs(text) {
+            return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
         }
 
         // Language selector
@@ -157,7 +162,7 @@
                 const escapedRoomId = escapeHtml(room.id);
 
                 return `
-                    <div class="room-grid-card" onclick="openRoomModal('${escapedRoomId}')">
+                    <div class="room-grid-card" onclick="openRoomModal('${escapeJs(escapedRoomId)}')" tabindex="0" role="button" aria-label="View details for ${name}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openRoomModal('${escapeJs(escapedRoomId)}');}">
                         <div class="room-grid-photo">
                             ${firstPhoto ? `
                                 <img src="${escapeHtml(firstPhoto)}" alt="${name}">
@@ -254,15 +259,27 @@
             }
         });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.style.display === 'flex') {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowRight') nextPhoto();
-                if (e.key === 'ArrowLeft') prevPhoto();
-            }
-        });
+        // Keyboard navigation - consolidated handler
+        let keyboardHandlerInitialized = false;
+        
+        function initializeKeyboardHandler() {
+            if (keyboardHandlerInitialized) return;
+            
+            document.addEventListener('keydown', (e) => {
+                const lightbox = document.getElementById('lightbox');
+                const modal = document.getElementById('room-modal');
+                
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowRight') nextPhoto();
+                    if (e.key === 'ArrowLeft') prevPhoto();
+                } else if (modal && modal.classList.contains('active')) {
+                    if (e.key === 'Escape') closeRoomModal();
+                }
+            });
+            
+            keyboardHandlerInitialized = true;
+        }
 
         // Video player
         window.playVideo = function(videoUrl) {
@@ -280,10 +297,23 @@
             });
         };
 
+        // Initialize
+        (async () => {
+            await loadAmenities();
+            await loadRooms();
+            initializeModalControls();
+            initializeKeyboardHandler();
+        })();
+
         // Room Modal functionality
+        let lastFocusedElement = null;
+
         window.openRoomModal = function(roomId) {
             const room = roomsData.find(r => r.id === roomId);
             if (!room) return;
+
+            // Store the element that triggered the modal
+            lastFocusedElement = document.activeElement;
 
             const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
             const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
@@ -296,7 +326,7 @@
             }).filter(a => a) : [];
 
             const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
-            const escapedRoomId = escapeHtml(room.id);
+            const escapedRoomId = escapeJs(room.id);
 
             const modalBody = document.getElementById('room-modal-body');
             modalBody.innerHTML = `
@@ -309,7 +339,7 @@
                             ` : ''}
                         </div>
                     ` : ''}
-                    <h2 class="room-modal-title">${name}</h2>
+                    <h2 class="room-modal-title" id="room-modal-title">${name}</h2>
                 </div>
                 
                 <div class="room-modal-details">
@@ -349,7 +379,7 @@
                             <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">View Photo Gallery</button>
                         ` : ''}
                         ${room.video ? `
-                            <button class="btn room-modal-btn" onclick="playVideo('${escapeHtml(room.video.url)}')">Watch Video Tour</button>
+                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">Watch Video Tour</button>
                         ` : ''}
                     </div>
                 </div>
@@ -357,26 +387,35 @@
 
             document.getElementById('room-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Focus on close button for keyboard accessibility
+            setTimeout(() => {
+                document.querySelector('.room-modal-close').focus();
+            }, 100);
         };
 
         function closeRoomModal() {
             document.getElementById('room-modal').classList.remove('active');
             document.body.style.overflow = '';
+            
+            // Return focus to the element that opened the modal
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+                lastFocusedElement = null;
+            }
         }
 
-        // Room modal controls
-        document.querySelector('.room-modal-close').addEventListener('click', closeRoomModal);
-        document.querySelector('.room-modal-overlay').addEventListener('click', closeRoomModal);
-
-        // Close modal on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const modal = document.getElementById('room-modal');
-                if (modal.classList.contains('active')) {
-                    closeRoomModal();
-                }
-            }
-        });
+        // Room modal controls - only set up once
+        let modalControlsInitialized = false;
+        
+        function initializeModalControls() {
+            if (modalControlsInitialized) return;
+            
+            document.querySelector('.room-modal-close').addEventListener('click', closeRoomModal);
+            document.querySelector('.room-modal-overlay').addEventListener('click', closeRoomModal);
+            
+            modalControlsInitialized = true;
+        }
 
         // Initialize
         (async () => {

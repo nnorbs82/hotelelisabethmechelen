@@ -2680,6 +2680,7 @@ body:not(.admin-page) .nav-logo img {
     border: 2px solid var(--color-white);
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -2725,7 +2726,7 @@ body:not(.admin-page) .nav-logo img {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2746,6 +2747,7 @@ body:not(.admin-page) .nav-logo img {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.85);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
 }
 
@@ -2827,6 +2829,7 @@ body:not(.admin-page) .nav-logo img {
     font-size: 0.85rem;
     font-weight: 400;
     letter-spacing: 0.05em;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -3034,4 +3037,21 @@ body:not(.admin-page) .nav-logo img {
     .room-grid-card:hover {
         transform: translateY(-4px);
     }
+}
+
+/* Keyboard focus states for accessibility */
+.room-grid-card:focus {
+    outline: 3px solid var(--color-black);
+    outline-offset: 2px;
+}
+
+.room-grid-card:focus-visible {
+    outline: 3px solid var(--color-black);
+    outline-offset: 2px;
+}
+
+.rooms-lang-btn:focus-visible,
+.room-modal-close:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
 }
