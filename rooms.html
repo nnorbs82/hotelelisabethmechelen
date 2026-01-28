@@ -32,13 +32,6 @@
         <div class="rooms-hero">
             <h1 class="rooms-hero-title">Our Rooms</h1>
             <p class="rooms-hero-subtitle">Discover elegant comfort and modern luxury</p>
-            
-            <!-- Language Selector -->
-            <div class="rooms-lang-selector">
-                <button class="rooms-lang-btn active" data-lang="en">EN</button>
-                <button class="rooms-lang-btn" data-lang="nl">NL</button>
-                <button class="rooms-lang-btn" data-lang="fr">FR</button>
-            </div>
         </div>
 
         <!-- Rooms Grid Container -->
@@ -84,21 +77,20 @@
         import { database } from './firebase-config.js';
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        let currentLang = 'en';
         let roomsData = [];
         let amenitiesData = {};
         let currentLightboxRoom = null;
         let currentLightboxIndex = 0;
 
-        // Internationalization labels
-        const i18n = {
-            bedType: { en: 'Bed Type', nl: 'Bedtype', fr: 'Type de Lit' },
-            maxOccupancy: { en: 'Max Occupancy', nl: 'Max. Bezetting', fr: 'Occupation Max.' },
-            roomSize: { en: 'Room Size', nl: 'Kamergrootte', fr: 'Taille de la Chambre' },
-            description: { en: 'Description', nl: 'Beschrijving', fr: 'Description' },
-            amenities: { en: 'Amenities', nl: 'Voorzieningen', fr: 'Équipements' },
-            viewGallery: { en: 'View Photo Gallery', nl: 'Bekijk Fotogalerij', fr: 'Voir la Galerie Photo' },
-            watchVideo: { en: 'Watch Video Tour', nl: 'Bekijk Videotour', fr: 'Regarder la Vidéo' }
+        // Labels
+        const labels = {
+            bedType: 'Bed Type',
+            maxOccupancy: 'Max Occupancy',
+            roomSize: 'Room Size',
+            description: 'Description',
+            amenities: 'Amenities',
+            viewGallery: 'View Photo Gallery',
+            watchVideo: 'Watch Video Tour'
         };
 
         // HTML escape function to prevent XSS
@@ -112,16 +104,6 @@
         function escapeJs(text) {
             return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
         }
-
-        // Language selector
-        document.querySelectorAll('.rooms-lang-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.rooms-lang-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentLang = e.target.dataset.lang;
-                renderRooms();
-            });
-        });
 
         // Load amenities
         async function loadAmenities() {
@@ -165,8 +147,8 @@
             }
 
             const roomsHTML = roomsData.map(room => {
-                const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
-                const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
+                const name = escapeHtml(room.name_en || '');
+                const bedType = escapeHtml(room.bedType_en || '');
                 
                 // Get first photo for card display
                 const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
@@ -318,14 +300,14 @@
             // Store the element that triggered the modal
             lastFocusedElement = document.activeElement;
 
-            const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
-            const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
-            const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
+            const name = escapeHtml(room.name_en || '');
+            const bedType = escapeHtml(room.bedType_en || '');
+            const description = escapeHtml(room.description_en || '');
             
             // Get amenities list
             const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
                 const amenity = amenitiesData[amenityId];
-                return amenity ? escapeHtml(amenity[`name_${currentLang}`] || amenity.name_en || '') : '';
+                return amenity ? escapeHtml(amenity.name_en || '') : '';
             }).filter(a => a) : [];
 
             const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
@@ -348,29 +330,29 @@
                 <div class="room-modal-details">
                     <div class="room-modal-specs">
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">${i18n.bedType[currentLang]}</span>
+                            <span class="room-modal-spec-label">${labels.bedType}</span>
                             <span class="room-modal-spec-value">${bedType}</span>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">${i18n.maxOccupancy[currentLang]}</span>
+                            <span class="room-modal-spec-label">${labels.maxOccupancy}</span>
                             <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">${i18n.roomSize[currentLang]}</span>
+                            <span class="room-modal-spec-label">${labels.roomSize}</span>
                             <span class="room-modal-spec-value">${room.roomSize} m²</span>
                         </div>
                     </div>
                     
                     ${description ? `
                         <div class="room-modal-description">
-                            <h3>${i18n.description[currentLang]}</h3>
+                            <h3>${labels.description}</h3>
                             <p>${description}</p>
                         </div>
                     ` : ''}
                     
                     ${amenitiesList.length > 0 ? `
                         <div class="room-modal-amenities">
-                            <h3>${i18n.amenities[currentLang]}</h3>
+                            <h3>${labels.amenities}</h3>
                             <ul class="room-modal-amenities-list">
                                 ${amenitiesList.map(a => `<li>${a}</li>`).join('')}
                             </ul>
@@ -379,10 +361,10 @@
                     
                     <div class="room-modal-actions">
                         ${room.photos && room.photos.length > 0 ? `
-                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">${i18n.viewGallery[currentLang]}</button>
+                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">${labels.viewGallery}</button>
                         ` : ''}
                         ${room.video ? `
-                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${i18n.watchVideo[currentLang]}</button>
+                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${labels.watchVideo}</button>
                         ` : ''}
                     </div>
                 </div>
