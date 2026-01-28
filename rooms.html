@@ -42,7 +42,7 @@
         </div>
 
         <!-- Rooms Grid Container -->
-        <div id="rooms-grid-container" class="rooms-grid">
+        <div id="rooms-grid-container" class="rooms-grid" aria-live="polite" aria-atomic="false">
             <p class="rooms-loading">Loading rooms...</p>
         </div>
     </main>
@@ -89,6 +89,17 @@
         let amenitiesData = {};
         let currentLightboxRoom = null;
         let currentLightboxIndex = 0;
+
+        // Internationalization labels
+        const i18n = {
+            bedType: { en: 'Bed Type', nl: 'Bedtype', fr: 'Type de Lit' },
+            maxOccupancy: { en: 'Max Occupancy', nl: 'Max. Bezetting', fr: 'Occupation Max.' },
+            roomSize: { en: 'Room Size', nl: 'Kamergrootte', fr: 'Taille de la Chambre' },
+            description: { en: 'Description', nl: 'Beschrijving', fr: 'Description' },
+            amenities: { en: 'Amenities', nl: 'Voorzieningen', fr: 'Équipements' },
+            viewGallery: { en: 'View Photo Gallery', nl: 'Bekijk Fotogalerij', fr: 'Voir la Galerie Photo' },
+            watchVideo: { en: 'Watch Video Tour', nl: 'Bekijk Videotour', fr: 'Regarder la Vidéo' }
+        };
 
         // HTML escape function to prevent XSS
         function escapeHtml(text) {
@@ -297,14 +308,6 @@
             });
         };
 
-        // Initialize
-        (async () => {
-            await loadAmenities();
-            await loadRooms();
-            initializeModalControls();
-            initializeKeyboardHandler();
-        })();
-
         // Room Modal functionality
         let lastFocusedElement = null;
 
@@ -345,29 +348,29 @@
                 <div class="room-modal-details">
                     <div class="room-modal-specs">
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">Bed Type</span>
+                            <span class="room-modal-spec-label">${i18n.bedType[currentLang]}</span>
                             <span class="room-modal-spec-value">${bedType}</span>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">Max Occupancy</span>
+                            <span class="room-modal-spec-label">${i18n.maxOccupancy[currentLang]}</span>
                             <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-modal-spec-label">Room Size</span>
+                            <span class="room-modal-spec-label">${i18n.roomSize[currentLang]}</span>
                             <span class="room-modal-spec-value">${room.roomSize} m²</span>
                         </div>
                     </div>
                     
                     ${description ? `
                         <div class="room-modal-description">
-                            <h3>Description</h3>
+                            <h3>${i18n.description[currentLang]}</h3>
                             <p>${description}</p>
                         </div>
                     ` : ''}
                     
                     ${amenitiesList.length > 0 ? `
                         <div class="room-modal-amenities">
-                            <h3>Amenities</h3>
+                            <h3>${i18n.amenities[currentLang]}</h3>
                             <ul class="room-modal-amenities-list">
                                 ${amenitiesList.map(a => `<li>${a}</li>`).join('')}
                             </ul>
@@ -376,10 +379,10 @@
                     
                     <div class="room-modal-actions">
                         ${room.photos && room.photos.length > 0 ? `
-                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">View Photo Gallery</button>
+                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">${i18n.viewGallery[currentLang]}</button>
                         ` : ''}
                         ${room.video ? `
-                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">Watch Video Tour</button>
+                            <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${i18n.watchVideo[currentLang]}</button>
                         ` : ''}
                     </div>
                 </div>
@@ -421,6 +424,8 @@
         (async () => {
             await loadAmenities();
             await loadRooms();
+            initializeModalControls();
+            initializeKeyboardHandler();
         })();
     </script>
 </body>
