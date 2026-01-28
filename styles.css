@@ -2523,76 +2523,58 @@ body:not(.admin-page) .nav-logo img {
 /* Rooms Main Container */
 .rooms-main {
     min-height: calc(100vh - var(--header-height));
-    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-    padding: 3rem 0;
+    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 50%);
+    padding: 0;
 }
 
-/* Rooms Hero Section */
+/* Rooms Hero Section - Enhanced Modern Look */
 .rooms-hero {
     text-align: center;
-    padding: 2rem 2rem 3rem;
-    margin-bottom: 2rem;
+    padding: 4rem 2rem 4rem;
+    margin-bottom: 0;
+    background: linear-gradient(135deg, rgba(149, 147, 128, 0.05) 0%, rgba(212, 211, 195, 0.05) 100%);
+    border-bottom: 1px solid rgba(149, 147, 128, 0.1);
 }
 
 .rooms-hero-title {
-    font-size: 3.5rem;
-    font-weight: 300;
-    letter-spacing: 0.1em;
+    font-size: 4rem;
+    font-weight: 200;
+    letter-spacing: 0.15em;
     color: var(--color-black);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+}
+
+.rooms-hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--color-sage);
 }
 
 .rooms-hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 300;
     color: var(--color-sage);
-    letter-spacing: 0.05em;
-    margin-bottom: 2rem;
-}
-
-/* Modern Language Selector */
-.rooms-lang-selector {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
+    letter-spacing: 0.08em;
     margin-top: 2rem;
+    font-style: italic;
 }
 
-.rooms-lang-btn {
-    background: transparent;
-    border: 1px solid var(--color-sage);
-    color: var(--color-sage);
-    padding: 0.5rem 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-    text-transform: uppercase;
-}
-
-.rooms-lang-btn:hover {
-    background: var(--color-sage);
-    color: var(--color-white);
-    transform: translateY(-2px);
-}
-
-.rooms-lang-btn.active {
-    background: var(--color-black);
-    border-color: var(--color-black);
-    color: var(--color-white);
-}
-
-/* Modern Grid Layout */
+/* Modern Grid Layout - Enhanced Spacing */
 .rooms-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 4rem 2rem;
 }
 
 .rooms-loading {
@@ -2600,34 +2582,34 @@ body:not(.admin-page) .nav-logo img {
     text-align: center;
     color: var(--color-sage);
     font-size: 1.1rem;
-    padding: 3rem;
+    padding: 4rem;
 }
 
-/* Room Grid Card - Compact & Modern */
+/* Room Grid Card - Modern & Dynamic */
 .room-grid-card {
     background: var(--color-white);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     position: relative;
 }
 
 .room-grid-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
 .room-grid-card:hover .room-grid-overlay {
     opacity: 1;
 }
 
-/* Room Photo Container */
+/* Room Photo Container - Enhanced */
 .room-grid-photo {
     position: relative;
     width: 100%;
-    height: 280px;
+    height: 320px;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-beige) 0%, var(--color-sage) 100%);
 }
@@ -2636,11 +2618,11 @@ body:not(.admin-page) .nav-logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .room-grid-card:hover .room-grid-photo img {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .room-grid-no-photo {
@@ -2655,62 +2637,66 @@ body:not(.admin-page) .nav-logo img {
     letter-spacing: 0.05em;
 }
 
-/* Overlay on Hover */
+/* Overlay on Hover - Modern Design */
 .room-grid-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
 }
 
 .room-grid-view {
     color: var(--color-white);
     font-size: 1rem;
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    padding: 0.8rem 2rem;
+    padding: 1rem 2.5rem;
     border: 2px solid var(--color-white);
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.15);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
 }
 
-/* Room Info - Minimal */
+/* Room Info - Enhanced Typography */
 .room-grid-info {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 .room-grid-name {
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.03em;
 }
 
 .room-grid-bed {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--color-sage);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     font-weight: 300;
+    letter-spacing: 0.02em;
 }
 
 .room-grid-meta {
     display: flex;
-    gap: 1.5rem;
-    font-size: 0.85rem;
+    gap: 2rem;
+    font-size: 0.9rem;
     color: var(--color-sage);
     font-weight: 400;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(149, 147, 128, 0.15);
 }
 
 .room-grid-meta span {
@@ -2718,7 +2704,7 @@ body:not(.admin-page) .nav-logo img {
     align-items: center;
 }
 
-/* ============ ROOM MODAL ============ */
+/* ============ ROOM MODAL - ENHANCED ============ */
 
 .room-modal {
     position: fixed;
@@ -2732,7 +2718,7 @@ body:not(.admin-page) .nav-logo img {
     justify-content: center;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .room-modal.active {
@@ -2746,22 +2732,22 @@ body:not(.admin-page) .nav-logo img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.9);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 }
 
 .room-modal-content {
     position: relative;
     background: var(--color-white);
-    max-width: 900px;
+    max-width: 960px;
     max-height: 90vh;
     width: 90%;
     overflow-y: auto;
-    border-radius: 4px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
     transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .room-modal.active .room-modal-content {
@@ -2770,12 +2756,12 @@ body:not(.admin-page) .nav-logo img {
 
 .room-modal-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 1.5rem;
     background: var(--color-white);
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     font-size: 2rem;
     line-height: 1;
@@ -2784,7 +2770,7 @@ body:not(.admin-page) .nav-logo img {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
@@ -2801,199 +2787,208 @@ body:not(.admin-page) .nav-logo img {
 
 .room-modal-hero {
     width: 100%;
-    height: 400px;
+    height: 450px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
+    border-radius: 12px 12px 0 0;
 }
 
 .room-modal-hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .room-modal-hero:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .room-modal-photo-badge {
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    background: rgba(0, 0, 0, 0.75);
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.85);
     color: var(--color-white);
-    padding: 0.75rem 1.5rem;
-    border-radius: 2px;
-    font-size: 0.85rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
     font-weight: 400;
-    letter-spacing: 0.05em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    letter-spacing: 0.08em;
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
 }
 
 .room-modal-title {
-    font-size: 2.5rem;
-    font-weight: 400;
+    font-size: 2.8rem;
+    font-weight: 300;
     color: var(--color-black);
     margin: 0;
-    padding: 2rem 2.5rem 1rem;
-    letter-spacing: 0.05em;
+    padding: 2.5rem 3rem 1.5rem;
+    letter-spacing: 0.08em;
 }
 
 /* Modal Details */
 .room-modal-details {
-    padding: 0 2.5rem 2.5rem;
+    padding: 0 3rem 3rem;
 }
 
 .room-modal-specs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    margin-bottom: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(149, 147, 128, 0.2);
+    border-bottom: 1px solid rgba(149, 147, 128, 0.2);
+    margin-bottom: 2.5rem;
 }
 
 .room-modal-spec {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.75rem;
 }
 
 .room-modal-spec-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--color-sage);
     font-weight: 500;
 }
 
 .room-modal-spec-value {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--color-black);
     font-weight: 400;
 }
 
 .room-modal-description {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .room-modal-description h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.08em;
 }
 
 .room-modal-description p {
-    line-height: 1.8;
+    line-height: 1.9;
     color: #555;
     font-weight: 300;
+    font-size: 1rem;
 }
 
 .room-modal-amenities {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .room-modal-amenities h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.4rem;
+    font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.08em;
 }
 
 .room-modal-amenities-list {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
 }
 
 .room-modal-amenities-list li {
     color: #555;
     font-weight: 300;
-    padding-left: 1.5rem;
+    padding-left: 1.75rem;
     position: relative;
+    font-size: 0.95rem;
 }
 
 .room-modal-amenities-list li:before {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--color-black);
-    font-weight: 500;
+    color: var(--color-sage);
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .room-modal-actions {
     display: flex;
-    gap: 1rem;
+    gap: 1.25rem;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 .room-modal-btn {
     flex: 1;
-    min-width: 200px;
+    min-width: 220px;
 }
 
 /* ============ RESPONSIVE DESIGN ============ */
 
 @media (max-width: 768px) {
     .rooms-hero-title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
 
     .rooms-hero-subtitle {
         font-size: 1rem;
     }
 
+    .rooms-hero {
+        padding: 3rem 1.5rem;
+    }
+
     .rooms-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1.5rem;
-        padding: 0 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 3rem 1.5rem;
     }
 
     .room-grid-photo {
-        height: 220px;
+        height: 260px;
     }
 
     .room-grid-info {
-        padding: 1rem;
+        padding: 1.5rem;
     }
 
     .room-grid-name {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .room-modal-content {
         width: 95%;
         max-height: 95vh;
+        border-radius: 8px;
     }
 
     .room-modal-hero {
-        height: 250px;
+        height: 300px;
     }
 
     .room-modal-title {
-        font-size: 1.8rem;
-        padding: 1.5rem 1.5rem 1rem;
+        font-size: 2rem;
+        padding: 2rem 2rem 1.25rem;
     }
 
     .room-modal-details {
-        padding: 0 1.5rem 1.5rem;
+        padding: 0 2rem 2rem;
     }
 
     .room-modal-specs {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
-        padding: 1.5rem 0;
-        margin-bottom: 1.5rem;
+        gap: 2rem;
+        padding: 2rem 0;
+        margin-bottom: 2rem;
     }
 
     .room-modal-actions {
@@ -3012,30 +3007,51 @@ body:not(.admin-page) .nav-logo img {
 
 @media (max-width: 480px) {
     .rooms-hero {
-        padding: 1.5rem 1rem 2rem;
+        padding: 2.5rem 1rem 2.5rem;
     }
 
     .rooms-hero-title {
-        font-size: 2rem;
-        letter-spacing: 0.05em;
+        font-size: 2.2rem;
+        letter-spacing: 0.08em;
     }
 
-    .rooms-lang-selector {
-        gap: 0.25rem;
+    .rooms-hero-title::after {
+        width: 60px;
     }
 
-    .rooms-lang-btn {
-        padding: 0.4rem 1rem;
-        font-size: 0.8rem;
+    .rooms-hero-subtitle {
+        font-size: 0.95rem;
+        margin-top: 1.5rem;
     }
 
     .rooms-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
+        padding: 2.5rem 1rem;
     }
 
     .room-grid-card:hover {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
+    }
+
+    .room-modal-hero {
+        height: 240px;
+    }
+
+    .room-modal-title {
+        font-size: 1.6rem;
+        padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .room-modal-details {
+        padding: 0 1.5rem 1.5rem;
+    }
+
+    .room-modal-close {
+        width: 40px;
+        height: 40px;
+        top: 1rem;
+        right: 1rem;
     }
 }
 
@@ -3050,7 +3066,6 @@ body:not(.admin-page) .nav-logo img {
     outline-offset: 2px;
 }
 
-.rooms-lang-btn:focus-visible,
 .room-modal-close:focus-visible {
     outline: 2px solid var(--color-black);
     outline-offset: 2px;
