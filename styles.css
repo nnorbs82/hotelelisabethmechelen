@@ -3375,6 +3375,10 @@ body:not(.admin-page) .nav-logo img {
     .room-modal-amenities-list {
         grid-template-columns: 1fr;
     }
+
+    .room-modal-booking {
+        padding: 2.5rem 2rem 2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3417,6 +3421,10 @@ body:not(.admin-page) .nav-logo img {
 
     .room-modal-details {
         padding: 0 1.5rem 1.5rem;
+    }
+
+    .room-modal-booking {
+        padding: 2.5rem 1.5rem 1.5rem;
     }
 
     .room-modal-close {
