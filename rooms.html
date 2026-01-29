@@ -169,24 +169,37 @@
 
         // Set hero section background to City Suite's first image
         function setHeroBackground() {
+            const heroSection = document.querySelector('.rooms-hero-modern');
+            if (!heroSection) return;
+            
             // Find the City Suite room (case-insensitive search)
             const citySuiteRoom = roomsData.find(room => 
                 room.name_en && room.name_en.toLowerCase().includes('city suite')
             );
             
+            let imageUrl = null;
+            
             if (citySuiteRoom && citySuiteRoom.photos && citySuiteRoom.photos.length > 0) {
-                const heroSection = document.querySelector('.rooms-hero-modern');
-                if (heroSection) {
-                    heroSection.style.backgroundImage = `url('${escapeHtml(citySuiteRoom.photos[0].url)}')`;
-                }
+                imageUrl = citySuiteRoom.photos[0].url;
             } else {
                 // Fallback: use the first room's first image if City Suite is not found
                 const firstRoom = roomsData.find(room => room.photos && room.photos.length > 0);
                 if (firstRoom) {
-                    const heroSection = document.querySelector('.rooms-hero-modern');
-                    if (heroSection) {
-                        heroSection.style.backgroundImage = `url('${escapeHtml(firstRoom.photos[0].url)}')`;
+                    imageUrl = firstRoom.photos[0].url;
+                }
+            }
+            
+            // Set background image with proper URL validation
+            if (imageUrl) {
+                // Basic URL validation to prevent CSS injection
+                try {
+                    const url = new URL(imageUrl, window.location.href);
+                    // Only allow http and https protocols
+                    if (url.protocol === 'http:' || url.protocol === 'https:') {
+                        heroSection.style.backgroundImage = `url("${imageUrl.replace(/["\\]/g, '\\$&')}")`;
                     }
+                } catch (e) {
+                    console.error('Invalid image URL:', imageUrl);
                 }
             }
         }
