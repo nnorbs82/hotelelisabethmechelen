@@ -156,13 +156,53 @@
                         ...roomsObj[id]
                     }));
                     renderRooms();
+                    setHeroBackground(); // Set hero background after rooms are loaded
                 } else {
                     document.getElementById('rooms-list-container').innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
+                    setHeroBackground(); // Still attempt to set background even if no rooms
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
                 // Use demo data if Firebase fails
                 useDemoData();
+            }
+        }
+
+        // Set hero section background to City Suite's first image
+        function setHeroBackground() {
+            const heroSection = document.querySelector('.rooms-hero-modern');
+            if (!heroSection) return;
+            
+            // Find the City Suite room (case-insensitive search)
+            const citySuiteRoom = roomsData.find(room => 
+                room.name_en && room.name_en.toLowerCase().includes('city suite')
+            );
+            
+            let imageUrl = null;
+            
+            if (citySuiteRoom && citySuiteRoom.photos && citySuiteRoom.photos.length > 0) {
+                imageUrl = citySuiteRoom.photos[0].url;
+            } else {
+                // Fallback: use the first room's first image if City Suite is not found
+                const firstRoom = roomsData.find(room => room.photos && room.photos.length > 0);
+                if (firstRoom) {
+                    imageUrl = firstRoom.photos[0].url;
+                }
+            }
+            
+            // Set background image with proper URL validation
+            if (imageUrl) {
+                try {
+                    // Validate URL format and protocol
+                    const url = new URL(imageUrl, window.location.href);
+                    // Only allow http and https protocols
+                    if (url.protocol === 'http:' || url.protocol === 'https:') {
+                        // Use the validated URL's href property
+                        heroSection.style.backgroundImage = `url("${url.href}")`;
+                    }
+                } catch (e) {
+                    console.error('Invalid image URL:', imageUrl);
+                }
             }
         }
 
@@ -204,6 +244,7 @@
                 }
             ];
             renderRooms();
+            setHeroBackground(); // Set hero background after demo data is loaded
         }
 
         // Track current image index for each room card
