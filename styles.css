@@ -3227,8 +3227,8 @@ body:not(.admin-page) .nav-logo img {
 
 /* Room Modal Booking Bar */
 .room-modal-booking {
-    margin-top: 3rem;
-    padding-top: 2.5rem;
+    margin-top: 0;
+    padding: 2.5rem 3rem 3rem;
     border-top: 2px solid rgba(149, 147, 128, 0.2);
 }
 
