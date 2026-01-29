@@ -385,7 +385,7 @@ footer {
     color: var(--color-beige);
     text-align: center;
     padding: 2rem;
-    margin-top: 3rem;
+    margin-top: 0;
 }
 
 /* Booking Bar Styles */
@@ -2896,7 +2896,7 @@ body:not(.admin-page) .nav-logo img {
 /* Call to Action Section */
 .rooms-cta {
     padding: 6rem 2rem;
-    background: linear-gradient(135deg, var(--color-black) 0%, var(--color-sage) 100%);
+    background: rgba(0, 0, 0, 0.4);
     text-align: center;
 }
 
