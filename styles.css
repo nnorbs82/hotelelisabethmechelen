@@ -2523,19 +2523,20 @@ body:not(.admin-page) .nav-logo img {
 /* Rooms Main Container */
 .rooms-main {
     min-height: calc(100vh - var(--header-height));
-    background-color: var(--color-white);
+    background-color: transparent; /* Allow fixed page-background to show through the hero section */
     padding: 0;
 }
 
 /* Enhanced Hero Section with Background */
 .rooms-hero-modern {
     position: relative;
-    height: 65vh;
+    height: calc(100vh - var(--header-height));
     min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: transparent; /* Allow fixed page-background to show through */
 }
 
 .rooms-hero-overlay {
