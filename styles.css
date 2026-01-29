@@ -2532,6 +2532,7 @@ body:not(.admin-page) .nav-logo img {
     position: relative;
     height: 65vh;
     min-height: 500px;
+    background-color: #333; /* Fallback color if no image is set */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
