@@ -2523,7 +2523,7 @@ body:not(.admin-page) .nav-logo img {
 /* Rooms Main Container */
 .rooms-main {
     min-height: calc(100vh - var(--header-height));
-    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 50%);
+    background-color: var(--color-beige);
     padding: 0;
 }
 
@@ -2567,65 +2567,59 @@ body:not(.admin-page) .nav-logo img {
     font-style: italic;
 }
 
-/* Modern Grid Layout - Enhanced Spacing */
-.rooms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2.5rem;
-    max-width: 1400px;
+/* Vertical Room List Layout */
+.rooms-list {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
 }
 
 .rooms-loading {
-    grid-column: 1 / -1;
     text-align: center;
     color: var(--color-sage);
     font-size: 1.1rem;
     padding: 4rem;
 }
 
-/* Room Grid Card - Modern & Dynamic */
-.room-grid-card {
-    background: var(--color-white);
+/* Room Card - Vertical Layout with Alternating Images */
+.room-card {
+    display: flex;
+    background: var(--color-beige);
     border-radius: 8px;
     overflow: hidden;
-    cursor: pointer;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2.5rem;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    max-height: 400px;
+}
+
+.room-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container with navigation */
+.room-card-image-container {
     position: relative;
-}
-
-.room-grid-card:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-}
-
-.room-grid-card:hover .room-grid-overlay {
-    opacity: 1;
-}
-
-/* Room Photo Container - Enhanced */
-.room-grid-photo {
-    position: relative;
-    width: 100%;
-    height: 320px;
+    flex: 0 0 400px;
+    max-width: 400px;
+    height: 300px;
     overflow: hidden;
-    background: linear-gradient(135deg, var(--color-beige) 0%, var(--color-sage) 100%);
+    background: var(--color-sage);
 }
 
-.room-grid-photo img {
+.room-card.image-right .room-card-image-container {
+    order: 2;
+}
+
+.room-card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    display: block;
 }
 
-.room-grid-card:hover .room-grid-photo img {
-    transform: scale(1.15);
-}
-
-.room-grid-no-photo {
+.room-card-no-image {
     width: 100%;
     height: 100%;
     display: flex;
@@ -2633,75 +2627,99 @@ body:not(.admin-page) .nav-logo img {
     justify-content: center;
     color: var(--color-white);
     font-size: 1rem;
-    font-weight: 300;
-    letter-spacing: 0.05em;
 }
 
-/* Overlay on Hover - Modern Design */
-.room-grid-overlay {
+/* Image navigation arrows */
+.room-image-nav {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: background 0.3s ease;
+    z-index: 2;
 }
 
-.room-grid-view {
-    color: var(--color-white);
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 1rem 2.5rem;
-    border: 2px solid var(--color-white);
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.15);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+.room-image-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
-/* Room Info - Enhanced Typography */
-.room-grid-info {
-    padding: 2rem 1.5rem;
+.room-image-nav-left {
+    left: 10px;
 }
 
-.room-grid-name {
-    font-size: 1.5rem;
+.room-image-nav-right {
+    right: 10px;
+}
+
+/* Room details side */
+.room-card-details {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.room-card-name {
+    font-size: 1.8rem;
     font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     letter-spacing: 0.03em;
 }
 
-.room-grid-bed {
-    font-size: 0.95rem;
-    color: var(--color-sage);
-    margin-bottom: 1.25rem;
-    font-weight: 300;
-    letter-spacing: 0.02em;
-}
-
-.room-grid-meta {
+.room-card-meta {
     display: flex;
-    gap: 2rem;
-    font-size: 0.9rem;
-    color: var(--color-sage);
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(149, 147, 128, 0.15);
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
 }
 
-.room-grid-meta span {
+.room-card-meta-item {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-black);
+}
+
+.room-card-icon {
+    font-size: 1.2rem;
+}
+
+.room-card-teaser {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.room-card-btn {
+    align-self: flex-start;
+    padding: 0.75rem 2rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.room-card-btn:hover {
+    background: var(--color-sage);
+    transform: translateX(5px);
 }
 
 /* ============ ROOM MODAL - ENHANCED ============ */
@@ -2846,8 +2864,12 @@ body:not(.admin-page) .nav-logo img {
 
 .room-modal-spec {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
+}
+
+.room-modal-spec .room-card-icon {
+    font-size: 1.5rem;
 }
 
 .room-modal-spec-label {
@@ -2932,6 +2954,27 @@ body:not(.admin-page) .nav-logo img {
     min-width: 220px;
 }
 
+/* Room Modal Booking Bar */
+.room-modal-booking {
+    margin-top: 3rem;
+    padding-top: 2.5rem;
+    border-top: 2px solid rgba(149, 147, 128, 0.2);
+}
+
+.room-modal-booking h3 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--color-black);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.08em;
+}
+
+.booking-bar-modal {
+    background: var(--color-beige);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
 /* ============ RESPONSIVE DESIGN ============ */
 
 @media (max-width: 768px) {
@@ -2947,22 +2990,42 @@ body:not(.admin-page) .nav-logo img {
         padding: 3rem 1.5rem;
     }
 
-    .rooms-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 2rem;
+    .rooms-list {
         padding: 3rem 1.5rem;
     }
 
-    .room-grid-photo {
-        height: 260px;
+    .room-card {
+        flex-direction: column;
+        max-height: none;
     }
 
-    .room-grid-info {
+    .room-card.image-right {
+        flex-direction: column;
+    }
+
+    .room-card-image-container {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        height: 250px;
+        order: 1 !important;
+    }
+
+    .room-card.image-right .room-card-image-container {
+        order: 1 !important;
+    }
+
+    .room-card-details {
         padding: 1.5rem;
     }
 
-    .room-grid-name {
-        font-size: 1.3rem;
+    .room-card-name {
+        font-size: 1.5rem;
+    }
+
+    .room-card-meta {
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
     .room-modal-content {

@@ -34,8 +34,8 @@
             <p class="rooms-hero-subtitle">Discover elegant comfort and modern luxury</p>
         </div>
 
-        <!-- Rooms Grid Container -->
-        <div id="rooms-grid-container" class="rooms-grid" aria-live="polite" aria-atomic="false">
+        <!-- Rooms List Container -->
+        <div id="rooms-list-container" class="rooms-list" aria-live="polite" aria-atomic="false">
             <p class="rooms-loading">Loading rooms...</p>
         </div>
     </main>
@@ -71,6 +71,9 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+
+    <!-- Include booking bar script for DatePicker -->
+    <script src="booking-bar.js"></script>
 
     <!-- Firebase and Rooms Display Script -->
     <script type="module">
@@ -137,44 +140,96 @@
             }
         }
 
+        // Track current image index for each room card
+        const roomImageIndices = {};
+
+        // Initialize image indices
+        function initializeImageIndices() {
+            roomsData.forEach(room => {
+                roomImageIndices[room.id] = 0;
+            });
+        }
+
+        // Navigate room card images
+        window.navigateRoomImage = function(roomId, direction, event) {
+            event.stopPropagation();
+            const room = roomsData.find(r => r.id === roomId);
+            if (!room || !room.photos || room.photos.length <= 1) return;
+            
+            const currentIndex = roomImageIndices[roomId] || 0;
+            const newIndex = (currentIndex + direction + room.photos.length) % room.photos.length;
+            roomImageIndices[roomId] = newIndex;
+            
+            const imgElement = document.querySelector(`#room-card-${roomId} .room-card-image`);
+            if (imgElement) {
+                imgElement.src = escapeHtml(room.photos[newIndex].url);
+            }
+        };
+
         // Render rooms
         function renderRooms() {
-            const container = document.getElementById('rooms-grid-container');
+            const container = document.getElementById('rooms-list-container');
             
             if (roomsData.length === 0) {
                 container.innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
                 return;
             }
 
-            const roomsHTML = roomsData.map(room => {
+            initializeImageIndices();
+
+            const roomsHTML = roomsData.map((room, index) => {
                 const name = escapeHtml(room.name_en || '');
                 const bedType = escapeHtml(room.bedType_en || '');
+                const description = escapeHtml(room.description_en || '');
                 
                 // Get first photo for card display
                 const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
+                const hasMultiplePhotos = room.photos && room.photos.length > 1;
                 const escapedRoomId = escapeHtml(room.id);
+                
+                // Create short teaser (first 100 characters of description)
+                const teaser = description.length > 100 ? description.substring(0, 100) + '...' : description;
+                
+                // Determine if image should be on left or right (odd index = left, even index = right)
+                const imageOnLeft = index % 2 === 0;
 
                 return `
-                    <div class="room-grid-card" onclick="openRoomModal('${escapeJs(escapedRoomId)}')" tabindex="0" role="button" aria-label="View details for ${name}" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openRoomModal('${escapeJs(escapedRoomId)}');}">
-                        <div class="room-grid-photo">
+                    <div class="room-card ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
+                        <div class="room-card-image-container">
                             ${firstPhoto ? `
-                                <img src="${escapeHtml(firstPhoto)}" alt="${name}">
-                                <div class="room-grid-overlay">
-                                    <span class="room-grid-view">View Details</span>
-                                </div>
+                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-card-image">
+                                ${hasMultiplePhotos ? `
+                                    <button class="room-image-nav room-image-nav-left" 
+                                            onclick="navigateRoomImage('${escapeJs(escapedRoomId)}', -1, event)"
+                                            aria-label="Previous image">‹</button>
+                                    <button class="room-image-nav room-image-nav-right" 
+                                            onclick="navigateRoomImage('${escapeJs(escapedRoomId)}', 1, event)"
+                                            aria-label="Next image">›</button>
+                                ` : ''}
                             ` : `
-                                <div class="room-grid-no-photo">
+                                <div class="room-card-no-image">
                                     <span>No Image</span>
                                 </div>
                             `}
                         </div>
-                        <div class="room-grid-info">
-                            <h3 class="room-grid-name">${name}</h3>
-                            <p class="room-grid-bed">${bedType}</p>
-                            <div class="room-grid-meta">
-                                <span>${room.maxOccupancy} guests</span>
-                                <span>${room.roomSize} m²</span>
+                        <div class="room-card-details">
+                            <h3 class="room-card-name">${name}</h3>
+                            <div class="room-card-meta">
+                                <div class="room-card-meta-item">
+                                    <span class="room-card-icon">👥</span>
+                                    <span>${room.maxOccupancy} guests</span>
+                                </div>
+                                <div class="room-card-meta-item">
+                                    <span class="room-card-icon">🛏️</span>
+                                    <span>${bedType}</span>
+                                </div>
+                                <div class="room-card-meta-item">
+                                    <span class="room-card-icon">📏</span>
+                                    <span>${room.roomSize} m²</span>
+                                </div>
                             </div>
+                            ${teaser ? `<p class="room-card-teaser">${teaser}</p>` : ''}
+                            <button class="room-card-btn" onclick="openRoomModal('${escapeJs(escapedRoomId)}')">Read More</button>
                         </div>
                     </div>
                 `;
@@ -330,14 +385,17 @@
                 <div class="room-modal-details">
                     <div class="room-modal-specs">
                         <div class="room-modal-spec">
+                            <span class="room-card-icon">🛏️</span>
                             <span class="room-modal-spec-label">${labels.bedType}</span>
                             <span class="room-modal-spec-value">${bedType}</span>
                         </div>
                         <div class="room-modal-spec">
+                            <span class="room-card-icon">👥</span>
                             <span class="room-modal-spec-label">${labels.maxOccupancy}</span>
                             <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
                         </div>
                         <div class="room-modal-spec">
+                            <span class="room-card-icon">📏</span>
                             <span class="room-modal-spec-label">${labels.roomSize}</span>
                             <span class="room-modal-spec-value">${room.roomSize} m²</span>
                         </div>
@@ -367,11 +425,30 @@
                             <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${labels.watchVideo}</button>
                         ` : ''}
                     </div>
+                    
+                    <!-- Booking Bar in Modal -->
+                    <div class="room-modal-booking">
+                        <h3>Book This Room</h3>
+                        <div class="booking-bar booking-bar-modal">
+                            <div class="booking-field">
+                                <label for="modal-checkin-date">Check-in</label>
+                                <input type="text" id="modal-checkin-date" placeholder="Select date" readonly>
+                            </div>
+                            <div class="booking-field">
+                                <label for="modal-checkout-date">Check-out</label>
+                                <input type="text" id="modal-checkout-date" placeholder="Select date" readonly>
+                            </div>
+                            <button id="modal-search-btn" class="btn booking-search-btn">Search</button>
+                        </div>
+                    </div>
                 </div>
             `;
 
             document.getElementById('room-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Initialize booking bar for modal
+            initializeModalBookingBar();
 
             // Focus on close button for keyboard accessibility
             setTimeout(() => {
@@ -383,11 +460,74 @@
             document.getElementById('room-modal').classList.remove('active');
             document.body.style.overflow = '';
             
+            // Destroy modal date pickers if they exist
+            if (window.modalCheckinPicker) {
+                window.modalCheckinPicker.destroy();
+                window.modalCheckinPicker = null;
+            }
+            if (window.modalCheckoutPicker) {
+                window.modalCheckoutPicker.destroy();
+                window.modalCheckoutPicker = null;
+            }
+            
             // Return focus to the element that opened the modal
             if (lastFocusedElement) {
                 lastFocusedElement.focus();
                 lastFocusedElement = null;
             }
+        }
+
+        // Initialize modal booking bar
+        function initializeModalBookingBar() {
+            const checkinInput = document.getElementById('modal-checkin-date');
+            const checkoutInput = document.getElementById('modal-checkout-date');
+            const searchBtn = document.getElementById('modal-search-btn');
+
+            if (!checkinInput || !checkoutInput || !searchBtn) return;
+
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            // Destroy existing pickers if they exist
+            if (window.modalCheckinPicker) {
+                window.modalCheckinPicker.destroy();
+            }
+            if (window.modalCheckoutPicker) {
+                window.modalCheckoutPicker.destroy();
+            }
+
+            // Initialize check-in picker
+            window.modalCheckinPicker = new DatePicker(checkinInput, {
+                defaultDate: today,
+                minDate: today,
+                onChange: (selectedDate) => {
+                    const nextDay = new Date(selectedDate);
+                    nextDay.setDate(nextDay.getDate() + 1);
+                    window.modalCheckoutPicker.setMinDate(nextDay);
+                    
+                    if (window.modalCheckoutPicker.getDate() < nextDay) {
+                        window.modalCheckoutPicker.setDate(nextDay);
+                    }
+                }
+            });
+
+            // Initialize check-out picker
+            window.modalCheckoutPicker = new DatePicker(checkoutInput, {
+                defaultDate: tomorrow,
+                minDate: tomorrow
+            });
+
+            // Search button functionality
+            searchBtn.addEventListener('click', function() {
+                const checkinDate = checkinInput.value;
+                const checkoutDate = checkoutInput.value;
+                
+                if (checkinDate && checkoutDate) {
+                    const url = `https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e?mewsStart=${checkinDate}&mewsEnd=${checkoutDate}&mewsRoute=rooms`;
+                    window.open(url, '_blank');
+                }
+            });
         }
 
         // Room modal controls - only set up once
