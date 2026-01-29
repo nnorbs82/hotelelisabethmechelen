@@ -159,6 +159,7 @@
                     setHeroBackground(); // Set hero background after rooms are loaded
                 } else {
                     document.getElementById('rooms-list-container').innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
+                    setHeroBackground(); // Still attempt to set background even if no rooms
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
@@ -191,12 +192,13 @@
             
             // Set background image with proper URL validation
             if (imageUrl) {
-                // Basic URL validation to prevent CSS injection
                 try {
+                    // Validate URL format and protocol
                     const url = new URL(imageUrl, window.location.href);
                     // Only allow http and https protocols
                     if (url.protocol === 'http:' || url.protocol === 'https:') {
-                        heroSection.style.backgroundImage = `url("${imageUrl.replace(/["\\]/g, '\\$&')}")`;
+                        // Use the validated URL's href property
+                        heroSection.style.backgroundImage = `url("${url.href}")`;
                     }
                 } catch (e) {
                     console.error('Invalid image URL:', imageUrl);
