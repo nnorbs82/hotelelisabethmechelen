@@ -2743,32 +2743,30 @@ body:not(.admin-page) .nav-logo img {
     position: absolute;
     bottom: 1.5rem;
     right: 1.5rem;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
     z-index: 3;
 }
 
 .room-feature-magnify-icon svg {
-    width: 22px;
-    height: 22px;
-    color: var(--color-sage);
+    width: 20px;
+    height: 20px;
+    color: var(--color-beige);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 .room-feature-image-clickable:hover .room-feature-magnify-icon {
-    background: var(--color-white);
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.15);
 }
 
 .room-feature-image-clickable:hover .room-feature-magnify-icon svg {
-    color: var(--color-black);
+    color: var(--color-white);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 /* Image navigation arrows */
@@ -3129,8 +3127,8 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .room-modal-icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     color: var(--color-sage);
     flex-shrink: 0;
 }
@@ -3229,8 +3227,8 @@ body:not(.admin-page) .nav-logo img {
 
 /* Room Modal Booking Bar */
 .room-modal-booking {
-    margin-top: 3rem;
-    padding-top: 2.5rem;
+    margin-top: 0;
+    padding: 2.5rem 3rem 3rem;
     border-top: 2px solid rgba(149, 147, 128, 0.2);
 }
 
@@ -3377,6 +3375,10 @@ body:not(.admin-page) .nav-logo img {
     .room-modal-amenities-list {
         grid-template-columns: 1fr;
     }
+
+    .room-modal-booking {
+        padding: 2.5rem 2rem 2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3419,6 +3421,10 @@ body:not(.admin-page) .nav-logo img {
 
     .room-modal-details {
         padding: 0 1.5rem 1.5rem;
+    }
+
+    .room-modal-booking {
+        padding: 2.5rem 1.5rem 1.5rem;
     }
 
     .room-modal-close {

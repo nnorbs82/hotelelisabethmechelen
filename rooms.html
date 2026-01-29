@@ -582,21 +582,21 @@
                             <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${labels.watchVideo}</button>
                         </div>
                     ` : ''}
-                    
-                    <!-- Booking Bar in Modal -->
-                    <div class="room-modal-booking">
-                        <h3>Book This Room</h3>
-                        <div class="booking-bar booking-bar-modal">
-                            <div class="booking-field">
-                                <label for="modal-checkin-date">Check-in</label>
-                                <input type="text" id="modal-checkin-date" placeholder="Select date" readonly>
-                            </div>
-                            <div class="booking-field">
-                                <label for="modal-checkout-date">Check-out</label>
-                                <input type="text" id="modal-checkout-date" placeholder="Select date" readonly>
-                            </div>
-                            <button id="modal-search-btn" class="btn booking-search-btn">Search</button>
+                </div>
+                
+                <!-- Booking Bar in Modal - Moved to Bottom -->
+                <div class="room-modal-booking">
+                    <h3>Book This Room</h3>
+                    <div class="booking-bar booking-bar-modal">
+                        <div class="booking-field">
+                            <label for="modal-checkin-date">Check-in</label>
+                            <input type="text" id="modal-checkin-date" placeholder="Select date" readonly>
                         </div>
+                        <div class="booking-field">
+                            <label for="modal-checkout-date">Check-out</label>
+                            <input type="text" id="modal-checkout-date" placeholder="Select date" readonly>
+                        </div>
+                        <button id="modal-search-btn" class="btn booking-search-btn">Search</button>
                     </div>
                 </div>
             `;
