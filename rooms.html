@@ -159,10 +159,10 @@
                         ...roomsObj[id]
                     }));
                     renderRooms();
-                    setHeroBackground(); // Set hero background after rooms are loaded
+                    setPageBackground(); // Set page background after rooms are loaded
                 } else {
                     document.getElementById('rooms-list-container').innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
-                    setHeroBackground(); // Still attempt to set background even if no rooms
+                    setPageBackground(); // Still attempt to set background even if no rooms
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
@@ -172,7 +172,7 @@
         }
 
         // Set page background to City Suite's first image
-        function setHeroBackground() {
+        function setPageBackground() {
             const pageBackground = document.getElementById('page-background');
             if (!pageBackground) return;
             
@@ -247,7 +247,7 @@
                 }
             ];
             renderRooms();
-            setHeroBackground(); // Set hero background after demo data is loaded
+            setPageBackground(); // Set page background after demo data is loaded
         }
 
         // Track current image index for each room card
