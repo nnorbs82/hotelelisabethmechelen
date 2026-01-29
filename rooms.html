@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
+    
     <header>
         <nav>
             <a class="nav-logo" href="index.html">
@@ -168,10 +171,10 @@
             }
         }
 
-        // Set hero section background to City Suite's first image
+        // Set page background to City Suite's first image
         function setHeroBackground() {
-            const heroSection = document.querySelector('.rooms-hero-modern');
-            if (!heroSection) return;
+            const pageBackground = document.getElementById('page-background');
+            if (!pageBackground) return;
             
             // Find the City Suite room (case-insensitive search)
             const citySuiteRoom = roomsData.find(room => 
@@ -198,7 +201,7 @@
                     // Only allow http and https protocols
                     if (url.protocol === 'http:' || url.protocol === 'https:') {
                         // Use the validated URL's href property
-                        heroSection.style.backgroundImage = `url("${url.href}")`;
+                        pageBackground.style.backgroundImage = `url("${url.href}")`;
                     }
                 } catch (e) {
                     console.error('Invalid image URL:', imageUrl);
