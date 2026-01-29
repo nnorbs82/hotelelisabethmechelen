@@ -29,15 +29,40 @@
     </header>
 
     <main class="rooms-main">
-        <div class="rooms-hero">
-            <h1 class="rooms-hero-title">Our Rooms</h1>
-            <p class="rooms-hero-subtitle">Discover elegant comfort and modern luxury</p>
-        </div>
+        <!-- Enhanced Hero Section -->
+        <section class="rooms-hero-modern">
+            <div class="rooms-hero-overlay"></div>
+            <div class="rooms-hero-content">
+                <span class="rooms-hero-tagline">Luxury Accommodations</span>
+                <h1 class="rooms-hero-title-modern">Discover Your Perfect Stay</h1>
+                <p class="rooms-hero-subtitle-modern">Experience comfort and elegance in every detail</p>
+                <div class="rooms-hero-divider"></div>
+            </div>
+        </section>
 
-        <!-- Rooms List Container -->
-        <div id="rooms-list-container" class="rooms-list" aria-live="polite" aria-atomic="false">
-            <p class="rooms-loading">Loading rooms...</p>
-        </div>
+        <!-- Intro Section -->
+        <section class="rooms-intro">
+            <div class="rooms-intro-content">
+                <h2 class="rooms-section-title">Our Rooms & Suites</h2>
+                <p class="rooms-intro-text">Each of our thoughtfully designed rooms offers a perfect blend of contemporary style and timeless comfort. From cozy retreats to spacious suites, find your ideal sanctuary in the heart of Mechelen.</p>
+            </div>
+        </section>
+
+        <!-- Rooms Showcase Container -->
+        <section class="rooms-showcase">
+            <div id="rooms-list-container" class="rooms-showcase-grid" aria-live="polite" aria-atomic="false">
+                <p class="rooms-loading">Loading rooms...</p>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="rooms-cta">
+            <div class="rooms-cta-content">
+                <h2 class="rooms-cta-title">Ready to Book Your Stay?</h2>
+                <p class="rooms-cta-text">Experience the perfect blend of comfort and luxury</p>
+                <a href="index.html#booking" class="rooms-cta-button">Book Now</a>
+            </div>
+        </section>
     </main>
     
     <!-- Room Details Modal -->
@@ -136,8 +161,49 @@
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
-                document.getElementById('rooms-list-container').innerHTML = '<p class="rooms-loading" style="color: #d32f2f;">Failed to load rooms.</p>';
+                // Use demo data if Firebase fails
+                useDemoData();
             }
+        }
+
+        // Demo data for testing/preview
+        function useDemoData() {
+            roomsData = [
+                {
+                    id: 'demo-1',
+                    name_en: 'Deluxe Double Room',
+                    bedType_en: 'King Size Bed',
+                    description_en: 'Spacious and elegantly appointed, our Deluxe Double Room offers a perfect blend of comfort and sophistication. Featuring premium bedding, modern amenities, and a refined aesthetic, this room provides an ideal retreat after a day of exploring Mechelen.',
+                    maxOccupancy: 2,
+                    roomSize: 28,
+                    photos: [
+                        { url: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop' }
+                    ]
+                },
+                {
+                    id: 'demo-2',
+                    name_en: 'Superior Suite',
+                    bedType_en: 'Queen Size Bed',
+                    description_en: 'Experience luxury in our Superior Suite, featuring a separate living area, marble bathroom, and stunning city views. Perfect for extended stays or those seeking extra space and comfort. Each suite is thoughtfully designed with contemporary furnishings and premium amenities.',
+                    maxOccupancy: 3,
+                    roomSize: 42,
+                    photos: [
+                        { url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop' }
+                    ]
+                },
+                {
+                    id: 'demo-3',
+                    name_en: 'Executive Twin Room',
+                    bedType_en: 'Two Single Beds',
+                    description_en: 'Ideal for business travelers or friends traveling together, our Executive Twin Room offers two comfortable single beds, a spacious work area, and all the modern conveniences you need. The room combines functionality with elegant design.',
+                    maxOccupancy: 2,
+                    roomSize: 25,
+                    photos: [
+                        { url: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=600&fit=crop' }
+                    ]
+                }
+            ];
+            renderRooms();
         }
 
         // Track current image index for each room card
@@ -160,7 +226,7 @@
             const newIndex = (currentIndex + direction + room.photos.length) % room.photos.length;
             roomImageIndices[roomId] = newIndex;
             
-            const imgElement = document.querySelector(`#room-card-${roomId} .room-card-image`);
+            const imgElement = document.querySelector(`#room-card-${roomId} .room-feature-image`);
             if (imgElement) {
                 imgElement.src = escapeHtml(room.photos[newIndex].url);
             }
@@ -187,17 +253,17 @@
                 const hasMultiplePhotos = room.photos && room.photos.length > 1;
                 const escapedRoomId = escapeHtml(room.id);
                 
-                // Create short teaser (first 100 characters of description)
-                const teaser = description.length > 100 ? description.substring(0, 100) + '...' : description;
+                // Create short teaser (first 150 characters of description)
+                const teaser = description.length > 150 ? description.substring(0, 150) + '...' : description;
                 
                 // Determine if image should be on left or right (odd index = left, even index = right)
                 const imageOnLeft = index % 2 === 0;
 
                 return `
-                    <div class="room-card ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
-                        <div class="room-card-image-container">
+                    <article class="room-feature ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
+                        <div class="room-feature-image-wrapper">
                             ${firstPhoto ? `
-                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-card-image">
+                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
                                 ${hasMultiplePhotos ? `
                                     <button class="room-image-nav room-image-nav-left" 
                                             onclick="navigateRoomImage('${escapeJs(escapedRoomId)}', -1, event)"
@@ -205,33 +271,57 @@
                                     <button class="room-image-nav room-image-nav-right" 
                                             onclick="navigateRoomImage('${escapeJs(escapedRoomId)}', 1, event)"
                                             aria-label="Next image">›</button>
+                                    <div class="room-feature-badge">${room.photos.length} Photos</div>
                                 ` : ''}
                             ` : `
-                                <div class="room-card-no-image">
+                                <div class="room-feature-no-image">
                                     <span>No Image</span>
                                 </div>
                             `}
                         </div>
-                        <div class="room-card-details">
-                            <h3 class="room-card-name">${name}</h3>
-                            <div class="room-card-meta">
-                                <div class="room-card-meta-item">
-                                    <span class="room-card-icon">👥</span>
-                                    <span>${room.maxOccupancy} guests</span>
+                        <div class="room-feature-content">
+                            <div class="room-feature-header">
+                                <span class="room-feature-label">Room Type</span>
+                                <h3 class="room-feature-name">${name}</h3>
+                            </div>
+                            <div class="room-feature-amenities">
+                                <div class="room-feature-amenity">
+                                    <svg class="room-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                    <span>${room.maxOccupancy} Guests</span>
                                 </div>
-                                <div class="room-card-meta-item">
-                                    <span class="room-card-icon">🛏️</span>
+                                <div class="room-feature-amenity">
+                                    <svg class="room-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                                    </svg>
                                     <span>${bedType}</span>
                                 </div>
-                                <div class="room-card-meta-item">
-                                    <span class="room-card-icon">📏</span>
+                                <div class="room-feature-amenity">
+                                    <svg class="room-feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                        <rect x="1" y="3" width="22" height="5"></rect>
+                                        <line x1="10" y1="12" x2="14" y2="12"></line>
+                                    </svg>
                                     <span>${room.roomSize} m²</span>
                                 </div>
                             </div>
-                            ${teaser ? `<p class="room-card-teaser">${teaser}</p>` : ''}
-                            <button class="room-card-btn" onclick="openRoomModal('${escapeJs(escapedRoomId)}')">Read More</button>
+                            ${teaser ? `<p class="room-feature-description">${teaser}</p>` : ''}
+                            <div class="room-feature-actions">
+                                <button class="room-feature-btn primary" onclick="openRoomModal('${escapeJs(escapedRoomId)}')">
+                                    <span>Discover More</span>
+                                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </article>
                 `;
             }).join('');
 
