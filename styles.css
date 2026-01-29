@@ -2530,13 +2530,13 @@ body:not(.admin-page) .nav-logo img {
 /* Enhanced Hero Section with Background */
 .rooms-hero-modern {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - var(--header-height));
     min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: transparent; /* Allow fixed page-background to show through */
+    background-color: transparent; /* Allow fixed page-background to show through */
 }
 
 .rooms-hero-overlay {
