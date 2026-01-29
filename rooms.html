@@ -307,7 +307,15 @@
                     <article class="room-feature ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
                         <div class="room-feature-image-wrapper">
                             ${firstPhoto ? `
-                                <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
+                                <div class="room-feature-image-clickable" onclick="openLightbox('${escapeJs(escapedRoomId)}', ${roomImageIndices[room.id] || 0})" style="cursor: pointer;">
+                                    <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
+                                    <div class="room-feature-magnify-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <path d="M21 21l-4.35-4.35"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                                 ${hasMultiplePhotos ? `
                                     <button class="room-image-nav room-image-nav-left" 
                                             onclick="navigateRoomImage('${escapeJs(escapedRoomId)}', -1, event)"
@@ -519,19 +527,37 @@
                 <div class="room-modal-details">
                     <div class="room-modal-specs">
                         <div class="room-modal-spec">
-                            <span class="room-card-icon">🛏️</span>
-                            <span class="room-modal-spec-label">${labels.bedType}</span>
-                            <span class="room-modal-spec-value">${bedType}</span>
+                            <svg class="room-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <div class="room-modal-spec-content">
+                                <span class="room-modal-spec-label">${labels.maxOccupancy}</span>
+                                <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
+                            </div>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-card-icon">👥</span>
-                            <span class="room-modal-spec-label">${labels.maxOccupancy}</span>
-                            <span class="room-modal-spec-value">${room.maxOccupancy} guests</span>
+                            <svg class="room-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="9" y1="3" x2="9" y2="21"></line>
+                            </svg>
+                            <div class="room-modal-spec-content">
+                                <span class="room-modal-spec-label">${labels.bedType}</span>
+                                <span class="room-modal-spec-value">${bedType}</span>
+                            </div>
                         </div>
                         <div class="room-modal-spec">
-                            <span class="room-card-icon">📏</span>
-                            <span class="room-modal-spec-label">${labels.roomSize}</span>
-                            <span class="room-modal-spec-value">${room.roomSize} m²</span>
+                            <svg class="room-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                <rect x="1" y="3" width="22" height="5"></rect>
+                                <line x1="10" y1="12" x2="14" y2="12"></line>
+                            </svg>
+                            <div class="room-modal-spec-content">
+                                <span class="room-modal-spec-label">${labels.roomSize}</span>
+                                <span class="room-modal-spec-value">${room.roomSize} m²</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -551,14 +577,11 @@
                         </div>
                     ` : ''}
                     
-                    <div class="room-modal-actions">
-                        ${room.photos && room.photos.length > 0 ? `
-                            <button class="btn room-modal-btn" onclick="openLightbox('${escapedRoomId}', 0)">${labels.viewGallery}</button>
-                        ` : ''}
-                        ${room.video ? `
+                    ${room.video ? `
+                        <div class="room-modal-actions">
                             <button class="btn room-modal-btn" onclick="playVideo('${escapeJs(room.video.url)}')">${labels.watchVideo}</button>
-                        ` : ''}
-                    </div>
+                        </div>
+                    ` : ''}
                     
                     <!-- Booking Bar in Modal -->
                     <div class="room-modal-booking">
