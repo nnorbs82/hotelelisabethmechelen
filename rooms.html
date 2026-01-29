@@ -139,7 +139,10 @@
         // Load amenities
         async function loadAmenities() {
             try {
-                const amenitiesSnapshot = await get(dbRef(database, 'amenities'));
+                let amenitiesSnapshot = await get(dbRef(database, 'amenitiesMaster'));
+                if (!amenitiesSnapshot.exists()) {
+                    amenitiesSnapshot = await get(dbRef(database, 'amenities'));
+                }
                 if (amenitiesSnapshot.exists()) {
                     amenitiesData = amenitiesSnapshot.val();
                 }

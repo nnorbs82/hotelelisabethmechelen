@@ -2371,25 +2371,26 @@ body:not(.admin-page) .nav-logo img {
     position: absolute;
     top: 2rem;
     right: 2rem;
-    background: white;
-    border: none;
-    font-size: 3rem;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--color-beige);
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    color: var(--color-beige);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10001;
-    transition: background 0.3s, transform 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     line-height: 1;
     padding: 0;
 }
 
 .lightbox-close:hover {
-    background: var(--color-beige);
-    transform: scale(1.1);
+    background-color: var(--color-beige);
+    color: var(--color-black);
 }
 
 .lightbox-prev,
@@ -2397,15 +2398,16 @@ body:not(.admin-page) .nav-logo img {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    font-size: 3rem;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--color-beige);
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    color: var(--color-beige);
     cursor: pointer;
     z-index: 10001;
-    transition: background 0.3s, transform 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2423,8 +2425,9 @@ body:not(.admin-page) .nav-logo img {
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    transform: translateY(-50%);
 }
 
 .lightbox-thumbnails {
@@ -2774,19 +2777,19 @@ body:not(.admin-page) .nav-logo img {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    color: var(--color-black);
-    border: none;
-    font-size: 2rem;
-    width: 50px;
-    height: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--color-beige);
+    border: 2px solid var(--color-beige);
+    border-radius: 999px;
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
     z-index: 2;
-    border-radius: 50%;
     opacity: 0;
 }
 
@@ -2795,9 +2798,9 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .room-image-nav:hover {
-    background: var(--color-black);
-    color: var(--color-white);
-    transform: translateY(-50%) scale(1.1);
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    transform: translateY(-50%);
 }
 
 .room-image-nav-left {
@@ -3034,26 +3037,25 @@ body:not(.admin-page) .nav-logo img {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
-    background: var(--color-white);
-    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--color-beige);
     width: 48px;
     height: 48px;
-    border-radius: 50%;
-    font-size: 2rem;
+    border-radius: 999px;
+    font-size: 1.5rem;
     line-height: 1;
+    color: var(--color-beige);
     cursor: pointer;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .room-modal-close:hover {
-    background: var(--color-black);
-    color: var(--color-white);
-    transform: rotate(90deg);
+    background-color: var(--color-beige);
+    color: var(--color-black);
 }
 
 /* Modal Header */
@@ -3240,10 +3242,26 @@ body:not(.admin-page) .nav-logo img {
     letter-spacing: 0.08em;
 }
 
-.booking-bar-modal {
+.booking-bar.booking-bar-modal {
+    position: static;
     background: var(--color-beige);
     padding: 1.5rem;
     border-radius: 8px;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    left: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+}
+
+.booking-bar.booking-bar-modal .booking-field label {
+    color: var(--color-black);
+}
+
+.booking-bar.booking-bar-modal .booking-field input {
+    border-color: rgba(0, 0, 0, 0.4);
 }
 
 /* ============ RESPONSIVE DESIGN ============ */
