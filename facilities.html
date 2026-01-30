@@ -28,11 +28,33 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Hotel Facilities</h2>
-            <p>Explore the amenities and services we offer to our guests.</p>
-        </div>
+    <main class="facilities-main">
+        <section class="facilities-hero" aria-label="Facilities hero">
+            <div class="facilities-hero-overlay"></div>
+            <div class="facilities-hero-content">
+                <span class="facilities-hero-tagline">Hotel Elisabeth Mechelen</span>
+                <h1 class="facilities-hero-title">Facilities & Services</h1>
+                <p class="facilities-hero-subtitle">Thoughtfully curated spaces designed for comfort and ease.</p>
+                <div class="facilities-hero-divider"></div>
+            </div>
+        </section>
+
+        <section class="facilities-intro">
+            <div class="facilities-intro-content">
+                <h2 class="facilities-section-title">Discover Our Facilities</h2>
+                <p class="facilities-intro-text">From wellness experiences to business essentials, our hotel facilities are designed to make every stay memorable.</p>
+            </div>
+        </section>
+
+        <section class="facilities-library" aria-label="Facilities photo gallery">
+            <div class="facilities-library-grid" id="facilities-library-grid">
+                <p class="facilities-loading">Loading facilities...</p>
+            </div>
+        </section>
+
+        <section class="facilities-list" id="facilities-list" aria-label="Facilities details">
+            <!-- Facilities will be rendered here -->
+        </section>
     </main>
 
     <footer>
@@ -44,5 +66,128 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const labels = {
+            en: { guidelines: 'Guidelines', guidelinesUnavailable: 'Guidelines will be available soon.' },
+            nl: { guidelines: 'Richtlijnen', guidelinesUnavailable: 'Richtlijnen zijn binnenkort beschikbaar.' },
+            fr: { guidelines: 'Consignes', guidelinesUnavailable: 'Les consignes seront bientôt disponibles.' }
+        };
+
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('nl')) return 'nl';
+            if (browserLang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        const currentLang = detectLanguage();
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') ||
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        async function loadFacilitiesHero() {
+            try {
+                const snapshot = await get(dbRef(database, 'facilitiesHero'));
+                if (snapshot.exists()) {
+                    const hero = snapshot.val();
+                    const safeUrl = sanitizeImageUrl(hero?.url || '');
+                    if (safeUrl) {
+                        const heroSection = document.querySelector('.facilities-hero');
+                        heroSection.style.backgroundImage = `url('${safeUrl}')`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading facilities hero:', error);
+            }
+        }
+
+        async function loadFacilitiesLibrary() {
+            const grid = document.getElementById('facilities-library-grid');
+            try {
+                const snapshot = await get(dbRef(database, 'facilitiesLibrary'));
+                if (snapshot.exists()) {
+                    const library = Object.values(snapshot.val())
+                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                    const sanitizedLibrary = library.filter(item => sanitizeImageUrl(item.url || ''));
+                    if (sanitizedLibrary.length === 0) {
+                        grid.innerHTML = '<p class="facilities-loading">No facility photos available.</p>';
+                        return;
+                    }
+                    grid.innerHTML = sanitizedLibrary.map(item => {
+                        const safeUrl = sanitizeImageUrl(item.url || '');
+                        return `
+                        <div class="facilities-library-item">
+                            <img src="${safeUrl}" alt="Facility photo">
+                        </div>
+                    `;
+                    }).join('');
+                } else {
+                    grid.innerHTML = '<p class="facilities-loading">No facility photos available.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading facilities library:', error);
+                grid.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
+            }
+        }
+
+        async function loadFacilitiesList() {
+            const container = document.getElementById('facilities-list');
+            try {
+                const snapshot = await get(dbRef(database, 'facilities'));
+                if (!snapshot.exists()) {
+                    container.innerHTML = '<p class="facilities-loading">Facilities information will be available soon.</p>';
+                    return;
+                }
+                const facilities = Object.keys(snapshot.val()).map(id => ({
+                    id,
+                    ...snapshot.val()[id]
+                }));
+                container.innerHTML = facilities.map(facility => {
+                    const name = escapeHtml(facility[`name_${currentLang}`] || facility.name_en || '');
+                    const operation = escapeHtml(facility[`operation_${currentLang}`] || facility.operation_en || '');
+                    const guidelines = facility[`guidelines_${currentLang}`] || facility.guidelines_en || [];
+                    const guidelineItems = guidelines.length
+                        ? `<ul class="facility-guidelines">${guidelines.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
+                        : `<p class="facility-guidelines-empty">${labels[currentLang]?.guidelinesUnavailable || labels.en.guidelinesUnavailable}</p>`;
+
+                    return `
+                        <article class="facility-card">
+                            <div class="facility-card-header">
+                                <h3>${name || 'Facility'}</h3>
+                            </div>
+                            <div class="facility-card-body">
+                                <p>${operation || ''}</p>
+                                <h4>${labels[currentLang]?.guidelines || labels.en.guidelines}</h4>
+                                ${guidelineItems}
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading facilities list:', error);
+                container.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
+            }
+        }
+
+        loadFacilitiesHero();
+        loadFacilitiesLibrary();
+        loadFacilitiesList();
+    </script>
 </body>
 </html>
