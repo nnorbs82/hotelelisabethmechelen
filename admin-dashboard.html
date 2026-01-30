@@ -262,7 +262,11 @@
 
                 <div class="facility-library-section">
                     <h3>Facilities Photo Library</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload and reorder photos displayed on the facilities page.</p>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload and reorder photos for each facility on the facilities page.</p>
+                    <div class="form-group">
+                        <label for="facility-library-select">Select facility album</label>
+                        <select id="facility-library-select" class="form-control"></select>
+                    </div>
                     <input type="file" id="facility-library-input" accept="image/*" multiple style="display: none;">
                     <button class="btn" id="upload-facility-library-btn">Add Library Photos</button>
                     <div id="facility-library-grid" class="photo-grid"></div>
@@ -1190,6 +1194,7 @@
         let facilitiesHeroImage = null;
         let editingFacilityId = null;
         let facilityDraft = null;
+        let currentFacilityLibraryId = null;
 
         // Show facilities management card
         document.getElementById('manage-facilities-btn').addEventListener('click', async () => {
@@ -1227,6 +1232,11 @@
 
             await loadFacilitiesData();
             await loadFacilitiesHero();
+            await loadFacilitiesLibrary();
+        });
+
+        document.getElementById('facility-library-select').addEventListener('change', async (event) => {
+            currentFacilityLibraryId = event.target.value || null;
             await loadFacilitiesLibrary();
         });
 
@@ -1306,6 +1316,7 @@
                 return;
             }
 
+            const hasLibrarySelection = !!currentFacilityLibraryId;
             const timestamp = Date.now();
             const facilityId = `facility_${timestamp}`;
 
@@ -1328,6 +1339,11 @@
                 applyFacilityDraft(currentFacilityLang);
                 alert('Facility added successfully!');
                 await loadFacilitiesData();
+                if (!hasLibrarySelection) {
+                    currentFacilityLibraryId = facilityId;
+                    updateFacilityLibrarySelect();
+                    await loadFacilitiesLibrary();
+                }
             } catch (error) {
                 console.error('Error adding facility:', error);
                 alert('Failed to add facility. Please try again.');
@@ -1350,6 +1366,7 @@
 
             if (!facilitiesData || Object.keys(facilitiesData).length === 0) {
                 container.innerHTML = '<p style="color: var(--color-sage); text-align: center;">No facilities added yet.</p>';
+                updateFacilityLibrarySelect();
                 return;
             }
 
@@ -1371,6 +1388,41 @@
                     </div>
                 `;
             }).join('');
+            updateFacilityLibrarySelect();
+        }
+
+        function updateFacilityLibrarySelect() {
+            const select = document.getElementById('facility-library-select');
+            if (!select) return;
+            const previousSelection = currentFacilityLibraryId;
+
+            if (!facilitiesData || Object.keys(facilitiesData).length === 0) {
+                select.innerHTML = '<option value="">No facilities available</option>';
+                select.disabled = true;
+                currentFacilityLibraryId = null;
+                return;
+            }
+
+            select.disabled = false;
+            const facilities = Object.keys(facilitiesData).map(id => {
+                const facility = facilitiesData[id];
+                const name = facility.name_en || facility.name_nl || facility.name_fr || 'Facility';
+                return { id, name };
+            });
+
+            if (!currentFacilityLibraryId || !facilitiesData[currentFacilityLibraryId]) {
+                currentFacilityLibraryId = facilities[0]?.id || null;
+            }
+
+            select.innerHTML = facilities.map(({ id, name }) => `
+                <option value="${id}" ${id === currentFacilityLibraryId ? 'selected' : ''}>
+                    ${escapeHtml(name)}
+                </option>
+            `).join('');
+
+            if (previousSelection !== currentFacilityLibraryId) {
+                loadFacilitiesLibrary();
+            }
         }
 
         window.editFacility = function(facilityId) {
@@ -1500,7 +1552,23 @@
             }
 
             try {
+                const librarySnapshot = await get(dbRef(database, `facilitiesLibrary/${facilityId}`));
+                if (librarySnapshot.exists()) {
+                    await Promise.all(Object.values(librarySnapshot.val()).map(async (photo) => {
+                        if (photo?.filename) {
+                            try {
+                                await deleteObject(storageRef(storage, photo.filename));
+                            } catch (deleteError) {
+                                console.warn('Failed to delete facility library photo:', deleteError?.message || 'Unknown error');
+                            }
+                        }
+                    }));
+                }
                 await set(dbRef(database, `facilities/${facilityId}`), null);
+                await set(dbRef(database, `facilitiesLibrary/${facilityId}`), null);
+                if (currentFacilityLibraryId === facilityId) {
+                    currentFacilityLibraryId = null;
+                }
                 alert('Facility deleted successfully!');
                 await loadFacilitiesData();
             } catch (error) {
@@ -1615,6 +1683,12 @@
             const files = Array.from(e.target.files || []);
             if (!files.length) return;
 
+            if (!currentFacilityLibraryId) {
+                alert('Please select a facility before uploading photos.');
+                e.target.value = '';
+                return;
+            }
+
             const uploadBtn = document.getElementById('upload-facility-library-btn');
             uploadBtn.disabled = true;
             uploadBtn.textContent = 'Uploading...';
@@ -1636,6 +1710,7 @@
                         url: downloadURL,
                         filename,
                         timestamp,
+                        facilityId: currentFacilityLibraryId,
                         order: facilitiesLibrary.length
                     });
                 }
@@ -1656,7 +1731,12 @@
 
         async function loadFacilitiesLibrary() {
             try {
-                const snapshot = await get(dbRef(database, 'facilitiesLibrary'));
+                if (!currentFacilityLibraryId) {
+                    facilitiesLibrary = [];
+                    renderFacilitiesLibrary();
+                    return;
+                }
+                const snapshot = await get(dbRef(database, `facilitiesLibrary/${currentFacilityLibraryId}`));
                 facilitiesLibrary = [];
                 if (snapshot.exists()) {
                     facilitiesLibrary = Object.values(snapshot.val()).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -1670,6 +1750,11 @@
         function renderFacilitiesLibrary() {
             const grid = document.getElementById('facility-library-grid');
             if (!grid) return;
+
+            if (!currentFacilityLibraryId) {
+                grid.innerHTML = '<p style="color: var(--color-sage);">Select a facility to manage its photo album.</p>';
+                return;
+            }
 
             if (facilitiesLibrary.length === 0) {
                 grid.innerHTML = '<p style="color: var(--color-sage);">No library photos uploaded yet.</p>';
@@ -1740,11 +1825,14 @@
         }
 
         async function saveFacilitiesLibrary() {
+            if (!currentFacilityLibraryId) {
+                return;
+            }
             const updates = {};
             facilitiesLibrary.forEach(photo => {
                 updates[photo.timestamp] = photo;
             });
-            await set(dbRef(database, 'facilitiesLibrary'), updates);
+            await set(dbRef(database, `facilitiesLibrary/${currentFacilityLibraryId}`), updates);
         }
 
         window.deleteFacilityLibraryPhoto = async function(index) {
@@ -1753,6 +1841,10 @@
             }
 
             try {
+                if (!currentFacilityLibraryId) {
+                    alert('Please select a facility album.');
+                    return;
+                }
                 if (index < 0 || index >= facilitiesLibrary.length) {
                     alert('Invalid photo index.');
                     return;

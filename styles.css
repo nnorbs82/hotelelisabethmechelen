@@ -2558,37 +2558,6 @@ body:not(.admin-page) .nav-logo img {
     line-height: 1.7;
 }
 
-.facilities-library {
-    padding: 0 1.5rem 3rem;
-}
-
-.facilities-library-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.facilities-library-item {
-    overflow: hidden;
-    border-radius: 0;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    background-color: var(--color-white);
-}
-
-.facilities-library-item img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
-
-.facilities-library-item:hover img {
-    transform: scale(1.05);
-}
-
 .facilities-list {
     padding: 0 1.5rem 4rem;
     display: grid;
@@ -2615,6 +2584,43 @@ body:not(.admin-page) .nav-logo img {
     line-height: 1.8;
     margin-bottom: 1.5rem;
     white-space: pre-line;
+}
+
+.facility-album {
+    margin-bottom: 2rem;
+}
+
+.facility-album-title {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+}
+
+.facility-album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.facility-album-item {
+    overflow: hidden;
+    background-color: var(--color-beige);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.facility-album-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.facility-album-empty {
+    color: var(--color-sage);
+    font-style: italic;
+    margin-bottom: 0;
 }
 
 .facility-card-body h4 {

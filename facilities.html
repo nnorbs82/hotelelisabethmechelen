@@ -46,12 +46,6 @@
             </div>
         </section>
 
-        <section class="facilities-library" aria-label="Facilities photo gallery">
-            <div class="facilities-library-grid" id="facilities-library-grid">
-                <p class="facilities-loading">Loading facilities...</p>
-            </div>
-        </section>
-
         <section class="facilities-list" id="facilities-list" aria-label="Facilities details">
             <!-- Facilities will be rendered here -->
         </section>
@@ -117,46 +111,22 @@
             }
         }
 
-        async function loadFacilitiesLibrary() {
-            const grid = document.getElementById('facilities-library-grid');
-            try {
-                const snapshot = await get(dbRef(database, 'facilitiesLibrary'));
-                if (snapshot.exists()) {
-                    const library = Object.values(snapshot.val())
-                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-                    const sanitizedLibrary = library.filter(item => sanitizeImageUrl(item.url || ''));
-                    if (sanitizedLibrary.length === 0) {
-                        grid.innerHTML = '<p class="facilities-loading">No facility photos available.</p>';
-                        return;
-                    }
-                    grid.innerHTML = sanitizedLibrary.map(item => {
-                        const safeUrl = sanitizeImageUrl(item.url || '');
-                        return `
-                        <div class="facilities-library-item">
-                            <img src="${safeUrl}" alt="Facility photo">
-                        </div>
-                    `;
-                    }).join('');
-                } else {
-                    grid.innerHTML = '<p class="facilities-loading">No facility photos available.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading facilities library:', error);
-                grid.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
-            }
-        }
-
         async function loadFacilitiesList() {
             const container = document.getElementById('facilities-list');
             try {
-                const snapshot = await get(dbRef(database, 'facilities'));
-                if (!snapshot.exists()) {
+                const [facilitySnapshot, librarySnapshot] = await Promise.all([
+                    get(dbRef(database, 'facilities')),
+                    get(dbRef(database, 'facilitiesLibrary'))
+                ]);
+                if (!facilitySnapshot.exists()) {
                     container.innerHTML = '<p class="facilities-loading">Facilities information will be available soon.</p>';
                     return;
                 }
-                const facilities = Object.keys(snapshot.val()).map(id => ({
+                const libraryData = librarySnapshot.exists() ? librarySnapshot.val() : {};
+                const facilities = Object.keys(facilitySnapshot.val()).map(id => ({
                     id,
-                    ...snapshot.val()[id]
+                    ...facilitySnapshot.val()[id],
+                    library: libraryData[id] ? Object.values(libraryData[id]).sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : []
                 }));
                 container.innerHTML = facilities.map(facility => {
                     const name = escapeHtml(facility[`name_${currentLang}`] || facility.name_en || '');
@@ -165,6 +135,20 @@
                     const guidelineItems = guidelines.length
                         ? `<ul class="facility-guidelines">${guidelines.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
                         : `<p class="facility-guidelines-empty">${labels[currentLang]?.guidelinesUnavailable || labels.en.guidelinesUnavailable}</p>`;
+                    const libraryItems = (facility.library || [])
+                        .map(item => sanitizeImageUrl(item.url || ''))
+                        .filter(Boolean);
+                    const libraryMarkup = libraryItems.length
+                        ? `
+                            <div class="facility-album-grid">
+                                ${libraryItems.map(url => `
+                                    <div class="facility-album-item">
+                                        <img src="${url}" alt="${name || 'Facility'} photo">
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `
+                        : '<p class="facility-album-empty">No photos available for this facility yet.</p>';
 
                     return `
                         <article class="facility-card">
@@ -172,6 +156,10 @@
                                 <h3>${name || 'Facility'}</h3>
                             </div>
                             <div class="facility-card-body">
+                                <div class="facility-album">
+                                    <h4 class="facility-album-title">Photo Album</h4>
+                                    ${libraryMarkup}
+                                </div>
                                 <p>${operation || ''}</p>
                                 <h4>${labels[currentLang]?.guidelines || labels.en.guidelines}</h4>
                                 ${guidelineItems}
@@ -186,7 +174,6 @@
         }
 
         loadFacilitiesHero();
-        loadFacilitiesLibrary();
         loadFacilitiesList();
     </script>
 </body>
