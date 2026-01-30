@@ -227,9 +227,16 @@
             <div id="facilities-management-card" class="card" style="display: none;">
                 <h2>Facilities Management</h2>
                 <p style="color: var(--color-sage); margin-bottom: 1rem;">Create and manage facilities content, guidelines, and imagery for the facilities page.</p>
+                <p class="facility-step-hint">Follow the steps below to add a facility and immediately upload its photos.</p>
+                <div class="facility-steps">
+                    <div class="facility-step"><span class="facility-step-number">1</span><span>Facility details</span></div>
+                    <div class="facility-step"><span class="facility-step-number">2</span><span>Facility photos</span></div>
+                    <div class="facility-step"><span class="facility-step-number">3</span><span>Existing facilities & hero image</span></div>
+                </div>
 
                 <div class="facility-add-section">
-                    <h3>Add New Facility</h3>
+                    <h3>Step 1: Facility Details</h3>
+                    <p class="facility-step-hint">Save the details to unlock photo uploads below. We will switch the photo section to the new facility automatically.</p>
                     <div class="facility-lang-tabs">
                         <button class="facility-lang-tab active" data-lang="en">English</button>
                         <button class="facility-lang-tab" data-lang="nl">Nederlands</button>
@@ -249,22 +256,15 @@
                         <textarea id="facility-guidelines-input" class="admin-textarea" placeholder="Enter guidelines, one per line"></textarea>
                     </div>
 
-                    <button class="btn" id="add-facility-btn">Add Facility</button>
-                </div>
-
-                <div class="facility-main-image-section">
-                    <h3>Main Facilities Hero Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the hero image displayed on the facilities page.</p>
-                    <input type="file" id="facility-hero-upload-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-facility-hero-btn">Upload Main Image</button>
-                    <div id="facility-hero-preview" class="facility-hero-preview"></div>
+                    <button class="btn" id="add-facility-btn">Save Facility & Start Photos</button>
                 </div>
 
                 <div class="facility-library-section">
-                    <h3>Facilities Photo Library</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload and reorder photos for each facility on the facilities page.</p>
+                    <h3>Step 2: Facility Photo Library</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload and reorder photos for the selected facility. Newly saved facilities are selected automatically.</p>
+                    <div id="facility-photo-status" class="facility-photo-status">Select a facility to upload photos.</div>
                     <div class="form-group">
-                        <label for="facility-library-select">Select facility album</label>
+                        <label for="facility-library-select">Facility photo album</label>
                         <select id="facility-library-select" class="form-control"></select>
                     </div>
                     <input type="file" id="facility-library-input" accept="image/*" multiple style="display: none;">
@@ -273,8 +273,17 @@
                 </div>
 
                 <div class="facility-list-section">
-                    <h3>Existing Facilities</h3>
+                    <h3>Step 3: Existing Facilities & Hero Image</h3>
+                    <p class="facility-step-hint">Review the existing facilities and update the facilities page hero image below.</p>
                     <div id="facility-list" class="facility-grid"></div>
+                </div>
+
+                <div class="facility-main-image-section">
+                    <h3>Facilities Page Hero Image</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the hero image displayed at the top of the facilities page (this is not tied to a single facility).</p>
+                    <input type="file" id="facility-hero-upload-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="upload-facility-hero-btn">Upload Main Image</button>
+                    <div id="facility-hero-preview" class="facility-hero-preview"></div>
                 </div>
             </div>
 
@@ -1237,6 +1246,12 @@
 
         document.getElementById('facility-library-select').addEventListener('change', async (event) => {
             currentFacilityLibraryId = event.target.value || null;
+            const status = document.getElementById('facility-photo-status');
+            if (status) {
+                const facility = currentFacilityLibraryId ? facilitiesData[currentFacilityLibraryId] : null;
+                const name = facility ? (facility.name_en || facility.name_nl || facility.name_fr || 'Facility') : 'a facility';
+                status.textContent = currentFacilityLibraryId ? `Uploading photos for ${name}.` : 'Select a facility to upload photos.';
+            }
             await loadFacilitiesLibrary();
         });
 
@@ -1316,7 +1331,6 @@
                 return;
             }
 
-            const hasLibrarySelection = !!currentFacilityLibraryId;
             const timestamp = Date.now();
             const facilityId = `facility_${timestamp}`;
 
@@ -1339,11 +1353,9 @@
                 applyFacilityDraft(currentFacilityLang);
                 alert('Facility added successfully!');
                 await loadFacilitiesData();
-                if (!hasLibrarySelection) {
-                    currentFacilityLibraryId = facilityId;
-                    updateFacilityLibrarySelect();
-                    await loadFacilitiesLibrary();
-                }
+                currentFacilityLibraryId = facilityId;
+                updateFacilityLibrarySelect();
+                await loadFacilitiesLibrary();
             } catch (error) {
                 console.error('Error adding facility:', error);
                 alert('Failed to add facility. Please try again.');
@@ -1395,11 +1407,15 @@
             const select = document.getElementById('facility-library-select');
             if (!select) return;
             const previousSelection = currentFacilityLibraryId;
+            const status = document.getElementById('facility-photo-status');
 
             if (!facilitiesData || Object.keys(facilitiesData).length === 0) {
                 select.innerHTML = '<option value="">No facilities available</option>';
                 select.disabled = true;
                 currentFacilityLibraryId = null;
+                if (status) {
+                    status.textContent = 'Add a facility above to start uploading photos.';
+                }
                 return;
             }
 
@@ -1419,6 +1435,11 @@
                     ${escapeHtml(name)}
                 </option>
             `).join('');
+
+            if (status) {
+                const activeName = facilities.find(({ id }) => id === currentFacilityLibraryId)?.name || 'this facility';
+                status.textContent = `Uploading photos for ${activeName}.`;
+            }
 
             if (previousSelection !== currentFacilityLibraryId) {
                 loadFacilitiesLibrary();
