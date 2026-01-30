@@ -604,7 +604,6 @@
         function handleDragEnd(e) {
             e.currentTarget.classList.remove('dragging');
             draggedIndex = null; // Reset to ensure cleanup
-            facilityLibraryDraggedIndex = null;
             // Remove drag-over class from all items
             document.querySelectorAll('.photo-item').forEach(item => {
                 item.classList.remove('drag-over');
@@ -1464,9 +1463,9 @@
             const operationEn = document.getElementById('facility-edit-operation-en').value.trim();
             const operationNl = document.getElementById('facility-edit-operation-nl').value.trim();
             const operationFr = document.getElementById('facility-edit-operation-fr').value.trim();
-            const guidelinesEn = document.getElementById('facility-edit-guidelines-en').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
-            const guidelinesNl = document.getElementById('facility-edit-guidelines-nl').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
-            const guidelinesFr = document.getElementById('facility-edit-guidelines-fr').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
+            const guidelinesEn = parseGuidelines(document.getElementById('facility-edit-guidelines-en').value);
+            const guidelinesNl = parseGuidelines(document.getElementById('facility-edit-guidelines-nl').value);
+            const guidelinesFr = parseGuidelines(document.getElementById('facility-edit-guidelines-fr').value);
 
             if (!nameEn && !nameNl && !nameFr) {
                 alert('Please enter at least one facility name');
@@ -1557,7 +1556,8 @@
                 alert('Facilities main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading facilities hero image:', error);
-                alert('Failed to upload main image.');
+                const message = error?.message ? `: ${error.message}` : '';
+                alert(`Failed to upload main image${message}`);
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -1620,11 +1620,13 @@
             uploadBtn.textContent = 'Uploading...';
 
             try {
+                let uploadCounter = 0;
                 for (const file of files) {
                     if (!file.type.startsWith('image/')) {
                         continue;
                     }
-                    const timestamp = Date.now() + Math.floor(Math.random() * 1000);
+                    const timestamp = Date.now() + uploadCounter;
+                    uploadCounter += 1;
                     const sanitizedName = sanitizeFilename(file.name);
                     const filename = `facilities-library/${timestamp}-${sanitizedName}`;
                     const fileRef = storageRef(storage, filename);
@@ -1644,7 +1646,8 @@
                 alert('Facilities library updated!');
             } catch (error) {
                 console.error('Error uploading facilities library images:', error);
-                alert('Failed to upload facility images.');
+                const message = error?.message ? `: ${error.message}` : '';
+                alert(`Failed to upload facility images${message}`);
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Add Library Photos';
@@ -1688,7 +1691,7 @@
                 item.addEventListener('dragstart', handleFacilityLibraryDragStart);
                 item.addEventListener('dragover', handleDragOver);
                 item.addEventListener('drop', handleFacilityLibraryDrop);
-                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragend', handleFacilityLibraryDragEnd);
                 grid.appendChild(item);
             });
         }
@@ -1709,6 +1712,14 @@
             if (facilityLibraryDraggedIndex !== null && facilityLibraryDraggedIndex !== dropIndex) {
                 await reorderFacilitiesLibrary(facilityLibraryDraggedIndex, dropIndex);
             }
+        }
+
+        function handleFacilityLibraryDragEnd(e) {
+            e.currentTarget.classList.remove('dragging');
+            facilityLibraryDraggedIndex = null;
+            document.querySelectorAll('#facility-library-grid .photo-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
         }
 
         async function reorderFacilitiesLibrary(fromIndex, toIndex) {
