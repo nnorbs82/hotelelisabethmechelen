@@ -63,7 +63,17 @@
             <div class="rooms-cta-content">
                 <h2 class="rooms-cta-title">Ready to Book Your Stay?</h2>
                 <p class="rooms-cta-text">Experience the perfect blend of comfort and luxury</p>
-                <a href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" class="rooms-cta-button">Book Now</a>
+                <div class="booking-bar booking-bar-modal">
+                    <div class="booking-field">
+                        <label for="checkin-date">Check-in</label>
+                        <input type="text" id="checkin-date" placeholder="Select date" readonly>
+                    </div>
+                    <div class="booking-field">
+                        <label for="checkout-date">Check-out</label>
+                        <input type="text" id="checkout-date" placeholder="Select date" readonly>
+                    </div>
+                    <button id="search-btn" class="btn booking-search-btn">Search</button>
+                </div>
             </div>
         </section>
     </main>
@@ -374,6 +384,9 @@
                                         <polyline points="12 5 19 12 12 19"></polyline>
                                     </svg>
                                 </button>
+                                <a class="room-feature-btn secondary" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer">
+                                    <span>Book</span>
+                                </a>
                             </div>
                         </div>
                     </article>
