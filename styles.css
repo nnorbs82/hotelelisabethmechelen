@@ -2880,6 +2880,7 @@ body:not(.admin-page) .nav-logo img {
 .room-feature-actions {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .room-feature-btn {
@@ -2899,6 +2900,7 @@ body:not(.admin-page) .nav-logo img {
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .room-feature-btn::before {
@@ -2931,6 +2933,20 @@ body:not(.admin-page) .nav-logo img {
 
 .room-feature-btn:hover .btn-icon {
     transform: translateX(5px);
+}
+
+.room-feature-btn.secondary {
+    background: transparent;
+    border: 1px solid var(--color-sage);
+    color: var(--color-black);
+}
+
+.room-feature-btn.secondary::before {
+    background: var(--color-sage);
+}
+
+.room-feature-btn.secondary:hover {
+    color: var(--color-white);
 }
 
 /* Call to Action Section */
@@ -3396,6 +3412,12 @@ body:not(.admin-page) .nav-logo img {
 
     .room-modal-booking {
         padding: 2.5rem 2rem 2rem;
+    }
+
+    .booking-bar.booking-bar-modal {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
     }
 }
 
