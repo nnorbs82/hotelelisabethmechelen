@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
+
     <header>
         <nav>
             <a class="nav-logo" href="index.html">
@@ -46,8 +49,10 @@
             </div>
         </section>
 
-        <section class="facilities-list" id="facilities-list" aria-label="Facilities details">
-            <!-- Facilities will be rendered here -->
+        <section class="facilities-list-section" aria-label="Facilities details">
+            <div class="facilities-list" id="facilities-list">
+                <!-- Facilities will be rendered here -->
+            </div>
         </section>
     </main>
 
@@ -120,8 +125,10 @@
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        const heroSection = document.querySelector('.facilities-hero');
-                        heroSection.style.backgroundImage = `url('${safeUrl}')`;
+                        const pageBackground = document.getElementById('page-background');
+                        if (pageBackground) {
+                            pageBackground.style.backgroundImage = `url("${safeUrl}")`;
+                        }
                     }
                 }
             } catch (error) {
