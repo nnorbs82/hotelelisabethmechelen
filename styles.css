@@ -2184,6 +2184,51 @@ body:not(.admin-page) .nav-logo img {
     margin-bottom: 2rem;
 }
 
+.facility-steps {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.facility-step {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--color-beige);
+}
+
+.facility-step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    font-weight: 600;
+}
+
+.facility-step-hint {
+    color: var(--color-sage);
+    margin-bottom: 1rem;
+}
+
+.facility-photo-status {
+    background-color: rgba(160, 180, 160, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    color: var(--color-beige);
+    font-size: 0.9rem;
+    border: 1px solid rgba(240, 236, 229, 0.3);
+}
+
 .facility-add-section h3 {
     color: var(--color-black);
     margin-bottom: 1rem;
