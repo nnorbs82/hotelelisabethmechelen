@@ -54,6 +54,11 @@
                         <span>Set Room Amenities</span>
                     </button>
                 </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-facilities-btn">
+                        <span>Manage Facilities</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -218,6 +223,57 @@
                 </div>
             </div>
 
+            <!-- Facilities Management Card -->
+            <div id="facilities-management-card" class="card" style="display: none;">
+                <h2>Facilities Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Create and manage facilities content, guidelines, and imagery for the facilities page.</p>
+
+                <div class="facility-add-section">
+                    <h3>Add New Facility</h3>
+                    <div class="facility-lang-tabs">
+                        <button class="facility-lang-tab active" data-lang="en">English</button>
+                        <button class="facility-lang-tab" data-lang="nl">Nederlands</button>
+                        <button class="facility-lang-tab" data-lang="fr">Français</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="facility-name-label">Facility Name (English)</label>
+                        <input type="text" id="facility-name-input" class="form-control" placeholder="e.g., Wellness & Spa">
+                    </div>
+                    <div class="form-group">
+                        <label id="facility-operation-label">Operation & Description (English)</label>
+                        <textarea id="facility-operation-input" class="admin-textarea" placeholder="Enter operation details and description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="facility-guidelines-label">Guidelines (English) - one per line</label>
+                        <textarea id="facility-guidelines-input" class="admin-textarea" placeholder="Enter guidelines, one per line"></textarea>
+                    </div>
+
+                    <button class="btn" id="add-facility-btn">Add Facility</button>
+                </div>
+
+                <div class="facility-main-image-section">
+                    <h3>Main Facilities Hero Image</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the hero image displayed on the facilities page.</p>
+                    <input type="file" id="facility-hero-upload-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="upload-facility-hero-btn">Upload Main Image</button>
+                    <div id="facility-hero-preview" class="facility-hero-preview"></div>
+                </div>
+
+                <div class="facility-library-section">
+                    <h3>Facilities Photo Library</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload and reorder photos displayed on the facilities page.</p>
+                    <input type="file" id="facility-library-input" accept="image/*" multiple style="display: none;">
+                    <button class="btn" id="upload-facility-library-btn">Add Library Photos</button>
+                    <div id="facility-library-grid" class="photo-grid"></div>
+                </div>
+
+                <div class="facility-list-section">
+                    <h3>Existing Facilities</h3>
+                    <div id="facility-list" class="facility-grid"></div>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -374,6 +430,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -385,6 +442,7 @@
             amenitiesCard.style.display = 'none';
             roomCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             
             // Show only photo card
             photoCard.style.display = 'block';
@@ -406,6 +464,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -417,6 +476,7 @@
             amenitiesCard.style.display = 'none';
             roomCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             
             // Show only ads card
             adsCard.style.display = 'block';
@@ -544,6 +604,7 @@
         function handleDragEnd(e) {
             e.currentTarget.classList.remove('dragging');
             draggedIndex = null; // Reset to ensure cleanup
+            facilityLibraryDraggedIndex = null;
             // Remove drag-over class from all items
             document.querySelectorAll('.photo-item').forEach(item => {
                 item.classList.remove('drag-over');
@@ -994,6 +1055,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -1004,6 +1066,7 @@
             amenitiesCard.style.display = 'none';
             roomCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             aboutUsCard.style.display = 'block';
             
             aboutUsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1024,6 +1087,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -1034,6 +1098,7 @@
             amenitiesCard.style.display = 'none';
             roomCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             adsBottomCard.style.display = 'block';
             
             adsBottomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1054,6 +1119,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -1065,6 +1131,7 @@
             adsBottomCard.style.display = 'none';
             amenitiesCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             
             // Show only room card
             roomCard.style.display = 'block';
@@ -1085,6 +1152,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -1096,6 +1164,7 @@
             adsBottomCard.style.display = 'none';
             amenitiesCard.style.display = 'none';
             roomCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             
             // Show only package card
             packageCard.style.display = 'block';
@@ -1115,6 +1184,585 @@
             alert('View Bookings functionality - to be implemented');
         });
 
+        // ============ FACILITIES MANAGEMENT ============
+        let currentFacilityLang = 'en';
+        let facilitiesData = {};
+        let facilitiesLibrary = [];
+        let facilitiesHeroImage = null;
+        let editingFacilityId = null;
+        let facilityDraft = null;
+
+        // Show facilities management card
+        document.getElementById('manage-facilities-btn').addEventListener('click', async () => {
+            const photoCard = document.getElementById('photo-management-card');
+            const adsCard = document.getElementById('ads-management-card');
+            const aboutUsCard = document.getElementById('about-us-management-card');
+            const adsBottomCard = document.getElementById('ads-bottom-management-card');
+            const amenitiesCard = document.getElementById('amenities-management-card');
+            const roomCard = document.getElementById('room-management-card');
+            const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
+
+            ensureDashboardVisible();
+
+            photoCard.style.display = 'none';
+            adsCard.style.display = 'none';
+            aboutUsCard.style.display = 'none';
+            adsBottomCard.style.display = 'none';
+            amenitiesCard.style.display = 'none';
+            roomCard.style.display = 'none';
+            packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'block';
+
+            facilitiesCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            verticalMenu.classList.remove('show');
+
+            currentFacilityLang = 'en';
+            document.querySelectorAll('.facility-lang-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.lang === 'en');
+            });
+            updateFacilityLabels();
+            initializeFacilityDraft();
+            applyFacilityDraft(currentFacilityLang);
+
+            await loadFacilitiesData();
+            await loadFacilitiesHero();
+            await loadFacilitiesLibrary();
+        });
+
+        function updateFacilityLabels() {
+            const labels = {
+                en: {
+                    name: 'Facility Name (English)',
+                    operation: 'Operation & Description (English)',
+                    guidelines: 'Guidelines (English) - one per line'
+                },
+                nl: {
+                    name: 'Facility Name (Nederlands)',
+                    operation: 'Operation & Description (Nederlands)',
+                    guidelines: 'Guidelines (Nederlands) - one per line'
+                },
+                fr: {
+                    name: 'Facility Name (Français)',
+                    operation: 'Operation & Description (Français)',
+                    guidelines: 'Guidelines (Français) - one per line'
+                }
+            };
+            document.getElementById('facility-name-label').textContent = labels[currentFacilityLang].name;
+            document.getElementById('facility-operation-label').textContent = labels[currentFacilityLang].operation;
+            document.getElementById('facility-guidelines-label').textContent = labels[currentFacilityLang].guidelines;
+        }
+
+        function initializeFacilityDraft() {
+            facilityDraft = {
+                en: { name: '', operation: '', guidelines: '' },
+                nl: { name: '', operation: '', guidelines: '' },
+                fr: { name: '', operation: '', guidelines: '' }
+            };
+        }
+
+        function syncFacilityDraft() {
+            facilityDraft[currentFacilityLang] = {
+                name: document.getElementById('facility-name-input').value,
+                operation: document.getElementById('facility-operation-input').value,
+                guidelines: document.getElementById('facility-guidelines-input').value
+            };
+        }
+
+        function applyFacilityDraft(lang) {
+            const draft = facilityDraft[lang];
+            document.getElementById('facility-name-input').value = draft.name || '';
+            document.getElementById('facility-operation-input').value = draft.operation || '';
+            document.getElementById('facility-guidelines-input').value = draft.guidelines || '';
+        }
+
+        function parseGuidelines(value) {
+            const trimmed = value.trim();
+            if (!trimmed) return [];
+            return trimmed.split('\n').map(line => line.trim()).filter(Boolean);
+        }
+
+        initializeFacilityDraft();
+
+        document.querySelectorAll('.facility-lang-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                syncFacilityDraft();
+                document.querySelectorAll('.facility-lang-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFacilityLang = tab.dataset.lang;
+                updateFacilityLabels();
+                applyFacilityDraft(currentFacilityLang);
+            });
+        });
+
+        document.getElementById('add-facility-btn').addEventListener('click', async () => {
+            syncFacilityDraft();
+            const nameEn = facilityDraft.en.name.trim();
+            const nameNl = facilityDraft.nl.name.trim();
+            const nameFr = facilityDraft.fr.name.trim();
+
+            if (!nameEn && !nameNl && !nameFr) {
+                alert('Please enter a facility name in at least one language');
+                return;
+            }
+
+            const timestamp = Date.now();
+            const facilityId = `facility_${timestamp}`;
+
+            const facilityData = {
+                name_en: nameEn,
+                name_nl: nameNl,
+                name_fr: nameFr,
+                operation_en: facilityDraft.en.operation.trim(),
+                operation_nl: facilityDraft.nl.operation.trim(),
+                operation_fr: facilityDraft.fr.operation.trim(),
+                guidelines_en: parseGuidelines(facilityDraft.en.guidelines),
+                guidelines_nl: parseGuidelines(facilityDraft.nl.guidelines),
+                guidelines_fr: parseGuidelines(facilityDraft.fr.guidelines),
+                timestamp
+            };
+
+            try {
+                await set(dbRef(database, `facilities/${facilityId}`), facilityData);
+                initializeFacilityDraft();
+                applyFacilityDraft(currentFacilityLang);
+                alert('Facility added successfully!');
+                await loadFacilitiesData();
+            } catch (error) {
+                console.error('Error adding facility:', error);
+                alert('Failed to add facility. Please try again.');
+            }
+        });
+
+        async function loadFacilitiesData() {
+            try {
+                const snapshot = await get(dbRef(database, 'facilities'));
+                facilitiesData = snapshot.exists() ? snapshot.val() : {};
+                renderFacilitiesList();
+            } catch (error) {
+                console.error('Error loading facilities:', error);
+            }
+        }
+
+        function renderFacilitiesList() {
+            const container = document.getElementById('facility-list');
+            if (!container) return;
+
+            if (!facilitiesData || Object.keys(facilitiesData).length === 0) {
+                container.innerHTML = '<p style="color: var(--color-sage); text-align: center;">No facilities added yet.</p>';
+                return;
+            }
+
+            container.innerHTML = Object.keys(facilitiesData).map(id => {
+                const facility = facilitiesData[id];
+                const nameEn = facility.name_en || '—';
+                const nameNl = facility.name_nl || '—';
+                const nameFr = facility.name_fr || '—';
+                return `
+                    <div class="facility-item">
+                        <div class="facility-info">
+                            <h4>${escapeHtml(nameEn)}</h4>
+                            <p>NL: ${escapeHtml(nameNl)} | FR: ${escapeHtml(nameFr)}</p>
+                        </div>
+                        <div class="facility-actions">
+                            <button class="btn-edit-amenity" onclick="editFacility('${id}')">Edit</button>
+                            <button class="btn-delete-amenity" onclick="deleteFacility('${id}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.editFacility = function(facilityId) {
+            editingFacilityId = facilityId;
+            const facility = facilitiesData[facilityId];
+
+            const modal = document.createElement('div');
+            modal.className = 'facility-edit-modal show';
+            modal.innerHTML = `
+                <div class="facility-edit-content">
+                    <h3>Edit Facility</h3>
+                    <div class="facility-modal-tabs">
+                        <button class="facility-modal-tab active" data-lang="en">🇬🇧 EN</button>
+                        <button class="facility-modal-tab" data-lang="nl">🇳🇱 NL</button>
+                        <button class="facility-modal-tab" data-lang="fr">🇫🇷 FR</button>
+                    </div>
+                    <div class="facility-modal-body">
+                        <div class="facility-modal-panel" data-lang="en">
+                            <div class="form-group">
+                                <label>Facility Name (English)</label>
+                                <input type="text" id="facility-edit-name-en" class="form-control" value="${escapeHtml(facility.name_en || '')}">
+                            </div>
+                            <div class="form-group">
+                                <label>Operation & Description (English)</label>
+                                <textarea id="facility-edit-operation-en" class="admin-textarea">${escapeHtml(facility.operation_en || '')}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Guidelines (English) - one per line</label>
+                                <textarea id="facility-edit-guidelines-en" class="admin-textarea">${escapeHtml((facility.guidelines_en || []).join('\n'))}</textarea>
+                            </div>
+                        </div>
+                        <div class="facility-modal-panel" data-lang="nl" style="display: none;">
+                            <div class="form-group">
+                                <label>Facility Name (Nederlands)</label>
+                                <input type="text" id="facility-edit-name-nl" class="form-control" value="${escapeHtml(facility.name_nl || '')}">
+                            </div>
+                            <div class="form-group">
+                                <label>Operation & Description (Nederlands)</label>
+                                <textarea id="facility-edit-operation-nl" class="admin-textarea">${escapeHtml(facility.operation_nl || '')}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Guidelines (Nederlands) - one per line</label>
+                                <textarea id="facility-edit-guidelines-nl" class="admin-textarea">${escapeHtml((facility.guidelines_nl || []).join('\n'))}</textarea>
+                            </div>
+                        </div>
+                        <div class="facility-modal-panel" data-lang="fr" style="display: none;">
+                            <div class="form-group">
+                                <label>Facility Name (Français)</label>
+                                <input type="text" id="facility-edit-name-fr" class="form-control" value="${escapeHtml(facility.name_fr || '')}">
+                            </div>
+                            <div class="form-group">
+                                <label>Operation & Description (Français)</label>
+                                <textarea id="facility-edit-operation-fr" class="admin-textarea">${escapeHtml(facility.operation_fr || '')}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Guidelines (Français) - one per line</label>
+                                <textarea id="facility-edit-guidelines-fr" class="admin-textarea">${escapeHtml((facility.guidelines_fr || []).join('\n'))}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="facility-edit-actions">
+                        <button class="btn" onclick="saveFacilityEdit()">Save Changes</button>
+                        <button class="btn btn-cancel" onclick="closeFacilityEdit()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            modal.querySelectorAll('.facility-modal-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    modal.querySelectorAll('.facility-modal-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const lang = tab.dataset.lang;
+                    modal.querySelectorAll('.facility-modal-panel').forEach(panel => {
+                        panel.style.display = panel.dataset.lang === lang ? 'block' : 'none';
+                    });
+                });
+            });
+        };
+
+        window.closeFacilityEdit = function() {
+            document.querySelector('.facility-edit-modal')?.remove();
+            editingFacilityId = null;
+        };
+
+        window.saveFacilityEdit = async function() {
+            const nameEn = document.getElementById('facility-edit-name-en').value.trim();
+            const nameNl = document.getElementById('facility-edit-name-nl').value.trim();
+            const nameFr = document.getElementById('facility-edit-name-fr').value.trim();
+            const operationEn = document.getElementById('facility-edit-operation-en').value.trim();
+            const operationNl = document.getElementById('facility-edit-operation-nl').value.trim();
+            const operationFr = document.getElementById('facility-edit-operation-fr').value.trim();
+            const guidelinesEn = document.getElementById('facility-edit-guidelines-en').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
+            const guidelinesNl = document.getElementById('facility-edit-guidelines-nl').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
+            const guidelinesFr = document.getElementById('facility-edit-guidelines-fr').value.trim().split('\n').map(line => line.trim()).filter(Boolean);
+
+            if (!nameEn && !nameNl && !nameFr) {
+                alert('Please enter at least one facility name');
+                return;
+            }
+
+            try {
+                await set(dbRef(database, `facilities/${editingFacilityId}`), {
+                    name_en: nameEn,
+                    name_nl: nameNl,
+                    name_fr: nameFr,
+                    operation_en: operationEn,
+                    operation_nl: operationNl,
+                    operation_fr: operationFr,
+                    guidelines_en: guidelinesEn,
+                    guidelines_nl: guidelinesNl,
+                    guidelines_fr: guidelinesFr,
+                    timestamp: facilitiesData[editingFacilityId].timestamp
+                });
+                closeFacilityEdit();
+                alert('Facility updated successfully!');
+                await loadFacilitiesData();
+            } catch (error) {
+                console.error('Error updating facility:', error);
+                alert('Failed to update facility. Please try again.');
+            }
+        };
+
+        window.deleteFacility = async function(facilityId) {
+            if (!confirm('Are you sure you want to delete this facility?')) {
+                return;
+            }
+
+            try {
+                await set(dbRef(database, `facilities/${facilityId}`), null);
+                alert('Facility deleted successfully!');
+                await loadFacilitiesData();
+            } catch (error) {
+                console.error('Error deleting facility:', error);
+                alert('Failed to delete facility.');
+            }
+        };
+
+        document.getElementById('upload-facility-hero-btn').addEventListener('click', () => {
+            document.getElementById('facility-hero-upload-input').click();
+        });
+
+        document.getElementById('facility-hero-upload-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('upload-facility-hero-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                if (facilitiesHeroImage && facilitiesHeroImage.filename) {
+                    try {
+                        await deleteObject(storageRef(storage, facilitiesHeroImage.filename));
+                    } catch (deleteError) {
+                        console.warn('Failed to delete old facilities hero image:', deleteError?.message || 'Unknown error');
+                    }
+                }
+
+                const timestamp = Date.now();
+                const sanitizedName = sanitizeFilename(file.name);
+                const filename = `facilities-hero/${timestamp}-${sanitizedName}`;
+                const fileRef = storageRef(storage, filename);
+
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                facilitiesHeroImage = {
+                    url: downloadURL,
+                    filename,
+                    timestamp
+                };
+
+                await set(dbRef(database, 'facilitiesHero'), facilitiesHeroImage);
+                await loadFacilitiesHero();
+
+                e.target.value = '';
+                alert('Facilities main image uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading facilities hero image:', error);
+                alert('Failed to upload main image.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Main Image';
+            }
+        });
+
+        async function loadFacilitiesHero() {
+            try {
+                const snapshot = await get(dbRef(database, 'facilitiesHero'));
+                facilitiesHeroImage = snapshot.exists() ? snapshot.val() : null;
+                const preview = document.getElementById('facility-hero-preview');
+                if (!preview) return;
+
+                if (facilitiesHeroImage && facilitiesHeroImage.url) {
+                    preview.innerHTML = `
+                        <div class="photo-item">
+                            <img src="${facilitiesHeroImage.url}" alt="Facilities main image">
+                            <div class="photo-overlay">
+                                <button class="btn-delete" onclick="deleteFacilitiesHero()">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading facilities hero image:', error);
+            }
+        }
+
+        window.deleteFacilitiesHero = async function() {
+            if (!confirm('Are you sure you want to delete the main image?')) {
+                return;
+            }
+
+            try {
+                if (facilitiesHeroImage && facilitiesHeroImage.filename) {
+                    await deleteObject(storageRef(storage, facilitiesHeroImage.filename));
+                }
+                await remove(dbRef(database, 'facilitiesHero'));
+                facilitiesHeroImage = null;
+                await loadFacilitiesHero();
+                alert('Main image deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting facilities hero image:', error);
+                alert('Failed to delete main image.');
+            }
+        };
+
+        document.getElementById('upload-facility-library-btn').addEventListener('click', () => {
+            document.getElementById('facility-library-input').click();
+        });
+
+        document.getElementById('facility-library-input').addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files || []);
+            if (!files.length) return;
+
+            const uploadBtn = document.getElementById('upload-facility-library-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                for (const file of files) {
+                    if (!file.type.startsWith('image/')) {
+                        continue;
+                    }
+                    const timestamp = Date.now() + Math.floor(Math.random() * 1000);
+                    const sanitizedName = sanitizeFilename(file.name);
+                    const filename = `facilities-library/${timestamp}-${sanitizedName}`;
+                    const fileRef = storageRef(storage, filename);
+                    await uploadBytes(fileRef, file);
+                    const downloadURL = await getDownloadURL(fileRef);
+                    facilitiesLibrary.push({
+                        url: downloadURL,
+                        filename,
+                        timestamp,
+                        order: facilitiesLibrary.length
+                    });
+                }
+
+                await saveFacilitiesLibrary();
+                await loadFacilitiesLibrary();
+                e.target.value = '';
+                alert('Facilities library updated!');
+            } catch (error) {
+                console.error('Error uploading facilities library images:', error);
+                alert('Failed to upload facility images.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Add Library Photos';
+            }
+        });
+
+        async function loadFacilitiesLibrary() {
+            try {
+                const snapshot = await get(dbRef(database, 'facilitiesLibrary'));
+                facilitiesLibrary = [];
+                if (snapshot.exists()) {
+                    facilitiesLibrary = Object.values(snapshot.val()).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                }
+                renderFacilitiesLibrary();
+            } catch (error) {
+                console.error('Error loading facilities library:', error);
+            }
+        }
+
+        function renderFacilitiesLibrary() {
+            const grid = document.getElementById('facility-library-grid');
+            if (!grid) return;
+
+            if (facilitiesLibrary.length === 0) {
+                grid.innerHTML = '<p style="color: var(--color-sage);">No library photos uploaded yet.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            facilitiesLibrary.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.draggable = true;
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="Facility library photo ${index + 1}">
+                    <div class="photo-overlay">
+                        <button class="btn-delete" onclick="deleteFacilityLibraryPhoto(${index})">Delete</button>
+                    </div>
+                `;
+                item.addEventListener('dragstart', handleFacilityLibraryDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleFacilityLibraryDrop);
+                item.addEventListener('dragend', handleDragEnd);
+                grid.appendChild(item);
+            });
+        }
+
+        let facilityLibraryDraggedIndex = null;
+
+        function handleFacilityLibraryDragStart(e) {
+            facilityLibraryDraggedIndex = parseInt(e.currentTarget.dataset.index);
+            e.currentTarget.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        async function handleFacilityLibraryDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            const dropIndex = parseInt(e.currentTarget.dataset.index);
+            if (facilityLibraryDraggedIndex !== null && facilityLibraryDraggedIndex !== dropIndex) {
+                await reorderFacilitiesLibrary(facilityLibraryDraggedIndex, dropIndex);
+            }
+        }
+
+        async function reorderFacilitiesLibrary(fromIndex, toIndex) {
+            try {
+                const reordered = [...facilitiesLibrary];
+                const [moved] = reordered.splice(fromIndex, 1);
+                reordered.splice(toIndex, 0, moved);
+                reordered.forEach((photo, index) => {
+                    photo.order = index;
+                });
+                facilitiesLibrary = reordered;
+                await saveFacilitiesLibrary();
+                renderFacilitiesLibrary();
+            } catch (error) {
+                console.error('Error reordering facilities library:', error);
+                alert('Failed to reorder photos.');
+            }
+        }
+
+        async function saveFacilitiesLibrary() {
+            const updates = {};
+            facilitiesLibrary.forEach(photo => {
+                updates[photo.timestamp] = photo;
+            });
+            await set(dbRef(database, 'facilitiesLibrary'), updates);
+        }
+
+        window.deleteFacilityLibraryPhoto = async function(index) {
+            if (!confirm('Are you sure you want to delete this photo?')) {
+                return;
+            }
+
+            try {
+                if (index < 0 || index >= facilitiesLibrary.length) {
+                    alert('Invalid photo index.');
+                    return;
+                }
+                const photo = facilitiesLibrary[index];
+                if (photo.filename) {
+                    await deleteObject(storageRef(storage, photo.filename));
+                }
+                facilitiesLibrary.splice(index, 1);
+                facilitiesLibrary.forEach((item, idx) => {
+                    item.order = idx;
+                });
+                await saveFacilitiesLibrary();
+                renderFacilitiesLibrary();
+                alert('Photo deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting facilities photo:', error);
+                alert('Failed to delete photo.');
+            }
+        };
+
         // ============ AMENITIES MANAGEMENT ============
         let currentAmenityLang = 'en';
         let amenitiesData = {};
@@ -1129,6 +1777,7 @@
             const amenitiesCard = document.getElementById('amenities-management-card');
             const roomCard = document.getElementById('room-management-card');
             const packageCard = document.getElementById('package-management-card');
+            const facilitiesCard = document.getElementById('facilities-management-card');
             const verticalMenu = document.getElementById('vertical-menu');
             
             ensureDashboardVisible();
@@ -1139,6 +1788,7 @@
             adsBottomCard.style.display = 'none';
             roomCard.style.display = 'none';
             packageCard.style.display = 'none';
+            facilitiesCard.style.display = 'none';
             amenitiesCard.style.display = 'block';
             
             amenitiesCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
