@@ -65,9 +65,27 @@
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const labels = {
-            en: { guidelines: 'Guidelines', guidelinesUnavailable: 'Guidelines will be available soon.' },
-            nl: { guidelines: 'Richtlijnen', guidelinesUnavailable: 'Richtlijnen zijn binnenkort beschikbaar.' },
-            fr: { guidelines: 'Consignes', guidelinesUnavailable: 'Les consignes seront bientôt disponibles.' }
+            en: {
+                guidelines: 'Guidelines',
+                guidelinesUnavailable: 'Guidelines will be available soon.',
+                albumTitle: 'Photo Album',
+                albumEmpty: 'No photos available for this facility yet.',
+                albumAlt: (name, index) => `${name || 'Facility'} photo ${index + 1}`
+            },
+            nl: {
+                guidelines: 'Richtlijnen',
+                guidelinesUnavailable: 'Richtlijnen zijn binnenkort beschikbaar.',
+                albumTitle: 'Fotoalbum',
+                albumEmpty: 'Er zijn nog geen foto’s beschikbaar voor deze faciliteit.',
+                albumAlt: (name, index) => `${name || 'Faciliteit'} foto ${index + 1}`
+            },
+            fr: {
+                guidelines: 'Consignes',
+                guidelinesUnavailable: 'Les consignes seront bientôt disponibles.',
+                albumTitle: 'Album photo',
+                albumEmpty: 'Aucune photo n’est encore disponible pour cet établissement.',
+                albumAlt: (name, index) => `${name || 'Équipement'} photo ${index + 1}`
+            }
         };
 
         function detectLanguage() {
@@ -138,17 +156,18 @@
                     const libraryItems = (facility.library || [])
                         .map(item => sanitizeImageUrl(item.url || ''))
                         .filter(Boolean);
+                    const albumLabels = labels[currentLang] || labels.en;
                     const libraryMarkup = libraryItems.length
                         ? `
                             <div class="facility-album-grid">
-                                ${libraryItems.map(url => `
+                                ${libraryItems.map((url, index) => `
                                     <div class="facility-album-item">
-                                        <img src="${url}" alt="${name || 'Facility'} photo">
+                                        <img src="${url}" alt="${escapeHtml(albumLabels.albumAlt(name, index))}">
                                     </div>
                                 `).join('')}
                             </div>
                         `
-                        : '<p class="facility-album-empty">No photos available for this facility yet.</p>';
+                        : `<p class="facility-album-empty">${albumLabels.albumEmpty}</p>`;
 
                     return `
                         <article class="facility-card">
@@ -157,11 +176,11 @@
                             </div>
                             <div class="facility-card-body">
                                 <div class="facility-album">
-                                    <h4 class="facility-album-title">Photo Album</h4>
+                                    <h4 class="facility-album-title">${albumLabels.albumTitle}</h4>
                                     ${libraryMarkup}
                                 </div>
                                 <p>${operation || ''}</p>
-                                <h4>${labels[currentLang]?.guidelines || labels.en.guidelines}</h4>
+                                <h4>${albumLabels.guidelines}</h4>
                                 ${guidelineItems}
                             </div>
                         </article>
