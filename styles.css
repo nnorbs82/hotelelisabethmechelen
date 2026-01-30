@@ -2524,15 +2524,15 @@ body:not(.admin-page) .nav-logo img {
 /* ============ FACILITIES PAGE ============ */
 
 .facilities-main {
-    background-color: var(--color-beige);
+    background-color: transparent;
 }
 
 .facilities-hero {
     position: relative;
     width: 100%;
     height: calc(100vh - var(--header-height));
-    min-height: 420px;
-    background-color: var(--color-black);
+    min-height: 500px;
+    background-color: transparent;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -2585,6 +2585,7 @@ body:not(.admin-page) .nav-logo img {
 .facilities-intro {
     padding: 3rem 1.5rem 2rem;
     text-align: center;
+    background-color: var(--color-beige);
 }
 
 .facilities-intro-content {
@@ -2609,6 +2610,11 @@ body:not(.admin-page) .nav-logo img {
     gap: 2rem;
     max-width: 1100px;
     margin: 0 auto;
+    background-color: var(--color-beige);
+}
+
+.facilities-list-section {
+    background-color: var(--color-beige);
 }
 
 .facility-card {
@@ -2710,7 +2716,8 @@ body:not(.admin-page) .nav-logo img {
 
 @media (max-width: 768px) {
     .facilities-hero {
-        height: 75vh;
+        height: 50vh;
+        min-height: 400px;
     }
 
     .facility-card {
