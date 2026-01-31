@@ -59,6 +59,16 @@
                         <span>Manage Facilities</span>
                     </button>
                 </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-meetings-btn">
+                        <span>Manage Meetings</span>
+                    </button>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-attractions-btn">
+                        <span>Manage Attractions</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -284,6 +294,140 @@
                     <input type="file" id="facility-hero-upload-input" accept="image/*" style="display: none;">
                     <button class="btn" id="upload-facility-hero-btn">Upload Main Image</button>
                     <div id="facility-hero-preview" class="facility-hero-preview"></div>
+                </div>
+            </div>
+
+            <!-- Meetings Management Card -->
+            <div id="meetings-management-card" class="card" style="display: none;">
+                <h2>Meetings Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Create and manage meeting rooms for the meetings page.</p>
+                
+                <div class="meeting-add-section">
+                    <h3>Add / Edit Meeting Room</h3>
+                    
+                    <!-- Language Tabs -->
+                    <div class="meeting-lang-tabs">
+                        <button class="meeting-lang-tab active" data-lang="en">English</button>
+                        <button class="meeting-lang-tab" data-lang="nl">Nederlands</button>
+                        <button class="meeting-lang-tab" data-lang="fr">Français</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="meeting-name-label">Meeting Room Name (English)</label>
+                        <input type="text" id="meeting-name-input" class="form-control" placeholder="e.g., Executive Boardroom">
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-description-label">Description (English)</label>
+                        <textarea id="meeting-description-input" class="admin-textarea" placeholder="Enter meeting room description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-setup-label">Setup Styles (English) - one per line</label>
+                        <textarea id="meeting-setup-input" class="admin-textarea" placeholder="e.g., Theater Style&#10;U-Shape&#10;Classroom"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-facilities-label">Meeting Facilities (English) - one per line</label>
+                        <textarea id="meeting-facilities-input" class="admin-textarea" placeholder="e.g., Projector&#10;Whiteboard&#10;Video Conferencing"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-food-label">Food & Beverage (English)</label>
+                        <textarea id="meeting-food-input" class="admin-textarea" placeholder="Describe food and beverage options"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-parking-label">Parking Option (English)</label>
+                        <textarea id="meeting-parking-input" class="admin-textarea" placeholder="Describe parking options"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="meeting-accommodation-label">Overnight Accommodation (English)</label>
+                        <textarea id="meeting-accommodation-input" class="admin-textarea" placeholder="Describe overnight accommodation options"></textarea>
+                    </div>
+
+                    <button class="btn" id="add-meeting-btn">Save Meeting Room</button>
+                </div>
+
+                <!-- Meeting Room Photos Section -->
+                <div class="meeting-photos-section">
+                    <h3>Meeting Room Photos</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Select a meeting room and upload photos. Drag to reorder.</p>
+                    <div id="meeting-photo-status" class="meeting-photo-status">Save a meeting room to upload photos.</div>
+                    <div class="form-group">
+                        <label for="meeting-photo-select">Meeting Room Photo Album</label>
+                        <select id="meeting-photo-select" class="form-control"></select>
+                    </div>
+                    <input type="file" id="meeting-photo-input" accept="image/*" multiple style="display: none;">
+                    <button class="btn" id="upload-meeting-photo-btn">Add Photos</button>
+                    <div id="meeting-photo-grid" class="photo-grid"></div>
+                </div>
+
+                <!-- Meeting Room Video Section -->
+                <div class="meeting-video-section">
+                    <h3>Meeting Room Video (Optional)</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload a video for the selected meeting room.</p>
+                    <div class="form-group">
+                        <label for="meeting-video-select">Meeting Room</label>
+                        <select id="meeting-video-select" class="form-control"></select>
+                    </div>
+                    <input type="file" id="meeting-video-input" accept="video/*" style="display: none;">
+                    <button class="btn" id="upload-meeting-video-btn">Upload Video</button>
+                    <div id="meeting-video-preview"></div>
+                </div>
+
+                <!-- Existing Meeting Rooms List -->
+                <div class="meeting-list-section">
+                    <h3>Existing Meeting Rooms</h3>
+                    <div id="meeting-list" class="meeting-grid"></div>
+                </div>
+
+                <!-- Meetings Main Image Section -->
+                <div class="meeting-main-image-section">
+                    <h3>Meetings Page Main Image</h3>
+                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the meetings page.</p>
+                    <input type="file" id="meeting-main-image-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="upload-meeting-main-image-btn">Upload Main Image</button>
+                    <div id="meeting-main-image-preview" class="meeting-main-image-preview"></div>
+                </div>
+            </div>
+
+            <!-- Attractions Management Card -->
+            <div id="attractions-management-card" class="card" style="display: none;">
+                <h2>Attractions Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Create and manage local attractions for the attractions page.</p>
+                
+                <div class="attraction-add-section">
+                    <h3>Add / Edit Attraction</h3>
+                    
+                    <!-- Language Tabs -->
+                    <div class="attraction-lang-tabs">
+                        <button class="attraction-lang-tab active" data-lang="en">English</button>
+                        <button class="attraction-lang-tab" data-lang="nl">Nederlands</button>
+                        <button class="attraction-lang-tab" data-lang="fr">Français</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label id="attraction-title-label">Attraction Title (English)</label>
+                        <input type="text" id="attraction-title-input" class="form-control" placeholder="e.g., St. Rumbold's Tower">
+                    </div>
+                    <div class="form-group">
+                        <label id="attraction-description-label">Description (English)</label>
+                        <textarea id="attraction-description-input" class="admin-textarea" placeholder="Enter attraction description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Website Link (optional)</label>
+                        <input type="url" id="attraction-link-input" class="form-control" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Attraction Image</label>
+                        <input type="file" id="attraction-image-input" accept="image/*" style="display: none;">
+                        <button class="btn" id="upload-attraction-image-btn" type="button">Upload Image</button>
+                        <div id="attraction-image-preview" style="margin-top: 0.5rem;"></div>
+                    </div>
+
+                    <button class="btn" id="add-attraction-btn">Save Attraction</button>
+                </div>
+
+                <!-- Existing Attractions List -->
+                <div class="attraction-list-section">
+                    <h3>Existing Attractions</h3>
+                    <div id="attraction-list" class="attraction-grid"></div>
                 </div>
             </div>
 
@@ -3441,6 +3585,1023 @@
             } catch (error) {
                 console.error('Error deleting room:', error);
                 alert('Failed to delete room.');
+            }
+        };
+
+        // ============ MEETINGS MANAGEMENT ============
+        let meetingsData = {};
+        let meetingsPhotos = {};
+        let currentMeetingLang = 'en';
+        let editingMeetingId = null;
+        let currentMeetingPhotoId = null;
+        let meetingMainImage = null;
+        let meetingDraft = null;
+
+        function initializeMeetingDraft() {
+            meetingDraft = {
+                en: { name: '', description: '', setupStyles: '', facilities: '', food: '', parking: '', accommodation: '' },
+                nl: { name: '', description: '', setupStyles: '', facilities: '', food: '', parking: '', accommodation: '' },
+                fr: { name: '', description: '', setupStyles: '', facilities: '', food: '', parking: '', accommodation: '' }
+            };
+        }
+
+        function syncMeetingDraft() {
+            meetingDraft[currentMeetingLang] = {
+                name: document.getElementById('meeting-name-input').value,
+                description: document.getElementById('meeting-description-input').value,
+                setupStyles: document.getElementById('meeting-setup-input').value,
+                facilities: document.getElementById('meeting-facilities-input').value,
+                food: document.getElementById('meeting-food-input').value,
+                parking: document.getElementById('meeting-parking-input').value,
+                accommodation: document.getElementById('meeting-accommodation-input').value
+            };
+        }
+
+        function applyMeetingDraft(lang) {
+            const draft = meetingDraft[lang];
+            document.getElementById('meeting-name-input').value = draft.name || '';
+            document.getElementById('meeting-description-input').value = draft.description || '';
+            document.getElementById('meeting-setup-input').value = draft.setupStyles || '';
+            document.getElementById('meeting-facilities-input').value = draft.facilities || '';
+            document.getElementById('meeting-food-input').value = draft.food || '';
+            document.getElementById('meeting-parking-input').value = draft.parking || '';
+            document.getElementById('meeting-accommodation-input').value = draft.accommodation || '';
+        }
+
+        function updateMeetingLabels() {
+            const labels = {
+                en: {
+                    name: 'Meeting Room Name (English)',
+                    description: 'Description (English)',
+                    setup: 'Setup Styles (English) - one per line',
+                    facilities: 'Meeting Facilities (English) - one per line',
+                    food: 'Food & Beverage (English)',
+                    parking: 'Parking Option (English)',
+                    accommodation: 'Overnight Accommodation (English)'
+                },
+                nl: {
+                    name: 'Meeting Room Name (Nederlands)',
+                    description: 'Description (Nederlands)',
+                    setup: 'Setup Styles (Nederlands) - one per line',
+                    facilities: 'Meeting Facilities (Nederlands) - one per line',
+                    food: 'Food & Beverage (Nederlands)',
+                    parking: 'Parking Option (Nederlands)',
+                    accommodation: 'Overnight Accommodation (Nederlands)'
+                },
+                fr: {
+                    name: 'Meeting Room Name (Français)',
+                    description: 'Description (Français)',
+                    setup: 'Setup Styles (Français) - one per line',
+                    facilities: 'Meeting Facilities (Français) - one per line',
+                    food: 'Food & Beverage (Français)',
+                    parking: 'Parking Option (Français)',
+                    accommodation: 'Overnight Accommodation (Français)'
+                }
+            };
+            document.getElementById('meeting-name-label').textContent = labels[currentMeetingLang].name;
+            document.getElementById('meeting-description-label').textContent = labels[currentMeetingLang].description;
+            document.getElementById('meeting-setup-label').textContent = labels[currentMeetingLang].setup;
+            document.getElementById('meeting-facilities-label').textContent = labels[currentMeetingLang].facilities;
+            document.getElementById('meeting-food-label').textContent = labels[currentMeetingLang].food;
+            document.getElementById('meeting-parking-label').textContent = labels[currentMeetingLang].parking;
+            document.getElementById('meeting-accommodation-label').textContent = labels[currentMeetingLang].accommodation;
+        }
+
+        function parseListItems(value) {
+            const trimmed = value.trim();
+            if (!trimmed) return [];
+            return trimmed.split('\n').map(line => line.trim()).filter(Boolean);
+        }
+
+        initializeMeetingDraft();
+
+        // Show meetings management card
+        document.getElementById('manage-meetings-btn').addEventListener('click', async () => {
+            const allCards = document.querySelectorAll('#dashboard-content > .card');
+            allCards.forEach(card => card.style.display = 'none');
+            
+            const meetingsCard = document.getElementById('meetings-management-card');
+            meetingsCard.style.display = 'block';
+            meetingsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            document.getElementById('vertical-menu').classList.remove('show');
+            ensureDashboardVisible();
+
+            currentMeetingLang = 'en';
+            document.querySelectorAll('.meeting-lang-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.lang === 'en');
+            });
+            updateMeetingLabels();
+            initializeMeetingDraft();
+            applyMeetingDraft(currentMeetingLang);
+
+            await loadMeetingsData();
+            await loadMeetingMainImage();
+        });
+
+        // Meeting language tab switching
+        document.querySelectorAll('.meeting-lang-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                syncMeetingDraft();
+                document.querySelectorAll('.meeting-lang-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentMeetingLang = tab.dataset.lang;
+                updateMeetingLabels();
+                applyMeetingDraft(currentMeetingLang);
+            });
+        });
+
+        // Add/Save meeting room
+        document.getElementById('add-meeting-btn').addEventListener('click', async () => {
+            syncMeetingDraft();
+            const nameEn = meetingDraft.en.name.trim();
+            const nameNl = meetingDraft.nl.name.trim();
+            const nameFr = meetingDraft.fr.name.trim();
+
+            if (!nameEn && !nameNl && !nameFr) {
+                alert('Please enter a meeting room name in at least one language');
+                return;
+            }
+
+            const timestamp = editingMeetingId ? meetingsData[editingMeetingId].timestamp : Date.now();
+            const meetingId = editingMeetingId || `meeting_${timestamp}`;
+
+            const meetingData = {
+                name_en: nameEn,
+                name_nl: nameNl,
+                name_fr: nameFr,
+                description_en: meetingDraft.en.description.trim(),
+                description_nl: meetingDraft.nl.description.trim(),
+                description_fr: meetingDraft.fr.description.trim(),
+                setupStyles_en: parseListItems(meetingDraft.en.setupStyles),
+                setupStyles_nl: parseListItems(meetingDraft.nl.setupStyles),
+                setupStyles_fr: parseListItems(meetingDraft.fr.setupStyles),
+                facilities_en: parseListItems(meetingDraft.en.facilities),
+                facilities_nl: parseListItems(meetingDraft.nl.facilities),
+                facilities_fr: parseListItems(meetingDraft.fr.facilities),
+                food_en: meetingDraft.en.food.trim(),
+                food_nl: meetingDraft.nl.food.trim(),
+                food_fr: meetingDraft.fr.food.trim(),
+                parking_en: meetingDraft.en.parking.trim(),
+                parking_nl: meetingDraft.nl.parking.trim(),
+                parking_fr: meetingDraft.fr.parking.trim(),
+                accommodation_en: meetingDraft.en.accommodation.trim(),
+                accommodation_nl: meetingDraft.nl.accommodation.trim(),
+                accommodation_fr: meetingDraft.fr.accommodation.trim(),
+                timestamp
+            };
+
+            try {
+                await set(dbRef(database, `meetings/${meetingId}`), meetingData);
+                initializeMeetingDraft();
+                applyMeetingDraft(currentMeetingLang);
+                editingMeetingId = null;
+                document.getElementById('add-meeting-btn').textContent = 'Save Meeting Room';
+                alert('Meeting room saved successfully!');
+                await loadMeetingsData();
+                currentMeetingPhotoId = meetingId;
+                updateMeetingPhotoSelect();
+                updateMeetingVideoSelect();
+                await loadMeetingPhotos();
+            } catch (error) {
+                console.error('Error saving meeting room:', error);
+                alert('Failed to save meeting room. Please try again.');
+            }
+        });
+
+        async function loadMeetingsData() {
+            try {
+                const snapshot = await get(dbRef(database, 'meetings'));
+                meetingsData = snapshot.exists() ? snapshot.val() : {};
+                renderMeetingsList();
+                updateMeetingPhotoSelect();
+                updateMeetingVideoSelect();
+            } catch (error) {
+                console.error('Error loading meetings:', error);
+            }
+        }
+
+        function renderMeetingsList() {
+            const container = document.getElementById('meeting-list');
+            if (!container) return;
+
+            if (!meetingsData || Object.keys(meetingsData).length === 0) {
+                container.innerHTML = '<p style="color: var(--color-sage); text-align: center;">No meeting rooms added yet.</p>';
+                return;
+            }
+
+            container.innerHTML = Object.keys(meetingsData).map(id => {
+                const meeting = meetingsData[id];
+                const nameEn = meeting.name_en || '—';
+                const nameNl = meeting.name_nl || '—';
+                const nameFr = meeting.name_fr || '—';
+                return `
+                    <div class="meeting-item">
+                        <div class="meeting-info">
+                            <h4>${escapeHtml(nameEn)}</h4>
+                            <p>NL: ${escapeHtml(nameNl)} | FR: ${escapeHtml(nameFr)}</p>
+                        </div>
+                        <div class="meeting-actions">
+                            <button class="btn-edit-amenity" onclick="editMeeting('${id}')">Edit</button>
+                            <button class="btn-delete-amenity" onclick="deleteMeeting('${id}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateMeetingPhotoSelect() {
+            const select = document.getElementById('meeting-photo-select');
+            if (!select) return;
+            const status = document.getElementById('meeting-photo-status');
+
+            if (!meetingsData || Object.keys(meetingsData).length === 0) {
+                select.innerHTML = '<option value="">No meeting rooms available</option>';
+                select.disabled = true;
+                currentMeetingPhotoId = null;
+                if (status) status.textContent = 'Add a meeting room to start uploading photos.';
+                return;
+            }
+
+            select.disabled = false;
+            const meetings = Object.keys(meetingsData).map(id => {
+                const meeting = meetingsData[id];
+                const name = meeting.name_en || meeting.name_nl || meeting.name_fr || 'Meeting Room';
+                return { id, name };
+            });
+
+            if (!currentMeetingPhotoId || !meetingsData[currentMeetingPhotoId]) {
+                currentMeetingPhotoId = meetings[0]?.id || null;
+            }
+
+            select.innerHTML = meetings.map(({ id, name }) => `
+                <option value="${id}" ${id === currentMeetingPhotoId ? 'selected' : ''}>
+                    ${escapeHtml(name)}
+                </option>
+            `).join('');
+
+            if (status) {
+                const activeName = meetings.find(({ id }) => id === currentMeetingPhotoId)?.name || 'this meeting room';
+                status.textContent = `Uploading photos for ${activeName}.`;
+            }
+        }
+
+        function updateMeetingVideoSelect() {
+            const select = document.getElementById('meeting-video-select');
+            if (!select) return;
+
+            if (!meetingsData || Object.keys(meetingsData).length === 0) {
+                select.innerHTML = '<option value="">No meeting rooms available</option>';
+                select.disabled = true;
+                return;
+            }
+
+            select.disabled = false;
+            const meetings = Object.keys(meetingsData).map(id => {
+                const meeting = meetingsData[id];
+                const name = meeting.name_en || meeting.name_nl || meeting.name_fr || 'Meeting Room';
+                return { id, name };
+            });
+
+            select.innerHTML = meetings.map(({ id, name }) => `
+                <option value="${id}" ${id === currentMeetingPhotoId ? 'selected' : ''}>
+                    ${escapeHtml(name)}
+                </option>
+            `).join('');
+        }
+
+        document.getElementById('meeting-photo-select').addEventListener('change', async (event) => {
+            currentMeetingPhotoId = event.target.value || null;
+            const status = document.getElementById('meeting-photo-status');
+            if (status) {
+                const meeting = currentMeetingPhotoId ? meetingsData[currentMeetingPhotoId] : null;
+                const name = meeting ? (meeting.name_en || meeting.name_nl || meeting.name_fr || 'Meeting Room') : 'a meeting room';
+                status.textContent = currentMeetingPhotoId ? `Uploading photos for ${name}.` : 'Select a meeting room to upload photos.';
+            }
+            await loadMeetingPhotos();
+        });
+
+        // Meeting photos upload
+        document.getElementById('upload-meeting-photo-btn').addEventListener('click', () => {
+            document.getElementById('meeting-photo-input').click();
+        });
+
+        document.getElementById('meeting-photo-input').addEventListener('change', async (e) => {
+            const files = Array.from(e.target.files || []);
+            if (!files.length) return;
+
+            if (!currentMeetingPhotoId) {
+                alert('Please select a meeting room before uploading photos.');
+                e.target.value = '';
+                return;
+            }
+
+            const uploadBtn = document.getElementById('upload-meeting-photo-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                let currentPhotos = meetingsPhotos[currentMeetingPhotoId] || [];
+                let uploadCounter = 0;
+                
+                for (const file of files) {
+                    if (!file.type.startsWith('image/')) continue;
+                    const timestamp = Date.now() + uploadCounter;
+                    uploadCounter += 1;
+                    const sanitizedName = sanitizeFilename(file.name);
+                    const filename = `meetings-photos/${currentMeetingPhotoId}/${timestamp}-${sanitizedName}`;
+                    const fileRef = storageRef(storage, filename);
+                    await uploadBytes(fileRef, file);
+                    const downloadURL = await getDownloadURL(fileRef);
+                    currentPhotos.push({
+                        url: downloadURL,
+                        filename,
+                        timestamp,
+                        order: currentPhotos.length
+                    });
+                }
+
+                meetingsPhotos[currentMeetingPhotoId] = currentPhotos;
+                await saveMeetingPhotos();
+                await loadMeetingPhotos();
+                e.target.value = '';
+                alert('Photos uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading meeting photos:', error);
+                alert('Failed to upload photos.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Add Photos';
+            }
+        });
+
+        async function loadMeetingPhotos() {
+            try {
+                if (!currentMeetingPhotoId) {
+                    renderMeetingPhotos();
+                    return;
+                }
+                const snapshot = await get(dbRef(database, `meetingsPhotos/${currentMeetingPhotoId}`));
+                meetingsPhotos[currentMeetingPhotoId] = [];
+                if (snapshot.exists()) {
+                    meetingsPhotos[currentMeetingPhotoId] = Object.values(snapshot.val()).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+                }
+                renderMeetingPhotos();
+                renderMeetingVideoPreview();
+            } catch (error) {
+                console.error('Error loading meeting photos:', error);
+            }
+        }
+
+        function renderMeetingPhotos() {
+            const grid = document.getElementById('meeting-photo-grid');
+            if (!grid) return;
+
+            const photos = meetingsPhotos[currentMeetingPhotoId] || [];
+
+            if (!currentMeetingPhotoId) {
+                grid.innerHTML = '<p style="color: var(--color-sage);">Select a meeting room to manage its photo album.</p>';
+                return;
+            }
+
+            if (photos.length === 0) {
+                grid.innerHTML = '<p style="color: var(--color-sage);">No photos uploaded yet.</p>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            photos.forEach((photo, index) => {
+                const item = document.createElement('div');
+                item.className = 'photo-item';
+                item.draggable = true;
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <img src="${photo.url}" alt="Meeting room photo ${index + 1}">
+                    <div class="photo-overlay">
+                        <button class="btn-delete" onclick="deleteMeetingPhoto(${index})">Delete</button>
+                    </div>
+                `;
+                item.addEventListener('dragstart', handleMeetingPhotoDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleMeetingPhotoDrop);
+                item.addEventListener('dragend', handleMeetingPhotoDragEnd);
+                grid.appendChild(item);
+            });
+        }
+
+        let meetingPhotoDraggedIndex = null;
+
+        function handleMeetingPhotoDragStart(e) {
+            meetingPhotoDraggedIndex = parseInt(e.currentTarget.dataset.index);
+            e.currentTarget.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        async function handleMeetingPhotoDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            const dropIndex = parseInt(e.currentTarget.dataset.index);
+            if (meetingPhotoDraggedIndex !== null && meetingPhotoDraggedIndex !== dropIndex) {
+                await reorderMeetingPhotos(meetingPhotoDraggedIndex, dropIndex);
+            }
+        }
+
+        function handleMeetingPhotoDragEnd(e) {
+            e.currentTarget.classList.remove('dragging');
+            meetingPhotoDraggedIndex = null;
+            document.querySelectorAll('#meeting-photo-grid .photo-item').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        async function reorderMeetingPhotos(fromIndex, toIndex) {
+            try {
+                const photos = meetingsPhotos[currentMeetingPhotoId] || [];
+                const [moved] = photos.splice(fromIndex, 1);
+                photos.splice(toIndex, 0, moved);
+                photos.forEach((photo, index) => { photo.order = index; });
+                meetingsPhotos[currentMeetingPhotoId] = photos;
+                await saveMeetingPhotos();
+                renderMeetingPhotos();
+            } catch (error) {
+                console.error('Error reordering meeting photos:', error);
+                alert('Failed to reorder photos.');
+            }
+        }
+
+        async function saveMeetingPhotos() {
+            if (!currentMeetingPhotoId) return;
+            const photos = meetingsPhotos[currentMeetingPhotoId] || [];
+            const updates = {};
+            photos.forEach(photo => { updates[photo.timestamp] = photo; });
+            await set(dbRef(database, `meetingsPhotos/${currentMeetingPhotoId}`), updates);
+        }
+
+        window.deleteMeetingPhoto = async function(index) {
+            if (!confirm('Are you sure you want to delete this photo?')) return;
+
+            try {
+                const photos = meetingsPhotos[currentMeetingPhotoId] || [];
+                if (index < 0 || index >= photos.length) {
+                    alert('Invalid photo index.');
+                    return;
+                }
+                const photo = photos[index];
+                if (photo.filename) {
+                    await deleteObject(storageRef(storage, photo.filename));
+                }
+                photos.splice(index, 1);
+                photos.forEach((item, idx) => { item.order = idx; });
+                meetingsPhotos[currentMeetingPhotoId] = photos;
+                await saveMeetingPhotos();
+                renderMeetingPhotos();
+                alert('Photo deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting meeting photo:', error);
+                alert('Failed to delete photo.');
+            }
+        };
+
+        // Meeting video upload
+        document.getElementById('upload-meeting-video-btn').addEventListener('click', () => {
+            document.getElementById('meeting-video-input').click();
+        });
+
+        document.getElementById('meeting-video-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const meetingId = document.getElementById('meeting-video-select').value;
+            if (!meetingId) {
+                alert('Please select a meeting room before uploading a video.');
+                e.target.value = '';
+                return;
+            }
+
+            if (!file.type.startsWith('video/')) {
+                alert('Please select a video file');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('upload-meeting-video-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                const timestamp = Date.now();
+                const sanitizedName = sanitizeFilename(file.name);
+                const filename = `meetings-videos/${meetingId}/${timestamp}-${sanitizedName}`;
+                const fileRef = storageRef(storage, filename);
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                meetingsData[meetingId].video = {
+                    url: downloadURL,
+                    filename
+                };
+
+                await set(dbRef(database, `meetings/${meetingId}/video`), meetingsData[meetingId].video);
+                renderMeetingVideoPreview();
+                e.target.value = '';
+                alert('Video uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading meeting video:', error);
+                alert('Failed to upload video.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Video';
+            }
+        });
+
+        document.getElementById('meeting-video-select').addEventListener('change', () => {
+            renderMeetingVideoPreview();
+        });
+
+        function renderMeetingVideoPreview() {
+            const preview = document.getElementById('meeting-video-preview');
+            const meetingId = document.getElementById('meeting-video-select').value;
+            if (!preview || !meetingId) {
+                if (preview) preview.innerHTML = '';
+                return;
+            }
+
+            const meeting = meetingsData[meetingId];
+            if (meeting && meeting.video && meeting.video.url) {
+                preview.innerHTML = `
+                    <div style="position: relative; display: inline-block; margin-top: 1rem;">
+                        <video src="${meeting.video.url}" controls style="max-width: 400px; border-radius: 8px;"></video>
+                        <button class="btn" onclick="deleteMeetingVideo('${meetingId}')" style="background: #d32f2f; margin-top: 0.5rem; display: block;">Delete Video</button>
+                    </div>
+                `;
+            } else {
+                preview.innerHTML = '<p style="color: var(--color-sage); margin-top: 1rem;">No video uploaded for this meeting room.</p>';
+            }
+        }
+
+        window.deleteMeetingVideo = async function(meetingId) {
+            if (!confirm('Are you sure you want to delete this video?')) return;
+
+            try {
+                const meeting = meetingsData[meetingId];
+                if (meeting && meeting.video && meeting.video.filename) {
+                    await deleteObject(storageRef(storage, meeting.video.filename));
+                }
+                await remove(dbRef(database, `meetings/${meetingId}/video`));
+                delete meetingsData[meetingId].video;
+                renderMeetingVideoPreview();
+                alert('Video deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting meeting video:', error);
+                alert('Failed to delete video.');
+            }
+        };
+
+        // Meeting main image
+        document.getElementById('upload-meeting-main-image-btn').addEventListener('click', () => {
+            document.getElementById('meeting-main-image-input').click();
+        });
+
+        document.getElementById('meeting-main-image-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('upload-meeting-main-image-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                if (meetingMainImage && meetingMainImage.filename) {
+                    try {
+                        await deleteObject(storageRef(storage, meetingMainImage.filename));
+                    } catch (deleteError) {
+                        console.warn('Failed to delete old meeting main image:', deleteError?.message || 'Unknown error');
+                    }
+                }
+
+                const timestamp = Date.now();
+                const sanitizedName = sanitizeFilename(file.name);
+                const filename = `meetings-main/${timestamp}-${sanitizedName}`;
+                const fileRef = storageRef(storage, filename);
+
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                meetingMainImage = {
+                    url: downloadURL,
+                    filename,
+                    timestamp
+                };
+
+                await set(dbRef(database, 'meetingsMainImage'), meetingMainImage);
+                await loadMeetingMainImage();
+
+                e.target.value = '';
+                alert('Meetings main image uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading meetings main image:', error);
+                alert('Failed to upload main image.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Main Image';
+            }
+        });
+
+        async function loadMeetingMainImage() {
+            try {
+                const snapshot = await get(dbRef(database, 'meetingsMainImage'));
+                meetingMainImage = snapshot.exists() ? snapshot.val() : null;
+                const preview = document.getElementById('meeting-main-image-preview');
+                if (!preview) return;
+
+                if (meetingMainImage && meetingMainImage.url) {
+                    preview.innerHTML = `
+                        <div class="photo-item">
+                            <img src="${meetingMainImage.url}" alt="Meetings main image">
+                            <div class="photo-overlay">
+                                <button class="btn-delete" onclick="deleteMeetingMainImage()">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading meetings main image:', error);
+            }
+        }
+
+        window.deleteMeetingMainImage = async function() {
+            if (!confirm('Are you sure you want to delete the main image?')) return;
+
+            try {
+                if (meetingMainImage && meetingMainImage.filename) {
+                    await deleteObject(storageRef(storage, meetingMainImage.filename));
+                }
+                await remove(dbRef(database, 'meetingsMainImage'));
+                meetingMainImage = null;
+                await loadMeetingMainImage();
+                alert('Main image deleted successfully!');
+            } catch (error) {
+                console.error('Error deleting meetings main image:', error);
+                alert('Failed to delete main image.');
+            }
+        };
+
+        window.editMeeting = function(meetingId) {
+            editingMeetingId = meetingId;
+            const meeting = meetingsData[meetingId];
+
+            // Populate draft with meeting data
+            meetingDraft = {
+                en: {
+                    name: meeting.name_en || '',
+                    description: meeting.description_en || '',
+                    setupStyles: (meeting.setupStyles_en || []).join('\n'),
+                    facilities: (meeting.facilities_en || []).join('\n'),
+                    food: meeting.food_en || '',
+                    parking: meeting.parking_en || '',
+                    accommodation: meeting.accommodation_en || ''
+                },
+                nl: {
+                    name: meeting.name_nl || '',
+                    description: meeting.description_nl || '',
+                    setupStyles: (meeting.setupStyles_nl || []).join('\n'),
+                    facilities: (meeting.facilities_nl || []).join('\n'),
+                    food: meeting.food_nl || '',
+                    parking: meeting.parking_nl || '',
+                    accommodation: meeting.accommodation_nl || ''
+                },
+                fr: {
+                    name: meeting.name_fr || '',
+                    description: meeting.description_fr || '',
+                    setupStyles: (meeting.setupStyles_fr || []).join('\n'),
+                    facilities: (meeting.facilities_fr || []).join('\n'),
+                    food: meeting.food_fr || '',
+                    parking: meeting.parking_fr || '',
+                    accommodation: meeting.accommodation_fr || ''
+                }
+            };
+
+            applyMeetingDraft(currentMeetingLang);
+            document.getElementById('add-meeting-btn').textContent = 'Update Meeting Room';
+            document.querySelector('.meeting-add-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        window.deleteMeeting = async function(meetingId) {
+            if (!confirm('Are you sure you want to delete this meeting room?')) return;
+
+            try {
+                // Delete photos from storage
+                const photosSnapshot = await get(dbRef(database, `meetingsPhotos/${meetingId}`));
+                if (photosSnapshot.exists()) {
+                    await Promise.all(Object.values(photosSnapshot.val()).map(async (photo) => {
+                        if (photo?.filename) {
+                            try {
+                                await deleteObject(storageRef(storage, photo.filename));
+                            } catch (deleteError) {
+                                console.warn('Failed to delete meeting photo:', deleteError?.message || 'Unknown error');
+                            }
+                        }
+                    }));
+                }
+
+                // Delete video from storage
+                const meeting = meetingsData[meetingId];
+                if (meeting && meeting.video && meeting.video.filename) {
+                    try {
+                        await deleteObject(storageRef(storage, meeting.video.filename));
+                    } catch (deleteError) {
+                        console.warn('Failed to delete meeting video:', deleteError?.message || 'Unknown error');
+                    }
+                }
+
+                // Delete from database
+                await set(dbRef(database, `meetings/${meetingId}`), null);
+                await set(dbRef(database, `meetingsPhotos/${meetingId}`), null);
+
+                if (currentMeetingPhotoId === meetingId) {
+                    currentMeetingPhotoId = null;
+                }
+
+                alert('Meeting room deleted successfully!');
+                await loadMeetingsData();
+                await loadMeetingPhotos();
+            } catch (error) {
+                console.error('Error deleting meeting room:', error);
+                alert('Failed to delete meeting room.');
+            }
+        };
+
+        // ============ ATTRACTIONS MANAGEMENT ============
+        let attractionsData = {};
+        let currentAttractionLang = 'en';
+        let editingAttractionId = null;
+        let attractionDraft = null;
+        let attractionImageTemp = null;
+
+        function initializeAttractionDraft() {
+            attractionDraft = {
+                en: { title: '', description: '' },
+                nl: { title: '', description: '' },
+                fr: { title: '', description: '' }
+            };
+            attractionImageTemp = null;
+        }
+
+        function syncAttractionDraft() {
+            attractionDraft[currentAttractionLang] = {
+                title: document.getElementById('attraction-title-input').value,
+                description: document.getElementById('attraction-description-input').value
+            };
+        }
+
+        function applyAttractionDraft(lang) {
+            const draft = attractionDraft[lang];
+            document.getElementById('attraction-title-input').value = draft.title || '';
+            document.getElementById('attraction-description-input').value = draft.description || '';
+        }
+
+        function updateAttractionLabels() {
+            const labels = {
+                en: { title: 'Attraction Title (English)', description: 'Description (English)' },
+                nl: { title: 'Attraction Title (Nederlands)', description: 'Description (Nederlands)' },
+                fr: { title: 'Attraction Title (Français)', description: 'Description (Français)' }
+            };
+            document.getElementById('attraction-title-label').textContent = labels[currentAttractionLang].title;
+            document.getElementById('attraction-description-label').textContent = labels[currentAttractionLang].description;
+        }
+
+        initializeAttractionDraft();
+
+        // Show attractions management card
+        document.getElementById('manage-attractions-btn').addEventListener('click', async () => {
+            const allCards = document.querySelectorAll('#dashboard-content > .card');
+            allCards.forEach(card => card.style.display = 'none');
+            
+            const attractionsCard = document.getElementById('attractions-management-card');
+            attractionsCard.style.display = 'block';
+            attractionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            document.getElementById('vertical-menu').classList.remove('show');
+            ensureDashboardVisible();
+
+            currentAttractionLang = 'en';
+            document.querySelectorAll('.attraction-lang-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.lang === 'en');
+            });
+            updateAttractionLabels();
+            initializeAttractionDraft();
+            applyAttractionDraft(currentAttractionLang);
+            document.getElementById('attraction-link-input').value = '';
+            document.getElementById('attraction-image-preview').innerHTML = '';
+
+            await loadAttractionsData();
+        });
+
+        // Attraction language tab switching
+        document.querySelectorAll('.attraction-lang-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                syncAttractionDraft();
+                document.querySelectorAll('.attraction-lang-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentAttractionLang = tab.dataset.lang;
+                updateAttractionLabels();
+                applyAttractionDraft(currentAttractionLang);
+            });
+        });
+
+        // Upload attraction image
+        document.getElementById('upload-attraction-image-btn').addEventListener('click', () => {
+            document.getElementById('attraction-image-input').click();
+        });
+
+        document.getElementById('attraction-image-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('upload-attraction-image-btn');
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            try {
+                const timestamp = Date.now();
+                const sanitizedName = sanitizeFilename(file.name);
+                const filename = `attractions/${timestamp}-${sanitizedName}`;
+                const fileRef = storageRef(storage, filename);
+                await uploadBytes(fileRef, file);
+                const downloadURL = await getDownloadURL(fileRef);
+
+                attractionImageTemp = {
+                    url: downloadURL,
+                    filename
+                };
+
+                document.getElementById('attraction-image-preview').innerHTML = `
+                    <img src="${attractionImageTemp.url}" style="max-width: 300px; display: block; margin-top: 0.5rem; border-radius: 4px;">
+                `;
+
+                e.target.value = '';
+            } catch (error) {
+                console.error('Error uploading attraction image:', error);
+                alert('Failed to upload image.');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Image';
+            }
+        });
+
+        // Add/Save attraction
+        document.getElementById('add-attraction-btn').addEventListener('click', async () => {
+            syncAttractionDraft();
+            const titleEn = attractionDraft.en.title.trim();
+            const titleNl = attractionDraft.nl.title.trim();
+            const titleFr = attractionDraft.fr.title.trim();
+
+            if (!titleEn && !titleNl && !titleFr) {
+                alert('Please enter an attraction title in at least one language');
+                return;
+            }
+
+            const timestamp = editingAttractionId ? attractionsData[editingAttractionId].timestamp : Date.now();
+            const attractionId = editingAttractionId || `attraction_${timestamp}`;
+            const link = document.getElementById('attraction-link-input').value.trim();
+
+            // Handle image: use temp image if uploaded, otherwise keep existing
+            let imageData = attractionImageTemp;
+            if (!imageData && editingAttractionId && attractionsData[editingAttractionId]) {
+                imageData = attractionsData[editingAttractionId].image;
+            }
+
+            const attractionData = {
+                title_en: titleEn,
+                title_nl: titleNl,
+                title_fr: titleFr,
+                description_en: attractionDraft.en.description.trim(),
+                description_nl: attractionDraft.nl.description.trim(),
+                description_fr: attractionDraft.fr.description.trim(),
+                link,
+                image: imageData || null,
+                timestamp
+            };
+
+            try {
+                await set(dbRef(database, `attractions/${attractionId}`), attractionData);
+                initializeAttractionDraft();
+                applyAttractionDraft(currentAttractionLang);
+                editingAttractionId = null;
+                document.getElementById('attraction-link-input').value = '';
+                document.getElementById('attraction-image-preview').innerHTML = '';
+                document.getElementById('add-attraction-btn').textContent = 'Save Attraction';
+                alert('Attraction saved successfully!');
+                await loadAttractionsData();
+            } catch (error) {
+                console.error('Error saving attraction:', error);
+                alert('Failed to save attraction. Please try again.');
+            }
+        });
+
+        async function loadAttractionsData() {
+            try {
+                const snapshot = await get(dbRef(database, 'attractions'));
+                attractionsData = snapshot.exists() ? snapshot.val() : {};
+                renderAttractionsList();
+            } catch (error) {
+                console.error('Error loading attractions:', error);
+            }
+        }
+
+        function renderAttractionsList() {
+            const container = document.getElementById('attraction-list');
+            if (!container) return;
+
+            if (!attractionsData || Object.keys(attractionsData).length === 0) {
+                container.innerHTML = '<p style="color: var(--color-sage); text-align: center;">No attractions added yet.</p>';
+                return;
+            }
+
+            container.innerHTML = Object.keys(attractionsData).map(id => {
+                const attraction = attractionsData[id];
+                const titleEn = attraction.title_en || '—';
+                const titleNl = attraction.title_nl || '—';
+                const titleFr = attraction.title_fr || '—';
+                const imageUrl = attraction.image?.url || '';
+                return `
+                    <div class="attraction-item">
+                        ${imageUrl ? `<img src="${imageUrl}" alt="${escapeHtml(titleEn)}" class="attraction-thumbnail">` : ''}
+                        <div class="attraction-info">
+                            <h4>${escapeHtml(titleEn)}</h4>
+                            <p>NL: ${escapeHtml(titleNl)} | FR: ${escapeHtml(titleFr)}</p>
+                            ${attraction.link ? `<p style="font-size: 0.85rem; color: var(--color-sage);">Link: ${escapeHtml(attraction.link)}</p>` : ''}
+                        </div>
+                        <div class="attraction-actions">
+                            <button class="btn-edit-amenity" onclick="editAttraction('${id}')">Edit</button>
+                            <button class="btn-delete-amenity" onclick="deleteAttraction('${id}')">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.editAttraction = function(attractionId) {
+            editingAttractionId = attractionId;
+            const attraction = attractionsData[attractionId];
+
+            attractionDraft = {
+                en: { title: attraction.title_en || '', description: attraction.description_en || '' },
+                nl: { title: attraction.title_nl || '', description: attraction.description_nl || '' },
+                fr: { title: attraction.title_fr || '', description: attraction.description_fr || '' }
+            };
+
+            applyAttractionDraft(currentAttractionLang);
+            document.getElementById('attraction-link-input').value = attraction.link || '';
+            
+            if (attraction.image && attraction.image.url) {
+                attractionImageTemp = attraction.image;
+                document.getElementById('attraction-image-preview').innerHTML = `
+                    <img src="${attraction.image.url}" style="max-width: 300px; display: block; margin-top: 0.5rem; border-radius: 4px;">
+                `;
+            } else {
+                attractionImageTemp = null;
+                document.getElementById('attraction-image-preview').innerHTML = '';
+            }
+
+            document.getElementById('add-attraction-btn').textContent = 'Update Attraction';
+            document.querySelector('.attraction-add-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        window.deleteAttraction = async function(attractionId) {
+            if (!confirm('Are you sure you want to delete this attraction?')) return;
+
+            try {
+                const attraction = attractionsData[attractionId];
+                
+                // Delete image from storage
+                if (attraction && attraction.image && attraction.image.filename) {
+                    try {
+                        await deleteObject(storageRef(storage, attraction.image.filename));
+                    } catch (deleteError) {
+                        console.warn('Failed to delete attraction image:', deleteError?.message || 'Unknown error');
+                    }
+                }
+
+                // Delete from database
+                await set(dbRef(database, `attractions/${attractionId}`), null);
+
+                alert('Attraction deleted successfully!');
+                await loadAttractionsData();
+            } catch (error) {
+                console.error('Error deleting attraction:', error);
+                alert('Failed to delete attraction.');
             }
         };
 

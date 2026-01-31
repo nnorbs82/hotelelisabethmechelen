@@ -8,8 +8,217 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght=100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Attractions Page Specific Styles */
+        .attractions-main {
+            padding-top: 0;
+        }
+
+        .attractions-hero {
+            position: relative;
+            height: 50vh;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--color-black) 0%, var(--color-sage) 100%);
+            overflow: hidden;
+        }
+
+        .attractions-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .attractions-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-white);
+            padding: 2rem;
+        }
+
+        .attractions-hero-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            color: var(--color-beige);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .attractions-hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .attractions-hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .attractions-hero-divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-beige);
+            margin: 1.5rem auto 0;
+        }
+
+        .attractions-intro {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--color-beige);
+        }
+
+        .attractions-intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .attractions-section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .attractions-intro-text {
+            font-size: 1.1rem;
+            color: var(--color-sage);
+            line-height: 1.8;
+        }
+
+        .attractions-grid-section {
+            padding: 4rem 2rem;
+            background-color: var(--color-white);
+        }
+
+        .attractions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .attraction-card {
+            background: var(--color-white);
+            border: 1px solid rgba(149, 147, 128, 0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .attraction-card-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .attraction-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .attraction-card:hover .attraction-card-image img {
+            transform: scale(1.05);
+        }
+
+        .attraction-card-no-image {
+            height: 250px;
+            background: var(--color-beige);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-sage);
+            font-size: 1rem;
+        }
+
+        .attraction-card-content {
+            padding: 1.5rem;
+        }
+
+        .attraction-card-title {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--color-black);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .attraction-card-description {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .attraction-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-sage);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .attraction-card-link:hover {
+            color: var(--color-black);
+        }
+
+        .attraction-card-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .attractions-loading {
+            text-align: center;
+            color: var(--color-sage);
+            padding: 4rem 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .attractions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attraction-card-image {
+                height: 200px;
+            }
+
+            .attractions-hero {
+                height: 40vh;
+                min-height: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
+
     <header>
         <nav>
             <a class="nav-logo" href="index.html">
@@ -28,11 +237,32 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Local Attractions</h2>
-            <p>Discover the best attractions and places to visit in Mechelen and surrounding areas.</p>
-        </div>
+    <main class="attractions-main">
+        <!-- Hero Section -->
+        <section class="attractions-hero" aria-label="Attractions hero">
+            <div class="attractions-hero-overlay"></div>
+            <div class="attractions-hero-content">
+                <span class="attractions-hero-tagline">Explore Mechelen</span>
+                <h1 class="attractions-hero-title">Local Attractions</h1>
+                <p class="attractions-hero-subtitle">Discover the best places to visit in Mechelen and the surrounding areas.</p>
+                <div class="attractions-hero-divider"></div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="attractions-intro">
+            <div class="attractions-intro-content">
+                <h2 class="attractions-section-title">Discover Our City</h2>
+                <p class="attractions-intro-text">Mechelen is a city rich in history, culture, and natural beauty. From stunning Gothic architecture to peaceful parks and world-class museums, there's something for everyone to explore just steps from our hotel.</p>
+            </div>
+        </section>
+
+        <!-- Attractions Grid Section -->
+        <section class="attractions-grid-section">
+            <div class="attractions-container" id="attractions-list">
+                <p class="attractions-loading">Loading attractions...</p>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -44,5 +274,133 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Detect browser language
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('nl')) return 'nl';
+            if (browserLang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        const currentLang = detectLanguage();
+
+        // Labels for different languages
+        const labels = {
+            en: {
+                visitWebsite: 'Visit Website',
+                noAttractions: 'Attractions information will be available soon.',
+                noImage: 'No Image'
+            },
+            nl: {
+                visitWebsite: 'Bezoek Website',
+                noAttractions: 'Informatie over attracties is binnenkort beschikbaar.',
+                noImage: 'Geen Afbeelding'
+            },
+            fr: {
+                visitWebsite: 'Visiter le Site',
+                noAttractions: 'Les informations sur les attractions seront bientôt disponibles.',
+                noImage: 'Pas d\'Image'
+            }
+        };
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') ||
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        function sanitizeUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        // Load attractions
+        async function loadAttractions() {
+            const container = document.getElementById('attractions-list');
+            try {
+                const snapshot = await get(dbRef(database, 'attractions'));
+
+                if (!snapshot.exists()) {
+                    container.innerHTML = `<p class="attractions-loading">${labels[currentLang].noAttractions}</p>`;
+                    return;
+                }
+
+                const attractions = Object.keys(snapshot.val()).map(id => ({
+                    id,
+                    ...snapshot.val()[id]
+                }));
+
+                if (attractions.length === 0) {
+                    container.innerHTML = `<p class="attractions-loading">${labels[currentLang].noAttractions}</p>`;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div class="attractions-grid">
+                        ${attractions.map(attraction => {
+                            const title = escapeHtml(attraction[`title_${currentLang}`] || attraction.title_en || '');
+                            const description = escapeHtml(attraction[`description_${currentLang}`] || attraction.description_en || '');
+                            const link = sanitizeUrl(attraction.link || '');
+                            const imageUrl = attraction.image ? sanitizeImageUrl(attraction.image.url) : '';
+
+                            return `
+                                <article class="attraction-card">
+                                    ${imageUrl ? `
+                                        <div class="attraction-card-image">
+                                            <img src="${imageUrl}" alt="${title}">
+                                        </div>
+                                    ` : `
+                                        <div class="attraction-card-no-image">
+                                            ${labels[currentLang].noImage}
+                                        </div>
+                                    `}
+                                    <div class="attraction-card-content">
+                                        <h3 class="attraction-card-title">${title}</h3>
+                                        <p class="attraction-card-description">${description}</p>
+                                        ${link ? `
+                                            <a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="attraction-card-link">
+                                                ${labels[currentLang].visitWebsite}
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                                </svg>
+                                            </a>
+                                        ` : ''}
+                                    </div>
+                                </article>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error loading attractions:', error);
+                container.innerHTML = '<p class="attractions-loading">Unable to load attractions. Please try again later.</p>';
+            }
+        }
+
+        // Initialize page
+        loadAttractions();
+    </script>
 </body>
 </html>
