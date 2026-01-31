@@ -158,7 +158,7 @@ nav ul li {
     background-color: rgba(0, 0, 0, 0.92);
     border: 1px solid rgba(212, 211, 195, 0.2);
     min-width: 180px;
-    display: none;
+    display: none !important;
     flex-direction: column;
     gap: 0.5rem;
     z-index: 1001;
@@ -172,7 +172,7 @@ nav ul li {
 nav ul li:hover > .nav-submenu,
 nav ul li:focus-within > .nav-submenu,
 .nav-submenu.show {
-    display: flex;
+    display: flex !important;
 }
 
 nav a {
@@ -307,10 +307,11 @@ nav a:hover {
         min-width: unset;
         box-shadow: none;
         gap: 0;
+        display: none !important;
     }
 
     .nav-submenu.show {
-        display: flex;
+        display: flex !important;
     }
 
     .nav-submenu li {
@@ -2806,9 +2807,9 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facilities-list {
-    padding: 3rem 2rem 4rem;
+    padding: 2.5rem 2rem 3rem;
     display: grid;
-    gap: 1.75rem;
+    gap: 1.25rem;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -2956,7 +2957,7 @@ body:not(.admin-page) .nav-logo img {
 .facility-album-showcase {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    min-height: 320px;
+    min-height: 240px;
 }
 
 .facility-album-showcase.image-right {
@@ -2970,7 +2971,7 @@ body:not(.admin-page) .nav-logo img {
 .facility-album-main-wrapper {
     position: relative;
     height: 100%;
-    min-height: 320px;
+    min-height: 240px;
 }
 
 .facility-album-main-image {
@@ -3070,7 +3071,7 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facility-content {
-    padding: 2.5rem 2.5rem 2rem;
+    padding: 1.75rem 2rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3080,28 +3081,28 @@ body:not(.admin-page) .nav-logo img {
 .facility-content::before {
     content: '';
     position: absolute;
-    top: 2rem;
+    top: 1.5rem;
     left: 0;
-    width: 4px;
-    height: 45px;
+    width: 3px;
+    height: 35px;
     background: var(--color-sage);
 }
 
 .facility-content-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 500;
     color: var(--color-black);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
     letter-spacing: 0.06rem;
     text-transform: uppercase;
 }
 
 .facility-content-description {
     color: #555;
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
     white-space: pre-line;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .facility-guidelines-section h4 {
@@ -3109,16 +3110,16 @@ body:not(.admin-page) .nav-logo img {
     text-transform: uppercase;
     letter-spacing: 0.12rem;
     color: var(--color-sage);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
     font-weight: 600;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.35rem;
     border-bottom: 1px solid rgba(149, 147, 128, 0.3);
 }
 
 .facility-no-photos {
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    min-height: 320px;
+    min-height: 240px;
 }
 
 .facility-no-photos-placeholder {
