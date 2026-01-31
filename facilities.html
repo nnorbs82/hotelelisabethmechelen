@@ -56,6 +56,19 @@
         </section>
     </main>
 
+    <!-- Facility Lightbox Modal -->
+    <div id="facility-lightbox" class="facility-lightbox" style="display: none;">
+        <button class="facility-lightbox-close" onclick="closeFacilityLightbox()" aria-label="Close lightbox">&times;</button>
+        <button class="facility-lightbox-prev" onclick="navigateFacilityLightbox(-1)" aria-label="Previous photo">‹</button>
+        <button class="facility-lightbox-next" onclick="navigateFacilityLightbox(1)" aria-label="Next photo">›</button>
+        <div class="facility-lightbox-content">
+            <img id="facility-lightbox-image" src="" alt="Facility photo">
+        </div>
+        <div class="facility-lightbox-thumbnails" id="facility-lightbox-thumbnails">
+            <!-- Thumbnails will be dynamically inserted here -->
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
         <p>
@@ -153,7 +166,7 @@
                     ...facilitySnapshot.val()[id],
                     library: libraryData[id] ? Object.values(libraryData[id]).sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : []
                 }));
-                container.innerHTML = facilities.map(facility => {
+                container.innerHTML = facilities.map((facility, facilityIndex) => {
                     const name = escapeHtml(facility[`name_${currentLang}`] || facility.name_en || '');
                     const operation = escapeHtml(facility[`operation_${currentLang}`] || facility.operation_en || '');
                     const guidelines = facility[`guidelines_${currentLang}`] || facility.guidelines_en || [];
@@ -164,32 +177,62 @@
                         .map(item => sanitizeImageUrl(item.url || ''))
                         .filter(Boolean);
                     const albumLabels = labels[currentLang] || labels.en;
-                    const libraryMarkup = libraryItems.length
+                    const hasPhotos = libraryItems.length > 0;
+                    const hasMultiplePhotos = libraryItems.length > 1;
+                    const firstPhoto = libraryItems[0] || '';
+                    const facilityId = facility.id;
+                    
+                    // Determine layout (alternating)
+                    const imageOnLeft = facilityIndex % 2 === 0;
+
+                    const albumMarkup = hasPhotos
                         ? `
-                            <div class="facility-album-grid">
-                                ${libraryItems.map((url, index) => `
-                                    <div class="facility-album-item">
-                                        <img src="${url}" alt="${escapeHtml(albumLabels.albumAlt(name, index))}">
+                            <div class="facility-album-showcase ${imageOnLeft ? 'image-left' : 'image-right'}">
+                                <div class="facility-album-main-wrapper" data-facility-id="${facilityId}" data-photos='${JSON.stringify(libraryItems)}' data-index="0">
+                                    <div class="facility-album-main-image" onclick="openFacilityLightbox('${facilityId}', 0)" style="cursor: pointer;">
+                                        <img src="${firstPhoto}" alt="${escapeHtml(albumLabels.albumAlt(name, 0))}" id="facility-img-${facilityId}">
+                                        <div class="facility-magnify-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <path d="M21 21l-4.35-4.35"></path>
+                                            </svg>
+                                        </div>
                                     </div>
-                                `).join('')}
+                                    ${hasMultiplePhotos ? `
+                                        <button class="facility-album-nav facility-album-nav-prev" onclick="navigateFacilityImage('${facilityId}', -1, event)">‹</button>
+                                        <button class="facility-album-nav facility-album-nav-next" onclick="navigateFacilityImage('${facilityId}', 1, event)">›</button>
+                                        <div class="facility-album-badge">${libraryItems.length} ${albumLabels.albumTitle}</div>
+                                    ` : ''}
+                                </div>
+                                <div class="facility-content">
+                                    <h3 class="facility-content-title">${name || 'Facility'}</h3>
+                                    <p class="facility-content-description">${operation || ''}</p>
+                                    <div class="facility-guidelines-section">
+                                        <h4>${albumLabels.guidelines}</h4>
+                                        ${guidelineItems}
+                                    </div>
+                                </div>
                             </div>
                         `
-                        : `<p class="facility-album-empty">${albumLabels.albumEmpty}</p>`;
+                        : `
+                            <div class="facility-no-photos">
+                                <div class="facility-no-photos-placeholder">
+                                    <span>${albumLabels.albumEmpty}</span>
+                                </div>
+                                <div class="facility-content">
+                                    <h3 class="facility-content-title">${name || 'Facility'}</h3>
+                                    <p class="facility-content-description">${operation || ''}</p>
+                                    <div class="facility-guidelines-section">
+                                        <h4>${albumLabels.guidelines}</h4>
+                                        ${guidelineItems}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
 
                     return `
-                        <article class="facility-card">
-                            <div class="facility-card-header">
-                                <h3>${name || 'Facility'}</h3>
-                            </div>
-                            <div class="facility-card-body">
-                                <div class="facility-album">
-                                    <h4 class="facility-album-title">${albumLabels.albumTitle}</h4>
-                                    ${libraryMarkup}
-                                </div>
-                                <p>${operation || ''}</p>
-                                <h4>${albumLabels.guidelines}</h4>
-                                ${guidelineItems}
-                            </div>
+                        <article class="facility-card-modern" id="facility-${facilityId}">
+                            ${albumMarkup}
                         </article>
                     `;
                 }).join('');
@@ -198,6 +241,93 @@
                 container.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
             }
         }
+
+        // Navigate facility images
+        window.navigateFacilityImage = function(facilityId, direction, event) {
+            if (event) event.stopPropagation();
+            const wrapper = document.querySelector(`[data-facility-id="${facilityId}"]`);
+            if (!wrapper) return;
+            
+            const photos = JSON.parse(wrapper.dataset.photos || '[]');
+            if (photos.length === 0) return;
+            
+            let currentIndex = parseInt(wrapper.dataset.index) || 0;
+            currentIndex = (currentIndex + direction + photos.length) % photos.length;
+            
+            const img = document.getElementById(`facility-img-${facilityId}`);
+            if (img) {
+                img.src = photos[currentIndex];
+            }
+            wrapper.dataset.index = currentIndex;
+        };
+
+        // Store data for lightbox
+        let facilityLightboxPhotos = [];
+        let facilityLightboxIndex = 0;
+
+        // Open facility lightbox
+        window.openFacilityLightbox = function(facilityId, photoIndex) {
+            const wrapper = document.querySelector(`[data-facility-id="${facilityId}"]`);
+            if (!wrapper) return;
+            
+            const photos = JSON.parse(wrapper.dataset.photos || '[]');
+            if (photos.length === 0) return;
+
+            facilityLightboxPhotos = photos;
+            facilityLightboxIndex = parseInt(wrapper.dataset.index) || photoIndex || 0;
+
+            const lightbox = document.getElementById('facility-lightbox');
+            const lightboxImage = document.getElementById('facility-lightbox-image');
+            const thumbnailsContainer = document.getElementById('facility-lightbox-thumbnails');
+
+            // Show current photo
+            lightboxImage.src = photos[facilityLightboxIndex];
+
+            // Render thumbnails
+            thumbnailsContainer.innerHTML = photos.map((photo, index) => `
+                <img src="${photo}" 
+                     class="facility-lightbox-thumbnail ${index === facilityLightboxIndex ? 'active' : ''}" 
+                     onclick="changeFacilityLightboxPhoto(${index})"
+                     alt="Thumbnail ${index + 1}">
+            `).join('');
+
+            lightbox.style.display = 'flex';
+        };
+
+        window.changeFacilityLightboxPhoto = function(index) {
+            if (facilityLightboxPhotos.length === 0) return;
+
+            facilityLightboxIndex = index;
+            const lightboxImage = document.getElementById('facility-lightbox-image');
+            lightboxImage.src = facilityLightboxPhotos[index];
+
+            // Update active thumbnail
+            document.querySelectorAll('.facility-lightbox-thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        };
+
+        window.navigateFacilityLightbox = function(direction) {
+            if (facilityLightboxPhotos.length === 0) return;
+            
+            facilityLightboxIndex = (facilityLightboxIndex + direction + facilityLightboxPhotos.length) % facilityLightboxPhotos.length;
+            changeFacilityLightboxPhoto(facilityLightboxIndex);
+        };
+
+        window.closeFacilityLightbox = function() {
+            document.getElementById('facility-lightbox').style.display = 'none';
+        };
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeFacilityLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                navigateFacilityLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateFacilityLightbox(1);
+            }
+        });
 
         loadFacilitiesHero();
         loadFacilitiesList();

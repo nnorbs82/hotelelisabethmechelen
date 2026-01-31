@@ -602,6 +602,22 @@
             return '';
         }
 
+        function sanitizeVideoUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') ||
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        // Escape for use in JavaScript string within onclick attributes
+        function escapeJsString(str) {
+            if (!str) return '';
+            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
         // Load meetings hero image
         async function loadMeetingsHero() {
             try {
@@ -650,7 +666,8 @@
                     const food = escapeHtml(meeting[`food_${currentLang}`] || meeting.food_en || '');
                     const parking = escapeHtml(meeting[`parking_${currentLang}`] || meeting.parking_en || '');
                     const accommodation = escapeHtml(meeting[`accommodation_${currentLang}`] || meeting.accommodation_en || '');
-                    const video = meeting.video?.url || '';
+                    const videoRaw = meeting.video?.url || '';
+                    const video = sanitizeVideoUrl(videoRaw);
                     const photos = meeting.photos || [];
                     const firstPhoto = photos.length > 0 ? sanitizeImageUrl(photos[0].url) : '';
                     const hasMultiplePhotos = photos.length > 1;
@@ -696,7 +713,7 @@
                     ` : '';
 
                     const videoBtn = video ? `
-                        <button class="room-feature-btn secondary meeting-room-video-btn" onclick="playMeetingVideo('${video}')">
+                        <button class="room-feature-btn secondary meeting-room-video-btn" onclick="playMeetingVideo('${escapeJsString(video)}')">
                             <span>${labels[currentLang].watchVideo}</span>
                             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -759,12 +776,17 @@
 
         // Play meeting video
         window.playMeetingVideo = function(videoUrl) {
+            if (!videoUrl) return;
+            
             const videoModal = document.createElement('div');
             videoModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center;';
             videoModal.innerHTML = `
                 <div style="position: relative; max-width: 90%; max-height: 90%;">
                     <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: -40px; right: 0; background: white; border: none; font-size: 30px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%;">&times;</button>
-                    <video src="${videoUrl}" controls autoplay style="max-width: 100%; max-height: 80vh; border-radius: 8px;"></video>
+                    <video controls autoplay playsinline style="max-width: 100%; max-height: 80vh; border-radius: 8px;">
+                        <source src="${escapeHtml(videoUrl)}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             `;
             document.body.appendChild(videoModal);
