@@ -164,8 +164,15 @@ nav a:hover {
     margin-top: 0.5rem;
 }
 
-.nav-item-more:hover .nav-dropdown,
-.nav-item-more:focus-within .nav-dropdown,
+/* Show dropdown on hover for desktop */
+@media (min-width: 901px) {
+    .nav-item-more:hover .nav-dropdown,
+    .nav-item-more:focus-within .nav-dropdown {
+        display: flex;
+    }
+}
+
+/* Show dropdown on toggle for mobile */
 .nav-dropdown.show {
     display: flex;
 }
