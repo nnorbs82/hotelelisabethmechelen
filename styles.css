@@ -5,9 +5,6 @@
     --color-beige: #D4D3C3;
     --color-sage: #959380;
     --color-white: #FFFFFF;
-    --header-height: 80px;
-    --logo-height: 30px;
-    --nav-padding: 50px;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
 }
@@ -23,7 +20,6 @@ body {
     background-color: transparent;
     color: var(--color-black);
     line-height: 1.6;
-    padding-top: var(--header-height); /* Account for fixed header height */
 }
 
 /* Ensure all text inputs, textareas, and buttons use Raleway */
@@ -49,274 +45,6 @@ input, textarea, button {
     pointer-events: none;
 }
 
-/* Header Styles */
-header {
-    background-color: var(--color-black);
-    padding: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    height: var(--header-height);
-}
-
-/* Navigation - Rebuilt from scratch */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 var(--nav-padding);
-    max-width: 100%;
-}
-
-/* Logo */
-.nav-logo {
-    display: inline-flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.nav-logo img {
-    height: var(--logo-height);
-    width: auto;
-    display: block;
-}
-
-.nav-logo:focus-visible {
-    outline: 2px solid var(--color-white);
-    outline-offset: 4px;
-}
-
-/* Menu List */
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-}
-
-nav ul li {
-    white-space: nowrap;
-}
-
-/* Menu Links */
-nav a {
-    color: var(--color-beige);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-}
-
-nav a:hover {
-    color: var(--color-white);
-}
-
-/* More Button */
-.nav-item-more {
-    position: relative;
-}
-
-.nav-more-btn {
-    background: none;
-    border: none;
-    color: var(--color-beige);
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.3s ease;
-    font-family: 'Raleway', sans-serif;
-}
-
-.nav-more-btn:hover {
-    color: var(--color-white);
-}
-
-.nav-more-btn:focus-visible {
-    color: var(--color-white);
-    outline: 2px solid var(--color-white);
-    outline-offset: 4px;
-}
-
-/* Dropdown Menu - Vertical */
-.nav-dropdown {
-    list-style: none;
-    margin: 0;
-    padding: 0.75rem 0;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--color-black);
-    min-width: 150px;
-    display: none !important;
-    flex-direction: column !important;
-    gap: 0.5rem;
-    z-index: 1001;
-    border-top: 2px solid var(--color-beige);
-    margin-top: 0.5rem;
-}
-
-/* Show dropdown on hover for desktop */
-@media (min-width: 901px) {
-    .nav-item-more:hover .nav-dropdown,
-    .nav-item-more:focus-within .nav-dropdown {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-}
-
-/* Show dropdown on toggle for mobile */
-.nav-dropdown.show {
-    display: flex !important;
-    flex-direction: column !important;
-}
-
-.nav-dropdown li {
-    padding: 0;
-}
-
-.nav-dropdown a {
-    display: block;
-    padding: 0.5rem 1rem;
-}
-
-/* Mobile Menu Toggle */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1001;
-}
-
-.mobile-menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 2px;
-    background-color: var(--color-beige);
-    margin: 5px 0;
-    transition: all 0.3s ease;
-}
-
-.mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Mobile Menu Responsive */
-@media (max-width: 1024px) {
-    nav {
-        padding: 0 var(--nav-padding);
-    }
-    
-    nav ul {
-        gap: 1rem;
-    }
-    
-    nav a {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 900px) {
-    .mobile-menu-toggle {
-        display: block;
-    }
-    
-    nav {
-        padding: 0 var(--nav-padding);
-    }
-    
-    nav ul#nav-menu {
-        display: none;
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
-        right: 0;
-        background-color: var(--color-black);
-        flex-direction: column;
-        padding: 1rem var(--nav-padding);
-        gap: 0;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        max-height: calc(100vh - var(--header-height));
-        overflow-y: auto;
-        z-index: 999;
-        align-items: stretch;
-    }
-    
-    nav ul#nav-menu.show {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    
-    nav ul#nav-menu li {
-        padding: 0.75rem 0;
-        border-bottom: 1px solid rgba(212, 211, 195, 0.1);
-        display: block;
-        width: 100%;
-    }
-    
-    nav ul#nav-menu li:last-child {
-        border-bottom: none;
-    }
-    
-    nav ul#nav-menu a {
-        font-size: 1rem;
-        display: block;
-        text-align: left;
-    }
-
-    .nav-more-btn {
-        font-size: 1rem;
-        width: 100%;
-        text-align: left;
-        display: block;
-    }
-
-    .nav-dropdown {
-        position: static;
-        border: none;
-        background-color: transparent;
-        padding: 0.5rem 0 0.75rem;
-        min-width: unset;
-        gap: 0.5rem;
-        margin-top: 0.5rem;
-        display: none !important;
-        flex-direction: column !important;
-        border-top: none;
-    }
-
-    .nav-dropdown.show {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    .nav-dropdown li {
-        padding: 0.75rem 0 0.75rem 1rem;
-        border-bottom: none;
-    }
-    
-    .nav-dropdown a {
-        padding: 0;
-    }
-}
-
 /* Main Container */
 .container {
     max-width: 1200px;
@@ -327,7 +55,7 @@ nav a:hover {
 /* Hero Slideshow */
 .hero-slideshow {
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: 100vh;
     min-height: 420px;
     background-color: var(--color-black);
     overflow: hidden; /* Prevent overflow issues */
@@ -1108,71 +836,6 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 /* ============ MAIN WEBSITE NAVIGATION (NOT ADMIN) ============ */
-
-/* Ensure main website nav stays horizontal - NOT affected by admin styles */
-body:not(.admin-page) header {
-    background-color: var(--color-black);
-    padding: 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    height: var(--header-height);
-}
-
-body:not(.admin-page) nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding: 0 var(--nav-padding);
-}
-
-/* Main website nav list - MUST BE HORIZONTAL */
-body:not(.admin-page) nav ul {
-    display: flex !important; /* FORCE horizontal */
-    flex-direction: row !important; /* FORCE row, not column */
-    list-style: none;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-}
-
-body:not(.admin-page) nav li {
-    display: inline-block; /* Horizontal list items */
-    margin: 0;
-}
-
-body:not(.admin-page) nav a {
-    color: var(--color-beige);
-    text-decoration: none;
-    transition: color 0.3s;
-    white-space: nowrap;
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    font-family: 'Raleway', sans-serif;
-}
-
-body:not(.admin-page) nav a:hover {
-    color: var(--color-white);
-}
-
-/* Ensure nav logo stays on left */
-body:not(.admin-page) .nav-logo {
-    display: inline-flex;
-    align-items: center;
-}
-
-body:not(.admin-page) .nav-logo img {
-    height: var(--logo-height);
-    width: auto;
-    display: block;
-}
-
-/* ============ END MAIN WEBSITE NAVIGATION ============ */
 
 /* Photo grid stays centered */
 .photo-grid {
@@ -2731,7 +2394,7 @@ body:not(.admin-page) .nav-logo img {
 .facilities-hero {
     position: relative;
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: 100vh;
     min-height: 500px;
     background-color: transparent;
     display: flex;
@@ -3517,7 +3180,7 @@ body:not(.admin-page) .nav-logo img {
 
 /* Rooms Main Container */
 .rooms-main {
-    min-height: calc(100vh - var(--header-height));
+    min-height: 100vh;
     background-color: transparent; /* Allow fixed page-background to show through the hero section */
     padding: 0;
 }
@@ -3525,7 +3188,7 @@ body:not(.admin-page) .nav-logo img {
 /* Enhanced Hero Section with Background */
 .rooms-hero-modern {
     position: relative;
-    height: calc(100vh - var(--header-height));
+    height: 100vh;
     min-height: 500px;
     display: flex;
     align-items: center;
