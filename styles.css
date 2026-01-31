@@ -164,15 +164,15 @@ nav a:hover {
 
 /* Mobile Menu Responsive */
 @media (max-width: 1024px) {
-    nav {
-        padding: 0 20px;
+    body:not(.admin-page) nav {
+        padding: 0 var(--nav-padding);
     }
     
-    nav ul {
+    body:not(.admin-page) nav ul {
         gap: 1rem;
     }
     
-    nav a {
+    body:not(.admin-page) nav a {
         font-size: 0.9rem;
     }
 }
@@ -180,6 +180,15 @@ nav a:hover {
 @media (max-width: 900px) {
     .mobile-menu-toggle {
         display: block;
+    }
+    
+    /* Ensure main website nav keeps logo left, burger right on mobile */
+    body:not(.admin-page) nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 var(--nav-padding);
     }
     
     nav ul#nav-menu {
@@ -200,20 +209,24 @@ nav a:hover {
     
     nav ul#nav-menu.show {
         display: flex !important;
+        flex-direction: column !important;
     }
     
-    nav ul li {
+    nav ul#nav-menu li {
         padding: 0.75rem 0;
         border-bottom: 1px solid rgba(212, 211, 195, 0.1);
+        display: block;
+        width: 100%;
     }
     
-    nav ul li:last-child {
+    nav ul#nav-menu li:last-child {
         border-bottom: none;
     }
     
-    nav a {
+    nav ul#nav-menu a {
         font-size: 1rem;
         display: block;
+        text-align: left;
     }
 }
 
@@ -708,12 +721,13 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    nav {
+    /* Only apply to admin pages - main website nav handled separately */
+    body.admin-page nav {
         flex-direction: column;
         gap: 1rem;
     }
 
-    nav ul {
+    body.admin-page nav ul {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
@@ -1026,7 +1040,7 @@ body:not(.admin-page) nav {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 var(--nav-padding);
 }
 
 /* Main website nav list - MUST BE HORIZONTAL */
@@ -2699,15 +2713,15 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facilities-list {
-    padding: 0 1.5rem 4rem;
+    padding: 4rem 2rem;
     display: grid;
-    gap: 2rem;
-    max-width: 1100px;
+    gap: 0;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .facilities-list-section {
-    background-color: var(--color-beige);
+    background-color: var(--color-white);
 }
 
 .facility-card {
@@ -2821,16 +2835,29 @@ body:not(.admin-page) .nav-logo img {
 /* ============ MODERN FACILITY STYLES ============ */
 .facility-card-modern {
     background-color: var(--color-white);
-    border: 1px solid rgba(149, 147, 128, 0.25);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    border: none;
+    box-shadow: none;
     overflow: hidden;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(149, 147, 128, 0.2);
+}
+
+.facility-card-modern:last-child {
+    border-bottom: none;
+}
+
+.facility-card-modern:nth-child(even) {
+    background-color: var(--color-beige);
+}
+
+.facility-card-modern:nth-child(even) .facility-content {
+    background-color: var(--color-beige);
 }
 
 .facility-album-showcase {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 450px;
+    min-height: 500px;
 }
 
 .facility-album-showcase.image-right {
@@ -2844,7 +2871,7 @@ body:not(.admin-page) .nav-logo img {
 .facility-album-main-wrapper {
     position: relative;
     height: 100%;
-    min-height: 450px;
+    min-height: 500px;
 }
 
 .facility-album-main-image {
@@ -2944,14 +2971,14 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facility-content {
-    padding: 3rem;
+    padding: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .facility-content-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 300;
     color: var(--color-black);
     margin-bottom: 1.5rem;
@@ -2963,6 +2990,7 @@ body:not(.admin-page) .nav-logo img {
     line-height: 1.9;
     margin-bottom: 2rem;
     white-space: pre-line;
+    font-size: 1.05rem;
 }
 
 .facility-guidelines-section h4 {
@@ -2977,7 +3005,7 @@ body:not(.admin-page) .nav-logo img {
 .facility-no-photos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 450px;
+    min-height: 500px;
 }
 
 .facility-no-photos-placeholder {

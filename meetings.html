@@ -12,6 +12,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         /* Meetings Page Specific Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
         .meetings-main {
             padding-top: 0;
         }
@@ -83,6 +87,11 @@
             height: 2px;
             background-color: var(--color-beige);
             margin: 1.5rem auto 0;
+        }
+
+        .meetings-hero-cta {
+            margin-top: 2rem;
+            display: inline-block;
         }
 
         .meetings-intro {
@@ -257,8 +266,19 @@
             line-height: 1.6;
         }
 
-        .meeting-room-video-btn {
+        .meeting-room-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             margin-top: 1rem;
+        }
+
+        .meeting-room-video-btn {
+            margin-top: 0;
+        }
+
+        .meeting-room-quotation-btn {
+            display: inline-block;
         }
 
         /* Overnight Accommodation Section - Full Width */
@@ -460,6 +480,7 @@
                 <h1 class="meetings-hero-title">Meetings & Events</h1>
                 <p class="meetings-hero-subtitle">Host your business meetings and special events in our versatile, well-equipped spaces.</p>
                 <div class="meetings-hero-divider"></div>
+                <a href="#meeting-request-form" class="btn meetings-hero-cta">Request Quotation</a>
             </div>
         </section>
 
@@ -479,12 +500,12 @@
         </section>
 
         <!-- Meeting Request Form Section -->
-        <section class="meeting-request-section">
+        <section class="meeting-request-section" id="meeting-request-form">
             <div class="meeting-request-container">
                 <h2 class="meeting-request-title">Request a Meeting Room</h2>
                 <p class="meeting-request-subtitle">Fill out the form below and we'll get back to you shortly.</p>
                 
-                <form id="meeting-request-form" class="meeting-form">
+                <form id="meeting-request-form-element" class="meeting-form">
                     <div class="meeting-form-row">
                         <div class="meeting-form-group">
                             <label for="firstName">First Name *</label>
@@ -568,7 +589,8 @@
                 accommodation: 'Overnight Accommodation',
                 watchVideo: 'Watch Video Tour',
                 photos: 'Photos',
-                noRooms: 'Meeting room information will be available soon.'
+                noRooms: 'Meeting room information will be available soon.',
+                requestQuotation: 'Request Quotation'
             },
             nl: {
                 setupStyles: 'Opstellingsmogelijkheden',
@@ -578,7 +600,8 @@
                 accommodation: 'Overnachting',
                 watchVideo: 'Bekijk Video',
                 photos: "Foto's",
-                noRooms: 'Informatie over vergaderruimtes is binnenkort beschikbaar.'
+                noRooms: 'Informatie over vergaderruimtes is binnenkort beschikbaar.',
+                requestQuotation: 'Offerte Aanvragen'
             },
             fr: {
                 setupStyles: 'Configurations',
@@ -588,7 +611,8 @@
                 accommodation: 'Hébergement',
                 watchVideo: 'Voir la vidéo',
                 photos: 'Photos',
-                noRooms: 'Les informations sur les salles de réunion seront bientôt disponibles.'
+                noRooms: 'Les informations sur les salles de réunion seront bientôt disponibles.',
+                requestQuotation: 'Demander un Devis'
             }
         };
 
@@ -727,6 +751,12 @@
                         </button>
                     ` : '';
 
+                    const quotationBtn = `
+                        <a href="#meeting-request-form" class="btn meeting-room-quotation-btn">
+                            ${labels[currentLang].requestQuotation}
+                        </a>
+                    `;
+
                     return `
                         <article class="meeting-room-card" id="meeting-${meetingId}">
                             <div class="meeting-room-header">
@@ -743,7 +773,10 @@
                                 <div class="meeting-room-info">
                                     <h3 class="meeting-room-name">${name}</h3>
                                     <p class="meeting-room-description">${description}</p>
-                                    ${videoBtn}
+                                    <div class="meeting-room-buttons">
+                                        ${videoBtn}
+                                        ${quotationBtn}
+                                    </div>
                                 </div>
                             </div>
                             <div class="meeting-room-details">
@@ -833,7 +866,7 @@
             }
         })();
 
-        document.getElementById('meeting-request-form').addEventListener('submit', function(e) {
+        document.getElementById('meeting-request-form-element').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
@@ -876,7 +909,7 @@
                     console.log('Email sent successfully:', response);
                     formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
                     formStatus.className = 'meeting-form-status success';
-                    document.getElementById('meeting-request-form').reset();
+                    document.getElementById('meeting-request-form-element').reset();
                 }, function(error) {
                     console.error('Failed to send email:', error);
                     formStatus.textContent = 'Sorry, there was an error sending your request. Please try again or contact us directly at info@elisabeth-hotel.be';
