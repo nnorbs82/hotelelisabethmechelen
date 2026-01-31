@@ -8,8 +8,416 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght=100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        /* Meetings Page Specific Styles */
+        .meetings-main {
+            padding-top: 0;
+        }
+
+        .meetings-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .meetings-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .meetings-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+        }
+
+        .meetings-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-white);
+            padding: 2rem;
+        }
+
+        .meetings-hero-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            color: var(--color-beige);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .meetings-hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .meetings-hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .meetings-hero-divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-beige);
+            margin: 1.5rem auto 0;
+        }
+
+        .meetings-intro {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--color-beige);
+        }
+
+        .meetings-intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .meetings-section-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .meetings-intro-text {
+            font-size: 1.1rem;
+            color: var(--color-sage);
+            line-height: 1.8;
+        }
+
+        .meetings-rooms-section {
+            padding: 4rem 2rem;
+            background-color: var(--color-white);
+        }
+
+        .meetings-rooms-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .meeting-room-card {
+            background: var(--color-white);
+            border: 1px solid rgba(149, 147, 128, 0.3);
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .meeting-room-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .meeting-room-gallery {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .meeting-room-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .meeting-room-gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .meeting-room-gallery-nav:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .meeting-room-gallery-nav.prev {
+            left: 1rem;
+        }
+
+        .meeting-room-gallery-nav.next {
+            right: 1rem;
+        }
+
+        .meeting-room-gallery-badge {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
+
+        .meeting-room-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .meeting-room-name {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--color-black);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05rem;
+        }
+
+        .meeting-room-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .meeting-room-details {
+            padding: 2rem;
+            background: var(--color-beige);
+        }
+
+        .meeting-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .meeting-detail-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-black);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08rem;
+        }
+
+        .meeting-detail-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .meeting-detail-section li {
+            padding: 0.25rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .meeting-detail-section li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.65em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--color-sage);
+        }
+
+        .meeting-detail-section p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .meeting-room-video-btn {
+            margin-top: 1rem;
+        }
+
+        /* Meeting Request Form */
+        .meeting-request-section {
+            padding: 4rem 2rem;
+            background-color: var(--color-black);
+        }
+
+        .meeting-request-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .meeting-request-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-beige);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .meeting-request-subtitle {
+            color: var(--color-sage);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .meeting-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .meeting-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .meeting-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meeting-form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .meeting-form-group label {
+            color: var(--color-beige);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .meeting-form-group input,
+        .meeting-form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-sage);
+            border-radius: 4px;
+            background-color: var(--color-white);
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+        }
+
+        .meeting-form-group input:focus,
+        .meeting-form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-beige);
+        }
+
+        .meeting-form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .meeting-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .meeting-form-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .meeting-form-checkbox label {
+            color: var(--color-sage);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .meeting-form-checkbox a {
+            color: var(--color-beige);
+        }
+
+        .meeting-submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .meeting-submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .meeting-form-status {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .meeting-form-status.success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            display: block;
+        }
+
+        .meeting-form-status.error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .meeting-room-header {
+                grid-template-columns: 1fr;
+            }
+
+            .meeting-room-gallery {
+                height: 300px;
+            }
+
+            .meeting-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .meetings-hero {
+                height: 50vh;
+                min-height: 350px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
+
     <header>
         <nav>
             <a class="nav-logo" href="index.html">
@@ -28,11 +436,88 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Meetings & Events</h2>
-            <p>Host your business meetings and special events in our versatile spaces.</p>
-        </div>
+    <main class="meetings-main">
+        <!-- Hero Section -->
+        <section class="meetings-hero" aria-label="Meetings hero">
+            <div class="meetings-hero-bg" id="meetings-hero-bg"></div>
+            <div class="meetings-hero-overlay"></div>
+            <div class="meetings-hero-content">
+                <span class="meetings-hero-tagline">Hotel Elisabeth Mechelen</span>
+                <h1 class="meetings-hero-title">Meetings & Events</h1>
+                <p class="meetings-hero-subtitle">Host your business meetings and special events in our versatile, well-equipped spaces.</p>
+                <div class="meetings-hero-divider"></div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="meetings-intro">
+            <div class="meetings-intro-content">
+                <h2 class="meetings-section-title">Our Meeting Spaces</h2>
+                <p class="meetings-intro-text">Whether you're planning an intimate board meeting, a corporate conference, or a special celebration, Hotel Elisabeth Mechelen offers flexible meeting spaces equipped with modern amenities and professional support.</p>
+            </div>
+        </section>
+
+        <!-- Meeting Rooms Section -->
+        <section class="meetings-rooms-section">
+            <div class="meetings-rooms-container" id="meetings-list">
+                <p class="meetings-loading" style="text-align: center; color: var(--color-sage);">Loading meeting rooms...</p>
+            </div>
+        </section>
+
+        <!-- Meeting Request Form Section -->
+        <section class="meeting-request-section">
+            <div class="meeting-request-container">
+                <h2 class="meeting-request-title">Request a Meeting Room</h2>
+                <p class="meeting-request-subtitle">Fill out the form below and we'll get back to you shortly.</p>
+                
+                <form id="meeting-request-form" class="meeting-form">
+                    <div class="meeting-form-row">
+                        <div class="meeting-form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="meeting-form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="meeting-form-row">
+                        <div class="meeting-form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="meeting-form-group">
+                            <label for="telephone">Telephone Number *</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+                    </div>
+                    <div class="meeting-form-row">
+                        <div class="meeting-form-group">
+                            <label for="participants">Total Number of Participants *</label>
+                            <input type="number" id="participants" name="participants" min="1" required>
+                        </div>
+                        <div class="meeting-form-group">
+                            <label for="meetingDate">Meeting Date *</label>
+                            <input type="date" id="meetingDate" name="meetingDate" required>
+                        </div>
+                    </div>
+                    <div class="meeting-form-group full-width">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us more about your meeting requirements..."></textarea>
+                    </div>
+                    <div class="meeting-form-group full-width">
+                        <div class="meeting-form-checkbox">
+                            <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                            <label for="privacyConsent">
+                                Yes, I agree for Elisabeth Hotel Mechelen / Group Daedalus to use my details for the purpose of transmitting information about Elisabeth Hotel Mechelen / Group Daedalus and statistical purposes. I can revoke this consent at any time by sending an e-mail to info@elisabeth-hotel.be. Further information on the handling of your data can be found in our <a href="privacypolicy.html" target="_blank">privacy policy</a>.
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn meeting-submit-btn" id="submitBtn">Send Request</button>
+                    <div id="formStatus" class="meeting-form-status"></div>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -44,5 +529,309 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Detect browser language
+        function detectLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('nl')) return 'nl';
+            if (browserLang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        const currentLang = detectLanguage();
+
+        // Labels for different languages
+        const labels = {
+            en: {
+                setupStyles: 'Setup Styles',
+                facilities: 'Meeting Facilities',
+                foodBeverage: 'Food & Beverage',
+                parking: 'Parking',
+                accommodation: 'Overnight Accommodation',
+                watchVideo: 'Watch Video Tour',
+                photos: 'Photos',
+                noRooms: 'Meeting room information will be available soon.'
+            },
+            nl: {
+                setupStyles: 'Opstellingsmogelijkheden',
+                facilities: 'Vergaderfaciliteiten',
+                foodBeverage: 'Eten & Drinken',
+                parking: 'Parkeren',
+                accommodation: 'Overnachting',
+                watchVideo: 'Bekijk Video',
+                photos: "Foto's",
+                noRooms: 'Informatie over vergaderruimtes is binnenkort beschikbaar.'
+            },
+            fr: {
+                setupStyles: 'Configurations',
+                facilities: 'Équipements de réunion',
+                foodBeverage: 'Restauration',
+                parking: 'Parking',
+                accommodation: 'Hébergement',
+                watchVideo: 'Voir la vidéo',
+                photos: 'Photos',
+                noRooms: 'Les informations sur les salles de réunion seront bientôt disponibles.'
+            }
+        };
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') ||
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        // Load meetings hero image
+        async function loadMeetingsHero() {
+            try {
+                const snapshot = await get(dbRef(database, 'meetingsMainImage'));
+                if (snapshot.exists()) {
+                    const hero = snapshot.val();
+                    const safeUrl = sanitizeImageUrl(hero?.url || '');
+                    if (safeUrl) {
+                        const heroBg = document.getElementById('meetings-hero-bg');
+                        if (heroBg) {
+                            heroBg.style.backgroundImage = `url("${safeUrl}")`;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading meetings hero:', error);
+            }
+        }
+
+        // Load meeting rooms
+        async function loadMeetingRooms() {
+            const container = document.getElementById('meetings-list');
+            try {
+                const [meetingsSnapshot, photosSnapshot] = await Promise.all([
+                    get(dbRef(database, 'meetings')),
+                    get(dbRef(database, 'meetingsPhotos'))
+                ]);
+
+                if (!meetingsSnapshot.exists()) {
+                    container.innerHTML = `<p style="text-align: center; color: var(--color-sage);">${labels[currentLang].noRooms}</p>`;
+                    return;
+                }
+
+                const photosData = photosSnapshot.exists() ? photosSnapshot.val() : {};
+                const meetings = Object.keys(meetingsSnapshot.val()).map(id => ({
+                    id,
+                    ...meetingsSnapshot.val()[id],
+                    photos: photosData[id] ? Object.values(photosData[id]).sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : []
+                }));
+
+                container.innerHTML = meetings.map((meeting, index) => {
+                    const name = escapeHtml(meeting[`name_${currentLang}`] || meeting.name_en || '');
+                    const description = escapeHtml(meeting[`description_${currentLang}`] || meeting.description_en || '');
+                    const setupStyles = meeting[`setupStyles_${currentLang}`] || meeting.setupStyles_en || [];
+                    const facilities = meeting[`facilities_${currentLang}`] || meeting.facilities_en || [];
+                    const food = escapeHtml(meeting[`food_${currentLang}`] || meeting.food_en || '');
+                    const parking = escapeHtml(meeting[`parking_${currentLang}`] || meeting.parking_en || '');
+                    const accommodation = escapeHtml(meeting[`accommodation_${currentLang}`] || meeting.accommodation_en || '');
+                    const video = meeting.video?.url || '';
+                    const photos = meeting.photos || [];
+                    const firstPhoto = photos.length > 0 ? sanitizeImageUrl(photos[0].url) : '';
+                    const hasMultiplePhotos = photos.length > 1;
+                    const meetingId = meeting.id;
+
+                    const setupStylesHtml = setupStyles.length > 0 ? `
+                        <div class="meeting-detail-section">
+                            <h4>${labels[currentLang].setupStyles}</h4>
+                            <ul>
+                                ${setupStyles.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '';
+
+                    const facilitiesHtml = facilities.length > 0 ? `
+                        <div class="meeting-detail-section">
+                            <h4>${labels[currentLang].facilities}</h4>
+                            <ul>
+                                ${facilities.map(item => `<li>${escapeHtml(item)}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '';
+
+                    const foodHtml = food ? `
+                        <div class="meeting-detail-section">
+                            <h4>${labels[currentLang].foodBeverage}</h4>
+                            <p>${food}</p>
+                        </div>
+                    ` : '';
+
+                    const parkingHtml = parking ? `
+                        <div class="meeting-detail-section">
+                            <h4>${labels[currentLang].parking}</h4>
+                            <p>${parking}</p>
+                        </div>
+                    ` : '';
+
+                    const accommodationHtml = accommodation ? `
+                        <div class="meeting-detail-section">
+                            <h4>${labels[currentLang].accommodation}</h4>
+                            <p>${accommodation}</p>
+                        </div>
+                    ` : '';
+
+                    const videoBtn = video ? `
+                        <button class="room-feature-btn secondary meeting-room-video-btn" onclick="playMeetingVideo('${video}')">
+                            <span>${labels[currentLang].watchVideo}</span>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </button>
+                    ` : '';
+
+                    return `
+                        <article class="meeting-room-card" id="meeting-${meetingId}">
+                            <div class="meeting-room-header">
+                                <div class="meeting-room-gallery">
+                                    ${firstPhoto ? `
+                                        <img src="${firstPhoto}" alt="${name}" id="meeting-img-${meetingId}" data-photos='${JSON.stringify(photos.map(p => sanitizeImageUrl(p.url)))}' data-index="0">
+                                        ${hasMultiplePhotos ? `
+                                            <button class="meeting-room-gallery-nav prev" onclick="navigateMeetingImage('${meetingId}', -1)">‹</button>
+                                            <button class="meeting-room-gallery-nav next" onclick="navigateMeetingImage('${meetingId}', 1)">›</button>
+                                            <div class="meeting-room-gallery-badge">${photos.length} ${labels[currentLang].photos}</div>
+                                        ` : ''}
+                                    ` : '<div style="background: var(--color-beige); height: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-sage);">No Image</div>'}
+                                </div>
+                                <div class="meeting-room-info">
+                                    <h3 class="meeting-room-name">${name}</h3>
+                                    <p class="meeting-room-description">${description}</p>
+                                    ${videoBtn}
+                                </div>
+                            </div>
+                            <div class="meeting-room-details">
+                                <div class="meeting-details-grid">
+                                    ${setupStylesHtml}
+                                    ${facilitiesHtml}
+                                    ${foodHtml}
+                                    ${parkingHtml}
+                                    ${accommodationHtml}
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error('Error loading meeting rooms:', error);
+                container.innerHTML = '<p style="text-align: center; color: var(--color-sage);">Unable to load meeting rooms. Please try again later.</p>';
+            }
+        }
+
+        // Navigate meeting images
+        window.navigateMeetingImage = function(meetingId, direction) {
+            const img = document.getElementById(`meeting-img-${meetingId}`);
+            if (!img) return;
+            
+            const photos = JSON.parse(img.dataset.photos || '[]');
+            if (photos.length === 0) return;
+            
+            let currentIndex = parseInt(img.dataset.index) || 0;
+            currentIndex = (currentIndex + direction + photos.length) % photos.length;
+            
+            img.src = photos[currentIndex];
+            img.dataset.index = currentIndex;
+        };
+
+        // Play meeting video
+        window.playMeetingVideo = function(videoUrl) {
+            const videoModal = document.createElement('div');
+            videoModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center;';
+            videoModal.innerHTML = `
+                <div style="position: relative; max-width: 90%; max-height: 90%;">
+                    <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: -40px; right: 0; background: white; border: none; font-size: 30px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%;">&times;</button>
+                    <video src="${videoUrl}" controls autoplay style="max-width: 100%; max-height: 80vh; border-radius: 8px;"></video>
+                </div>
+            `;
+            document.body.appendChild(videoModal);
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) videoModal.remove();
+            });
+        };
+
+        // Initialize page
+        loadMeetingsHero();
+        loadMeetingRooms();
+    </script>
+
+    <script>
+        // EmailJS initialization and form handling
+        // NOTE: You need to replace these values with your actual EmailJS credentials
+        // See EMAILJS_SETUP.md for instructions
+        
+        (function() {
+            // Initialize EmailJS with your public key
+            // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+            emailjs.init('YOUR_PUBLIC_KEY');
+        })();
+
+        document.getElementById('meeting-request-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const formStatus = document.getElementById('formStatus');
+            const privacyConsent = document.getElementById('privacyConsent');
+            
+            // Check privacy consent
+            if (!privacyConsent.checked) {
+                formStatus.textContent = 'Please accept the privacy policy to continue.';
+                formStatus.className = 'meeting-form-status error';
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            formStatus.className = 'meeting-form-status';
+            formStatus.style.display = 'none';
+            
+            // Prepare template parameters
+            const templateParams = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                participants: document.getElementById('participants').value,
+                meetingDate: document.getElementById('meetingDate').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Send email using EmailJS
+            // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
+                    formStatus.className = 'meeting-form-status success';
+                    document.getElementById('meeting-request-form').reset();
+                }, function(error) {
+                    console.error('Failed to send email:', error);
+                    formStatus.textContent = 'Sorry, there was an error sending your request. Please try again or contact us directly at info@elisabeth-hotel.be';
+                    formStatus.className = 'meeting-form-status error';
+                })
+                .finally(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Request';
+                });
+        });
+
+        // Set minimum date for meeting date picker to today
+        document.getElementById('meetingDate').min = new Date().toISOString().split('T')[0];
+    </script>
 </body>
 </html>

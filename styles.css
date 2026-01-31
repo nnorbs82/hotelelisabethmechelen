@@ -3878,3 +3878,125 @@ body:not(.admin-page) .nav-logo img {
     outline: 2px solid var(--color-black);
     outline-offset: 2px;
 }
+
+/* ============ MEETINGS MANAGEMENT STYLES ============ */
+.meeting-lang-tabs,
+.attraction-lang-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.meeting-lang-tab,
+.attraction-lang-tab {
+    background-color: transparent;
+    color: var(--color-beige);
+    border: 1px solid var(--color-sage);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.meeting-lang-tab:hover,
+.attraction-lang-tab:hover {
+    background-color: var(--color-sage);
+    color: var(--color-white);
+}
+
+.meeting-lang-tab.active,
+.attraction-lang-tab.active {
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    border-color: var(--color-beige);
+}
+
+.meeting-add-section,
+.meeting-photos-section,
+.meeting-video-section,
+.meeting-list-section,
+.meeting-main-image-section,
+.attraction-add-section,
+.attraction-list-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(212, 211, 195, 0.2);
+}
+
+.meeting-add-section h3,
+.meeting-photos-section h3,
+.meeting-video-section h3,
+.meeting-list-section h3,
+.meeting-main-image-section h3,
+.attraction-add-section h3,
+.attraction-list-section h3 {
+    color: var(--color-beige);
+    margin-bottom: 1rem;
+}
+
+.meeting-photo-status,
+.attraction-photo-status {
+    color: var(--color-sage);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: rgba(149, 147, 128, 0.1);
+    border-radius: 4px;
+}
+
+.meeting-grid,
+.attraction-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.meeting-item,
+.attraction-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(212, 211, 195, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 211, 195, 0.2);
+}
+
+.meeting-info,
+.attraction-info {
+    flex: 1;
+}
+
+.meeting-info h4,
+.attraction-info h4 {
+    color: var(--color-beige);
+    margin-bottom: 0.25rem;
+}
+
+.meeting-info p,
+.attraction-info p {
+    color: var(--color-sage);
+    font-size: 0.85rem;
+}
+
+.meeting-actions,
+.attraction-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.attraction-thumbnail {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.meeting-main-image-preview {
+    margin-top: 1rem;
+}
+
+.meeting-main-image-preview .photo-item {
+    max-width: 300px;
+}
