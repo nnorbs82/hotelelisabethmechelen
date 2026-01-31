@@ -182,7 +182,8 @@ nav a:hover {
         display: block;
     }
     
-    nav ul {
+    nav ul#nav-menu {
+        display: none !important;
         position: fixed;
         top: var(--header-height);
         left: 0;
@@ -191,19 +192,14 @@ nav a:hover {
         flex-direction: column;
         padding: 1rem var(--nav-padding);
         gap: 0;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         max-height: calc(100vh - var(--header-height));
         overflow-y: auto;
+        z-index: 999;
     }
     
-    nav ul.show {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
+    nav ul#nav-menu.show {
+        display: flex !important;
     }
     
     nav ul li {
