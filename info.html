@@ -10,6 +10,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Main Navigation Menu -->
+    <header class="main-menu">
+        <a href="index.html">
+            <img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen" class="main-menu-logo">
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+            ☰
+        </button>
+        <nav class="main-nav" id="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="meetings.html">Meetings</a></li>
+                <li><a href="info.html">Info</a></li>
+                <li class="dropdown">
+                    <button id="more-btn">More</button>
+                    <div class="dropdown-menu" id="more-dropdown">
+                        <a href="attractions.html">Attractions</a>
+                        <a href="photos.html">Photos</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <main class="container">
         <div class="card">
@@ -27,5 +53,8 @@
             <a href="career.html" style="color: var(--color-beige); margin: 0 1rem;">Careers</a>
         </p>
     </footer>
+    
+    <!-- Main Menu Script -->
+    <script src="main-menu.js"></script>
 </body>
 </html>

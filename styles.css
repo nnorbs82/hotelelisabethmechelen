@@ -7,6 +7,7 @@
     --color-white: #FFFFFF;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
+    --main-menu-height: 70px;
 }
 
 * {
@@ -29,6 +30,175 @@ h1, h2, h3, h4, h5, h6 {
 
 input, textarea, button {
     font-family: 'Raleway', sans-serif;
+}
+
+/* Main Navigation Menu */
+.main-menu {
+    background-color: var(--color-black);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-menu-logo {
+    height: 30px;
+    display: block;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    align-items: center;
+}
+
+.main-nav li {
+    position: relative;
+}
+
+.main-nav a,
+.main-nav button {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-beige);
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav button:hover {
+    color: var(--color-white);
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--color-black);
+    min-width: 200px;
+    display: none;
+    flex-direction: column;
+    padding: 10px 0;
+    border-top: 2px solid var(--color-beige);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.dropdown-menu a {
+    padding: 12px 20px;
+    white-space: nowrap;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-beige);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--color-white);
+}
+
+.mobile-menu-btn.active {
+    color: var(--color-white);
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 899px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .main-nav {
+        position: fixed;
+        top: var(--main-menu-height);
+        left: 0;
+        right: 0;
+        background-color: var(--color-black);
+        flex-direction: column;
+        align-items: stretch;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .main-nav.active {
+        max-height: 500px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .main-nav li {
+        width: 100%;
+        border-bottom: 1px solid rgba(212, 211, 195, 0.2);
+    }
+    
+    .main-nav a,
+    .main-nav button {
+        width: 100%;
+        text-align: left;
+        padding: 15px 20px;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        border-top: none;
+        border-left: 3px solid var(--color-beige);
+        margin-left: 20px;
+        box-shadow: none;
+    }
+    
+    .dropdown-menu a {
+        padding-left: 30px;
+    }
+}
+
+/* Add padding to body to account for fixed menu */
+body {
+    padding-top: var(--main-menu-height);
+}
+
+/* Override for admin page */
+body.admin-page {
+    padding-top: 0;
 }
 
 /* Fixed Background Layer (iOS Compatible) */
