@@ -268,8 +268,8 @@
 
         .meeting-room-buttons {
             display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.75rem;
             margin-top: 1rem;
         }
 
@@ -278,7 +278,27 @@
         }
 
         .meeting-room-quotation-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background: transparent;
+            color: var(--color-sage);
+            border: 1px solid var(--color-sage);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .meeting-room-quotation-btn:hover {
+            background: var(--color-sage);
+            color: var(--color-white);
+            border-color: var(--color-sage);
         }
 
         /* Overnight Accommodation Section - Full Width */
