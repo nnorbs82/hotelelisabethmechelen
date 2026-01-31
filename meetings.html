@@ -795,7 +795,7 @@
         (function() {
             // Initialize EmailJS with your public key
             if (typeof emailjs !== 'undefined' && isEmailJSConfigured) {
-                emailjs.init(EMAILJS_PUBLIC_KEY);
+                emailjs.init(MEiKFhBHfwDzT-xz1);
             }
         })();
 
@@ -844,7 +844,7 @@
             };
             
             // Send email using EmailJS
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+            emailjs.send(service_iu8cxtm, template_8txu2md, templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
