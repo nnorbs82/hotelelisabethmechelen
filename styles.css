@@ -6,7 +6,7 @@
     --color-sage: #959380;
     --color-white: #FFFFFF;
     --header-height: 80px;
-    --logo-height: 50px;
+    --logo-height: 35px;
     --nav-padding: 50px;
     --vertical-menu-width: 250px;
 }
@@ -125,6 +125,9 @@ nav a {
     text-decoration: none;
     transition: color 0.3s;
     font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    font-family: 'Raleway', sans-serif;
 }
 
 nav a:hover {
@@ -174,6 +177,8 @@ nav a:hover {
     
     body:not(.admin-page) nav a {
         font-size: 0.9rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
     }
 }
 
@@ -225,6 +230,9 @@ nav a:hover {
     
     nav ul#nav-menu a {
         font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        font-family: 'Raleway', sans-serif;
         display: block;
         text-align: left;
     }
@@ -1063,6 +1071,10 @@ body:not(.admin-page) nav a {
     text-decoration: none;
     transition: color 0.3s;
     white-space: nowrap;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    font-family: 'Raleway', sans-serif;
 }
 
 body:not(.admin-page) nav a:hover {
@@ -2691,7 +2703,7 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facilities-intro {
-    padding: 3rem 1.5rem 2rem;
+    padding: 4rem 1.5rem 3rem;
     text-align: center;
     background-color: var(--color-beige);
 }
@@ -2713,9 +2725,9 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facilities-list {
-    padding: 4rem 2rem;
+    padding: 3rem 2rem 4rem;
     display: grid;
-    gap: 0;
+    gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -2832,32 +2844,37 @@ body:not(.admin-page) .nav-logo img {
     }
 }
 
-/* ============ MODERN FACILITY STYLES ============ */
+/* ============ MODERN FACILITY STYLES - BOUTIQUE REDESIGN ============ */
 .facility-card-modern {
     background-color: var(--color-white);
     border: none;
-    box-shadow: none;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    margin-bottom: 0;
-    border-bottom: 1px solid rgba(149, 147, 128, 0.2);
+    margin-bottom: 3rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.facility-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
 }
 
 .facility-card-modern:last-child {
-    border-bottom: none;
+    margin-bottom: 0;
 }
 
 .facility-card-modern:nth-child(even) {
-    background-color: var(--color-beige);
+    background-color: rgba(212, 211, 195, 0.15);
 }
 
 .facility-card-modern:nth-child(even) .facility-content {
-    background-color: var(--color-beige);
+    background-color: rgba(212, 211, 195, 0.15);
 }
 
 .facility-album-showcase {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 500px;
+    min-height: 480px;
 }
 
 .facility-album-showcase.image-right {
@@ -2971,50 +2988,64 @@ body:not(.admin-page) .nav-logo img {
 }
 
 .facility-content {
-    padding: 4rem;
+    padding: 3.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+}
+
+.facility-content::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    width: 4px;
+    height: 60px;
+    background: var(--color-sage);
 }
 
 .facility-content-title {
-    font-size: 2.2rem;
-    font-weight: 300;
+    font-size: 1.9rem;
+    font-weight: 400;
     color: var(--color-black);
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
 }
 
 .facility-content-description {
     color: #555;
-    line-height: 1.9;
-    margin-bottom: 2rem;
+    line-height: 1.85;
+    margin-bottom: 1.75rem;
     white-space: pre-line;
-    font-size: 1.05rem;
+    font-size: 1rem;
 }
 
 .facility-guidelines-section h4 {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.12rem;
+    letter-spacing: 0.15rem;
     color: var(--color-sage);
     margin-bottom: 1rem;
     font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(149, 147, 128, 0.3);
 }
 
 .facility-no-photos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 500px;
+    min-height: 480px;
 }
 
 .facility-no-photos-placeholder {
-    background: var(--color-beige);
+    background: linear-gradient(135deg, var(--color-beige) 0%, rgba(212, 211, 195, 0.6) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-sage);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-style: italic;
 }
 
@@ -3155,15 +3186,24 @@ body:not(.admin-page) .nav-logo img {
     }
 
     .facility-album-main-wrapper {
-        min-height: 350px;
+        min-height: 320px;
     }
 
     .facility-content {
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+    }
+
+    .facility-content::before {
+        top: 1.5rem;
+        height: 40px;
     }
 
     .facility-content-title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+    }
+    
+    .facility-card-modern {
+        margin-bottom: 2rem;
     }
 }
 

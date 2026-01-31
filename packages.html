@@ -41,95 +41,136 @@
             text-transform: uppercase;
         }
 
-        /* Compact Package Card - Collapsed State */
+        /* Compact Package Card - Collapsed State - Modern Boutique */
         .package-card {
             background: var(--color-white);
             border-radius: 0;
             overflow: hidden;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(149, 147, 128, 0.3);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border: none;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
 
         .package-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
         }
 
         .package-card.expanded {
             cursor: default;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
         /* Compact Header - Always Visible */
         .package-header {
             display: flex;
-            align-items: center;
-            padding: 1.75rem;
-            gap: 1.5rem;
+            align-items: stretch;
+            padding: 0;
+            gap: 0;
             position: relative;
+            min-height: 220px;
         }
 
         .package-thumbnail {
-            width: 240px;
-            height: 180px;
+            width: 300px;
+            height: auto;
+            min-height: 220px;
             object-fit: cover;
             border-radius: 0;
             flex-shrink: 0;
-            margin: -1.75rem 0 -1.75rem -1.75rem;
+            margin: 0;
         }
 
         .package-summary {
             flex: 1;
             min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem 2.5rem;
+            position: relative;
+            gap: 0.75rem;
+        }
+
+        .package-summary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 50px;
+            background: var(--color-sage);
         }
 
         .package-title {
-            font-size: clamp(1.75rem, 2vw + 1rem, 2.6rem);
-            font-weight: 300;
+            font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+            font-weight: 400;
             color: var(--color-black);
-            margin-bottom: 0.6rem;
-            line-height: 1.2;
-            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
         .package-teaser {
             font-size: 0.95rem;
-            color: #555;
-            line-height: 1.6;
-            max-height: 2.85em; /* Fallback: ~2 lines */
+            color: #666;
+            line-height: 1.7;
+            max-height: 3.4em;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
 
-        .package-summary {
+        .package-header-cta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-sage);
+            margin-top: 0.5rem;
             display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .package-header-cta svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .package-card:hover .package-header-cta svg {
+            transform: translateX(4px);
         }
 
         .package-expand-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 0;
-            border: 1px solid var(--color-sage);
-            background-color: transparent;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(149, 147, 128, 0.4);
+            background-color: rgba(255, 255, 255, 0.95);
             color: var(--color-sage);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 0.9rem;
             flex-shrink: 0;
-            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .package-card:hover .package-expand-icon {
             background-color: var(--color-black);
             border-color: var(--color-black);
             color: var(--color-white);
+            transform: scale(1.05);
         }
 
         .package-card.expanded .package-expand-icon {
@@ -273,28 +314,43 @@
 
             .package-header {
                 flex-direction: column;
-                align-items: flex-start;
-                padding: 1.25rem;
+                align-items: stretch;
+                padding: 0;
+                min-height: auto;
             }
 
             .package-thumbnail {
                 width: 100%;
-                height: 180px;
-                margin: -1.25rem -1.25rem 0 -1.25rem;
+                height: 200px;
+                min-height: 200px;
+                margin: 0;
+            }
+
+            .package-summary {
+                padding: 1.5rem;
+            }
+
+            .package-summary::before {
+                display: none;
             }
 
             .package-expand-icon {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
+                top: 0.75rem;
+                right: 0.75rem;
+                width: 38px;
+                height: 38px;
             }
 
             .package-title {
-                font-size: 1.6rem;
+                font-size: 1.35rem;
             }
 
             .package-teaser {
                 font-size: 0.9rem;
+            }
+            
+            .package-header-cta {
+                font-size: 0.7rem;
             }
 
             .package-content {
@@ -425,6 +481,9 @@
                             (description.length > TEASER_MAX_LENGTH ? description.substring(0, TEASER_MAX_LENGTH) + '...' : description) : 
                             (currentLang === 'nl' ? 'Klik voor meer details' : currentLang === 'fr' ? 'Cliquez pour plus de détails' : 'Click for more details');
 
+                        // View details CTA text
+                        const viewDetailsCta = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
+
                         return `
                             <div class="package-card" data-package-id="${index}">
                                 <div class="package-header">
@@ -432,6 +491,13 @@
                                     <div class="package-summary">
                                         <h2 class="package-title">${title}</h2>
                                         <p class="package-teaser">${teaser}</p>
+                                        <div class="package-header-cta">
+                                            <span>${viewDetailsCta}</span>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                <polyline points="12 5 19 12 12 19"></polyline>
+                                            </svg>
+                                        </div>
                                     </div>
                                     <div class="package-expand-icon">▼</div>
                                 </div>
