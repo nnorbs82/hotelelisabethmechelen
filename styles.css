@@ -156,8 +156,8 @@ nav a:hover {
     left: 0;
     background-color: var(--color-black);
     min-width: 150px;
-    display: none;
-    flex-direction: column;
+    display: none !important;
+    flex-direction: column !important;
     gap: 0.5rem;
     z-index: 1001;
     border-top: 2px solid var(--color-beige);
@@ -168,13 +168,15 @@ nav a:hover {
 @media (min-width: 901px) {
     .nav-item-more:hover .nav-dropdown,
     .nav-item-more:focus-within .nav-dropdown {
-        display: flex;
+        display: flex !important;
+        flex-direction: column !important;
     }
 }
 
 /* Show dropdown on toggle for mobile */
 .nav-dropdown.show {
-    display: flex;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .nav-dropdown li {
@@ -259,7 +261,8 @@ nav a:hover {
     }
     
     nav ul#nav-menu.show {
-        display: flex;
+        display: flex !important;
+        flex-direction: column !important;
     }
     
     nav ul#nav-menu li {
@@ -294,12 +297,14 @@ nav a:hover {
         min-width: unset;
         gap: 0.5rem;
         margin-top: 0.5rem;
-        display: none;
+        display: none !important;
+        flex-direction: column !important;
         border-top: none;
     }
 
     .nav-dropdown.show {
-        display: flex;
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .nav-dropdown li {
