@@ -153,7 +153,7 @@ nav a:hover {
     padding: 0.75rem 0;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;
     background-color: var(--color-black);
     min-width: 150px;
     display: none !important;
@@ -308,7 +308,7 @@ nav a:hover {
     }
 
     .nav-dropdown li {
-        padding: 0.5rem 0 0.5rem 1rem;
+        padding: 0.75rem 0 0.75rem 1rem;
         border-bottom: none;
     }
     
