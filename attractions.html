@@ -392,7 +392,12 @@
             <a class="nav-logo" href="index.html">
                 <img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen logo">
             </a>
-            <ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="rooms.html">Rooms</a></li>
                 <li><a href="packages.html">Packages</a></li>
@@ -401,6 +406,7 @@
                 <li><a href="info.html">Info</a></li>
                 <li><a href="attractions.html">Attractions</a></li>
                 <li><a href="photos.html">Photos</a></li>
+                <li><a href="#">More</a></li>
             </ul>
         </nav>
     </header>
@@ -665,5 +671,6 @@
         loadAttractionsHero();
         loadAttractions();
     </script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>
