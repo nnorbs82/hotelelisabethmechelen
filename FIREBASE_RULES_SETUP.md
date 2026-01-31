@@ -60,6 +60,15 @@ service firebase.storage {
     match /facilities-library/{allPaths=**} {
       allow write, delete: if request.auth != null;
     }
+
+    // Allow authenticated users to write/delete files in attractions folders
+    match /attractions-main/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
+
+    match /attractions/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
   }
 }
 ```
@@ -117,6 +126,14 @@ These rules allow authenticated admin users to read and write photo metadata in 
       ".write": "auth != null"
     },
     "facilitiesLibrary": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "attractions": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "attractionsMainImage": {
       ".read": "auth != null",
       ".write": "auth != null"
     }
@@ -183,6 +200,17 @@ service firebase.storage {
       allow write, delete: if request.auth != null;
     }
 
+    // Allow anyone to read files in attractions folders
+    match /attractions-main/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+
+    match /attractions/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+
     // For all other paths, require authentication
     match /{allPaths=**} {
       allow read: if request.auth != null;
@@ -233,9 +261,19 @@ service firebase.storage {
     "facilitiesLibrary": {
       ".read": true,
       ".write": "auth != null"
+    },
+    "attractions": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "attractionsMainImage": {
+      ".read": true,
+      ".write": "auth != null"
     }
   }
 }
+```
+
 ## Verification
 
 After applying the rules:
