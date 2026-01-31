@@ -771,14 +771,32 @@
     </script>
 
     <script>
-        // EmailJS initialization and form handling
-        // NOTE: You need to replace these values with your actual EmailJS credentials
-        // See EMAILJS_SETUP.md for instructions
+        // EmailJS Configuration
+        // =====================
+        // IMPORTANT: Replace these placeholder values with your actual EmailJS credentials
+        // before deploying to production. See MEETINGS_ATTRACTIONS_SETUP.md for detailed instructions.
+        // 
+        // Steps:
+        // 1. Create an account at https://www.emailjs.com/
+        // 2. Create an email service and note the Service ID
+        // 3. Create an email template and note the Template ID
+        // 4. Get your Public Key from Account settings
+        // 5. Replace the values below
+        
+        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';      // Replace with your EmailJS public key
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';      // Replace with your EmailJS service ID
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';    // Replace with your EmailJS template ID
+        
+        // Check if EmailJS is configured
+        const isEmailJSConfigured = EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY' && 
+                                    EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID' && 
+                                    EMAILJS_TEMPLATE_ID !== 'YOUR_TEMPLATE_ID';
         
         (function() {
             // Initialize EmailJS with your public key
-            // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
-            emailjs.init('YOUR_PUBLIC_KEY');
+            if (typeof emailjs !== 'undefined' && isEmailJSConfigured) {
+                emailjs.init(EMAILJS_PUBLIC_KEY);
+            }
         })();
 
         document.getElementById('meeting-request-form').addEventListener('submit', function(e) {
@@ -787,6 +805,20 @@
             const submitBtn = document.getElementById('submitBtn');
             const formStatus = document.getElementById('formStatus');
             const privacyConsent = document.getElementById('privacyConsent');
+            
+            // Check if EmailJS is configured
+            if (!isEmailJSConfigured) {
+                formStatus.textContent = 'The email service is not configured. Please contact the hotel directly at info@elisabeth-hotel.be to make your meeting request.';
+                formStatus.className = 'meeting-form-status error';
+                return;
+            }
+            
+            // Check if EmailJS library is loaded
+            if (typeof emailjs === 'undefined') {
+                formStatus.textContent = 'Email service unavailable. Please contact us directly at info@elisabeth-hotel.be';
+                formStatus.className = 'meeting-form-status error';
+                return;
+            }
             
             // Check privacy consent
             if (!privacyConsent.checked) {
@@ -812,8 +844,7 @@
             };
             
             // Send email using EmailJS
-            // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
