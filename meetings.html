@@ -261,6 +261,14 @@
             margin-top: 1rem;
         }
 
+        /* Overnight Accommodation Section - Full Width */
+        .meeting-accommodation-full {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(149, 147, 128, 0.3);
+            width: 100%;
+        }
+
         /* Meeting Request Form */
         .meeting-request-section {
             padding: 4rem 2rem;
@@ -681,7 +689,7 @@
                     ` : '';
 
                     const accommodationHtml = accommodation ? `
-                        <div class="meeting-detail-section">
+                        <div class="meeting-detail-section meeting-accommodation-full">
                             <h4>${labels[currentLang].accommodation}</h4>
                             <p>${accommodation}</p>
                         </div>
@@ -721,8 +729,8 @@
                                     ${facilitiesHtml}
                                     ${foodHtml}
                                     ${parkingHtml}
-                                    ${accommodationHtml}
                                 </div>
+                                ${accommodationHtml}
                             </div>
                         </article>
                     `;
@@ -783,19 +791,17 @@
         // 4. Get your Public Key from Account settings
         // 5. Replace the values below
         
-        const EMAILJS_PUBLIC_KEY = 'MEiKFhBHfwDzT-xz1';      // Replace with your EmailJS public key
-        const EMAILJS_SERVICE_ID = 'service_iu8cxtm';      // Replace with your EmailJS service ID
-        const EMAILJS_TEMPLATE_ID = 'template_8txu2md';    // Replace with your EmailJS template ID
+        const EMAILJS_PUBLIC_KEY = 'MEiKFhBHfwDzT-xz1';
+        const EMAILJS_SERVICE_ID = 'service_iu8cxtm';
+        const EMAILJS_TEMPLATE_ID = 'template_8txu2md';
         
-        // Check if EmailJS is configured
-        const isEmailJSConfigured = EMAILJS_PUBLIC_KEY !== 'MEiKFhBHfwDzT-xz1' && 
-                                    EMAILJS_SERVICE_ID !== 'service_iu8cxtm' && 
-                                    EMAILJS_TEMPLATE_ID !== 'template_8txu2md';
+        // EmailJS is configured with actual credentials
+        const isEmailJSConfigured = true;
         
         (function() {
             // Initialize EmailJS with your public key
-            if (typeof emailjs !== 'undefined' && isEmailJSConfigured) {
-                emailjs.init(MEiKFhBHfwDzT-xz1);
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(EMAILJS_PUBLIC_KEY);
             }
         })();
 
@@ -805,13 +811,6 @@
             const submitBtn = document.getElementById('submitBtn');
             const formStatus = document.getElementById('formStatus');
             const privacyConsent = document.getElementById('privacyConsent');
-            
-            // Check if EmailJS is configured
-            if (!isEmailJSConfigured) {
-                formStatus.textContent = 'The email service is not configured. Please contact the hotel directly at info@elisabeth-hotel.be to make your meeting request.';
-                formStatus.className = 'meeting-form-status error';
-                return;
-            }
             
             // Check if EmailJS library is loaded
             if (typeof emailjs === 'undefined') {
@@ -844,7 +843,7 @@
             };
             
             // Send email using EmailJS
-            emailjs.send(service_iu8cxtm, template_8txu2md, templateParams)
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
