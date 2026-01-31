@@ -261,6 +261,14 @@
             margin-top: 1rem;
         }
 
+        /* Overnight Accommodation Section - Full Width */
+        .meeting-accommodation-full {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(149, 147, 128, 0.3);
+            width: 100%;
+        }
+
         /* Meeting Request Form */
         .meeting-request-section {
             padding: 4rem 2rem;
@@ -423,7 +431,12 @@
             <a class="nav-logo" href="index.html">
                 <img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen logo">
             </a>
-            <ul>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="rooms.html">Rooms</a></li>
                 <li><a href="packages.html">Packages</a></li>
@@ -432,6 +445,7 @@
                 <li><a href="info.html">Info</a></li>
                 <li><a href="attractions.html">Attractions</a></li>
                 <li><a href="photos.html">Photos</a></li>
+                <li><a href="#">More</a></li>
             </ul>
         </nav>
     </header>
@@ -594,6 +608,22 @@
             return '';
         }
 
+        function sanitizeVideoUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') ||
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
+        // Escape for use in JavaScript string within onclick attributes
+        function escapeJsString(str) {
+            if (!str) return '';
+            return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
         // Load meetings hero image
         async function loadMeetingsHero() {
             try {
@@ -642,7 +672,8 @@
                     const food = escapeHtml(meeting[`food_${currentLang}`] || meeting.food_en || '');
                     const parking = escapeHtml(meeting[`parking_${currentLang}`] || meeting.parking_en || '');
                     const accommodation = escapeHtml(meeting[`accommodation_${currentLang}`] || meeting.accommodation_en || '');
-                    const video = meeting.video?.url || '';
+                    const videoRaw = meeting.video?.url || '';
+                    const video = sanitizeVideoUrl(videoRaw);
                     const photos = meeting.photos || [];
                     const firstPhoto = photos.length > 0 ? sanitizeImageUrl(photos[0].url) : '';
                     const hasMultiplePhotos = photos.length > 1;
@@ -681,14 +712,14 @@
                     ` : '';
 
                     const accommodationHtml = accommodation ? `
-                        <div class="meeting-detail-section">
+                        <div class="meeting-detail-section meeting-accommodation-full">
                             <h4>${labels[currentLang].accommodation}</h4>
                             <p>${accommodation}</p>
                         </div>
                     ` : '';
 
                     const videoBtn = video ? `
-                        <button class="room-feature-btn secondary meeting-room-video-btn" onclick="playMeetingVideo('${video}')">
+                        <button class="room-feature-btn secondary meeting-room-video-btn" onclick="playMeetingVideo('${escapeJsString(video)}')">
                             <span>${labels[currentLang].watchVideo}</span>
                             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -721,8 +752,8 @@
                                     ${facilitiesHtml}
                                     ${foodHtml}
                                     ${parkingHtml}
-                                    ${accommodationHtml}
                                 </div>
+                                ${accommodationHtml}
                             </div>
                         </article>
                     `;
@@ -751,12 +782,17 @@
 
         // Play meeting video
         window.playMeetingVideo = function(videoUrl) {
+            if (!videoUrl) return;
+            
             const videoModal = document.createElement('div');
             videoModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center;';
             videoModal.innerHTML = `
                 <div style="position: relative; max-width: 90%; max-height: 90%;">
                     <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: -40px; right: 0; background: white; border: none; font-size: 30px; cursor: pointer; width: 40px; height: 40px; border-radius: 50%;">&times;</button>
-                    <video src="${videoUrl}" controls autoplay style="max-width: 100%; max-height: 80vh; border-radius: 8px;"></video>
+                    <video controls autoplay playsinline style="max-width: 100%; max-height: 80vh; border-radius: 8px;">
+                        <source src="${escapeHtml(videoUrl)}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             `;
             document.body.appendChild(videoModal);
@@ -783,19 +819,17 @@
         // 4. Get your Public Key from Account settings
         // 5. Replace the values below
         
-        const EMAILJS_PUBLIC_KEY = 'MEiKFhBHfwDzT-xz1';      // Replace with your EmailJS public key
-        const EMAILJS_SERVICE_ID = 'service_iu8cxtm';      // Replace with your EmailJS service ID
-        const EMAILJS_TEMPLATE_ID = 'template_8txu2md';    // Replace with your EmailJS template ID
+        const EMAILJS_PUBLIC_KEY = 'MEiKFhBHfwDzT-xz1';
+        const EMAILJS_SERVICE_ID = 'service_iu8cxtm';
+        const EMAILJS_TEMPLATE_ID = 'template_8txu2md';
         
-        // Check if EmailJS is configured
-        const isEmailJSConfigured = EMAILJS_PUBLIC_KEY !== 'MEiKFhBHfwDzT-xz1' && 
-                                    EMAILJS_SERVICE_ID !== 'service_iu8cxtm' && 
-                                    EMAILJS_TEMPLATE_ID !== 'template_8txu2md';
+        // EmailJS is configured with actual credentials
+        const isEmailJSConfigured = true;
         
         (function() {
             // Initialize EmailJS with your public key
-            if (typeof emailjs !== 'undefined' && isEmailJSConfigured) {
-                emailjs.init(MEiKFhBHfwDzT-xz1);
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init(EMAILJS_PUBLIC_KEY);
             }
         })();
 
@@ -805,13 +839,6 @@
             const submitBtn = document.getElementById('submitBtn');
             const formStatus = document.getElementById('formStatus');
             const privacyConsent = document.getElementById('privacyConsent');
-            
-            // Check if EmailJS is configured
-            if (!isEmailJSConfigured) {
-                formStatus.textContent = 'The email service is not configured. Please contact the hotel directly at info@elisabeth-hotel.be to make your meeting request.';
-                formStatus.className = 'meeting-form-status error';
-                return;
-            }
             
             // Check if EmailJS library is loaded
             if (typeof emailjs === 'undefined') {
@@ -844,7 +871,7 @@
             };
             
             // Send email using EmailJS
-            emailjs.send(service_iu8cxtm, template_8txu2md, templateParams)
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     formStatus.textContent = 'Thank you! Your meeting request has been sent successfully. We will contact you soon.';
@@ -864,5 +891,6 @@
         // Set minimum date for meeting date picker to today
         document.getElementById('meetingDate').min = new Date().toISOString().split('T')[0];
     </script>
+    <script src="mobile-menu.js"></script>
 </body>
 </html>
