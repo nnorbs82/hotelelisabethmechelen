@@ -6,7 +6,7 @@
     --color-sage: #959380;
     --color-white: #FFFFFF;
     --header-height: 80px;
-    --logo-height: 35px;
+    --logo-height: 30px;
     --nav-padding: 50px;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
@@ -62,6 +62,7 @@ header {
     height: var(--header-height);
 }
 
+/* Navigation - Rebuilt from scratch */
 nav {
     display: flex;
     justify-content: space-between;
@@ -71,13 +72,7 @@ nav {
     max-width: 100%;
 }
 
-nav h1 {
-    color: var(--color-beige);
-    font-size: 1.8rem;
-    margin: 0;
-    font-weight: 600; /* Use SemiBold */
-}
-
+/* Logo */
 .nav-logo {
     display: inline-flex;
     align-items: center;
@@ -95,101 +90,96 @@ nav h1 {
     outline-offset: 4px;
 }
 
-.nav-buttons {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex: 1;
-    justify-content: flex-end;
-}
-
-.nav-btn {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
+/* Menu List */
 nav ul {
     display: flex;
     list-style: none;
     gap: 1.5rem;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 nav ul li {
     white-space: nowrap;
 }
 
-.nav-item {
-    position: relative;
-}
-
-.nav-link {
-    background: none;
-    border: none;
-    color: var(--color-beige);
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    font-family: 'Raleway', sans-serif;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.3s;
-}
-
-.nav-link:hover {
-    color: var(--color-white);
-}
-
-.nav-link:focus-visible {
-    color: var(--color-white);
-    outline: 2px solid var(--color-white);
-    outline-offset: 4px;
-}
-
-.nav-submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0.5rem 0;
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    background-color: transparent;
-    border: none;
-    min-width: auto;
-    display: none !important;
-    flex-direction: column;
-    gap: 0.75rem;
-    z-index: 1001;
-    box-shadow: none;
-}
-
-.nav-submenu li {
-    padding: 0;
-}
-
-nav ul li:hover > .nav-submenu,
-nav ul li:focus-within > .nav-submenu,
-.nav-submenu.show {
-    display: flex !important;
-}
-
+/* Menu Links */
 nav a {
     color: var(--color-beige);
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
     font-size: 0.95rem;
     font-weight: 400;
     letter-spacing: 0.02em;
-    font-family: 'Raleway', sans-serif;
 }
 
 nav a:hover {
     color: var(--color-white);
 }
 
-/* Mobile Menu Toggle Button */
+/* More Button */
+.nav-item-more {
+    position: relative;
+}
+
+.nav-more-btn {
+    background: none;
+    border: none;
+    color: var(--color-beige);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+    font-family: 'Raleway', sans-serif;
+}
+
+.nav-more-btn:hover {
+    color: var(--color-white);
+}
+
+.nav-more-btn:focus-visible {
+    color: var(--color-white);
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+}
+
+/* Dropdown Menu - Vertical */
+.nav-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-black);
+    min-width: 150px;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1001;
+    border-top: 2px solid var(--color-beige);
+    margin-top: 0.5rem;
+}
+
+.nav-item-more:hover .nav-dropdown,
+.nav-item-more:focus-within .nav-dropdown,
+.nav-dropdown.show {
+    display: flex;
+}
+
+.nav-dropdown li {
+    padding: 0;
+}
+
+.nav-dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+/* Mobile Menu Toggle */
 .mobile-menu-toggle {
     display: none;
     background: none;
@@ -222,18 +212,16 @@ nav a:hover {
 
 /* Mobile Menu Responsive */
 @media (max-width: 1024px) {
-    body:not(.admin-page) nav {
+    nav {
         padding: 0 var(--nav-padding);
     }
     
-    body:not(.admin-page) nav ul {
+    nav ul {
         gap: 1rem;
     }
     
-    body:not(.admin-page) nav a {
+    nav a {
         font-size: 0.9rem;
-        font-weight: 400;
-        letter-spacing: 0.02em;
     }
 }
 
@@ -242,17 +230,12 @@ nav a:hover {
         display: block;
     }
     
-    /* Ensure main website nav keeps logo left, burger right on mobile */
-    body:not(.admin-page) nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    nav {
         padding: 0 var(--nav-padding);
     }
     
     nav ul#nav-menu {
-        display: none !important;
+        display: none;
         position: fixed;
         top: var(--header-height);
         left: 0;
@@ -265,11 +248,11 @@ nav a:hover {
         max-height: calc(100vh - var(--header-height));
         overflow-y: auto;
         z-index: 999;
+        align-items: stretch;
     }
     
     nav ul#nav-menu.show {
-        display: flex !important;
-        flex-direction: column !important;
+        display: flex;
     }
     
     nav ul#nav-menu li {
@@ -285,38 +268,40 @@ nav a:hover {
     
     nav ul#nav-menu a {
         font-size: 1rem;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-        font-family: 'Raleway', sans-serif;
         display: block;
         text-align: left;
     }
 
-    nav ul#nav-menu .nav-link {
+    .nav-more-btn {
         font-size: 1rem;
         width: 100%;
         text-align: left;
         display: block;
     }
 
-    .nav-submenu {
+    .nav-dropdown {
         position: static;
         border: none;
         background-color: transparent;
         padding: 0.5rem 0 0.75rem;
         min-width: unset;
-        box-shadow: none;
         gap: 0.5rem;
-        display: none !important;
+        margin-top: 0.5rem;
+        display: none;
+        border-top: none;
     }
 
-    .nav-submenu.show {
-        display: flex !important;
+    .nav-dropdown.show {
+        display: flex;
     }
 
-    .nav-submenu li {
+    .nav-dropdown li {
         padding: 0.5rem 0 0.5rem 1rem;
         border-bottom: none;
+    }
+    
+    .nav-dropdown a {
+        padding: 0;
     }
 }
 

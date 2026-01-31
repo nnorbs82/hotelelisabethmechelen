@@ -1,76 +1,79 @@
-// Mobile Menu Toggle Script
+// Mobile Menu JavaScript - Rebuilt
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.getElementById('nav-menu');
-    const submenuToggles = document.querySelectorAll('.nav-submenu-toggle');
-    const submenuItems = Array.from(submenuToggles).map(toggle => ({
-        toggle,
-        submenu: toggle.nextElementSibling
-    }));
-    const closeAllSubmenus = (exceptToggle = null) => {
-        submenuItems.forEach(({ toggle, submenu }) => {
-            if (toggle === exceptToggle) {
-                return;
-            }
-            toggle.setAttribute('aria-expanded', 'false');
-            if (submenu) {
-                submenu.classList.remove('show');
-            }
-        });
-    };
+    const moreBtn = document.querySelector('.nav-more-btn');
+    const dropdown = document.querySelector('.nav-dropdown');
     
+    // Toggle mobile menu
     if (mobileMenuToggle && navMenu) {
         mobileMenuToggle.addEventListener('click', function() {
             this.classList.toggle('active');
             navMenu.classList.toggle('show');
-            if (!navMenu.classList.contains('show')) {
-                closeAllSubmenus();
+            
+            // Close dropdown when closing menu
+            if (!navMenu.classList.contains('show') && dropdown) {
+                dropdown.classList.remove('show');
+                if (moreBtn) {
+                    moreBtn.setAttribute('aria-expanded', 'false');
+                }
             }
         });
         
-        // Close menu when clicking on a link
+        // Close menu when clicking on a regular link
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenuToggle.classList.remove('active');
                 navMenu.classList.remove('show');
-                closeAllSubmenus();
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+                if (moreBtn) {
+                    moreBtn.setAttribute('aria-expanded', 'false');
+                }
             });
         });
         
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target) && navMenu.classList.contains('show')) {
+            if (!navMenu.contains(e.target) && 
+                !mobileMenuToggle.contains(e.target) && 
+                navMenu.classList.contains('show')) {
                 mobileMenuToggle.classList.remove('active');
                 navMenu.classList.remove('show');
-                closeAllSubmenus();
+                if (dropdown) {
+                    dropdown.classList.remove('show');
+                }
+                if (moreBtn) {
+                    moreBtn.setAttribute('aria-expanded', 'false');
+                }
             }
         });
     }
-
-    submenuItems.forEach(({ toggle, submenu }) => {
-        if (submenu) {
-            const toggleSubmenu = () => {
-                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-                if (isExpanded) {
-                    closeAllSubmenus();
-                } else {
-                    closeAllSubmenus(toggle);
-                    toggle.setAttribute('aria-expanded', 'true');
-                    submenu.classList.add('show');
-                }
-            };
-
-            toggle.addEventListener('click', toggleSubmenu);
-        toggle.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                toggleSubmenu();
+    
+    // Toggle dropdown menu
+    if (moreBtn && dropdown) {
+        moreBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            dropdown.classList.toggle('show');
+        });
+        
+        // Keyboard support for More button
+        moreBtn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                dropdown.classList.toggle('show');
             }
-            if (event.key === 'Escape') {
-                closeAllSubmenus();
-                toggle.focus();
+            if (e.key === 'Escape') {
+                this.setAttribute('aria-expanded', 'false');
+                dropdown.classList.remove('show');
+                this.focus();
             }
         });
-        }
-    });
+    }
 });
+
