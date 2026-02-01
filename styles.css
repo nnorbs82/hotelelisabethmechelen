@@ -4679,7 +4679,7 @@ body.admin-page .vertical-menu-nav ul {
 
 @media (max-width: 768px) {
     .info-hero {
-        height: 500px;
+        height: 600px;
     }
 
     .info-hero-title {
@@ -4702,11 +4702,6 @@ body.admin-page .vertical-menu-nav ul {
         font-size: 1rem;
     }
     
-    .info-columns {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
     .info-sections-container {
         padding: 3rem 1rem 4rem;
     }
@@ -4718,7 +4713,7 @@ body.admin-page .vertical-menu-nav ul {
 
 @media (max-width: 480px) {
     .info-hero {
-        height: 400px;
+        height: 450px;
     }
 
     .info-hero-title {
