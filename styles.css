@@ -4596,7 +4596,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* Info Sections Container */
 .info-sections-container {
-    background-color: var(--color-white);
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8F7F4 100%);
     padding: 4rem 2rem 6rem;
 }
 
@@ -4624,19 +4624,38 @@ body.admin-page .vertical-menu-nav ul {
     gap: 2.5rem;
 }
 
-/* Elegant Info Cards */
+/* Elegant Info Cards - Modern Boutique Style */
 .info-card-modern {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
-    border-radius: 8px;
+    background: linear-gradient(135deg, #FAF9F6 0%, #F5F4F0 100%);
+    border-radius: 12px;
     padding: 2.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    border: 1px solid rgba(212, 211, 195, 0.15);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(149, 147, 128, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-sage) 0%, var(--color-beige) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .info-card-modern:hover {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    border-color: rgba(149, 147, 128, 0.25);
+}
+
+.info-card-modern:hover::before {
+    opacity: 1;
 }
 
 .info-card-full {
@@ -4644,25 +4663,26 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .info-card-modern h3 {
-    color: var(--color-beige);
-    font-size: 1.4rem;
+    color: var(--color-black);
+    font-size: 1.5rem;
     font-weight: 400;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     margin-bottom: 1.5rem;
     text-align: left;
-    border-bottom: 1px solid rgba(212, 211, 195, 0.3);
+    border-bottom: 2px solid var(--color-sage);
     padding-bottom: 0.75rem;
+    text-transform: uppercase;
 }
 
 .info-card-modern .info-content {
-    color: rgba(212, 211, 195, 0.9);
-    font-size: 0.95rem;
-    line-height: 1.8;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.9;
 }
 
 .info-card-modern .info-content p {
-    margin-bottom: 1rem;
-    color: rgba(212, 211, 195, 0.85);
+    margin-bottom: 1.2rem;
+    color: #555;
 }
 
 .info-card-modern .info-content p:last-child {
