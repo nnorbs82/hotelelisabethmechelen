@@ -212,23 +212,15 @@ body.admin-page {
 /* Fixed Background Layer (iOS Compatible) */
 .page-background {
     position: fixed;
-    top: 70px; /* Start below mobile menu (when collapsed) */
+    top: var(--main-menu-height); /* Start below menu */
     left: 0;
     width: 100%;
-    height: calc(100% - 70px); /* Adjust height to exclude menu area */
+    height: calc(100% - var(--main-menu-height)); /* Adjust height to exclude menu area */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
     pointer-events: none;
-}
-
-/* Adjust background position for desktop */
-@media (min-width: 900px) {
-    .page-background {
-        top: var(--main-menu-height);
-        height: calc(100% - var(--main-menu-height));
-    }
 }
 
 /* Main Container */
