@@ -4703,20 +4703,9 @@ body.admin-page .vertical-menu-nav ul {
     padding-bottom: 0.75rem;
     text-transform: uppercase;
     position: relative;
-    padding-left: 1rem;
 }
 
-.info-card-modern h3::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 60%;
-    background: linear-gradient(180deg, var(--color-sage), var(--color-beige));
-    border-radius: 2px;
-}
+
 
 .info-card-modern .info-content {
     color: var(--color-text-primary);
