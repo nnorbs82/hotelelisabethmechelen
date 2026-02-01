@@ -472,11 +472,6 @@
         </div>
     </main>
 
-    <!-- Map Section -->
-    <section class="map-section">
-        <div id="map"></div>
-    </section>
-
     <footer>
         <div class="footer-container">
             <!-- Logo Section -->
@@ -4863,46 +4858,5 @@
         }
 
     </script>
-    <script>
-        // Initialize Google Map
-        function initMap() {
-            const hotelLocation = { lat: 51.0259, lng: 4.4774 };
-            
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
-                center: hotelLocation,
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                    position: google.maps.ControlPosition.TOP_RIGHT,
-                },
-                fullscreenControl: true,
-                zoomControl: true,
-                streetViewControl: true,
-            });
-            
-            const marker = new google.maps.Marker({
-                position: hotelLocation,
-                map: map,
-                title: "Hotel Elisabeth Mechelen",
-            });
-            
-            const infoWindow = new google.maps.InfoWindow({
-                content: `
-                    <div style="padding: 10px; font-family: 'Raleway', sans-serif;">
-                        <h3 style="margin: 0 0 8px 0; color: #000;">Hotel Elisabeth Mechelen</h3>
-                        <p style="margin: 0; color: #444;">Goswin de Stassartstraat 26/28<br>2800 Mechelen, Belgium</p>
-                    </div>
-                `,
-            });
-            
-            marker.addListener("click", () => {
-                infoWindow.open(map, marker);
-            });
-        }
-        
-        window.initMap = initMap;
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 </body>
 </html>

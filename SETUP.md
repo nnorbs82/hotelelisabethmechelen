@@ -66,7 +66,7 @@ Admin users should be managed through the Firebase Console:
 
 ## Google Maps Integration
 
-The website includes an interactive Google Maps section on all pages showing the hotel location.
+The website includes an interactive Google Maps section on the **homepage (index.html only)** showing the hotel location.
 
 ### Setting up Google Maps API Key
 
@@ -79,8 +79,9 @@ The website includes an interactive Google Maps section on all pages showing the
    - Create credentials (API Key)
    - Restrict the API key to your domain for security
 
-2. Add the API key to all HTML files:
-   - Search for `YOUR_GOOGLE_MAPS_API_KEY` in each HTML file
+2. Add the API key to index.html:
+   - Open `index.html`
+   - Search for `YOUR_GOOGLE_MAPS_API_KEY`
    - Replace it with your actual API key
    - The script tag looks like this:
      ```html
@@ -93,7 +94,7 @@ The website includes an interactive Google Maps section on all pages showing the
    - **Features**: Zoom controls, fullscreen, satellite/map view, street view
 
 ### Map Styling
-The map section has a greyish-white background (#f5f5f3) and is 500px height, full-width, positioned just before the footer on all pages.
+The map section has a greyish-white background (#f5f5f3) and is 500px height, full-width, positioned just before the footer on the homepage.
 
 ## Usage
 
