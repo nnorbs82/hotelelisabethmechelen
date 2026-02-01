@@ -64,6 +64,38 @@ Admin users should be managed through the Firebase Console:
 - **Sage** (#959380) - Secondary buttons and accents
 - **White** (#FFFFFF) - Background and contrast text
 
+## Google Maps Integration
+
+The website includes an interactive Google Maps section on the **homepage (index.html only)** showing the hotel location.
+
+### Setting up Google Maps API Key
+
+**Important**: Before the map will work, you need to add your Google Maps API key.
+
+1. Get a Google Maps API key:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select an existing one
+   - Enable the "Maps JavaScript API"
+   - Create credentials (API Key)
+   - Restrict the API key to your domain for security
+
+2. Add the API key to index.html:
+   - Open `index.html`
+   - Search for `YOUR_GOOGLE_MAPS_API_KEY`
+   - Replace it with your actual API key
+   - The script tag looks like this:
+     ```html
+     <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_ACTUAL_KEY&callback=initMap"></script>
+     ```
+
+3. Map Configuration:
+   - **Location**: Goswin de Stassartstraat 26/28, 2800 Mechelen, Belgium
+   - **Coordinates**: 51.0259°N, 4.4774°E
+   - **Features**: Zoom controls, fullscreen, satellite/map view, street view
+
+### Map Styling
+The map section has a greyish-white background (#f5f5f3) and is 500px height, full-width, positioned just before the footer on the homepage.
+
 ## Usage
 
 ### Running Locally
