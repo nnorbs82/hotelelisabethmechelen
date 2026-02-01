@@ -40,7 +40,80 @@
     <main class="container">
         <div class="card">
             <h2>Hotel Information</h2>
-            <p>Find essential information about our hotel location, contact details, and services.</p>
+            <p id="info-intro">Find essential information about our hotel location, contact details, and services.</p>
+        </div>
+
+        <!-- Info Sections -->
+        <div class="info-sections">
+            <div class="card info-card" id="checkin-card">
+                <h3>Check-in</h3>
+                <div id="checkin-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="checkout-card">
+                <h3>Check-out</h3>
+                <div id="checkout-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="breakfast-card">
+                <h3>Breakfast</h3>
+                <div id="breakfast-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="payment-card">
+                <h3>Payment Methods</h3>
+                <div id="payment-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="services-card">
+                <h3>Services</h3>
+                <div id="services-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="fooddrinks-card">
+                <h3>Food & Drinks</h3>
+                <div id="fooddrinks-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="general-card">
+                <h3>General</h3>
+                <div id="general-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="parking-card">
+                <h3>Parking Information</h3>
+                <div id="parking-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="traffic-card">
+                <h3>Traffic-Calmed Streets</h3>
+                <div id="traffic-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <div class="card info-card" id="camera-card">
+                <h3>Camera Surveillance Notice</h3>
+                <div id="camera-content" class="info-content">
+                    <p>Loading...</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -56,5 +129,66 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+    
+    <!-- Firebase Script to Load Info Data -->
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Detect user's language preference
+        function getUserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('nl')) return 'nl';
+            if (browserLang.startsWith('fr')) return 'fr';
+            return 'en';
+        }
+
+        // Format text with line breaks
+        function formatText(text) {
+            if (!text) return '';
+            return text.split('\n').filter(line => line.trim()).map(line => `<p>${line}</p>`).join('');
+        }
+
+        // Load and display info data
+        async function loadInfoData() {
+            try {
+                const snapshot = await get(dbRef(database, 'hotelInfo'));
+                
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const userLang = getUserLanguage();
+                    
+                    // Update each section
+                    const sections = ['checkin', 'checkout', 'breakfast', 'payment', 'services', 'fooddrinks', 'general', 'parking', 'traffic', 'camera'];
+                    
+                    sections.forEach(section => {
+                        const content = data[section]?.[userLang] || data[section]?.['en'] || '';
+                        const contentDiv = document.getElementById(`${section}-content`);
+                        
+                        if (contentDiv) {
+                            if (content) {
+                                contentDiv.innerHTML = formatText(content);
+                            } else {
+                                contentDiv.innerHTML = '<p>No information available at this time.</p>';
+                            }
+                        }
+                    });
+                } else {
+                    // No data yet, show default message
+                    document.querySelectorAll('.info-content').forEach(div => {
+                        div.innerHTML = '<p>No information available at this time.</p>';
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading info data:', error);
+                document.querySelectorAll('.info-content').forEach(div => {
+                    div.innerHTML = '<p>Unable to load information. Please try again later.</p>';
+                });
+            }
+        }
+
+        // Load data when page loads
+        loadInfoData();
+    </script>
 </body>
 </html>
