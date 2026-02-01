@@ -1787,8 +1787,8 @@ body.admin-page .vertical-menu-nav ul {
 
 /* About Us Section */
 .about-us-section {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: var(--color-black);
+    color: var(--color-white);
     padding: 4rem 2rem;
     margin: 0;
     min-height: 700px; /* ADD THIS */
@@ -1805,7 +1805,7 @@ body.admin-page .vertical-menu-nav ul {
     font-weight: 300;
     letter-spacing: 0.3rem;
     margin-bottom: 4rem;
-    color: #ffffff;
+    color: var(--color-white);
     display: block; /* ENSURE IT'S VISIBLE */
 }
 
@@ -1825,7 +1825,7 @@ body.admin-page .vertical-menu-nav ul {
     font-weight: 400; /* Regular */
     letter-spacing: 0.15rem;
     margin-bottom: 0.5rem;
-    color: #ffffff;
+    color: var(--color-white);
     text-transform: uppercase;
 }
 
@@ -1833,7 +1833,7 @@ body.admin-page .vertical-menu-nav ul {
     font-size: 0.95rem;
     line-height: 1.8;
     margin-top: 1.5rem;
-    color: #ffffff;
+    color: var(--color-white);
     white-space: pre-line; /* Preserves line breaks */
 }
 
