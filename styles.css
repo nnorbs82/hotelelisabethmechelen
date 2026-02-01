@@ -4512,8 +4512,7 @@ body.admin-page .vertical-menu-nav ul {
 /* Info Hero Section */
 .info-hero {
     position: relative;
-    height: calc(100vh - var(--main-menu-height));
-    min-height: 500px;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4601,57 +4600,69 @@ body.admin-page .vertical-menu-nav ul {
     padding: 4rem 2rem 6rem;
 }
 
-.info-sections {
-    max-width: 1200px;
-    margin: 0 auto;
+/* Three Column Layout */
+.info-columns {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
 }
 
-/* Modern Info Cards */
+.info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Full Width Sections */
+.info-full-width-sections {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Light & Elegant Info Cards */
 .info-card-modern {
-    background: linear-gradient(135deg, var(--color-black) 0%, #1a1a1a 100%);
-    border-radius: 12px;
+    background: #ffffff;
+    border-radius: 8px;
     padding: 2.5rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(212, 211, 195, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .info-card-modern:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
-.info-card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    opacity: 0.9;
+.info-card-full {
+    width: 100%;
 }
 
 .info-card-modern h3 {
-    color: var(--color-beige);
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: 0.05em;
+    color: var(--color-black);
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
     margin-bottom: 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid rgba(212, 211, 195, 0.2);
-    padding-bottom: 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--color-beige);
+    padding-bottom: 0.75rem;
 }
 
 .info-card-modern .info-content {
-    color: var(--color-beige);
+    color: #333;
     font-size: 0.95rem;
-    line-height: 1.7;
-    opacity: 0.9;
+    line-height: 1.8;
 }
 
 .info-card-modern .info-content p {
     margin-bottom: 1rem;
-    color: var(--color-beige);
+    color: #555;
 }
 
 .info-card-modern .info-content p:last-child {
@@ -4659,7 +4670,26 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 /* Responsive Design for Info Page */
+@media (max-width: 1024px) {
+    .info-columns {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .info-column {
+        gap: 2rem;
+    }
+    
+    .info-full-width-sections {
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .info-hero {
+        height: 600px;
+    }
+
     .info-hero-title {
         font-size: 3rem;
     }
@@ -4680,11 +4710,6 @@ body.admin-page .vertical-menu-nav ul {
         font-size: 1rem;
     }
     
-    .info-sections {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
     .info-sections-container {
         padding: 3rem 1rem 4rem;
     }
@@ -4692,14 +4717,22 @@ body.admin-page .vertical-menu-nav ul {
     .info-card-modern {
         padding: 2rem;
     }
+    
+    .info-card-modern h3 {
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 480px) {
+    .info-hero {
+        height: 450px;
+    }
+
     .info-hero-title {
         font-size: 2.5rem;
     }
     
-    .info-hero {
-        min-height: 400px;
+    .info-card-modern {
+        padding: 1.5rem;
     }
 }
