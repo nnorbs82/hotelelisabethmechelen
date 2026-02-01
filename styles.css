@@ -508,12 +508,156 @@ body.admin-page {
 }
 
 /* Footer Styles */
+/* Modern Footer Styles */
 footer {
     background-color: var(--color-black);
     color: var(--color-beige);
-    text-align: center;
-    padding: 2rem;
+    padding: 3rem 2rem 1.5rem;
     margin-top: 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-section h3 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-tagline {
+    color: var(--color-sage);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.footer-contact-item strong {
+    color: var(--color-white);
+    min-width: 70px;
+    font-size: 0.85rem;
+}
+
+.footer-contact-item span,
+.footer-contact-item a {
+    color: var(--color-beige);
+    text-decoration: none;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.footer-contact-item a:hover {
+    color: var(--color-white);
+}
+
+.footer-address {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-social-link {
+    color: var(--color-beige);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer-social-link:hover {
+    color: var(--color-white);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--color-sage);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: var(--color-beige);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-white);
+}
+
+.footer-copyright {
+    color: var(--color-sage);
+    font-size: 0.85rem;
+}
+
+/* Footer Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    footer {
+        padding: 2rem 1.5rem 1rem;
+    }
 }
 
 /* Booking Bar Styles */
