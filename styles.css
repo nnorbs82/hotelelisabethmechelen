@@ -518,7 +518,7 @@ footer {
 /* Hero Bottom Section */
 .hero-bottom {
     position: absolute;
-    bottom: 100px;
+    bottom: 0;
     right: 0;
     width: 100%;
     display: flex;
@@ -528,9 +528,9 @@ footer {
 .hero-bottom-left {
     width: 25%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0 0 70px 70px;
 }
 
 .hero-bottom-logo {
@@ -544,6 +544,7 @@ footer {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    padding-bottom: 100px;
 }
 
 .booking-bar {
