@@ -4512,8 +4512,7 @@ body.admin-page .vertical-menu-nav ul {
 /* Info Hero Section */
 .info-hero {
     position: relative;
-    height: calc(100vh - var(--main-menu-height));
-    min-height: 500px;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4601,11 +4600,27 @@ body.admin-page .vertical-menu-nav ul {
     padding: 4rem 2rem 6rem;
 }
 
-.info-sections {
-    max-width: 1200px;
-    margin: 0 auto;
+/* Three Column Layout */
+.info-columns {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Full Width Sections */
+.info-full-width-sections {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
 }
 
@@ -4624,11 +4639,8 @@ body.admin-page .vertical-menu-nav ul {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
 
-.info-card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    opacity: 0.9;
+.info-card-full {
+    width: 100%;
 }
 
 .info-card-modern h3 {
@@ -4659,7 +4671,17 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 /* Responsive Design for Info Page */
+@media (max-width: 1024px) {
+    .info-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
+    .info-hero {
+        height: 500px;
+    }
+
     .info-hero-title {
         font-size: 3rem;
     }
@@ -4680,7 +4702,7 @@ body.admin-page .vertical-menu-nav ul {
         font-size: 1rem;
     }
     
-    .info-sections {
+    .info-columns {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
@@ -4695,11 +4717,11 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 @media (max-width: 480px) {
+    .info-hero {
+        height: 400px;
+    }
+
     .info-hero-title {
         font-size: 2.5rem;
-    }
-    
-    .info-hero {
-        min-height: 400px;
     }
 }
