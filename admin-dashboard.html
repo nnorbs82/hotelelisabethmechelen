@@ -457,7 +457,6 @@
                     <button class="info-tab" data-tab="breakfast">Breakfast</button>
                     <button class="info-tab" data-tab="payment">Payment Methods</button>
                     <button class="info-tab" data-tab="services">Services</button>
-                    <button class="info-tab" data-tab="fooddrinks">Food & Drinks</button>
                     <button class="info-tab" data-tab="general">General</button>
                     <button class="info-tab" data-tab="parking">Parking Information</button>
                     <button class="info-tab" data-tab="traffic">Traffic-Calmed Streets</button>
@@ -4650,16 +4649,15 @@
         let currentInfoTab = 'checkin';
         let currentInfoLang = 'en';
         let infoData = {
-            checkin: { en: '', nl: '', fr: '' },
-            checkout: { en: '', nl: '', fr: '' },
-            breakfast: { en: '', nl: '', fr: '' },
-            payment: { en: '', nl: '', fr: '' },
-            services: { en: '', nl: '', fr: '' },
-            fooddrinks: { en: '', nl: '', fr: '' },
-            general: { en: '', nl: '', fr: '' },
-            parking: { en: '', nl: '', fr: '' },
-            traffic: { en: '', nl: '', fr: '' },
-            camera: { en: '', nl: '', fr: '' }
+            checkin: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            checkout: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            breakfast: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            payment: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            services: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            general: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            parking: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            traffic: { en: '', nl: '', fr: '', lineSpacing: '1.6' },
+            camera: { en: '', nl: '', fr: '', lineSpacing: '1.6' }
         };
 
         // Show info management card
@@ -4715,7 +4713,6 @@
                 breakfast: 'Breakfast',
                 payment: 'Payment Methods',
                 services: 'Services',
-                fooddrinks: 'Food & Drinks',
                 general: 'General',
                 parking: 'Parking Information',
                 traffic: 'Traffic-Calmed Streets',
@@ -4738,6 +4735,7 @@
             `;
             
             const textValue = infoData[currentInfoTab][currentInfoLang] || '';
+            const lineSpacing = infoData[currentInfoTab].lineSpacing || '1.6';
             const tabTitle = getInfoTabTitle(currentInfoTab);
             
             const content = `
@@ -4746,6 +4744,12 @@
                     <h4>${escapeHtml(tabTitle)}</h4>
                     <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Enter the information text in ${currentInfoLang === 'en' ? 'English' : currentInfoLang === 'nl' ? 'Dutch' : 'French'}. Press Enter to add line spacing between paragraphs.</p>
                     <textarea id="info-text-input" class="admin-textarea" placeholder="Enter ${tabTitle.toLowerCase()} information">${escapeHtml(textValue)}</textarea>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <label for="line-spacing-input" style="display: block; color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Line Spacing (line-height)</label>
+                        <input type="number" id="line-spacing-input" min="1" max="3" step="0.1" value="${lineSpacing}" style="padding: 0.5rem; border: 1px solid var(--color-sage); border-radius: 4px; width: 100px; font-family: 'Raleway', sans-serif;">
+                        <span style="color: var(--color-sage); font-size: 0.85rem; margin-left: 0.5rem;">(1.0 - 3.0, default: 1.6)</span>
+                    </div>
                 </div>
                 <button class="btn" id="save-info-btn">Save ${escapeHtml(tabTitle)}</button>
             `;
@@ -4763,7 +4767,9 @@
             if (saveBtn) {
                 saveBtn.addEventListener('click', async () => {
                     const value = document.getElementById('info-text-input').value;
+                    const lineSpacing = document.getElementById('line-spacing-input').value;
                     infoData[currentInfoTab][currentInfoLang] = value;
+                    infoData[currentInfoTab].lineSpacing = lineSpacing;
                     await saveInfoData();
                 });
             }

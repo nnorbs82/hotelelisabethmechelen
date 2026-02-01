@@ -36,85 +36,105 @@
             </ul>
         </nav>
     </header>
+    
+    <!-- Fixed Background Layer -->
+    <div id="page-background" class="page-background"></div>
 
-    <main class="container">
-        <div class="card">
-            <h2>Hotel Information</h2>
-            <p id="info-intro">Find essential information about our hotel location, contact details, and services.</p>
-        </div>
+    <main class="info-main">
+        <!-- Hero Section -->
+        <section class="info-hero">
+            <div class="info-hero-overlay"></div>
+            <div class="info-hero-content">
+                <span class="info-hero-tagline">Everything You Need to Know</span>
+                <h1 class="info-hero-title">Hotel Information</h1>
+                <p class="info-hero-subtitle">Essential details for a seamless stay</p>
+                <div class="info-hero-divider"></div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="info-intro">
+            <div class="info-intro-content">
+                <p class="info-intro-text">Welcome to Hotel Elisabeth Mechelen. Below you'll find all the essential information about check-in procedures, services, amenities, and policies to make your stay as comfortable and enjoyable as possible.</p>
+            </div>
+        </section>
 
         <!-- Info Sections -->
-        <div class="info-sections">
-            <div class="card info-card" id="checkin-card">
-                <h3>Check-in</h3>
-                <div id="checkin-content" class="info-content">
-                    <p>Loading...</p>
+        <section class="info-sections-container">
+            <div class="info-sections">
+                <div class="info-card-modern" id="checkin-card">
+                    <div class="info-card-icon">🔑</div>
+                    <h3>Check-in</h3>
+                    <div id="checkin-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="checkout-card">
-                <h3>Check-out</h3>
-                <div id="checkout-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="checkout-card">
+                    <div class="info-card-icon">🚪</div>
+                    <h3>Check-out</h3>
+                    <div id="checkout-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="breakfast-card">
-                <h3>Breakfast</h3>
-                <div id="breakfast-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="breakfast-card">
+                    <div class="info-card-icon">☕</div>
+                    <h3>Breakfast</h3>
+                    <div id="breakfast-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="payment-card">
-                <h3>Payment Methods</h3>
-                <div id="payment-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="payment-card">
+                    <div class="info-card-icon">💳</div>
+                    <h3>Payment Methods</h3>
+                    <div id="payment-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="services-card">
-                <h3>Services</h3>
-                <div id="services-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="services-card">
+                    <div class="info-card-icon">✨</div>
+                    <h3>Services</h3>
+                    <div id="services-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="fooddrinks-card">
-                <h3>Food & Drinks</h3>
-                <div id="fooddrinks-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="general-card">
+                    <div class="info-card-icon">ℹ️</div>
+                    <h3>General</h3>
+                    <div id="general-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="general-card">
-                <h3>General</h3>
-                <div id="general-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="parking-card">
+                    <div class="info-card-icon">🚗</div>
+                    <h3>Parking Information</h3>
+                    <div id="parking-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="parking-card">
-                <h3>Parking Information</h3>
-                <div id="parking-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="traffic-card">
+                    <div class="info-card-icon">🚦</div>
+                    <h3>Traffic-Calmed Streets</h3>
+                    <div id="traffic-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card info-card" id="traffic-card">
-                <h3>Traffic-Calmed Streets</h3>
-                <div id="traffic-content" class="info-content">
-                    <p>Loading...</p>
+                <div class="info-card-modern" id="camera-card">
+                    <div class="info-card-icon">📹</div>
+                    <h3>Camera Surveillance Notice</h3>
+                    <div id="camera-content" class="info-content">
+                        <p>Loading...</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="card info-card" id="camera-card">
-                <h3>Camera Surveillance Notice</h3>
-                <div id="camera-content" class="info-content">
-                    <p>Loading...</p>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>
@@ -150,10 +170,10 @@
             return div.innerHTML;
         }
 
-        // Format text with line breaks
-        function formatText(text) {
+        // Format text with line breaks and apply line spacing
+        function formatText(text, lineSpacing = '1.6') {
             if (!text) return '';
-            return text.split('\n').filter(line => line.trim()).map(line => `<p>${escapeHtml(line)}</p>`).join('');
+            return text.split('\n').filter(line => line.trim()).map(line => `<p style="line-height: ${lineSpacing};">${escapeHtml(line)}</p>`).join('');
         }
 
         // Load and display info data
@@ -165,16 +185,17 @@
                     const data = snapshot.val();
                     const userLang = getUserLanguage();
                     
-                    // Update each section
-                    const sections = ['checkin', 'checkout', 'breakfast', 'payment', 'services', 'fooddrinks', 'general', 'parking', 'traffic', 'camera'];
+                    // Update each section (fooddrinks removed)
+                    const sections = ['checkin', 'checkout', 'breakfast', 'payment', 'services', 'general', 'parking', 'traffic', 'camera'];
                     
                     sections.forEach(section => {
                         const content = data[section]?.[userLang] || data[section]?.['en'] || '';
+                        const lineSpacing = data[section]?.lineSpacing || '1.6';
                         const contentDiv = document.getElementById(`${section}-content`);
                         
                         if (contentDiv) {
                             if (content) {
-                                contentDiv.innerHTML = formatText(content);
+                                contentDiv.innerHTML = formatText(content, lineSpacing);
                             } else {
                                 contentDiv.innerHTML = '<p>No information available at this time.</p>';
                             }
