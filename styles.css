@@ -212,10 +212,10 @@ body.admin-page {
 /* Fixed Background Layer (iOS Compatible) */
 .page-background {
     position: fixed;
-    top: 0;
+    top: var(--main-menu-height); /* Start below menu */
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - var(--main-menu-height)); /* Adjust height to exclude menu area */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
