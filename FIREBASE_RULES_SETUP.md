@@ -136,6 +136,10 @@ These rules allow authenticated admin users to read and write photo metadata in 
     "attractionsMainImage": {
       ".read": "auth != null",
       ".write": "auth != null"
+    },
+    "hotelInfo": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }
@@ -267,6 +271,10 @@ service firebase.storage {
       ".write": "auth != null"
     },
     "attractionsMainImage": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "hotelInfo": {
       ".read": true,
       ".write": "auth != null"
     }
