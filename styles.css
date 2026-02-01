@@ -1313,12 +1313,14 @@ body.admin-page .vertical-menu-nav ul {
     background-position: center;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .index-ads-right {
     width: 40%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .index-ads-right-top,
@@ -1330,6 +1332,7 @@ body.admin-page .vertical-menu-nav ul {
     background-position: center;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .index-ad-content {
