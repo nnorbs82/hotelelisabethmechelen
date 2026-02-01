@@ -49,7 +49,7 @@ input, textarea, button {
 /* Fixed height for desktop only */
 @media (min-width: 900px) {
     .main-menu {
-        height: 70px;
+        height: var(--main-menu-height);
         padding: 15px 20px;
     }
 }
