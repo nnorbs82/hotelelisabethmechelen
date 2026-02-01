@@ -46,6 +46,14 @@ input, textarea, button {
     justify-content: space-between;
 }
 
+/* Fixed height for desktop only */
+@media (min-width: 900px) {
+    .main-menu {
+        height: 70px;
+        padding: 15px 20px;
+    }
+}
+
 .main-menu-logo {
     height: 30px;
     display: block;
