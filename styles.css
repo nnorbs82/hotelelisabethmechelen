@@ -531,6 +531,8 @@ footer {
     position: absolute;
     bottom: 100px;
     right: 0;
+    /* Ensure minimum 20px gap from logo: logo ends at ~270px (70px left + 200px width) */
+    left: 290px;
     background-color: rgba(0, 0, 0, 0.55);
     border: none;
     border-radius: 0;
@@ -538,7 +540,7 @@ footer {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
-    width: 75%;
+    width: auto;
     box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
@@ -713,7 +715,8 @@ footer {
 @media (max-width: 769px) {
     .hero-bottom-logo {
         bottom: auto;
-        top: 1rem;
+        /* Ensure logo is at least 100px from top in mobile view */
+        top: 100px;
         left: 50%;
         transform: translateX(-50%);
         max-width: 150px;
