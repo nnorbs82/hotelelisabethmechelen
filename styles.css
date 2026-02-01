@@ -86,11 +86,14 @@ input, textarea, button {
     color: var(--color-beige);
     text-decoration: none;
     padding: 10px 20px;
-    display: block;
+    display: flex;
+    align-items: center;
     background: none;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    line-height: 20px;
+    height: 40px;
     transition: color 0.3s ease;
 }
 
@@ -184,6 +187,8 @@ input, textarea, button {
         width: 100%;
         text-align: left;
         padding: 15px 20px;
+        height: auto;
+        justify-content: flex-start;
     }
     
     .dropdown-menu {
