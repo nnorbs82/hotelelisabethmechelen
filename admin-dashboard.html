@@ -69,6 +69,11 @@
                         <span>Manage Attractions</span>
                     </button>
                 </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-info-btn">
+                        <span>Manage Info</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -437,6 +442,31 @@
                     <input type="file" id="attraction-main-image-input" accept="image/*" style="display: none;">
                     <button class="btn" id="upload-attraction-main-image-btn">Upload Main Image</button>
                     <div id="attraction-main-image-preview" class="attraction-main-image-preview"></div>
+                </div>
+            </div>
+
+            <!-- Info Management Card -->
+            <div id="info-management-card" class="card" style="display: none;">
+                <h2>Info Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1rem;">Manage hotel information content displayed on the info page.</p>
+                
+                <!-- Tab Navigation -->
+                <div class="info-tabs">
+                    <button class="info-tab active" data-tab="checkin">Check-in</button>
+                    <button class="info-tab" data-tab="checkout">Check-out</button>
+                    <button class="info-tab" data-tab="breakfast">Breakfast</button>
+                    <button class="info-tab" data-tab="payment">Payment Methods</button>
+                    <button class="info-tab" data-tab="services">Services</button>
+                    <button class="info-tab" data-tab="fooddrinks">Food & Drinks</button>
+                    <button class="info-tab" data-tab="general">General</button>
+                    <button class="info-tab" data-tab="parking">Parking Information</button>
+                    <button class="info-tab" data-tab="traffic">Traffic-Calmed Streets</button>
+                    <button class="info-tab" data-tab="camera">Camera Surveillance Notice</button>
+                </div>
+                
+                <!-- Tab Content -->
+                <div id="info-tab-content">
+                    <!-- Content will be rendered by JavaScript -->
                 </div>
             </div>
 
@@ -4615,6 +4645,140 @@
                 alert('Failed to delete image.');
             }
         };
+
+        // ============ INFO MANAGEMENT ============
+        let currentInfoTab = 'checkin';
+        let currentInfoLang = 'en';
+        let infoData = {
+            checkin: { en: '', nl: '', fr: '' },
+            checkout: { en: '', nl: '', fr: '' },
+            breakfast: { en: '', nl: '', fr: '' },
+            payment: { en: '', nl: '', fr: '' },
+            services: { en: '', nl: '', fr: '' },
+            fooddrinks: { en: '', nl: '', fr: '' },
+            general: { en: '', nl: '', fr: '' },
+            parking: { en: '', nl: '', fr: '' },
+            traffic: { en: '', nl: '', fr: '' },
+            camera: { en: '', nl: '', fr: '' }
+        };
+
+        // Show info management card
+        document.getElementById('manage-info-btn').addEventListener('click', async () => {
+            ensureDashboardVisible();
+            hideAllManagementCards();
+            
+            const infoCard = document.getElementById('info-management-card');
+            infoCard.style.display = 'block';
+            infoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            document.getElementById('vertical-menu').classList.remove('show');
+
+            await loadInfoData();
+            renderInfoTab();
+        });
+
+        // Tab switching
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('info-tab')) {
+                document.querySelectorAll('.info-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentInfoTab = e.target.dataset.tab;
+                renderInfoTab();
+            }
+            
+            if (e.target.classList.contains('info-lang-tab')) {
+                document.querySelectorAll('.info-lang-tab').forEach(tab => tab.classList.remove('active'));
+                e.target.classList.add('active');
+                currentInfoLang = e.target.dataset.lang;
+                renderInfoTab();
+            }
+        });
+
+        // Load Info data from Firebase
+        async function loadInfoData() {
+            try {
+                const snapshot = await get(dbRef(database, 'hotelInfo'));
+                
+                if (snapshot.exists()) {
+                    infoData = snapshot.val();
+                }
+            } catch (error) {
+                console.error('Error loading Info data:', error);
+            }
+        }
+
+        // Get title for each tab
+        function getInfoTabTitle(tab) {
+            const titles = {
+                checkin: 'Check-in',
+                checkout: 'Check-out',
+                breakfast: 'Breakfast',
+                payment: 'Payment Methods',
+                services: 'Services',
+                fooddrinks: 'Food & Drinks',
+                general: 'General',
+                parking: 'Parking Information',
+                traffic: 'Traffic-Calmed Streets',
+                camera: 'Camera Surveillance Notice'
+            };
+            return titles[tab] || tab;
+        }
+
+        // Render tab content
+        function renderInfoTab() {
+            const container = document.getElementById('info-tab-content');
+            
+            // Language tabs
+            const langTabs = `
+                <div class="info-lang-tabs">
+                    <button class="info-lang-tab ${currentInfoLang === 'en' ? 'active' : ''}" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                    <button class="info-lang-tab ${currentInfoLang === 'nl' ? 'active' : ''}" data-lang="nl" aria-label="Nederlands">🇳🇱 NL</button>
+                    <button class="info-lang-tab ${currentInfoLang === 'fr' ? 'active' : ''}" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+                </div>
+            `;
+            
+            const textValue = infoData[currentInfoTab][currentInfoLang] || '';
+            const tabTitle = getInfoTabTitle(currentInfoTab);
+            
+            const content = `
+                ${langTabs}
+                <div class="info-section">
+                    <h4>${escapeHtml(tabTitle)}</h4>
+                    <p style="color: var(--color-sage); font-size: 0.9rem; margin-bottom: 0.5rem;">Enter the information text in ${currentInfoLang === 'en' ? 'English' : currentInfoLang === 'nl' ? 'Dutch' : 'French'}. Press Enter to add line spacing between paragraphs.</p>
+                    <textarea id="info-text-input" class="admin-textarea" placeholder="Enter ${tabTitle.toLowerCase()} information">${escapeHtml(textValue)}</textarea>
+                </div>
+                <button class="btn" id="save-info-btn">Save ${escapeHtml(tabTitle)}</button>
+            `;
+            
+            container.innerHTML = content;
+            
+            // Attach save handler
+            attachInfoSaveHandler();
+        }
+
+        // Attach save button handler
+        function attachInfoSaveHandler() {
+            const saveBtn = document.getElementById('save-info-btn');
+            
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    const value = document.getElementById('info-text-input').value;
+                    infoData[currentInfoTab][currentInfoLang] = value;
+                    await saveInfoData();
+                });
+            }
+        }
+
+        // Save to Firebase
+        async function saveInfoData() {
+            try {
+                await set(dbRef(database, 'hotelInfo'), infoData);
+                alert('Info content saved successfully!');
+            } catch (error) {
+                console.error('Error saving Info data:', error);
+                alert('Failed to save. Please try again.');
+            }
+        }
 
     </script>
 </body>
