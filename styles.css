@@ -4624,19 +4624,19 @@ body.admin-page .vertical-menu-nav ul {
     gap: 2.5rem;
 }
 
-/* Light & Elegant Info Cards */
+/* Elegant Info Cards */
 .info-card-modern {
-    background: #ffffff;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(40, 40, 40, 0.95) 100%);
     border-radius: 8px;
     padding: 2.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(212, 211, 195, 0.15);
 }
 
 .info-card-modern:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    transform: translateY(-3px);
 }
 
 .info-card-full {
@@ -4644,25 +4644,25 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .info-card-modern h3 {
-    color: var(--color-black);
+    color: var(--color-beige);
     font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     margin-bottom: 1.5rem;
     text-align: left;
-    border-bottom: 2px solid var(--color-beige);
+    border-bottom: 1px solid rgba(212, 211, 195, 0.3);
     padding-bottom: 0.75rem;
 }
 
 .info-card-modern .info-content {
-    color: #333;
+    color: rgba(212, 211, 195, 0.9);
     font-size: 0.95rem;
     line-height: 1.8;
 }
 
 .info-card-modern .info-content p {
     margin-bottom: 1rem;
-    color: #555;
+    color: rgba(212, 211, 195, 0.85);
 }
 
 .info-card-modern .info-content p:last-child {
