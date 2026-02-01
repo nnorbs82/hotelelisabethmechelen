@@ -225,7 +225,7 @@ body.admin-page {
 /* Hero Slideshow */
 .hero-slideshow {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - var(--main-menu-height));
     min-height: 420px;
     background-color: var(--color-black);
     overflow: hidden; /* Prevent overflow issues */
@@ -452,6 +452,10 @@ body.admin-page {
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+}
+
+.login-card .nav-logo img {
+    height: 50px;
 }
 
 .login-card h2 {
@@ -2564,7 +2568,7 @@ body.admin-page .vertical-menu-nav ul {
 .facilities-hero {
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - var(--main-menu-height));
     min-height: 500px;
     background-color: transparent;
     display: flex;
@@ -3358,7 +3362,7 @@ body.admin-page .vertical-menu-nav ul {
 /* Enhanced Hero Section with Background */
 .rooms-hero-modern {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - var(--main-menu-height));
     min-height: 500px;
     display: flex;
     align-items: center;
