@@ -730,17 +730,22 @@ footer {
 @media (max-width: 769px) {
     .hero-bottom {
         flex-direction: column;
-        bottom: 20px;
+        bottom: 0;
         width: 100%;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 0;
     }
     
     .hero-bottom-left {
         width: 100%;
-        padding: 0.5rem;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
     }
     
     .hero-bottom-logo {
-        max-width: 100px;
+        max-width: 150px;
     }
     
     .hero-bottom-right {
@@ -757,15 +762,17 @@ footer {
 /* Mobile Responsive for Booking Bar */
 @media (max-width: 768px) {
     .hero-bottom {
-        bottom: 10px;
+        bottom: 0;
+        gap: 1rem;
+        padding: 0.75rem 0;
     }
     
     .hero-bottom-left {
-        padding: 0.25rem;
+        padding: 0;
     }
     
     .hero-bottom-logo {
-        max-width: 80px;
+        max-width: 140px;
     }
     
     .booking-bar {
