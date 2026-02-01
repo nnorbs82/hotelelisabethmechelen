@@ -143,10 +143,17 @@
             return 'en';
         }
 
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Format text with line breaks
         function formatText(text) {
             if (!text) return '';
-            return text.split('\n').filter(line => line.trim()).map(line => `<p>${line}</p>`).join('');
+            return text.split('\n').filter(line => line.trim()).map(line => `<p>${escapeHtml(line)}</p>`).join('');
         }
 
         // Load and display info data
