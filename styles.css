@@ -726,7 +726,7 @@ footer {
 }
 
 /* Tablet and below - stack hero-bottom vertically */
-@media (max-width: 770px) {
+@media (max-width: 769px) {
     .hero-bottom {
         flex-direction: column;
         bottom: 20px;
