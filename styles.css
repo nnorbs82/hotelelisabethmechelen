@@ -50,7 +50,20 @@ input, textarea, button {
 @media (min-width: 900px) {
     .main-menu {
         height: var(--main-menu-height);
-        padding: 15px 20px;
+        padding: 0 20px;
+    }
+    
+    .main-nav {
+        height: 100%;
+    }
+    
+    .main-nav ul {
+        height: 100%;
+    }
+    
+    .main-nav a,
+    .main-nav button {
+        height: 100%;
     }
 }
 
