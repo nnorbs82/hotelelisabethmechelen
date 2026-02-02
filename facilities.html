@@ -287,7 +287,7 @@
 
                     const albumMarkup = hasPhotos
                         ? `
-                            <div class="facility-album-showcase">
+                            <div class="facility-album-wrapper-fullwidth">
                                 <div class="facility-album-main-wrapper" data-facility-id="${facilityId}" data-photos='${JSON.stringify(libraryItems)}' data-index="0">
                                     <div class="facility-album-main-image" onclick="openFacilityLightbox('${facilityId}', 0)" style="cursor: pointer;">
                                         <img src="${firstPhoto}" alt="${escapeHtml(albumLabels.albumAlt(name, 0))}" id="facility-img-${facilityId}">
@@ -304,9 +304,13 @@
                                         <div class="facility-album-badge">${libraryItems.length} ${albumLabels.albumTitle}</div>
                                     ` : ''}
                                 </div>
-                                <div class="facility-content">
-                                    <h3 class="facility-content-title">${name || 'Facility'}</h3>
+                            </div>
+                            <div class="facility-content-split">
+                                <div class="facility-description-section">
                                     <p class="facility-content-description">${operation || ''}</p>
+                                </div>
+                                <div class="facility-divider-vertical"></div>
+                                <div class="facility-guidelines-wrapper">
                                     <div class="facility-guidelines-section">
                                         <h4>${albumLabels.guidelines}</h4>
                                         ${guidelineItems}
@@ -315,13 +319,17 @@
                             </div>
                         `
                         : `
-                            <div class="facility-no-photos">
+                            <div class="facility-no-photos-fullwidth">
                                 <div class="facility-no-photos-placeholder">
                                     <span>${albumLabels.albumEmpty}</span>
                                 </div>
-                                <div class="facility-content">
-                                    <h3 class="facility-content-title">${name || 'Facility'}</h3>
+                            </div>
+                            <div class="facility-content-split">
+                                <div class="facility-description-section">
                                     <p class="facility-content-description">${operation || ''}</p>
+                                </div>
+                                <div class="facility-divider-vertical"></div>
+                                <div class="facility-guidelines-wrapper">
                                     <div class="facility-guidelines-section">
                                         <h4>${albumLabels.guidelines}</h4>
                                         ${guidelineItems}

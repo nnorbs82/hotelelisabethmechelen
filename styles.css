@@ -3047,6 +3047,47 @@ body.admin-page .vertical-menu-nav ul {
         flex: 1 1 auto;
         min-width: fit-content;
     }
+    
+    /* Mobile: Stack description and guidelines vertically */
+    .facility-content-split {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .facility-divider-vertical {
+        display: none; /* Hide vertical divider on mobile */
+    }
+    
+    .facility-description-section,
+    .facility-guidelines-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    /* Add horizontal divider for mobile */
+    .facility-guidelines-wrapper::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 2px;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+            to right,
+            transparent 0%,
+            var(--color-beige) 15%,
+            var(--color-beige) 85%,
+            transparent 100%
+        );
+    }
+    
+    .facility-album-main-wrapper {
+        min-height: 300px;
+    }
+    
+    .facility-no-photos-placeholder {
+        min-height: 300px;
+    }
 }
 
 /* ============ MODERN FACILITY STYLES - BOUTIQUE REDESIGN ============ */
@@ -3074,6 +3115,12 @@ body.admin-page .vertical-menu-nav ul {
     margin-bottom: 0;
 }
 
+/* Full-width photo album at top */
+.facility-album-wrapper-fullwidth {
+    width: 100%;
+    position: relative;
+}
+
 .facility-album-showcase {
     display: grid;
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -3091,7 +3138,8 @@ body.admin-page .vertical-menu-nav ul {
 .facility-album-main-wrapper {
     position: relative;
     height: 100%;
-    min-height: 180px;
+    min-height: 400px;
+    width: 100%;
 }
 
 .facility-album-main-image {
@@ -3099,17 +3147,18 @@ body.admin-page .vertical-menu-nav ul {
     height: 100%;
     position: relative;
     overflow: hidden;
+    background-color: #f5f5f5;
 }
 
 .facility-album-main-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 
 .facility-album-main-image:hover img {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 .facility-magnify-icon {
@@ -3190,6 +3239,61 @@ body.admin-page .vertical-menu-nav ul {
     z-index: 3;
 }
 
+/* Split content section: Description | Guidelines */
+.facility-content-split {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    padding: 2rem 2.5rem;
+    align-items: start;
+}
+
+.facility-description-section {
+    padding-right: 1rem;
+}
+
+.facility-content-description {
+    color: #555;
+    line-height: 1.65;
+    white-space: pre-line;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Vertical beige divider with fade effect */
+.facility-divider-vertical {
+    width: 2px;
+    height: 100%;
+    min-height: 150px;
+    position: relative;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--color-beige) 15%,
+        var(--color-beige) 85%,
+        transparent 100%
+    );
+}
+
+.facility-guidelines-wrapper {
+    padding-left: 1rem;
+}
+
+.facility-guidelines-section {
+    margin: 0;
+}
+
+.facility-guidelines-section h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--color-sage);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(149, 147, 128, 0.25);
+}
+
 .facility-content {
     padding: 1.25rem 1.5rem 1.25rem;
     display: flex;
@@ -3226,24 +3330,52 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .facility-guidelines-section h4 {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     color: var(--color-sage);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-weight: 600;
-    padding-bottom: 0.3rem;
+    padding-bottom: 0.4rem;
     border-bottom: 1px solid rgba(149, 147, 128, 0.25);
 }
 
-.facility-no-photos {
-    display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    min-height: 180px;
+/* Old styles kept for backwards compatibility */
+.facility-content {
+    padding: 1.25rem 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.facility-content::before {
+    content: '';
+    position: absolute;
+    top: 1.15rem;
+    left: 0;
+    width: 2px;
+    height: 28px;
+    background: var(--color-sage);
+}
+
+.facility-content-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+}
+
+/* Full-width no photos placeholder */
+.facility-no-photos-fullwidth {
+    width: 100%;
+    min-height: 400px;
+    background: linear-gradient(135deg, var(--color-beige) 0%, rgba(212, 211, 195, 0.5) 100%);
 }
 
 .facility-no-photos-placeholder {
-    background: linear-gradient(135deg, var(--color-beige) 0%, rgba(212, 211, 195, 0.5) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3252,6 +3384,8 @@ body.admin-page .vertical-menu-nav ul {
     font-style: italic;
     padding: 1.25rem;
     text-align: center;
+    height: 100%;
+    min-height: 400px;
 }
 
 /* Facility Lightbox Styles */
