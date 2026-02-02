@@ -82,6 +82,7 @@ The website includes an interactive Google Maps section on the **homepage (index
 2. Update the API key in `index.html` if needed:
    - Look for the Maps JavaScript API script tag near the bottom of the file.
    - Replace the key value with your latest API key.
+   - This key is intentionally client-side, so restrict it to your domain and rotate it immediately if it is exposed.
    - The script tag looks like this:
      ```html
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_ACTUAL_KEY&callback=initMap"></script>
@@ -94,7 +95,7 @@ The website includes an interactive Google Maps section on the **homepage (index
    - **Features**: Zoom controls, fullscreen, no map type or street view controls
 
 ### Map Styling
-The map section has a greyish-white background (#f5f5f3) and is 500px height, full-width, positioned just before the footer on the homepage.
+The map section uses a dark theme with custom road color (#8a7753) and is 500px height, full-width, positioned just before the footer on the homepage.
 
 ## Usage
 
