@@ -97,18 +97,7 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" style="display: none;">
-        <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
-        <button class="lightbox-prev" aria-label="Previous photo">‹</button>
-        <button class="lightbox-next" aria-label="Next photo">›</button>
-        <div class="lightbox-content">
-            <img id="lightbox-image" src="" alt="Room photo">
-        </div>
-        <div class="lightbox-thumbnails" id="lightbox-thumbnails">
-            <!-- Thumbnails will be dynamically inserted here -->
-        </div>
-    </div>
+
 
     <footer>
         <div class="footer-container">
@@ -195,8 +184,6 @@
 
         let roomsData = [];
         let amenitiesData = {};
-        let currentLightboxRoom = null;
-        let currentLightboxIndex = 0;
 
         // Labels
         const labels = {
@@ -395,7 +382,7 @@
                     <article class="room-feature ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
                         <div class="room-feature-image-wrapper">
                             ${firstPhoto ? `
-                                <div class="room-feature-image-clickable" onclick="openLightbox('${escapeJs(escapedRoomId)}', ${roomImageIndices[room.id] || 0})" style="cursor: pointer;">
+                                <div class="room-feature-image-clickable" onclick="openRoomModal('${escapeJs(escapedRoomId)}')" style="cursor: pointer;">
                                     <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
                                     <div class="room-feature-magnify-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -471,90 +458,184 @@
             container.innerHTML = roomsHTML;
         }
 
-        // Lightbox functionality
-        window.openLightbox = function(roomId, photoIndex) {
-            const room = roomsData.find(r => r.id === roomId);
-            if (!room || !room.photos || room.photos.length === 0) return;
+        // Cover Flow for Room Modal
+        const roomCoverflowStates = {};
 
-            currentLightboxRoom = room;
-            currentLightboxIndex = photoIndex;
+        window.initRoomCoverflow = function(roomId) {
+            const container = document.getElementById(`coverflow-${roomId}`);
+            if (!container) return;
 
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
+            const items = Array.from(container.querySelectorAll('.coverflow-item'));
+            if (items.length === 0) return;
 
-            // Show current photo
-            lightboxImage.src = escapeHtml(room.photos[photoIndex].url);
+            roomCoverflowStates[roomId] = {
+                currentIndex: 0,
+                items: items,
+                isAnimating: false
+            };
 
-            // Render thumbnails
-            thumbnailsContainer.innerHTML = room.photos.map((photo, index) => `
-                <img src="${escapeHtml(photo.url)}" 
-                     class="lightbox-thumbnail ${index === photoIndex ? 'active' : ''}" 
-                     onclick="changeLightboxPhoto(${index})"
-                     alt="Thumbnail ${index + 1}">
-            `).join('');
+            // Lazy load initial visible images
+            updateRoomCoverflowPositions(roomId);
+            lazyLoadRoomCoverflowImages(roomId);
 
-            lightbox.style.display = 'flex';
-        };
+            // Add wheel event listener
+            let lastWheelTime = 0;
+            const wheelThrottle = 300; // ms between wheel navigations
+            
+            container.addEventListener('wheel', (e) => {
+                const now = Date.now();
+                if (now - lastWheelTime < wheelThrottle) {
+                    return;
+                }
+                
+                // Only prevent default if we're actually navigating the carousel
+                const direction = e.deltaY > 0 ? 1 : -1;
+                const state = roomCoverflowStates[roomId];
+                if (state && !state.isAnimating) {
+                    e.preventDefault();
+                    lastWheelTime = now;
+                    navigateRoomCoverflow(roomId, direction, e);
+                }
+            }, { passive: false });
 
-        window.changeLightboxPhoto = function(index) {
-            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
+            // Add touch support
+            let touchStartX = 0;
+            let touchEndX = 0;
 
-            currentLightboxIndex = index;
-            const lightboxImage = document.getElementById('lightbox-image');
-            lightboxImage.src = escapeHtml(currentLightboxRoom.photos[index].url);
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
 
-            // Update active thumbnail
-            document.querySelectorAll('.lightbox-thumbnail').forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === index);
-            });
-        };
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(roomId);
+            }, { passive: true });
 
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-            currentLightboxRoom = null;
-            currentLightboxIndex = 0;
-        }
-
-        function nextPhoto() {
-            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
-            const nextIndex = (currentLightboxIndex + 1) % currentLightboxRoom.photos.length;
-            changeLightboxPhoto(nextIndex);
-        }
-
-        function prevPhoto() {
-            if (!currentLightboxRoom || !currentLightboxRoom.photos) return;
-            const prevIndex = (currentLightboxIndex - 1 + currentLightboxRoom.photos.length) % currentLightboxRoom.photos.length;
-            changeLightboxPhoto(prevIndex);
-        }
-
-        // Lightbox controls
-        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-        document.querySelector('.lightbox-next').addEventListener('click', nextPhoto);
-        document.querySelector('.lightbox-prev').addEventListener('click', prevPhoto);
-
-        // Close on background click
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox') {
-                closeLightbox();
+            function handleSwipe(roomId) {
+                const threshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        // Swipe left - next image
+                        navigateRoomCoverflow(roomId, 1);
+                    } else {
+                        // Swipe right - previous image
+                        navigateRoomCoverflow(roomId, -1);
+                    }
+                }
             }
-        });
 
-        // Keyboard navigation - consolidated handler
+            // Add keyboard support when container is focused
+            container.setAttribute('tabindex', '0');
+            container.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    navigateRoomCoverflow(roomId, -1);
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    navigateRoomCoverflow(roomId, 1);
+                }
+            });
+        }
+
+        function updateRoomCoverflowPositions(roomId) {
+            const state = roomCoverflowStates[roomId];
+            if (!state) return;
+
+            const { currentIndex, items } = state;
+            const total = items.length;
+
+            items.forEach((item, index) => {
+                // Remove all position classes
+                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden', 'hidden-left', 'hidden-right');
+
+                const diff = index - currentIndex;
+
+                if (diff === 0) {
+                    item.classList.add('active');
+                } else if (diff === -1 || (diff === total - 1 && currentIndex === 0)) {
+                    item.classList.add('left-1');
+                } else if (diff === -2 || (diff === total - 2 && currentIndex <= 1)) {
+                    item.classList.add('left-2');
+                } else if (diff === -3 || (diff === total - 3 && currentIndex <= 2)) {
+                    item.classList.add('left-3');
+                } else if (diff === 1 || (diff === -(total - 1) && currentIndex === total - 1)) {
+                    item.classList.add('right-1');
+                } else if (diff === 2 || (diff === -(total - 2) && currentIndex >= total - 2)) {
+                    item.classList.add('right-2');
+                } else if (diff === 3 || (diff === -(total - 3) && currentIndex >= total - 3)) {
+                    item.classList.add('right-3');
+                } else {
+                    // Determine if item should be hidden on left or right based on circular distance
+                    // Calculate normalized difference (0 to total-1) to determine shortest path
+                    const normalizedDiff = ((index - currentIndex) + total) % total;
+                    const midpoint = total / 2;
+                    
+                    // Items past the midpoint are closer via the left path, so hide them on the left
+                    // Items before the midpoint are closer via the right path, so hide them on the right
+                    if (normalizedDiff > midpoint) {
+                        item.classList.add('hidden-left');
+                    } else {
+                        item.classList.add('hidden-right');
+                    }
+                }
+            });
+        }
+
+        function lazyLoadRoomCoverflowImages(roomId) {
+            const state = roomCoverflowStates[roomId];
+            if (!state) return;
+
+            const { currentIndex, items } = state;
+            
+            // Load current and nearby images
+            const indicesToLoad = [
+                currentIndex,
+                (currentIndex - 1 + items.length) % items.length,
+                (currentIndex + 1) % items.length,
+                (currentIndex - 2 + items.length) % items.length,
+                (currentIndex + 2) % items.length
+            ];
+
+            indicesToLoad.forEach(idx => {
+                const img = items[idx]?.querySelector('img[data-src]');
+                if (img && !img.src) {
+                    img.src = img.dataset.src;
+                }
+            });
+        }
+
+        window.navigateRoomCoverflow = function(roomId, direction, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const state = roomCoverflowStates[roomId];
+            if (!state || state.isAnimating) return;
+
+            state.isAnimating = true;
+            const total = state.items.length;
+            state.currentIndex = (state.currentIndex + direction + total) % total;
+
+            updateRoomCoverflowPositions(roomId);
+            lazyLoadRoomCoverflowImages(roomId);
+
+            setTimeout(() => {
+                state.isAnimating = false;
+            }, 600); // Match CSS transition duration
+        };
+
+        // Room Modal functionality
         let keyboardHandlerInitialized = false;
         
         function initializeKeyboardHandler() {
             if (keyboardHandlerInitialized) return;
             
             document.addEventListener('keydown', (e) => {
-                const lightbox = document.getElementById('lightbox');
                 const modal = document.getElementById('room-modal');
                 
-                if (lightbox.style.display === 'flex') {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowRight') nextPhoto();
-                    if (e.key === 'ArrowLeft') prevPhoto();
-                } else if (modal && modal.classList.contains('active')) {
+                if (modal && modal.classList.contains('active')) {
                     if (e.key === 'Escape') closeRoomModal();
                 }
             });
@@ -602,13 +683,26 @@
             const escapedRoomId = escapeJs(room.id);
 
             const modalBody = document.getElementById('room-modal-body');
+            const hasMultiplePhotos = room.photos && room.photos.length > 1;
+            
             modalBody.innerHTML = `
                 <div class="room-modal-header">
                     ${firstPhoto ? `
-                        <div class="room-modal-hero" style="cursor: pointer;" onclick="openLightbox('${escapedRoomId}', 0)">
-                            <img src="${escapeHtml(firstPhoto)}" alt="${name}">
-                            ${room.photos && room.photos.length > 1 ? `
-                                <div class="room-modal-photo-badge">${room.photos.length} photos - Click to view gallery</div>
+                        <div class="coverflow-container" id="coverflow-${escapedRoomId}" data-room-id="${escapedRoomId}">
+                            <div class="coverflow-wrapper">
+                                ${room.photos.map((photo, idx) => `
+                                    <div class="coverflow-item ${idx === 0 ? 'active' : 'hidden'}" 
+                                         data-index="${idx}">
+                                        <div class="coverflow-item-inner">
+                                            <img data-src="${escapeHtml(photo.url)}" alt="${name} - Photo ${idx + 1}">
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ${hasMultiplePhotos ? `
+                                <button class="coverflow-nav coverflow-nav-prev" onclick="navigateRoomCoverflow('${escapedRoomId}', -1, event)" aria-label="Previous image">‹</button>
+                                <button class="coverflow-nav coverflow-nav-next" onclick="navigateRoomCoverflow('${escapedRoomId}', 1, event)" aria-label="Next image">›</button>
+                                <div class="coverflow-badge">${room.photos.length} Photos</div>
                             ` : ''}
                         </div>
                     ` : ''}
@@ -694,6 +788,13 @@
 
             document.getElementById('room-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Initialize Cover Flow for the room modal
+            if (firstPhoto) {
+                requestAnimationFrame(() => {
+                    initRoomCoverflow(escapedRoomId);
+                });
+            }
 
             // Initialize booking bar for modal
             initializeModalBookingBar();
