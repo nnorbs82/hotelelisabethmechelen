@@ -50,16 +50,14 @@
             border: none;
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
         }
 
         .package-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .package-card.expanded {
-            cursor: default;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -70,13 +68,13 @@
             padding: 0;
             gap: 0;
             position: relative;
-            min-height: 220px;
+            min-height: 280px;
         }
 
         .package-thumbnail {
-            width: 300px;
+            width: 400px;
             height: auto;
-            min-height: 220px;
+            min-height: 280px;
             object-fit: cover;
             border-radius: 0;
             flex-shrink: 0;
@@ -127,57 +125,47 @@
         }
 
         .package-header-cta {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--color-sage);
-            margin-top: 0.5rem;
-            display: flex;
+            color: var(--color-black);
+            margin-top: 1rem;
+            padding: 0.75rem 1.75rem;
+            background: transparent;
+            border: 2px solid var(--color-sage);
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
+            gap: 0.65rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            cursor: pointer;
         }
 
         .package-header-cta svg {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             transition: transform 0.3s ease;
         }
 
+        .package-card:hover .package-header-cta {
+            background: var(--color-sage);
+            color: var(--color-white);
+            border-color: var(--color-sage);
+        }
+
         .package-card:hover .package-header-cta svg {
-            transform: translateX(4px);
+            transform: scale(1.1);
         }
 
-        .package-expand-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(149, 147, 128, 0.4);
-            background-color: rgba(255, 255, 255, 0.95);
-            color: var(--color-sage);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-
-        .package-card:hover .package-expand-icon {
-            background-color: var(--color-black);
-            border-color: var(--color-black);
+        .package-card.expanded .package-header-cta {
+            background: var(--color-black);
             color: var(--color-white);
-            transform: scale(1.05);
+            border-color: var(--color-black);
         }
 
-        .package-card.expanded .package-expand-icon {
+        .package-card.expanded .package-header-cta svg {
             transform: rotate(180deg);
-            background-color: var(--color-black);
-            border-color: var(--color-black);
-            color: var(--color-white);
         }
 
         /* Expanded Content - Hidden by Default */
@@ -559,15 +547,13 @@
                                     <div class="package-summary">
                                         <h2 class="package-title">${title}</h2>
                                         <p class="package-teaser">${teaser}</p>
-                                        <div class="package-header-cta">
+                                        <button class="package-header-cta">
                                             <span>${viewDetailsCta}</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                <polyline points="12 5 19 12 12 19"></polyline>
+                                                <polyline points="6 9 12 15 18 9"></polyline>
                                             </svg>
-                                        </div>
+                                        </button>
                                     </div>
-                                    <div class="package-expand-icon">▼</div>
                                 </div>
                                 <div class="package-details">
                                     <div class="package-content">
@@ -620,21 +606,45 @@
 
                     // Add click handlers for expand/collapse
                     document.querySelectorAll('.package-card').forEach(card => {
-                        const header = card.querySelector('.package-header');
-                        header.addEventListener('click', (e) => {
-                            // Don't toggle if clicking on a link or within a link
-                            if (e.target.closest('a')) return;
+                        const ctaButton = card.querySelector('.package-header-cta');
+                        const ctaText = ctaButton.querySelector('span');
+                        const originalText = ctaText.textContent;
+                        const hideText = currentLang === 'nl' ? 'Verberg details' : currentLang === 'fr' ? 'Masquer les détails' : 'Hide Details';
+                        
+                        ctaButton.addEventListener('click', (e) => {
+                            e.stopPropagation();
                             
                             // Close previously expanded card
                             if (currentlyExpandedCard && currentlyExpandedCard !== card) {
                                 currentlyExpandedCard.classList.remove('expanded');
+                                const prevButton = currentlyExpandedCard.querySelector('.package-header-cta span');
+                                prevButton.textContent = prevButton.getAttribute('data-original-text');
+                            }
+                            
+                            // Store original text if not already stored
+                            if (!ctaText.getAttribute('data-original-text')) {
+                                ctaText.setAttribute('data-original-text', originalText);
                             }
                             
                             // Toggle this card
                             card.classList.toggle('expanded');
                             
+                            // Update button text
+                            if (card.classList.contains('expanded')) {
+                                ctaText.textContent = hideText;
+                            } else {
+                                ctaText.textContent = originalText;
+                            }
+                            
                             // Update reference to currently expanded card
                             currentlyExpandedCard = card.classList.contains('expanded') ? card : null;
+                            
+                            // Scroll to card if expanding
+                            if (card.classList.contains('expanded')) {
+                                setTimeout(() => {
+                                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                }, 100);
+                            }
                         });
                     });
                 } else {
