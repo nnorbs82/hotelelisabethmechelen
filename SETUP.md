@@ -70,7 +70,7 @@ The website includes an interactive Google Maps section on the **homepage (index
 
 ### Setting up Google Maps API Key
 
-**Important**: Before the map will work, you need to add your Google Maps API key.
+**Important**: The homepage map uses the Google Maps JavaScript API.
 
 1. Get a Google Maps API key:
    - Go to [Google Cloud Console](https://console.cloud.google.com/)
@@ -79,19 +79,19 @@ The website includes an interactive Google Maps section on the **homepage (index
    - Create credentials (API Key)
    - Restrict the API key to your domain for security
 
-2. Add the API key to index.html:
-   - Open `index.html`
-   - Search for `YOUR_GOOGLE_MAPS_API_KEY`
-   - Replace it with your actual API key
+2. Update the API key in `index.html` if needed:
+   - Look for the Maps JavaScript API script tag near the bottom of the file.
+   - Replace the key value with your latest API key.
    - The script tag looks like this:
      ```html
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_ACTUAL_KEY&callback=initMap"></script>
      ```
 
 3. Map Configuration:
-   - **Location**: Goswin de Stassartstraat 26/28, 2800 Mechelen, Belgium
-   - **Coordinates**: 51.0259°N, 4.4774°E
-   - **Features**: Zoom controls, fullscreen, satellite/map view, street view
+   - **Location**: plus code `2FJJ+J4 Mechelen, Belgium`
+   - **Fallback Coordinates**: 51.0259°N, 4.4774°E
+   - **Theme**: Dark map style with road color `#8a7753`
+   - **Features**: Zoom controls, fullscreen, no map type or street view controls
 
 ### Map Styling
 The map section has a greyish-white background (#f5f5f3) and is 500px height, full-width, positioned just before the footer on the homepage.
