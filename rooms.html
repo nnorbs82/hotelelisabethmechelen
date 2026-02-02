@@ -856,14 +856,14 @@
             // Show current photo
             const currentPhoto = fullscreenGalleryPhotos[fullscreenGalleryIndex];
             const altText = currentPhoto.alt || `${room.name_en || 'Room'} - Photo ${fullscreenGalleryIndex + 1}`;
-            galleryImage.src = escapeHtml(currentPhoto.url);
+            galleryImage.src = currentPhoto.url;
             galleryImage.alt = escapeHtml(altText);
             
             // Render thumbnails
             thumbnailsContainer.innerHTML = fullscreenGalleryPhotos.map((photo, index) => {
                 const thumbAlt = photo.alt || `Thumbnail ${index + 1}`;
                 return `
-                    <img src="${escapeHtml(photo.url)}" 
+                    <img src="${photo.url}" 
                          class="fullscreen-gallery-thumbnail ${index === fullscreenGalleryIndex ? 'active' : ''}" 
                          onclick="changeFullscreenGalleryPhoto(${index})"
                          alt="${escapeHtml(thumbAlt)}">
@@ -887,7 +887,7 @@
             fullscreenGalleryIndex = index;
             const galleryImage = document.getElementById('fullscreen-gallery-image');
             const currentPhoto = fullscreenGalleryPhotos[index];
-            galleryImage.src = escapeHtml(currentPhoto.url);
+            galleryImage.src = currentPhoto.url;
             const altText = currentPhoto.alt || `Room photo ${index + 1}`;
             galleryImage.alt = escapeHtml(altText);
             
