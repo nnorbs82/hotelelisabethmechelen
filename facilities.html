@@ -256,13 +256,10 @@
                     const hasMultiplePhotos = libraryItems.length > 1;
                     const firstPhoto = libraryItems[0] || '';
                     const facilityId = facility.id;
-                    
-                    // Determine layout (alternating)
-                    const imageOnLeft = facilityIndex % 2 === 0;
 
                     const albumMarkup = hasPhotos
                         ? `
-                            <div class="facility-album-showcase ${imageOnLeft ? 'image-left' : 'image-right'}">
+                            <div class="facility-album-showcase">
                                 <div class="facility-album-main-wrapper" data-facility-id="${facilityId}" data-photos='${JSON.stringify(libraryItems)}' data-index="0">
                                     <div class="facility-album-main-image" onclick="openFacilityLightbox('${facilityId}', 0)" style="cursor: pointer;">
                                         <img src="${firstPhoto}" alt="${escapeHtml(albumLabels.albumAlt(name, 0))}" id="facility-img-${facilityId}">
