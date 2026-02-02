@@ -3349,6 +3349,19 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 /* Hidden items */
+.coverflow-item.hidden-left {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-1200px) translateZ(-800px) scale(0.5);
+}
+
+.coverflow-item.hidden-right {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(1200px) translateZ(-800px) scale(0.5);
+}
+
+/* Fallback for generic hidden class */
 .coverflow-item.hidden {
     opacity: 0;
     pointer-events: none;

@@ -453,7 +453,7 @@
 
             items.forEach((item, index) => {
                 // Remove all position classes
-                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden');
+                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden', 'hidden-left', 'hidden-right');
 
                 const diff = index - currentIndex;
 
@@ -472,7 +472,15 @@
                 } else if (diff === 3 || (diff === -(total - 3) && currentIndex >= total - 3)) {
                     item.classList.add('right-3');
                 } else {
-                    item.classList.add('hidden');
+                    // Determine if item should be hidden on left or right
+                    // Items with indices less than currentIndex - 3 should be hidden on the left
+                    // Items with indices greater than currentIndex + 3 should be hidden on the right
+                    const normalizedDiff = ((index - currentIndex) + total) % total;
+                    if (normalizedDiff > total / 2) {
+                        item.classList.add('hidden-left');
+                    } else {
+                        item.classList.add('hidden-right');
+                    }
                 }
             });
         }
