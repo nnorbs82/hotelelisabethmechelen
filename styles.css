@@ -516,10 +516,9 @@ body.admin-page {
     padding: 0;
 }
 
-.map-section iframe {
+.map-section .map-embed {
     width: 100%;
     height: 100%;
-    filter: grayscale(1) invert(1) contrast(1.1);
     display: block;
 }
 

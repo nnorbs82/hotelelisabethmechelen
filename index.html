@@ -102,16 +102,7 @@
 
     <!-- Map Section -->
     <section class="map-section">
-        <iframe 
-            src="https://www.google.com/maps?q=2FJJ%2BJ4%20Mechelen%2C%20Belgium&hl=en&z=15&output=embed" 
-            width="100%" 
-            height="500" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Hotel Elisabeth Mechelen Location">
-        </iframe>
+        <div id="map" class="map-embed" role="img" aria-label="Hotel Elisabeth Mechelen Location"></div>
     </section>
 
     <footer>
@@ -631,6 +622,50 @@
         // Load background on page load
         loadPageBackground();
     </script>
+    <script>
+        const defaultPlusCode = '2FJJ+J4 Mechelen, Belgium';
+        const fallbackLocation = { lat: 51.0259, lng: 4.4774 };
+        const mapStyles = [
+            { elementType: 'geometry', stylers: [{ color: '#141414' }] },
+            { elementType: 'labels.text.fill', stylers: [{ color: '#c7c1b2' }] },
+            { elementType: 'labels.text.stroke', stylers: [{ color: '#0b0b0b' }] },
+            { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#8a7753' }] },
+            { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#3a2f1f' }] },
+            { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#efe7d6' }] },
+            { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#1f1f1f' }] },
+            { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#202020' }] },
+            { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0d0d0d' }] }
+        ];
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: fallbackLocation,
+                styles: mapStyles,
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: true
+            });
+
+            const marker = new google.maps.Marker({
+                map,
+                position: fallbackLocation,
+                title: defaultPlusCode
+            });
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: defaultPlusCode }, (results, status) => {
+                if (status === 'OK' && results[0]) {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location);
+                    marker.setPosition(location);
+                } else {
+                    console.warn('Unable to geocode plus code:', status);
+                }
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATJkyi-UfgeSQl9znvGtL4P4N7rC9HDWM&callback=initMap"></script>
     <script src="booking-bar.js"></script>
 </body>
 </html>
