@@ -601,7 +601,7 @@
 
             indicesToLoad.forEach(idx => {
                 const img = items[idx]?.querySelector('img[data-src]');
-                if (img && img.dataset.src && !img.src) {
+                if (img && img.dataset.src && (!img.src || img.src === img.baseURI)) {
                     img.src = img.dataset.src;
                 }
             });
@@ -695,7 +695,7 @@
                                     <div class="coverflow-item ${idx === 0 ? 'active' : ''}" 
                                          data-index="${idx}">
                                         <div class="coverflow-item-inner">
-                                            <img data-src="${escapeHtml(photo.url)}" alt="${name} - Photo ${idx + 1}">
+                                            <img src="" data-src="${escapeHtml(photo.url)}" alt="${name} - Photo ${idx + 1}">
                                         </div>
                                     </div>
                                 `).join('')}
