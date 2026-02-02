@@ -460,6 +460,7 @@
 
         // Cover Flow for Room Modal
         const roomCoverflowStates = {};
+        const COVERFLOW_ANIMATION_DURATION = 600; // milliseconds - must match CSS transition duration
 
         window.initRoomCoverflow = function(roomId) {
             const container = document.getElementById(`coverflow-${roomId}`);
@@ -600,7 +601,7 @@
 
             indicesToLoad.forEach(idx => {
                 const img = items[idx]?.querySelector('img[data-src]');
-                if (img && !img.src) {
+                if (img && img.dataset.src && !img.src) {
                     img.src = img.dataset.src;
                 }
             });
@@ -623,7 +624,7 @@
 
             setTimeout(() => {
                 state.isAnimating = false;
-            }, 600); // Match CSS transition duration
+            }, COVERFLOW_ANIMATION_DURATION);
         };
 
         // Room Modal functionality
@@ -691,7 +692,7 @@
                         <div class="coverflow-container" id="coverflow-${escapedRoomId}" data-room-id="${escapedRoomId}">
                             <div class="coverflow-wrapper">
                                 ${room.photos.map((photo, idx) => `
-                                    <div class="coverflow-item ${idx === 0 ? 'active' : 'hidden'}" 
+                                    <div class="coverflow-item ${idx === 0 ? 'active' : ''}" 
                                          data-index="${idx}">
                                         <div class="coverflow-item-inner">
                                             <img data-src="${escapeHtml(photo.url)}" alt="${name} - Photo ${idx + 1}">
