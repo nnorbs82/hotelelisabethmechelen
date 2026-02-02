@@ -3306,7 +3306,7 @@ body.admin-page .vertical-menu-nav ul {
 /* Center item - largest, fully opaque, forward-facing */
 .coverflow-item.active {
     z-index: 100;
-    transform: translateX(0) translateZ(0) rotateY(0deg) scale(1.2);
+    transform: translateX(0) translateZ(0) rotateY(0deg) scale(1.4);
     opacity: 1;
 }
 
