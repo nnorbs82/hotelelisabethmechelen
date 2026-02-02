@@ -295,7 +295,7 @@
                                                  data-index="${idx}"
                                                  onclick="openFacilityLightbox('${facilityId}', ${idx})">
                                                 <div class="coverflow-item-inner">
-                                                    <img data-src="${url}" alt="${escapeHtml(albumLabels.albumAlt(name, idx))}" loading="lazy">
+                                                    <img data-src="${url}" alt="${escapeHtml(albumLabels.albumAlt(name, idx))}">
                                                 </div>
                                             </div>
                                         `).join('')}
@@ -350,13 +350,13 @@
                 }).join('');
 
                 // Initialize Cover Flow after rendering
-                setTimeout(() => {
+                requestAnimationFrame(() => {
                     allFacilities.forEach(facility => {
                         if (facility.library && facility.library.length > 0) {
                             initCoverflow(facility.id);
                         }
                     });
-                }, 100);
+                });
             } catch (error) {
                 console.error('Error loading facilities list:', error);
                 container.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
@@ -384,10 +384,23 @@
             lazyLoadCoverflowImages(facilityId);
 
             // Add wheel event listener
+            let lastWheelTime = 0;
+            const wheelThrottle = 300; // ms between wheel navigations
+            
             container.addEventListener('wheel', (e) => {
-                e.preventDefault();
+                const now = Date.now();
+                if (now - lastWheelTime < wheelThrottle) {
+                    return;
+                }
+                
+                // Only prevent default if we're actually navigating the carousel
                 const direction = e.deltaY > 0 ? 1 : -1;
-                navigateCoverflow(facilityId, direction, e);
+                const state = coverflowStates[facilityId];
+                if (state && !state.isAnimating) {
+                    e.preventDefault();
+                    lastWheelTime = now;
+                    navigateCoverflow(facilityId, direction, e);
+                }
             }, { passive: false });
 
             // Add touch support
@@ -505,25 +518,6 @@
             setTimeout(() => {
                 state.isAnimating = false;
             }, 600);
-        };
-
-        // Navigate facility images (keeping old function for backwards compatibility)
-        window.navigateFacilityImage = function(facilityId, direction, event) {
-            if (event) event.stopPropagation();
-            const wrapper = document.querySelector(`[data-facility-id="${facilityId}"]`);
-            if (!wrapper) return;
-            
-            const photos = JSON.parse(wrapper.dataset.photos || '[]');
-            if (photos.length === 0) return;
-            
-            let currentIndex = parseInt(wrapper.dataset.index) || 0;
-            currentIndex = (currentIndex + direction + photos.length) % photos.length;
-            
-            const img = document.getElementById(`facility-img-${facilityId}`);
-            if (img) {
-                img.src = photos[currentIndex];
-            }
-            wrapper.dataset.index = currentIndex;
         };
 
         // Switch between facilities

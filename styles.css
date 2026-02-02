@@ -3724,8 +3724,7 @@ body.admin-page .vertical-menu-nav ul {
         height: 200px;
     }
 
-    .coverflow-item.left-1,
-    .coverflow-item.right-1 {
+    .coverflow-item.left-1 {
         transform: translateX(-250px) translateZ(-150px) rotateY(40deg) scale(0.8);
     }
 
@@ -3804,8 +3803,7 @@ body.admin-page .vertical-menu-nav ul {
         height: 165px;
     }
 
-    .coverflow-item.left-1,
-    .coverflow-item.right-1 {
+    .coverflow-item.left-1 {
         transform: translateX(-180px) translateZ(-120px) rotateY(35deg) scale(0.75);
     }
 
