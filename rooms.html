@@ -109,9 +109,6 @@
                 <button class="fullscreen-coverflow-nav fullscreen-coverflow-nav-next" aria-label="Next image">›</button>
                 <div class="fullscreen-coverflow-badge"></div>
             </div>
-            <div class="fullscreen-thumbnails" id="fullscreen-thumbnails">
-                <!-- Thumbnails will be inserted here dynamically -->
-            </div>
         </div>
     </div>
 
@@ -852,12 +849,10 @@
             
             const gallery = document.getElementById('fullscreen-gallery');
             const wrapper = gallery.querySelector('.fullscreen-coverflow-wrapper');
-            const thumbnailsContainer = document.getElementById('fullscreen-thumbnails');
             const badge = gallery.querySelector('.fullscreen-coverflow-badge');
             
             // Clear previous content
             wrapper.innerHTML = '';
-            thumbnailsContainer.innerHTML = '';
             
             // Create cover flow items
             room.photos.forEach((photo, idx) => {
@@ -871,14 +866,6 @@
                     </div>
                 `;
                 wrapper.appendChild(item);
-                
-                // Create thumbnail
-                const thumbnail = document.createElement('div');
-                thumbnail.className = `fullscreen-thumbnail ${idx === 0 ? 'active' : ''}`;
-                thumbnail.dataset.index = idx;
-                thumbnail.innerHTML = `<img src="${escapeHtml(photo.url)}" alt="">`;
-                thumbnail.onclick = () => navigateFullscreenGallery(idx, true);
-                thumbnailsContainer.appendChild(thumbnail);
             });
             
             // Update badge
@@ -927,7 +914,6 @@
             const state = fullscreenGalleryState;
             const gallery = document.getElementById('fullscreen-gallery');
             const items = Array.from(gallery.querySelectorAll('.fullscreen-coverflow-item'));
-            const thumbnails = Array.from(gallery.querySelectorAll('.fullscreen-thumbnail'));
             
             items.forEach((item, index) => {
                 item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden-left', 'hidden-right');
@@ -953,11 +939,6 @@
                 } else {
                     item.classList.add('hidden-right');
                 }
-            });
-            
-            // Update thumbnails
-            thumbnails.forEach((thumb, index) => {
-                thumb.classList.toggle('active', index === state.currentIndex);
             });
         }
         
