@@ -2944,15 +2944,16 @@ body.admin-page .vertical-menu-nav ul {
     list-style: none;
     padding: 0;
     display: grid;
-    gap: 0.4rem 1.5rem;
+    gap: 0.35rem 1.25rem;
     grid-template-columns: repeat(auto-fit, minmax(var(--facility-guidelines-min-width), 1fr));
 }
 
 .facility-guidelines li {
-    padding-left: 1.5rem;
+    padding-left: 1.25rem;
     position: relative;
     color: #555;
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.85rem;
 }
 
 .facility-guidelines li::before {
@@ -2960,6 +2961,7 @@ body.admin-page .vertical-menu-nav ul {
     position: absolute;
     left: 0;
     color: var(--color-sage);
+    font-size: 0.9rem;
 }
 
 .facility-guidelines-empty {
@@ -2987,38 +2989,31 @@ body.admin-page .vertical-menu-nav ul {
 /* ============ MODERN FACILITY STYLES - BOUTIQUE REDESIGN ============ */
 .facility-card-modern {
     background-color: var(--color-white);
-    border: 1px solid rgba(149, 147, 128, 0.2);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(149, 147, 128, 0.15);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
     overflow: hidden;
-    margin-bottom: 0;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
 }
 
 .facility-card-modern:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .facility-card-modern:last-child {
     margin-bottom: 0;
 }
 
-.facility-card-modern:nth-child(even) {
-    background-color: rgba(212, 211, 195, 0.15);
-}
-
-.facility-card-modern:nth-child(even) .facility-content {
-    background-color: rgba(212, 211, 195, 0.15);
-}
-
 .facility-album-showcase {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    min-height: 240px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    min-height: 180px;
 }
 
 .facility-album-showcase.image-right {
-    direction: rtl;
+    direction: ltr;
 }
 
 .facility-album-showcase.image-right > * {
@@ -3028,7 +3023,7 @@ body.admin-page .vertical-menu-nav ul {
 .facility-album-main-wrapper {
     position: relative;
     height: 100%;
-    min-height: 240px;
+    min-height: 180px;
 }
 
 .facility-album-main-image {
@@ -3051,10 +3046,10 @@ body.admin-page .vertical-menu-nav ul {
 
 .facility-magnify-icon {
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    width: 34px;
-    height: 34px;
+    bottom: 0.65rem;
+    right: 0.65rem;
+    width: 28px;
+    height: 28px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     display: flex;
@@ -3066,8 +3061,8 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .facility-magnify-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     color: var(--color-beige);
     filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
@@ -3087,11 +3082,11 @@ body.admin-page .vertical-menu-nav ul {
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: var(--color-beige);
-    border: 2px solid var(--color-beige);
+    border: 1px solid rgba(212, 211, 195, 0.6);
     border-radius: 999px;
-    font-size: 1.2rem;
-    width: 40px;
-    height: 40px;
+    font-size: 1rem;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -3108,27 +3103,27 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .facility-album-nav-prev {
-    left: 0.75rem;
+    left: 0.5rem;
 }
 
 .facility-album-nav-next {
-    right: 0.75rem;
+    right: 0.5rem;
 }
 
 .facility-album-badge {
     position: absolute;
-    bottom: 0.75rem;
-    left: 0.75rem;
-    background: rgba(0, 0, 0, 0.7);
+    bottom: 0.5rem;
+    left: 0.5rem;
+    background: rgba(0, 0, 0, 0.65);
     color: var(--color-white);
-    padding: 0.35rem 0.75rem;
-    font-size: 0.75rem;
-    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+    border-radius: 3px;
     z-index: 3;
 }
 
 .facility-content {
-    padding: 1.75rem 2rem 1.5rem;
+    padding: 1.25rem 1.5rem 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -3138,56 +3133,56 @@ body.admin-page .vertical-menu-nav ul {
 .facility-content::before {
     content: '';
     position: absolute;
-    top: 1.5rem;
+    top: 1.15rem;
     left: 0;
-    width: 3px;
-    height: 35px;
+    width: 2px;
+    height: 28px;
     background: var(--color-sage);
 }
 
 .facility-content-title {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 500;
     color: var(--color-black);
-    margin-bottom: 0.6rem;
-    letter-spacing: 0.06rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05rem;
     text-transform: uppercase;
 }
 
 .facility-content-description {
     color: #555;
-    line-height: 1.6;
-    margin-bottom: 1rem;
+    line-height: 1.55;
+    margin-bottom: 0.85rem;
     white-space: pre-line;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .facility-guidelines-section h4 {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.12rem;
+    letter-spacing: 0.1rem;
     color: var(--color-sage);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
     font-weight: 600;
-    padding-bottom: 0.35rem;
-    border-bottom: 1px solid rgba(149, 147, 128, 0.3);
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgba(149, 147, 128, 0.25);
 }
 
 .facility-no-photos {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    min-height: 240px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    min-height: 180px;
 }
 
 .facility-no-photos-placeholder {
-    background: linear-gradient(135deg, var(--color-beige) 0%, rgba(212, 211, 195, 0.6) 100%);
+    background: linear-gradient(135deg, var(--color-beige) 0%, rgba(212, 211, 195, 0.5) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-sage);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-style: italic;
-    padding: 1.5rem;
+    padding: 1.25rem;
     text-align: center;
 }
 
@@ -3332,57 +3327,57 @@ body.admin-page .vertical-menu-nav ul {
     }
 
     .facility-album-main-wrapper {
-        min-height: 260px;
+        min-height: 200px;
     }
 
     .facility-content {
-        padding: 1.75rem 1.5rem 1.5rem;
+        padding: 1.25rem 1.25rem 1.25rem;
     }
 
     .facility-content::before {
-        top: 1.25rem;
-        height: 40px;
+        top: 1.1rem;
+        height: 32px;
     }
 
     .facility-content-title {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     
     .facility-card-modern {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
     }
 }
 
 @media (max-width: 600px) {
     .facility-album-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
     }
 
     .facility-lightbox-prev,
     .facility-lightbox-next {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
     }
 
     .facility-lightbox-prev {
-        left: 1rem;
+        left: 0.75rem;
     }
 
     .facility-lightbox-next {
-        right: 1rem;
+        right: 0.75rem;
     }
 
     .facility-lightbox-thumbnails {
         max-width: 95%;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
 
     .facility-lightbox-thumbnail {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
     }
 }
 
