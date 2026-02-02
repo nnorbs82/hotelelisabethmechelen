@@ -547,7 +547,7 @@
                                     <div class="package-summary">
                                         <h2 class="package-title">${title}</h2>
                                         <p class="package-teaser">${teaser}</p>
-                                        <button class="package-header-cta">
+                                        <button class="package-header-cta" aria-expanded="false" aria-label="${viewDetailsCta}">
                                             <span>${viewDetailsCta}</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -610,6 +610,10 @@
                         const ctaText = ctaButton.querySelector('span');
                         const originalText = ctaText.textContent;
                         const hideText = currentLang === 'nl' ? 'Verberg details' : currentLang === 'fr' ? 'Masquer les détails' : 'Hide Details';
+                        const viewDetailsText = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
+                        
+                        // Store original text on initialization
+                        ctaText.setAttribute('data-original-text', originalText);
                         
                         ctaButton.addEventListener('click', (e) => {
                             e.stopPropagation();
@@ -617,32 +621,42 @@
                             // Close previously expanded card
                             if (currentlyExpandedCard && currentlyExpandedCard !== card) {
                                 currentlyExpandedCard.classList.remove('expanded');
-                                const prevButton = currentlyExpandedCard.querySelector('.package-header-cta span');
-                                prevButton.textContent = prevButton.getAttribute('data-original-text');
-                            }
-                            
-                            // Store original text if not already stored
-                            if (!ctaText.getAttribute('data-original-text')) {
-                                ctaText.setAttribute('data-original-text', originalText);
+                                const prevButton = currentlyExpandedCard.querySelector('.package-header-cta');
+                                const prevText = prevButton?.querySelector('span');
+                                if (prevButton) {
+                                    prevButton.setAttribute('aria-expanded', 'false');
+                                    prevButton.setAttribute('aria-label', viewDetailsText);
+                                }
+                                if (prevText) {
+                                    prevText.textContent = prevText.getAttribute('data-original-text');
+                                }
                             }
                             
                             // Toggle this card
                             card.classList.toggle('expanded');
                             
-                            // Update button text
+                            // Update button text and aria attributes
                             if (card.classList.contains('expanded')) {
                                 ctaText.textContent = hideText;
+                                ctaButton.setAttribute('aria-expanded', 'true');
+                                ctaButton.setAttribute('aria-label', hideText);
                             } else {
-                                ctaText.textContent = originalText;
+                                ctaText.textContent = ctaText.getAttribute('data-original-text');
+                                ctaButton.setAttribute('aria-expanded', 'false');
+                                ctaButton.setAttribute('aria-label', viewDetailsText);
                             }
                             
                             // Update reference to currently expanded card
                             currentlyExpandedCard = card.classList.contains('expanded') ? card : null;
                             
-                            // Scroll to card if expanding
+                            // Scroll to card if expanding (respect prefers-reduced-motion)
                             if (card.classList.contains('expanded')) {
                                 setTimeout(() => {
-                                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                                    card.scrollIntoView({ 
+                                        behavior: prefersReducedMotion ? 'auto' : 'smooth', 
+                                        block: 'nearest' 
+                                    });
                                 }, 100);
                             }
                         });
