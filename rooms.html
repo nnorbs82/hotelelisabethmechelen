@@ -97,7 +97,23 @@
         </div>
     </div>
 
-
+    <!-- Fullscreen Gallery Modal -->
+    <div id="fullscreen-gallery" class="fullscreen-gallery" role="dialog" aria-modal="true" aria-label="Photo Gallery">
+        <button class="fullscreen-gallery-close" aria-label="Close">&times;</button>
+        <div class="fullscreen-gallery-content">
+            <div class="fullscreen-coverflow-container" id="fullscreen-coverflow">
+                <div class="fullscreen-coverflow-wrapper">
+                    <!-- Images will be inserted here dynamically -->
+                </div>
+                <button class="fullscreen-coverflow-nav fullscreen-coverflow-nav-prev" aria-label="Previous image">‹</button>
+                <button class="fullscreen-coverflow-nav fullscreen-coverflow-nav-next" aria-label="Next image">›</button>
+                <div class="fullscreen-coverflow-badge"></div>
+            </div>
+            <div class="fullscreen-thumbnails" id="fullscreen-thumbnails">
+                <!-- Thumbnails will be inserted here dynamically -->
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-container">
@@ -382,7 +398,7 @@
                     <article class="room-feature ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
                         <div class="room-feature-image-wrapper">
                             ${firstPhoto ? `
-                                <div class="room-feature-image-clickable" onclick="openRoomModal('${escapeJs(escapedRoomId)}')" style="cursor: pointer;">
+                                <div class="room-feature-image-clickable" onclick="openFullscreenGallery('${escapeJs(escapedRoomId)}')" style="cursor: pointer;">
                                     <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
                                     <div class="room-feature-magnify-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -827,6 +843,149 @@
             }
         }
 
+        // Fullscreen Gallery functionality
+        const fullscreenGalleryState = {};
+        
+        window.openFullscreenGallery = function(roomId) {
+            const room = roomsData.find(r => r.id === roomId);
+            if (!room || !room.photos || room.photos.length === 0) return;
+            
+            const gallery = document.getElementById('fullscreen-gallery');
+            const wrapper = gallery.querySelector('.fullscreen-coverflow-wrapper');
+            const thumbnailsContainer = document.getElementById('fullscreen-thumbnails');
+            const badge = gallery.querySelector('.fullscreen-coverflow-badge');
+            
+            // Clear previous content
+            wrapper.innerHTML = '';
+            thumbnailsContainer.innerHTML = '';
+            
+            // Create cover flow items
+            room.photos.forEach((photo, idx) => {
+                const item = document.createElement('div');
+                item.className = `fullscreen-coverflow-item ${idx === 0 ? 'active' : ''}`;
+                item.dataset.index = idx;
+                item.innerHTML = `
+                    <div class="fullscreen-coverflow-item-inner">
+                        <img src="${escapeHtml(photo.url)}" alt="${escapeHtml(room.name_en || '')} - Photo ${idx + 1}">
+                    </div>
+                `;
+                wrapper.appendChild(item);
+                
+                // Create thumbnail
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `fullscreen-thumbnail ${idx === 0 ? 'active' : ''}`;
+                thumbnail.dataset.index = idx;
+                thumbnail.innerHTML = `<img src="${escapeHtml(photo.url)}" alt="Thumbnail ${idx + 1}">`;
+                thumbnail.onclick = () => navigateFullscreenGallery(idx, true);
+                thumbnailsContainer.appendChild(thumbnail);
+            });
+            
+            // Update badge
+            badge.textContent = `${room.photos.length} Photos`;
+            
+            // Initialize state
+            fullscreenGalleryState.currentIndex = 0;
+            fullscreenGalleryState.totalImages = room.photos.length;
+            fullscreenGalleryState.roomId = roomId;
+            
+            // Show gallery
+            gallery.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Update positions
+            updateFullscreenGalleryPositions();
+        };
+        
+        window.closeFullscreenGallery = function() {
+            const gallery = document.getElementById('fullscreen-gallery');
+            gallery.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        function navigateFullscreenGallery(indexOrDirection, isAbsolute = false) {
+            const state = fullscreenGalleryState;
+            
+            if (isAbsolute) {
+                state.currentIndex = indexOrDirection;
+            } else {
+                state.currentIndex += indexOrDirection;
+                if (state.currentIndex < 0) state.currentIndex = state.totalImages - 1;
+                if (state.currentIndex >= state.totalImages) state.currentIndex = 0;
+            }
+            
+            updateFullscreenGalleryPositions();
+        }
+        
+        function updateFullscreenGalleryPositions() {
+            const state = fullscreenGalleryState;
+            const gallery = document.getElementById('fullscreen-gallery');
+            const items = Array.from(gallery.querySelectorAll('.fullscreen-coverflow-item'));
+            const thumbnails = Array.from(gallery.querySelectorAll('.fullscreen-thumbnail'));
+            
+            items.forEach((item, index) => {
+                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden-left', 'hidden-right');
+                
+                const position = index - state.currentIndex;
+                
+                if (position === 0) {
+                    item.classList.add('active');
+                } else if (position === -1 || position === state.totalImages - 1) {
+                    item.classList.add('left-1');
+                } else if (position === -2 || position === state.totalImages - 2) {
+                    item.classList.add('left-2');
+                } else if (position === -3 || position === state.totalImages - 3) {
+                    item.classList.add('left-3');
+                } else if (position === 1 || position === -(state.totalImages - 1)) {
+                    item.classList.add('right-1');
+                } else if (position === 2 || position === -(state.totalImages - 2)) {
+                    item.classList.add('right-2');
+                } else if (position === 3 || position === -(state.totalImages - 3)) {
+                    item.classList.add('right-3');
+                } else if (position < 0) {
+                    item.classList.add('hidden-left');
+                } else {
+                    item.classList.add('hidden-right');
+                }
+            });
+            
+            // Update thumbnails
+            thumbnails.forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === state.currentIndex);
+            });
+        }
+        
+        // Setup fullscreen gallery controls
+        function initializeFullscreenGallery() {
+            const gallery = document.getElementById('fullscreen-gallery');
+            
+            // Close button
+            gallery.querySelector('.fullscreen-gallery-close').addEventListener('click', closeFullscreenGallery);
+            
+            // Navigation buttons
+            gallery.querySelector('.fullscreen-coverflow-nav-prev').addEventListener('click', () => navigateFullscreenGallery(-1));
+            gallery.querySelector('.fullscreen-coverflow-nav-next').addEventListener('click', () => navigateFullscreenGallery(1));
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!gallery.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeFullscreenGallery();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateFullscreenGallery(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateFullscreenGallery(1);
+                }
+            });
+            
+            // Click outside to close
+            gallery.addEventListener('click', (e) => {
+                if (e.target === gallery) {
+                    closeFullscreenGallery();
+                }
+            });
+        }
+
         // Initialize modal booking bar
         function initializeModalBookingBar() {
             const checkinInput = document.getElementById('modal-checkin-date');
@@ -897,6 +1056,7 @@
             await loadAmenities();
             await loadRooms();
             initializeModalControls();
+            initializeFullscreenGallery();
             initializeKeyboardHandler();
         })();
     </script>
