@@ -472,11 +472,14 @@
                 } else if (diff === 3 || (diff === -(total - 3) && currentIndex >= total - 3)) {
                     item.classList.add('right-3');
                 } else {
-                    // Determine if item should be hidden on left or right
-                    // Items with indices less than currentIndex - 3 should be hidden on the left
-                    // Items with indices greater than currentIndex + 3 should be hidden on the right
+                    // Determine if item should be hidden on left or right based on circular distance
+                    // Calculate normalized difference (0 to total-1) to determine shortest path
                     const normalizedDiff = ((index - currentIndex) + total) % total;
-                    if (normalizedDiff > total / 2) {
+                    const midpoint = total / 2;
+                    
+                    // Items past the midpoint are closer via the left path, so hide them on the left
+                    // Items before the midpoint are closer via the right path, so hide them on the right
+                    if (normalizedDiff > midpoint) {
                         item.classList.add('hidden-left');
                     } else {
                         item.classList.add('hidden-right');
