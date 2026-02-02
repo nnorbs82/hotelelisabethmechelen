@@ -7,7 +7,269 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Group Request Page Specific Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .group-request-main {
+            padding-top: 0;
+        }
+
+        .group-request-hero {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .group-request-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600');
+        }
+
+        .group-request-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+        }
+
+        .group-request-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-white);
+            padding: 2rem;
+        }
+
+        .group-request-hero-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            color: var(--color-beige);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .group-request-hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .group-request-hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .group-request-hero-divider {
+            width: 60px;
+            height: 2px;
+            background-color: var(--color-beige);
+            margin: 1.5rem auto 0;
+        }
+
+        /* Group Request Form Section */
+        .group-request-section {
+            padding: 4rem 2rem;
+            background-color: var(--color-black);
+        }
+
+        .group-request-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .group-request-title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--color-beige);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .group-request-subtitle {
+            color: var(--color-sage);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .group-request-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .group-request-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .group-request-form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .group-request-form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .group-request-form-group label {
+            color: var(--color-beige);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .group-request-form-group input,
+        .group-request-form-group select,
+        .group-request-form-group textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--color-sage);
+            border-radius: 4px;
+            background-color: var(--color-white);
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+        }
+
+        .group-request-form-group input:focus,
+        .group-request-form-group select:focus,
+        .group-request-form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-beige);
+        }
+
+        .group-request-form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .group-request-form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .group-request-form-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .group-request-form-checkbox label {
+            color: var(--color-sage);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .group-request-form-checkbox a {
+            color: var(--color-beige);
+        }
+
+        .group-request-submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+            background-color: var(--color-beige);
+            color: var(--color-black);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .group-request-submit-btn:hover {
+            background-color: var(--color-sage);
+            color: var(--color-white);
+        }
+
+        .group-request-submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .group-request-form-status {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .group-request-form-status.success {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            display: block;
+        }
+
+        .group-request-form-status.error {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            display: block;
+        }
+
+        /* International telephone input customization */
+        .iti {
+            width: 100%;
+        }
+
+        .iti__flag-container {
+            border-right: 1px solid var(--color-sage);
+        }
+
+        .iti__selected-flag {
+            padding: 0 0 0 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .group-request-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .group-request-hero {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .group-request-hero-title {
+                font-size: 2rem;
+            }
+
+            .group-request-hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Main Navigation Menu -->
@@ -37,11 +299,140 @@
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Group Request</h2>
-            <p>Submit a request for group bookings and special arrangements.</p>
-        </div>
+    <main class="group-request-main">
+        <!-- Hero Section -->
+        <section class="group-request-hero">
+            <div class="group-request-hero-bg"></div>
+            <div class="group-request-hero-overlay"></div>
+            <div class="group-request-hero-content">
+                <span class="group-request-hero-tagline">Special Group Bookings</span>
+                <h1 class="group-request-hero-title">Group Accommodation Request</h1>
+                <p class="group-request-hero-subtitle">Plan your perfect group stay with customized arrangements and personalized service</p>
+                <div class="group-request-hero-divider"></div>
+            </div>
+        </section>
+
+        <!-- Group Request Form Section -->
+        <section class="group-request-section">
+            <div class="group-request-container">
+                <h2 class="group-request-title">Request Your Group Booking</h2>
+                <p class="group-request-subtitle">Fill out the form below and we'll get back to you shortly with a customized quotation.</p>
+                
+                <form id="group-request-form" class="group-request-form">
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="first-name">First Name *</label>
+                            <input type="text" id="first-name" name="first_name" required>
+                        </div>
+                        <div class="group-request-form-group">
+                            <label for="last-name">Last Name *</label>
+                            <input type="text" id="last-name" name="last_name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="group-request-form-group">
+                            <label for="telephone">Telephone Number *</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="checkin-date-group">Check-in Date *</label>
+                            <input type="text" id="checkin-date-group" name="checkin_date" placeholder="Select date" readonly required>
+                        </div>
+                        <div class="group-request-form-group">
+                            <label for="checkout-date-group">Check-out Date *</label>
+                            <input type="text" id="checkout-date-group" name="checkout_date" placeholder="Select date" readonly required>
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="total-guests">Total Number of Guests *</label>
+                            <input type="number" id="total-guests" name="total_guests" min="1" required>
+                        </div>
+                        <div class="group-request-form-group">
+                            <label for="single-rooms">Number of Single Rooms</label>
+                            <input type="number" id="single-rooms" name="single_rooms" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="twin-rooms">Number of Twin Rooms (2 Separate Beds)</label>
+                            <input type="number" id="twin-rooms" name="twin_rooms" min="0" value="0">
+                        </div>
+                        <div class="group-request-form-group">
+                            <label for="double-rooms">Number of Double Rooms (One Double Bed)</label>
+                            <input type="number" id="double-rooms" name="double_rooms" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-row">
+                        <div class="group-request-form-group">
+                            <label for="triple-rooms">Number of Triple Rooms (3 Single Beds)</label>
+                            <input type="number" id="triple-rooms" name="triple_rooms" min="0" value="0">
+                        </div>
+                    </div>
+                    
+                    <div class="group-request-form-group full-width">
+                        <label for="group-type">Group Type *</label>
+                        <select id="group-type" name="group_type" required>
+                            <option value="">Select group type</option>
+                            <option value="Business">Business</option>
+                            <option value="Family Reunion">Family Reunion</option>
+                            <option value="Birthday">Birthday</option>
+                            <option value="Bachelor Party">Bachelor Party</option>
+                            <option value="Bachelorette Party">Bachelorette Party</option>
+                            <option value="Wedding">Wedding</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="group-request-form-group full-width">
+                        <label for="meal-option">Meal Option *</label>
+                        <select id="meal-option" name="meal_option" required>
+                            <option value="">Select meal option</option>
+                            <option value="Breakfast Only">Breakfast Only</option>
+                            <option value="Breakfast and Packed Lunch">Breakfast and Packed Lunch</option>
+                            <option value="Packed Lunch Only">Packed Lunch Only</option>
+                            <option value="We do not require food service">We do not require food service</option>
+                        </select>
+                    </div>
+                    
+                    <div class="group-request-form-group full-width">
+                        <label for="message">Additional Message</label>
+                        <textarea id="message" name="message" placeholder="Please provide any additional information or special requests..."></textarea>
+                    </div>
+                    
+                    <div class="group-request-form-group full-width">
+                        <div class="group-request-form-checkbox">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">
+                                Yes, I agree for Elisabeth Hotel Mechelen / Group Daedalus to use my details for the purpose of transmitting information about Elisabeth Hotel Mechelen / Group Daedalus and statistical purposes. I can revoke this consent at any time by sending an e-mail to <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>. Further information on the handling of your data can be found in our <a href="privacypolicy.html">privacy policy</a>. *
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="group-request-submit-btn">Submit Group Request</button>
+                    
+                    <div id="success-message" class="group-request-form-status success" style="display: none;">
+                        <h3>Thank You!</h3>
+                        <p>Your group request has been successfully submitted. We will contact you shortly to discuss your booking.</p>
+                    </div>
+                    
+                    <div id="error-message" class="group-request-form-status error" style="display: none;">
+                        <p>There was an error submitting your request. Please try again or contact us directly at <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>.</p>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -121,6 +512,18 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- International Telephone Input -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    
+    <!-- Date Picker (reusing from booking bar) -->
+    <script src="booking-bar.js"></script>
+    
+    <!-- Group Request Form Script -->
+    <script src="group-request-form.js"></script>
 
 </body>
 </html>
