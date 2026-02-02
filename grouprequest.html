@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -41,6 +42,117 @@
         <div class="card">
             <h2>Group Request</h2>
             <p>Submit a request for group bookings and special arrangements.</p>
+            
+            <form id="group-request-form" class="group-request-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name *</label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name *</label>
+                        <input type="text" id="last-name" name="last_name" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone Number *</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="checkin-date-group">Check-in Date *</label>
+                        <input type="text" id="checkin-date-group" name="checkin_date" placeholder="Select date" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-date-group">Check-out Date *</label>
+                        <input type="text" id="checkout-date-group" name="checkout_date" placeholder="Select date" readonly required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="total-guests">Total Number of Guests *</label>
+                        <input type="number" id="total-guests" name="total_guests" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="single-rooms">Number of Single Rooms</label>
+                        <input type="number" id="single-rooms" name="single_rooms" min="0" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="twin-rooms">Number of Twin Rooms (2 Separate Beds)</label>
+                        <input type="number" id="twin-rooms" name="twin_rooms" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="double-rooms">Number of Double Rooms (One Double Bed)</label>
+                        <input type="number" id="double-rooms" name="double_rooms" min="0" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="triple-rooms">Number of Triple Rooms (3 Single Beds)</label>
+                        <input type="number" id="triple-rooms" name="triple_rooms" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="group-type">Group Type *</label>
+                        <select id="group-type" name="group_type" required>
+                            <option value="">Select group type</option>
+                            <option value="Business">Business</option>
+                            <option value="Family Reunion">Family Reunion</option>
+                            <option value="Birthday">Birthday</option>
+                            <option value="Bachelor Party">Bachelor Party</option>
+                            <option value="Bachelorette Party">Bachelorette Party</option>
+                            <option value="Wedding">Wedding</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="meal-option">Meal Option *</label>
+                    <select id="meal-option" name="meal_option" required>
+                        <option value="">Select meal option</option>
+                        <option value="Breakfast Only">Breakfast Only</option>
+                        <option value="Breakfast and Packed Lunch">Breakfast and Packed Lunch</option>
+                        <option value="Packed Lunch Only">Packed Lunch Only</option>
+                        <option value="We do not require food service">We do not require food service</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Additional Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Please provide any additional information or special requests..."></textarea>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <span>Yes, I agree for Elisabeth Hotel Mechelen / Group Daedalus to use my details for the purpose of transmitting information about Elisabeth Hotel Mechelen / Group Daedalus and statistical purposes. I can revoke this consent at any time by sending an e-mail to <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>. Further information on the handling of your data can be found in our <a href="privacypolicy.html">privacy policy</a>. *</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Group Request</button>
+                
+                <div id="success-message" class="success-message" style="display: none;">
+                    <h3>Thank You!</h3>
+                    <p>Your group request has been successfully submitted. We will contact you shortly to discuss your booking.</p>
+                </div>
+                
+                <div id="error-message" class="error-message" style="display: none;">
+                    <p>There was an error submitting your request. Please try again or contact us directly at <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>.</p>
+                </div>
+            </form>
         </div>
     </main>
 
@@ -121,6 +233,18 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- International Telephone Input -->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+    
+    <!-- Date Picker (reusing from booking bar) -->
+    <script src="booking-bar.js"></script>
+    
+    <!-- Group Request Form Script -->
+    <script src="group-request-form.js"></script>
 
 </body>
 </html>
