@@ -329,7 +329,7 @@
                             ${hasMultiplePhotos ? `
                                 <button class="facility-album-nav facility-album-nav-prev" onclick="navigateFacilityImage('${facilityId}', -1, event)">‹</button>
                                 <button class="facility-album-nav facility-album-nav-next" onclick="navigateFacilityImage('${facilityId}', 1, event)">›</button>
-                                <div class="facility-album-badge">${libraryItems.length} Photos</div>
+                                <div class="facility-album-badge">${libraryItems.length} ${albumLabels.albumTitle}</div>
                             ` : ''}
                         </div>
                     </div>
