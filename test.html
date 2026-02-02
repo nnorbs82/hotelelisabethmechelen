@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Hotel Elisabeth Mechelen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Hero section with large height */
+        .test-hero {
+            width: 100%;
+            height: 80vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .test-hero-coverflow {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Adjust coverflow for hero size */
+        .test-hero .coverflow-container {
+            height: 100%;
+            max-height: none;
+            background: transparent;
+        }
+
+        .test-hero .coverflow-item {
+            width: 500px;
+            max-width: 85vw;
+            height: 400px;
+        }
+
+        .test-hero .coverflow-item.active {
+            transform: translateX(0) translateZ(0) rotateY(0deg) scale(1.3);
+        }
+
+        /* Loading state */
+        .test-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section with Cover Flow -->
+    <section class="test-hero" aria-label="Room photos hero">
+        <div class="test-loading" id="loading-message">Loading room photos...</div>
+        <div class="test-hero-coverflow" id="hero-coverflow-wrapper" style="display: none;">
+            <div class="coverflow-container" id="coverflow-rooms">
+                <div class="coverflow-wrapper" id="coverflow-content">
+                    <!-- Coverflow items will be inserted here -->
+                </div>
+                <button class="coverflow-nav coverflow-nav-prev" onclick="navigateCoverflow('rooms', -1, event)" aria-label="Previous image">‹</button>
+                <button class="coverflow-nav coverflow-nav-next" onclick="navigateCoverflow('rooms', 1, event)" aria-label="Next image">›</button>
+                <div class="coverflow-badge" id="photo-count-badge">0 Photos</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firebase and JavaScript -->
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        let allRoomPhotos = [];
+        const coverflowStates = {};
+
+        // Function to sanitize image URLs
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            try {
+                const urlObj = new URL(url, window.location.href);
+                if (urlObj.protocol === 'http:' || urlObj.protocol === 'https:') {
+                    return urlObj.href;
+                }
+            } catch (e) {
+                console.error('Invalid URL:', url);
+            }
+            return '';
+        }
+
+        // Function to escape HTML
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return String(text).replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Load all room photos from Firebase
+        async function loadRoomPhotos() {
+            try {
+                const roomsSnapshot = await get(dbRef(database, 'rooms'));
+                
+                if (roomsSnapshot.exists()) {
+                    const roomsObj = roomsSnapshot.val();
+                    const rooms = Object.keys(roomsObj).map(id => ({
+                        id,
+                        ...roomsObj[id]
+                    }));
+
+                    // Collect all photos from all rooms
+                    rooms.forEach(room => {
+                        if (room.photos && Array.isArray(room.photos)) {
+                            room.photos.forEach(photo => {
+                                if (photo.url) {
+                                    const sanitizedUrl = sanitizeImageUrl(photo.url);
+                                    if (sanitizedUrl) {
+                                        allRoomPhotos.push({
+                                            url: sanitizedUrl,
+                                            roomName: room.name_en || 'Room',
+                                            roomId: room.id
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+
+                    if (allRoomPhotos.length > 0) {
+                        renderCoverflow();
+                    } else {
+                        document.getElementById('loading-message').textContent = 'No photos available';
+                    }
+                } else {
+                    document.getElementById('loading-message').textContent = 'No rooms found';
+                }
+            } catch (error) {
+                console.error('Error loading room photos:', error);
+                document.getElementById('loading-message').textContent = 'Error loading photos';
+            }
+        }
+
+        // Render the coverflow with all photos
+        function renderCoverflow() {
+            const coverflowContent = document.getElementById('coverflow-content');
+            const loadingMessage = document.getElementById('loading-message');
+            const coverflowWrapper = document.getElementById('hero-coverflow-wrapper');
+            const photoBadge = document.getElementById('photo-count-badge');
+
+            // Generate coverflow items
+            const coverflowItems = allRoomPhotos.map((photo, index) => `
+                <div class="coverflow-item ${index === 0 ? 'active' : 'hidden'}" data-index="${index}">
+                    <div class="coverflow-item-inner">
+                        <img data-src="${escapeHtml(photo.url)}" alt="${escapeHtml(photo.roomName)} photo ${index + 1}">
+                    </div>
+                </div>
+            `).join('');
+
+            coverflowContent.innerHTML = coverflowItems;
+            photoBadge.textContent = `${allRoomPhotos.length} Photos`;
+
+            // Hide loading message and show coverflow
+            loadingMessage.style.display = 'none';
+            coverflowWrapper.style.display = 'flex';
+
+            // Initialize coverflow
+            initCoverflow('rooms');
+        }
+
+        // Initialize coverflow functionality
+        function initCoverflow(facilityId) {
+            const container = document.getElementById(`coverflow-${facilityId}`);
+            if (!container) return;
+
+            const items = Array.from(container.querySelectorAll('.coverflow-item'));
+            if (items.length === 0) return;
+
+            coverflowStates[facilityId] = {
+                currentIndex: 0,
+                items: items,
+                isAnimating: false
+            };
+
+            // Lazy load initial visible images
+            updateCoverflowPositions(facilityId);
+            lazyLoadCoverflowImages(facilityId);
+
+            // Add wheel event listener
+            let lastWheelTime = 0;
+            const wheelThrottle = 300;
+            
+            container.addEventListener('wheel', (e) => {
+                const now = Date.now();
+                if (now - lastWheelTime < wheelThrottle) {
+                    return;
+                }
+                
+                const direction = e.deltaY > 0 ? 1 : -1;
+                const state = coverflowStates[facilityId];
+                if (state && !state.isAnimating) {
+                    e.preventDefault();
+                    lastWheelTime = now;
+                    navigateCoverflow(facilityId, direction, e);
+                }
+            }, { passive: false });
+
+            // Add touch support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(facilityId);
+            }, { passive: true });
+
+            function handleSwipe(facilityId) {
+                const threshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > threshold) {
+                    if (diff > 0) {
+                        navigateCoverflow(facilityId, 1);
+                    } else {
+                        navigateCoverflow(facilityId, -1);
+                    }
+                }
+            }
+
+            // Add keyboard support
+            container.setAttribute('tabindex', '0');
+            container.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    navigateCoverflow(facilityId, -1);
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    navigateCoverflow(facilityId, 1);
+                }
+            });
+        }
+
+        // Update coverflow positions
+        function updateCoverflowPositions(facilityId) {
+            const state = coverflowStates[facilityId];
+            if (!state) return;
+
+            const { currentIndex, items } = state;
+            const total = items.length;
+
+            items.forEach((item, index) => {
+                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden', 'hidden-left', 'hidden-right');
+
+                const diff = index - currentIndex;
+
+                if (diff === 0) {
+                    item.classList.add('active');
+                } else if (diff === -1 || (diff === total - 1 && currentIndex === 0)) {
+                    item.classList.add('left-1');
+                } else if (diff === -2 || (diff === total - 2 && currentIndex <= 1)) {
+                    item.classList.add('left-2');
+                } else if (diff === -3 || (diff === total - 3 && currentIndex <= 2)) {
+                    item.classList.add('left-3');
+                } else if (diff === 1 || (diff === -(total - 1) && currentIndex === total - 1)) {
+                    item.classList.add('right-1');
+                } else if (diff === 2 || (diff === -(total - 2) && currentIndex >= total - 2)) {
+                    item.classList.add('right-2');
+                } else if (diff === 3 || (diff === -(total - 3) && currentIndex >= total - 3)) {
+                    item.classList.add('right-3');
+                } else {
+                    const normalizedDiff = ((index - currentIndex) + total) % total;
+                    const midpoint = total / 2;
+                    
+                    if (normalizedDiff > midpoint) {
+                        item.classList.add('hidden-left');
+                    } else {
+                        item.classList.add('hidden-right');
+                    }
+                }
+            });
+        }
+
+        // Lazy load coverflow images
+        function lazyLoadCoverflowImages(facilityId) {
+            const state = coverflowStates[facilityId];
+            if (!state) return;
+
+            const { currentIndex, items } = state;
+            
+            const indicesToLoad = [
+                currentIndex,
+                (currentIndex - 1 + items.length) % items.length,
+                (currentIndex + 1) % items.length,
+                (currentIndex - 2 + items.length) % items.length,
+                (currentIndex + 2) % items.length
+            ];
+
+            indicesToLoad.forEach(idx => {
+                const img = items[idx]?.querySelector('img[data-src]');
+                if (img && !img.src) {
+                    img.src = img.dataset.src;
+                }
+            });
+        }
+
+        // Navigate coverflow
+        window.navigateCoverflow = function(facilityId, direction, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const state = coverflowStates[facilityId];
+            if (!state || state.isAnimating) return;
+
+            state.isAnimating = true;
+            const total = state.items.length;
+            state.currentIndex = (state.currentIndex + direction + total) % total;
+
+            updateCoverflowPositions(facilityId);
+            lazyLoadCoverflowImages(facilityId);
+
+            setTimeout(() => {
+                state.isAnimating = false;
+            }, 600);
+        };
+
+        // Load photos on page load
+        loadRoomPhotos();
+    </script>
+</body>
+</html>
