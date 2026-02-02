@@ -4972,7 +4972,7 @@ body.admin-page .vertical-menu-nav ul {
 .group-request-form .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--color-black);
+    color: var(--color-beige);
     font-weight: 600;
     font-size: 0.95rem;
 }
@@ -5031,7 +5031,7 @@ body.admin-page .vertical-menu-nav ul {
     flex: 1;
     font-size: 0.9rem;
     line-height: 1.6;
-    color: var(--color-black);
+    color: var(--color-beige);
 }
 
 .checkbox-label span a {
