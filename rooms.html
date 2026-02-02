@@ -100,15 +100,13 @@
     <!-- Fullscreen Gallery Modal -->
     <div id="fullscreen-gallery" class="fullscreen-gallery" role="dialog" aria-modal="true" aria-label="Photo Gallery">
         <button class="fullscreen-gallery-close" aria-label="Close">&times;</button>
-        <div class="fullscreen-gallery-content">
-            <div class="fullscreen-coverflow-container" id="fullscreen-coverflow">
-                <div class="fullscreen-coverflow-wrapper">
-                    <!-- Images will be inserted here dynamically -->
-                </div>
-                <button class="fullscreen-coverflow-nav fullscreen-coverflow-nav-prev" aria-label="Previous image">‹</button>
-                <button class="fullscreen-coverflow-nav fullscreen-coverflow-nav-next" aria-label="Next image">›</button>
-                <div class="fullscreen-coverflow-badge"></div>
-            </div>
+        <button class="fullscreen-gallery-prev" aria-label="Previous image">‹</button>
+        <button class="fullscreen-gallery-next" aria-label="Next image">›</button>
+        <div class="fullscreen-gallery-image-content">
+            <img id="fullscreen-gallery-image" src="" alt="Room photo">
+        </div>
+        <div class="fullscreen-gallery-thumbnails" id="fullscreen-gallery-thumbnails">
+            <!-- Thumbnails will be dynamically inserted here -->
         </div>
     </div>
 
@@ -841,47 +839,40 @@
         }
 
         // Fullscreen Gallery functionality
-        const fullscreenGalleryState = {};
+        let fullscreenGalleryPhotos = [];
+        let fullscreenGalleryIndex = 0;
         
         window.openFullscreenGallery = function(roomId) {
             const room = roomsData.find(r => r.id === roomId);
             if (!room || !room.photos || room.photos.length === 0) return;
             
+            fullscreenGalleryPhotos = room.photos;
+            fullscreenGalleryIndex = 0;
+            
             const gallery = document.getElementById('fullscreen-gallery');
-            const wrapper = gallery.querySelector('.fullscreen-coverflow-wrapper');
-            const badge = gallery.querySelector('.fullscreen-coverflow-badge');
+            const galleryImage = document.getElementById('fullscreen-gallery-image');
+            const thumbnailsContainer = document.getElementById('fullscreen-gallery-thumbnails');
             
-            // Clear previous content
-            wrapper.innerHTML = '';
+            // Show current photo
+            const currentPhoto = fullscreenGalleryPhotos[fullscreenGalleryIndex];
+            const altText = currentPhoto.alt || `${room.name_en || 'Room'} - Photo ${fullscreenGalleryIndex + 1}`;
+            galleryImage.src = currentPhoto.url;
+            galleryImage.alt = escapeHtml(altText);
             
-            // Create cover flow items
-            room.photos.forEach((photo, idx) => {
-                const item = document.createElement('div');
-                item.className = `fullscreen-coverflow-item ${idx === 0 ? 'active' : ''}`;
-                item.dataset.index = idx;
-                const altText = photo.alt || `${room.name_en || 'Room'} - Photo ${idx + 1}`;
-                item.innerHTML = `
-                    <div class="fullscreen-coverflow-item-inner">
-                        <img src="${escapeHtml(photo.url)}" alt="${escapeHtml(altText)}">
-                    </div>
+            // Render thumbnails
+            thumbnailsContainer.innerHTML = fullscreenGalleryPhotos.map((photo, index) => {
+                const thumbAlt = photo.alt || `Thumbnail ${index + 1}`;
+                return `
+                    <img src="${photo.url}" 
+                         class="fullscreen-gallery-thumbnail ${index === fullscreenGalleryIndex ? 'active' : ''}" 
+                         onclick="changeFullscreenGalleryPhoto(${index})"
+                         alt="${escapeHtml(thumbAlt)}">
                 `;
-                wrapper.appendChild(item);
-            });
-            
-            // Update badge
-            badge.textContent = `${room.photos.length} Photos`;
-            
-            // Initialize state
-            fullscreenGalleryState.currentIndex = 0;
-            fullscreenGalleryState.totalImages = room.photos.length;
-            fullscreenGalleryState.roomId = roomId;
+            }).join('');
             
             // Show gallery
             gallery.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // Update positions
-            updateFullscreenGalleryPositions();
             
             // Move focus to close button for accessibility
             setTimeout(() => {
@@ -890,57 +881,34 @@
             }, 100);
         };
         
+        window.changeFullscreenGalleryPhoto = function(index) {
+            if (fullscreenGalleryPhotos.length === 0) return;
+            
+            fullscreenGalleryIndex = index;
+            const galleryImage = document.getElementById('fullscreen-gallery-image');
+            const currentPhoto = fullscreenGalleryPhotos[index];
+            galleryImage.src = currentPhoto.url;
+            const altText = currentPhoto.alt || `Room photo ${index + 1}`;
+            galleryImage.alt = escapeHtml(altText);
+            
+            // Update active thumbnail
+            document.querySelectorAll('.fullscreen-gallery-thumbnail').forEach((thumb, i) => {
+                thumb.classList.toggle('active', i === index);
+            });
+        };
+        
+        function navigateFullscreenGallery(direction) {
+            if (fullscreenGalleryPhotos.length === 0) return;
+            
+            fullscreenGalleryIndex = (fullscreenGalleryIndex + direction + fullscreenGalleryPhotos.length) % fullscreenGalleryPhotos.length;
+            changeFullscreenGalleryPhoto(fullscreenGalleryIndex);
+        }
+        
         window.closeFullscreenGallery = function() {
             const gallery = document.getElementById('fullscreen-gallery');
             gallery.classList.remove('active');
             document.body.style.overflow = '';
         };
-        
-        function navigateFullscreenGallery(indexOrDirection, isAbsolute = false) {
-            const state = fullscreenGalleryState;
-            
-            if (isAbsolute) {
-                state.currentIndex = indexOrDirection;
-            } else {
-                state.currentIndex += indexOrDirection;
-                if (state.currentIndex < 0) state.currentIndex = state.totalImages - 1;
-                if (state.currentIndex >= state.totalImages) state.currentIndex = 0;
-            }
-            
-            updateFullscreenGalleryPositions();
-        }
-        
-        function updateFullscreenGalleryPositions() {
-            const state = fullscreenGalleryState;
-            const gallery = document.getElementById('fullscreen-gallery');
-            const items = Array.from(gallery.querySelectorAll('.fullscreen-coverflow-item'));
-            
-            items.forEach((item, index) => {
-                item.classList.remove('active', 'left-1', 'left-2', 'left-3', 'right-1', 'right-2', 'right-3', 'hidden-left', 'hidden-right');
-                
-                const position = index - state.currentIndex;
-                
-                if (position === 0) {
-                    item.classList.add('active');
-                } else if (position === -1 || position === state.totalImages - 1) {
-                    item.classList.add('left-1');
-                } else if (position === -2 || position === state.totalImages - 2) {
-                    item.classList.add('left-2');
-                } else if (position === -3 || position === state.totalImages - 3) {
-                    item.classList.add('left-3');
-                } else if (position === 1 || position === -(state.totalImages - 1)) {
-                    item.classList.add('right-1');
-                } else if (position === 2 || position === -(state.totalImages - 2)) {
-                    item.classList.add('right-2');
-                } else if (position === 3 || position === -(state.totalImages - 3)) {
-                    item.classList.add('right-3');
-                } else if (position < 0) {
-                    item.classList.add('hidden-left');
-                } else {
-                    item.classList.add('hidden-right');
-                }
-            });
-        }
         
         // Keyboard handler for fullscreen gallery (defined once)
         function handleFullscreenGalleryKeydown(e) {
@@ -964,8 +932,8 @@
             gallery.querySelector('.fullscreen-gallery-close').addEventListener('click', closeFullscreenGallery);
             
             // Navigation buttons
-            gallery.querySelector('.fullscreen-coverflow-nav-prev').addEventListener('click', () => navigateFullscreenGallery(-1));
-            gallery.querySelector('.fullscreen-coverflow-nav-next').addEventListener('click', () => navigateFullscreenGallery(1));
+            gallery.querySelector('.fullscreen-gallery-prev').addEventListener('click', () => navigateFullscreenGallery(-1));
+            gallery.querySelector('.fullscreen-gallery-next').addEventListener('click', () => navigateFullscreenGallery(1));
             
             // Keyboard navigation (add only once)
             document.addEventListener('keydown', handleFullscreenGalleryKeydown);
