@@ -60,6 +60,14 @@
         </section>
 
         <section class="facilities-list-section" aria-label="Facilities details">
+            <!-- Horizontal Tabs for Facilities -->
+            <div class="facilities-tabs-container">
+                <div class="facilities-tabs" id="facilities-tabs">
+                    <!-- Tabs will be rendered here -->
+                </div>
+                <div class="facilities-tabs-divider"></div>
+            </div>
+            
             <div class="facilities-list" id="facilities-list">
                 <!-- Facilities will be rendered here -->
             </div>
@@ -224,8 +232,14 @@
             }
         }
 
+        // Store facilities data globally for tab switching
+        let allFacilities = [];
+        let activeFacilityIndex = 0;
+
         async function loadFacilitiesList() {
             const container = document.getElementById('facilities-list');
+            const tabsContainer = document.getElementById('facilities-tabs');
+            
             try {
                 const [facilitySnapshot, librarySnapshot] = await Promise.all([
                     get(dbRef(database, 'facilities')),
@@ -236,12 +250,26 @@
                     return;
                 }
                 const libraryData = librarySnapshot.exists() ? librarySnapshot.val() : {};
-                const facilities = Object.keys(facilitySnapshot.val()).map(id => ({
+                allFacilities = Object.keys(facilitySnapshot.val()).map(id => ({
                     id,
                     ...facilitySnapshot.val()[id],
                     library: libraryData[id] ? Object.values(libraryData[id]).sort((a, b) => (a.order ?? 0) - (b.order ?? 0)) : []
                 }));
-                container.innerHTML = facilities.map((facility, facilityIndex) => {
+                
+                // Render tabs
+                tabsContainer.innerHTML = allFacilities.map((facility, index) => {
+                    const name = escapeHtml(facility[`name_${currentLang}`] || facility.name_en || 'Facility');
+                    return `
+                        <button class="facility-tab ${index === 0 ? 'active' : ''}" 
+                                onclick="switchFacility(${index})"
+                                data-facility-index="${index}">
+                            ${name}
+                        </button>
+                    `;
+                }).join('');
+                
+                // Render all facilities
+                container.innerHTML = allFacilities.map((facility, facilityIndex) => {
                     const name = escapeHtml(facility[`name_${currentLang}`] || facility.name_en || '');
                     const operation = escapeHtml(facility[`operation_${currentLang}`] || facility.operation_en || '');
                     const guidelines = facility[`guidelines_${currentLang}`] || facility.guidelines_en || [];
@@ -303,7 +331,9 @@
                         `;
 
                     return `
-                        <article class="facility-card-modern" id="facility-${facilityId}">
+                        <article class="facility-card-modern ${facilityIndex === 0 ? 'active' : ''}" 
+                                 id="facility-${facilityId}"
+                                 data-facility-index="${facilityIndex}">
                             ${albumMarkup}
                         </article>
                     `;
@@ -313,6 +343,29 @@
                 container.innerHTML = '<p class="facilities-loading">Unable to load facilities right now.</p>';
             }
         }
+
+        // Switch between facilities
+        window.switchFacility = function(index) {
+            activeFacilityIndex = index;
+            
+            // Update tab active state
+            document.querySelectorAll('.facility-tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            
+            // Update facility card visibility
+            document.querySelectorAll('.facility-card-modern').forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+            
+            // Scroll to facilities section smoothly
+            const facilitiesSection = document.querySelector('.facilities-list-section');
+            if (facilitiesSection) {
+                const yOffset = -80; // Offset for fixed header
+                const y = facilitiesSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        };
 
         // Navigate facility images
         window.navigateFacilityImage = function(facilityId, direction, event) {
