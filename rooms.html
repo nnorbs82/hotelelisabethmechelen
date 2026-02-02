@@ -864,9 +864,10 @@
                 const item = document.createElement('div');
                 item.className = `fullscreen-coverflow-item ${idx === 0 ? 'active' : ''}`;
                 item.dataset.index = idx;
+                const altText = photo.alt || `${room.name_en || 'Room'} - Photo ${idx + 1}`;
                 item.innerHTML = `
                     <div class="fullscreen-coverflow-item-inner">
-                        <img src="${escapeHtml(photo.url)}" alt="${escapeHtml(room.name_en || '')} - Photo ${idx + 1}">
+                        <img src="${escapeHtml(photo.url)}" alt="${escapeHtml(altText)}">
                     </div>
                 `;
                 wrapper.appendChild(item);
@@ -875,7 +876,7 @@
                 const thumbnail = document.createElement('div');
                 thumbnail.className = `fullscreen-thumbnail ${idx === 0 ? 'active' : ''}`;
                 thumbnail.dataset.index = idx;
-                thumbnail.innerHTML = `<img src="${escapeHtml(photo.url)}" alt="Thumbnail ${idx + 1}">`;
+                thumbnail.innerHTML = `<img src="${escapeHtml(photo.url)}" alt="">`;
                 thumbnail.onclick = () => navigateFullscreenGallery(idx, true);
                 thumbnailsContainer.appendChild(thumbnail);
             });
@@ -894,6 +895,12 @@
             
             // Update positions
             updateFullscreenGalleryPositions();
+            
+            // Move focus to close button for accessibility
+            setTimeout(() => {
+                const closeBtn = gallery.querySelector('.fullscreen-gallery-close');
+                if (closeBtn) closeBtn.focus();
+            }, 100);
         };
         
         window.closeFullscreenGallery = function() {
@@ -954,6 +961,20 @@
             });
         }
         
+        // Keyboard handler for fullscreen gallery (defined once)
+        function handleFullscreenGalleryKeydown(e) {
+            const gallery = document.getElementById('fullscreen-gallery');
+            if (!gallery.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeFullscreenGallery();
+            } else if (e.key === 'ArrowLeft') {
+                navigateFullscreenGallery(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateFullscreenGallery(1);
+            }
+        }
+        
         // Setup fullscreen gallery controls
         function initializeFullscreenGallery() {
             const gallery = document.getElementById('fullscreen-gallery');
@@ -965,18 +986,8 @@
             gallery.querySelector('.fullscreen-coverflow-nav-prev').addEventListener('click', () => navigateFullscreenGallery(-1));
             gallery.querySelector('.fullscreen-coverflow-nav-next').addEventListener('click', () => navigateFullscreenGallery(1));
             
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (!gallery.classList.contains('active')) return;
-                
-                if (e.key === 'Escape') {
-                    closeFullscreenGallery();
-                } else if (e.key === 'ArrowLeft') {
-                    navigateFullscreenGallery(-1);
-                } else if (e.key === 'ArrowRight') {
-                    navigateFullscreenGallery(1);
-                }
-            });
+            // Keyboard navigation (add only once)
+            document.addEventListener('keydown', handleFullscreenGalleryKeydown);
             
             // Click outside to close
             gallery.addEventListener('click', (e) => {
