@@ -800,7 +800,11 @@
             const requirementsHTML = requirementsEditor.innerHTML.trim();
             
             // Validate description is not empty
-            if (!descriptionHTML || descriptionHTML === '<br>' || descriptionHTML === '') {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = descriptionHTML;
+            const textContent = tempDiv.textContent || tempDiv.innerText || '';
+            
+            if (!textContent.trim()) {
                 showMessage('admin-message', 'Job Description is required!', 'error');
                 return;
             }
