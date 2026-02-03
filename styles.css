@@ -1240,6 +1240,32 @@ body.admin-page .vertical-menu-nav ul {
     justify-items: center;
 }
 
+/* Main Image Management sections */
+.main-image-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.main-image-section h3 {
+    margin-top: 0;
+    color: var(--color-black);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.main-image-section p {
+    margin-bottom: 1rem;
+}
+
+.rooms-main-image-preview,
+.info-main-image-preview,
+.group-main-image-preview {
+    margin-top: 1rem;
+}
+
 /* Form elements stay centered */
 .form-group {
     max-width: 800px;
