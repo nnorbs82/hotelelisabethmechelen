@@ -646,13 +646,13 @@
                         </div>
                         <div class="our-picks-list">
                             ${ourPickPackages.map((pkg, index) => {
-                                const title = pkg[\`title_\${currentLang}\`] || pkg.title_en || 'Package';
-                                const description = pkg[\`description_\${currentLang}\`] || pkg.description_en || '';
-                                const inclusions = pkg[\`inclusions_\${currentLang}\`] || pkg.inclusions_en || '';
-                                const goodToKnow = pkg[\`goodToKnow_\${currentLang}\`] || pkg.goodToKnow_en || '';
+                                const title = pkg['title_' + currentLang] || pkg.title_en || 'Package';
+                                const description = pkg['description_' + currentLang] || pkg.description_en || '';
+                                const inclusions = pkg['inclusions_' + currentLang] || pkg.inclusions_en || '';
+                                const goodToKnow = pkg['goodToKnow_' + currentLang] || pkg.goodToKnow_en || '';
 
-                                const inclusionsList = inclusions.split('\\n').filter(item => item.trim());
-                                const goodToKnowList = goodToKnow.split('\\n').filter(item => item.trim());
+                                const inclusionsList = inclusions.split('\n').filter(item => item.trim());
+                                const goodToKnowList = goodToKnow.split('\n').filter(item => item.trim());
 
                                 const teaser = description ? 
                                     (description.length > TEASER_MAX_LENGTH ? description.substring(0, TEASER_MAX_LENGTH) + '...' : description) : 
@@ -661,7 +661,7 @@
                                 const viewDetailsCta = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
 
                                 return \`
-                                    <div class="package-card" data-package-id="\${index}">
+                                    <div class="package-card" data-package-id="\${pkg.id}">
                                         <div class="package-header">
                                             \${pkg.imageUrl ? \`<img src="\${pkg.imageUrl}" alt="\${title}" class="package-thumbnail">\` : ''}
                                             <div class="package-summary">

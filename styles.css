@@ -6294,7 +6294,7 @@ body.admin-page .vertical-menu-nav ul {
     font-size: 0.95rem;
     color: #666;
     line-height: 1.7;
-    max-height: 3.4em;
+    max-height: 3.4em; /* 2 lines * 1.7 line-height = 3.4em */
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
