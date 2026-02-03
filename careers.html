@@ -65,6 +65,14 @@
 
         <!-- Job Listings Section -->
         <section class="careers-listings">
+            <!-- Filter Section -->
+            <div class="careers-filter-container">
+                <label for="department-filter" class="filter-label">Filter by Department:</label>
+                <select id="department-filter" class="filter-select">
+                    <option value="all">All Departments</option>
+                </select>
+            </div>
+            
             <div id="careers-list-container" class="careers-grid" aria-live="polite" aria-atomic="false">
                 <p class="careers-loading">Loading career opportunities...</p>
             </div>
@@ -167,6 +175,9 @@
         import { database } from './firebase-config.js';
         import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Store all jobs globally for filtering
+        let allJobs = [];
+
         // Load job listings from Firebase
         function loadCareers() {
             const careersRef = ref(database, 'careers');
@@ -181,50 +192,142 @@
                 }
 
                 const careers = snapshot.val();
-                const activeJobs = Object.entries(careers)
+                allJobs = Object.entries(careers)
                     .filter(([id, job]) => job.status === 'active')
                     .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
 
-                if (activeJobs.length === 0) {
+                if (allJobs.length === 0) {
                     container.innerHTML = '';
                     noJobsMsg.style.display = 'block';
                     return;
                 }
 
+                // Populate department filter
+                populateDepartmentFilter();
+                
+                // Render jobs
+                renderJobs(allJobs);
                 noJobsMsg.style.display = 'none';
-                container.innerHTML = activeJobs.map(([id, job]) => `
-                    <div class="career-card">
-                        <div class="career-card-header">
-                            <h3 class="career-title">${escapeHtml(job.title)}</h3>
-                            <span class="career-type">${escapeHtml(job.type || 'Full-time')}</span>
-                        </div>
-                        <div class="career-card-body">
-                            <div class="career-meta">
-                                <span class="career-department">${escapeHtml(job.department || 'General')}</span>
-                                ${job.location ? `<span class="career-location">📍 ${escapeHtml(job.location)}</span>` : ''}
-                            </div>
-                            <p class="career-description">${escapeHtml(job.description || '')}</p>
-                            ${job.requirements ? `
-                                <div class="career-requirements">
-                                    <strong>Requirements:</strong>
-                                    <ul>
-                                        ${job.requirements.split('\n').map(req => 
-                                            req.trim() ? `<li>${escapeHtml(req.trim())}</li>` : ''
-                                        ).join('')}
-                                    </ul>
-                                </div>
-                            ` : ''}
-                        </div>
-                        <div class="career-card-footer">
-                            <a href="mailto:info@elisabeth-hotel.be?subject=Application for ${encodeURIComponent(job.title)}" class="btn career-apply-btn">Apply Now</a>
-                        </div>
-                    </div>
-                `).join('');
             }, (error) => {
                 console.error('Error loading careers:', error);
                 document.getElementById('careers-list-container').innerHTML = 
                     '<p class="error-message">Unable to load career opportunities. Please try again later.</p>';
             });
+        }
+
+        // Populate department filter with unique departments
+        function populateDepartmentFilter() {
+            const filter = document.getElementById('department-filter');
+            const departments = [...new Set(allJobs.map(([id, job]) => job.department || 'General'))];
+            
+            // Keep "All Departments" option and add unique departments
+            filter.innerHTML = '<option value="all">All Departments</option>' +
+                departments.sort().map(dept => 
+                    `<option value="${escapeHtml(dept)}">${escapeHtml(dept)}</option>`
+                ).join('');
+        }
+
+        // Render jobs (with optional filtering)
+        function renderJobs(jobs) {
+            const container = document.getElementById('careers-list-container');
+            
+            container.innerHTML = jobs.map(([id, job], index) => `
+                <div class="career-card" data-department="${escapeHtml(job.department || 'General')}">
+                    <div class="career-card-header" onclick="toggleJobCard(this)">
+                        <div class="career-header-content">
+                            <h3 class="career-title">${escapeHtml(job.title)}</h3>
+                            <span class="career-type">${escapeHtml(job.type || 'Full-time')}</span>
+                        </div>
+                        <button class="career-toggle-btn" aria-label="Toggle job details">
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                    <div class="career-card-body" style="display: none;">
+                        <div class="career-meta">
+                            <span class="career-department">${escapeHtml(job.department || 'General')}</span>
+                            ${job.location ? `<span class="career-location">📍 ${escapeHtml(job.location)}</span>` : ''}
+                        </div>
+                        ${job.description ? `<div class="career-description">${sanitizeHTML(job.description)}</div>` : ''}
+                        ${job.requirements ? `
+                            <div class="career-requirements">
+                                <strong>Requirements:</strong>
+                                <div class="requirements-content">${sanitizeHTML(job.requirements)}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="career-card-footer" style="display: none;">
+                        <a href="mailto:info@elisabeth-hotel.be?subject=Application for ${encodeURIComponent(job.title)}" class="btn career-apply-btn">Apply Now</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle job card expanded/collapsed state
+        window.toggleJobCard = function(headerElement) {
+            const card = headerElement.closest('.career-card');
+            const body = card.querySelector('.career-card-body');
+            const footer = card.querySelector('.career-card-footer');
+            const toggleBtn = card.querySelector('.toggle-icon');
+            
+            const isExpanded = body.style.display !== 'none';
+            
+            if (isExpanded) {
+                body.style.display = 'none';
+                footer.style.display = 'none';
+                toggleBtn.textContent = '▼';
+                card.classList.remove('expanded');
+            } else {
+                body.style.display = 'block';
+                footer.style.display = 'block';
+                toggleBtn.textContent = '▲';
+                card.classList.add('expanded');
+            }
+        };
+
+        // Filter jobs by department
+        document.addEventListener('DOMContentLoaded', () => {
+            const filter = document.getElementById('department-filter');
+            filter.addEventListener('change', (e) => {
+                const selectedDept = e.target.value;
+                
+                if (selectedDept === 'all') {
+                    renderJobs(allJobs);
+                } else {
+                    const filtered = allJobs.filter(([id, job]) => 
+                        (job.department || 'General') === selectedDept
+                    );
+                    renderJobs(filtered);
+                }
+            });
+        });
+
+        // Sanitize HTML while allowing safe tags
+        function sanitizeHTML(html) {
+            if (!html) return '';
+            
+            // Create a temporary div to parse HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Allow only safe tags
+            const allowedTags = ['P', 'BR', 'STRONG', 'EM', 'U', 'UL', 'OL', 'LI', 'H2', 'H3', 'H4', 'B', 'I'];
+            
+            // Remove script tags and other dangerous elements
+            const allElements = tempDiv.querySelectorAll('*');
+            allElements.forEach(el => {
+                if (!allowedTags.includes(el.tagName)) {
+                    // Replace disallowed tags with their text content
+                    el.replaceWith(document.createTextNode(el.textContent));
+                }
+                // Remove all event handlers and dangerous attributes
+                Array.from(el.attributes).forEach(attr => {
+                    if (attr.name.startsWith('on') || attr.name === 'style') {
+                        el.removeAttribute(attr.name);
+                    }
+                });
+            });
+            
+            return tempDiv.innerHTML;
         }
 
         // Escape HTML to prevent XSS
