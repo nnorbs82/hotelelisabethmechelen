@@ -591,9 +591,13 @@
                                        currentLang === 'fr' ? 'Réserver' : 
                                        'Book Now';
                     
+                    const ourPickBadgeText = currentLang === 'nl' ? 'Onze Keuze' : 
+                                            currentLang === 'fr' ? 'Notre Choix' : 
+                                            'Our Pick';
+                    
                     return `
                         <div class="our-pick-card">
-                            <div class="our-pick-badge">Our Pick</div>
+                            <div class="our-pick-badge">${ourPickBadgeText}</div>
                             ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="our-pick-image">` : ''}
                             <div class="our-pick-content">
                                 <h3 class="our-pick-title">${title}</h3>

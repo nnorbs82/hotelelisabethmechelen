@@ -2738,7 +2738,7 @@
                     <div class="package-item-content">
                         <div class="package-item-image">
                             ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${pkg.title_en || 'Package'}">` : '<div class="no-image">No Image</div>'}
-                            ${pkg.ourPick ? '<div style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--color-sage); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">OUR PICK</div>' : ''}
+                            ${pkg.ourPick ? '<div class="admin-our-pick-badge">OUR PICK</div>' : ''}
                         </div>
                         <div class="package-item-details">
                             <h3>${pkg.title_en || 'Untitled Package'}</h3>

@@ -2264,6 +2264,19 @@ body.admin-page .vertical-menu-nav ul {
     background-color: #c82333;
 }
 
+/* Admin Our Pick Badge */
+.admin-our-pick-badge {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    background: var(--color-sage);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
 /* Package Language Tabs in Modal */
 .package-lang-tabs {
     display: flex;
