@@ -75,6 +75,11 @@ input, textarea, button {
     display: block;
 }
 
+/* Mobile header controls - hidden on desktop, visible on mobile */
+.mobile-header-controls {
+    display: none;
+}
+
 .main-nav {
     display: flex;
     align-items: center;
@@ -152,7 +157,7 @@ input, textarea, button {
     background: none;
     border: none;
     color: var(--color-beige);
-    font-size: 24px;
+    font-size: 32px;
     cursor: pointer;
     padding: 5px;
     transition: color 0.3s ease;
@@ -196,6 +201,25 @@ input, textarea, button {
 @media (max-width: 899px) {
     .mobile-menu-btn {
         display: block;
+    }
+    
+    /* Show mobile header controls on mobile */
+    .mobile-header-controls {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .mobile-header-controls .booking-button {
+        padding: 8px 16px !important;
+        font-size: 12px;
+        margin-left: 0;
+        white-space: nowrap;
+    }
+    
+    /* Hide booking button from mobile menu */
+    .main-nav li:has(.booking-button) {
+        display: none;
     }
     
     .main-nav {
@@ -4831,7 +4855,7 @@ body.admin-page .vertical-menu-nav ul {
 
 .room-modal-description p {
     line-height: 1.9;
-    color: #555;
+    color: #333;
     font-weight: 300;
     font-size: 1rem;
 }
@@ -5461,14 +5485,14 @@ body.admin-page .vertical-menu-nav ul {
 
 
 .info-card-modern .info-content {
-    color: var(--color-text-primary);
+    color: #333;
     font-size: 1rem;
     line-height: 1.9;
 }
 
 .info-card-modern .info-content p {
     margin-bottom: 1.2rem;
-    color: var(--color-text-secondary);
+    color: #333;
 }
 
 .info-card-modern .info-content p:last-child {
