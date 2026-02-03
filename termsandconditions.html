@@ -8,6 +8,105 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .language-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .language-btn {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-sage);
+            color: var(--color-white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn:hover {
+            background-color: var(--color-beige);
+            color: var(--color-black);
+        }
+
+        .language-btn.active {
+            background-color: var(--color-black);
+            color: var(--color-beige);
+        }
+
+        .terms-content {
+            display: none;
+        }
+
+        .terms-content.active {
+            display: block;
+        }
+
+        .terms-text {
+            line-height: 1.8;
+            color: var(--color-black);
+        }
+
+        .terms-text h1, .terms-text h2, .terms-text h3 {
+            color: var(--color-black);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .terms-text h1 {
+            font-size: 2rem;
+        }
+
+        .terms-text h2 {
+            font-size: 1.5rem;
+        }
+
+        .terms-text h3 {
+            font-size: 1.25rem;
+        }
+
+        .terms-text p {
+            margin-bottom: 1rem;
+        }
+
+        .terms-text ul, .terms-text ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        .terms-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .terms-text a {
+            color: var(--color-sage);
+            text-decoration: underline;
+        }
+
+        .terms-text a:hover {
+            color: var(--color-black);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--color-sage);
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-sage);
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <!-- Main Navigation Menu -->
@@ -40,7 +139,26 @@
     <main class="container">
         <div class="card">
             <h2>Terms and Conditions</h2>
-            <p>Read the terms and conditions governing the use of our website and hotel services.</p>
+            
+            <div class="language-selector">
+                <button class="language-btn active" data-lang="en">🇬🇧 English</button>
+                <button class="language-btn" data-lang="nl">🇳🇱 Nederlands</button>
+                <button class="language-btn" data-lang="fr">🇫🇷 Français</button>
+            </div>
+
+            <div id="loading" class="loading">Loading terms and conditions...</div>
+
+            <div id="terms-content-en" class="terms-content active">
+                <div class="terms-text"></div>
+            </div>
+
+            <div id="terms-content-nl" class="terms-content">
+                <div class="terms-text"></div>
+            </div>
+
+            <div id="terms-content-fr" class="terms-content">
+                <div class="terms-text"></div>
+            </div>
         </div>
     </main>
 
@@ -121,6 +239,73 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { database } from './firebase-config.js';
+        import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        let currentLang = 'en';
+        let termsData = {};
+
+        // Load terms and conditions from Firebase
+        async function loadTerms() {
+            try {
+                const snapshot = await get(dbRef(database, 'termsAndConditions'));
+                if (snapshot.exists()) {
+                    termsData = snapshot.val();
+                    displayTerms();
+                } else {
+                    showEmptyMessage();
+                }
+            } catch (error) {
+                console.error('Error loading terms:', error);
+                showEmptyMessage();
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        function displayTerms() {
+            const langs = ['en', 'nl', 'fr'];
+            langs.forEach(lang => {
+                const content = termsData[lang] || '';
+                const container = document.querySelector(`#terms-content-${lang} .terms-text`);
+                if (content) {
+                    container.innerHTML = content;
+                } else {
+                    container.innerHTML = '<p class="empty-message">Content not available in this language yet.</p>';
+                }
+            });
+        }
+
+        function showEmptyMessage() {
+            ['en', 'nl', 'fr'].forEach(lang => {
+                const container = document.querySelector(`#terms-content-${lang} .terms-text`);
+                container.innerHTML = '<p class="empty-message">Terms and conditions content is not available at this time.</p>';
+            });
+        }
+
+        // Language switching
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Update visible content
+                const lang = btn.dataset.lang;
+                currentLang = lang;
+                document.querySelectorAll('.terms-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`terms-content-${lang}`).classList.add('active');
+            });
+        });
+
+        // Initialize
+        loadTerms();
+    </script>
 
 </body>
 </html>
