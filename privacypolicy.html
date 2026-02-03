@@ -9,102 +9,164 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .language-selector {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            flex-wrap: wrap;
-        }
-
-        .language-btn {
-            padding: 0.75rem 1.5rem;
-            background-color: var(--color-sage);
-            color: var(--color-white);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Raleway', sans-serif;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .language-btn:hover {
+        /* Modern Page Styles */
+        body {
             background-color: var(--color-beige);
+        }
+
+        .policy-main {
+            padding-top: 0;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .policy-hero {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(149, 147, 128, 0.9), rgba(212, 211, 195, 0.9));
+            margin-bottom: 3rem;
+        }
+
+        .policy-hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-black);
+            padding: 2rem;
+        }
+
+        .policy-hero-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3rem;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .policy-hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
             color: var(--color-black);
         }
 
-        .language-btn.active {
+        .policy-hero-divider {
+            width: 80px;
+            height: 3px;
             background-color: var(--color-black);
-            color: var(--color-beige);
+            margin: 1.5rem auto 0;
         }
 
-        .policy-content {
-            display: none;
+        /* Content Section */
+        .policy-content-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
 
-        .policy-content.active {
-            display: block;
+        .policy-content-card {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .policy-text {
             line-height: 1.8;
-            color: var(--color-black);
+            color: var(--color-text-primary);
         }
 
         .policy-text h1, .policy-text h2, .policy-text h3 {
             color: var(--color-black);
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .policy-text h1:first-child,
+        .policy-text h2:first-child,
+        .policy-text h3:first-child {
+            margin-top: 0;
         }
 
         .policy-text h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
+            border-bottom: 2px solid var(--color-beige);
+            padding-bottom: 0.5rem;
         }
 
         .policy-text h2 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            color: var(--color-sage);
         }
 
         .policy-text h3 {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
         }
 
         .policy-text p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .policy-text ul, .policy-text ol {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            padding-left: 2.5rem;
         }
 
         .policy-text li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
         .policy-text a {
             color: var(--color-sage);
-            text-decoration: underline;
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-sage);
+            transition: color 0.3s ease;
         }
 
         .policy-text a:hover {
             color: var(--color-black);
+            border-bottom-color: var(--color-black);
         }
 
         .loading {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem;
             font-size: 1.2rem;
             color: var(--color-sage);
         }
 
         .empty-message {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem;
             color: var(--color-sage);
             font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .policy-hero {
+                height: 300px;
+            }
+
+            .policy-content-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .policy-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .policy-text h2 {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
@@ -132,34 +194,29 @@
                         <a href="grouprequest.html">Group Request</a>
                     </div>
                 </li>
+                <li><a href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" class="booking-button" target="_blank" rel="noopener noreferrer">Book Now</a></li>
             </ul>
         </nav>
     </header>
 
-    <main class="container">
-        <div class="card">
-            <h2>Privacy Policy</h2>
-            
-            <div class="language-selector">
-                <button class="language-btn active" data-lang="en">🇬🇧 English</button>
-                <button class="language-btn" data-lang="nl">🇳🇱 Nederlands</button>
-                <button class="language-btn" data-lang="fr">🇫🇷 Français</button>
+    <main class="policy-main">
+        <!-- Hero Section -->
+        <section class="policy-hero">
+            <div class="policy-hero-content">
+                <span class="policy-hero-tagline">Legal Information</span>
+                <h1 class="policy-hero-title">Privacy Policy</h1>
+                <div class="policy-hero-divider"></div>
             </div>
+        </section>
 
+        <!-- Content Section -->
+        <section class="policy-content-section">
             <div id="loading" class="loading">Loading privacy policy...</div>
-
-            <div id="policy-content-en" class="policy-content active">
-                <div class="policy-text"></div>
+            
+            <div class="policy-content-card">
+                <div class="policy-text" id="policy-text-content"></div>
             </div>
-
-            <div id="policy-content-nl" class="policy-content">
-                <div class="policy-text"></div>
-            </div>
-
-            <div id="policy-content-fr" class="policy-content">
-                <div class="policy-text"></div>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>
@@ -245,7 +302,6 @@
         import { database } from './firebase-config.js';
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        let currentLang = 'en';
         let privacyData = {};
 
         // Load privacy policy from Firebase
@@ -267,41 +323,20 @@
         }
 
         function displayPrivacyPolicy() {
-            const langs = ['en', 'nl', 'fr'];
-            langs.forEach(lang => {
-                const content = privacyData[lang] || '';
-                const container = document.querySelector(`#policy-content-${lang} .policy-text`);
-                if (content) {
-                    container.innerHTML = content;
-                } else {
-                    container.innerHTML = '<p class="empty-message">Content not available in this language yet.</p>';
-                }
-            });
+            // Display English content by default
+            const content = privacyData['en'] || privacyData['nl'] || privacyData['fr'] || '';
+            const container = document.getElementById('policy-text-content');
+            if (content) {
+                container.innerHTML = content;
+            } else {
+                container.innerHTML = '<p class="empty-message">Content not available at this time.</p>';
+            }
         }
 
         function showEmptyMessage() {
-            ['en', 'nl', 'fr'].forEach(lang => {
-                const container = document.querySelector(`#policy-content-${lang} .policy-text`);
-                container.innerHTML = '<p class="empty-message">Privacy policy content is not available at this time.</p>';
-            });
+            const container = document.getElementById('policy-text-content');
+            container.innerHTML = '<p class="empty-message">Privacy policy content is not available at this time.</p>';
         }
-
-        // Language switching
-        document.querySelectorAll('.language-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Update active button
-                document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // Update visible content
-                const lang = btn.dataset.lang;
-                currentLang = lang;
-                document.querySelectorAll('.policy-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.getElementById(`policy-content-${lang}`).classList.add('active');
-            });
-        });
 
         // Initialize
         loadPrivacyPolicy();
