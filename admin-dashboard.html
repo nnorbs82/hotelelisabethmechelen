@@ -2738,6 +2738,7 @@
                     <div class="package-item-content">
                         <div class="package-item-image">
                             ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${pkg.title_en || 'Package'}">` : '<div class="no-image">No Image</div>'}
+                            ${pkg.ourPick ? '<div style="position: absolute; top: 0.5rem; left: 0.5rem; background: var(--color-sage); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">OUR PICK</div>' : ''}
                         </div>
                         <div class="package-item-details">
                             <h3>${pkg.title_en || 'Untitled Package'}</h3>
@@ -2929,6 +2930,15 @@
                             </select>
                         </div>
 
+                        <!-- Our Pick Toggle -->
+                        <div style="margin: 1rem 0;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="checkbox" id="package-our-pick" ${pkg && pkg.ourPick ? 'checked' : ''} style="width: 18px; height: 18px; margin-right: 0.5rem; cursor: pointer;">
+                                <span style="font-weight: 600;">Mark as "Our Pick" (Display on homepage)</span>
+                            </label>
+                            <p style="color: var(--color-sage); font-size: 0.9rem; margin-top: 0.25rem; margin-left: 1.625rem;">When enabled, this package will be featured in the "Our Pick" section on the homepage.</p>
+                        </div>
+
                         <!-- Action Buttons -->
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
                             <button class="btn" id="cancel-package-btn">Cancel</button>
@@ -3003,7 +3013,8 @@
                     goodToKnow_nl: document.getElementById('package-goodtoknow-nl').value,
                     goodToKnow_fr: document.getElementById('package-goodtoknow-fr').value,
                     bookingLink: document.getElementById('package-booking-link').value,
-                    status: document.getElementById('package-status').value
+                    status: document.getElementById('package-status').value,
+                    ourPick: document.getElementById('package-our-pick').checked
                 };
 
                 if (!packageData.title_en) {

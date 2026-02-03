@@ -95,13 +95,18 @@
         <!-- Ads Bottom Section -->
         <section id="ads-bottom-section" style="display: none;"></section>
 
-        <div class="container">
-            <div class="card">
-                <h2>Welcome to Hotel Elisabeth Mechelen</h2>
-                <p>Experience luxury and comfort in the heart of Mechelen.</p>
-                <a href="rooms.html" class="btn">View Our Rooms</a>
+        <!-- Our Pick Section -->
+        <section id="our-pick-section" class="our-pick-section">
+            <div class="container">
+                <div class="our-pick-header">
+                    <h2>Our Pick</h2>
+                    <p>Discover our specially selected package offers</p>
+                </div>
+                <div id="our-pick-packages" class="our-pick-packages">
+                    <!-- Our Pick packages will be loaded here dynamically -->
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <!-- Map Section -->
@@ -541,6 +546,75 @@
 
         // Load About Us after page loads
         loadAboutUsContent();
+
+        // ============ OUR PICK SECTION ============
+        async function loadOurPickPackages() {
+            try {
+                const snapshot = await get(dbRef(database, 'packages'));
+                
+                if (!snapshot.exists()) {
+                    document.getElementById('our-pick-section').style.display = 'none';
+                    return;
+                }
+                
+                const data = snapshot.val();
+                const currentLang = detectLanguage();
+                const ourPickPackagesEl = document.getElementById('our-pick-packages');
+                
+                // Filter for active packages marked as "Our Pick"
+                const ourPickPackages = Object.keys(data)
+                    .map(key => ({ id: key, ...data[key] }))
+                    .filter(pkg => pkg.status === 'active' && pkg.ourPick === true);
+                
+                if (ourPickPackages.length === 0) {
+                    document.getElementById('our-pick-section').style.display = 'none';
+                    return;
+                }
+                
+                // Show the section
+                document.getElementById('our-pick-section').style.display = 'block';
+                
+                // Render Our Pick packages
+                ourPickPackagesEl.innerHTML = ourPickPackages.map(pkg => {
+                    const title = pkg[`title_${currentLang}`] || pkg.title_en || 'Package';
+                    const description = pkg[`description_${currentLang}`] || pkg.description_en || '';
+                    
+                    // Create shorter description for index page (200 chars max)
+                    const shortDescription = description.length > 200 ? 
+                        description.substring(0, 200) + '...' : description;
+                    
+                    const viewDetailsText = currentLang === 'nl' ? 'Bekijk details' : 
+                                           currentLang === 'fr' ? 'Voir les détails' : 
+                                           'View Details';
+                    
+                    const bookNowText = currentLang === 'nl' ? 'Boek Nu' : 
+                                       currentLang === 'fr' ? 'Réserver' : 
+                                       'Book Now';
+                    
+                    return `
+                        <div class="our-pick-card">
+                            <div class="our-pick-badge">Our Pick</div>
+                            ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="our-pick-image">` : ''}
+                            <div class="our-pick-content">
+                                <h3 class="our-pick-title">${title}</h3>
+                                <p class="our-pick-description">${shortDescription}</p>
+                                <div class="our-pick-actions">
+                                    <a href="packages.html" class="our-pick-btn secondary">${viewDetailsText}</a>
+                                    ${pkg.bookingLink ? `<a href="${pkg.bookingLink}" target="_blank" rel="noopener noreferrer" class="our-pick-btn">${bookNowText}</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+            } catch (error) {
+                console.error('Error loading Our Pick packages:', error);
+                document.getElementById('our-pick-section').style.display = 'none';
+            }
+        }
+        
+        // Load Our Pick packages after page loads
+        loadOurPickPackages();
 
         // ============ ADS BOTTOM SECTION ============
         async function loadAdsBottom() {
