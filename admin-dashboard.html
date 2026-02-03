@@ -3098,6 +3098,9 @@
         async function toggleOurPicks(packageId, showInOurPicks) {
             try {
                 const pkg = packagesData.find(p => p.id === packageId);
+                if (!pkg) {
+                    throw new Error('Package not found');
+                }
                 pkg.showInOurPicks = showInOurPicks;
                 await savePackagesData();
             } catch (error) {

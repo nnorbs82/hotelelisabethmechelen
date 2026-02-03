@@ -608,6 +608,10 @@
         loadAdsBottom();
 
         // ============ OUR PICKS MANAGEMENT ============
+        // Constants
+        const DEFAULT_BOOKING_URL = 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
+        const MAX_CARD_DESCRIPTION_LENGTH = 120;
+        
         // Load and display packages marked for "Our Picks"
         async function loadOurPicks() {
             try {
@@ -640,8 +644,10 @@
                 listContainer.innerHTML = ourPicksPackages.map(pkg => {
                     const title = pkg[`title_${currentLang}`] || pkg.title_en || 'Untitled Package';
                     const description = pkg[`description_${currentLang}`] || pkg.description_en || '';
-                    const shortDescription = description.length > 120 ? description.substring(0, 120) + '...' : description;
-                    const bookingLink = pkg.bookingLink || 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
+                    const shortDescription = description.length > MAX_CARD_DESCRIPTION_LENGTH 
+                        ? description.substring(0, MAX_CARD_DESCRIPTION_LENGTH) + '...' 
+                        : description;
+                    const bookingLink = pkg.bookingLink || DEFAULT_BOOKING_URL;
                     
                     return `
                         <div class="our-picks-card" data-package-id="${pkg.id}">
@@ -683,7 +689,7 @@
             const description = pkg[`description_${lang}`] || pkg.description_en || '';
             const inclusions = pkg[`inclusions_${lang}`] || pkg.inclusions_en || '';
             const goodToKnow = pkg[`goodToKnow_${lang}`] || pkg.goodToKnow_en || '';
-            const bookingLink = pkg.bookingLink || 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
+            const bookingLink = pkg.bookingLink || DEFAULT_BOOKING_URL;
             
             const inclusionsList = inclusions.split('\n').filter(line => line.trim()).map(line => 
                 `<li>${line.trim()}</li>`
@@ -732,21 +738,21 @@
             const closeBtn = modal.querySelector('.package-modal-close');
             const overlay = modal.querySelector('.package-modal-overlay');
             
+            // Handle Escape key
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            };
+            
             const closeModal = () => {
+                document.removeEventListener('keydown', handleEscape);
                 modal.remove();
                 document.body.style.overflow = '';
             };
             
             closeBtn.addEventListener('click', closeModal);
             overlay.addEventListener('click', closeModal);
-            
-            // Close on Escape key
-            const handleEscape = (e) => {
-                if (e.key === 'Escape') {
-                    closeModal();
-                    document.removeEventListener('keydown', handleEscape);
-                }
-            };
             document.addEventListener('keydown', handleEscape);
         }
         
