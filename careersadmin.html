@@ -8,8 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Quill Rich Text Editor -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <style>
         /* Careers Admin Specific Styles */
         .careers-admin-main {
@@ -148,32 +146,69 @@
             color: var(--color-black);
         }
 
-        .quill-editor {
+        .editor-toolbar {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .editor-toolbar button {
+            background: var(--color-white);
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            color: var(--color-black);
+        }
+
+        .editor-toolbar button:hover {
+            background: #e8e8e8;
+            border-color: var(--color-sage);
+        }
+
+        .editor-toolbar button.active {
+            background: var(--color-sage);
+            color: var(--color-white);
+            border-color: var(--color-sage);
+        }
+
+        .rich-text-editor {
             background: #fafafa;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
             min-height: 200px;
-        }
-
-        .quill-editor .ql-toolbar {
-            border: none;
-            border-bottom: 2px solid #e0e0e0;
-            background: #f5f5f5;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .quill-editor .ql-container {
-            border: none;
+            padding: 1rem;
             font-family: 'Raleway', sans-serif;
             font-size: 1rem;
-            min-height: 180px;
+            line-height: 1.6;
+            overflow-y: auto;
+            max-height: 400px;
         }
 
-        .quill-editor .ql-editor {
-            min-height: 180px;
+        .rich-text-editor:focus {
+            outline: none;
+            background: var(--color-white);
         }
 
-        .quill-editor.focused {
+        .rich-text-editor:empty:before {
+            content: attr(data-placeholder);
+            color: #999;
+        }
+
+        .editor-wrapper.focused .editor-toolbar {
+            border-color: var(--color-sage);
+        }
+
+        .editor-wrapper.focused .rich-text-editor {
             border-color: var(--color-sage);
             background: var(--color-white);
             box-shadow: 0 0 0 3px rgba(149, 147, 128, 0.1);
@@ -495,14 +530,48 @@
                         <!-- Job Description Rich Text Editor -->
                         <div class="editor-container form-full-width">
                             <label for="job-description-editor">Job Description *</label>
-                            <div id="job-description-editor" class="quill-editor"></div>
+                            <div class="editor-wrapper">
+                                <div class="editor-toolbar" id="description-toolbar">
+                                    <button type="button" data-command="bold" title="Bold">B</button>
+                                    <button type="button" data-command="italic" title="Italic"><i>I</i></button>
+                                    <button type="button" data-command="underline" title="Underline"><u>U</u></button>
+                                    <button type="button" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                                    <button type="button" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                                    <button type="button" data-command="formatBlock:h2" title="Heading">H2</button>
+                                    <button type="button" data-command="formatBlock:h3" title="Heading">H3</button>
+                                    <button type="button" data-command="formatBlock:p" title="Paragraph">P</button>
+                                </div>
+                                <div 
+                                    id="job-description-editor" 
+                                    class="rich-text-editor" 
+                                    contenteditable="true" 
+                                    data-placeholder="Enter the job description..."
+                                ></div>
+                            </div>
                             <input type="hidden" id="job-description" required>
                         </div>
 
                         <!-- Requirements Rich Text Editor -->
                         <div class="editor-container form-full-width">
                             <label for="job-requirements-editor">Requirements</label>
-                            <div id="job-requirements-editor" class="quill-editor"></div>
+                            <div class="editor-wrapper">
+                                <div class="editor-toolbar" id="requirements-toolbar">
+                                    <button type="button" data-command="bold" title="Bold">B</button>
+                                    <button type="button" data-command="italic" title="Italic"><i>I</i></button>
+                                    <button type="button" data-command="underline" title="Underline"><u>U</u></button>
+                                    <button type="button" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                                    <button type="button" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                                    <button type="button" data-command="formatBlock:h2" title="Heading">H2</button>
+                                    <button type="button" data-command="formatBlock:h3" title="Heading">H3</button>
+                                    <button type="button" data-command="formatBlock:p" title="Paragraph">P</button>
+                                </div>
+                                <div 
+                                    id="job-requirements-editor" 
+                                    class="rich-text-editor" 
+                                    contenteditable="true" 
+                                    data-placeholder="Enter the job requirements (e.g., • Experience in hospitality)"
+                                ></div>
+                            </div>
                             <input type="hidden" id="job-requirements">
                         </div>
 
@@ -601,9 +670,6 @@
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
 
-    <!-- Quill Rich Text Editor -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
     <!-- Firebase and Admin Logic -->
     <script type="module">
         import { auth, database } from './firebase-config.js';
@@ -613,60 +679,80 @@
         let currentEditId = null;
         let descriptionEditor, requirementsEditor;
 
-        // Initialize Quill editors when DOM is ready
+        // Initialize Rich Text Editors when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             initializeEditors();
         });
 
         function initializeEditors() {
-            // Job Description Editor
-            descriptionEditor = new Quill('#job-description-editor', {
-                theme: 'snow',
-                placeholder: 'Enter the job description...',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],
-                        ['link'],
-                        ['clean']
-                    ]
-                }
+            descriptionEditor = document.getElementById('job-description-editor');
+            requirementsEditor = document.getElementById('job-requirements-editor');
+
+            // Setup toolbar handlers for description editor
+            const descToolbar = document.getElementById('description-toolbar');
+            setupToolbar(descToolbar, descriptionEditor);
+
+            // Setup toolbar handlers for requirements editor
+            const reqToolbar = document.getElementById('requirements-toolbar');
+            setupToolbar(reqToolbar, requirementsEditor);
+
+            // Add focus handlers
+            descriptionEditor.addEventListener('focus', () => {
+                descriptionEditor.closest('.editor-wrapper').classList.add('focused');
+            });
+            descriptionEditor.addEventListener('blur', () => {
+                descriptionEditor.closest('.editor-wrapper').classList.remove('focused');
             });
 
-            // Requirements Editor
-            requirementsEditor = new Quill('#job-requirements-editor', {
-                theme: 'snow',
-                placeholder: 'Enter the job requirements (e.g., • Experience in hospitality)',
-                modules: {
-                    toolbar: [
-                        [{ 'header': [1, 2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],
-                        ['link'],
-                        ['clean']
-                    ]
-                }
+            requirementsEditor.addEventListener('focus', () => {
+                requirementsEditor.closest('.editor-wrapper').classList.add('focused');
+            });
+            requirementsEditor.addEventListener('blur', () => {
+                requirementsEditor.closest('.editor-wrapper').classList.remove('focused');
+            });
+        }
+
+        function setupToolbar(toolbar, editor) {
+            const buttons = toolbar.querySelectorAll('button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const command = button.dataset.command;
+                    
+                    editor.focus();
+                    
+                    if (command.includes(':')) {
+                        const [cmd, value] = command.split(':');
+                        document.execCommand(cmd, false, value);
+                    } else {
+                        document.execCommand(command, false, null);
+                    }
+                    
+                    // Update button state
+                    updateToolbarState(toolbar, editor);
+                });
             });
 
-            // Add focus/blur handlers for styling
-            descriptionEditor.on('selection-change', function(range) {
-                const editor = document.querySelector('#job-description-editor');
-                if (range) {
-                    editor.classList.add('focused');
-                } else {
-                    editor.classList.remove('focused');
-                }
-            });
+            // Update toolbar state on selection change
+            editor.addEventListener('mouseup', () => updateToolbarState(toolbar, editor));
+            editor.addEventListener('keyup', () => updateToolbarState(toolbar, editor));
+        }
 
-            requirementsEditor.on('selection-change', function(range) {
-                const editor = document.querySelector('#job-requirements-editor');
-                if (range) {
-                    editor.classList.add('focused');
-                } else {
-                    editor.classList.remove('focused');
+        function updateToolbarState(toolbar, editor) {
+            const buttons = toolbar.querySelectorAll('button');
+            buttons.forEach(button => {
+                const command = button.dataset.command;
+                const cmd = command.includes(':') ? command.split(':')[0] : command;
+                
+                try {
+                    if (document.queryCommandState(cmd)) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                } catch (e) {
+                    // Command not supported, ignore
                 }
             });
         }
@@ -709,9 +795,15 @@
         document.getElementById('job-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Get HTML content from Quill editors
-            const descriptionHTML = descriptionEditor.root.innerHTML;
-            const requirementsHTML = requirementsEditor.root.innerHTML;
+            // Get HTML content from contenteditable editors
+            const descriptionHTML = descriptionEditor.innerHTML.trim();
+            const requirementsHTML = requirementsEditor.innerHTML.trim();
+            
+            // Validate description is not empty
+            if (!descriptionHTML || descriptionHTML === '<br>' || descriptionHTML === '') {
+                showMessage('admin-message', 'Job Description is required!', 'error');
+                return;
+            }
             
             const jobData = {
                 title: document.getElementById('job-title').value,
@@ -738,8 +830,8 @@
                 }
                 
                 document.getElementById('job-form').reset();
-                descriptionEditor.setContents([]);
-                requirementsEditor.setContents([]);
+                descriptionEditor.innerHTML = '';
+                requirementsEditor.innerHTML = '';
             } catch (error) {
                 showMessage('admin-message', 'Error saving job: ' + error.message, 'error');
             }
@@ -753,8 +845,8 @@
             document.getElementById('form-title').textContent = 'Add New Job Listing';
             document.getElementById('cancel-edit-btn').style.display = 'none';
             document.getElementById('job-form').reset();
-            descriptionEditor.setContents([]);
-            requirementsEditor.setContents([]);
+            descriptionEditor.innerHTML = '';
+            requirementsEditor.innerHTML = '';
         }
 
         function loadJobs() {
@@ -808,18 +900,9 @@
                     document.getElementById('job-department').value = job.department || '';
                     document.getElementById('job-location').value = job.location || '';
                     
-                    // Set Quill editor content
-                    if (job.description) {
-                        descriptionEditor.root.innerHTML = job.description;
-                    } else {
-                        descriptionEditor.setContents([]);
-                    }
-                    
-                    if (job.requirements) {
-                        requirementsEditor.root.innerHTML = job.requirements;
-                    } else {
-                        requirementsEditor.setContents([]);
-                    }
+                    // Set editor content
+                    descriptionEditor.innerHTML = job.description || '';
+                    requirementsEditor.innerHTML = job.requirements || '';
                     
                     document.getElementById('form-title').textContent = 'Edit Job Listing';
                     document.getElementById('cancel-edit-btn').style.display = 'inline-block';
