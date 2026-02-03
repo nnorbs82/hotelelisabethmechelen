@@ -3132,6 +3132,8 @@
                 const escapedId = escapeHtml(room.id);
                 const escapedName = escapeHtml(room.name_en || 'Untitled Room');
                 const escapedBedType = escapeHtml(room.bedType_en || 'N/A');
+                const status = room.status || 'available';
+                const isAvailable = status === 'available';
                 
                 return `
                 <div class="room-item" style="border: 1px solid var(--color-sage); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
@@ -3143,6 +3145,16 @@
                             <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Room Size:</strong> ${room.roomSize || 'N/A'} m²</p>
                             <p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Photos:</strong> ${room.photos ? room.photos.length : 0}</p>
                             ${room.video ? '<p style="color: var(--color-sage); margin: 0.25rem 0;"><strong>Video:</strong> Yes</p>' : ''}
+                            <div style="margin-top: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <strong style="color: var(--color-sage);">Status:</strong>
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <div style="position: relative; width: 50px; height: 24px; background: ${isAvailable ? '#4CAF50' : '#9E9E9E'}; border-radius: 12px; transition: background 0.3s;">
+                                        <input type="checkbox" ${isAvailable ? 'checked' : ''} onchange="toggleRoomStatus('${escapedId}')" style="display: none;">
+                                        <div style="position: absolute; top: 2px; left: ${isAvailable ? '26px' : '2px'}; width: 20px; height: 20px; background: white; border-radius: 50%; transition: left 0.3s;"></div>
+                                    </div>
+                                    <span style="margin-left: 0.5rem; font-weight: 600; color: ${isAvailable ? '#4CAF50' : '#9E9E9E'};">${isAvailable ? 'Available' : 'Offline'}</span>
+                                </label>
+                            </div>
                         </div>
                         <div style="display: flex; gap: 0.5rem;">
                             <button class="btn" onclick="editRoom('${escapedId}')" style="padding: 0.5rem 1rem;">Edit</button>
@@ -3569,6 +3581,7 @@
                     roomSize,
                     amenities,
                     photos: roomPhotos,
+                    status: room ? (room.status || 'available') : 'available',
                     ...(roomVideo && { video: roomVideo })
                 };
 
@@ -3635,6 +3648,28 @@
             } catch (error) {
                 console.error('Error deleting room:', error);
                 alert('Failed to delete room.');
+            }
+        };
+
+        window.toggleRoomStatus = async function(roomId) {
+            try {
+                const room = roomsData.find(r => r.id === roomId);
+                if (!room) return;
+                
+                const currentStatus = room.status || 'available';
+                const newStatus = currentStatus === 'available' ? 'offline' : 'available';
+                
+                // Update status in Firebase
+                await set(dbRef(database, `rooms/${roomId}/status`), newStatus);
+                
+                // Update local data
+                room.status = newStatus;
+                
+                // Re-render the list
+                renderRoomsList();
+            } catch (error) {
+                console.error('Error toggling room status:', error);
+                alert('Failed to update room status.');
             }
         };
 
