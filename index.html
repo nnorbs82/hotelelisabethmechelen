@@ -95,8 +95,13 @@
         <!-- Ads Bottom Section -->
         <section id="ads-bottom-section" style="display: none;"></section>
 
-        <!-- Our Picks Section -->
-        <section id="our-picks-section" style="display: none;"></section>
+        <div class="container">
+            <div class="card">
+                <h2>Welcome to Hotel Elisabeth Mechelen</h2>
+                <p>Experience luxury and comfort in the heart of Mechelen.</p>
+                <a href="rooms.html" class="btn">View Our Rooms</a>
+            </div>
+        </div>
     </main>
 
     <!-- Map Section -->
@@ -599,191 +604,6 @@
         
         // Load Ads Bottom after page loads
         loadAdsBottom();
-
-        // ============ OUR PICKS SECTION ============
-        // Load and display packages marked as "Our Pick"
-        async function loadOurPicks() {
-            try {
-                const snapshot = await get(dbRef(database, 'packages'));
-                
-                if (!snapshot.exists()) {
-                    return;
-                }
-
-                const data = snapshot.val();
-                const ourPickPackages = Object.keys(data)
-                    .map(key => ({ id: key, ...data[key] }))
-                    .filter(pkg => pkg.status === 'active' && pkg.ourPick === true);
-
-                if (ourPickPackages.length === 0) {
-                    return; // Don't show section if no Our Picks
-                }
-
-                // Detect language
-                function detectLanguage() {
-                    const lang = navigator.language || navigator.userLanguage;
-                    if (lang.startsWith('nl')) return 'nl';
-                    if (lang.startsWith('fr')) return 'fr';
-                    return 'en';
-                }
-
-                const currentLang = detectLanguage();
-                const TEASER_MAX_LENGTH = 120;
-                let currentlyExpandedCard = null;
-
-                // Section title translations
-                const sectionTitles = {
-                    en: 'Our Picks',
-                    nl: 'Onze Keuzes',
-                    fr: 'Nos Choix'
-                };
-
-                // Build the HTML for Our Picks section
-                const ourPicksHTML = `
-                    <div class="our-picks-container">
-                        <div class="our-picks-header">
-                            <h2>${sectionTitles[currentLang]}</h2>
-                        </div>
-                        <div class="our-picks-list">
-                            ${ourPickPackages.map((pkg, index) => {
-                                const title = pkg['title_' + currentLang] || pkg.title_en || 'Package';
-                                const description = pkg['description_' + currentLang] || pkg.description_en || '';
-                                const inclusions = pkg['inclusions_' + currentLang] || pkg.inclusions_en || '';
-                                const goodToKnow = pkg['goodToKnow_' + currentLang] || pkg.goodToKnow_en || '';
-
-                                const inclusionsList = inclusions.split('\n').filter(item => item.trim());
-                                const goodToKnowList = goodToKnow.split('\n').filter(item => item.trim());
-
-                                const teaser = description ? 
-                                    (description.length > TEASER_MAX_LENGTH ? description.substring(0, TEASER_MAX_LENGTH) + '...' : description) : 
-                                    (currentLang === 'nl' ? 'Klik voor meer details' : currentLang === 'fr' ? 'Cliquez pour plus de détails' : 'Click for more details');
-
-                                const viewDetailsCta = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
-
-                                return \`
-                                    <div class="package-card" data-package-id="\${pkg.id}">
-                                        <div class="package-header">
-                                            \${pkg.imageUrl ? \`<img src="\${pkg.imageUrl}" alt="\${title}" class="package-thumbnail">\` : ''}
-                                            <div class="package-summary">
-                                                <h3 class="package-title">\${title}</h3>
-                                                <p class="package-teaser">\${teaser}</p>
-                                                <button class="package-header-cta" aria-expanded="false" aria-label="\${viewDetailsCta}">
-                                                    <span>\${viewDetailsCta}</span>
-                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="package-details">
-                                            <div class="package-content">
-                                                \${pkg.imageUrl ? \`<img src="\${pkg.imageUrl}" alt="\${title}" class="package-full-image">\` : ''}
-                                                
-                                                \${description || inclusionsList.length > 0 ? \`
-                                                    <div class="package-two-column-layout">
-                                                        <div class="package-column-description">
-                                                            \${description ? \`<p>\${description}</p>\` : ''}
-                                                        </div>
-                                                        <div class="package-column-divider"></div>
-                                                        <div class="package-column-inclusions">
-                                                            \${inclusionsList.length > 0 ? \`
-                                                                <div class="package-section">
-                                                                    <h4 class="package-section-title">\${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h4>
-                                                                    <ul class="package-list">
-                                                                        \${inclusionsList.map(item => \`<li>\${item}</li>\`).join('')}
-                                                                    </ul>
-                                                                </div>
-                                                            \` : ''}
-                                                        </div>
-                                                    </div>
-                                                \` : ''}
-                                                
-                                                \${goodToKnowList.length > 0 ? \`
-                                                    <div class="package-section">
-                                                        <h4 class="package-section-title">\${currentLang === 'nl' ? 'Goed om te weten' : currentLang === 'fr' ? 'Bon à savoir' : 'Good to Know'}</h4>
-                                                        <ul class="package-list">
-                                                            \${goodToKnowList.map(item => \`<li>\${item}</li>\`).join('')}
-                                                        </ul>
-                                                    </div>
-                                                \` : ''}
-                                                
-                                                \${pkg.bookingLink ? \`
-                                                    <div class="package-actions">
-                                                        <a href="\${pkg.bookingLink}" target="_blank" class="room-feature-btn primary package-book-btn">
-                                                            <span>\${currentLang === 'nl' ? 'Boek Nu' : currentLang === 'fr' ? 'Réserver' : 'Book Now'}</span>
-                                                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                                <polyline points="12 5 19 12 12 19"></polyline>
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                \` : ''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                \`;
-                            }).join('')}
-                        </div>
-                    </div>
-                `;
-
-                const ourPicksSection = document.getElementById('our-picks-section');
-                ourPicksSection.innerHTML = ourPicksHTML;
-                ourPicksSection.style.display = 'block';
-
-                // Add click handlers for expand/collapse
-                const viewDetailsText = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
-                const hideText = currentLang === 'nl' ? 'Verberg details' : currentLang === 'fr' ? 'Masquer les détails' : 'Hide Details';
-
-                document.querySelectorAll('#our-picks-section .package-card').forEach(card => {
-                    const ctaButton = card.querySelector('.package-header-cta');
-                    const ctaText = ctaButton.querySelector('span');
-                    const originalText = ctaText.textContent;
-                    
-                    ctaText.setAttribute('data-original-text', originalText);
-                    
-                    ctaButton.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        
-                        // Close previously expanded card
-                        if (currentlyExpandedCard && currentlyExpandedCard !== card) {
-                            currentlyExpandedCard.classList.remove('expanded');
-                            const prevButton = currentlyExpandedCard.querySelector('.package-header-cta');
-                            const prevText = prevButton?.querySelector('span');
-                            if (prevButton) {
-                                prevButton.setAttribute('aria-expanded', 'false');
-                                prevButton.setAttribute('aria-label', viewDetailsText);
-                            }
-                            if (prevText) {
-                                prevText.textContent = prevText.getAttribute('data-original-text');
-                            }
-                        }
-                        
-                        // Toggle this card
-                        card.classList.toggle('expanded');
-                        
-                        // Update button text and aria attributes
-                        if (card.classList.contains('expanded')) {
-                            ctaText.textContent = hideText;
-                            ctaButton.setAttribute('aria-expanded', 'true');
-                            ctaButton.setAttribute('aria-label', hideText);
-                            currentlyExpandedCard = card;
-                        } else {
-                            ctaText.textContent = ctaText.getAttribute('data-original-text');
-                            ctaButton.setAttribute('aria-expanded', 'false');
-                            ctaButton.setAttribute('aria-label', viewDetailsText);
-                            currentlyExpandedCard = null;
-                        }
-                    });
-                });
-
-            } catch (error) {
-                console.error('Error loading Our Picks:', error);
-            }
-        }
-        
-        // Load Our Picks after page loads
-        loadOurPicks();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
         // Load and display background image

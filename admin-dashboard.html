@@ -2929,15 +2929,6 @@
                             </select>
                         </div>
 
-                        <!-- Our Pick Toggle -->
-                        <div style="margin: 1rem 0;">
-                            <label style="display: flex; align-items: center; cursor: pointer;">
-                                <input type="checkbox" id="package-our-pick" ${pkg && pkg.ourPick ? 'checked' : ''} style="margin-right: 0.5rem; width: 20px; height: 20px; cursor: pointer;">
-                                <span style="font-weight: 600;">Our Pick (Display on Index Page)</span>
-                            </label>
-                            <p style="font-size: 0.85rem; color: #666; margin: 0.5rem 0 0 26px;">When enabled, this package will be featured in the "Our Picks" section on the homepage.</p>
-                        </div>
-
                         <!-- Action Buttons -->
                         <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
                             <button class="btn" id="cancel-package-btn">Cancel</button>
@@ -3012,8 +3003,7 @@
                     goodToKnow_nl: document.getElementById('package-goodtoknow-nl').value,
                     goodToKnow_fr: document.getElementById('package-goodtoknow-fr').value,
                     bookingLink: document.getElementById('package-booking-link').value,
-                    status: document.getElementById('package-status').value,
-                    ourPick: document.getElementById('package-our-pick').checked
+                    status: document.getElementById('package-status').value
                 };
 
                 if (!packageData.title_en) {
