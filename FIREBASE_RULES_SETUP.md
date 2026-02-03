@@ -69,6 +69,11 @@ service firebase.storage {
     match /attractions/{allPaths=**} {
       allow write, delete: if request.auth != null;
     }
+
+    // Allow authenticated users to write/delete files in room-photos folder
+    match /room-photos/{allPaths=**} {
+      allow write, delete: if request.auth != null;
+    }
   }
 }
 ```
@@ -139,6 +144,10 @@ These rules allow authenticated admin users to read and write photo metadata in 
     },
     "hotelInfo": {
       ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "rooms": {
+      ".read": true,
       ".write": "auth != null"
     }
   }
@@ -215,6 +224,12 @@ service firebase.storage {
       allow write, delete: if request.auth != null;
     }
 
+    // Allow anyone to read files in room-photos folder
+    match /room-photos/{allPaths=**} {
+      allow read: if true;
+      allow write, delete: if request.auth != null;
+    }
+
     // For all other paths, require authentication
     match /{allPaths=**} {
       allow read: if request.auth != null;
@@ -277,6 +292,11 @@ service firebase.storage {
     "hotelInfo": {
       ".read": true,
       ".write": "auth != null"
+    },
+    "rooms": {
+      ".read": true,
+      ".write": "auth != null"
+    }
     }
   }
 }

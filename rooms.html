@@ -240,10 +240,16 @@
                 const roomsSnapshot = await get(dbRef(database, 'rooms'));
                 if (roomsSnapshot.exists()) {
                     const roomsObj = roomsSnapshot.val();
-                    roomsData = Object.keys(roomsObj).map(id => ({
-                        id,
-                        ...roomsObj[id]
-                    }));
+                    // Filter to only show rooms with status 'available' or no status field (default to available)
+                    roomsData = Object.keys(roomsObj)
+                        .map(id => ({
+                            id,
+                            ...roomsObj[id]
+                        }))
+                        .filter(room => {
+                            const status = room.status || 'available';
+                            return status === 'available';
+                        });
                     renderRooms();
                     setPageBackground(); // Set page background after rooms are loaded
                 } else {
