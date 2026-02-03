@@ -1830,7 +1830,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: transparent; /* Allow fixed page-background to show through, matching overall design */
+    background-color: #C4C3B3; /* Darker beige background */
     padding: 3rem 0;
 }
 
