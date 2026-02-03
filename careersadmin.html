@@ -9,33 +9,65 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Hide main navigation menu on careers admin page */
+        .main-menu {
+            display: none !important;
+        }
+
         /* Careers Admin Specific Styles */
         .careers-admin-main {
-            padding-top: 90px;
+            padding-top: 0;
             min-height: 100vh;
             background: linear-gradient(135deg, #FAF9F6 0%, #F5F4F0 100%);
         }
 
         .admin-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2.5rem;
+            padding-top: 140px; /* Space for fixed header */
         }
 
-        .admin-header {
-            background: var(--color-black);
+        .careers-admin-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--color-black) 0%, #1a1a1a 100%);
             color: var(--color-white);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 2.5rem;
+            margin-bottom: 0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            z-index: 1000;
         }
 
-        .admin-header h1 {
-            font-size: 2rem;
+        .careers-admin-header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .careers-admin-header h1 {
+            font-size: 2.5rem;
             font-weight: 300;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .careers-admin-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .careers-admin-header-actions {
+            display: flex;
+            gap: 1rem;
         }
 
         .admin-controls {
@@ -45,20 +77,65 @@
             flex-wrap: wrap;
         }
 
+        /* Tab Navigation Styles */
+        .tabs-navigation {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-sage);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tab-button:hover {
+            color: var(--color-black);
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .tab-button.active {
+            color: var(--color-black);
+            border-bottom-color: var(--color-black);
+            font-weight: 600;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
         .job-form-container {
             background: var(--color-white);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .job-form-container h2 {
             color: var(--color-black);
             font-weight: 400;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
             letter-spacing: 0.05em;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-beige);
         }
 
         .form-grid {
@@ -82,19 +159,22 @@
         .form-group input,
         .form-group select,
         .form-group textarea {
-            padding: 0.75rem;
-            border: 1px solid var(--color-sage);
+            padding: 0.875rem;
+            border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-family: 'Raleway', sans-serif;
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            background: #fafafa;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--color-black);
+            border-color: var(--color-sage);
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(149, 147, 128, 0.1);
         }
 
         .form-group textarea {
@@ -106,39 +186,146 @@
             grid-column: 1 / -1;
         }
 
+        /* Rich Text Editor Styles */
+        .editor-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-container label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-black);
+        }
+
+        .editor-toolbar {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            border-radius: 8px 8px 0 0;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .editor-toolbar button {
+            background: var(--color-white);
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            color: var(--color-black);
+        }
+
+        .editor-toolbar button:hover {
+            background: #e8e8e8;
+            border-color: var(--color-sage);
+        }
+
+        .editor-toolbar button.active {
+            background: var(--color-sage);
+            color: var(--color-white);
+            border-color: var(--color-sage);
+        }
+
+        .rich-text-editor {
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            min-height: 200px;
+            padding: 1rem;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .rich-text-editor:focus {
+            outline: none;
+            background: var(--color-white);
+        }
+
+        .rich-text-editor:empty:before {
+            content: attr(data-placeholder);
+            color: #999;
+        }
+
+        .editor-wrapper.focused .editor-toolbar {
+            border-color: var(--color-sage);
+        }
+
+        .editor-wrapper.focused .rich-text-editor {
+            border-color: var(--color-sage);
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(149, 147, 128, 0.1);
+        }
+
         .form-actions {
             display: flex;
             gap: 1rem;
             justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: var(--color-black);
+            color: var(--color-white);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
         .jobs-list-container {
             background: var(--color-white);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .jobs-list-container h2 {
             color: var(--color-black);
             font-weight: 400;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
             letter-spacing: 0.05em;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--color-beige);
         }
 
         .job-item {
-            background: linear-gradient(135deg, #FAF9F6 0%, #F5F4F0 100%);
-            border: 1px solid var(--color-sage);
+            background: linear-gradient(135deg, #fefefe 0%, #fafafa 100%);
+            border: 2px solid #e8e8e8;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
 
         .job-item:hover {
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+            border-color: var(--color-sage);
         }
 
         .job-item-header {
@@ -150,9 +337,10 @@
 
         .job-item-info h3 {
             color: var(--color-black);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.02em;
         }
 
         .job-item-meta {
@@ -188,8 +376,9 @@
         }
 
         .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
         .btn-edit {
@@ -198,7 +387,7 @@
         }
 
         .btn-edit:hover {
-            background: var(--color-black);
+            background: #6e6c5f;
         }
 
         .btn-delete {
@@ -207,7 +396,7 @@
         }
 
         .btn-delete:hover {
-            background: #cb2431;
+            background: #b52a37;
         }
 
         .btn-toggle {
@@ -218,6 +407,15 @@
         .btn-toggle:hover {
             background: var(--color-sage);
             color: var(--color-white);
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: var(--color-white);
+        }
+
+        .btn-cancel:hover {
+            background: #5a6268;
         }
 
         #login-section {
@@ -328,16 +526,30 @@
         <!-- Admin Section (hidden until logged in) -->
         <div id="admin-section" style="display: none;">
             <div class="admin-container">
-                <div class="admin-header">
-                    <h1>Careers Management</h1>
-                    <p>Create and manage job listings for Hotel Elisabeth Mechelen</p>
-                    <button id="logout-btn" class="btn" style="margin-top: 1rem;">Logout</button>
+                <div class="careers-admin-header">
+                    <div class="careers-admin-header-content">
+                        <h1>Careers Management</h1>
+                        <p>Create and manage job listings for Hotel Elisabeth Mechelen</p>
+                    </div>
+                    <div class="careers-admin-header-actions">
+                        <button id="logout-btn" class="btn">Logout</button>
+                    </div>
                 </div>
 
                 <div id="admin-message"></div>
 
-                <!-- Job Form -->
-                <div class="job-form-container">
+                <!-- Tab Navigation -->
+                <div class="tabs-navigation">
+                    <button class="tab-button active" data-tab="new-job">New Job Post</button>
+                    <button class="tab-button" data-tab="active-posts">Active Posts</button>
+                    <button class="tab-button" data-tab="inactive-posts">Inactive Posts</button>
+                </div>
+
+                <!-- Tab Panels -->
+                <!-- New Job Post Tab -->
+                <div id="new-job-tab" class="tab-panel active">
+                    <!-- Job Form -->
+                    <div class="job-form-container">
                     <h2 id="form-title">Add New Job Listing</h2>
                     <form id="job-form">
                         <input type="hidden" id="job-id">
@@ -375,29 +587,86 @@
                                 <label for="job-location">Location</label>
                                 <input type="text" id="job-location" value="Mechelen, Belgium">
                             </div>
-                            <div class="form-group form-full-width">
-                                <label for="job-description">Job Description *</label>
-                                <textarea id="job-description" required></textarea>
-                            </div>
-                            <div class="form-group form-full-width">
-                                <label for="job-requirements">Requirements (one per line)</label>
-                                <textarea id="job-requirements" placeholder="• Experience in hospitality&#10;• Excellent communication skills&#10;• Team player"></textarea>
-                            </div>
                         </div>
+                        
+                        <!-- Job Description Rich Text Editor -->
+                        <div class="editor-container form-full-width">
+                            <label for="job-description-editor">Job Description *</label>
+                            <div class="editor-wrapper">
+                                <div class="editor-toolbar" id="description-toolbar">
+                                    <button type="button" data-command="bold" title="Bold">B</button>
+                                    <button type="button" data-command="italic" title="Italic"><i>I</i></button>
+                                    <button type="button" data-command="underline" title="Underline"><u>U</u></button>
+                                    <button type="button" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                                    <button type="button" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                                    <button type="button" data-command="formatBlock:h2" title="Heading">H2</button>
+                                    <button type="button" data-command="formatBlock:h3" title="Heading">H3</button>
+                                    <button type="button" data-command="formatBlock:p" title="Paragraph">P</button>
+                                </div>
+                                <div 
+                                    id="job-description-editor" 
+                                    class="rich-text-editor" 
+                                    contenteditable="true" 
+                                    data-placeholder="Enter the job description..."
+                                ></div>
+                            </div>
+                            <input type="hidden" id="job-description" required>
+                        </div>
+
+                        <!-- Requirements Rich Text Editor -->
+                        <div class="editor-container form-full-width">
+                            <label for="job-requirements-editor">Requirements</label>
+                            <div class="editor-wrapper">
+                                <div class="editor-toolbar" id="requirements-toolbar">
+                                    <button type="button" data-command="bold" title="Bold">B</button>
+                                    <button type="button" data-command="italic" title="Italic"><i>I</i></button>
+                                    <button type="button" data-command="underline" title="Underline"><u>U</u></button>
+                                    <button type="button" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                                    <button type="button" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                                    <button type="button" data-command="formatBlock:h2" title="Heading">H2</button>
+                                    <button type="button" data-command="formatBlock:h3" title="Heading">H3</button>
+                                    <button type="button" data-command="formatBlock:p" title="Paragraph">P</button>
+                                </div>
+                                <div 
+                                    id="job-requirements-editor" 
+                                    class="rich-text-editor" 
+                                    contenteditable="true" 
+                                    data-placeholder="Enter the job requirements (e.g., • Experience in hospitality)"
+                                ></div>
+                            </div>
+                            <input type="hidden" id="job-requirements">
+                        </div>
+
                         <div class="form-actions">
-                            <button type="button" id="cancel-edit-btn" class="btn" style="display: none; background: #6c757d;">Cancel</button>
+                            <button type="button" id="cancel-edit-btn" class="btn btn-cancel" style="display: none;">Cancel</button>
                             <button type="submit" class="btn">Save Job Listing</button>
                         </div>
                     </form>
                 </div>
+                </div>
+                <!-- End New Job Post Tab -->
 
-                <!-- Jobs List -->
-                <div class="jobs-list-container">
-                    <h2>Current Job Listings</h2>
-                    <div id="jobs-list">
-                        <p>Loading...</p>
+                <!-- Active Posts Tab -->
+                <div id="active-posts-tab" class="tab-panel">
+                    <div class="jobs-list-container">
+                        <h2>Active Job Listings</h2>
+                        <div id="active-jobs-list">
+                            <p>Loading...</p>
+                        </div>
                     </div>
                 </div>
+                <!-- End Active Posts Tab -->
+
+                <!-- Inactive Posts Tab -->
+                <div id="inactive-posts-tab" class="tab-panel">
+                    <div class="jobs-list-container">
+                        <h2>Inactive Job Listings</h2>
+                        <div id="inactive-jobs-list">
+                            <p>Loading...</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Inactive Posts Tab -->
             </div>
         </div>
     </main>
@@ -486,6 +755,112 @@
         import { ref, push, set, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         let currentEditId = null;
+        let descriptionEditor, requirementsEditor;
+
+        // Initialize Rich Text Editors when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeEditors();
+            setupTabs(); // Call independently to ensure tabs work even if editors fail
+        });
+
+        function initializeEditors() {
+            descriptionEditor = document.getElementById('job-description-editor');
+            requirementsEditor = document.getElementById('job-requirements-editor');
+
+            // Setup toolbar handlers for description editor
+            const descToolbar = document.getElementById('description-toolbar');
+            setupToolbar(descToolbar, descriptionEditor);
+
+            // Setup toolbar handlers for requirements editor
+            const reqToolbar = document.getElementById('requirements-toolbar');
+            setupToolbar(reqToolbar, requirementsEditor);
+
+            // Add focus handlers
+            descriptionEditor.addEventListener('focus', () => {
+                descriptionEditor.closest('.editor-wrapper').classList.add('focused');
+            });
+            descriptionEditor.addEventListener('blur', () => {
+                descriptionEditor.closest('.editor-wrapper').classList.remove('focused');
+            });
+
+            requirementsEditor.addEventListener('focus', () => {
+                requirementsEditor.closest('.editor-wrapper').classList.add('focused');
+            });
+            requirementsEditor.addEventListener('blur', () => {
+                requirementsEditor.closest('.editor-wrapper').classList.remove('focused');
+            });
+        }
+
+        function setupTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.dataset.tab;
+                    
+                    // Remove active class from all buttons and panels
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanels.forEach(panel => panel.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding panel
+                    button.classList.add('active');
+                    document.getElementById(`${tabName}-tab`).classList.add('active');
+                    
+                    // Load jobs for the selected tab
+                    if (tabName === 'active-posts') {
+                        loadJobs('active');
+                    } else if (tabName === 'inactive-posts') {
+                        loadJobs('inactive');
+                    }
+                });
+            });
+        }
+
+        function setupToolbar(toolbar, editor) {
+            const buttons = toolbar.querySelectorAll('button');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const command = button.dataset.command;
+                    
+                    editor.focus();
+                    
+                    if (command.includes(':')) {
+                        const [cmd, value] = command.split(':');
+                        document.execCommand(cmd, false, value);
+                    } else {
+                        document.execCommand(command, false, null);
+                    }
+                    
+                    // Update button state
+                    updateToolbarState(toolbar, editor);
+                });
+            });
+
+            // Update toolbar state on selection change
+            editor.addEventListener('mouseup', () => updateToolbarState(toolbar, editor));
+            editor.addEventListener('keyup', () => updateToolbarState(toolbar, editor));
+        }
+
+        function updateToolbarState(toolbar, editor) {
+            const buttons = toolbar.querySelectorAll('button');
+            buttons.forEach(button => {
+                const command = button.dataset.command;
+                const cmd = command.includes(':') ? command.split(':')[0] : command;
+                
+                try {
+                    if (document.queryCommandState(cmd)) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                } catch (e) {
+                    // Command not supported, ignore
+                }
+            });
+        }
 
         // Authentication
         onAuthStateChanged(auth, (user) => {
@@ -525,13 +900,27 @@
         document.getElementById('job-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // Get HTML content from contenteditable editors
+            const descriptionHTML = descriptionEditor.innerHTML.trim();
+            const requirementsHTML = requirementsEditor.innerHTML.trim();
+            
+            // Validate description is not empty
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = descriptionHTML;
+            const textContent = tempDiv.textContent || tempDiv.innerText || '';
+            
+            if (!textContent.trim()) {
+                showMessage('admin-message', 'Job Description is required!', 'error');
+                return;
+            }
+            
             const jobData = {
                 title: document.getElementById('job-title').value,
                 type: document.getElementById('job-type').value,
                 department: document.getElementById('job-department').value,
                 location: document.getElementById('job-location').value,
-                description: document.getElementById('job-description').value,
-                requirements: document.getElementById('job-requirements').value,
+                description: descriptionHTML,
+                requirements: requirementsHTML,
                 status: 'active',
                 updatedAt: Date.now()
             };
@@ -550,6 +939,8 @@
                 }
                 
                 document.getElementById('job-form').reset();
+                descriptionEditor.innerHTML = '';
+                requirementsEditor.innerHTML = '';
             } catch (error) {
                 showMessage('admin-message', 'Error saving job: ' + error.message, 'error');
             }
@@ -563,12 +954,25 @@
             document.getElementById('form-title').textContent = 'Add New Job Listing';
             document.getElementById('cancel-edit-btn').style.display = 'none';
             document.getElementById('job-form').reset();
+            descriptionEditor.innerHTML = '';
+            requirementsEditor.innerHTML = '';
         }
 
-        function loadJobs() {
+        function loadJobs(statusFilter = null) {
             const jobsRef = ref(database, 'careers');
             onValue(jobsRef, (snapshot) => {
-                const container = document.getElementById('jobs-list');
+                // Determine which container to use based on status filter
+                let container;
+                if (statusFilter === 'active') {
+                    container = document.getElementById('active-jobs-list');
+                } else if (statusFilter === 'inactive') {
+                    container = document.getElementById('inactive-jobs-list');
+                } else {
+                    // Load both lists when no filter specified (initial load)
+                    loadJobs('active');
+                    loadJobs('inactive');
+                    return;
+                }
                 
                 if (!snapshot.exists()) {
                     container.innerHTML = '<p>No job listings yet.</p>';
@@ -576,7 +980,14 @@
                 }
 
                 const jobs = snapshot.val();
-                const jobsArray = Object.entries(jobs).sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+                const jobsArray = Object.entries(jobs)
+                    .filter(([id, job]) => job.status === statusFilter)
+                    .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+                if (jobsArray.length === 0) {
+                    container.innerHTML = `<p>No ${statusFilter} job listings.</p>`;
+                    return;
+                }
 
                 container.innerHTML = jobsArray.map(([id, job]) => `
                     <div class="job-item">
@@ -615,10 +1026,19 @@
                     document.getElementById('job-type').value = job.type || 'Full-time';
                     document.getElementById('job-department').value = job.department || '';
                     document.getElementById('job-location').value = job.location || '';
-                    document.getElementById('job-description').value = job.description || '';
-                    document.getElementById('job-requirements').value = job.requirements || '';
+                    
+                    // Set editor content
+                    descriptionEditor.innerHTML = job.description || '';
+                    requirementsEditor.innerHTML = job.requirements || '';
+                    
                     document.getElementById('form-title').textContent = 'Edit Job Listing';
                     document.getElementById('cancel-edit-btn').style.display = 'inline-block';
+                    
+                    // Switch to New Job Post tab
+                    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+                    document.querySelector('[data-tab="new-job"]').classList.add('active');
+                    document.getElementById('new-job-tab').classList.add('active');
                     
                     // Scroll to form
                     document.querySelector('.job-form-container').scrollIntoView({ behavior: 'smooth' });
