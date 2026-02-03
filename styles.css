@@ -166,6 +166,34 @@ input, textarea, button {
     color: var(--color-white);
 }
 
+/* Booking Button - Unique Design */
+.booking-button {
+    background: linear-gradient(135deg, var(--color-sage), var(--color-beige)) !important;
+    color: var(--color-black) !important;
+    border: 2px solid var(--color-beige) !important;
+    border-radius: 25px !important;
+    padding: 10px 25px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(149, 147, 128, 0.4);
+    transition: all 0.3s ease !important;
+    margin-left: 10px;
+}
+
+.booking-button:hover {
+    background: linear-gradient(135deg, var(--color-beige), var(--color-white)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(149, 147, 128, 0.6);
+    color: var(--color-black) !important;
+}
+
+.booking-button:active {
+    transform: translateY(0);
+}
+    color: var(--color-white);
+}
+
 /* Mobile Menu Styles */
 @media (max-width: 899px) {
     .mobile-menu-btn {
