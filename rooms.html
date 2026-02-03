@@ -257,25 +257,40 @@
             }
         }
 
-        // Set page background to City Suite's first image
-        function setPageBackground() {
+        // Set page background to uploaded main image or fallback to City Suite
+        async function setPageBackground() {
             const pageBackground = document.getElementById('page-background');
             if (!pageBackground) return;
             
-            // Find the City Suite room (case-insensitive search)
-            const citySuiteRoom = roomsData.find(room => 
-                room.name_en && room.name_en.toLowerCase().includes('city suite')
-            );
-            
             let imageUrl = null;
             
-            if (citySuiteRoom && citySuiteRoom.photos && citySuiteRoom.photos.length > 0) {
-                imageUrl = citySuiteRoom.photos[0].url;
-            } else {
-                // Fallback: use the first room's first image if City Suite is not found
-                const firstRoom = roomsData.find(room => room.photos && room.photos.length > 0);
-                if (firstRoom) {
-                    imageUrl = firstRoom.photos[0].url;
+            // First, try to load the rooms main image from Firebase
+            try {
+                const roomsMainImageSnapshot = await get(dbRef(database, 'roomsMainImage'));
+                if (roomsMainImageSnapshot.exists()) {
+                    const roomsMainImage = roomsMainImageSnapshot.val();
+                    if (roomsMainImage && roomsMainImage.url) {
+                        imageUrl = roomsMainImage.url;
+                    }
+                }
+            } catch (error) {
+                console.log('Rooms main image not set, using fallback');
+            }
+            
+            // Fallback: Find the City Suite room (case-insensitive search)
+            if (!imageUrl) {
+                const citySuiteRoom = roomsData.find(room => 
+                    room.name_en && room.name_en.toLowerCase().includes('city suite')
+                );
+                
+                if (citySuiteRoom && citySuiteRoom.photos && citySuiteRoom.photos.length > 0) {
+                    imageUrl = citySuiteRoom.photos[0].url;
+                } else {
+                    // Final fallback: use the first room's first image
+                    const firstRoom = roomsData.find(room => room.photos && room.photos.length > 0);
+                    if (firstRoom) {
+                        imageUrl = firstRoom.photos[0].url;
+                    }
                 }
             }
             
