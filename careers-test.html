@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers Test - Hotel Elisabeth Mechelen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Navigation Menu -->
+    <header class="main-menu">
+        <a href="index.html">
+            <img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen" class="main-menu-logo">
+        </a>
+        <div class="mobile-header-controls">
+            <a href="#" class="booking-button">Book Now</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
+                ☰
+            </button>
+        </div>
+        <nav class="main-nav" id="main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="packages.html">Packages</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Fixed Background Layer -->
+    <div id="page-background" class="page-background"></div>
+
+    <main class="careers-main">
+        <!-- Hero Section -->
+        <section class="careers-hero">
+            <div class="careers-hero-overlay"></div>
+            <div class="careers-hero-content">
+                <span class="careers-hero-tagline">Join Our Team</span>
+                <h1 class="careers-hero-title">Career Opportunities (TEST)</h1>
+                <p class="careers-hero-subtitle">Be part of an exceptional hospitality experience</p>
+                <div class="careers-hero-divider"></div>
+            </div>
+        </section>
+
+        <!-- Intro Section -->
+        <section class="careers-intro">
+            <div class="careers-intro-content">
+                <h2 class="careers-section-title">Work With Us</h2>
+                <p class="careers-intro-text">At Hotel Elisabeth Mechelen, we believe in creating memorable experiences for our guests through dedicated teamwork and exceptional service.</p>
+            </div>
+        </section>
+
+        <!-- Job Listings Section -->
+        <section class="careers-listings">
+            <!-- Filter Section -->
+            <div class="careers-filter-container">
+                <label for="department-filter" class="filter-label">Filter by Department:</label>
+                <select id="department-filter" class="filter-select">
+                    <option value="all">All Departments</option>
+                </select>
+            </div>
+            
+            <div id="careers-list-container" class="careers-grid" aria-live="polite" aria-atomic="false">
+                <p class="careers-loading">Loading career opportunities...</p>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="careers-cta">
+            <div class="careers-cta-content">
+                <h2 class="careers-cta-title">Questions About Working With Us?</h2>
+                <p class="careers-cta-text">Feel free to reach out to our HR department</p>
+                <a href="mailto:info@elisabeth-hotel.be" class="btn careers-contact-btn">Contact Us</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section footer-logo-section">
+                <img src="logo/logo.png" alt="Hotel Elisabeth Logo" class="footer-logo">
+            </div>
+        </div>
+        <div class="footer-copyright-wrapper">
+            <p class="footer-copyright">&copy; 2026 Hotel Elisabeth Mechelen. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Main Menu Script -->
+    <script src="main-menu.js"></script>
+
+    <!-- Mock Firebase Data and Test Script -->
+    <script type="module">
+        // Mock job data
+        const mockJobs = {
+            'job1': {
+                title: 'Front Desk Receptionist',
+                type: 'Full-time',
+                department: 'Front Office',
+                location: 'Mechelen, Belgium',
+                description: '<p>We are seeking a friendly and professional Front Desk Receptionist to join our team.</p><p>You will be the first point of contact for our guests.</p>',
+                requirements: '<ul><li>Excellent communication skills</li><li>Fluent in Dutch and English</li><li>Previous hotel experience preferred</li><li>Strong customer service orientation</li></ul>',
+                status: 'active',
+                createdAt: Date.now() - 100000
+            },
+            'job2': {
+                title: 'Executive Chef',
+                type: 'Full-time',
+                department: 'Kitchen',
+                location: 'Mechelen, Belgium',
+                description: '<p>Looking for an experienced Executive Chef to lead our culinary team.</p><p>Must have passion for creating exceptional dining experiences.</p>',
+                requirements: '<ul><li>5+ years experience in professional kitchen</li><li>Culinary degree or equivalent</li><li>Leadership experience required</li><li>Knowledge of food safety standards</li></ul>',
+                status: 'active',
+                createdAt: Date.now() - 200000
+            },
+            'job3': {
+                title: 'Housekeeping Supervisor',
+                type: 'Full-time',
+                department: 'Housekeeping',
+                location: 'Mechelen, Belgium',
+                description: '<p>We need a detail-oriented Housekeeping Supervisor to maintain our high standards of cleanliness.</p>',
+                requirements: '<ul><li>Previous housekeeping experience</li><li>Supervisory skills</li><li>Attention to detail</li><li>Ability to work flexible hours</li></ul>',
+                status: 'active',
+                createdAt: Date.now() - 300000
+            },
+            'job4': {
+                title: 'Marketing Coordinator',
+                type: 'Part-time',
+                department: 'Marketing',
+                location: 'Mechelen, Belgium',
+                description: '<p>Join our marketing team to help promote our hotel and special events.</p>',
+                requirements: '<ul><li>Experience with social media management</li><li>Basic graphic design skills</li><li>Excellent writing skills</li><li>Knowledge of hospitality industry a plus</li></ul>',
+                status: 'active',
+                createdAt: Date.now() - 400000
+            }
+        };
+
+        // Store all jobs globally for filtering
+        let allJobs = [];
+
+        // Load job listings (using mock data)
+        function loadCareers() {
+            const container = document.getElementById('careers-list-container');
+            
+            allJobs = Object.entries(mockJobs)
+                .filter(([id, job]) => job.status === 'active')
+                .sort((a, b) => (b[1].createdAt || 0) - (a[1].createdAt || 0));
+
+            // Populate department filter
+            populateDepartmentFilter();
+            
+            // Render jobs
+            renderJobs(allJobs);
+        }
+
+        // Populate department filter with unique departments
+        function populateDepartmentFilter() {
+            const filter = document.getElementById('department-filter');
+            const departments = [...new Set(allJobs.map(([id, job]) => job.department || 'General'))];
+            
+            // Keep "All Departments" option and add unique departments
+            filter.innerHTML = '<option value="all">All Departments</option>' +
+                departments.sort().map(dept => 
+                    `<option value="${escapeHtml(dept)}">${escapeHtml(dept)}</option>`
+                ).join('');
+        }
+
+        // Render jobs (with optional filtering)
+        function renderJobs(jobs) {
+            const container = document.getElementById('careers-list-container');
+            
+            container.innerHTML = jobs.map(([id, job], index) => `
+                <div class="career-card" data-department="${escapeHtml(job.department || 'General')}">
+                    <div class="career-card-header" onclick="toggleJobCard(this)">
+                        <div class="career-header-content">
+                            <h3 class="career-title">${escapeHtml(job.title)}</h3>
+                            <span class="career-type">${escapeHtml(job.type || 'Full-time')}</span>
+                        </div>
+                        <button class="career-toggle-btn" aria-label="Toggle job details">
+                            <span class="toggle-icon">▼</span>
+                        </button>
+                    </div>
+                    <div class="career-card-body" style="display: none;">
+                        <div class="career-meta">
+                            <span class="career-department">${escapeHtml(job.department || 'General')}</span>
+                            ${job.location ? `<span class="career-location">📍 ${escapeHtml(job.location)}</span>` : ''}
+                        </div>
+                        ${job.description ? `<div class="career-description">${sanitizeHTML(job.description)}</div>` : ''}
+                        ${job.requirements ? `
+                            <div class="career-requirements">
+                                <strong>Requirements:</strong>
+                                <div class="requirements-content">${sanitizeHTML(job.requirements)}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="career-card-footer" style="display: none;">
+                        <a href="mailto:info@elisabeth-hotel.be?subject=Application for ${encodeURIComponent(job.title)}" class="btn career-apply-btn">Apply Now</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Toggle job card expanded/collapsed state
+        window.toggleJobCard = function(headerElement) {
+            const card = headerElement.closest('.career-card');
+            const body = card.querySelector('.career-card-body');
+            const footer = card.querySelector('.career-card-footer');
+            const toggleBtn = card.querySelector('.toggle-icon');
+            
+            const isExpanded = body.style.display !== 'none';
+            
+            if (isExpanded) {
+                body.style.display = 'none';
+                footer.style.display = 'none';
+                toggleBtn.textContent = '▼';
+                card.classList.remove('expanded');
+            } else {
+                body.style.display = 'block';
+                footer.style.display = 'block';
+                toggleBtn.textContent = '▲';
+                card.classList.add('expanded');
+            }
+        };
+
+        // Filter jobs by department
+        document.addEventListener('DOMContentLoaded', () => {
+            const filter = document.getElementById('department-filter');
+            filter.addEventListener('change', (e) => {
+                const selectedDept = e.target.value;
+                
+                if (selectedDept === 'all') {
+                    renderJobs(allJobs);
+                } else {
+                    const filtered = allJobs.filter(([id, job]) => 
+                        (job.department || 'General') === selectedDept
+                    );
+                    renderJobs(filtered);
+                }
+            });
+        });
+
+        // Sanitize HTML while allowing safe tags
+        function sanitizeHTML(html) {
+            if (!html) return '';
+            
+            // Create a temporary div to parse HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Allow only safe tags
+            const allowedTags = ['P', 'BR', 'STRONG', 'EM', 'U', 'UL', 'OL', 'LI', 'H2', 'H3', 'H4', 'B', 'I'];
+            
+            // Remove script tags and other dangerous elements
+            const allElements = tempDiv.querySelectorAll('*');
+            allElements.forEach(el => {
+                if (!allowedTags.includes(el.tagName)) {
+                    // Replace disallowed tags with their text content
+                    el.replaceWith(document.createTextNode(el.textContent));
+                }
+                // Remove all event handlers and dangerous attributes
+                Array.from(el.attributes).forEach(attr => {
+                    if (attr.name.startsWith('on') || attr.name === 'style') {
+                        el.removeAttribute(attr.name);
+                    }
+                });
+            });
+            
+            return tempDiv.innerHTML;
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Initialize
+        loadCareers();
+    </script>
+
+</body>
+</html>
