@@ -1828,6 +1828,237 @@ body.admin-page .vertical-menu-nav ul {
     border-color: var(--color-beige);
 }
 
+/* ============ OUR PICKS SECTION ============ */
+.our-picks-section {
+    background-color: var(--color-beige);
+    padding: 3rem 0;
+}
+
+.our-picks-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.our-picks-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.1rem;
+}
+
+.our-picks-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.our-picks-card {
+    background: var(--color-white);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.our-picks-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.our-picks-card-image {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.our-picks-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.our-picks-card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-black);
+    margin: 0 0 0.75rem 0;
+    letter-spacing: 0.05rem;
+}
+
+.our-picks-card-description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+    flex: 1;
+}
+
+.our-picks-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Package Modal */
+.package-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.package-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+.package-modal-content {
+    position: relative;
+    z-index: 2;
+    background: var(--color-white);
+    border-radius: 0;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.package-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--color-white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    z-index: 3;
+}
+
+.package-modal-close:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.package-modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.package-modal-body {
+    padding: 2rem;
+}
+
+.package-modal-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-black);
+    margin: 0 0 1rem 0;
+    letter-spacing: 0.05rem;
+}
+
+.package-modal-description {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.package-modal-section {
+    margin-bottom: 2rem;
+}
+
+.package-modal-section h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-black);
+    margin: 0 0 1rem 0;
+}
+
+.package-modal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.package-modal-list li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.package-modal-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-sage);
+    font-weight: bold;
+}
+
+.package-modal-actions {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Responsive styles for Our Picks */
+@media (max-width: 768px) {
+    .our-picks-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .our-picks-title {
+        font-size: 2rem;
+    }
+    
+    .package-modal-content {
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    
+    .package-modal-image {
+        height: 200px;
+    }
+    
+    .package-modal-body {
+        padding: 1.5rem;
+    }
+    
+    .package-modal-title {
+        font-size: 1.5rem;
+    }
+}
+
 /* About Us Management - reduce spacing */
 .about-us-form-section {
     margin-bottom: 1rem; /* CHANGE FROM 2rem to 1rem */
@@ -2229,6 +2460,57 @@ body.admin-page .vertical-menu-nav ul {
     color: var(--color-sage);
     font-size: 0.9rem;
     line-height: 1.4;
+}
+
+.package-item-meta {
+    margin-bottom: 0.75rem;
+}
+
+.our-picks-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.our-picks-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.our-picks-toggle-slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+
+.our-picks-toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left: 3px;
+    top: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.our-picks-checkbox:checked + .our-picks-toggle-slider {
+    background-color: var(--color-sage);
+}
+
+.our-picks-checkbox:checked + .our-picks-toggle-slider::before {
+    transform: translateX(20px);
+}
+
+.our-picks-toggle-label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
 }
 
 .package-item-actions {

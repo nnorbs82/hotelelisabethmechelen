@@ -95,13 +95,15 @@
         <!-- Ads Bottom Section -->
         <section id="ads-bottom-section" style="display: none;"></section>
 
-        <div class="container">
-            <div class="card">
-                <h2>Welcome to Hotel Elisabeth Mechelen</h2>
-                <p>Experience luxury and comfort in the heart of Mechelen.</p>
-                <a href="rooms.html" class="btn">View Our Rooms</a>
+        <!-- Our Picks Section -->
+        <section id="our-picks-section" class="our-picks-section" style="display: none;">
+            <div class="our-picks-container">
+                <h2 class="our-picks-title">Our Picks</h2>
+                <div id="our-picks-list" class="our-picks-list">
+                    <!-- Package cards will be dynamically inserted here -->
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <!-- Map Section -->
@@ -604,6 +606,152 @@
         
         // Load Ads Bottom after page loads
         loadAdsBottom();
+
+        // ============ OUR PICKS MANAGEMENT ============
+        // Load and display packages marked for "Our Picks"
+        async function loadOurPicks() {
+            try {
+                const snapshot = await get(dbRef(database, 'packages'));
+                
+                if (!snapshot.exists()) {
+                    return;
+                }
+                
+                const packagesObj = snapshot.val();
+                const packagesArray = Object.keys(packagesObj).map(key => ({
+                    id: key,
+                    ...packagesObj[key]
+                }));
+                
+                // Filter packages that are active and marked to show in Our Picks
+                const ourPicksPackages = packagesArray.filter(pkg => 
+                    pkg.status === 'active' && pkg.showInOurPicks === true
+                );
+                
+                if (ourPicksPackages.length === 0) {
+                    return;
+                }
+                
+                const section = document.getElementById('our-picks-section');
+                const listContainer = document.getElementById('our-picks-list');
+                const currentLang = document.documentElement.lang || 'en';
+                
+                // Render package cards
+                listContainer.innerHTML = ourPicksPackages.map(pkg => {
+                    const title = pkg[`title_${currentLang}`] || pkg.title_en || 'Untitled Package';
+                    const description = pkg[`description_${currentLang}`] || pkg.description_en || '';
+                    const shortDescription = description.length > 120 ? description.substring(0, 120) + '...' : description;
+                    const bookingLink = pkg.bookingLink || 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
+                    
+                    return `
+                        <div class="our-picks-card" data-package-id="${pkg.id}">
+                            ${pkg.imageUrl ? `<div class="our-picks-card-image" style="background-image: url('${pkg.imageUrl}');"></div>` : ''}
+                            <div class="our-picks-card-content">
+                                <h3 class="our-picks-card-title">${title}</h3>
+                                <p class="our-picks-card-description">${shortDescription}</p>
+                                <div class="our-picks-card-actions">
+                                    <button class="btn view-details-btn" data-package-id="${pkg.id}">View Details</button>
+                                    <a href="${bookingLink}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Book Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Show the section
+                section.style.display = 'block';
+                
+                // Add event listeners for "View Details" buttons
+                document.querySelectorAll('.view-details-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const packageId = e.target.dataset.packageId;
+                        const pkg = ourPicksPackages.find(p => p.id === packageId);
+                        if (pkg) {
+                            openPackageModal(pkg, currentLang);
+                        }
+                    });
+                });
+                
+            } catch (error) {
+                console.error('Error loading Our Picks:', error);
+            }
+        }
+        
+        // Open package modal with full details
+        function openPackageModal(pkg, lang) {
+            const title = pkg[`title_${lang}`] || pkg.title_en || 'Untitled Package';
+            const description = pkg[`description_${lang}`] || pkg.description_en || '';
+            const inclusions = pkg[`inclusions_${lang}`] || pkg.inclusions_en || '';
+            const goodToKnow = pkg[`goodToKnow_${lang}`] || pkg.goodToKnow_en || '';
+            const bookingLink = pkg.bookingLink || 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
+            
+            const inclusionsList = inclusions.split('\n').filter(line => line.trim()).map(line => 
+                `<li>${line.trim()}</li>`
+            ).join('');
+            
+            const goodToKnowList = goodToKnow.split('\n').filter(line => line.trim()).map(line => 
+                `<li>${line.trim()}</li>`
+            ).join('');
+            
+            const modalHTML = `
+                <div id="package-modal" class="package-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                    <div class="package-modal-overlay"></div>
+                    <div class="package-modal-content">
+                        <button class="package-modal-close" aria-label="Close modal">&times;</button>
+                        ${pkg.imageUrl ? `<img src="${pkg.imageUrl}" alt="${title}" class="package-modal-image">` : ''}
+                        <div class="package-modal-body">
+                            <h2 id="modal-title" class="package-modal-title">${title}</h2>
+                            <div class="package-modal-description">${description.replace(/\n/g, '<br>')}</div>
+                            ${inclusionsList ? `
+                                <div class="package-modal-section">
+                                    <h3>Inclusions</h3>
+                                    <ul class="package-modal-list">${inclusionsList}</ul>
+                                </div>
+                            ` : ''}
+                            ${goodToKnowList ? `
+                                <div class="package-modal-section">
+                                    <h3>Good to Know</h3>
+                                    <ul class="package-modal-list">${goodToKnowList}</ul>
+                                </div>
+                            ` : ''}
+                            <div class="package-modal-actions">
+                                <a href="${bookingLink}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            
+            // Close modal handlers
+            const modal = document.getElementById('package-modal');
+            const closeBtn = modal.querySelector('.package-modal-close');
+            const overlay = modal.querySelector('.package-modal-overlay');
+            
+            const closeModal = () => {
+                modal.remove();
+                document.body.style.overflow = '';
+            };
+            
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', closeModal);
+            
+            // Close on Escape key
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    closeModal();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            };
+            document.addEventListener('keydown', handleEscape);
+        }
+        
+        // Load Our Picks after page loads
+        loadOurPicks();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
         // Load and display background image

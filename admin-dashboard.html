@@ -2742,6 +2742,13 @@
                         <div class="package-item-details">
                             <h3>${pkg.title_en || 'Untitled Package'}</h3>
                             <p>${pkg.description_en ? pkg.description_en.substring(0, 100) + '...' : 'No description'}</p>
+                            <div class="package-item-meta">
+                                <label class="our-picks-toggle">
+                                    <input type="checkbox" class="our-picks-checkbox" data-package-id="${pkg.id}" ${pkg.showInOurPicks ? 'checked' : ''}>
+                                    <span class="our-picks-toggle-slider"></span>
+                                    <span class="our-picks-toggle-label">Show in Our Picks</span>
+                                </label>
+                            </div>
                             <div class="package-item-actions">
                                 <button class="btn btn-small edit-package-btn" data-package-id="${pkg.id}">Edit</button>
                                 <button class="btn btn-small btn-danger delete-package-btn" data-package-id="${pkg.id}">Delete</button>
@@ -2777,6 +2784,13 @@
                 btn.addEventListener('click', async (e) => {
                     const packageId = e.target.dataset.packageId;
                     await togglePackageStatus(packageId);
+                });
+            });
+
+            document.querySelectorAll('.our-picks-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', async (e) => {
+                    const packageId = e.target.dataset.packageId;
+                    await toggleOurPicks(packageId, e.target.checked);
                 });
             });
         }
@@ -3078,6 +3092,20 @@
             } catch (error) {
                 console.error('Error toggling status:', error);
                 alert('Failed to update status.');
+            }
+        }
+
+        async function toggleOurPicks(packageId, showInOurPicks) {
+            try {
+                const pkg = packagesData.find(p => p.id === packageId);
+                pkg.showInOurPicks = showInOurPicks;
+                await savePackagesData();
+            } catch (error) {
+                console.error('Error toggling Our Picks:', error);
+                alert('Failed to update Our Picks status.');
+                // Revert the checkbox
+                const checkbox = document.querySelector(`.our-picks-checkbox[data-package-id="${packageId}"]`);
+                if (checkbox) checkbox.checked = !showInOurPicks;
             }
         }
 
