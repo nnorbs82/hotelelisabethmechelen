@@ -1830,7 +1830,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: rgba(159, 140, 118, 0.85); /* Very dark beige with 85% opacity */
+    background-color: transparent; /* Allow fixed page-background to show through, matching overall design */
     padding: 3rem 0;
 }
 
@@ -1859,7 +1859,7 @@ body.admin-page .vertical-menu-nav ul {
     background: var(--color-white);
     border-radius: 0;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -1867,7 +1867,7 @@ body.admin-page .vertical-menu-nav ul {
 
 .our-picks-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .our-picks-card-image {
