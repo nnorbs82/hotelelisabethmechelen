@@ -1830,7 +1830,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: var(--color-beige);
+    background-color: rgba(90, 85, 75, 0.85); /* Very dark beige with 85% opacity */
     padding: 3rem 0;
 }
 
@@ -1843,7 +1843,7 @@ body.admin-page .vertical-menu-nav ul {
 .our-picks-title {
     font-size: 2.5rem;
     font-weight: 300;
-    color: var(--color-black);
+    color: var(--color-white); /* Changed to white for good contrast against dark background */
     text-align: center;
     margin-bottom: 2.5rem;
     letter-spacing: 0.1rem;
