@@ -1830,7 +1830,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: rgba(90, 85, 75, 0.85); /* Very dark beige with 85% opacity */
+    background-color: rgba(0, 0, 0, 0.85); /* Very dark beige with 85% opacity */
     padding: 3rem 0;
 }
 
