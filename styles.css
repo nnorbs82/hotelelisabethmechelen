@@ -2676,6 +2676,86 @@ body.admin-page .vertical-menu-nav ul {
     color: var(--color-black);
 }
 
+/* ============ POLICY EDIT MODAL ============ */
+.policy-edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.policy-edit-modal.show {
+    display: flex;
+}
+
+.policy-edit-content {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.policy-modal-tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+.policy-modal-tab {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.policy-modal-tab.active {
+    border-bottom-color: var(--color-sage);
+    font-weight: 600;
+}
+
+.policy-edit-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.quill-editor {
+    min-height: 400px;
+    background: white;
+}
+
+/* Override Quill default styles to match our theme */
+.ql-toolbar.ql-snow {
+    border: 1px solid var(--color-sage);
+    border-radius: 4px 4px 0 0;
+}
+
+.ql-container.ql-snow {
+    border: 1px solid var(--color-sage);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+.ql-editor {
+    min-height: 350px;
+    font-family: 'Raleway', sans-serif;
+}
+
 /* ============ ROOM CARDS ============ */
 .room-card {
     background: var(--color-white);

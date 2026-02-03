@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body class="admin-page">
     <header class="admin-header">
@@ -72,6 +75,16 @@
                 <li class="vertical-menu-item">
                     <button class="vertical-menu-btn" id="manage-info-btn">
                         <span>Manage Info</span>
+                    </button>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-privacy-policy-btn">
+                        <span>Manage Privacy Policy</span>
+                    </button>
+                </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="manage-terms-btn">
+                        <span>Manage Terms & Conditions</span>
                     </button>
                 </li>
             </ul>
@@ -5242,6 +5255,302 @@
                 alert('Failed to save. Please try again.');
             }
         }
+
+        // ==================== PRIVACY POLICY MANAGEMENT ====================
+        
+        let privacyPolicyData = {
+            en: '',
+            nl: '',
+            fr: ''
+        };
+
+        document.getElementById('manage-privacy-policy-btn').addEventListener('click', async () => {
+            document.getElementById('vertical-menu').classList.remove('show');
+            await loadPrivacyPolicy();
+            showPrivacyPolicyModal();
+        });
+
+        async function loadPrivacyPolicy() {
+            try {
+                const snapshot = await get(dbRef(database, 'privacyPolicy'));
+                if (snapshot.exists()) {
+                    privacyPolicyData = snapshot.val();
+                } else {
+                    privacyPolicyData = { en: '', nl: '', fr: '' };
+                }
+            } catch (error) {
+                console.error('Error loading privacy policy:', error);
+                alert('Failed to load privacy policy data.');
+            }
+        }
+
+        function showPrivacyPolicyModal() {
+            const modal = document.createElement('div');
+            modal.className = 'policy-edit-modal show';
+            modal.id = 'privacy-policy-modal';
+            modal.innerHTML = `
+                <div class="policy-edit-content">
+                    <h3>Manage Privacy Policy</h3>
+                    <div class="policy-modal-tabs">
+                        <button class="policy-modal-tab active" data-lang="en">🇬🇧 EN</button>
+                        <button class="policy-modal-tab" data-lang="nl">🇳🇱 NL</button>
+                        <button class="policy-modal-tab" data-lang="fr">🇫🇷 FR</button>
+                    </div>
+                    <div class="policy-modal-body">
+                        <div class="policy-modal-panel" data-lang="en">
+                            <div class="form-group">
+                                <label>Privacy Policy Content (English)</label>
+                                <div id="privacy-editor-en" class="quill-editor"></div>
+                            </div>
+                        </div>
+                        <div class="policy-modal-panel" data-lang="nl" style="display: none;">
+                            <div class="form-group">
+                                <label>Privacy Policy Content (Nederlands)</label>
+                                <div id="privacy-editor-nl" class="quill-editor"></div>
+                            </div>
+                        </div>
+                        <div class="policy-modal-panel" data-lang="fr" style="display: none;">
+                            <div class="form-group">
+                                <label>Privacy Policy Content (Français)</label>
+                                <div id="privacy-editor-fr" class="quill-editor"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-edit-actions">
+                        <button class="btn" onclick="savePrivacyPolicy()">Save Changes</button>
+                        <button class="btn btn-cancel" onclick="closePrivacyPolicyModal()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Initialize Quill editors
+            window.privacyEditors = {
+                en: new Quill('#privacy-editor-en', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                }),
+                nl: new Quill('#privacy-editor-nl', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                }),
+                fr: new Quill('#privacy-editor-fr', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                })
+            };
+
+            // Set existing content
+            window.privacyEditors.en.root.innerHTML = privacyPolicyData.en || '';
+            window.privacyEditors.nl.root.innerHTML = privacyPolicyData.nl || '';
+            window.privacyEditors.fr.root.innerHTML = privacyPolicyData.fr || '';
+
+            // Tab switching
+            modal.querySelectorAll('.policy-modal-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    modal.querySelectorAll('.policy-modal-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const lang = tab.dataset.lang;
+                    modal.querySelectorAll('.policy-modal-panel').forEach(panel => {
+                        panel.style.display = panel.dataset.lang === lang ? 'block' : 'none';
+                    });
+                });
+            });
+        }
+
+        window.closePrivacyPolicyModal = function() {
+            document.getElementById('privacy-policy-modal')?.remove();
+            window.privacyEditors = null;
+        };
+
+        window.savePrivacyPolicy = async function() {
+            try {
+                privacyPolicyData = {
+                    en: window.privacyEditors.en.root.innerHTML,
+                    nl: window.privacyEditors.nl.root.innerHTML,
+                    fr: window.privacyEditors.fr.root.innerHTML
+                };
+
+                await set(dbRef(database, 'privacyPolicy'), privacyPolicyData);
+                alert('Privacy Policy saved successfully!');
+                closePrivacyPolicyModal();
+            } catch (error) {
+                console.error('Error saving privacy policy:', error);
+                alert('Failed to save privacy policy. Please try again.');
+            }
+        };
+
+        // ==================== TERMS & CONDITIONS MANAGEMENT ====================
+        
+        let termsData = {
+            en: '',
+            nl: '',
+            fr: ''
+        };
+
+        document.getElementById('manage-terms-btn').addEventListener('click', async () => {
+            document.getElementById('vertical-menu').classList.remove('show');
+            await loadTerms();
+            showTermsModal();
+        });
+
+        async function loadTerms() {
+            try {
+                const snapshot = await get(dbRef(database, 'termsAndConditions'));
+                if (snapshot.exists()) {
+                    termsData = snapshot.val();
+                } else {
+                    termsData = { en: '', nl: '', fr: '' };
+                }
+            } catch (error) {
+                console.error('Error loading terms:', error);
+                alert('Failed to load terms data.');
+            }
+        }
+
+        function showTermsModal() {
+            const modal = document.createElement('div');
+            modal.className = 'policy-edit-modal show';
+            modal.id = 'terms-modal';
+            modal.innerHTML = `
+                <div class="policy-edit-content">
+                    <h3>Manage Terms & Conditions</h3>
+                    <div class="policy-modal-tabs">
+                        <button class="policy-modal-tab active" data-lang="en">🇬🇧 EN</button>
+                        <button class="policy-modal-tab" data-lang="nl">🇳🇱 NL</button>
+                        <button class="policy-modal-tab" data-lang="fr">🇫🇷 FR</button>
+                    </div>
+                    <div class="policy-modal-body">
+                        <div class="policy-modal-panel" data-lang="en">
+                            <div class="form-group">
+                                <label>Terms & Conditions Content (English)</label>
+                                <div id="terms-editor-en" class="quill-editor"></div>
+                            </div>
+                        </div>
+                        <div class="policy-modal-panel" data-lang="nl" style="display: none;">
+                            <div class="form-group">
+                                <label>Terms & Conditions Content (Nederlands)</label>
+                                <div id="terms-editor-nl" class="quill-editor"></div>
+                            </div>
+                        </div>
+                        <div class="policy-modal-panel" data-lang="fr" style="display: none;">
+                            <div class="form-group">
+                                <label>Terms & Conditions Content (Français)</label>
+                                <div id="terms-editor-fr" class="quill-editor"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="policy-edit-actions">
+                        <button class="btn" onclick="saveTerms()">Save Changes</button>
+                        <button class="btn btn-cancel" onclick="closeTermsModal()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Initialize Quill editors
+            window.termsEditors = {
+                en: new Quill('#terms-editor-en', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                }),
+                nl: new Quill('#terms-editor-nl', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                }),
+                fr: new Quill('#terms-editor-fr', {
+                    theme: 'snow',
+                    modules: {
+                        toolbar: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link'],
+                            ['clean']
+                        ]
+                    }
+                })
+            };
+
+            // Set existing content
+            window.termsEditors.en.root.innerHTML = termsData.en || '';
+            window.termsEditors.nl.root.innerHTML = termsData.nl || '';
+            window.termsEditors.fr.root.innerHTML = termsData.fr || '';
+
+            // Tab switching
+            modal.querySelectorAll('.policy-modal-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    modal.querySelectorAll('.policy-modal-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const lang = tab.dataset.lang;
+                    modal.querySelectorAll('.policy-modal-panel').forEach(panel => {
+                        panel.style.display = panel.dataset.lang === lang ? 'block' : 'none';
+                    });
+                });
+            });
+        }
+
+        window.closeTermsModal = function() {
+            document.getElementById('terms-modal')?.remove();
+            window.termsEditors = null;
+        };
+
+        window.saveTerms = async function() {
+            try {
+                termsData = {
+                    en: window.termsEditors.en.root.innerHTML,
+                    nl: window.termsEditors.nl.root.innerHTML,
+                    fr: window.termsEditors.fr.root.innerHTML
+                };
+
+                await set(dbRef(database, 'termsAndConditions'), termsData);
+                alert('Terms & Conditions saved successfully!');
+                closeTermsModal();
+            } catch (error) {
+                console.error('Error saving terms:', error);
+                alert('Failed to save terms. Please try again.');
+            }
+        };
 
     </script>
 </body>
