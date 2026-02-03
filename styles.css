@@ -191,8 +191,6 @@ input, textarea, button {
 .booking-button:active {
     transform: translateY(0);
 }
-    color: var(--color-white);
-}
 
 /* Mobile Menu Styles */
 @media (max-width: 899px) {
