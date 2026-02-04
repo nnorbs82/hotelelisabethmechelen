@@ -185,11 +185,11 @@
                 <div class="amenity-add-section">
                     <h3>Add New Amenity</h3>
                     
-                    <!-- Language Tabs -->
-                    <div class="lang-tabs">
-                        <button class="lang-tab active" data-lang="en">English</button>
-                        <button class="lang-tab" data-lang="nl">Nederlands</button>
-                        <button class="lang-tab" data-lang="fr">Français</button>
+                    <!-- Language Tabs with Flags -->
+                    <div class="lang-flag-tabs">
+                        <button class="lang-flag-tab active" data-lang="en" title="English">🇬🇧</button>
+                        <button class="lang-flag-tab" data-lang="nl" title="Nederlands">🇳🇱</button>
+                        <button class="lang-flag-tab" data-lang="fr" title="Français">🇫🇷</button>
                     </div>
                     
                     <div class="form-group">
@@ -261,10 +261,10 @@
                 <div class="facility-add-section">
                     <h3>Step 1: Facility Details</h3>
                     <p class="facility-step-hint">Save the details to unlock photo uploads below. We will switch the photo section to the new facility automatically.</p>
-                    <div class="facility-lang-tabs">
-                        <button class="facility-lang-tab active" data-lang="en">English</button>
-                        <button class="facility-lang-tab" data-lang="nl">Nederlands</button>
-                        <button class="facility-lang-tab" data-lang="fr">Français</button>
+                    <div class="lang-flag-tabs">
+                        <button class="lang-flag-tab facility-lang-tab active" data-lang="en" title="English">🇬🇧</button>
+                        <button class="lang-flag-tab facility-lang-tab" data-lang="nl" title="Nederlands">🇳🇱</button>
+                        <button class="lang-flag-tab facility-lang-tab" data-lang="fr" title="Français">🇫🇷</button>
                     </div>
 
                     <div class="form-group">
@@ -311,11 +311,11 @@
                 <div class="meeting-add-section">
                     <h3>Add / Edit Meeting Room</h3>
                     
-                    <!-- Language Tabs -->
-                    <div class="meeting-lang-tabs">
-                        <button class="meeting-lang-tab active" data-lang="en">English</button>
-                        <button class="meeting-lang-tab" data-lang="nl">Nederlands</button>
-                        <button class="meeting-lang-tab" data-lang="fr">Français</button>
+                    <!-- Language Tabs with Flags -->
+                    <div class="lang-flag-tabs">
+                        <button class="lang-flag-tab meeting-lang-tab active" data-lang="en" title="English">🇬🇧</button>
+                        <button class="lang-flag-tab meeting-lang-tab" data-lang="nl" title="Nederlands">🇳🇱</button>
+                        <button class="lang-flag-tab meeting-lang-tab" data-lang="fr" title="Français">🇫🇷</button>
                     </div>
                     
                     <div class="form-group">
@@ -392,11 +392,11 @@
                 <div class="attraction-add-section">
                     <h3>Add / Edit Attraction</h3>
                     
-                    <!-- Language Tabs -->
-                    <div class="attraction-lang-tabs">
-                        <button class="attraction-lang-tab active" data-lang="en">English</button>
-                        <button class="attraction-lang-tab" data-lang="nl">Nederlands</button>
-                        <button class="attraction-lang-tab" data-lang="fr">Français</button>
+                    <!-- Language Tabs with Flags -->
+                    <div class="lang-flag-tabs">
+                        <button class="lang-flag-tab attraction-lang-tab active" data-lang="en" title="English">🇬🇧</button>
+                        <button class="lang-flag-tab attraction-lang-tab" data-lang="nl" title="Nederlands">🇳🇱</button>
+                        <button class="lang-flag-tab attraction-lang-tab" data-lang="fr" title="Français">🇫🇷</button>
                     </div>
                     
                     <div class="form-group">
@@ -960,6 +960,9 @@
             photoCard.style.display = 'block';
             photoCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
+            // Show action bar
+            showActionBar('Main Banner Photo Management', []);
+            
             // Hide menu after selection
             verticalMenu.classList.remove('show');
             
@@ -978,6 +981,9 @@
             // Show only ads card
             adsCard.style.display = 'block';
             adsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Show action bar
+            showActionBar('Index Ads Management', []);
             
             // Hide menu after selection
             verticalMenu.classList.remove('show');
@@ -1571,6 +1577,9 @@
             aboutUsCard.style.display = 'block';
             aboutUsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
+            // Show action bar
+            showActionBar('About Us Management', []);
+            
             // Hide menu after selection
             verticalMenu.classList.remove('show');
             
@@ -1588,6 +1597,9 @@
             
             adsBottomCard.style.display = 'block';
             adsBottomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Show action bar
+            showActionBar('Ads Bottom Management', []);
             
             // Hide menu after selection
             verticalMenu.classList.remove('show');
@@ -1609,6 +1621,9 @@
             roomCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             // Hide menu after selection
+            
+            // Show action bar
+            showActionBar('Room Management', []);
             verticalMenu.classList.remove('show');
             
             await loadRoomsData();
@@ -1627,6 +1642,9 @@
             packageCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             // Hide menu after selection
+            
+            // Show action bar
+            showActionBar('Package Management', []);
             verticalMenu.classList.remove('show');
             
             await loadPackagesData();
@@ -1645,6 +1663,9 @@
             mainImageCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
             // Hide menu after selection
+            
+            // Show action bar
+            showActionBar('Main Images', []);
             verticalMenu.classList.remove('show');
             
             // Load all main images
@@ -1676,6 +1697,9 @@
 
             facilitiesCard.style.display = 'block';
             facilitiesCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Show action bar
+            showActionBar('Facilities Management', []);
             verticalMenu.classList.remove('show');
 
             currentFacilityLang = 'en';
@@ -2349,6 +2373,9 @@
             amenitiesCard.style.display = 'block';
             amenitiesCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
+            
+            // Show action bar
+            showActionBar('Room Amenities Management', []);
             verticalMenu.classList.remove('show');
             
             await loadAmenities();
