@@ -1870,6 +1870,7 @@ body.admin-page .vertical-menu-nav ul {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 350px;
 }
 
 .our-picks-card:hover {
