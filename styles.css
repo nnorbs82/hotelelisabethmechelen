@@ -7,6 +7,7 @@
     --color-white: #FFFFFF;
     --color-text-primary: #444444;
     --color-text-secondary: #555555;
+    --color-neumorphic-bg: #20222d;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
     --main-menu-height: 70px;
@@ -1830,7 +1831,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: #20222d; /* Dark grey background for neumorphism */
+    background-color: var(--color-neumorphic-bg); /* Dark grey background for neumorphism */
     padding: 3rem 0;
 }
 
@@ -1851,13 +1852,13 @@ body.admin-page .vertical-menu-nav ul {
 
 .our-picks-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    justify-content: center;
+    justify-items: center;
 }
 
 .our-picks-card {
-    background: #20222d; /* Same color as background for neumorphism */
+    background: var(--color-neumorphic-bg); /* Same color as background for neumorphism */
     border-radius: 20px;
     overflow: hidden;
     /* Neumorphism: top-left light shadow, bottom-right dark shadow */
@@ -1866,6 +1867,7 @@ body.admin-page .vertical-menu-nav ul {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    max-width: 100%;
 }
 
 .our-picks-card:hover {
