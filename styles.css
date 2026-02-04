@@ -12,6 +12,18 @@
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
     --main-menu-height: 70px;
+    
+    /* Neumorphic design variables - for dark backgrounds */
+    --neumorphic-light-shadow: -8px -8px 16px rgba(255, 255, 255, 0.1);
+    --neumorphic-dark-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4);
+    --neumorphic-inset-light: inset -4px -4px 8px rgba(255, 255, 255, 0.05);
+    --neumorphic-inset-dark: inset 4px 4px 8px rgba(0, 0, 0, 0.3);
+    
+    /* Neumorphic design variables - for light backgrounds */
+    --neumorphic-light-raised: -6px -6px 12px rgba(255, 255, 255, 0.5);
+    --neumorphic-light-shadow-raised: 6px 6px 12px rgba(0, 0, 0, 0.15);
+    --neumorphic-light-inset-light: inset -3px -3px 6px rgba(255, 255, 255, 0.3);
+    --neumorphic-light-inset-dark: inset 3px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -177,26 +189,26 @@ input, textarea, button {
 .booking-button {
     background: linear-gradient(135deg, var(--color-sage), var(--color-beige)) !important;
     color: var(--color-black) !important;
-    border: 2px solid var(--color-beige) !important;
+    border: none !important;
     border-radius: 25px !important;
     padding: 10px 25px !important;
     font-weight: 600 !important;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(149, 147, 128, 0.4);
+    box-shadow: var(--neumorphic-light-shadow), var(--neumorphic-dark-shadow);
     transition: all 0.3s ease !important;
     margin-left: 10px;
 }
 
 .booking-button:hover {
-    background: linear-gradient(135deg, var(--color-beige), var(--color-white)) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(149, 147, 128, 0.6);
+    background: linear-gradient(135deg, var(--color-sage), var(--color-beige)) !important;
     color: var(--color-black) !important;
+    box-shadow: var(--neumorphic-inset-light), var(--neumorphic-inset-dark);
+    transform: scale(0.98);
 }
 
 .booking-button:active {
-    transform: translateY(0);
+    transform: scale(0.96);
 }
 
 /* Mobile Menu Styles */
@@ -400,8 +412,14 @@ body.admin-page {
     color: var(--color-beige);
     padding: 2rem;
     margin: 1rem 0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: var(--neumorphic-light-shadow), var(--neumorphic-dark-shadow);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: var(--neumorphic-inset-light), var(--neumorphic-inset-dark);
+    transform: scale(0.99);
 }
 
 .card h2 {
@@ -415,31 +433,34 @@ body.admin-page {
     background-color: var(--color-beige);
     color: var(--color-black);
     text-decoration: none;
-    border: 2px solid var(--color-beige);
-    border-radius: 4px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: all 0.3s ease;
     font-size: 1rem;
     line-height: normal;
     font-weight: 500; /* Medium */
+    box-shadow: var(--neumorphic-light-raised), var(--neumorphic-light-shadow-raised);
 }
 
 .btn:hover {
-    background-color: var(--color-sage);
-    color: var(--color-white);
-    border-color: var(--color-sage);
+    background-color: var(--color-beige);
+    color: var(--color-black);
+    box-shadow: var(--neumorphic-light-inset-light), var(--neumorphic-light-inset-dark);
+    transform: scale(0.98);
 }
 
 .btn-secondary {
     background-color: var(--color-sage);
     color: var(--color-white);
-    border: 2px solid var(--color-sage);
+    box-shadow: var(--neumorphic-light-shadow), var(--neumorphic-dark-shadow);
 }
 
 .btn-secondary:hover {
-    background-color: var(--color-beige);
-    color: var(--color-black);
-    border-color: var(--color-beige);
+    background-color: var(--color-sage);
+    color: var(--color-white);
+    box-shadow: var(--neumorphic-inset-light), var(--neumorphic-inset-dark);
+    transform: scale(0.98);
 }
 
 /* LOG OUT Button */
@@ -1016,6 +1037,34 @@ footer {
 body.admin-page {
     padding-top: 0;
     margin: 0;
+}
+
+/* Override neumorphic styles for admin pages */
+body.admin-page .btn,
+body.admin-page .btn-secondary {
+    border-radius: 4px;
+    border: 2px solid var(--color-beige);
+    box-shadow: none;
+}
+
+body.admin-page .btn-secondary {
+    border-color: var(--color-sage);
+}
+
+body.admin-page .btn:hover,
+body.admin-page .btn-secondary:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+body.admin-page .card {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.admin-page .card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: none;
 }
 
 /* Top Header Bar - Fixed */
@@ -1648,21 +1697,23 @@ body.admin-page .vertical-menu-nav ul {
 .index-ad-button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    background-color: rgba(212, 211, 195, 0.70);
+    background-color: rgba(212, 211, 195, 0.90);
     color: var(--color-black);
     text-decoration: none;
-    border: 2px solid var(--color-beige);
-    border-radius: 4px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
+    transition: all 0.3s ease;
     font-size: 1rem;
     font-weight: bold;
+    box-shadow: var(--neumorphic-light-raised), var(--neumorphic-light-shadow-raised);
 }
 
 .index-ad-button:hover {
-    background-color: rgba(149, 147, 128, 0.70);
-    color: var(--color-white);
-    border-color: var(--color-sage);
+    background-color: rgba(212, 211, 195, 0.90);
+    color: var(--color-black);
+    box-shadow: var(--neumorphic-light-inset-light), var(--neumorphic-light-inset-dark);
+    transform: scale(0.98);
 }
 
 /* Ads Tabs */
@@ -3541,12 +3592,13 @@ body.admin-page .vertical-menu-nav ul {
 /* ============ MODERN FACILITY STYLES - BOUTIQUE REDESIGN ============ */
 .facility-card-modern {
     background-color: var(--color-white);
-    border: 1px solid rgba(149, 147, 128, 0.15);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+    border: none;
+    box-shadow: -8px -8px 16px rgba(255, 255, 255, 0.8),
+                8px 8px 16px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 4px;
+    transition: all 0.3s ease;
+    border-radius: 12px;
     display: none; /* Hide all by default */
 }
 
@@ -3555,8 +3607,9 @@ body.admin-page .vertical-menu-nav ul {
 }
 
 .facility-card-modern:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transform: scale(0.98);
+    box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+                inset 4px 4px 8px rgba(0, 0, 0, 0.08);
 }
 
 .facility-card-modern:last-child {
@@ -4609,16 +4662,19 @@ body.admin-page .vertical-menu-nav ul {
     gap: 0;
     margin-bottom: 6rem;
     background: var(--color-white);
-    border-radius: 0;
+    border-radius: 12px;
     overflow: hidden;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: -10px -10px 20px rgba(255, 255, 255, 0.8),
+                10px 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 @media (hover: hover) and (pointer: fine) {
     .room-feature:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transform: scale(0.98);
+        box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.5),
+                    inset 5px 5px 10px rgba(0, 0, 0, 0.08);
     }
 }
 
