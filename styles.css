@@ -190,7 +190,7 @@ input, textarea, button {
     background-color: var(--color-black);
     border: 1px solid var(--color-beige);
     border-top: none;
-    min-width: 60px;
+    min-width: 80px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -213,7 +213,8 @@ input, textarea, button {
     color: var(--color-beige);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 8px;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
@@ -228,6 +229,13 @@ input, textarea, button {
 
 .language-option .language-flag {
     flex-shrink: 0;
+}
+
+.language-abbr {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-beige);
+    letter-spacing: 0.5px;
 }
 
 /* Mobile Menu Button */

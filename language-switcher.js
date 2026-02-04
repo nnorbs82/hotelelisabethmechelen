@@ -6,9 +6,9 @@
     
     // Available languages with their flag images and labels
     const LANGUAGES = {
-        'nl': { label: 'Nederlands', flag: 'logo/flag-nl.svg' },
-        'en': { label: 'English', flag: 'logo/flag-en.svg' },
-        'fr': { label: 'Français', flag: 'logo/flag-fr.svg' }
+        'nl': { label: 'Nederlands', flag: 'logo/flag-nl.svg', abbr: 'NL' },
+        'en': { label: 'English', flag: 'logo/flag-en.svg', abbr: 'GB' },
+        'fr': { label: 'Français', flag: 'logo/flag-fr.svg', abbr: 'FR' }
     };
     
     const DEFAULT_LANGUAGE = 'en';
@@ -68,6 +68,7 @@
             option.setAttribute('data-lang', langCode);
             option.innerHTML = `
                 <img src="${langData.flag}" alt="${langData.label}" class="language-flag">
+                <span class="language-abbr">${langData.abbr}</span>
             `;
             
             // Highlight the current language
