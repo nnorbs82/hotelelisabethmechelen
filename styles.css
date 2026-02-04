@@ -7,7 +7,7 @@
     --color-white: #FFFFFF;
     --color-text-primary: #444444;
     --color-text-secondary: #555555;
-    --color-text-light: #b8b8b8;
+    --color-text-light: #c5c5c5;
     --color-neumorphic-bg: #20222d;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
@@ -1868,7 +1868,7 @@ body.admin-page .vertical-menu-nav ul {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
-    max-width: 400px;
+    width: 100%;
 }
 
 .our-picks-card:hover {
