@@ -44,24 +44,21 @@
         /* Compact Package Card - Collapsed State - Modern Boutique */
         .package-card {
             background: var(--color-white);
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
             margin-bottom: 2rem;
             border: none;
-            box-shadow: -8px -8px 16px rgba(255, 255, 255, 0.8),
-                        8px 8px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .package-card:hover {
-            transform: scale(0.98);
-            box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
-                        inset 4px 4px 8px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .package-card.expanded {
-            box-shadow: -8px -8px 16px rgba(255, 255, 255, 0.8),
-                        8px 8px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
         }
 
         /* Compact Header - Always Visible */
