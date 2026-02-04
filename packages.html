@@ -497,6 +497,13 @@
         
         // Detect browser language
         function detectLanguage() {
+            // First check localStorage for user preference
+            const stored = localStorage.getItem('selectedLanguage');
+            if (stored && (stored === 'nl' || stored === 'en' || stored === 'fr')) {
+                return stored;
+            }
+            
+            // Then check browser language
             const lang = navigator.language || navigator.userLanguage;
             if (lang.startsWith('nl')) return 'nl';
             if (lang.startsWith('fr')) return 'fr';
@@ -681,6 +688,7 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+    <script src="language-switcher.js"></script>
 
 </body>
 </html>

@@ -187,6 +187,7 @@
     
     <!-- Main Menu Script -->
     <script src="main-menu.js"></script>
+    <script src="language-switcher.js"></script>
     
     <script type="module">
         import { database, storage } from './firebase-config.js';
@@ -206,6 +207,13 @@
 
         // Detect browser language or default to English (used globally by all content loading functions)
         function detectLanguage() {
+            // First check localStorage for user preference
+            const stored = localStorage.getItem('selectedLanguage');
+            if (stored && (stored === 'nl' || stored === 'en' || stored === 'fr')) {
+                return stored;
+            }
+            
+            // Then check browser language
             const browserLang = navigator.language || navigator.userLanguage;
             if (browserLang.startsWith('nl')) return 'nl';
             if (browserLang.startsWith('fr')) return 'fr';

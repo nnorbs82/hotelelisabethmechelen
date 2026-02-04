@@ -153,6 +153,88 @@ input, textarea, button {
     white-space: nowrap;
 }
 
+/* Language Switcher Styles */
+.language-switcher {
+    position: relative;
+}
+
+.language-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    height: 100%;
+}
+
+.language-btn:hover {
+    transform: scale(1.1);
+}
+
+.language-flag {
+    width: 28px;
+    height: 20px;
+    object-fit: cover;
+    border: 1px solid rgba(212, 211, 195, 0.3);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--color-black);
+    border: 1px solid var(--color-beige);
+    border-top: none;
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.language-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: var(--color-beige);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-align: left;
+    font-size: 14px;
+}
+
+.language-option:hover {
+    background-color: rgba(149, 147, 128, 0.2);
+    color: var(--color-white);
+}
+
+.language-option.active {
+    background-color: rgba(149, 147, 128, 0.3);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.language-option .language-flag {
+    flex-shrink: 0;
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
@@ -269,6 +351,30 @@ input, textarea, button {
     }
     
     .dropdown-menu a {
+        padding-left: 30px;
+    }
+    
+    /* Language switcher mobile styles */
+    .language-switcher {
+        border-bottom: 1px solid rgba(212, 211, 195, 0.2);
+    }
+    
+    .language-btn {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
+    
+    .language-dropdown {
+        position: static;
+        border-top: none;
+        border-left: 3px solid var(--color-beige);
+        margin-left: 20px;
+        box-shadow: none;
+        min-width: auto;
+    }
+    
+    .language-option {
         padding-left: 30px;
     }
 }
