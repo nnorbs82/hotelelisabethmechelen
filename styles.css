@@ -6478,3 +6478,401 @@ body.admin-page .vertical-menu-nav ul {
     color: #d73a49;
     font-size: 1.1rem;
 }
+
+/* ============================================
+   ADMIN DASHBOARD MODERNIZATION
+   ============================================ */
+
+/* Sticky Action Bar */
+.admin-action-bar {
+    position: sticky;
+    top: 70px; /* Below fixed header */
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    z-index: 900;
+    border-bottom: 2px solid var(--color-sage);
+    display: none; /* Hidden by default, shown when a section is active */
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.admin-action-bar.show {
+    display: flex;
+}
+
+.admin-action-bar-title {
+    color: var(--color-beige);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.admin-action-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Flag Icons for Language Selection */
+.lang-flag-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.lang-flag-tab {
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.lang-flag-tab:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-sage);
+}
+
+.lang-flag-tab.active {
+    background-color: rgba(212, 211, 195, 0.2);
+    border-color: var(--color-beige);
+    box-shadow: 0 0 8px rgba(212, 211, 195, 0.3);
+}
+
+/* Multi-language Form Container */
+.multi-lang-form {
+    position: relative;
+}
+
+.lang-panel {
+    display: none;
+}
+
+.lang-panel.active {
+    display: block;
+}
+
+/* Image Grid with Square Format and Beige Frame */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.photo-item {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: var(--color-beige);
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    cursor: grab;
+}
+
+.photo-item:active {
+    cursor: grabbing;
+}
+
+.photo-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
+.photo-item-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.photo-item:hover .photo-item-actions {
+    opacity: 1;
+}
+
+.photo-item-checkbox {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Drag and Drop Visual Feedback */
+.photo-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.photo-item.drag-over {
+    border: 2px dashed var(--color-beige);
+    background-color: rgba(212, 211, 195, 0.2);
+}
+
+/* Sortable Lists */
+.sortable-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sortable-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: grab;
+    transition: all 0.2s ease;
+}
+
+.sortable-item:active {
+    cursor: grabbing;
+}
+
+.sortable-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-sage);
+}
+
+.sortable-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.sortable-item.drag-over {
+    border-color: var(--color-beige);
+    background-color: rgba(212, 211, 195, 0.1);
+}
+
+.drag-handle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-sage);
+    font-size: 1.2rem;
+    cursor: grab;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.drag-handle:hover {
+    color: var(--color-beige);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+/* Success Notification (non-blocking) */
+.success-notification {
+    position: fixed;
+    top: 90px;
+    right: 2rem;
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s;
+    pointer-events: none;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+.success-notification-icon {
+    font-size: 1.5rem;
+}
+
+.success-notification-message {
+    font-weight: 500;
+}
+
+/* Footer Positioning Fix */
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.admin-page .container {
+    flex: 1 0 auto;
+    padding-top: 90px; /* Account for fixed header */
+    padding-bottom: 2rem;
+}
+
+.admin-page footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Multiple File Upload Enhancement */
+.file-upload-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.file-upload-info {
+    color: var(--color-sage);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Multi-select Actions */
+.multi-select-actions {
+    display: none;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    align-items: center;
+}
+
+.multi-select-actions.show {
+    display: flex;
+}
+
+.multi-select-info {
+    color: var(--color-beige);
+    font-weight: 500;
+    flex: 1;
+}
+
+/* Improved Form Consistency */
+.unified-form {
+    max-width: 100%;
+}
+
+.unified-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.unified-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-beige);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.unified-form input[type="text"],
+.unified-form input[type="email"],
+.unified-form input[type="number"],
+.unified-form textarea,
+.unified-form select {
+    width: 100%;
+    padding: 0.875rem;
+    border: 2px solid var(--color-sage);
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: var(--color-white);
+    transition: border-color 0.3s ease;
+    font-family: 'Raleway', sans-serif;
+}
+
+.unified-form input:focus,
+.unified-form textarea:focus,
+.unified-form select:focus {
+    outline: none;
+    border-color: var(--color-beige);
+    box-shadow: 0 0 0 3px rgba(212, 211, 195, 0.1);
+}
+
+.unified-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .admin-action-bar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .admin-action-bar-title {
+        font-size: 1.1rem;
+    }
+
+    .admin-action-buttons {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .admin-action-buttons .btn {
+        flex: 1;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+
+    .lang-flag-tab {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .success-notification {
+        right: 1rem;
+        left: 1rem;
+        top: 80px;
+    }
+}
