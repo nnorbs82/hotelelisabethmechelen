@@ -351,7 +351,7 @@ input, textarea, button {
     }
     
     .dropdown-menu a {
-        padding-left: 30px;
+        padding-left: var(--mobile-menu-indent, 30px);
     }
     
     /* Language switcher mobile styles */
@@ -375,7 +375,7 @@ input, textarea, button {
     }
     
     .language-option {
-        padding-left: 30px;
+        padding-left: var(--mobile-menu-indent, 30px);
     }
 }
 
