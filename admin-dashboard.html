@@ -91,6 +91,14 @@
         </nav>
     </aside>
 
+    <!-- Sticky Action Bar -->
+    <div class="admin-action-bar" id="admin-action-bar">
+        <h2 class="admin-action-bar-title" id="action-bar-title">Section Title</h2>
+        <div class="admin-action-buttons" id="action-bar-buttons">
+            <!-- Buttons will be dynamically added here -->
+        </div>
+    </div>
+
     <main class="container">
         <div id="loading" style="text-align: center; padding: 3rem;">
             <p>Loading...</p>
@@ -103,8 +111,9 @@
                 <p style="color: var(--color-sage); margin-bottom: 1rem;">Upload and manage photos for the main banner. Drag and drop photos to reorder them.</p>
                 
                 <div class="photo-upload-section">
-                    <input type="file" id="photo-upload-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="add-photo-btn">Add Photo</button>
+                    <input type="file" id="photo-upload-input" accept="image/*" multiple style="display: none;">
+                    <button class="btn" id="add-photo-btn">Add Photos</button>
+                    <span class="file-upload-info">(Max 10 images at once)</span>
                 </div>
 
                 <div id="photo-grid" class="photo-grid">
@@ -734,10 +743,209 @@
             document.getElementById('dashboard-content').style.display = 'block';
         }
 
+        // ============================================
+        // MODERNIZATION HELPER FUNCTIONS
+        // ============================================
+
+        // Show/hide sticky action bar
+        function showActionBar(title, buttons = []) {
+            const actionBar = document.getElementById('admin-action-bar');
+            const actionBarTitle = document.getElementById('action-bar-title');
+            const actionBarButtons = document.getElementById('action-bar-buttons');
+            
+            actionBarTitle.textContent = title;
+            actionBarButtons.innerHTML = '';
+            
+            buttons.forEach(btn => {
+                const button = document.createElement('button');
+                button.className = btn.className || 'btn';
+                button.textContent = btn.text;
+                button.onclick = btn.onClick;
+                actionBarButtons.appendChild(button);
+            });
+            
+            actionBar.classList.add('show');
+        }
+
+        function hideActionBar() {
+            const actionBar = document.getElementById('admin-action-bar');
+            actionBar.classList.remove('show');
+        }
+
+        // Show non-blocking success notification
+        function showSuccessNotification(message) {
+            // Remove any existing notification
+            const existing = document.querySelector('.success-notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'success-notification';
+            notification.innerHTML = `
+                <span class="success-notification-icon">✓</span>
+                <span class="success-notification-message">${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Create flag icon for language tabs
+        function createFlagIcon(lang) {
+            const flags = {
+                'en': '🇬🇧',
+                'nl': '🇳🇱',
+                'fr': '🇫🇷'
+            };
+            return flags[lang] || lang.toUpperCase();
+        }
+
+        // Replace old language tabs with flag tabs
+        function replaceLangTabsWithFlags(container) {
+            const oldTabs = container.querySelectorAll('.lang-tab, .facility-lang-tab, .meeting-lang-tab, .attraction-lang-tab');
+            if (oldTabs.length === 0) return;
+
+            const parent = oldTabs[0].parentElement;
+            const flagTabsContainer = document.createElement('div');
+            flagTabsContainer.className = 'lang-flag-tabs';
+
+            ['en', 'nl', 'fr'].forEach(lang => {
+                const flagTab = document.createElement('button');
+                flagTab.className = 'lang-flag-tab';
+                flagTab.dataset.lang = lang;
+                flagTab.textContent = createFlagIcon(lang);
+                flagTab.title = {'en': 'English', 'nl': 'Nederlands', 'fr': 'Français'}[lang];
+                
+                // Copy active state from old tabs
+                const oldTab = Array.from(oldTabs).find(t => t.dataset.lang === lang);
+                if (oldTab && oldTab.classList.contains('active')) {
+                    flagTab.classList.add('active');
+                }
+
+                // Preserve click handlers
+                if (oldTab) {
+                    flagTab.onclick = oldTab.onclick;
+                }
+
+                flagTabsContainer.appendChild(flagTab);
+            });
+
+            parent.replaceChild(flagTabsContainer, oldTabs[0]);
+            
+            // Remove remaining old tabs
+            oldTabs.forEach((tab, i) => {
+                if (i > 0) tab.remove();
+            });
+        }
+
+        // Multi-language form data storage (prevents data loss when switching languages)
+        const multiLangFormData = {};
+
+        function initMultiLangForm(formId, fields) {
+            if (!multiLangFormData[formId]) {
+                multiLangFormData[formId] = {
+                    en: {},
+                    nl: {},
+                    fr: {}
+                };
+            }
+
+            // Store field names for this form
+            multiLangFormData[formId]._fields = fields;
+        }
+
+        function saveCurrentLangData(formId, currentLang) {
+            if (!multiLangFormData[formId]) return;
+
+            const fields = multiLangFormData[formId]._fields || [];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field) {
+                    multiLangFormData[formId][currentLang][fieldId] = field.value;
+                }
+            });
+        }
+
+        function loadLangData(formId, lang) {
+            if (!multiLangFormData[formId]) return;
+
+            const fields = multiLangFormData[formId]._fields || [];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && multiLangFormData[formId][lang][fieldId] !== undefined) {
+                    field.value = multiLangFormData[formId][lang][fieldId];
+                }
+            });
+        }
+
+        // Initialize drag-and-drop for any sortable list
+        function initDragAndDrop(containerSelector, itemSelector, onReorder) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+
+            let draggedItem = null;
+
+            container.addEventListener('dragstart', (e) => {
+                if (e.target.matches(itemSelector)) {
+                    draggedItem = e.target;
+                    e.target.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                }
+            });
+
+            container.addEventListener('dragend', (e) => {
+                if (e.target.matches(itemSelector)) {
+                    e.target.classList.remove('dragging');
+                    draggedItem = null;
+                }
+            });
+
+            container.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientY, itemSelector);
+                if (afterElement == null) {
+                    container.appendChild(draggedItem);
+                } else {
+                    container.insertBefore(draggedItem, afterElement);
+                }
+            });
+
+            container.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (onReorder) {
+                    onReorder();
+                }
+            });
+        }
+
+        function getDragAfterElement(container, y, itemSelector) {
+            const draggableElements = [...container.querySelectorAll(`${itemSelector}:not(.dragging)`)];
+
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // ============================================
+        // END MODERNIZATION HELPER FUNCTIONS
+        // ============================================
+
         // Helper function to hide all management cards
         function hideAllManagementCards() {
             const allCards = document.querySelectorAll('#dashboard-content > .card');
             allCards.forEach(card => card.style.display = 'none');
+            hideActionBar(); // Hide action bar when switching sections
         }
 
         // Show photo management card when Main Banner is clicked
@@ -782,52 +990,70 @@
             document.getElementById('photo-upload-input').click();
         });
 
-        // Handle photo upload
+        // Handle photo upload (multiple files)
         document.getElementById('photo-upload-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
+            const files = Array.from(e.target.files);
+            if (files.length === 0) return;
 
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
-                return;
+            // Limit to 10 files
+            const filesToUpload = files.slice(0, 10);
+            if (files.length > 10) {
+                showSuccessNotification('Only first 10 images will be uploaded');
             }
+
+            // Validate all files are images
+            const invalidFiles = filesToUpload.filter(file => !file.type.startsWith('image/'));
+            if (invalidFiles.length > 0) {
+                showSuccessNotification('Some files are not images and were skipped');
+            }
+
+            const validFiles = filesToUpload.filter(file => file.type.startsWith('image/'));
+            if (validFiles.length === 0) return;
 
             const addBtn = document.getElementById('add-photo-btn');
             addBtn.disabled = true;
-            addBtn.textContent = 'Uploading...';
+            addBtn.textContent = `Uploading ${validFiles.length} image(s)...`;
 
             try {
-                // Generate unique filename
-                const timestamp = Date.now();
-                const filename = `main-banner/${timestamp}-${file.name}`;
-                const fileRef = storageRef(storage, filename);
+                let uploadedCount = 0;
+                const baseOrder = currentPhotos.length;
 
-                // Upload file
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
+                // Upload files sequentially to maintain order
+                for (let i = 0; i < validFiles.length; i++) {
+                    const file = validFiles[i];
+                    const timestamp = Date.now() + i; // Ensure unique timestamps
+                    const filename = `main-banner/${timestamp}-${file.name}`;
+                    const fileRef = storageRef(storage, filename);
 
-                // Save to database
-                const photoData = {
-                    url: downloadURL,
-                    filename: filename,
-                    timestamp: timestamp,
-                    order: currentPhotos.length
-                };
+                    await uploadBytes(fileRef, file);
+                    const downloadURL = await getDownloadURL(fileRef);
 
-                await set(dbRef(database, `mainBanner/${timestamp}`), photoData);
+                    const photoData = {
+                        url: downloadURL,
+                        filename: filename,
+                        timestamp: timestamp,
+                        order: baseOrder + i
+                    };
+
+                    await set(dbRef(database, `mainBanner/${timestamp}`), photoData);
+                    uploadedCount++;
+
+                    // Update button text with progress
+                    addBtn.textContent = `Uploaded ${uploadedCount}/${validFiles.length}...`;
+                }
 
                 // Reload photos
                 await loadPhotos();
+                showSuccessNotification(`${uploadedCount} image(s) uploaded successfully!`);
 
                 // Reset input
                 e.target.value = '';
             } catch (error) {
-                console.error('Error uploading photo:', error);
-                alert('Failed to upload photo. Please try again.');
+                console.error('Error uploading photos:', error);
+                showSuccessNotification('Failed to upload some photos. Please try again.');
             } finally {
                 addBtn.disabled = false;
-                addBtn.textContent = 'Add Photo';
+                addBtn.textContent = 'Add Photos';
             }
         });
 
