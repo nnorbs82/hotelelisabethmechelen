@@ -1026,13 +1026,13 @@
             // Limit to 10 files
             const filesToUpload = files.slice(0, 10);
             if (files.length > 10) {
-                showSuccessNotification('Only first 10 images will be uploaded');
+                showErrorNotification('Only first 10 images will be uploaded');
             }
 
             // Validate all files are images
             const invalidFiles = filesToUpload.filter(file => !file.type.startsWith('image/'));
             if (invalidFiles.length > 0) {
-                showSuccessNotification('Some files are not images and were skipped');
+                showErrorNotification('Some files are not images and were skipped');
             }
 
             const validFiles = filesToUpload.filter(file => file.type.startsWith('image/'));
@@ -1078,7 +1078,7 @@
                 e.target.value = '';
             } catch (error) {
                 console.error('Error uploading photos:', error);
-                showSuccessNotification('Failed to upload some photos. Please try again.');
+                showErrorNotification('Failed to upload some photos. Please try again.');
             } finally {
                 addBtn.disabled = false;
                 addBtn.textContent = 'Add Photos';
