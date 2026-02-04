@@ -775,7 +775,7 @@
         // Show non-blocking success notification
         function showSuccessNotification(message) {
             // Remove any existing notification
-            const existing = document.querySelector('.success-notification');
+            const existing = document.querySelector('.success-notification, .error-notification');
             if (existing) {
                 existing.remove();
             }
@@ -792,6 +792,28 @@
             setTimeout(() => {
                 notification.remove();
             }, 3000);
+        }
+
+        // Show non-blocking error notification
+        function showErrorNotification(message) {
+            // Remove any existing notification
+            const existing = document.querySelector('.success-notification, .error-notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = 'error-notification';
+            notification.innerHTML = `
+                <span class="error-notification-icon">⚠</span>
+                <span class="error-notification-message">${message}</span>
+            `;
+            document.body.appendChild(notification);
+
+            // Auto-remove after 4 seconds (slightly longer for errors)
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
         }
 
         // Create flag icon for language tabs
@@ -1185,7 +1207,7 @@
                 await loadPhotos();
             } catch (error) {
                 console.error('Error reordering photos:', error);
-                alert('Failed to reorder photos. Please try again.');
+                showErrorNotification('Failed to reorder photos. Please try again.');
             }
         }
 
@@ -1199,7 +1221,7 @@
                 // Bounds check for index
                 if (index < 0 || index >= currentPhotos.length) {
                     console.error('Invalid index:', index);
-                    alert('Invalid photo index.');
+                    showErrorNotification('Invalid photo index.');
                     return;
                 }
                 
@@ -1217,10 +1239,10 @@
                 // Reload photos
                 await loadPhotos();
                 
-                alert('Photo deleted successfully!');
+                showSuccessNotification('Photo deleted successfully!');
             } catch (error) {
                 console.error('Error deleting photo:', error);
-                alert('Failed to delete photo. Please try again.');
+                showErrorNotification('Failed to delete photo. Please try again.');
             }
         }
         
@@ -1378,7 +1400,7 @@
                     if (!file) return;
                     
                     if (!file.type.startsWith('image/')) {
-                        alert('Please select an image file');
+                        showErrorNotification('Please select an image file');
                         return;
                     }
                     
@@ -1395,10 +1417,10 @@
                         await set(dbRef(database, 'indexAds'), adsData);
                         
                         renderAdTab();
-                        alert('Image uploaded successfully!');
+                        showSuccessNotification('Image uploaded successfully!');
                     } catch (error) {
                         console.error('Error uploading image:', error);
-                        alert('Failed to upload image.');
+                        showErrorNotification('Failed to upload image.');
                     }
                 });
             }
@@ -1417,10 +1439,10 @@
                     
                     try {
                         await set(dbRef(database, 'indexAds'), adsData);
-                        alert('Ad saved successfully!');
+                        showSuccessNotification('Ad saved successfully!');
                     } catch (error) {
                         console.error('Error saving ad:', error);
-                        alert('Failed to save ad.');
+                        showErrorNotification('Failed to save ad.');
                     }
                 });
             }
@@ -1466,7 +1488,7 @@
             if (!file) return;
             
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
             
@@ -1509,10 +1531,10 @@
                 // Reset input
                 e.target.value = '';
                 
-                alert('Background photo uploaded successfully!');
+                showSuccessNotification('Background photo uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading background:', error);
-                alert('Failed to upload background photo. Please try again.');
+                showErrorNotification('Failed to upload background photo. Please try again.');
             } finally {
                 addBtn.disabled = false;
                 addBtn.textContent = 'Upload Background';
@@ -1538,10 +1560,10 @@
                 // Reload
                 await loadBackgroundPhoto();
                 
-                alert('Background photo deleted successfully!');
+                showSuccessNotification('Background photo deleted successfully!');
             } catch (error) {
                 console.error('Error deleting background photo:', error);
-                alert('Failed to delete background photo.');
+                showErrorNotification('Failed to delete background photo.');
             }
         }
         
@@ -1798,7 +1820,7 @@
             const nameFr = facilityDraft.fr.name.trim();
 
             if (!nameEn && !nameNl && !nameFr) {
-                alert('Please enter a facility name in at least one language');
+                showErrorNotification('Please enter a facility name in at least one language');
                 return;
             }
 
@@ -1822,14 +1844,14 @@
                 await set(dbRef(database, `facilities/${facilityId}`), facilityData);
                 initializeFacilityDraft();
                 applyFacilityDraft(currentFacilityLang);
-                alert('Facility added successfully!');
+                showSuccessNotification('Facility added successfully!');
                 await loadFacilitiesData();
                 currentFacilityLibraryId = facilityId;
                 updateFacilityLibrarySelect();
                 await loadFacilitiesLibrary();
             } catch (error) {
                 console.error('Error adding facility:', error);
-                alert('Failed to add facility. Please try again.');
+                showErrorNotification('Failed to add facility. Please try again.');
             }
         });
 
@@ -2012,7 +2034,7 @@
             const guidelinesFr = parseGuidelines(document.getElementById('facility-edit-guidelines-fr').value);
 
             if (!nameEn && !nameNl && !nameFr) {
-                alert('Please enter at least one facility name');
+                showErrorNotification('Please enter at least one facility name');
                 return;
             }
 
@@ -2030,11 +2052,11 @@
                     timestamp: facilitiesData[editingFacilityId].timestamp
                 });
                 closeFacilityEdit();
-                alert('Facility updated successfully!');
+                showSuccessNotification('Facility updated successfully!');
                 await loadFacilitiesData();
             } catch (error) {
                 console.error('Error updating facility:', error);
-                alert('Failed to update facility. Please try again.');
+                showErrorNotification('Failed to update facility. Please try again.');
             }
         };
 
@@ -2061,11 +2083,11 @@
                 if (currentFacilityLibraryId === facilityId) {
                     currentFacilityLibraryId = null;
                 }
-                alert('Facility deleted successfully!');
+                showSuccessNotification('Facility deleted successfully!');
                 await loadFacilitiesData();
             } catch (error) {
                 console.error('Error deleting facility:', error);
-                alert('Failed to delete facility.');
+                showErrorNotification('Failed to delete facility.');
             }
         };
 
@@ -2078,7 +2100,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -2113,11 +2135,11 @@
                 await loadFacilitiesHero();
 
                 e.target.value = '';
-                alert('Facilities main image uploaded successfully!');
+                showSuccessNotification('Facilities main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading facilities hero image:', error);
                 const message = error?.message ? `: ${error.message}` : '';
-                alert(`Failed to upload main image${message}`);
+                showErrorNotification(`Failed to upload main image${message}`);
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -2160,10 +2182,10 @@
                 await remove(dbRef(database, 'facilitiesHero'));
                 facilitiesHeroImage = null;
                 await loadFacilitiesHero();
-                alert('Main image deleted successfully!');
+                showSuccessNotification('Main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting facilities hero image:', error);
-                alert('Failed to delete main image.');
+                showErrorNotification('Failed to delete main image.');
             }
         };
 
@@ -2176,7 +2198,7 @@
             if (!files.length) return;
 
             if (!currentFacilityLibraryId) {
-                alert('Please select a facility before uploading photos.');
+                showErrorNotification('Please select a facility before uploading photos.');
                 e.target.value = '';
                 return;
             }
@@ -2209,11 +2231,11 @@
                 await saveFacilitiesLibrary();
                 await loadFacilitiesLibrary();
                 e.target.value = '';
-                alert('Facilities library updated!');
+                showSuccessNotification('Facilities library updated!');
             } catch (error) {
                 console.error('Error uploading facilities library images:', error);
                 const message = error?.message ? `: ${error.message}` : '';
-                alert(`Failed to upload facility images${message}`);
+                showErrorNotification(`Failed to upload facility images${message}`);
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Add Library Photos';
@@ -2311,7 +2333,7 @@
                 renderFacilitiesLibrary();
             } catch (error) {
                 console.error('Error reordering facilities library:', error);
-                alert('Failed to reorder photos.');
+                showErrorNotification('Failed to reorder photos.');
             }
         }
 
@@ -2333,11 +2355,11 @@
 
             try {
                 if (!currentFacilityLibraryId) {
-                    alert('Please select a facility album.');
+                    showErrorNotification('Please select a facility album.');
                     return;
                 }
                 if (index < 0 || index >= facilitiesLibrary.length) {
-                    alert('Invalid photo index.');
+                    showErrorNotification('Invalid photo index.');
                     return;
                 }
                 const photo = facilitiesLibrary[index];
@@ -2350,10 +2372,10 @@
                 });
                 await saveFacilitiesLibrary();
                 renderFacilitiesLibrary();
-                alert('Photo deleted successfully!');
+                showSuccessNotification('Photo deleted successfully!');
             } catch (error) {
                 console.error('Error deleting facilities photo:', error);
-                alert('Failed to delete photo.');
+                showErrorNotification('Failed to delete photo.');
             }
         };
 
@@ -2406,7 +2428,7 @@
             const name = input.value.trim();
             
             if (!name) {
-                alert('Please enter an amenity name');
+                showErrorNotification('Please enter an amenity name');
                 return;
             }
             
@@ -2425,11 +2447,11 @@
             try {
                 await set(dbRef(database, `amenitiesMaster/${amenityId}`), amenityData);
                 input.value = '';
-                alert('Amenity added successfully!');
+                showSuccessNotification('Amenity added successfully!');
                 await loadAmenities();
             } catch (error) {
                 console.error('Error adding amenity:', error);
-                alert('Failed to add amenity. Please try again.');
+                showErrorNotification('Failed to add amenity. Please try again.');
             }
         });
 
@@ -2527,7 +2549,7 @@
             const nameFr = document.getElementById('edit-name-fr').value.trim();
             
             if (!nameEn && !nameNl && !nameFr) {
-                alert('Please enter at least one name');
+                showErrorNotification('Please enter at least one name');
                 return;
             }
             
@@ -2540,11 +2562,11 @@
                 });
                 
                 closeEditModal();
-                alert('Amenity updated successfully!');
+                showSuccessNotification('Amenity updated successfully!');
                 await loadAmenities();
             } catch (error) {
                 console.error('Error updating amenity:', error);
-                alert('Failed to update amenity. Please try again.');
+                showErrorNotification('Failed to update amenity. Please try again.');
             }
         };
 
@@ -2565,11 +2587,11 @@
             
             try {
                 await set(dbRef(database, `amenitiesMaster/${amenityId}`), null);
-                alert('Amenity deleted successfully!');
+                showSuccessNotification('Amenity deleted successfully!');
                 await loadAmenities();
             } catch (error) {
                 console.error('Error deleting amenity:', error);
-                alert('Failed to delete amenity. Please try again.');
+                showErrorNotification('Failed to delete amenity. Please try again.');
             }
         };
 
@@ -2727,10 +2749,10 @@
         async function saveAboutUsData() {
             try {
                 await set(dbRef(database, 'aboutUs'), aboutUsData);
-                alert('About Us content saved successfully!');
+                showSuccessNotification('About Us content saved successfully!');
             } catch (error) {
                 console.error('Error saving About Us data:', error);
-                alert('Failed to save. Please try again.');
+                showErrorNotification('Failed to save. Please try again.');
             }
         }
 
@@ -2882,7 +2904,7 @@
                         if (!file) return;
                         
                         if (!file.type.startsWith('image/')) {
-                            alert('Please select an image file');
+                            showErrorNotification('Please select an image file');
                             return;
                         }
                         
@@ -2899,10 +2921,10 @@
                             await set(dbRef(database, 'adsBottom'), adsBottomData);
                             
                             renderAdsBottomTab();
-                            alert('Image uploaded successfully!');
+                            showSuccessNotification('Image uploaded successfully!');
                         } catch (error) {
                             console.error('Error uploading image:', error);
-                            alert('Failed to upload image.');
+                            showErrorNotification('Failed to upload image.');
                         }
                     });
                 }
@@ -2923,10 +2945,10 @@
         async function saveAdsBottomData() {
             try {
                 await set(dbRef(database, 'adsBottom'), adsBottomData);
-                alert('Ads Bottom content saved successfully!');
+                showSuccessNotification('Ads Bottom content saved successfully!');
             } catch (error) {
                 console.error('Error saving Ads Bottom data:', error);
-                alert('Failed to save. Please try again.');
+                showErrorNotification('Failed to save. Please try again.');
             }
         }
 
@@ -3231,7 +3253,7 @@
                 if (!file) return;
 
                 if (!file.type.startsWith('image/')) {
-                    alert('Please select an image file');
+                    showErrorNotification('Please select an image file');
                     return;
                 }
 
@@ -3246,10 +3268,10 @@
                     document.getElementById('package-image-preview').innerHTML = 
                         `<img src="${uploadedImageUrl}" style="max-width: 300px; border-radius: 8px;">`;
                     
-                    alert('Image uploaded successfully!');
+                    showSuccessNotification('Image uploaded successfully!');
                 } catch (error) {
                     console.error('Error uploading image:', error);
-                    alert('Failed to upload image.');
+                    showErrorNotification('Failed to upload image.');
                 }
             });
 
@@ -3274,7 +3296,7 @@
                 };
 
                 if (!packageData.title_en) {
-                    alert('Please enter at least an English title');
+                    showErrorNotification('Please enter at least an English title');
                     return;
                 }
 
@@ -3288,12 +3310,12 @@
                     }
 
                     await savePackagesData();
-                    alert('Package saved successfully!');
+                    showSuccessNotification('Package saved successfully!');
                     closePackageModal();
                     renderPackagesList();
                 } catch (error) {
                     console.error('Error saving package:', error);
-                    alert('Failed to save package. Please try again.');
+                    showErrorNotification('Failed to save package. Please try again.');
                 }
             });
 
@@ -3328,10 +3350,10 @@
                 packagesData = packagesData.filter(p => p.id !== packageId);
                 await savePackagesData();
                 renderPackagesList();
-                alert('Package deleted successfully!');
+                showSuccessNotification('Package deleted successfully!');
             } catch (error) {
                 console.error('Error deleting package:', error);
-                alert('Failed to delete package.');
+                showErrorNotification('Failed to delete package.');
             }
         }
 
@@ -3344,7 +3366,7 @@
                 renderPackagesList();
             } catch (error) {
                 console.error('Error toggling status:', error);
-                alert('Failed to update status.');
+                showErrorNotification('Failed to update status.');
             }
         }
 
@@ -3358,7 +3380,7 @@
                 await savePackagesData();
             } catch (error) {
                 console.error('Error toggling Our Picks:', error);
-                alert('Failed to update Our Picks status.');
+                showErrorNotification('Failed to update Our Picks status.');
                 // Revert the checkbox
                 const checkbox = document.querySelector(`.our-picks-checkbox[data-package-id="${packageId}"]`);
                 if (checkbox) checkbox.checked = !showInOurPicks;
@@ -3413,7 +3435,7 @@
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
-                alert('Failed to load rooms data.');
+                showErrorNotification('Failed to load rooms data.');
             }
         }
 
@@ -3669,7 +3691,7 @@
                     e.target.value = '';
                 } catch (error) {
                     console.error('Error uploading photos:', error);
-                    alert('Failed to upload photos.');
+                    showErrorNotification('Failed to upload photos.');
                 } finally {
                     uploadPhotoBtn.disabled = false;
                     uploadPhotoBtn.textContent = 'Upload Photos';
@@ -3698,7 +3720,7 @@
                                 renderPhotoGallery();
                             } catch (error) {
                                 console.error('Error deleting photo:', error);
-                                alert('Failed to delete photo.');
+                                showErrorNotification('Failed to delete photo.');
                             }
                         }
                     });
@@ -3750,7 +3772,7 @@
                 if (!file) return;
 
                 if (!file.type.startsWith('video/')) {
-                    alert('Please select a video file');
+                    showErrorNotification('Please select a video file');
                     return;
                 }
 
@@ -3785,7 +3807,7 @@
                                 videoPreview.innerHTML = '';
                             } catch (error) {
                                 console.error('Error deleting video:', error);
-                                alert('Failed to delete video.');
+                                showErrorNotification('Failed to delete video.');
                             }
                         }
                     });
@@ -3793,7 +3815,7 @@
                     e.target.value = '';
                 } catch (error) {
                     console.error('Error uploading video:', error);
-                    alert('Failed to upload video.');
+                    showErrorNotification('Failed to upload video.');
                 } finally {
                     uploadVideoBtn.disabled = false;
                     uploadVideoBtn.textContent = 'Upload Video';
@@ -3810,7 +3832,7 @@
                             videoPreview.innerHTML = '';
                         } catch (error) {
                             console.error('Error deleting video:', error);
-                            alert('Failed to delete video.');
+                            showErrorNotification('Failed to delete video.');
                         }
                     }
                 });
@@ -3842,19 +3864,19 @@
 
                 // Validation
                 if (!name_en || !name_nl || !name_fr) {
-                    alert('Please fill in room name for all languages');
+                    showErrorNotification('Please fill in room name for all languages');
                     return;
                 }
                 if (!bedType_en || !bedType_nl || !bedType_fr) {
-                    alert('Please fill in bed type for all languages');
+                    showErrorNotification('Please fill in bed type for all languages');
                     return;
                 }
                 if (!maxOccupancy || maxOccupancy < 1) {
-                    alert('Please enter a valid max occupancy');
+                    showErrorNotification('Please enter a valid max occupancy');
                     return;
                 }
                 if (!roomSize || roomSize < 1) {
-                    alert('Please enter a valid room size');
+                    showErrorNotification('Please enter a valid room size');
                     return;
                 }
 
@@ -3895,7 +3917,7 @@
                     closeRoomModal();
                 } catch (error) {
                     console.error('Error saving room:', error);
-                    alert('Failed to save room.');
+                    showErrorNotification('Failed to save room.');
                     saveBtn.disabled = false;
                     saveBtn.textContent = 'Save Room';
                 }
@@ -3944,7 +3966,7 @@
                 renderRoomsList();
             } catch (error) {
                 console.error('Error deleting room:', error);
-                alert('Failed to delete room.');
+                showErrorNotification('Failed to delete room.');
             }
         };
 
@@ -3966,7 +3988,7 @@
                 renderRoomsList();
             } catch (error) {
                 console.error('Error toggling room status:', error);
-                alert('Failed to update room status.');
+                showErrorNotification('Failed to update room status.');
             }
         };
 
@@ -4100,7 +4122,7 @@
             const nameFr = meetingDraft.fr.name.trim();
 
             if (!nameEn && !nameNl && !nameFr) {
-                alert('Please enter a meeting room name in at least one language');
+                showErrorNotification('Please enter a meeting room name in at least one language');
                 return;
             }
 
@@ -4138,7 +4160,7 @@
                 applyMeetingDraft(currentMeetingLang);
                 editingMeetingId = null;
                 document.getElementById('add-meeting-btn').textContent = 'Save Meeting Room';
-                alert('Meeting room saved successfully!');
+                showSuccessNotification('Meeting room saved successfully!');
                 await loadMeetingsData();
                 currentMeetingPhotoId = meetingId;
                 updateMeetingPhotoSelect();
@@ -4146,7 +4168,7 @@
                 await loadMeetingPhotos();
             } catch (error) {
                 console.error('Error saving meeting room:', error);
-                alert('Failed to save meeting room. Please try again.');
+                showErrorNotification('Failed to save meeting room. Please try again.');
             }
         });
 
@@ -4272,7 +4294,7 @@
             if (!files.length) return;
 
             if (!currentMeetingPhotoId) {
-                alert('Please select a meeting room before uploading photos.');
+                showErrorNotification('Please select a meeting room before uploading photos.');
                 e.target.value = '';
                 return;
             }
@@ -4306,10 +4328,10 @@
                 await saveMeetingPhotos();
                 await loadMeetingPhotos();
                 e.target.value = '';
-                alert('Photos uploaded successfully!');
+                showSuccessNotification('Photos uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading meeting photos:', error);
-                alert('Failed to upload photos.');
+                showErrorNotification('Failed to upload photos.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Add Photos';
@@ -4406,7 +4428,7 @@
                 renderMeetingPhotos();
             } catch (error) {
                 console.error('Error reordering meeting photos:', error);
-                alert('Failed to reorder photos.');
+                showErrorNotification('Failed to reorder photos.');
             }
         }
 
@@ -4424,7 +4446,7 @@
             try {
                 const photos = meetingsPhotos[currentMeetingPhotoId] || [];
                 if (index < 0 || index >= photos.length) {
-                    alert('Invalid photo index.');
+                    showErrorNotification('Invalid photo index.');
                     return;
                 }
                 const photo = photos[index];
@@ -4436,10 +4458,10 @@
                 meetingsPhotos[currentMeetingPhotoId] = photos;
                 await saveMeetingPhotos();
                 renderMeetingPhotos();
-                alert('Photo deleted successfully!');
+                showSuccessNotification('Photo deleted successfully!');
             } catch (error) {
                 console.error('Error deleting meeting photo:', error);
-                alert('Failed to delete photo.');
+                showErrorNotification('Failed to delete photo.');
             }
         };
 
@@ -4454,13 +4476,13 @@
 
             const meetingId = document.getElementById('meeting-video-select').value;
             if (!meetingId) {
-                alert('Please select a meeting room before uploading a video.');
+                showErrorNotification('Please select a meeting room before uploading a video.');
                 e.target.value = '';
                 return;
             }
 
             if (!file.type.startsWith('video/')) {
-                alert('Please select a video file');
+                showErrorNotification('Please select a video file');
                 return;
             }
 
@@ -4484,10 +4506,10 @@
                 await set(dbRef(database, `meetings/${meetingId}/video`), meetingsData[meetingId].video);
                 renderMeetingVideoPreview();
                 e.target.value = '';
-                alert('Video uploaded successfully!');
+                showSuccessNotification('Video uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading meeting video:', error);
-                alert('Failed to upload video.');
+                showErrorNotification('Failed to upload video.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Video';
@@ -4530,10 +4552,10 @@
                 await remove(dbRef(database, `meetings/${meetingId}/video`));
                 delete meetingsData[meetingId].video;
                 renderMeetingVideoPreview();
-                alert('Video deleted successfully!');
+                showSuccessNotification('Video deleted successfully!');
             } catch (error) {
                 console.error('Error deleting meeting video:', error);
-                alert('Failed to delete video.');
+                showErrorNotification('Failed to delete video.');
             }
         };
 
@@ -4547,7 +4569,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -4582,10 +4604,10 @@
                 await loadMeetingMainImage();
 
                 e.target.value = '';
-                alert('Meetings main image uploaded successfully!');
+                showSuccessNotification('Meetings main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading meetings main image:', error);
-                alert('Failed to upload main image.');
+                showErrorNotification('Failed to upload main image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -4626,10 +4648,10 @@
                 await remove(dbRef(database, 'meetingsMainImage'));
                 meetingMainImage = null;
                 await loadMeetingMainImage();
-                alert('Main image deleted successfully!');
+                showSuccessNotification('Main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting meetings main image:', error);
-                alert('Failed to delete main image.');
+                showErrorNotification('Failed to delete main image.');
             }
         };
 
@@ -4709,12 +4731,12 @@
                     currentMeetingPhotoId = null;
                 }
 
-                alert('Meeting room deleted successfully!');
+                showSuccessNotification('Meeting room deleted successfully!');
                 await loadMeetingsData();
                 await loadMeetingPhotos();
             } catch (error) {
                 console.error('Error deleting meeting room:', error);
-                alert('Failed to delete meeting room.');
+                showErrorNotification('Failed to delete meeting room.');
             }
         };
 
@@ -4806,7 +4828,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -4834,7 +4856,7 @@
                 e.target.value = '';
             } catch (error) {
                 console.error('Error uploading attraction image:', error);
-                alert('Failed to upload image.');
+                showErrorNotification('Failed to upload image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Image';
@@ -4849,7 +4871,7 @@
             const titleFr = attractionDraft.fr.title.trim();
 
             if (!titleEn && !titleNl && !titleFr) {
-                alert('Please enter an attraction title in at least one language');
+                showErrorNotification('Please enter an attraction title in at least one language');
                 return;
             }
 
@@ -4883,11 +4905,11 @@
                 document.getElementById('attraction-link-input').value = '';
                 document.getElementById('attraction-image-preview').innerHTML = '';
                 document.getElementById('add-attraction-btn').textContent = 'Save Attraction';
-                alert('Attraction saved successfully!');
+                showSuccessNotification('Attraction saved successfully!');
                 await loadAttractionsData();
             } catch (error) {
                 console.error('Error saving attraction:', error);
-                alert('Failed to save attraction. Please try again.');
+                showErrorNotification('Failed to save attraction. Please try again.');
             }
         });
 
@@ -4978,11 +5000,11 @@
                 // Delete from database
                 await set(dbRef(database, `attractions/${attractionId}`), null);
 
-                alert('Attraction deleted successfully!');
+                showSuccessNotification('Attraction deleted successfully!');
                 await loadAttractionsData();
             } catch (error) {
                 console.error('Error deleting attraction:', error);
-                alert('Failed to delete attraction.');
+                showErrorNotification('Failed to delete attraction.');
             }
         };
 
@@ -5030,7 +5052,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -5066,10 +5088,10 @@
                 renderAttractionsMainImagePreview();
 
                 e.target.value = '';
-                alert('Attractions main image uploaded successfully!');
+                showSuccessNotification('Attractions main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading attractions main image:', error);
-                alert('Failed to upload image.');
+                showErrorNotification('Failed to upload image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -5092,10 +5114,10 @@
                 attractionsMainImage = null;
                 renderAttractionsMainImagePreview();
 
-                alert('Attractions main image deleted successfully!');
+                showSuccessNotification('Attractions main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting attractions main image:', error);
-                alert('Failed to delete image.');
+                showErrorNotification('Failed to delete image.');
             }
         };
 
@@ -5112,7 +5134,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -5148,10 +5170,10 @@
                 await loadRoomsMainImage();
 
                 e.target.value = '';
-                alert('Rooms main image uploaded successfully!');
+                showSuccessNotification('Rooms main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading rooms main image:', error);
-                alert('Failed to upload image.');
+                showErrorNotification('Failed to upload image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -5192,10 +5214,10 @@
                 await set(dbRef(database, 'roomsMainImage'), null);
                 roomsMainImage = null;
                 await loadRoomsMainImage();
-                alert('Rooms main image deleted successfully!');
+                showSuccessNotification('Rooms main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting rooms main image:', error);
-                alert('Failed to delete image.');
+                showErrorNotification('Failed to delete image.');
             }
         };
 
@@ -5212,7 +5234,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -5248,10 +5270,10 @@
                 await loadInfoMainImage();
 
                 e.target.value = '';
-                alert('Info main image uploaded successfully!');
+                showSuccessNotification('Info main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading info main image:', error);
-                alert('Failed to upload image.');
+                showErrorNotification('Failed to upload image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -5292,10 +5314,10 @@
                 await set(dbRef(database, 'infoMainImage'), null);
                 infoMainImage = null;
                 await loadInfoMainImage();
-                alert('Info main image deleted successfully!');
+                showSuccessNotification('Info main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting info main image:', error);
-                alert('Failed to delete image.');
+                showErrorNotification('Failed to delete image.');
             }
         };
 
@@ -5312,7 +5334,7 @@
             if (!file) return;
 
             if (!file.type.startsWith('image/')) {
-                alert('Please select an image file');
+                showErrorNotification('Please select an image file');
                 return;
             }
 
@@ -5348,10 +5370,10 @@
                 await loadGroupMainImage();
 
                 e.target.value = '';
-                alert('Group request main image uploaded successfully!');
+                showSuccessNotification('Group request main image uploaded successfully!');
             } catch (error) {
                 console.error('Error uploading group main image:', error);
-                alert('Failed to upload image.');
+                showErrorNotification('Failed to upload image.');
             } finally {
                 uploadBtn.disabled = false;
                 uploadBtn.textContent = 'Upload Main Image';
@@ -5392,10 +5414,10 @@
                 await set(dbRef(database, 'groupMainImage'), null);
                 groupMainImage = null;
                 await loadGroupMainImage();
-                alert('Group request main image deleted successfully!');
+                showSuccessNotification('Group request main image deleted successfully!');
             } catch (error) {
                 console.error('Error deleting group main image:', error);
-                alert('Failed to delete image.');
+                showErrorNotification('Failed to delete image.');
             }
         };
 
@@ -5533,10 +5555,10 @@
         async function saveInfoData() {
             try {
                 await set(dbRef(database, 'hotelInfo'), infoData);
-                alert('Info content saved successfully!');
+                showSuccessNotification('Info content saved successfully!');
             } catch (error) {
                 console.error('Error saving Info data:', error);
-                alert('Failed to save. Please try again.');
+                showErrorNotification('Failed to save. Please try again.');
             }
         }
 
@@ -5564,7 +5586,7 @@
                 }
             } catch (error) {
                 console.error('Error loading privacy policy:', error);
-                alert('Failed to load privacy policy data.');
+                showErrorNotification('Failed to load privacy policy data.');
             }
         }
 
@@ -5680,11 +5702,11 @@
                 };
 
                 await set(dbRef(database, 'privacyPolicy'), privacyPolicyData);
-                alert('Privacy Policy saved successfully!');
+                showSuccessNotification('Privacy Policy saved successfully!');
                 closePrivacyPolicyModal();
             } catch (error) {
                 console.error('Error saving privacy policy:', error);
-                alert('Failed to save privacy policy. Please try again.');
+                showErrorNotification('Failed to save privacy policy. Please try again.');
             }
         };
 
@@ -5712,7 +5734,7 @@
                 }
             } catch (error) {
                 console.error('Error loading terms:', error);
-                alert('Failed to load terms data.');
+                showErrorNotification('Failed to load terms data.');
             }
         }
 
@@ -5828,11 +5850,11 @@
                 };
 
                 await set(dbRef(database, 'termsAndConditions'), termsData);
-                alert('Terms & Conditions saved successfully!');
+                showSuccessNotification('Terms & Conditions saved successfully!');
                 closeTermsModal();
             } catch (error) {
                 console.error('Error saving terms:', error);
-                alert('Failed to save terms. Please try again.');
+                showErrorNotification('Failed to save terms. Please try again.');
             }
         };
 
