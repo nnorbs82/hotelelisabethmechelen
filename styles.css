@@ -7,6 +7,7 @@
     --color-white: #FFFFFF;
     --color-text-primary: #444444;
     --color-text-secondary: #555555;
+    --color-text-light: #b8b8b8;
     --color-neumorphic-bg: #20222d;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
@@ -1852,7 +1853,7 @@ body.admin-page .vertical-menu-nav ul {
 
 .our-picks-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
     justify-items: center;
 }
@@ -1902,7 +1903,7 @@ body.admin-page .vertical-menu-nav ul {
 
 .our-picks-card-description {
     font-size: 0.95rem;
-    color: #b8b8b8; /* Light grey text for dark background */
+    color: var(--color-text-light); /* Light grey text for dark background */
     line-height: 1.6;
     margin: 0 0 1.5rem 0;
     flex: 1;
