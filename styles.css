@@ -213,6 +213,7 @@ input, textarea, button {
     color: var(--color-beige);
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 12px;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
