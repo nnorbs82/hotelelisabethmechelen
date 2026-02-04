@@ -190,7 +190,7 @@ input, textarea, button {
     background-color: var(--color-black);
     border: 1px solid var(--color-beige);
     border-top: none;
-    min-width: 180px;
+    min-width: 60px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -207,29 +207,23 @@ input, textarea, button {
 
 .language-option {
     width: 100%;
-    padding: 12px 20px;
+    padding: 10px;
     background: none;
     border: none;
     color: var(--color-beige);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 12px;
+    justify-content: center;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    text-align: left;
-    font-size: 14px;
+    transition: background-color 0.2s ease;
 }
 
 .language-option:hover {
     background-color: rgba(149, 147, 128, 0.2);
-    color: var(--color-white);
 }
 
 .language-option.active {
     background-color: rgba(149, 147, 128, 0.3);
-    color: var(--color-white);
-    font-weight: 600;
 }
 
 .language-option .language-flag {
@@ -376,7 +370,8 @@ input, textarea, button {
     }
     
     .language-option {
-        padding-left: var(--mobile-menu-indent, 30px);
+        padding: 10px;
+        justify-content: center;
     }
 }
 

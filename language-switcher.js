@@ -68,7 +68,6 @@
             option.setAttribute('data-lang', langCode);
             option.innerHTML = `
                 <img src="${langData.flag}" alt="${langData.label}" class="language-flag">
-                <span>${langData.label}</span>
             `;
             
             // Highlight the current language
