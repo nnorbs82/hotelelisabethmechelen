@@ -7,6 +7,8 @@
     --color-white: #FFFFFF;
     --color-text-primary: #444444;
     --color-text-secondary: #555555;
+    --color-text-light: #c5c5c5;
+    --color-neumorphic-bg: #20222d;
     --vertical-menu-width: 250px;
     --facility-guidelines-min-width: 220px;
     --main-menu-height: 70px;
@@ -1830,7 +1832,7 @@ body.admin-page .vertical-menu-nav ul {
 
 /* ============ OUR PICKS SECTION ============ */
 .our-picks-section {
-    background-color: #C4C3B3; /* Darker beige background */
+    background-color: var(--color-neumorphic-bg); /* Dark grey background for neumorphism */
     padding: 3rem 0;
 }
 
@@ -1853,21 +1855,27 @@ body.admin-page .vertical-menu-nav ul {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
+    justify-items: center;
 }
 
 .our-picks-card {
-    background: var(--color-white);
-    border-radius: 0;
+    background: var(--color-neumorphic-bg); /* Same color as background for neumorphism */
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    /* Neumorphism: top-left light shadow, bottom-right dark shadow */
+    box-shadow: -10px -10px 20px rgba(255, 255, 255, 0.05), 
+                10px 10px 20px rgba(0, 0, 0, 0.5);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .our-picks-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    /* Inset shadow for pressed/depressed effect on hover */
+    box-shadow: inset -5px -5px 10px rgba(255, 255, 255, 0.03),
+                inset 5px 5px 10px rgba(0, 0, 0, 0.4);
+    transform: scale(0.98); /* Subtle scale for kinetic feedback */
 }
 
 .our-picks-card-image {
@@ -1888,14 +1896,14 @@ body.admin-page .vertical-menu-nav ul {
 .our-picks-card-title {
     font-size: 1.5rem;
     font-weight: 500;
-    color: var(--color-black);
+    color: var(--color-white); /* White text for dark background */
     margin: 0 0 0.75rem 0;
     letter-spacing: 0.05rem;
 }
 
 .our-picks-card-description {
     font-size: 0.95rem;
-    color: var(--color-text-secondary);
+    color: var(--color-text-light); /* Light grey text for dark background */
     line-height: 1.6;
     margin: 0 0 1.5rem 0;
     flex: 1;
