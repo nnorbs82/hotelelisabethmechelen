@@ -87,6 +87,11 @@
                         <span>Manage Terms & Conditions</span>
                     </button>
                 </li>
+                <li class="vertical-menu-item">
+                    <button class="vertical-menu-btn" id="page-translations-btn">
+                        <span>Page Translations</span>
+                    </button>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -522,6 +527,112 @@
                     <input type="file" id="group-main-image-input" accept="image/*" style="display: none;">
                     <button class="btn" id="upload-group-main-image-btn">Upload Main Image</button>
                     <div id="group-main-image-preview" class="group-main-image-preview"></div>
+                </div>
+            </div>
+
+            <!-- Translation Management Card -->
+            <div id="translation-management-card" class="card" style="display: none;">
+                <h2>Translation Management</h2>
+                <p style="color: var(--color-sage); margin-bottom: 1.5rem;">
+                    Manage translations for all static frontend text across the website. 
+                    English is the default language. Changes are saved immediately to Firebase.
+                </p>
+
+                <!-- Save All Button -->
+                <div style="margin-bottom: 1.5rem;">
+                    <button class="btn" id="save-all-translations-btn">Save All Translations</button>
+                    <button class="btn" id="load-translations-btn" style="margin-left: 1rem; background-color: var(--color-sage);">Load from Firebase</button>
+                </div>
+
+                <!-- Translations organized by page -->
+                <div id="translations-container">
+                    <!-- Navigation Menu Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Main Navigation Menu</h3>
+                        <div class="translation-items" id="nav-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Home Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Home Page</h3>
+                        <div class="translation-items" id="home-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Rooms Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Rooms Page</h3>
+                        <div class="translation-items" id="rooms-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Packages Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Packages Page</h3>
+                        <div class="translation-items" id="packages-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Facilities Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Facilities Page</h3>
+                        <div class="translation-items" id="facilities-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Meetings Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Meetings Page</h3>
+                        <div class="translation-items" id="meetings-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Info Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Info Page</h3>
+                        <div class="translation-items" id="info-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Attractions Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Attractions Page</h3>
+                        <div class="translation-items" id="attractions-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Group Request Page Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Group Request Page</h3>
+                        <div class="translation-items" id="group-request-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Footer Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Footer</h3>
+                        <div class="translation-items" id="footer-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Common Elements Section -->
+                    <div class="translation-section">
+                        <h3 class="translation-section-title">Common Elements</h3>
+                        <div class="translation-items" id="common-translations">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -5857,6 +5968,252 @@
                 showErrorNotification('Failed to save terms. Please try again.');
             }
         };
+
+        // ========================================
+        // Translation Management System
+        // ========================================
+
+        // Define all translatable strings with their default English values
+        const translationKeys = {
+            // Navigation Menu
+            nav: {
+                home: "Home",
+                rooms: "Rooms",
+                packages: "Packages",
+                facilities: "Facilities",
+                meetings: "Meetings",
+                info: "Info",
+                more: "More",
+                attractions: "Attractions",
+                groupRequest: "Group Request",
+                bookNow: "Book Now"
+            },
+            // Home Page
+            home: {
+                title: "Welcome to Hotel Elisabeth Mechelen",
+                checkInLabel: "Check-in",
+                checkOutLabel: "Check-out",
+                searchButton: "Search",
+                aboutUsTitle: "ELISABETH HOTEL",
+                ourPicksTitle: "Our Picks"
+            },
+            // Rooms Page
+            rooms: {
+                pageTitle: "Our Rooms & Suites",
+                tagline: "Exclusive Accommodations",
+                mainTitle: "Discover Your Perfect Stay",
+                subtitle: "Experience comfort and elegance in every detail",
+                sectionTitle: "Our Rooms & Suites",
+                ctaTitle: "Ready to Book Your Stay?",
+                ctaButton: "Book Now"
+            },
+            // Packages Page
+            packages: {
+                pageTitle: "Our Packages",
+                mainTitle: "Special Packages & Offers",
+                subtitle: "Discover our curated experiences"
+            },
+            // Facilities Page
+            facilities: {
+                pageTitle: "Facilities & Services",
+                mainTitle: "Discover Our Facilities",
+                subtitle: "From wellness experiences to business essentials"
+            },
+            // Meetings Page
+            meetings: {
+                pageTitle: "Meetings & Events",
+                mainTitle: "Your Perfect Event Space",
+                subtitle: "Professional meeting rooms and event facilities"
+            },
+            // Info Page
+            info: {
+                pageTitle: "Hotel Information",
+                mainTitle: "Everything You Need to Know",
+                checkInTitle: "Check-in",
+                checkOutTitle: "Check-out",
+                breakfastTitle: "Breakfast",
+                paymentTitle: "Payment Methods",
+                servicesTitle: "Services",
+                generalTitle: "General Information",
+                parkingTitle: "Parking Information"
+            },
+            // Attractions Page
+            attractions: {
+                pageTitle: "Local Attractions",
+                mainTitle: "Discover Mechelen",
+                subtitle: "Explore the best of our beautiful city"
+            },
+            // Group Request Page
+            groupRequest: {
+                pageTitle: "Group Request",
+                mainTitle: "Group Booking Request",
+                subtitle: "Request a quote for group bookings",
+                submitButton: "Submit Request"
+            },
+            // Footer
+            footer: {
+                contactTitle: "Contact",
+                phoneLabel: "PHONE:",
+                emailLabel: "EMAIL:",
+                addressLabel: "ADDRESS:",
+                socialTitle: "Social",
+                informationTitle: "Information",
+                privacyPolicy: "Privacy Policy",
+                termsConditions: "Terms & Conditions",
+                hotelPolicies: "Hotel Policies",
+                careers: "Careers"
+            },
+            // Common Elements
+            common: {
+                loading: "Loading...",
+                save: "Save",
+                cancel: "Cancel",
+                delete: "Delete",
+                edit: "Edit",
+                add: "Add",
+                upload: "Upload",
+                close: "Close",
+                back: "Back",
+                next: "Next",
+                previous: "Previous"
+            }
+        };
+
+        // Function to create a translation item UI
+        function createTranslationItem(key, englishText, section) {
+            const item = document.createElement('div');
+            item.className = 'translation-item';
+            item.innerHTML = `
+                <div class="translation-key">
+                    <strong>${key}</strong>
+                </div>
+                <div class="translation-inputs">
+                    <div class="translation-lang-group">
+                        <label>🇬🇧 English (Default)</label>
+                        <input type="text" 
+                               class="translation-input" 
+                               data-key="${section}.${key}" 
+                               data-lang="en" 
+                               value="${englishText}"
+                               placeholder="English text">
+                    </div>
+                    <div class="translation-lang-group">
+                        <label>🇳🇱 Nederlands</label>
+                        <input type="text" 
+                               class="translation-input" 
+                               data-key="${section}.${key}" 
+                               data-lang="nl" 
+                               value=""
+                               placeholder="Dutch translation">
+                    </div>
+                    <div class="translation-lang-group">
+                        <label>🇫🇷 Français</label>
+                        <input type="text" 
+                               class="translation-input" 
+                               data-key="${section}.${key}" 
+                               data-lang="fr" 
+                               value=""
+                               placeholder="French translation">
+                    </div>
+                </div>
+            `;
+            return item;
+        }
+
+        // Function to populate translation sections
+        function populateTranslations() {
+            // Clear existing content
+            Object.keys(translationKeys).forEach(section => {
+                const container = document.getElementById(`${section}-translations`);
+                if (container) {
+                    container.innerHTML = '';
+                    const keys = translationKeys[section];
+                    Object.keys(keys).forEach(key => {
+                        const item = createTranslationItem(key, keys[key], section);
+                        container.appendChild(item);
+                    });
+                }
+            });
+        }
+
+        // Function to load translations from Firebase
+        async function loadTranslationsFromFirebase() {
+            try {
+                const snapshot = await get(dbRef(database, 'translations'));
+                if (snapshot.exists()) {
+                    const translations = snapshot.val();
+                    
+                    // Populate input fields with loaded translations
+                    document.querySelectorAll('.translation-input').forEach(input => {
+                        const key = input.dataset.key;
+                        const lang = input.dataset.lang;
+                        const [section, subkey] = key.split('.');
+                        
+                        if (translations[section] && translations[section][subkey] && translations[section][subkey][lang]) {
+                            input.value = translations[section][subkey][lang];
+                        }
+                    });
+                    
+                    showSuccessNotification('Translations loaded successfully!');
+                } else {
+                    showErrorNotification('No translations found in Firebase. Using defaults.');
+                }
+            } catch (error) {
+                console.error('Error loading translations:', error);
+                showErrorNotification('Failed to load translations from Firebase.');
+            }
+        }
+
+        // Function to save all translations to Firebase
+        async function saveAllTranslations() {
+            try {
+                const translations = {};
+                
+                // Collect all translation inputs
+                document.querySelectorAll('.translation-input').forEach(input => {
+                    const key = input.dataset.key;
+                    const lang = input.dataset.lang;
+                    const value = input.value.trim();
+                    const [section, subkey] = key.split('.');
+                    
+                    if (!translations[section]) {
+                        translations[section] = {};
+                    }
+                    if (!translations[section][subkey]) {
+                        translations[section][subkey] = {};
+                    }
+                    translations[section][subkey][lang] = value;
+                });
+                
+                // Save to Firebase
+                await set(dbRef(database, 'translations'), translations);
+                showSuccessNotification('All translations saved successfully!');
+            } catch (error) {
+                console.error('Error saving translations:', error);
+                showErrorNotification('Failed to save translations. Please try again.');
+            }
+        }
+
+        // Event listener for Page Translations button
+        document.getElementById('page-translations-btn').addEventListener('click', () => {
+            const translationCard = document.getElementById('translation-management-card');
+            const verticalMenu = document.getElementById('vertical-menu');
+            
+            ensureDashboardVisible();
+            hideAllManagementCards();
+            translationCard.style.display = 'block';
+            translationCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            showActionBar('Translation Management', []);
+            verticalMenu.classList.remove('show');
+            
+            // Populate translations on first load
+            populateTranslations();
+        });
+
+        // Event listeners for translation management buttons
+        document.getElementById('save-all-translations-btn').addEventListener('click', saveAllTranslations);
+        document.getElementById('load-translations-btn').addEventListener('click', loadTranslationsFromFirebase);
 
     </script>
 </body>
