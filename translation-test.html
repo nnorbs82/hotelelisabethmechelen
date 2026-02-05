@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation System Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .status { 
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.success { background: #4CAF50; color: white; }
+        .status.pending { background: #FF9800; color: white; }
+        .status.error { background: #f44336; color: white; }
+        
+        .language-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 4px;
+        }
+        .language-selector button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background: #2196F3;
+            color: white;
+        }
+        .language-selector button:hover {
+            background: #1976D2;
+        }
+        .translation-example {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .translation-column {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .translation-column h4 {
+            margin-top: 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Translation System Test Page</h1>
+        <p>This page tests the translation system implementation for Hotel Elisabeth Mechelen.</p>
+        
+        <div class="language-selector">
+            <h3>Select Language to Test:</h3>
+            <button onclick="changeLanguage('en')">🇬🇧 English</button>
+            <button onclick="changeLanguage('nl')">🇳🇱 Nederlands</button>
+            <button onclick="changeLanguage('fr')">🇫🇷 Français</button>
+        </div>
+
+        <div class="test-section">
+            <h2>System Status</h2>
+            <div class="test-item">
+                <strong>Translation Script Loaded:</strong> 
+                <span id="script-status" class="status pending">CHECKING...</span>
+            </div>
+            <div class="test-item">
+                <strong>Current Language:</strong> 
+                <span id="current-lang" class="status pending">DETECTING...</span>
+            </div>
+            <div class="test-item">
+                <strong>Translations Loaded:</strong> 
+                <span id="translations-status" class="status pending">LOADING...</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Navigation Translations</h2>
+            <div class="test-item">
+                <strong>Home:</strong> <span data-translate="nav.home">Home</span>
+            </div>
+            <div class="test-item">
+                <strong>Rooms:</strong> <span data-translate="nav.rooms">Rooms</span>
+            </div>
+            <div class="test-item">
+                <strong>Packages:</strong> <span data-translate="nav.packages">Packages</span>
+            </div>
+            <div class="test-item">
+                <strong>Book Now:</strong> <span data-translate="nav.bookNow">Book Now</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>Footer Translations</h2>
+            <div class="test-item">
+                <strong>Contact:</strong> <span data-translate="footer.contactTitle">Contact</span>
+            </div>
+            <div class="test-item">
+                <strong>Privacy Policy:</strong> <span data-translate="footer.privacyPolicy">Privacy Policy</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h2>How It Works</h2>
+            <ol>
+                <li>Translation keys are defined in the admin dashboard</li>
+                <li>HTML elements have <code>data-translate</code> attributes</li>
+                <li>The <code>elisabeth-translations.js</code> script loads translations from Firebase</li>
+                <li>When language changes, translations are automatically applied</li>
+            </ol>
+        </div>
+    </div>
+
+    <script type="module" src="elisabeth-translations.js"></script>
+    <script type="module">
+        // Wait for translation system to load
+        setTimeout(() => {
+            // Check if translation system is available
+            if (window.ElisabethTranslations) {
+                document.getElementById('script-status').textContent = 'LOADED';
+                document.getElementById('script-status').className = 'status success';
+                
+                const currentLang = window.ElisabethTranslations.getLocale();
+                document.getElementById('current-lang').textContent = currentLang.toUpperCase();
+                document.getElementById('current-lang').className = 'status success';
+                
+                document.getElementById('translations-status').textContent = 'READY';
+                document.getElementById('translations-status').className = 'status success';
+            } else {
+                document.getElementById('script-status').textContent = 'ERROR';
+                document.getElementById('script-status').className = 'status error';
+            }
+        }, 2000);
+        
+        window.changeLanguage = function(lang) {
+            localStorage.setItem('selectedLanguage', lang);
+            if (window.ElisabethTranslations && window.ElisabethTranslations.refresh) {
+                window.ElisabethTranslations.refresh().then(() => {
+                    location.reload();
+                });
+            } else {
+                location.reload();
+            }
+        };
+    </script>
+</body>
+</html>
