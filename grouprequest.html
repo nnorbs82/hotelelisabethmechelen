@@ -327,9 +327,9 @@
             <div class="group-request-hero-bg"></div>
             <div class="group-request-hero-overlay"></div>
             <div class="group-request-hero-content">
-                <span class="group-request-hero-tagline">Special Group Bookings</span>
+                <span class="group-request-hero-tagline" data-translate="groupRequest.tagline">Special Group Bookings</span>
                 <h1 class="group-request-hero-title" data-translate="groupRequest.pageTitle">Group Accommodation Request</h1>
-                <p class="group-request-hero-subtitle">Plan your perfect group stay with customized arrangements and personalized service</p>
+                <p class="group-request-hero-subtitle" data-translate="groupRequest.heroSubtitle">Plan your perfect group stay with customized arrangements and personalized service</p>
                 <div class="group-request-hero-divider"></div>
             </div>
         </section>
@@ -337,103 +337,103 @@
         <!-- Group Request Form Section -->
         <section class="group-request-section">
             <div class="group-request-container">
-                <h2 class="group-request-title">Request Your Group Booking</h2>
-                <p class="group-request-subtitle">Fill out the form below and we'll get back to you shortly with a customized quotation.</p>
+                <h2 class="group-request-title" data-translate="groupRequest.formTitle">Request Your Group Booking</h2>
+                <p class="group-request-subtitle" data-translate="groupRequest.formSubtitle">Fill out the form below and we'll get back to you shortly with a customized quotation.</p>
                 
                 <form id="group-request-form" class="group-request-form">
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="first-name">First Name *</label>
+                            <label for="first-name" data-translate="groupRequest.fieldFirstName">First Name *</label>
                             <input type="text" id="first-name" name="first_name" required>
                         </div>
                         <div class="group-request-form-group">
-                            <label for="last-name">Last Name *</label>
+                            <label for="last-name" data-translate="groupRequest.fieldLastName">Last Name *</label>
                             <input type="text" id="last-name" name="last_name" required>
                         </div>
                     </div>
                     
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email" data-translate="groupRequest.fieldEmail">Email Address *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="group-request-form-group">
-                            <label for="telephone">Telephone Number *</label>
+                            <label for="telephone" data-translate="groupRequest.fieldTelephone">Telephone Number *</label>
                             <input type="tel" id="telephone" name="telephone" required>
                         </div>
                     </div>
                     
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="checkin-date-group">Check-in Date *</label>
-                            <input type="text" id="checkin-date-group" name="checkin_date" placeholder="Select date" readonly required>
+                            <label for="checkin-date-group" data-translate="groupRequest.fieldCheckinDate">Check-in Date *</label>
+                            <input type="text" id="checkin-date-group" name="checkin_date" data-translate="groupRequest.selectDatePlaceholder" placeholder="Select date" readonly required>
                         </div>
                         <div class="group-request-form-group">
-                            <label for="checkout-date-group">Check-out Date *</label>
-                            <input type="text" id="checkout-date-group" name="checkout_date" placeholder="Select date" readonly required>
+                            <label for="checkout-date-group" data-translate="groupRequest.fieldCheckoutDate">Check-out Date *</label>
+                            <input type="text" id="checkout-date-group" name="checkout_date" data-translate="groupRequest.selectDatePlaceholder" placeholder="Select date" readonly required>
                         </div>
                     </div>
                     
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="total-guests">Total Number of Guests *</label>
+                            <label for="total-guests" data-translate="groupRequest.fieldTotalGuests">Total Number of Guests *</label>
                             <input type="number" id="total-guests" name="total_guests" min="1" required>
                         </div>
                         <div class="group-request-form-group">
-                            <label for="single-rooms">Number of Single Rooms</label>
+                            <label for="single-rooms" data-translate="groupRequest.fieldSingleRooms">Number of Single Rooms</label>
                             <input type="number" id="single-rooms" name="single_rooms" min="0" value="0">
                         </div>
                     </div>
                     
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="twin-rooms">Number of Twin Rooms (2 Separate Beds)</label>
+                            <label for="twin-rooms" data-translate="groupRequest.fieldTwinRooms">Number of Twin Rooms (2 Separate Beds)</label>
                             <input type="number" id="twin-rooms" name="twin_rooms" min="0" value="0">
                         </div>
                         <div class="group-request-form-group">
-                            <label for="double-rooms">Number of Double Rooms (One Double Bed)</label>
+                            <label for="double-rooms" data-translate="groupRequest.fieldDoubleRooms">Number of Double Rooms (One Double Bed)</label>
                             <input type="number" id="double-rooms" name="double_rooms" min="0" value="0">
                         </div>
                     </div>
                     
                     <div class="group-request-form-row">
                         <div class="group-request-form-group">
-                            <label for="triple-rooms">Number of Triple Rooms (3 Single Beds)</label>
+                            <label for="triple-rooms" data-translate="groupRequest.fieldTripleRooms">Number of Triple Rooms (3 Single Beds)</label>
                             <input type="number" id="triple-rooms" name="triple_rooms" min="0" value="0">
                         </div>
                     </div>
                     
                     <div class="group-request-form-group full-width">
-                        <label for="group-type">Group Type *</label>
+                        <label for="group-type" data-translate="groupRequest.fieldGroupType">Group Type *</label>
                         <select id="group-type" name="group_type" required>
-                            <option value="">Select group type</option>
-                            <option value="Business">Business</option>
-                            <option value="Family Reunion">Family Reunion</option>
-                            <option value="Birthday">Birthday</option>
-                            <option value="Bachelor Party">Bachelor Party</option>
-                            <option value="Bachelorette Party">Bachelorette Party</option>
-                            <option value="Wedding">Wedding</option>
-                            <option value="Other">Other</option>
+                            <option value="" data-translate="groupRequest.selectGroupType">Select group type</option>
+                            <option value="Business" data-translate="groupRequest.optionBusiness">Business</option>
+                            <option value="Family Reunion" data-translate="groupRequest.optionFamilyReunion">Family Reunion</option>
+                            <option value="Birthday" data-translate="groupRequest.optionBirthday">Birthday</option>
+                            <option value="Bachelor Party" data-translate="groupRequest.optionBachelorParty">Bachelor Party</option>
+                            <option value="Bachelorette Party" data-translate="groupRequest.optionBacheloretteParty">Bachelorette Party</option>
+                            <option value="Wedding" data-translate="groupRequest.optionWedding">Wedding</option>
+                            <option value="Other" data-translate="groupRequest.optionOther">Other</option>
                         </select>
                     </div>
                     
                     <div class="group-request-form-group full-width">
-                        <label for="meal-option">Meal Option *</label>
+                        <label for="meal-option" data-translate="groupRequest.fieldMealOption">Meal Option *</label>
                         <select id="meal-option" name="meal_option" required>
-                            <option value="">Select meal option</option>
-                            <option value="Breakfast Only">Breakfast Only</option>
-                            <option value="Breakfast and Packed Lunch">Breakfast and Packed Lunch</option>
-                            <option value="Packed Lunch Only">Packed Lunch Only</option>
-                            <option value="Breakfast and Dinner">Breakfast and Dinner</option>
-                            <option value="Breakfast, Lunch and Dinner">Breakfast, Lunch and Dinner</option>
-                            <option value="Dinner Only">Dinner Only</option>
-                            <option value="We do not require food service">We do not require food service</option>
+                            <option value="" data-translate="groupRequest.selectMealOption">Select meal option</option>
+                            <option value="Breakfast Only" data-translate="groupRequest.optionBreakfastOnly">Breakfast Only</option>
+                            <option value="Breakfast and Packed Lunch" data-translate="groupRequest.optionBreakfastPackedLunch">Breakfast and Packed Lunch</option>
+                            <option value="Packed Lunch Only" data-translate="groupRequest.optionPackedLunchOnly">Packed Lunch Only</option>
+                            <option value="Breakfast and Dinner" data-translate="groupRequest.optionBreakfastDinner">Breakfast and Dinner</option>
+                            <option value="Breakfast, Lunch and Dinner" data-translate="groupRequest.optionFullBoard">Breakfast, Lunch and Dinner</option>
+                            <option value="Dinner Only" data-translate="groupRequest.optionDinnerOnly">Dinner Only</option>
+                            <option value="We do not require food service" data-translate="groupRequest.optionNoFood">We do not require food service</option>
                         </select>
                     </div>
                     
                     <div class="group-request-form-group full-width">
-                        <label for="message">Additional Message</label>
-                        <textarea id="message" name="message" placeholder="Please provide any additional information or special requests..."></textarea>
+                        <label for="message" data-translate="groupRequest.fieldMessage">Additional Message</label>
+                        <textarea id="message" name="message" data-translate="groupRequest.messagePlaceholder" placeholder="Please provide any additional information or special requests..."></textarea>
                     </div>
                     
                     <div class="group-request-form-group full-width">
@@ -448,12 +448,12 @@
                     <button type="submit" class="group-request-submit-btn" data-translate="groupRequest.submitButton">Submit Group Request</button>
                     
                     <div id="success-message" class="group-request-form-status success" style="display: none;">
-                        <h3>Thank You!</h3>
-                        <p>Your group request has been successfully submitted. We will contact you shortly to discuss your booking.</p>
+                        <h3 data-translate="groupRequest.successTitle">Thank You!</h3>
+                        <p data-translate="groupRequest.successMessage">Your group request has been successfully submitted. We will contact you shortly to discuss your booking.</p>
                     </div>
                     
                     <div id="error-message" class="group-request-form-status error" style="display: none;">
-                        <p>There was an error submitting your request. Please try again or contact us directly at <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>.</p>
+                        <p data-translate="groupRequest.errorMessage">There was an error submitting your request. Please try again or contact us directly at <a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a>.</p>
                     </div>
                 </form>
             </div>
