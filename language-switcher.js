@@ -34,8 +34,14 @@
     function setLanguage(lang) {
         if (LANGUAGES[lang]) {
             localStorage.setItem(STORAGE_KEY, lang);
-            // Reload the page to apply the new language
-            window.location.reload();
+            // Refresh Elisabeth translations if available
+            if (window.ElisabethTranslations && window.ElisabethTranslations.refresh) {
+                window.ElisabethTranslations.refresh().then(() => {
+                    window.location.reload();
+                });
+            } else {
+                window.location.reload();
+            }
         }
     }
     
