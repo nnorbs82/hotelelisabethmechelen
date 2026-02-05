@@ -7005,3 +7005,97 @@ body.admin-page .vertical-menu-nav ul {
         top: 80px;
     }
 }
+
+/* ========================================
+   Translation Management Styles
+   ======================================== */
+
+.translation-section {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--color-beige);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.translation-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-sage);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-beige);
+}
+
+.translation-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.translation-item {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.translation-key {
+    margin-bottom: 1rem;
+    color: var(--color-sage);
+    font-size: 0.95rem;
+}
+
+.translation-key strong {
+    font-weight: 600;
+}
+
+.translation-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.translation-lang-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.translation-lang-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.translation-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.translation-input:focus {
+    outline: none;
+    border-color: var(--color-sage);
+    box-shadow: 0 0 0 3px rgba(128, 135, 126, 0.1);
+}
+
+.translation-input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Responsive adjustments for translation management */
+@media (max-width: 768px) {
+    .translation-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .translation-section {
+        padding: 1rem;
+    }
+}
