@@ -90,8 +90,26 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
             
             if (localizedContent) {
                 // Handle different element types
-                if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                if (element.tagName === 'INPUT') {
+                    if (element.hasAttribute('placeholder')) {
+                        element.placeholder = localizedContent;
+                    }
+                } else if (element.tagName === 'TEXTAREA' && element.hasAttribute('placeholder')) {
                     element.placeholder = localizedContent;
+                } else if (element.tagName === 'OPTION') {
+                    element.textContent = localizedContent;
+                } else if (element.tagName === 'LABEL') {
+                    // For labels, preserve any nested elements (like checkboxes)
+                    const nestedInputs = element.querySelectorAll('input, a');
+                    if (nestedInputs.length > 0) {
+                        // Complex label with nested elements - update only text nodes
+                        const textNodes = Array.from(element.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+                        if (textNodes.length > 0) {
+                            textNodes[0].textContent = localizedContent;
+                        }
+                    } else {
+                        element.textContent = localizedContent;
+                    }
                 } else if (element.tagName === 'BUTTON' || element.tagName === 'A') {
                     element.textContent = localizedContent;
                 } else {

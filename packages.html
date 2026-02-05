@@ -395,12 +395,12 @@
 
     <main class="packages-container">
         <div class="packages-header">
-            <h1>Our Packages</h1>
-            <p>Discover our exclusive deals and special offers for an unforgettable stay</p>
+            <h1 data-translate="packages.pageTitle">Our Packages</h1>
+            <p data-translate="packages.subtitle">Discover our exclusive deals and special offers for an unforgettable stay</p>
         </div>
 
         <div id="loading" class="loading">
-            <p>Loading packages...</p>
+            <p data-translate="packages.loading">Loading packages...</p>
         </div>
 
         <div id="packages-list">
@@ -408,8 +408,8 @@
         </div>
 
         <div id="no-packages" class="no-packages" style="display: none;">
-            <h2>No Packages Available</h2>
-            <p>Check back soon for exciting new offers!</p>
+            <h2 data-translate="packages.noAvailable">No Packages Available</h2>
+            <p data-translate="packages.checkBackSoon">Check back soon for exciting new offers!</p>
         </div>
     </main>
 
@@ -495,6 +495,14 @@
         // Configuration constants
         const TEASER_MAX_LENGTH = 120;
         
+        // Helper to get translation text
+        function getTranslation(category, key) {
+            if (window.ElisabethTranslations && window.ElisabethTranslations.getText) {
+                return window.ElisabethTranslations.getText(category, key) || '';
+            }
+            return '';
+        }
+        
         // Detect browser language
         function detectLanguage() {
             // First check localStorage for user preference
@@ -502,7 +510,6 @@
             if (stored && (stored === 'nl' || stored === 'en' || stored === 'fr')) {
                 return stored;
             }
-            
             // Then check browser language
             const lang = navigator.language || navigator.userLanguage;
             if (lang.startsWith('nl')) return 'nl';
@@ -543,13 +550,18 @@
                         const inclusionsList = inclusions.split('\n').filter(item => item.trim());
                         const goodToKnowList = goodToKnow.split('\n').filter(item => item.trim());
 
-                        // Create teaser from description (first TEASER_MAX_LENGTH characters)
+                        // Create teaser from description
+                        const teaserDefaultText = getTranslation('packages', 'teaserDefault') || 'Click for more details';
                         const teaser = description ? 
                             (description.length > TEASER_MAX_LENGTH ? description.substring(0, TEASER_MAX_LENGTH) + '...' : description) : 
-                            (currentLang === 'nl' ? 'Klik voor meer details' : currentLang === 'fr' ? 'Cliquez pour plus de détails' : 'Click for more details');
+                            teaserDefaultText;
 
-                        // View details CTA text
-                        const viewDetailsCta = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
+                        // Get translated UI text
+                        const viewDetailsText = getTranslation('packages', 'viewDetails') || 'View Details';
+                        const hideDetailsText = getTranslation('packages', 'hideDetails') || 'Hide Details';
+                        const includedText = getTranslation('packages', 'sectionIncluded') || 'Included';
+                        const goodToKnowText = getTranslation('packages', 'sectionGoodToKnow') || 'Good to Know';
+                        const bookNowText = getTranslation('packages', 'bookNow') || 'Book Now';
 
                         return `
                             <div class="package-card" data-package-id="${index}">
@@ -558,8 +570,8 @@
                                     <div class="package-summary">
                                         <h2 class="package-title">${title}</h2>
                                         <p class="package-teaser">${teaser}</p>
-                                        <button class="package-header-cta" aria-expanded="false" aria-label="${viewDetailsCta}">
-                                            <span>${viewDetailsCta}</span>
+                                        <button class="package-header-cta" aria-expanded="false" aria-label="${viewDetailsText}">
+                                            <span>${viewDetailsText}</span>
                                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <polyline points="6 9 12 15 18 9"></polyline>
                                             </svg>
@@ -579,7 +591,7 @@
                                                 <div class="package-column-inclusions">
                                                     ${inclusionsList.length > 0 ? `
                                                         <div class="package-section">
-                                                            <h3 class="package-section-title">${currentLang === 'nl' ? 'Inbegrepen' : currentLang === 'fr' ? 'Inclus' : 'Included'}</h3>
+                                                            <h3 class="package-section-title">${includedText}</h3>
                                                             <ul class="package-list">
                                                                 ${inclusionsList.map(item => `<li>${item}</li>`).join('')}
                                                             </ul>
@@ -591,7 +603,7 @@
                                         
                                         ${goodToKnowList.length > 0 ? `
                                             <div class="package-section">
-                                                <h3 class="package-section-title">${currentLang === 'nl' ? 'Goed om te weten' : currentLang === 'fr' ? 'Bon à savoir' : 'Good to Know'}</h3>
+                                                <h3 class="package-section-title">${goodToKnowText}</h3>
                                                 <ul class="package-list">
                                                     ${goodToKnowList.map(item => `<li>${item}</li>`).join('')}
                                                 </ul>
@@ -601,7 +613,7 @@
                                         ${pkg.bookingLink ? `
                                             <div class="package-actions">
                                                 <a href="${pkg.bookingLink}" target="_blank" class="room-feature-btn primary package-book-btn">
-                                                    <span>${currentLang === 'nl' ? 'Boek Nu' : currentLang === 'fr' ? 'Réserver' : 'Book Now'}</span>
+                                                    <span>${bookNowText}</span>
                                                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                                         <polyline points="12 5 19 12 12 19"></polyline>
@@ -620,8 +632,8 @@
                         const ctaButton = card.querySelector('.package-header-cta');
                         const ctaText = ctaButton.querySelector('span');
                         const originalText = ctaText.textContent;
-                        const hideText = currentLang === 'nl' ? 'Verberg details' : currentLang === 'fr' ? 'Masquer les détails' : 'Hide Details';
-                        const viewDetailsText = currentLang === 'nl' ? 'Bekijk details' : currentLang === 'fr' ? 'Voir les détails' : 'View Details';
+                        const hideText = getTranslation('packages', 'hideDetails') || hideDetailsText;
+                        const showText = getTranslation('packages', 'viewDetails') || viewDetailsText;
                         
                         // Store original text on initialization
                         ctaText.setAttribute('data-original-text', originalText);
@@ -636,17 +648,15 @@
                                 const prevText = prevButton?.querySelector('span');
                                 if (prevButton) {
                                     prevButton.setAttribute('aria-expanded', 'false');
-                                    prevButton.setAttribute('aria-label', viewDetailsText);
+                                    prevButton.setAttribute('aria-label', showText);
                                 }
                                 if (prevText) {
                                     prevText.textContent = prevText.getAttribute('data-original-text');
                                 }
                             }
                             
-                            // Toggle this card
                             card.classList.toggle('expanded');
                             
-                            // Update button text and aria attributes
                             if (card.classList.contains('expanded')) {
                                 ctaText.textContent = hideText;
                                 ctaButton.setAttribute('aria-expanded', 'true');
@@ -654,13 +664,11 @@
                             } else {
                                 ctaText.textContent = ctaText.getAttribute('data-original-text');
                                 ctaButton.setAttribute('aria-expanded', 'false');
-                                ctaButton.setAttribute('aria-label', viewDetailsText);
+                                ctaButton.setAttribute('aria-label', showText);
                             }
                             
-                            // Update reference to currently expanded card
                             currentlyExpandedCard = card.classList.contains('expanded') ? card : null;
                             
-                            // Scroll to card if expanding (respect prefers-reduced-motion)
                             if (card.classList.contains('expanded')) {
                                 setTimeout(() => {
                                     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
