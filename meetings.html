@@ -523,7 +523,7 @@
         <!-- Meeting Rooms Section -->
         <section class="meetings-rooms-section">
             <div class="meetings-rooms-container" id="meetings-list">
-                <p class="meetings-loading" style="text-align: center; color: var(--color-sage);">Loading meeting rooms...</p>
+                <p class="meetings-loading" data-translate="meetings.loading" style="text-align: center; color: var(--color-sage);">Loading meeting rooms...</p>
             </div>
         </section>
 
@@ -536,37 +536,37 @@
                 <form id="meeting-request-form-element" class="meeting-form">
                     <div class="meeting-form-row">
                         <div class="meeting-form-group">
-                            <label for="firstName">First Name *</label>
+                            <label for="firstName" data-translate="meetings.fieldFirstName">First Name *</label>
                             <input type="text" id="firstName" name="firstName" required>
                         </div>
                         <div class="meeting-form-group">
-                            <label for="lastName">Last Name *</label>
+                            <label for="lastName" data-translate="meetings.fieldLastName">Last Name *</label>
                             <input type="text" id="lastName" name="lastName" required>
                         </div>
                     </div>
                     <div class="meeting-form-row">
                         <div class="meeting-form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email" data-translate="meetings.fieldEmail">Email Address *</label>
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="meeting-form-group">
-                            <label for="telephone">Telephone Number *</label>
+                            <label for="telephone" data-translate="meetings.fieldTelephone">Telephone Number *</label>
                             <input type="tel" id="telephone" name="telephone" required>
                         </div>
                     </div>
                     <div class="meeting-form-row">
                         <div class="meeting-form-group">
-                            <label for="participants">Total Number of Participants *</label>
+                            <label for="participants" data-translate="meetings.fieldParticipants">Total Number of Participants *</label>
                             <input type="number" id="participants" name="participants" min="1" required>
                         </div>
                         <div class="meeting-form-group">
-                            <label for="meetingDate">Meeting Date *</label>
+                            <label for="meetingDate" data-translate="meetings.fieldMeetingDate">Meeting Date *</label>
                             <input type="date" id="meetingDate" name="meetingDate" required>
                         </div>
                     </div>
                     <div class="meeting-form-group full-width">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" name="message" placeholder="Tell us more about your meeting requirements..."></textarea>
+                        <label for="message" data-translate="meetings.fieldMessage">Your Message</label>
+                        <textarea id="message" name="message" data-translate="meetings.messagePlaceholder" placeholder="Tell us more about your meeting requirements..."></textarea>
                     </div>
                     <div class="meeting-form-group full-width">
                         <div class="meeting-form-checkbox">
@@ -576,7 +576,7 @@
                             </label>
                         </div>
                     </div>
-                    <button type="submit" class="btn meeting-submit-btn" id="submitBtn">Send Request</button>
+                    <button type="submit" class="btn meeting-submit-btn" id="submitBtn" data-translate="meetings.submitButton">Send Request</button>
                     <div id="formStatus" class="meeting-form-status"></div>
                 </form>
             </div>
