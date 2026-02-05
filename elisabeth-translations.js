@@ -93,9 +93,6 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
                 if (element.tagName === 'INPUT') {
                     if (element.hasAttribute('placeholder')) {
                         element.placeholder = localizedContent;
-                    } else if (element.type === 'text' || element.type === 'email' || element.type === 'tel') {
-                        // Don't set value for input fields, only placeholder
-                        element.placeholder = localizedContent;
                     }
                 } else if (element.tagName === 'TEXTAREA' && element.hasAttribute('placeholder')) {
                     element.placeholder = localizedContent;

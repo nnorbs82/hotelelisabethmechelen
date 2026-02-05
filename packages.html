@@ -505,10 +505,12 @@
         
         // Detect browser language
         function detectLanguage() {
+            // First check localStorage for user preference
             const stored = localStorage.getItem('selectedLanguage');
             if (stored && (stored === 'nl' || stored === 'en' || stored === 'fr')) {
                 return stored;
             }
+            // Then check browser language
             const lang = navigator.language || navigator.userLanguage;
             if (lang.startsWith('nl')) return 'nl';
             if (lang.startsWith('fr')) return 'fr';
@@ -633,6 +635,7 @@
                         const hideText = getTranslation('packages', 'hideDetails') || hideDetailsText;
                         const showText = getTranslation('packages', 'viewDetails') || viewDetailsText;
                         
+                        // Store original text on initialization
                         ctaText.setAttribute('data-original-text', originalText);
                         
                         ctaButton.addEventListener('click', (e) => {
