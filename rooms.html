@@ -433,6 +433,24 @@
             }).join('');
 
             container.innerHTML = roomsHTML;
+            preloadRoomImages(); // Preload images to prevent loading delays when navigating
+        }
+
+        // Preload all room images to prevent loading delays when navigating
+        const preloadedImages = []; // Keep references to prevent garbage collection
+        function preloadRoomImages() {
+            // Clear previous preloaded images if renderRooms is called again
+            preloadedImages.length = 0;
+            
+            roomsData.forEach(room => {
+                if (room.photos && room.photos.length > 1) {
+                    room.photos.forEach(photo => {
+                        const img = new Image();
+                        img.src = photo.url;
+                        preloadedImages.push(img); // Store reference
+                    });
+                }
+            });
         }
 
         // Cover Flow for Room Modal
