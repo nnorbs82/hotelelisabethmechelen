@@ -104,16 +104,16 @@
                 <!-- Column 3: Payments and General -->
                 <div class="info-column">
                     <div class="info-card-modern" id="payment-card">
-                        <h3>Payment Methods</h3>
+                        <h3 data-translate="info.paymentTitle">Payment Methods</h3>
                         <div id="payment-content" class="info-content">
-                            <p>Loading...</p>
+                            <p data-translate="info.loading">Loading...</p>
                         </div>
                     </div>
 
                     <div class="info-card-modern" id="general-card">
-                        <h3>General</h3>
+                        <h3 data-translate="info.generalTitle">General</h3>
                         <div id="general-content" class="info-content">
-                            <p>Loading...</p>
+                            <p data-translate="info.loading">Loading...</p>
                         </div>
                     </div>
                 </div>
@@ -122,23 +122,23 @@
             <!-- Full Width Sections Below -->
             <div class="info-full-width-sections">
                 <div class="info-card-modern info-card-full" id="parking-card">
-                    <h3>Parking Information</h3>
+                    <h3 data-translate="info.parkingTitle">Parking Information</h3>
                     <div id="parking-content" class="info-content">
-                        <p>Loading...</p>
+                        <p data-translate="info.loading">Loading...</p>
                     </div>
                 </div>
 
                 <div class="info-card-modern info-card-full" id="traffic-card">
-                    <h3>Traffic-Calmed Streets</h3>
+                    <h3 data-translate="info.trafficTitle">Traffic-Calmed Streets</h3>
                     <div id="traffic-content" class="info-content">
-                        <p>Loading...</p>
+                        <p data-translate="info.loading">Loading...</p>
                     </div>
                 </div>
 
                 <div class="info-card-modern info-card-full" id="camera-card">
-                    <h3>Camera Surveillance Notice</h3>
+                    <h3 data-translate="info.cameraTitle">Camera Surveillance Notice</h3>
                     <div id="camera-content" class="info-content">
-                        <p>Loading...</p>
+                        <p data-translate="info.loading">Loading...</p>
                     </div>
                 </div>
             </div>
@@ -232,6 +232,10 @@
 
         // Detect user's language preference
         function getUserLanguage() {
+            const stored = localStorage.getItem('selectedLanguage');
+            if (stored && (stored === 'nl' || stored === 'en' || stored === 'fr')) {
+                return stored;
+            }
             const browserLang = navigator.language || navigator.userLanguage;
             if (browserLang.startsWith('nl')) return 'nl';
             if (browserLang.startsWith('fr')) return 'fr';
