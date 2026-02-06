@@ -437,12 +437,14 @@
         }
 
         // Preload all room images to prevent loading delays when navigating
+        const preloadedImages = []; // Keep references to prevent garbage collection
         function preloadRoomImages() {
             roomsData.forEach(room => {
                 if (room.photos && room.photos.length > 1) {
                     room.photos.forEach(photo => {
                         const img = new Image();
                         img.src = photo.url;
+                        preloadedImages.push(img); // Store reference
                     });
                 }
             });
