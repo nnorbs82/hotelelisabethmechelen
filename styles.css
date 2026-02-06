@@ -3367,7 +3367,6 @@ body.admin-page .vertical-menu-nav ul {
     width: 100%;
     height: calc(100vh - var(--main-menu-height));
     min-height: 500px;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4623,7 +4622,6 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
 }
 
 .rooms-hero-overlay {

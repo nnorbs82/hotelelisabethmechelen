@@ -789,7 +789,7 @@
                 }
             }
 
-            // Fetch fresh URL in background and update if changed
+            // Fetch fresh URL in background and update cache
             try {
                 const snapshot = await get(dbRef(database, 'meetingsMainImage'));
                 if (snapshot.exists()) {
@@ -797,9 +797,8 @@
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
                         localStorage.setItem(cacheKey, safeUrl);
-                        if (safeUrl !== cached) {
-                            heroBg.style.backgroundImage = `url("${safeUrl}")`;
-                        }
+                        // Always set the image to ensure it displays correctly
+                        heroBg.style.backgroundImage = `url("${safeUrl}")`;
                     }
                 }
             } catch (error) {

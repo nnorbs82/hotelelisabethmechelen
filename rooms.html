@@ -356,9 +356,8 @@
                 const safeUrl = sanitizeImageUrl(imageUrl);
                 if (safeUrl) {
                     localStorage.setItem(cacheKey, safeUrl);
-                    if (safeUrl !== cached) {
-                        pageBackground.style.backgroundImage = `url("${safeUrl}")`;
-                    }
+                    // Always set the image to ensure it displays correctly
+                    pageBackground.style.backgroundImage = `url("${safeUrl}")`;
                 }
             }
         }
