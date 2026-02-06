@@ -14,6 +14,40 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
         supportedLocales: ['en', 'nl', 'fr']
     };
 
+    // localStorage cache configuration
+    const CACHE_KEY = 'elisabethTranslationCache';
+    const CACHE_TIMESTAMP_KEY = 'elisabethTranslationCacheTimestamp';
+
+    // Load cached translations from localStorage
+    function loadCachedTranslations() {
+        try {
+            const cachedData = localStorage.getItem(CACHE_KEY);
+            if (cachedData) {
+                const parsed = JSON.parse(cachedData);
+                // Reconstruct Map from stored array of [key, value] pairs
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    elisabethTranslationCache.data = new Map(parsed);
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.warn('Failed to load cached translations:', error);
+        }
+        return false;
+    }
+
+    // Save translations to localStorage
+    function saveCachedTranslations() {
+        try {
+            // Convert Map to array of [key, value] pairs for JSON serialization
+            const dataArray = Array.from(elisabethTranslationCache.data.entries());
+            localStorage.setItem(CACHE_KEY, JSON.stringify(dataArray));
+            localStorage.setItem(CACHE_TIMESTAMP_KEY, Date.now().toString());
+        } catch (error) {
+            console.warn('Failed to save translations to cache:', error);
+        }
+    }
+
     // Retrieve visitor's preferred locale from browser storage
     function retrieveVisitorLocale() {
         const storedChoice = localStorage.getItem('selectedLanguage');
@@ -42,6 +76,9 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
                         elisabethTranslationCache.data.set(fullKey, contentData[categoryKey][itemKey]);
                     });
                 });
+                
+                // Save to localStorage cache
+                saveCachedTranslations();
                 
                 return true;
             } else {
@@ -115,20 +152,40 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
                 } else {
                     element.textContent = localizedContent;
                 }
+                
+                // Mark element as translated
+                element.classList.add('translated');
             }
         });
+        
+        // Mark body as translations ready
+        document.body.classList.add('translations-ready');
     }
 
     // Bootstrap the translation system
     async function bootstrapElisabethTranslations() {
         elisabethTranslationCache.activeLocale = retrieveVisitorLocale();
         
+        // First, try to load from cache for instant translation
+        const cacheLoaded = loadCachedTranslations();
+        if (cacheLoaded) {
+            // Apply cached translations immediately (synchronous, no flash)
+            injectLocalizedContent();
+        }
+        
+        // Then fetch fresh translations from Firebase in the background
         const contentLoaded = await fetchMultilingualContent();
         
         if (contentLoaded) {
+            // Re-apply translations with fresh data (in case anything changed)
             injectLocalizedContent();
         } else {
-            console.warn('Using static content - translations unavailable');
+            // Fetch failed - warn user but continue with cache if available
+            if (cacheLoaded) {
+                console.warn('Firebase fetch failed - using cached translations');
+            } else {
+                console.warn('Using static content - translations unavailable');
+            }
         }
     }
 

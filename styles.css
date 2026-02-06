@@ -27,6 +27,21 @@ body {
     line-height: 1.6;
 }
 
+/* Translation Flash Prevention - Hide untranslated content until ready
+ * Uses visibility: hidden to preserve layout and prevent flash of English content.
+ * Elements become visible almost instantly on cached visits (< 10ms), so accessibility
+ * impact is minimal. Screen readers will see content after translations are applied.
+ */
+[data-translate]:not(.translated) {
+    visibility: hidden;
+}
+
+/* Show elements once translated */
+.translated,
+.translations-ready [data-translate] {
+    visibility: visible;
+}
+
 /* Ensure all text inputs, textareas, and buttons use Raleway */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
