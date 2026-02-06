@@ -206,8 +206,8 @@
         <!-- Hero Section -->
         <section class="policy-hero">
             <div class="policy-hero-content">
-                <span class="policy-hero-tagline">Legal Information</span>
-                <h1 class="policy-hero-title">Privacy Policy</h1>
+                <span class="policy-hero-tagline" data-translate="privacyPolicyPage.heroTagline">Legal Information</span>
+                <h1 class="policy-hero-title" data-translate="privacyPolicyPage.heroTitle">Privacy Policy</h1>
                 <div class="policy-hero-divider"></div>
             </div>
         </section>
@@ -328,8 +328,9 @@
         }
 
         function displayPrivacyPolicy() {
-            // Display English content by default
-            const content = privacyData['en'] || privacyData['nl'] || privacyData['fr'] || '';
+            // Display content in the user's selected language
+            const selectedLang = localStorage.getItem('selectedLanguage') || 'en';
+            const content = privacyData[selectedLang] || privacyData['en'] || privacyData['nl'] || privacyData['fr'] || '';
             const container = document.getElementById('policy-text-content');
             if (content) {
                 container.innerHTML = content;

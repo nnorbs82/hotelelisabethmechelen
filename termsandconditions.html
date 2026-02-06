@@ -206,8 +206,8 @@
         <!-- Hero Section -->
         <section class="terms-hero">
             <div class="terms-hero-content">
-                <span class="terms-hero-tagline">Legal Information</span>
-                <h1 class="terms-hero-title">Terms and Conditions</h1>
+                <span class="terms-hero-tagline" data-translate="termsAndConditionsPage.heroTagline">Legal Information</span>
+                <h1 class="terms-hero-title" data-translate="termsAndConditionsPage.heroTitle">Terms and Conditions</h1>
                 <div class="terms-hero-divider"></div>
             </div>
         </section>
@@ -328,8 +328,9 @@
         }
 
         function displayTerms() {
-            // Display English content by default
-            const content = termsData['en'] || termsData['nl'] || termsData['fr'] || '';
+            // Display content in the user's selected language
+            const selectedLang = localStorage.getItem('selectedLanguage') || 'en';
+            const content = termsData[selectedLang] || termsData['en'] || termsData['nl'] || termsData['fr'] || '';
             const container = document.getElementById('terms-text-content');
             if (content) {
                 container.innerHTML = content;
