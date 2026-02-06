@@ -4,32 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facilities - Hotel Elisabeth Mechelen</title>
-    <!-- Preload hero image from cache for instant display -->
-    <script>
-        (function() {
-            var cacheKey = 'cache_facilitiesHero_Hero';
-            var url = localStorage.getItem(cacheKey);
-            // Validate URL before preloading for security
-            if (url && typeof url === 'string') {
-                var trimmed = url.trim();
-                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
-                    trimmed.startsWith('https://storage.googleapis.com/')) {
-                    var link = document.createElement('link');
-                    link.rel = 'preload';
-                    link.as = 'image';
-                    link.href = trimmed;
-                    document.head.appendChild(link);
-                }
-            }
-        })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Firebase Storage preconnect for faster image loading -->
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
-    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
-    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -250,29 +226,14 @@
         }
 
         async function loadFacilitiesHero() {
-            const pageBackground = document.getElementById('page-background');
-            if (!pageBackground) return;
-
-            const cacheKey = 'cache_facilitiesHero_Hero';
-
-            // Instantly apply cached URL (with validation for security)
-            const cached = localStorage.getItem(cacheKey);
-            if (cached) {
-                const safeCached = sanitizeImageUrl(cached);
-                if (safeCached) {
-                    pageBackground.style.backgroundImage = `url("${safeCached}")`;
-                }
-            }
-
-            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'facilitiesHero'));
                 if (snapshot.exists()) {
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        localStorage.setItem(cacheKey, safeUrl);
-                        if (safeUrl !== cached) {
+                        const pageBackground = document.getElementById('page-background');
+                        if (pageBackground) {
                             pageBackground.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }

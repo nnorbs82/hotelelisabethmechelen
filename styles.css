@@ -415,7 +415,6 @@ body.admin-page {
     left: 0;
     width: 100%;
     height: calc(100% - var(--main-menu-height)); /* Adjust height to exclude menu area */
-    background-color: #1a1a1a; /* Dark fallback while image loads */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -3367,7 +3366,7 @@ body.admin-page .vertical-menu-nav ul {
     width: 100%;
     height: calc(100vh - var(--main-menu-height));
     min-height: 500px;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4623,7 +4622,7 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
+    background-color: transparent; /* Allow fixed page-background to show through */
 }
 
 .rooms-hero-overlay {
@@ -5714,7 +5713,7 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
+    background-color: transparent;
 }
 
 .info-hero-overlay {
@@ -6174,7 +6173,7 @@ body.admin-page .vertical-menu-nav ul {
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    background: #1a1a1a linear-gradient(135deg, rgba(0,0,0,0.7), rgba(149, 147, 128, 0.4)), 
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(149, 147, 128, 0.4)), 
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23959380" width="1200" height="600"/></svg>');
     background-size: cover;
     background-position: center;

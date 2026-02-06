@@ -4,32 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Request - Hotel Elisabeth Mechelen</title>
-    <!-- Preload hero image from cache for instant display -->
-    <script>
-        (function() {
-            var cacheKey = 'cache_groupMainImage_Hero';
-            var url = localStorage.getItem(cacheKey);
-            // Validate URL before preloading for security
-            if (url && typeof url === 'string') {
-                var trimmed = url.trim();
-                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
-                    trimmed.startsWith('https://storage.googleapis.com/')) {
-                    var link = document.createElement('link');
-                    link.rel = 'preload';
-                    link.as = 'image';
-                    link.href = trimmed;
-                    document.head.appendChild(link);
-                }
-            }
-        })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Firebase Storage preconnect for faster image loading -->
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
-    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
-    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
     <link rel="stylesheet" href="styles.css">
@@ -60,7 +36,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #1a1a1a; /* Dark fallback while image loads */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -582,44 +557,16 @@
         import { database } from './firebase-config.js';
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // Sanitize image URLs to prevent injection attacks
-        function sanitizeImageUrl(url) {
-            if (!url || typeof url !== 'string') return '';
-            const trimmed = url.trim();
-            // Only allow HTTPS URLs from Firebase Storage
-            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
-                trimmed.startsWith('https://storage.googleapis.com/')) {
-                return trimmed;
-            }
-            return '';
-        }
-
-        // Load group main image for header background with localStorage caching
+        // Load group main image for header background
         async function loadGroupMainImage() {
-            const groupHeroBg = document.querySelector('.group-request-hero-bg');
-            if (!groupHeroBg) return;
-
-            const cacheKey = 'cache_groupMainImage_Hero';
-
-            // Instantly apply cached URL (with validation for security)
-            const cached = localStorage.getItem(cacheKey);
-            if (cached) {
-                const safeCached = sanitizeImageUrl(cached);
-                if (safeCached) {
-                    groupHeroBg.style.backgroundImage = `url("${safeCached}")`;
-                }
-            }
-
-            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'groupMainImage'));
                 if (snapshot.exists()) {
                     const groupMainImage = snapshot.val();
-                    const safeUrl = sanitizeImageUrl(groupMainImage?.url || '');
-                    if (safeUrl) {
-                        localStorage.setItem(cacheKey, safeUrl);
-                        if (safeUrl !== cached) {
-                            groupHeroBg.style.backgroundImage = `url("${safeUrl}")`;
+                    if (groupMainImage && groupMainImage.url) {
+                        const groupHeroBg = document.querySelector('.group-request-hero-bg');
+                        if (groupHeroBg) {
+                            groupHeroBg.style.backgroundImage = `url("${groupMainImage.url}")`;
                         }
                     }
                 }
