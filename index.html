@@ -807,11 +807,11 @@
                 
                 if (snapshot.exists()) {
                     const bgData = snapshot.val();
-                    const url = bgData?.url || '';
-                    if (url) {
-                        localStorage.setItem(cacheKey, url);
-                        if (url !== cached) {
-                            bgElement.style.backgroundImage = `url('${url}')`;
+                    const safeUrl = sanitizeImageUrl(bgData?.url || '');
+                    if (safeUrl) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
+                            bgElement.style.backgroundImage = `url('${safeUrl}')`;
                         }
                     }
                 }

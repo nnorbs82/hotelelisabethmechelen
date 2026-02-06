@@ -274,6 +274,22 @@
             return text.split('\n').filter(line => line.trim()).map(line => `<p style="line-height: ${lineSpacing};">${escapeHtml(line)}</p>`).join('');
         }
 
+        // Sanitize image URLs to prevent injection attacks
+        function sanitizeImageUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                // Additional validation: ensure no quotes or parentheses that could break CSS
+                if (trimmed.includes("'") || trimmed.includes('"') || trimmed.includes('(') || trimmed.includes(')')) {
+                    return '';
+                }
+                return trimmed;
+            }
+            return '';
+        }
+
         // Load and display info data
         async function loadInfoData() {
             try {
@@ -334,11 +350,11 @@
                 const snapshot = await get(dbRef(database, 'infoMainImage'));
                 if (snapshot.exists()) {
                     const infoMainImage = snapshot.val();
-                    const url = infoMainImage?.url || '';
-                    if (url) {
-                        localStorage.setItem(cacheKey, url);
-                        if (url !== cached) {
-                            infoHero.style.backgroundImage = `url("${url}")`;
+                    const safeUrl = sanitizeImageUrl(infoMainImage?.url || '');
+                    if (safeUrl) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
+                            infoHero.style.backgroundImage = `url("${safeUrl}")`;
                             infoHero.style.backgroundSize = 'cover';
                             infoHero.style.backgroundPosition = 'center';
                             infoHero.style.backgroundRepeat = 'no-repeat';

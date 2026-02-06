@@ -577,6 +577,22 @@
         import { database } from './firebase-config.js';
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Sanitize image URLs to prevent injection attacks
+        function sanitizeImageUrl(url) {
+            if (!url) return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                // Additional validation: ensure no quotes or parentheses that could break CSS
+                if (trimmed.includes("'") || trimmed.includes('"') || trimmed.includes('(') || trimmed.includes(')')) {
+                    return '';
+                }
+                return trimmed;
+            }
+            return '';
+        }
+
         // Load group main image for header background with localStorage caching
         async function loadGroupMainImage() {
             const groupHeroBg = document.querySelector('.group-request-hero-bg');
@@ -595,11 +611,11 @@
                 const snapshot = await get(dbRef(database, 'groupMainImage'));
                 if (snapshot.exists()) {
                     const groupMainImage = snapshot.val();
-                    const url = groupMainImage?.url || '';
-                    if (url) {
-                        localStorage.setItem(cacheKey, url);
-                        if (url !== cached) {
-                            groupHeroBg.style.backgroundImage = `url("${url}")`;
+                    const safeUrl = sanitizeImageUrl(groupMainImage?.url || '');
+                    if (safeUrl) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
+                            groupHeroBg.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }
                 }
