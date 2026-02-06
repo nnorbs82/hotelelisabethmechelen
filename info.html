@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Information - Hotel Elisabeth Mechelen</title>
+    <!-- Preload hero image from cache for instant display -->
+    <script>
+        (function() {
+            var cacheKey = 'cache_infoMainImage_Hero';
+            var url = localStorage.getItem(cacheKey);
+            // Validate URL before preloading for security
+            if (url && typeof url === 'string') {
+                var trimmed = url.trim();
+                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                    trimmed.startsWith('https://storage.googleapis.com/')) {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = trimmed;
+                    document.head.appendChild(link);
+                }
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Firebase Storage preconnect for faster image loading -->
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -255,6 +279,18 @@
             return text.split('\n').filter(line => line.trim()).map(line => `<p style="line-height: ${lineSpacing};">${escapeHtml(line)}</p>`).join('');
         }
 
+        // Sanitize image URLs to prevent injection attacks
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
         // Load and display info data
         async function loadInfoData() {
             try {
@@ -294,19 +330,37 @@
             }
         }
 
-        // Load info main image for header background
+        // Load info main image for header background with localStorage caching
         async function loadInfoMainImage() {
+            const infoHero = document.querySelector('.info-hero');
+            if (!infoHero) return;
+
+            // Set consistent background styles
+            infoHero.style.backgroundSize = 'cover';
+            infoHero.style.backgroundPosition = 'center';
+            infoHero.style.backgroundRepeat = 'no-repeat';
+
+            const cacheKey = 'cache_infoMainImage_Hero';
+
+            // Instantly apply cached URL (with validation for security)
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    infoHero.style.backgroundImage = `url("${safeCached}")`;
+                }
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'infoMainImage'));
                 if (snapshot.exists()) {
                     const infoMainImage = snapshot.val();
-                    if (infoMainImage && infoMainImage.url) {
-                        const infoHero = document.querySelector('.info-hero');
-                        if (infoHero) {
-                            infoHero.style.backgroundImage = `url("${infoMainImage.url}")`;
-                            infoHero.style.backgroundSize = 'cover';
-                            infoHero.style.backgroundPosition = 'center';
-                            infoHero.style.backgroundRepeat = 'no-repeat';
+                    const safeUrl = sanitizeImageUrl(infoMainImage?.url || '');
+                    if (safeUrl) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
+                            infoHero.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }
                 }

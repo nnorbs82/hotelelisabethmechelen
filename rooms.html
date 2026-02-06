@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rooms - Hotel Elisabeth Mechelen</title>
+    <!-- Preload hero image from cache for instant display -->
+    <script>
+        (function() {
+            var cacheKey = 'cache_roomsMainImage_Hero';
+            var url = localStorage.getItem(cacheKey);
+            // Validate URL before preloading for security
+            if (url && typeof url === 'string') {
+                var trimmed = url.trim();
+                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                    trimmed.startsWith('https://storage.googleapis.com/')) {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = trimmed;
+                    document.head.appendChild(link);
+                }
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Firebase Storage preconnect for faster image loading -->
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -218,6 +242,18 @@
             return div.innerHTML;
         }
 
+        // Sanitize image URLs to prevent injection attacks
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
         // JavaScript string escape function
         function escapeJs(text) {
             return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
@@ -271,6 +307,17 @@
         async function setPageBackground() {
             const pageBackground = document.getElementById('page-background');
             if (!pageBackground) return;
+
+            const cacheKey = 'cache_roomsMainImage_Hero';
+            
+            // Instantly apply cached URL (with validation for security)
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    pageBackground.style.backgroundImage = `url("${safeCached}")`;
+                }
+            }
             
             let imageUrl = null;
             
@@ -306,16 +353,12 @@
             
             // Set background image with proper URL validation
             if (imageUrl) {
-                try {
-                    // Validate URL format and protocol
-                    const url = new URL(imageUrl, window.location.href);
-                    // Only allow http and https protocols
-                    if (url.protocol === 'http:' || url.protocol === 'https:') {
-                        // Use the validated URL's href property
-                        pageBackground.style.backgroundImage = `url("${url.href}")`;
+                const safeUrl = sanitizeImageUrl(imageUrl);
+                if (safeUrl) {
+                    localStorage.setItem(cacheKey, safeUrl);
+                    if (safeUrl !== cached) {
+                        pageBackground.style.backgroundImage = `url("${safeUrl}")`;
                     }
-                } catch (e) {
-                    console.error('Invalid image URL:', imageUrl);
                 }
             }
         }

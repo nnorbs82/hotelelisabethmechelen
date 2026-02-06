@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Elisabeth Mechelen - Home</title>
+    <!-- Preload hero image from cache for instant display -->
+    <script>
+        (function() {
+            var cacheKey = 'cache_indexBackground_Hero';
+            var url = localStorage.getItem(cacheKey);
+            // Validate URL before preloading for security
+            if (url && typeof url === 'string') {
+                var trimmed = url.trim();
+                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                    trimmed.startsWith('https://storage.googleapis.com/')) {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = trimmed;
+                    document.head.appendChild(link);
+                }
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Firebase Storage preconnect for faster image loading -->
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -769,16 +793,34 @@
         loadOurPicks();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
-        // Load and display background image
+        // Load and display background image with localStorage caching
         async function loadPageBackground() {
+            const bgElement = document.getElementById('page-background');
+            if (!bgElement) return;
+
+            const cacheKey = 'cache_indexBackground_Hero';
+
+            // Instantly apply cached URL (with validation for security)
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    bgElement.style.backgroundImage = `url('${safeCached}')`;
+                }
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'indexBackground'));
                 
                 if (snapshot.exists()) {
                     const bgData = snapshot.val();
-                    const bgElement = document.getElementById('page-background');
-                    if (bgElement && bgData.url) {
-                        bgElement.style.backgroundImage = `url('${bgData.url}')`;
+                    const safeUrl = sanitizeImageUrl(bgData?.url || '');
+                    if (safeUrl) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
+                            bgElement.style.backgroundImage = `url('${safeUrl}')`;
+                        }
                     }
                 }
             } catch (error) {

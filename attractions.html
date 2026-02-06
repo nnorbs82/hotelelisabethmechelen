@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Attractions - Hotel Elisabeth Mechelen</title>
+    <!-- Preload hero image from cache for instant display -->
+    <script>
+        (function() {
+            var cacheKey = 'cache_attractionsMainImage_Hero';
+            var url = localStorage.getItem(cacheKey);
+            // Validate URL before preloading for security
+            if (url && typeof url === 'string') {
+                var trimmed = url.trim();
+                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                    trimmed.startsWith('https://storage.googleapis.com/')) {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = trimmed;
+                    document.head.appendChild(link);
+                }
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Firebase Storage preconnect for faster image loading -->
+    <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com">
+    <link rel="dns-prefetch" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -22,7 +46,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: var(--color-beige);
+            background-color: #1a1a1a; /* Dark fallback while image loads */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -603,16 +627,31 @@
             return '';
         }
 
-        // Load attractions hero image
+        // Load attractions hero image with localStorage caching
         async function loadAttractionsHero() {
+            const heroSection = document.querySelector('.attractions-hero');
+            if (!heroSection) return;
+
+            const cacheKey = 'cache_attractionsMainImage_Hero';
+
+            // Instantly apply cached URL (with validation for security)
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    heroSection.style.backgroundImage = `url("${safeCached}")`;
+                }
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'attractionsMainImage'));
                 if (snapshot.exists()) {
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        const heroSection = document.querySelector('.attractions-hero');
-                        if (heroSection) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
                             heroSection.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }
