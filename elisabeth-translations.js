@@ -25,7 +25,7 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
             if (cachedData) {
                 const parsed = JSON.parse(cachedData);
                 // Reconstruct Map from stored array of [key, value] pairs
-                if (Array.isArray(parsed)) {
+                if (Array.isArray(parsed) && parsed.length > 0) {
                     elisabethTranslationCache.data = new Map(parsed);
                     return true;
                 }
@@ -168,7 +168,7 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
         
         // First, try to load from cache for instant translation
         const cacheLoaded = loadCachedTranslations();
-        if (cacheLoaded && elisabethTranslationCache.data.size > 0) {
+        if (cacheLoaded) {
             // Apply cached translations immediately (synchronous, no flash)
             injectLocalizedContent();
         }
@@ -179,9 +179,13 @@ import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/fir
         if (contentLoaded) {
             // Re-apply translations with fresh data (in case anything changed)
             injectLocalizedContent();
-        } else if (!cacheLoaded) {
-            // No cache and fetch failed - show hardcoded English
-            console.warn('Using static content - translations unavailable');
+        } else {
+            // Fetch failed - warn user but continue with cache if available
+            if (cacheLoaded) {
+                console.warn('Firebase fetch failed - using cached translations');
+            } else {
+                console.warn('Using static content - translations unavailable');
+            }
         }
     }
 
