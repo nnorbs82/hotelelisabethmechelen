@@ -366,10 +366,17 @@
             
             // Wait for first image to load before building full slideshow
             return new Promise((resolve) => {
-                firstImg.onload = () => resolve();
-                firstImg.onerror = () => resolve(); // Still resolve on error
+                let timeoutId;
+                
+                const handleResolve = () => {
+                    clearTimeout(timeoutId);
+                    resolve();
+                };
+                
+                firstImg.onload = handleResolve;
+                firstImg.onerror = handleResolve; // Still resolve on error
                 // Timeout fallback in case image takes too long
-                setTimeout(resolve, 2000);
+                timeoutId = setTimeout(handleResolve, 2000);
             });
         }
 
