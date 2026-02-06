@@ -6,38 +6,8 @@
     <title>Hotel Elisabeth Mechelen - Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preconnect to Firebase Storage for faster image loading -->
-    <link rel="preconnect" href="https://firebasestorage.googleapis.com">
-    <link rel="preconnect" href="https://storage.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Hero slideshow optimization styles */
-        .hero-track {
-            background-color: #000000; /* Black background while loading */
-        }
-        
-        .hero-slide-loading img {
-            opacity: 0;
-            animation: fadeInHero 0.5s ease-in forwards;
-        }
-        
-        @keyframes fadeInHero {
-            to {
-                opacity: 1;
-            }
-        }
-        
-        .hero-loading-indicator {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 0.9rem;
-            letter-spacing: 0.2rem;
-        }
-    </style>
 </head>
 <body>
     <!-- Main Navigation Menu -->
@@ -388,17 +358,9 @@
             // Create and show first slide immediately
             const firstSlide = document.createElement('div');
             firstSlide.className = 'hero-slide hero-slide-loading';
-
-            // Optional: Add a subtle loading indicator
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'hero-loading-indicator';
-            loadingDiv.textContent = 'LOADING...';
-            firstSlide.appendChild(loadingDiv);
-
             const firstImg = document.createElement('img');
             firstImg.src = urls[0];
             firstImg.alt = 'Main banner image 1';
-
             firstSlide.appendChild(firstImg);
             heroTrack.appendChild(firstSlide);
             
@@ -408,14 +370,13 @@
                 
                 const handleResolve = () => {
                     clearTimeout(timeoutId);
-                    loadingDiv.remove();
                     resolve();
                 };
                 
                 firstImg.onload = handleResolve;
                 firstImg.onerror = handleResolve; // Still resolve on error
                 // Timeout fallback in case image takes too long
-                timeoutId = setTimeout(handleResolve, 800);
+                timeoutId = setTimeout(handleResolve, 2000);
             });
         }
 
