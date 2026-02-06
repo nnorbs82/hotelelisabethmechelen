@@ -237,6 +237,18 @@
             return div.innerHTML;
         }
 
+        // Sanitize image URLs to prevent injection attacks
+        function sanitizeImageUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            const trimmed = url.trim();
+            // Only allow HTTPS URLs from Firebase Storage
+            if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                trimmed.startsWith('https://storage.googleapis.com/')) {
+                return trimmed;
+            }
+            return '';
+        }
+
         // JavaScript string escape function
         function escapeJs(text) {
             return text.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
@@ -296,15 +308,9 @@
             // Instantly apply cached URL (with validation for security)
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
-                try {
-                    const url = new URL(cached, window.location.href);
-                    // Only allow https URLs from Firebase Storage (matching security pattern of other pages)
-                    if ((url.protocol === 'https:') && 
-                        (url.hostname === 'firebasestorage.googleapis.com' || url.hostname === 'storage.googleapis.com')) {
-                        pageBackground.style.backgroundImage = `url("${url.href}")`;
-                    }
-                } catch (e) {
-                    // Invalid cached URL, ignore it
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    pageBackground.style.backgroundImage = `url("${safeCached}")`;
                 }
             }
             
@@ -342,19 +348,12 @@
             
             // Set background image with proper URL validation
             if (imageUrl) {
-                try {
-                    // Validate URL format and protocol
-                    const url = new URL(imageUrl, window.location.href);
-                    // Only allow http and https protocols
-                    if (url.protocol === 'http:' || url.protocol === 'https:') {
-                        // Use the validated URL's href property
-                        localStorage.setItem(cacheKey, url.href);
-                        if (url.href !== cached) {
-                            pageBackground.style.backgroundImage = `url("${url.href}")`;
-                        }
+                const safeUrl = sanitizeImageUrl(imageUrl);
+                if (safeUrl) {
+                    localStorage.setItem(cacheKey, safeUrl);
+                    if (safeUrl !== cached) {
+                        pageBackground.style.backgroundImage = `url("${safeUrl}")`;
                     }
-                } catch (e) {
-                    console.error('Invalid image URL:', imageUrl);
                 }
             }
         }
