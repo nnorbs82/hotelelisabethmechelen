@@ -27,6 +27,17 @@ body {
     line-height: 1.6;
 }
 
+/* Translation Flash Prevention - Hide untranslated content until ready */
+[data-translate]:not(.translated) {
+    visibility: hidden;
+}
+
+/* Show elements once translated */
+.translated,
+.translations-ready [data-translate] {
+    visibility: visible;
+}
+
 /* Ensure all text inputs, textareas, and buttons use Raleway */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
