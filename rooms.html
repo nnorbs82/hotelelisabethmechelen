@@ -312,7 +312,7 @@
             });
         }
 
-        // Navigate room card images
+        // Navigate room card images - instant CSS switching
         window.navigateRoomImage = function(roomId, direction, event) {
             event.stopPropagation();
             const room = roomsData.find(r => r.id === roomId);
@@ -322,10 +322,13 @@
             const newIndex = (currentIndex + direction + room.photos.length) % room.photos.length;
             roomImageIndices[roomId] = newIndex;
             
-            const imgElement = document.querySelector(`#room-card-${roomId} .room-feature-image`);
-            if (imgElement) {
-                imgElement.src = escapeHtml(room.photos[newIndex].url);
-            }
+            // Hide all images for this room, then show only the selected one
+            const roomCard = document.querySelector(`#room-card-${roomId}`);
+            if (!roomCard) return;
+            const allImages = roomCard.querySelectorAll(`.room-feature-image-${roomId}`);
+            allImages.forEach((img, idx) => {
+                img.style.display = idx === newIndex ? 'block' : 'none';
+            });
         };
 
         // Render rooms
@@ -358,9 +361,15 @@
                 return `
                     <article class="room-feature ${imageOnLeft ? 'image-left' : 'image-right'}" id="room-card-${escapedRoomId}">
                         <div class="room-feature-image-wrapper">
-                            ${firstPhoto ? `
-                                <div class="room-feature-image-clickable" onclick="openFullscreenGallery('${escapeJs(escapedRoomId)}')" style="cursor: pointer;">
-                                    <img src="${escapeHtml(firstPhoto)}" alt="${name}" class="room-feature-image">
+                            ${room.photos && room.photos.length > 0 ? `
+                                <div class="room-feature-image-clickable" onclick="openFullscreenGallery('${escapeJs(escapedRoomId)}')" style="cursor: pointer; position: relative;">
+                                    ${room.photos.map((photo, photoIdx) => `
+                                        <img src="${escapeHtml(photo.url)}" 
+                                             alt="${name} - Photo ${photoIdx + 1}" 
+                                             class="room-feature-image room-feature-image-${escapedRoomId}" 
+                                             data-photo-index="${photoIdx}"
+                                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; ${photoIdx === 0 ? '' : 'display: none;'}">
+                                    `).join('')}
                                     <div class="room-feature-magnify-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <circle cx="11" cy="11" r="8"></circle>
@@ -433,24 +442,6 @@
             }).join('');
 
             container.innerHTML = roomsHTML;
-            preloadRoomImages(); // Preload images to prevent loading delays when navigating
-        }
-
-        // Preload all room images to prevent loading delays when navigating
-        const preloadedImages = []; // Keep references to prevent garbage collection
-        function preloadRoomImages() {
-            // Clear previous preloaded images if renderRooms is called again
-            preloadedImages.length = 0;
-            
-            roomsData.forEach(room => {
-                if (room.photos && room.photos.length > 1) {
-                    room.photos.forEach(photo => {
-                        const img = new Image();
-                        img.src = photo.url;
-                        preloadedImages.push(img); // Store reference
-                    });
-                }
-            });
         }
 
         // Cover Flow for Room Modal
