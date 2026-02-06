@@ -774,16 +774,31 @@
         loadOurPicks();
 
         // ============ PAGE BACKGROUND MANAGEMENT ============
-        // Load and display background image
+        // Load and display background image with localStorage caching
         async function loadPageBackground() {
+            const bgElement = document.getElementById('page-background');
+            if (!bgElement) return;
+
+            const cacheKey = 'cache_indexBackground_Hero';
+
+            // Instantly apply cached URL
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                bgElement.style.backgroundImage = `url('${cached}')`;
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'indexBackground'));
                 
                 if (snapshot.exists()) {
                     const bgData = snapshot.val();
-                    const bgElement = document.getElementById('page-background');
-                    if (bgElement && bgData.url) {
-                        bgElement.style.backgroundImage = `url('${bgData.url}')`;
+                    const url = bgData?.url || '';
+                    if (url) {
+                        localStorage.setItem(cacheKey, url);
+                        if (url !== cached) {
+                            bgElement.style.backgroundImage = `url('${url}')`;
+                        }
                     }
                 }
             } catch (error) {

@@ -754,16 +754,28 @@
             return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
-        // Load meetings hero image
+        // Load meetings hero image with localStorage caching
         async function loadMeetingsHero() {
+            const heroBg = document.getElementById('meetings-hero-bg');
+            if (!heroBg) return;
+
+            const cacheKey = 'cache_meetingsMainImage_Hero';
+
+            // Instantly apply cached URL
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                heroBg.style.backgroundImage = `url("${cached}")`;
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'meetingsMainImage'));
                 if (snapshot.exists()) {
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        const heroBg = document.getElementById('meetings-hero-bg');
-                        if (heroBg) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
                             heroBg.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }

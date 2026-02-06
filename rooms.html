@@ -276,6 +276,14 @@
         async function setPageBackground() {
             const pageBackground = document.getElementById('page-background');
             if (!pageBackground) return;
+
+            const cacheKey = 'cache_roomsMainImage_Hero';
+            
+            // Instantly apply cached URL
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                pageBackground.style.backgroundImage = `url("${cached}")`;
+            }
             
             let imageUrl = null;
             
@@ -317,7 +325,11 @@
                     // Only allow http and https protocols
                     if (url.protocol === 'http:' || url.protocol === 'https:') {
                         // Use the validated URL's href property
-                        pageBackground.style.backgroundImage = `url("${url.href}")`;
+                        const validatedUrl = url.href;
+                        localStorage.setItem(cacheKey, validatedUrl);
+                        if (validatedUrl !== cached) {
+                            pageBackground.style.backgroundImage = `url("${validatedUrl}")`;
+                        }
                     }
                 } catch (e) {
                     console.error('Invalid image URL:', imageUrl);

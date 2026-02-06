@@ -608,16 +608,28 @@
             return '';
         }
 
-        // Load attractions hero image
+        // Load attractions hero image with localStorage caching
         async function loadAttractionsHero() {
+            const heroSection = document.querySelector('.attractions-hero');
+            if (!heroSection) return;
+
+            const cacheKey = 'cache_attractionsMainImage_Hero';
+
+            // Instantly apply cached URL
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                heroSection.style.backgroundImage = `url("${cached}")`;
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'attractionsMainImage'));
                 if (snapshot.exists()) {
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        const heroSection = document.querySelector('.attractions-hero');
-                        if (heroSection) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
                             heroSection.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }

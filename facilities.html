@@ -231,14 +231,26 @@
         }
 
         async function loadFacilitiesHero() {
+            const pageBackground = document.getElementById('page-background');
+            if (!pageBackground) return;
+
+            const cacheKey = 'cache_facilitiesHero_Hero';
+
+            // Instantly apply cached URL
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                pageBackground.style.backgroundImage = `url("${cached}")`;
+            }
+
+            // Fetch fresh URL in background and update if changed
             try {
                 const snapshot = await get(dbRef(database, 'facilitiesHero'));
                 if (snapshot.exists()) {
                     const hero = snapshot.val();
                     const safeUrl = sanitizeImageUrl(hero?.url || '');
                     if (safeUrl) {
-                        const pageBackground = document.getElementById('page-background');
-                        if (pageBackground) {
+                        localStorage.setItem(cacheKey, safeUrl);
+                        if (safeUrl !== cached) {
                             pageBackground.style.backgroundImage = `url("${safeUrl}")`;
                         }
                     }
