@@ -349,6 +349,37 @@
             }
         }
 
+        // Show first image immediately while building full slideshow
+        async function loadFirstImageQuickly(urls) {
+            if (!urls || urls.length === 0) return;
+            
+            const heroTrack = document.getElementById('hero-track');
+            
+            // Create and show first slide immediately
+            const firstSlide = document.createElement('div');
+            firstSlide.className = 'hero-slide hero-slide-loading';
+            const firstImg = document.createElement('img');
+            firstImg.src = urls[0];
+            firstImg.alt = 'Main banner image 1';
+            firstSlide.appendChild(firstImg);
+            heroTrack.appendChild(firstSlide);
+            
+            // Wait for first image to load before building full slideshow
+            return new Promise((resolve) => {
+                let timeoutId;
+                
+                const handleResolve = () => {
+                    clearTimeout(timeoutId);
+                    resolve();
+                };
+                
+                firstImg.onload = handleResolve;
+                firstImg.onerror = handleResolve; // Still resolve on error
+                // Timeout fallback in case image takes too long
+                timeoutId = setTimeout(handleResolve, 2000);
+            });
+        }
+
         function buildSlides(urls) {
             heroTrack.innerHTML = '';
             slideCount = urls.length;
@@ -418,7 +449,14 @@
         nextButton.addEventListener('click', () => moveSlide(1, true));
         window.addEventListener('resize', () => setTrackPosition(false));
 
-        fetchBannerUrls().then(buildSlides);
+        // Progressive loading: show first image immediately, then build full slideshow
+        fetchBannerUrls().then(async (urls) => {
+            // Load and show first image immediately
+            await loadFirstImageQuickly(urls);
+            
+            // Build full slideshow (this will replace the loading slide)
+            buildSlides(urls);
+        });
 
         // ============ INDEX ADS DISPLAY ============
         const adsSection = document.getElementById('index-ads-section');

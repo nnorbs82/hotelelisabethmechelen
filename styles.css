@@ -450,6 +450,7 @@ body.admin-page {
     height: 100%;
     width: 100%; /* Ensure track takes full width */
     transform: translateX(0);
+    background-color: #1a1a1a; /* Dark gray instead of pure black */
 }
 
 .hero-slide {
@@ -480,6 +481,17 @@ body.admin-page {
     font-size: 1.5rem;
     text-align: center;
     padding: 2rem;
+}
+
+.hero-slide-loading {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
 }
 
 .hero-handle {
