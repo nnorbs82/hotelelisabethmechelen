@@ -9,12 +9,17 @@
         (function() {
             var cacheKey = 'cache_indexBackground_Hero';
             var url = localStorage.getItem(cacheKey);
-            if (url) {
-                var link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = url;
-                document.head.appendChild(link);
+            // Validate URL before preloading for security
+            if (url && typeof url === 'string') {
+                var trimmed = url.trim();
+                if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
+                    trimmed.startsWith('https://storage.googleapis.com/')) {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = trimmed;
+                    document.head.appendChild(link);
+                }
             }
         })();
     </script>
