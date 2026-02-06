@@ -323,7 +323,9 @@
             roomImageIndices[roomId] = newIndex;
             
             // Hide all images for this room, then show only the selected one
-            const allImages = document.querySelectorAll(`.room-feature-image-${roomId}`);
+            const roomCard = document.querySelector(`#room-card-${roomId}`);
+            if (!roomCard) return;
+            const allImages = roomCard.querySelectorAll(`.room-feature-image-${roomId}`);
             allImages.forEach((img, idx) => {
                 img.style.display = idx === newIndex ? 'block' : 'none';
             });
