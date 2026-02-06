@@ -433,6 +433,19 @@
             }).join('');
 
             container.innerHTML = roomsHTML;
+            preloadRoomImages(); // Preload images to prevent loading delays when navigating
+        }
+
+        // Preload all room images to prevent loading delays when navigating
+        function preloadRoomImages() {
+            roomsData.forEach(room => {
+                if (room.photos && room.photos.length > 1) {
+                    room.photos.forEach(photo => {
+                        const img = new Image();
+                        img.src = photo.url;
+                    });
+                }
+            });
         }
 
         // Cover Flow for Room Modal
