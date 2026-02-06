@@ -579,15 +579,11 @@
 
         // Sanitize image URLs to prevent injection attacks
         function sanitizeImageUrl(url) {
-            if (!url) return '';
+            if (!url || typeof url !== 'string') return '';
             const trimmed = url.trim();
             // Only allow HTTPS URLs from Firebase Storage
             if (trimmed.startsWith('https://firebasestorage.googleapis.com/') || 
                 trimmed.startsWith('https://storage.googleapis.com/')) {
-                // Additional validation: ensure no quotes or parentheses that could break CSS
-                if (trimmed.includes("'") || trimmed.includes('"') || trimmed.includes('(') || trimmed.includes(')')) {
-                    return '';
-                }
                 return trimmed;
             }
             return '';

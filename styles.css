@@ -4623,7 +4623,7 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #1a1a1a; /* Dark fallback while image loads - allow fixed page-background to show through */
+    background-color: #1a1a1a; /* Dark fallback while image loads */
 }
 
 .rooms-hero-overlay {
