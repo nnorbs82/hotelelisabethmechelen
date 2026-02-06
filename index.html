@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- Preload first slideshow image for instant display -->
+    <link rel="preload" as="image" href="mainslide/1.webp">
 </head>
 <body>
     <!-- Main Navigation Menu -->
@@ -191,9 +193,9 @@
     <script type="module" src="elisabeth-translations.js"></script>
     
     <script type="module">
-        import { database, storage } from './firebase-config.js';
+        import { database } from './firebase-config.js';
         import { ref as dbRef, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-        import { ref as storageRef, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+        // Firebase Storage import removed - using local images for slideshow
 
         const heroTrack = document.getElementById('hero-track');
         const prevButton = document.getElementById('hero-prev');
@@ -224,42 +226,18 @@
         // Global language setting
         const currentLang = detectLanguage();
 
-        async function fetchBannerUrls() {
-            const urls = [];
-
-            try {
-                const snapshot = await get(dbRef(database, 'mainBanner'));
-                if (snapshot.exists()) {
-                    const data = Object.values(snapshot.val())
-                        .filter(item => item && item.url)
-                        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-                    data.forEach(item => urls.push(item.url));
-                }
-            } catch (error) {
-                console.error('Error loading main banner metadata:', error);
-            }
-
-            if (urls.length) {
-                return urls;
-            }
-
-            const folders = ['mainBanner', 'main-banner'];
-            for (const folder of folders) {
-                try {
-                    const listResult = await listAll(storageRef(storage, folder));
-                    if (listResult.items.length) {
-                        const storageUrls = await Promise.all(
-                            listResult.items.map(item => getDownloadURL(item))
-                        );
-                        urls.push(...storageUrls);
-                        break;
-                    }
-                } catch (error) {
-                    console.warn(`Unable to list storage folder ${folder}:`, error);
-                }
-            }
-
-            return urls;
+        // Use local slideshow images from /mainslide/ folder (much faster than Firebase)
+        function getBannerUrls() {
+            return [
+                'mainslide/1.webp',
+                'mainslide/2.webp',
+                'mainslide/3.webp',
+                'mainslide/4.webp',
+                'mainslide/5.webp',
+                'mainslide/6.webp',
+                'mainslide/7.webp',
+                'mainslide/8.webp'
+            ];
         }
 
         // Handle page visibility changes to prevent black screen when returning from inactive tab
@@ -449,14 +427,14 @@
         nextButton.addEventListener('click', () => moveSlide(1, true));
         window.addEventListener('resize', () => setTrackPosition(false));
 
+        // Load slideshow from local images (instant, no Firebase delay)
+        const bannerUrls = getBannerUrls();
+
         // Progressive loading: show first image immediately, then build full slideshow
-        fetchBannerUrls().then(async (urls) => {
-            // Load and show first image immediately
-            await loadFirstImageQuickly(urls);
-            
-            // Build full slideshow (this will replace the loading slide)
-            buildSlides(urls);
-        });
+        (async () => {
+            await loadFirstImageQuickly(bannerUrls);
+            buildSlides(bannerUrls);
+        })();
 
         // ============ INDEX ADS DISPLAY ============
         const adsSection = document.getElementById('index-ads-section');
