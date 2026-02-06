@@ -41,9 +41,6 @@
         </nav>
     </header>
     
-    <!-- Fixed Background Layer (iOS Compatible) -->
-    <div id="page-background" class="page-background"></div>
-    
 
     <main class="rooms-main">
         <!-- Enhanced Hero Section -->
@@ -255,68 +252,13 @@
                             return status === 'available';
                         });
                     renderRooms();
-                    setPageBackground(); // Set page background after rooms are loaded
                 } else {
                     document.getElementById('rooms-list-container').innerHTML = '<p class="rooms-loading">No rooms available at the moment.</p>';
-                    setPageBackground(); // Still attempt to set background even if no rooms
                 }
             } catch (error) {
                 console.error('Error loading rooms:', error);
                 // Use demo data if Firebase fails
                 useDemoData();
-            }
-        }
-
-        // Set page background to uploaded main image or fallback to City Suite
-        async function setPageBackground() {
-            const pageBackground = document.getElementById('page-background');
-            if (!pageBackground) return;
-            
-            let imageUrl = null;
-            
-            // First, try to load the rooms main image from Firebase
-            try {
-                const roomsMainImageSnapshot = await get(dbRef(database, 'roomsMainImage'));
-                if (roomsMainImageSnapshot.exists()) {
-                    const roomsMainImage = roomsMainImageSnapshot.val();
-                    if (roomsMainImage && roomsMainImage.url) {
-                        imageUrl = roomsMainImage.url;
-                    }
-                }
-            } catch (error) {
-                console.log('Rooms main image not set, using fallback');
-            }
-            
-            // Fallback: Find the City Suite room (case-insensitive search)
-            if (!imageUrl) {
-                const citySuiteRoom = roomsData.find(room => 
-                    room.name_en && room.name_en.toLowerCase().includes('city suite')
-                );
-                
-                if (citySuiteRoom && citySuiteRoom.photos && citySuiteRoom.photos.length > 0) {
-                    imageUrl = citySuiteRoom.photos[0].url;
-                } else {
-                    // Final fallback: use the first room's first image
-                    const firstRoom = roomsData.find(room => room.photos && room.photos.length > 0);
-                    if (firstRoom) {
-                        imageUrl = firstRoom.photos[0].url;
-                    }
-                }
-            }
-            
-            // Set background image with proper URL validation
-            if (imageUrl) {
-                try {
-                    // Validate URL format and protocol
-                    const url = new URL(imageUrl, window.location.href);
-                    // Only allow http and https protocols
-                    if (url.protocol === 'http:' || url.protocol === 'https:') {
-                        // Use the validated URL's href property
-                        pageBackground.style.backgroundImage = `url("${url.href}")`;
-                    }
-                } catch (e) {
-                    console.error('Invalid image URL:', imageUrl);
-                }
             }
         }
 
@@ -358,7 +300,6 @@
                 }
             ];
             renderRooms();
-            setPageBackground(); // Set page background after demo data is loaded
         }
 
         // Track current image index for each room card

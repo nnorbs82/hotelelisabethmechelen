@@ -41,9 +41,6 @@
         </nav>
     </header>
     
-    <!-- Fixed Background Layer (iOS Compatible) -->
-    <div id="page-background" class="page-background"></div>
-
 
     <main class="facilities-main">
         <section class="facilities-hero" aria-label="Facilities hero">
@@ -223,24 +220,6 @@
                 return trimmed;
             }
             return '';
-        }
-
-        async function loadFacilitiesHero() {
-            try {
-                const snapshot = await get(dbRef(database, 'facilitiesHero'));
-                if (snapshot.exists()) {
-                    const hero = snapshot.val();
-                    const safeUrl = sanitizeImageUrl(hero?.url || '');
-                    if (safeUrl) {
-                        const pageBackground = document.getElementById('page-background');
-                        if (pageBackground) {
-                            pageBackground.style.backgroundImage = `url("${safeUrl}")`;
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading facilities hero:', error);
-            }
         }
 
         // Store facilities data globally for tab switching
@@ -634,7 +613,6 @@
             }
         });
 
-        loadFacilitiesHero();
         loadFacilitiesList();
     </script>
     

@@ -22,7 +22,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: var(--color-beige);
+            background-image: url('headers/attractions.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -414,9 +414,6 @@
             </ul>
         </nav>
     </header>
-    
-    <!-- Fixed Background Layer (iOS Compatible) -->
-    <div id="page-background" class="page-background"></div>
 
 
     <main class="attractions-main">
@@ -603,25 +600,6 @@
             return '';
         }
 
-        // Load attractions hero image
-        async function loadAttractionsHero() {
-            try {
-                const snapshot = await get(dbRef(database, 'attractionsMainImage'));
-                if (snapshot.exists()) {
-                    const hero = snapshot.val();
-                    const safeUrl = sanitizeImageUrl(hero?.url || '');
-                    if (safeUrl) {
-                        const heroSection = document.querySelector('.attractions-hero');
-                        if (heroSection) {
-                            heroSection.style.backgroundImage = `url("${safeUrl}")`;
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading attractions hero:', error);
-            }
-        }
-
         // Load attractions
         async function loadAttractions() {
             const container = document.getElementById('attractions-list');
@@ -748,7 +726,6 @@
         });
 
         // Initialize page
-        loadAttractionsHero();
         loadAttractions();
     </script>
     

@@ -41,8 +41,6 @@
         </nav>
     </header>
     
-    <!-- Fixed Background Layer -->
-    <div id="page-background" class="page-background"></div>
 
     <main class="info-main">
         <!-- Hero Section -->
@@ -294,30 +292,8 @@
             }
         }
 
-        // Load info main image for header background
-        async function loadInfoMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'infoMainImage'));
-                if (snapshot.exists()) {
-                    const infoMainImage = snapshot.val();
-                    if (infoMainImage && infoMainImage.url) {
-                        const infoHero = document.querySelector('.info-hero');
-                        if (infoHero) {
-                            infoHero.style.backgroundImage = `url("${infoMainImage.url}")`;
-                            infoHero.style.backgroundSize = 'cover';
-                            infoHero.style.backgroundPosition = 'center';
-                            infoHero.style.backgroundRepeat = 'no-repeat';
-                        }
-                    }
-                }
-            } catch (error) {
-                console.log('Info main image not set, using default');
-            }
-        }
-
         // Load data when page loads
         loadInfoData();
-        loadInfoMainImage();
     </script>
 </body>
 </html>

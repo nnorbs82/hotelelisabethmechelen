@@ -3366,7 +3366,10 @@ body.admin-page .vertical-menu-nav ul {
     width: 100%;
     height: calc(100vh - var(--main-menu-height));
     min-height: 500px;
-    background-color: transparent;
+    background-image: url('headers/facilities.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4622,7 +4625,10 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: transparent; /* Allow fixed page-background to show through */
+    background-image: url('headers/rooms.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .rooms-hero-overlay {
@@ -5713,7 +5719,10 @@ body.admin-page .vertical-menu-nav ul {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: transparent;
+    background-image: url('headers/info.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .info-hero-overlay {

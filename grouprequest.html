@@ -28,17 +28,14 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-        }
-
-        .group-request-hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background-image: url('headers/grouprequest.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+        }
+
+        .group-request-hero-bg {
+            display: none; /* No longer needed */
         }
 
         .group-request-hero-overlay {
@@ -324,7 +321,6 @@
     <main class="group-request-main">
         <!-- Hero Section -->
         <section class="group-request-hero">
-            <div class="group-request-hero-bg"></div>
             <div class="group-request-hero-overlay"></div>
             <div class="group-request-hero-content">
                 <span class="group-request-hero-tagline" data-translate="groupRequest.tagline">Special Group Bookings</span>

@@ -29,17 +29,14 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-        }
-
-        .meetings-hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            background-image: url('headers/meetings.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+        }
+
+        .meetings-hero-bg {
+            display: none; /* No longer needed */
         }
 
         .meetings-hero-overlay {
@@ -493,15 +490,11 @@
             </ul>
         </nav>
     </header>
-    
-    <!-- Fixed Background Layer (iOS Compatible) -->
-    <div id="page-background" class="page-background"></div>
 
 
     <main class="meetings-main">
         <!-- Hero Section -->
         <section class="meetings-hero" aria-label="Meetings hero">
-            <div class="meetings-hero-bg" id="meetings-hero-bg"></div>
             <div class="meetings-hero-overlay"></div>
             <div class="meetings-hero-content">
                 <span class="meetings-hero-tagline" data-translate="meetings.heroTagline">Hotel Elisabeth Mechelen</span>
@@ -748,25 +741,6 @@
             return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
         }
 
-        // Load meetings hero image
-        async function loadMeetingsHero() {
-            try {
-                const snapshot = await get(dbRef(database, 'meetingsMainImage'));
-                if (snapshot.exists()) {
-                    const hero = snapshot.val();
-                    const safeUrl = sanitizeImageUrl(hero?.url || '');
-                    if (safeUrl) {
-                        const heroBg = document.getElementById('meetings-hero-bg');
-                        if (heroBg) {
-                            heroBg.style.backgroundImage = `url("${safeUrl}")`;
-                        }
-                    }
-                }
-            } catch (error) {
-                console.error('Error loading meetings hero:', error);
-            }
-        }
-
         // Load meeting rooms
         async function loadMeetingRooms() {
             const container = document.getElementById('meetings-list');
@@ -935,7 +909,6 @@
         };
 
         // Initialize page
-        loadMeetingsHero();
         loadMeetingRooms();
     </script>
 
