@@ -293,10 +293,17 @@
 
             const cacheKey = 'cache_roomsMainImage_Hero';
             
-            // Instantly apply cached URL
+            // Instantly apply cached URL (with validation for security)
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
-                pageBackground.style.backgroundImage = `url("${cached}")`;
+                try {
+                    const url = new URL(cached, window.location.href);
+                    if (url.protocol === 'http:' || url.protocol === 'https:') {
+                        pageBackground.style.backgroundImage = `url("${url.href}")`;
+                    }
+                } catch (e) {
+                    // Invalid cached URL, ignore it
+                }
             }
             
             let imageUrl = null;

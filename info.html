@@ -332,13 +332,16 @@
 
             const cacheKey = 'cache_infoMainImage_Hero';
 
-            // Instantly apply cached URL
+            // Instantly apply cached URL (with validation for security)
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
-                infoHero.style.backgroundImage = `url("${cached}")`;
-                infoHero.style.backgroundSize = 'cover';
-                infoHero.style.backgroundPosition = 'center';
-                infoHero.style.backgroundRepeat = 'no-repeat';
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    infoHero.style.backgroundImage = `url("${safeCached}")`;
+                    infoHero.style.backgroundSize = 'cover';
+                    infoHero.style.backgroundPosition = 'center';
+                    infoHero.style.backgroundRepeat = 'no-repeat';
+                }
             }
 
             // Fetch fresh URL in background and update if changed

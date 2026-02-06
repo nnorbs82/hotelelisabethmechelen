@@ -6174,8 +6174,7 @@ body.admin-page .vertical-menu-nav ul {
     justify-content: center;
     text-align: center;
     overflow: hidden;
-    background-color: #1a1a1a; /* Dark fallback while image loads */
-    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(149, 147, 128, 0.4)), 
+    background: #1a1a1a linear-gradient(135deg, rgba(0,0,0,0.7), rgba(149, 147, 128, 0.4)), 
                 url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23959380" width="1200" height="600"/></svg>');
     background-size: cover;
     background-position: center;

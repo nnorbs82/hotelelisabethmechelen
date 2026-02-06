@@ -596,10 +596,13 @@
 
             const cacheKey = 'cache_groupMainImage_Hero';
 
-            // Instantly apply cached URL
+            // Instantly apply cached URL (with validation for security)
             const cached = localStorage.getItem(cacheKey);
             if (cached) {
-                groupHeroBg.style.backgroundImage = `url("${cached}")`;
+                const safeCached = sanitizeImageUrl(cached);
+                if (safeCached) {
+                    groupHeroBg.style.backgroundImage = `url("${safeCached}")`;
+                }
             }
 
             // Fetch fresh URL in background and update if changed
