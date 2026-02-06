@@ -298,7 +298,9 @@
             if (cached) {
                 try {
                     const url = new URL(cached, window.location.href);
-                    if (url.protocol === 'http:' || url.protocol === 'https:') {
+                    // Only allow https URLs from Firebase Storage (matching security pattern of other pages)
+                    if ((url.protocol === 'https:') && 
+                        (url.hostname === 'firebasestorage.googleapis.com' || url.hostname === 'storage.googleapis.com')) {
                         pageBackground.style.backgroundImage = `url("${url.href}")`;
                     }
                 } catch (e) {
@@ -346,10 +348,9 @@
                     // Only allow http and https protocols
                     if (url.protocol === 'http:' || url.protocol === 'https:') {
                         // Use the validated URL's href property
-                        const validatedUrl = url.href;
-                        localStorage.setItem(cacheKey, validatedUrl);
-                        if (validatedUrl !== cached) {
-                            pageBackground.style.backgroundImage = `url("${validatedUrl}")`;
+                        localStorage.setItem(cacheKey, url.href);
+                        if (url.href !== cached) {
+                            pageBackground.style.backgroundImage = `url("${url.href}")`;
                         }
                     }
                 } catch (e) {

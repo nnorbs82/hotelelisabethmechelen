@@ -330,6 +330,11 @@
             const infoHero = document.querySelector('.info-hero');
             if (!infoHero) return;
 
+            // Set consistent background styles
+            infoHero.style.backgroundSize = 'cover';
+            infoHero.style.backgroundPosition = 'center';
+            infoHero.style.backgroundRepeat = 'no-repeat';
+
             const cacheKey = 'cache_infoMainImage_Hero';
 
             // Instantly apply cached URL (with validation for security)
@@ -338,9 +343,6 @@
                 const safeCached = sanitizeImageUrl(cached);
                 if (safeCached) {
                     infoHero.style.backgroundImage = `url("${safeCached}")`;
-                    infoHero.style.backgroundSize = 'cover';
-                    infoHero.style.backgroundPosition = 'center';
-                    infoHero.style.backgroundRepeat = 'no-repeat';
                 }
             }
 
@@ -354,9 +356,6 @@
                         localStorage.setItem(cacheKey, safeUrl);
                         if (safeUrl !== cached) {
                             infoHero.style.backgroundImage = `url("${safeUrl}")`;
-                            infoHero.style.backgroundSize = 'cover';
-                            infoHero.style.backgroundPosition = 'center';
-                            infoHero.style.backgroundRepeat = 'no-repeat';
                         }
                     }
                 }
