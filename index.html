@@ -27,6 +27,16 @@
                 opacity: 1;
             }
         }
+        
+        .hero-loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+            letter-spacing: 0.2rem;
+        }
     </style>
 </head>
 <body>
@@ -381,7 +391,7 @@
 
             // Optional: Add a subtle loading indicator
             const loadingDiv = document.createElement('div');
-            loadingDiv.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgba(255,255,255,0.3); font-size: 0.9rem; letter-spacing: 0.2rem;';
+            loadingDiv.className = 'hero-loading-indicator';
             loadingDiv.textContent = 'LOADING...';
             firstSlide.appendChild(loadingDiv);
 
