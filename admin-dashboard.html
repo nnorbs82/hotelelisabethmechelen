@@ -48,11 +48,6 @@
                     </button>
                 </li>
                 <li class="vertical-menu-item">
-                    <button class="vertical-menu-btn" id="main-images-btn">
-                        <span>Main Images</span>
-                    </button>
-                </li>
-                <li class="vertical-menu-item">
                     <button class="vertical-menu-btn" id="set-amenities-btn">
                         <span>Set Room Amenities</span>
                     </button>
@@ -123,6 +118,19 @@
 
                 <div id="photo-grid" class="photo-grid">
                     <!-- Photos will be dynamically added here -->
+                </div>
+
+                <!-- Background Photo Section (moved from Main Image Management) -->
+                <div class="main-image-section" style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid var(--color-beige);">
+                    <h3>Background Photo</h3>
+                    <p style="color: var(--color-sage);">Upload a background image for the website pages.</p>
+                    
+                    <input type="file" id="background-upload-input" accept="image/*" style="display: none;">
+                    <button class="btn" id="add-background-btn">Upload Background</button>
+                    
+                    <div id="background-preview" style="margin-top: 1rem;">
+                        <!-- Image preview will be displayed here with consistent size -->
+                    </div>
                 </div>
             </div>
 
@@ -454,79 +462,6 @@
                 <!-- Tab Content -->
                 <div id="info-tab-content">
                     <!-- Content will be rendered by JavaScript -->
-                </div>
-            </div>
-
-            <!-- Main Image Management Card -->
-            <div id="main-image-management-card" class="card" style="display: none;">
-                <h2>Main Image Management</h2>
-                <p style="color: var(--color-sage); margin-bottom: 1.5rem;">Manage all main hero images used across the website pages.</p>
-                
-                <!-- Background Photo Section (moved from Main Banner Photo Management) -->
-                <div class="main-image-section">
-                    <h3>Background Photo</h3>
-                    <p style="color: var(--color-sage);">Upload a background image for the website pages.</p>
-                    
-                    <input type="file" id="background-upload-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="add-background-btn">Upload Background</button>
-                    
-                    <div id="background-preview" style="margin-top: 1rem;">
-                        <!-- Image preview will be displayed here with consistent size -->
-                    </div>
-                </div>
-
-                <!-- Facilities Page Hero Image (moved from Facilities Management) -->
-                <div class="main-image-section">
-                    <h3>Facilities Page Hero Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the hero image displayed at the top of the facilities page.</p>
-                    <input type="file" id="facility-hero-upload-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-facility-hero-btn">Upload Main Image</button>
-                    <div id="facility-hero-preview" class="facility-hero-preview"></div>
-                </div>
-
-                <!-- Meetings Page Main Image (moved from Meetings Management) -->
-                <div class="main-image-section">
-                    <h3>Meetings Page Main Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the meetings page.</p>
-                    <input type="file" id="meeting-main-image-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-meeting-main-image-btn">Upload Main Image</button>
-                    <div id="meeting-main-image-preview" class="meeting-main-image-preview"></div>
-                </div>
-
-                <!-- Attractions Page Main Image (moved from Attractions Management) -->
-                <div class="main-image-section">
-                    <h3>Attractions Page Main Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the attractions page.</p>
-                    <input type="file" id="attraction-main-image-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-attraction-main-image-btn">Upload Main Image</button>
-                    <div id="attraction-main-image-preview" class="attraction-main-image-preview"></div>
-                </div>
-
-                <!-- NEW: Rooms Main Image -->
-                <div class="main-image-section">
-                    <h3>Rooms Main Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the rooms page background.</p>
-                    <input type="file" id="rooms-main-image-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-rooms-main-image-btn">Upload Main Image</button>
-                    <div id="rooms-main-image-preview" class="rooms-main-image-preview"></div>
-                </div>
-
-                <!-- NEW: Info Main Image -->
-                <div class="main-image-section">
-                    <h3>Info Main Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the info page header background.</p>
-                    <input type="file" id="info-main-image-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-info-main-image-btn">Upload Main Image</button>
-                    <div id="info-main-image-preview" class="info-main-image-preview"></div>
-                </div>
-
-                <!-- NEW: Group Main Image -->
-                <div class="main-image-section">
-                    <h3>Group Request Main Image</h3>
-                    <p style="color: var(--color-sage); margin-bottom: 0.5rem;">Upload the main hero image for the group request page header background.</p>
-                    <input type="file" id="group-main-image-input" accept="image/*" style="display: none;">
-                    <button class="btn" id="upload-group-main-image-btn">Upload Main Image</button>
-                    <div id="group-main-image-preview" class="group-main-image-preview"></div>
                 </div>
             </div>
 
@@ -1816,38 +1751,11 @@
             renderPackagesList();
         });
 
-        document.getElementById('main-images-btn').addEventListener('click', async () => {
-            const mainImageCard = document.getElementById('main-image-management-card');
-            const verticalMenu = document.getElementById('vertical-menu');
-            
-            ensureDashboardVisible();
-            hideAllManagementCards();
-            
-            // Show only main image card
-            mainImageCard.style.display = 'block';
-            mainImageCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            
-            // Hide menu after selection
-            
-            // Show action bar
-            showActionBar('Main Images', []);
-            verticalMenu.classList.remove('show');
-            
-            // Load all main images
-            await loadBackgroundPhoto();
-            await loadFacilitiesHero();
-            await loadMeetingMainImage();
-            await loadAttractionsMainImage();
-            await loadRoomsMainImage();
-            await loadInfoMainImage();
-            await loadGroupMainImage();
-        });
-
         // ============ FACILITIES MANAGEMENT ============
         let currentFacilityLang = 'en';
         let facilitiesData = {};
         let facilitiesLibrary = [];
-        let facilitiesHeroImage = null;
+
         let editingFacilityId = null;
         let facilityDraft = null;
         let currentFacilityLibraryId = null;
@@ -1876,7 +1784,6 @@
             applyFacilityDraft(currentFacilityLang);
 
             await loadFacilitiesData();
-            await loadFacilitiesHero();
             await loadFacilitiesLibrary();
         });
 
@@ -2234,103 +2141,6 @@
             }
         };
 
-        document.getElementById('upload-facility-hero-btn').addEventListener('click', () => {
-            document.getElementById('facility-hero-upload-input').click();
-        });
-
-        document.getElementById('facility-hero-upload-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-facility-hero-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                if (facilitiesHeroImage && facilitiesHeroImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, facilitiesHeroImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old facilities hero image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `facilities-hero/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                facilitiesHeroImage = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'facilitiesHero'), facilitiesHeroImage);
-                await loadFacilitiesHero();
-
-                e.target.value = '';
-                showSuccessNotification('Facilities main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading facilities hero image:', error);
-                const message = error?.message ? `: ${error.message}` : '';
-                showErrorNotification(`Failed to upload main image${message}`);
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        async function loadFacilitiesHero() {
-            try {
-                const snapshot = await get(dbRef(database, 'facilitiesHero'));
-                facilitiesHeroImage = snapshot.exists() ? snapshot.val() : null;
-                const preview = document.getElementById('facility-hero-preview');
-                if (!preview) return;
-
-                if (facilitiesHeroImage && facilitiesHeroImage.url) {
-                    preview.innerHTML = `
-                        <div class="photo-item">
-                            <img src="${facilitiesHeroImage.url}" alt="Facilities main image">
-                            <div class="photo-overlay">
-                                <button class="btn-delete" onclick="deleteFacilitiesHero()">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading facilities hero image:', error);
-            }
-        }
-
-        window.deleteFacilitiesHero = async function() {
-            if (!confirm('Are you sure you want to delete the main image?')) {
-                return;
-            }
-
-            try {
-                if (facilitiesHeroImage && facilitiesHeroImage.filename) {
-                    await deleteObject(storageRef(storage, facilitiesHeroImage.filename));
-                }
-                await remove(dbRef(database, 'facilitiesHero'));
-                facilitiesHeroImage = null;
-                await loadFacilitiesHero();
-                showSuccessNotification('Main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting facilities hero image:', error);
-                showErrorNotification('Failed to delete main image.');
-            }
-        };
 
         document.getElementById('upload-facility-library-btn').addEventListener('click', () => {
             document.getElementById('facility-library-input').click();
@@ -4141,7 +3951,7 @@
         let currentMeetingLang = 'en';
         let editingMeetingId = null;
         let currentMeetingPhotoId = null;
-        let meetingMainImage = null;
+
         let meetingDraft = null;
 
         function initializeMeetingDraft() {
@@ -4242,7 +4052,6 @@
             applyMeetingDraft(currentMeetingLang);
 
             await loadMeetingsData();
-            await loadMeetingMainImage();
         });
 
         // Meeting language tab switching
@@ -4703,100 +4512,6 @@
         };
 
         // Meeting main image
-        document.getElementById('upload-meeting-main-image-btn').addEventListener('click', () => {
-            document.getElementById('meeting-main-image-input').click();
-        });
-
-        document.getElementById('meeting-main-image-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-meeting-main-image-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                if (meetingMainImage && meetingMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, meetingMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old meeting main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `meetings-main/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                meetingMainImage = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'meetingsMainImage'), meetingMainImage);
-                await loadMeetingMainImage();
-
-                e.target.value = '';
-                showSuccessNotification('Meetings main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading meetings main image:', error);
-                showErrorNotification('Failed to upload main image.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        async function loadMeetingMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'meetingsMainImage'));
-                meetingMainImage = snapshot.exists() ? snapshot.val() : null;
-                const preview = document.getElementById('meeting-main-image-preview');
-                if (!preview) return;
-
-                if (meetingMainImage && meetingMainImage.url) {
-                    preview.innerHTML = `
-                        <div class="photo-item">
-                            <img src="${meetingMainImage.url}" alt="Meetings main image">
-                            <div class="photo-overlay">
-                                <button class="btn-delete" onclick="deleteMeetingMainImage()">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading meetings main image:', error);
-            }
-        }
-
-        window.deleteMeetingMainImage = async function() {
-            if (!confirm('Are you sure you want to delete the main image?')) return;
-
-            try {
-                if (meetingMainImage && meetingMainImage.filename) {
-                    await deleteObject(storageRef(storage, meetingMainImage.filename));
-                }
-                await remove(dbRef(database, 'meetingsMainImage'));
-                meetingMainImage = null;
-                await loadMeetingMainImage();
-                showSuccessNotification('Main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting meetings main image:', error);
-                showErrorNotification('Failed to delete main image.');
-            }
-        };
 
         window.editMeeting = function(meetingId) {
             editingMeetingId = meetingId;
@@ -4946,7 +4661,7 @@
             document.getElementById('attraction-image-preview').innerHTML = '';
 
             await loadAttractionsData();
-            await loadAttractionsMainImage();
+
         });
 
         // Attraction language tab switching
@@ -5152,417 +4867,9 @@
         };
 
         // ============ ATTRACTIONS MAIN IMAGE ============
-        let attractionsMainImage = null;
 
-        async function loadAttractionsMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'attractionsMainImage'));
-                if (snapshot.exists()) {
-                    attractionsMainImage = snapshot.val();
-                    renderAttractionsMainImagePreview();
-                } else {
-                    attractionsMainImage = null;
-                    const preview = document.getElementById('attraction-main-image-preview');
-                    if (preview) preview.innerHTML = '';
-                }
-            } catch (error) {
-                console.error('Error loading attractions main image:', error);
-            }
-        }
 
-        function renderAttractionsMainImagePreview() {
-            const preview = document.getElementById('attraction-main-image-preview');
-            if (!preview) return;
 
-            if (attractionsMainImage && attractionsMainImage.url) {
-                preview.innerHTML = `
-                    <div style="position: relative; display: inline-block; margin-top: 1rem;">
-                        <img src="${attractionsMainImage.url}" style="max-width: 100%; max-height: 300px; display: block; border-radius: 4px;">
-                        <button onclick="deleteAttractionsMainImage()" style="position: absolute; top: 0.5rem; right: 0.5rem; background: rgba(255,0,0,0.8); color: white; border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 1.2rem;">&times;</button>
-                    </div>
-                `;
-            } else {
-                preview.innerHTML = '';
-            }
-        }
-
-        document.getElementById('upload-attraction-main-image-btn').addEventListener('click', () => {
-            document.getElementById('attraction-main-image-input').click();
-        });
-
-        document.getElementById('attraction-main-image-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-attraction-main-image-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                // Delete old image if exists
-                if (attractionsMainImage && attractionsMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, attractionsMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old attractions main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `attractions-main/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                const imageData = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'attractionsMainImage'), imageData);
-                attractionsMainImage = imageData;
-                renderAttractionsMainImagePreview();
-
-                e.target.value = '';
-                showSuccessNotification('Attractions main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading attractions main image:', error);
-                showErrorNotification('Failed to upload image.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        window.deleteAttractionsMainImage = async function() {
-            if (!confirm('Are you sure you want to delete the attractions main image?')) return;
-
-            try {
-                if (attractionsMainImage && attractionsMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, attractionsMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete attractions main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                await set(dbRef(database, 'attractionsMainImage'), null);
-                attractionsMainImage = null;
-                renderAttractionsMainImagePreview();
-
-                showSuccessNotification('Attractions main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting attractions main image:', error);
-                showErrorNotification('Failed to delete image.');
-            }
-        };
-
-        // ============ ROOMS MAIN IMAGE MANAGEMENT ============
-        let roomsMainImage = null;
-
-        // Upload rooms main image
-        document.getElementById('upload-rooms-main-image-btn').addEventListener('click', () => {
-            document.getElementById('rooms-main-image-input').click();
-        });
-
-        document.getElementById('rooms-main-image-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-rooms-main-image-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                // Delete old image if exists
-                if (roomsMainImage && roomsMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, roomsMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old rooms main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `rooms-main/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                const imageData = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'roomsMainImage'), imageData);
-                roomsMainImage = imageData;
-                await loadRoomsMainImage();
-
-                e.target.value = '';
-                showSuccessNotification('Rooms main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading rooms main image:', error);
-                showErrorNotification('Failed to upload image.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        async function loadRoomsMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'roomsMainImage'));
-                roomsMainImage = snapshot.exists() ? snapshot.val() : null;
-                const preview = document.getElementById('rooms-main-image-preview');
-                if (!preview) return;
-
-                if (roomsMainImage && roomsMainImage.url) {
-                    preview.innerHTML = `
-                        <div class="photo-item">
-                            <img src="${roomsMainImage.url}" alt="Rooms main image">
-                            <div class="photo-overlay">
-                                <button class="btn-delete" onclick="deleteRoomsMainImage()">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading rooms main image:', error);
-            }
-        }
-
-        window.deleteRoomsMainImage = async function() {
-            if (!confirm('Are you sure you want to delete the rooms main image?')) return;
-
-            try {
-                if (roomsMainImage && roomsMainImage.filename) {
-                    await deleteObject(storageRef(storage, roomsMainImage.filename));
-                }
-                await set(dbRef(database, 'roomsMainImage'), null);
-                roomsMainImage = null;
-                await loadRoomsMainImage();
-                showSuccessNotification('Rooms main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting rooms main image:', error);
-                showErrorNotification('Failed to delete image.');
-            }
-        };
-
-        // ============ INFO MAIN IMAGE MANAGEMENT ============
-        let infoMainImage = null;
-
-        // Upload info main image
-        document.getElementById('upload-info-main-image-btn').addEventListener('click', () => {
-            document.getElementById('info-main-image-input').click();
-        });
-
-        document.getElementById('info-main-image-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-info-main-image-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                // Delete old image if exists
-                if (infoMainImage && infoMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, infoMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old info main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `info-main/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                const imageData = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'infoMainImage'), imageData);
-                infoMainImage = imageData;
-                await loadInfoMainImage();
-
-                e.target.value = '';
-                showSuccessNotification('Info main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading info main image:', error);
-                showErrorNotification('Failed to upload image.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        async function loadInfoMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'infoMainImage'));
-                infoMainImage = snapshot.exists() ? snapshot.val() : null;
-                const preview = document.getElementById('info-main-image-preview');
-                if (!preview) return;
-
-                if (infoMainImage && infoMainImage.url) {
-                    preview.innerHTML = `
-                        <div class="photo-item">
-                            <img src="${infoMainImage.url}" alt="Info main image">
-                            <div class="photo-overlay">
-                                <button class="btn-delete" onclick="deleteInfoMainImage()">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading info main image:', error);
-            }
-        }
-
-        window.deleteInfoMainImage = async function() {
-            if (!confirm('Are you sure you want to delete the info main image?')) return;
-
-            try {
-                if (infoMainImage && infoMainImage.filename) {
-                    await deleteObject(storageRef(storage, infoMainImage.filename));
-                }
-                await set(dbRef(database, 'infoMainImage'), null);
-                infoMainImage = null;
-                await loadInfoMainImage();
-                showSuccessNotification('Info main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting info main image:', error);
-                showErrorNotification('Failed to delete image.');
-            }
-        };
-
-        // ============ GROUP REQUEST MAIN IMAGE MANAGEMENT ============
-        let groupMainImage = null;
-
-        // Upload group request main image
-        document.getElementById('upload-group-main-image-btn').addEventListener('click', () => {
-            document.getElementById('group-main-image-input').click();
-        });
-
-        document.getElementById('group-main-image-input').addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (!file.type.startsWith('image/')) {
-                showErrorNotification('Please select an image file');
-                return;
-            }
-
-            const uploadBtn = document.getElementById('upload-group-main-image-btn');
-            uploadBtn.disabled = true;
-            uploadBtn.textContent = 'Uploading...';
-
-            try {
-                // Delete old image if exists
-                if (groupMainImage && groupMainImage.filename) {
-                    try {
-                        await deleteObject(storageRef(storage, groupMainImage.filename));
-                    } catch (deleteError) {
-                        console.warn('Failed to delete old group main image:', deleteError?.message || 'Unknown error');
-                    }
-                }
-
-                const timestamp = Date.now();
-                const sanitizedName = sanitizeFilename(file.name);
-                const filename = `group-main/${timestamp}-${sanitizedName}`;
-                const fileRef = storageRef(storage, filename);
-                await uploadBytes(fileRef, file);
-                const downloadURL = await getDownloadURL(fileRef);
-
-                const imageData = {
-                    url: downloadURL,
-                    filename,
-                    timestamp
-                };
-
-                await set(dbRef(database, 'groupMainImage'), imageData);
-                groupMainImage = imageData;
-                await loadGroupMainImage();
-
-                e.target.value = '';
-                showSuccessNotification('Group request main image uploaded successfully!');
-            } catch (error) {
-                console.error('Error uploading group main image:', error);
-                showErrorNotification('Failed to upload image.');
-            } finally {
-                uploadBtn.disabled = false;
-                uploadBtn.textContent = 'Upload Main Image';
-            }
-        });
-
-        async function loadGroupMainImage() {
-            try {
-                const snapshot = await get(dbRef(database, 'groupMainImage'));
-                groupMainImage = snapshot.exists() ? snapshot.val() : null;
-                const preview = document.getElementById('group-main-image-preview');
-                if (!preview) return;
-
-                if (groupMainImage && groupMainImage.url) {
-                    preview.innerHTML = `
-                        <div class="photo-item">
-                            <img src="${groupMainImage.url}" alt="Group request main image">
-                            <div class="photo-overlay">
-                                <button class="btn-delete" onclick="deleteGroupMainImage()">Delete</button>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    preview.innerHTML = '<p style="color: var(--color-sage);">No main image uploaded.</p>';
-                }
-            } catch (error) {
-                console.error('Error loading group main image:', error);
-            }
-        }
-
-        window.deleteGroupMainImage = async function() {
-            if (!confirm('Are you sure you want to delete the group request main image?')) return;
-
-            try {
-                if (groupMainImage && groupMainImage.filename) {
-                    await deleteObject(storageRef(storage, groupMainImage.filename));
-                }
-                await set(dbRef(database, 'groupMainImage'), null);
-                groupMainImage = null;
-                await loadGroupMainImage();
-                showSuccessNotification('Group request main image deleted successfully!');
-            } catch (error) {
-                console.error('Error deleting group main image:', error);
-                showErrorNotification('Failed to delete image.');
-            }
-        };
 
         // ============ INFO MANAGEMENT ============
         let currentInfoTab = 'checkin';
