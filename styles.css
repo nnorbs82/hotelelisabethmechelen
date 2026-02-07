@@ -7144,7 +7144,7 @@ body.admin-page .vertical-menu-nav ul {
 @media (min-width: 900px) {
     .decorative-text-container {
         display: block;
-        position: fixed;
+        position: absolute;
         right: 25%; /* Middle of right half of screen (50% + 50%/2 = 75%, so right: 25%) */
         top: 100px;
         z-index: 100;
@@ -7153,8 +7153,8 @@ body.admin-page .vertical-menu-nav ul {
     
     .decorative-text-primary,
     .decorative-text-secondary {
-        font-size: 60px;
-        font-weight: 700;
+        font-size: 70px;
+        font-weight: 300;
         color: var(--color-white);
         font-family: 'Raleway', sans-serif;
         white-space: nowrap;
