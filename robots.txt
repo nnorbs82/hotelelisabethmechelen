@@ -1,0 +1,15 @@
+# robots.txt for Hotel Elisabeth Mechelen
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin-dashboard.html
+Disallow: /hoteladmin.html
+Disallow: /careersadmin.html
+Disallow: /test.html
+Disallow: /careers-test.html
+
+# Sitemap location
+Sitemap: https://hotelelisabethmechelen.com/sitemap.xml
