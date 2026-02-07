@@ -7135,3 +7135,38 @@ body.admin-page .vertical-menu-nav ul {
         padding: 1rem;
     }
 }
+
+/* Decorative Text Elements - Desktop Only */
+.decorative-text-container {
+    display: none; /* Hidden by default (mobile) */
+}
+
+@media (min-width: 900px) {
+    .decorative-text-container {
+        display: block;
+        position: fixed;
+        right: 25%; /* Middle of right half of screen (50% + 50%/2 = 75%, so right: 25%) */
+        top: 100px;
+        z-index: 100;
+        pointer-events: none; /* Allow clicks to pass through */
+    }
+    
+    .decorative-text-primary {
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--color-black);
+        font-family: 'Raleway', sans-serif;
+        white-space: nowrap;
+    }
+    
+    .decorative-text-secondary {
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--color-black);
+        font-family: 'Raleway', sans-serif;
+        white-space: nowrap;
+        position: relative;
+        left: 20px; /* 20 pixels to the right from the beginning of the previous text */
+        top: -10px; /* -10 pixels from the bottom of the previous text */
+    }
+}
