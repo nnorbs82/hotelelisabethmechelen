@@ -7163,6 +7163,6 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-secondary {
         position: relative;
         left: 70px; /* 70 pixels to the right from the beginning of the previous text */
-        top: -85px; /* Positioned 95 pixels above to create visual hierarchy */
+        top: -80px; /* Positioned 95 pixels above to create visual hierarchy */
     }
 }
