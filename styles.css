@@ -7171,17 +7171,17 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-secondary .letter {
         display: inline-block;
         opacity: 0;
-        transform: rotate(0deg);
+        transform: rotateY(0deg);
     }
     
     @keyframes spinFadeIn {
         0% {
             opacity: 0;
-            transform: rotate(-180deg) scale(0.5);
+            transform: rotateY(90deg);
         }
         100% {
             opacity: 1;
-            transform: rotate(0deg) scale(1);
+            transform: rotateY(0deg);
         }
     }
     
