@@ -7155,7 +7155,7 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-secondary {
         font-size: 120px;
         font-weight: 700;
-        color: white;
+        color: var(--color-white);
         font-family: 'Raleway', sans-serif;
         white-space: nowrap;
     }
