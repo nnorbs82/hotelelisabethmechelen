@@ -76,6 +76,8 @@
         </nav>
     </header>
     
+    <!-- Fixed Background Layer (iOS Compatible) -->
+    <div id="page-background" class="page-background"></div>
 
     <main class="rooms-main">
         <!-- Enhanced Hero Section -->
@@ -1012,6 +1014,14 @@
         // Room modal controls - only set up once
         let modalControlsInitialized = false;
         
+        // Initialize page background
+        function initializePageBackground() {
+            const bgElement = document.getElementById('page-background');
+            if (bgElement) {
+                bgElement.style.backgroundImage = "url('headers/rooms.webp')";
+            }
+        }
+        
         function initializeModalControls() {
             if (modalControlsInitialized) return;
             
@@ -1023,6 +1033,7 @@
 
         // Initialize
         (async () => {
+            initializePageBackground();
             await loadAmenities();
             await loadRooms();
             initializeModalControls();
