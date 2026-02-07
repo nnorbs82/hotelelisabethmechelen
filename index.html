@@ -1012,9 +1012,9 @@
             });
         }
         
-        // Wait 2 seconds after page load, then start the animation
+        // Start the animation immediately after page load
         window.addEventListener('load', () => {
-            setTimeout(animateDecorativeText, 2000);
+            animateDecorativeText();
         });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATJkyi-UfgeSQl9znvGtL4P4N7rC9HDWM&callback=initMap"></script>
