@@ -7163,6 +7163,6 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-secondary {
         position: relative;
         left: 20px; /* 20 pixels to the right from the beginning of the previous text */
-        top: -90px; /* Moved 20 pixels up from previous position (-70px - 20px = -90px) */
+        top: -105px; /* Moved 15 pixels up from previous position (-90px - 15px = -105px) */
     }
 }
