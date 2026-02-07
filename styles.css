@@ -7151,7 +7151,8 @@ body.admin-page .vertical-menu-nav ul {
         pointer-events: none; /* Allow clicks to pass through */
     }
     
-    .decorative-text-primary {
+    .decorative-text-primary,
+    .decorative-text-secondary {
         font-size: 30px;
         font-weight: 700;
         color: var(--color-black);
@@ -7160,13 +7161,8 @@ body.admin-page .vertical-menu-nav ul {
     }
     
     .decorative-text-secondary {
-        font-size: 30px;
-        font-weight: 700;
-        color: var(--color-black);
-        font-family: 'Raleway', sans-serif;
-        white-space: nowrap;
         position: relative;
         left: 20px; /* 20 pixels to the right from the beginning of the previous text */
-        top: -10px; /* -10 pixels from the bottom of the previous text */
+        top: -10px; /* Shifted 10 pixels upward relative to natural position */
     }
 }
