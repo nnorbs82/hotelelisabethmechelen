@@ -7158,6 +7158,7 @@ body.admin-page .vertical-menu-nav ul {
         color: var(--color-white);
         font-family: 'Raleway', sans-serif;
         white-space: nowrap;
+        opacity: 0; /* Hidden initially, shown when animation starts */
     }
     
     .decorative-text-secondary {
