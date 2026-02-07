@@ -988,6 +988,10 @@
             const primaryLetters = splitTextIntoLetters(primaryText);
             const secondaryLetters = splitTextIntoLetters(secondaryText);
             
+            // Make the text containers visible now that letters are split
+            primaryText.style.opacity = '1';
+            secondaryText.style.opacity = '1';
+            
             // Combine all letters in sequence
             const allLetters = [...primaryLetters, ...secondaryLetters];
             
