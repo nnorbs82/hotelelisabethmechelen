@@ -885,8 +885,8 @@ footer {
     position: absolute;
     bottom: 100px;
     right: 0;
-    /* Ensure minimum 20px gap from logo: logo ends at ~270px (70px left + 200px width) */
-    left: 290px;
+    /* Booking bar extends to 65% of screen from the right (starts at 35% from left) */
+    left: 35%;
     background-color: rgba(0, 0, 0, 0.55);
     border: none;
     border-radius: 0;
