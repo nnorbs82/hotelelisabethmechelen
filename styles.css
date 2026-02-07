@@ -7145,15 +7145,15 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-container {
         display: block;
         position: absolute;
-        right: 25%; /* Middle of right half of screen (50% + 50%/2 = 75%, so right: 25%) */
-        top: 100px;
+        right: calc(25% - 100px); /* Moved 100px to the right */
+        top: 150px; /* Moved 50px down */
         z-index: 100;
         pointer-events: none; /* Allow clicks to pass through */
     }
     
     .decorative-text-primary,
     .decorative-text-secondary {
-        font-size: 70px;
+        font-size: 90px; /* Increased from 70px to 90px */
         font-weight: 300;
         color: var(--color-white);
         font-family: 'Raleway', sans-serif;
@@ -7163,6 +7163,6 @@ body.admin-page .vertical-menu-nav ul {
     .decorative-text-secondary {
         position: relative;
         left: 20px; /* 20 pixels to the right from the beginning of the previous text */
-        top: -10px; /* Shifted 10 pixels upward relative to natural position */
+        top: -100px; /* Moved 5 pixels down from previous position (-105px + 5px = -100px) */
     }
 }
