@@ -174,8 +174,8 @@
 
         <!-- Decorative Text Elements (Desktop Only) -->
         <div class="decorative-text-container">
-            <div class="decorative-text-primary">LIFE'S SHORT</div>
-            <div class="decorative-text-secondary">START SMILING</div>
+            <div class="decorative-text-primary" aria-label="LIFE'S SHORT">LIFE'S SHORT</div>
+            <div class="decorative-text-secondary" aria-label="START SMILING">START SMILING</div>
         </div>
 
         <!-- Index Ads Section -->
@@ -962,6 +962,9 @@
             
             if (!primaryText || !secondaryText) return;
             
+            // Check if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
             // Function to split text into letter spans
             function splitTextIntoLetters(element) {
                 const text = element.textContent;
@@ -987,6 +990,15 @@
             
             // Combine all letters in sequence
             const allLetters = [...primaryLetters, ...secondaryLetters];
+            
+            // If user prefers reduced motion, show all letters immediately without animation
+            if (prefersReducedMotion) {
+                allLetters.forEach((letter) => {
+                    letter.style.opacity = '1';
+                    letter.style.transform = 'none';
+                });
+                return;
+            }
             
             // Animate each letter with a delay
             allLetters.forEach((letter, index) => {
