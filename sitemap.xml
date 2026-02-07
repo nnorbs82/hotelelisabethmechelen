@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage - Highest priority -->
+  <url>
+    <loc>https://hotelelisabethmechelen.com/</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/index.html"/>
+  </url>
+
+  <!-- Main Pages - High priority -->
+  <url>
+    <loc>https://hotelelisabethmechelen.com/rooms.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/rooms.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/rooms.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/rooms.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/packages.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/packages.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/packages.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/packages.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/facilities.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/facilities.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/facilities.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/facilities.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/meetings.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/meetings.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/meetings.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/meetings.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/info.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/info.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/info.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/attractions.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/attractions.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/attractions.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/grouprequest.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/grouprequest.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/grouprequest.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/grouprequest.html"/>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/careers.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelelisabethmechelen.com/careers.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://hotelelisabethmechelen.com/careers.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://hotelelisabethmechelen.com/careers.html"/>
+  </url>
+
+  <!-- Legal Pages - Lower priority -->
+  <url>
+    <loc>https://hotelelisabethmechelen.com/policies.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/privacypolicy.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://hotelelisabethmechelen.com/termsandconditions.html</loc>
+    <lastmod>2026-02-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

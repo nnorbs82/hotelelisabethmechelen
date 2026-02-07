@@ -1,0 +1,27 @@
+{
+  "name": "Hotel Elisabeth Mechelen",
+  "short_name": "Hotel Elisabeth",
+  "description": "Luxury hotel in the heart of Mechelen, Belgium. Book your perfect stay with modern rooms, excellent facilities, and exceptional service.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c3e50",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "logo/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo/elicircle.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["travel", "hospitality", "hotels"],
+  "lang": "en",
+  "dir": "ltr"
+}
