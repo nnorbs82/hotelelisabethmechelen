@@ -954,6 +954,53 @@
             });
         }
     </script>
+    <script>
+        // Decorative text letter animation - spin-in and fade-in effect
+        function animateDecorativeText() {
+            const primaryText = document.querySelector('.decorative-text-primary');
+            const secondaryText = document.querySelector('.decorative-text-secondary');
+            
+            if (!primaryText || !secondaryText) return;
+            
+            // Function to split text into letter spans
+            function splitTextIntoLetters(element) {
+                const text = element.textContent;
+                element.innerHTML = '';
+                
+                for (let i = 0; i < text.length; i++) {
+                    const letter = document.createElement('span');
+                    letter.className = 'letter';
+                    letter.textContent = text[i];
+                    // Preserve spaces
+                    if (text[i] === ' ') {
+                        letter.style.width = '0.3em';
+                    }
+                    element.appendChild(letter);
+                }
+                
+                return element.querySelectorAll('.letter');
+            }
+            
+            // Split both texts into letters
+            const primaryLetters = splitTextIntoLetters(primaryText);
+            const secondaryLetters = splitTextIntoLetters(secondaryText);
+            
+            // Combine all letters in sequence
+            const allLetters = [...primaryLetters, ...secondaryLetters];
+            
+            // Animate each letter with a delay
+            allLetters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.classList.add('animate');
+                }, index * 80); // 80ms delay between each letter
+            });
+        }
+        
+        // Wait 2 seconds after page load, then start the animation
+        window.addEventListener('load', () => {
+            setTimeout(animateDecorativeText, 2000);
+        });
+    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATJkyi-UfgeSQl9znvGtL4P4N7rC9HDWM&callback=initMap"></script>
     <script src="booking-bar.js"></script>
 </body>
