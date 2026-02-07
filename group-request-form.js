@@ -84,6 +84,15 @@ document.addEventListener('DOMContentLoaded', function() {
             successMessage.style.display = 'block';
             successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+            // Track successful form submission with Google Analytics
+            if (window.gtag) {
+                gtag('event', 'form_submission', {
+                    'form_name': 'group_request',
+                    'event_category': 'engagement',
+                    'event_label': 'Group Booking Request'
+                });
+            }
+
             form.reset();
             iti.setCountry('be');
             checkinPicker.setDate(today);
