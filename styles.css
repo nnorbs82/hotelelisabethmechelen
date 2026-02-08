@@ -2274,7 +2274,7 @@ body.admin-page .vertical-menu-nav ul {
     color: var(--color-black);
     /* Neumorphism styling */
     border-radius: 50px;
-    background: linear-gradient(145deg, #bfbeb0, #e3e2d1);
+    background: #D4D3C3;
     box-shadow: 20px 20px 60px #b4b3a6,
                 -20px -20px 60px #f4f3e0;
     padding: 2rem;
