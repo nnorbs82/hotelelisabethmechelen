@@ -75,9 +75,9 @@ The Ads Bottom data is stored in the Firebase Realtime Database under the path `
     },
     "ad1": {
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.appspot.com/o/ads-bottom%2Fad1-1234567890-spa.jpg?alt=media&token=...",
-      "title_en": "Luxury Spa",
-      "title_nl": "Luxe Spa",
-      "title_fr": "Spa de luxe",
+      "title_en": "Exclusive Spa",
+      "title_nl": "Exclusief Spa",
+      "title_fr": "Spa Exclusif",
       "body_en": "Relax and rejuvenate in our world-class spa facilities.\nExperience ultimate comfort and tranquility.",
       "body_nl": "Ontspan en revitaliseer in onze spa-faciliteiten van wereldklasse.\nErvaar ultiem comfort en rust.",
       "body_fr": "Détendez-vous et ressourcez-vous dans nos installations de spa de classe mondiale.\nDécouvrez le confort et la tranquillité ultimes."

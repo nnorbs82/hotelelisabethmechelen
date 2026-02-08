@@ -59,8 +59,8 @@ Comprehensive SEO optimization has been successfully implemented for Hotel Elisa
 ## 3. Page-Specific Optimizations
 
 ### Homepage (index.html)
-- **Title**: "Hotel Elisabeth Mechelen - Luxury Hotel in the Heart of Mechelen, Belgium"
-- **Focus Keywords**: Hotel Mechelen, Hotel Elisabeth, luxury hotel Belgium
+- **Title**: "Hotel Elisabeth Mechelen - Boutique Hotel in the Heart of Mechelen, Belgium"
+- **Focus Keywords**: Hotel Mechelen, Hotel Elisabeth, boutique hotel Belgium
 - **Structured Data**: Complete Hotel schema (Schema.org JSON-LD) including:
   - Business information
   - Address and geo-coordinates
@@ -69,7 +69,7 @@ Comprehensive SEO optimization has been successfully implemented for Hotel Elisa
   - Booking action link
 
 ### Rooms Page (rooms.html)
-- **Title**: "Luxury Rooms & Suites - Hotel Elisabeth Mechelen"
+- **Title**: "Exclusive Rooms & Suites - Hotel Elisabeth Mechelen"
 - **Focus**: Room types, amenities, booking
 - **Keywords**: hotel rooms Mechelen, hotel suites, accommodation
 
@@ -211,7 +211,7 @@ Comprehensive SEO optimization has been successfully implemented for Hotel Elisa
 ### Primary Keywords
 - Hotel Mechelen
 - Hotel Elisabeth
-- Luxury hotel Belgium
+- Boutique hotel Belgium
 - Hotel booking Mechelen
 - Accommodation Mechelen
 
@@ -226,7 +226,7 @@ Comprehensive SEO optimization has been successfully implemented for Hotel Elisa
 - Romantic package Mechelen
 
 ### Long-tail Keywords
-- Luxury rooms and suites in Mechelen
+- Exclusive rooms and suites in Mechelen
 - Best hotel facilities in Mechelen Belgium
 - Meeting rooms and event spaces Mechelen
 - Things to do near Hotel Elisabeth
