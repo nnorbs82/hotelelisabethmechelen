@@ -93,7 +93,7 @@ Visit these tools to verify everything works:
 2. **Top Keywords to Monitor**
    - "Hotel Mechelen"
    - "Hotel Elisabeth"
-   - "luxury hotel Mechelen"
+   - "boutique hotel Mechelen"
    - "accommodation Mechelen"
    - "meeting rooms Mechelen"
 
@@ -111,7 +111,7 @@ Your site is now optimized for these searches:
 **Primary:**
 - Hotel Mechelen
 - Hotel Elisabeth
-- Luxury hotel Belgium
+- Boutique hotel Belgium
 - Accommodation Mechelen
 
 **Secondary:**
@@ -121,7 +121,7 @@ Your site is now optimized for these searches:
 - Group booking Mechelen
 
 **Long-tail:**
-- Luxury rooms and suites in Mechelen
+- Exclusive rooms and suites in Mechelen
 - Best hotel facilities in Mechelen
 - Things to do near Hotel Elisabeth
 

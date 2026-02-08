@@ -1,14 +1,14 @@
 # Rooms Page Redesign Summary
 
 ## Overview
-The `rooms.html` page has been completely redesigned with a modern, premium aesthetic inspired by contemporary luxury hotel websites. The new design emphasizes visual hierarchy, spacious layouts, and alternating content blocks for a dynamic user experience.
+The `rooms.html` page has been completely redesigned with a modern, premium aesthetic inspired by contemporary boutique hotel websites. The new design emphasizes visual hierarchy, spacious layouts, and alternating content blocks for a dynamic user experience.
 
 ## Design Elements Implemented
 
 ### 1. Enhanced Hero Section (`rooms-hero-modern`)
 - Full-height gradient background (sage to black)
 - Large, elegant typography with minimal letter-spacing
-- Tagline "Luxury Accommodations" above main title
+- Tagline "Exclusive Accommodations" above main title
 - Centered content with decorative divider
 - Height: 65vh minimum (500px)
 
