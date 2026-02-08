@@ -436,6 +436,7 @@ body.admin-page {
     min-height: 420px;
     background-color: var(--color-black);
     overflow: hidden; /* Prevent overflow issues */
+    border-bottom: 5px solid var(--color-beige);
 }
 
 .hero-slider {
