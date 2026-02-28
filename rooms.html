@@ -237,6 +237,9 @@
         let roomsData = [];
         let amenitiesData = {};
 
+        // Determine current language from localStorage (set by language-switcher.js)
+        const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+
         // Labels
         const labels = {
             bedType: 'Bed Type',
@@ -383,9 +386,9 @@
             initializeImageIndices();
 
             const roomsHTML = roomsData.map((room, index) => {
-                const name = escapeHtml(room.name_en || '');
-                const bedType = escapeHtml(room.bedType_en || '');
-                const description = escapeHtml(room.description_en || '');
+                const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
+                const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
+                const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
                 
                 // Get first photo for card display
                 const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
@@ -696,14 +699,14 @@
             // Store the element that triggered the modal
             lastFocusedElement = document.activeElement;
 
-            const name = escapeHtml(room.name_en || '');
-            const bedType = escapeHtml(room.bedType_en || '');
-            const description = escapeHtml(room.description_en || '');
+            const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
+            const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
+            const description = escapeHtml(room[`description_${currentLang}`] || room.description_en || '');
             
             // Get amenities list
             const amenitiesList = room.amenities ? Object.keys(room.amenities).map(amenityId => {
                 const amenity = amenitiesData[amenityId];
-                return amenity ? escapeHtml(amenity.name_en || '') : '';
+                return amenity ? escapeHtml(amenity[`name_${currentLang}`] || amenity.name_en || '') : '';
             }).filter(a => a) : [];
 
             const firstPhoto = room.photos && room.photos.length > 0 ? room.photos[0].url : '';
@@ -870,7 +873,7 @@
             
             // Show current photo
             const currentPhoto = fullscreenGalleryPhotos[fullscreenGalleryIndex];
-            const altText = currentPhoto.alt || `${room.name_en || 'Room'} - Photo ${fullscreenGalleryIndex + 1}`;
+            const altText = currentPhoto.alt || `${room[`name_${currentLang}`] || room.name_en || 'Room'} - Photo ${fullscreenGalleryIndex + 1}`;
             galleryImage.src = currentPhoto.url;
             galleryImage.alt = escapeHtml(altText);
             
