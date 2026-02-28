@@ -385,6 +385,9 @@
 
             initializeImageIndices();
 
+            const discoverMoreText = (window.ElisabethTranslations && window.ElisabethTranslations.getText('rooms', 'discoverMore')) || 'Discover More';
+            const bookButtonText = (window.ElisabethTranslations && window.ElisabethTranslations.getText('rooms', 'bookButton')) || 'Book';
+
             const roomsHTML = roomsData.map((room, index) => {
                 const name = escapeHtml(room[`name_${currentLang}`] || room.name_en || '');
                 const bedType = escapeHtml(room[`bedType_${currentLang}`] || room.bedType_en || '');
@@ -469,14 +472,14 @@
                             ${teaser ? `<p class="room-feature-description">${teaser}</p>` : ''}
                             <div class="room-feature-actions">
                                 <button class="room-feature-btn primary" onclick="openRoomModal('${escapeJs(escapedRoomId)}')">
-                                    <span>Discover More</span>
+                                    <span data-translate="rooms.discoverMore">${discoverMoreText}</span>
                                     <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
                                         <polyline points="12 5 19 12 12 19"></polyline>
                                     </svg>
                                 </button>
                                 <a class="room-feature-btn secondary" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer">
-                                    <span>Book</span>
+                                    <span data-translate="rooms.bookButton">${bookButtonText}</span>
                                 </a>
                             </div>
                         </div>
