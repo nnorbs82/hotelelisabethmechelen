@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Hotel Elisabeth - Revised Full-Site Design Preview</title>
+  <meta name="description" content="Private revised full-site design preview for Hotel Elisabeth Mechelen.">
+  <link rel="icon" type="image/png" href="logo/elicircle.png">
+  <link rel="stylesheet" href="design-preview-v2.css">
+</head>
+<body>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container-wide header-inner">
+      <a class="brand" href="#home" aria-label="Hotel Elisabeth home"><img src="logo/elitext.png" alt="Hotel Elisabeth Mechelen"></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#rooms" data-i18n="nav.rooms">Rooms</a>
+        <a href="#facilities" data-i18n="nav.facilities">Facilities</a>
+        <a href="#packages" data-i18n="nav.packages">Packages</a>
+        <a href="#meetings" data-i18n="nav.meetings">Meetings</a>
+        <a href="#info" data-i18n="nav.info">Info</a>
+        <a href="#group" data-i18n="nav.group">Group request</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang">
+          <button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span> ⌄</button>
+          <div class="lang-menu">
+            <button type="button" data-lang="en">English</button>
+            <button type="button" data-lang="nl">Nederlands</button>
+            <button type="button" data-lang="fr">Français</button>
+            <button type="button" data-lang="es">Español</button>
+            <button type="button" data-lang="de">Deutsch</button>
+          </div>
+        </div>
+        <a class="btn btn-solid header-book" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu">
+    <nav>
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#rooms" data-i18n="nav.rooms">Rooms</a>
+      <a href="#facilities" data-i18n="nav.facilities">Facilities</a>
+      <a href="#packages" data-i18n="nav.packages">Packages</a>
+      <a href="#meetings" data-i18n="nav.meetings">Meetings</a>
+      <a href="#info" data-i18n="nav.info">Info</a>
+      <a href="#group" data-i18n="nav.group">Group request</a>
+      <a href="#careers" data-i18n="nav.careers">Careers</a>
+    </nav>
+    <div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div>
+  </div>
+
+  <main>
+    <section class="hero anchor-marker" id="home">
+      <div class="hero-frame">
+        <div class="hero-slides">
+          <div class="hero-slide active"><img src="mainslide/1.webp" alt="Hotel Elisabeth Mechelen"></div>
+          <div class="hero-slide"><img src="mainslide/4.webp" alt="Hotel Elisabeth interior"></div>
+          <div class="hero-slide"><img src="mainslide/6.webp" alt="Hotel Elisabeth guest experience"></div>
+          <div class="hero-slide"><img src="mainslide/8.webp" alt="Hotel Elisabeth atmosphere"></div>
+        </div>
+      </div>
+      <div class="hero-border" aria-hidden="true"></div>
+      <div class="container-wide hero-layout">
+        <div class="hero-copy">
+          <img class="hero-logo" src="logo/elitext.png" alt="Hotel Elisabeth">
+          <p class="eyebrow" data-i18n="hero.eyebrow">A contemporary four-star stay in Mechelen</p>
+          <h1 class="display hero-title" data-i18n="hero.title">A modern pause in the heart of the city.</h1>
+          <p class="hero-subtitle" data-i18n="hero.body">Designed for city breaks, business stays and unhurried weekends - with an indoor pool, quiet courtyard and Mechelen just outside.</p>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-count"><span class="hero-current">01</span> / 04</div>
+          <div class="hero-progress"><span></span></div>
+          <div class="hero-controls"><button class="hero-prev" type="button" aria-label="Previous image">←</button><button class="hero-next" type="button" aria-label="Next image">→</button></div>
+        </div>
+      </div>
+      <span class="scroll-cue" data-i18n="common.scroll">Scroll to explore</span>
+    </section>
+
+    <div class="container booking-wrap">
+      <form class="booking-panel" onsubmit="return false;">
+        <label class="book-field"><span data-i18n="booking.checkin">Check-in</span><input id="preview-checkin" type="date" aria-label="Check-in"></label>
+        <label class="book-field"><span data-i18n="booking.checkout">Check-out</span><input id="preview-checkout" type="date" aria-label="Check-out"></label>
+        <div class="book-field guest-field"><span data-i18n="booking.guests">Guests</span><div class="guest-value" tabindex="0">2 adults · 0 children</div><div class="guest-popover">
+          <div class="guest-row"><div><strong data-i18n="booking.adults">Adults</strong><small>13+</small></div><div class="counter"><button type="button" data-counter="adults" data-delta="-1">−</button><span data-count="adults">2</span><button type="button" data-counter="adults" data-delta="1">+</button></div></div>
+          <div class="guest-row"><div><strong data-i18n="booking.children">Children</strong><small>0-12</small></div><div class="counter"><button type="button" data-counter="children" data-delta="-1">−</button><span data-count="children">0</span><button type="button" data-counter="children" data-delta="1">+</button></div></div>
+        </div></div>
+        <button class="booking-submit" id="preview-book" type="button" data-i18n="booking.check">Check availability</button>
+      </form>
+      <p class="booking-note" data-i18n="booking.note">Direct booking through Mews</p>
+    </div>
+
+    <section class="section anchor-marker" id="concept">
+      <div class="container">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="manifesto.eyebrow">Hotel Elisabeth · Mechelen</p><div><h2 class="display manifesto-title" data-i18n-html="manifesto.title">More than a room.<br><span>A change of pace.</span></h2></div></div>
+        <div class="manifesto-grid">
+          <div class="image-stack reveal"><img class="main" src="mainslide/2.webp" alt="Hotel Elisabeth interior"><img class="small" src="mainslide/5.webp" alt="Hotel Elisabeth detail"></div>
+          <div class="manifesto-copy reveal"><h3 data-i18n="manifesto.subtitle">Contemporary comfort with room to breathe.</h3><p data-i18n="manifesto.body">Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.</p>
+            <div class="facts"><div class="fact"><strong>66</strong><span data-i18n="facts.rooms">Rooms</span></div><div class="fact"><strong>4★</strong><span data-i18n="facts.hotel">Hotel</span></div><div class="fact"><strong>Indoor</strong><span data-i18n="facts.pool">Indoor pool</span></div><div class="fact"><strong>Central</strong><span data-i18n="facts.location">Central Mechelen</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section mist">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="pages.eyebrow">The complete hotel website</p><div><h2 class="display" data-i18n="pages.title">Every existing page, redesigned.</h2><p class="lead" data-i18n="pages.body">The final website keeps Rooms, Facilities, Packages, Meetings, Hotel Information, Attractions, Group Requests, Careers and the legal pages.</p></div></div>
+        <div class="page-index reveal">
+          <a href="#rooms"><span class="num">01</span><div><h3 data-i18n="nav.rooms">Rooms</h3><p>Categories, specifications, galleries, videos and direct booking.</p></div></a>
+          <a href="#facilities"><span class="num">02</span><div><h3 data-i18n="nav.facilities">Facilities</h3><p>Pool, courtyard, breakfast, parking and practical services.</p></div></a>
+          <a href="#packages"><span class="num">03</span><div><h3 data-i18n="nav.packages">Packages</h3><p>Active offers presented as refined editorial campaigns.</p></div></a>
+          <a href="#meetings"><span class="num">04</span><div><h3 data-i18n="nav.meetings">Meetings</h3><p>Spaces, capacities, equipment and the complete request form.</p></div></a>
+          <a href="#info"><span class="num">05</span><div><h3 data-i18n="nav.info">Info</h3><p>Every practical hotel detail, clearly organised.</p></div></a>
+          <a href="#group"><span class="num">06</span><div><h3 data-i18n="nav.group">Group request</h3><p>The full accommodation request, not a simplified contact form.</p></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white anchor-marker" id="rooms">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="rooms.eyebrow">Rooms & suites</p><div><h2 class="display" data-i18n="rooms.title">Stay your way.</h2><p class="lead" data-i18n="rooms.body">Every active category will keep its real name, translated description, occupancy, bed configuration, size, amenities, photographs, gallery order and booking action.</p></div></div>
+        <div class="room-track reveal">
+          <button class="room-card" type="button"><img src="mainslide/2.webp" alt="City Twin"><div class="room-card-content"><span class="index">01</span><h3>City Twin</h3><p data-i18n="rooms.card1">Separate beds and a comfortable city base.</p></div></button>
+          <button class="room-card" type="button"><img src="mainslide/3.webp" alt="Double Room"><div class="room-card-content"><span class="index">02</span><h3>Double Room</h3><p data-i18n="rooms.card2">A relaxed stay for two in central Mechelen.</p></div></button>
+          <button class="room-card" type="button"><img src="mainslide/7.webp" alt="Studio"><div class="room-card-content"><span class="index">03</span><h3>Studio</h3><p data-i18n="rooms.card3">Extra independence for a longer stay.</p></div></button>
+          <button class="room-card" type="button"><img src="mainslide/6.webp" alt="City Suite"><div class="room-card-content"><span class="index">04</span><h3>City Suite</h3><p data-i18n="rooms.card4">More space, a kitchenette and a separate rhythm.</p></div></button>
+          <button class="room-card" type="button"><img src="mainslide/8.webp" alt="Cathedral Suite"><div class="room-card-content"><span class="index">05</span><h3>Cathedral Suite</h3><p data-i18n="rooms.card5">A spacious stay with a Mechelen point of view.</p></div></button>
+        </div>
+        <p class="preview-note" data-i18n="rooms.note">Room labels in this visual prototype are indicative. The complete current room inventory will come from the Firebase export.</p>
+      </div>
+    </section>
+
+    <section class="section dark anchor-marker" id="facilities">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="facilities.eyebrow">Facilities</p><div><h2 class="display" data-i18n="facilities.title">The spaces around the room matter too.</h2><p class="lead" data-i18n="facilities.body">Pool, courtyard, breakfast, underground parking and every practical service remain visible, detailed and easy to explore.</p></div></div>
+        <div class="experience-layout reveal">
+          <div class="experience-tabs">
+            <button class="experience-tab active" type="button" data-experience="0"><span class="num">01</span><h3 data-i18n="facilities.pool">Indoor pool</h3><span>→</span></button>
+            <button class="experience-tab" type="button" data-experience="1"><span class="num">02</span><h3 data-i18n="facilities.courtyard">Courtyard</h3><span>→</span></button>
+            <button class="experience-tab" type="button" data-experience="2"><span class="num">03</span><h3 data-i18n="facilities.breakfast">Breakfast</h3><span>→</span></button>
+            <button class="experience-tab" type="button" data-experience="3"><span class="num">04</span><h3 data-i18n="facilities.parking">Underground parking</h3><span>→</span></button>
+          </div>
+          <div class="experience-media">
+            <img class="active" src="mainslide/4.webp" alt="Indoor pool"><img src="mainslide/5.webp" alt="Courtyard"><img src="mainslide/6.webp" alt="Breakfast"><img src="mainslide/1.webp" alt="Hotel arrival">
+            <div class="experience-caption"><p data-i18n="facilities.caption">Move between city energy and quieter moments without leaving the hotel.</p><span class="eyebrow" data-i18n="common.select">Select a space</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section anchor-marker" id="packages">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="packages.eyebrow">Packages & offers</p><div><h2 class="display" data-i18n="packages.title">Offers presented like campaigns, not database cards.</h2><p class="lead" data-i18n="packages.body">The dedicated Packages page remains. Active offers, validity dates, inclusions, images, prices and booking links will be editable.</p></div></div>
+        <div class="package-grid">
+          <article class="package-card reveal"><div class="media"><img src="mainslide/5.webp" alt="Package preview"><span class="package-badge" data-i18n="common.preview">Preview layout</span></div><div class="copy"><h3 data-i18n="packages.sampleTitle">Your current offer title</h3><p data-i18n="packages.sampleBody">Image, validity period, inclusions, price information and booking action.</p><button class="text-link" type="button" data-i18n="common.view">View details</button></div></article>
+          <article class="package-card reveal"><div class="media"><img src="mainslide/6.webp" alt="Package preview"><span class="package-badge" data-i18n="common.preview">Preview layout</span></div><div class="copy"><h3 data-i18n="packages.sampleTitle">Your current offer title</h3><p data-i18n="packages.sampleBody">Image, validity period, inclusions, price information and booking action.</p><button class="text-link" type="button" data-i18n="common.view">View details</button></div></article>
+          <article class="package-card reveal"><div class="media"><img src="mainslide/8.webp" alt="Package preview"><span class="package-badge" data-i18n="common.preview">Preview layout</span></div><div class="copy"><h3 data-i18n="packages.sampleTitle">Your current offer title</h3><p data-i18n="packages.sampleBody">Image, validity period, inclusions, price information and booking action.</p><button class="text-link" type="button" data-i18n="common.view">View details</button></div></article>
+        </div>
+        <div class="empty-state" data-i18n="packages.empty">When no offer is active, the page will show a deliberate branded message rather than an empty or broken section.</div>
+      </div>
+    </section>
+
+    <section class="section white anchor-marker" id="meetings">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="meetings.eyebrow">Meetings & events</p><div><h2 class="display" data-i18n="meetings.title">Space to meet. Room to think.</h2><p class="lead" data-i18n="meetings.body">Meeting rooms, layouts, capacities, equipment, catering and the complete quotation workflow remain together.</p></div></div>
+        <div class="meeting-grid">
+          <article class="meeting-card reveal"><img src="headers/meetings.webp" alt="Jeanne Room"><div class="copy"><p class="eyebrow">01</p><h3>Jeanne Room</h3><p data-i18n="meetings.roomBody">Capacity tables, setup options, equipment, catering and imagery will be migrated from the current content.</p><button class="text-link" type="button" data-i18n="common.view">View details</button></div></article>
+          <article class="meeting-card reveal"><img src="mainslide/8.webp" alt="Rooftop Room"><div class="copy"><p class="eyebrow">02</p><h3>Rooftop Room</h3><p data-i18n="meetings.roomBody">Capacity tables, setup options, equipment, catering and imagery will be migrated from the current content.</p><button class="text-link" type="button" data-i18n="common.view">View details</button></div></article>
+        </div>
+        <div class="form-shell reveal">
+          <div class="form-intro"><p class="eyebrow" data-i18n="meetings.eyebrow">Meetings & events</p><h2 class="display" data-i18n="meetings.requestTitle">Tell us what you are planning.</h2><p data-i18n="meetings.requestBody">The complete meeting request remains a real form, not a generic contact button.</p></div>
+          <form class="form-panel demo-form"><div class="form-grid">
+            <label class="field"><span data-i18n="form.firstName">First name</span><input type="text" required></label><label class="field"><span data-i18n="form.lastName">Last name</span><input type="text" required></label>
+            <label class="field"><span data-i18n="form.email">Email</span><input type="email" required></label><label class="field"><span data-i18n="form.phone">Phone</span><input type="tel"></label>
+            <label class="field"><span data-i18n="form.company">Company</span><input type="text"></label><label class="field"><span data-i18n="form.participants">Participants</span><input type="number" min="1"></label>
+            <label class="field"><span data-i18n="form.meetingDate">Meeting date</span><input type="date"></label><label class="field"><span data-i18n="form.setup">Preferred setup</span><select><option>Boardroom</option><option>Theatre</option><option>Classroom</option><option>Reception</option></select></label>
+            <label class="field"><span data-i18n="form.catering">Catering</span><select><option data-i18n="common.selectOption">Please select</option><option data-i18n="common.yes">Yes</option><option data-i18n="common.no">No</option></select></label><label class="field"><span data-i18n="form.overnight">Overnight rooms</span><select><option data-i18n="common.selectOption">Please select</option><option data-i18n="common.yes">Yes</option><option data-i18n="common.no">No</option></select></label>
+            <label class="field full"><span data-i18n="form.message">Message</span><textarea></textarea></label><label class="checkbox"><input type="checkbox" required><span data-i18n="form.consent">I agree that Hotel Elisabeth may use these details to respond to my request.</span></label>
+            <div class="form-actions"><button class="btn btn-solid" type="submit" data-i18n="common.send">Send request</button><span class="form-message" data-i18n="form.preview">Preview only - no message has been sent.</span></div>
+          </div></form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section anchor-marker" id="info">
+      <div class="container">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="info.eyebrow">Hotel information</p><div><h2 class="display" data-i18n="info.title">Everything useful. Nothing buried.</h2><p class="lead" data-i18n="info.body">Arrival, parking, breakfast, pool, digital access, policies and every existing information block remain in a clear dedicated section.</p></div></div>
+        <div class="info-grid">
+          <aside class="info-index reveal"><a href="#info-arrival" data-i18n="info.arrival">Arrival & departure</a><a href="#info-parking" data-i18n="info.parking">Parking</a><a href="#info-breakfast" data-i18n="info.breakfast">Breakfast</a><a href="#info-pool" data-i18n="info.pool">Pool</a><a href="#info-access" data-i18n="info.access">Access & keys</a><a href="#info-policies" data-i18n="info.policies">Hotel policies</a></aside>
+          <div class="accordion reveal">
+            <article class="accordion-item open" id="info-arrival"><button class="accordion-trigger" type="button"><h3 data-i18n="info.arrival">Arrival & departure</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+            <article class="accordion-item" id="info-parking"><button class="accordion-trigger" type="button"><h3 data-i18n="info.parking">Parking</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+            <article class="accordion-item" id="info-breakfast"><button class="accordion-trigger" type="button"><h3 data-i18n="info.breakfast">Breakfast</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+            <article class="accordion-item" id="info-pool"><button class="accordion-trigger" type="button"><h3 data-i18n="info.pool">Pool</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+            <article class="accordion-item" id="info-access"><button class="accordion-trigger" type="button"><h3 data-i18n="info.access">Access & keys</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+            <article class="accordion-item" id="info-policies"><button class="accordion-trigger" type="button"><h3 data-i18n="info.policies">Hotel policies</h3><span>+</span></button><div class="accordion-content"><div class="accordion-content-inner" data-i18n="info.placeholder">The existing Hotel Elisabeth text will be migrated here in five languages and remain editable in Pages CMS.</div></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark anchor-marker" id="group">
+      <div class="container-wide">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="group.eyebrow">Group accommodation</p><div><h2 class="display" data-i18n="group.title">Bring the group. Keep the planning clear.</h2><p class="lead" data-i18n="group.body">Arrival, departure, guest count, room mix, group type, meal option and message are all preserved.</p></div></div>
+        <div class="form-shell reveal">
+          <div class="form-intro"><p class="eyebrow" data-i18n="group.eyebrow">Group accommodation</p><h2 class="display" data-i18n="group.requestTitle">Tell us about the stay.</h2><p data-i18n="group.requestBody">The full group request is redesigned, not removed.</p></div>
+          <form class="form-panel demo-form"><div class="form-grid">
+            <label class="field"><span data-i18n="form.firstName">First name</span><input type="text" required></label><label class="field"><span data-i18n="form.lastName">Last name</span><input type="text" required></label>
+            <label class="field"><span data-i18n="form.email">Email</span><input type="email" required></label><label class="field"><span data-i18n="form.phone">Phone</span><input type="tel"></label>
+            <label class="field"><span data-i18n="form.arrival">Arrival</span><input type="date"></label><label class="field"><span data-i18n="form.departure">Departure</span><input type="date"></label>
+            <label class="field"><span data-i18n="form.totalGuests">Total guests</span><input type="number" min="1"></label><label class="field"><span data-i18n="form.groupType">Group type</span><select><option data-i18n="common.selectOption">Please select</option><option>Corporate</option><option>Leisure</option><option>Sports</option><option>School</option><option>Other</option></select></label>
+            <label class="field"><span data-i18n="form.singleRooms">Single rooms</span><input type="number" min="0"></label><label class="field"><span data-i18n="form.twinRooms">Twin rooms</span><input type="number" min="0"></label>
+            <label class="field"><span data-i18n="form.doubleRooms">Double rooms</span><input type="number" min="0"></label><label class="field"><span data-i18n="form.tripleRooms">Triple rooms</span><input type="number" min="0"></label>
+            <label class="field full"><span data-i18n="form.meal">Meal option</span><select><option data-i18n="common.selectOption">Please select</option><option>Room only</option><option>Breakfast</option><option>Half board</option><option>Other</option></select></label>
+            <label class="field full"><span data-i18n="form.message">Message</span><textarea></textarea></label><label class="checkbox"><input type="checkbox" required><span data-i18n="form.consent">I agree that Hotel Elisabeth may use these details to respond to my request.</span></label>
+            <div class="form-actions"><button class="btn btn-solid" type="submit" data-i18n="common.send">Send request</button><span class="form-message" data-i18n="form.preview">Preview only - no message has been sent.</span></div>
+          </div></form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section mist anchor-marker" id="careers">
+      <div class="container">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="careers.eyebrow">Careers</p><div><h2 class="display" data-i18n="careers.title">Join the team behind the stay.</h2><p class="lead" data-i18n="careers.body">Vacancies, requirements and application details remain on a dedicated editable Careers page.</p></div></div>
+        <div class="empty-state" data-i18n="careers.empty">No preview vacancy is published. The final page will show active roles or a considered open-application message.</div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <img src="mainslide/1.webp" alt="Hotel Elisabeth Mechelen">
+      <div class="container closing-copy reveal"><p class="eyebrow" data-i18n="closing.eyebrow">Your stay in Mechelen</p><h2 class="display" data-i18n="closing.title">Arrive. Exhale. Stay a little longer.</h2><a class="btn btn-light" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container-wide">
+      <div class="footer-grid">
+        <div><img class="footer-logo" src="logo/elitext.png" alt="Hotel Elisabeth"><p data-i18n="footer.about">A contemporary four-star hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking.</p></div>
+        <div><h3 data-i18n="footer.explore">Explore</h3><a href="#rooms" data-i18n="nav.rooms">Rooms</a><a href="#facilities" data-i18n="nav.facilities">Facilities</a><a href="#packages" data-i18n="nav.packages">Packages</a><a href="#meetings" data-i18n="nav.meetings">Meetings</a></div>
+        <div><h3 data-i18n="footer.plan">Plan</h3><a href="#info" data-i18n="nav.info">Info</a><a href="#group" data-i18n="nav.group">Group request</a><a href="#careers" data-i18n="nav.careers">Careers</a><a href="#">Hotel policies</a></div>
+        <div><h3 data-i18n="footer.contact">Contact</h3><a href="tel:+3215288400">+32 15 28 84 00</a><a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a><a href="#">Privacy policy</a><a href="#">Terms & conditions</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Hotel Elisabeth Mechelen</span><span data-i18n="footer.preview">Private redesign preview - the main website is unchanged.</span></div>
+    </div>
+  </footer>
+
+  <script src="design-preview-v2.js"></script>
+</body>
+</html>
