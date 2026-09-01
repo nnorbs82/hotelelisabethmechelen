@@ -29,9 +29,9 @@
   "name_en": "MEETING ROOM ROOFTOP",
   "name_fr": "MEETING ROOM ROOFTOP",
   "name_nl": "MEETING ROOM ROOFTOP",
-  "parking_en": "Hotel Elisabeth is easily accessible at all times in the low-traffic heart of Mechelen. Parking is super convenient and easy in one of the 18 parking spaces under the hotel.",
-  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un grand parking souterrain avec 28 places de parking.",
-  "parking_nl": "Hotel Elisabeth is op elk ogenblik makkelijk bereikbaar in het verkeersarme hart van Mechelen. Parkeren is superhandig en makkelijk op een van de 18 parkeerplaatsen onder het hotel.",
+  "parking_en": "Hotel Elisabeth is easily accessible at all times in the low-traffic heart of Mechelen. Parking is super convenient and easy in one of the parking spaces under the hotel.",
+  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un grand parking souterrain avec des places de parking.",
+  "parking_nl": "Hotel Elisabeth is op elk ogenblik makkelijk bereikbaar in het verkeersarme hart van Mechelen. Parkeren is superhandig en makkelijk op een van de parkeerplaatsen onder het hotel.",
   "setupStyles_en": [
     "U-Shape - max 12 p",
     "Theater Shape - max 18 p"
@@ -65,8 +65,8 @@
   "food_de": "Hotel Elisabeth bietet sorgfältig arrangierte Kaffeepausen, verschiedene Mittagsangebote und optionale Dinnerarrangements als Ergänzung zu Ihrer Tagung oder Veranstaltung.",
   "name_es": "MEETING ROOM ROOFTOP",
   "name_de": "MEETING ROOM ROOFTOP",
-  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en una de las 18 plazas situadas debajo del hotel.",
-  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie auf einem der 18 Stellplätze direkt unter dem Hotel.",
+  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en una de las plazas situadas debajo del hotel.",
+  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie auf einem der Stellplätze direkt unter dem Hotel.",
   "setupStyles_es": [
     "Forma en U - máx. 12 personas",
     "Teatro - máx. 18 personas"
