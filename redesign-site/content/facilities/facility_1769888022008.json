@@ -15,12 +15,16 @@
   "operation_fr": "Bientôt ouvert !",
   "operation_nl": "Binnenkort geopend!",
   "timestamp": 1769888022008,
-  "guidelines_es": [],
-  "guidelines_de": [],
-  "name_es": "",
-  "name_de": "",
-  "operation_es": "",
-  "operation_de": "",
+  "guidelines_es": [
+    "¡Próximamente! Mantente atento."
+  ],
+  "guidelines_de": [
+    "Demnächst verfügbar. Bleiben Sie gespannt."
+  ],
+  "name_es": "SPA",
+  "name_de": "SPA",
+  "operation_es": "¡Próxima apertura!",
+  "operation_de": "Eröffnung in Kürze!",
   "id": "facility_1769888022008",
   "order": 2,
   "gallery": [

@@ -40,12 +40,32 @@
     "operation_fr": "Inscrivez-vous à la réception avec un badge de chambre pour vérifier la disponibilité et activer l'accès.\n\nL'utilisation de la piscine est gratuite pour nos clients de l'hôtel ; il est payant pour les utilisateurs externes et n'est accessible qu'après inscription à l'accueil.\n\nHoraires d'ouverture : Tous les jours de 07h00 à 23h00.\nServiettes : L'utilisation de vos propres serviettes est autorisée. Serviettes disponibles à la réception à 5 € par serviette.\n\nPour plus d'informations, vous pouvez toujours contacter la réception.",
     "operation_nl": "Aanmelden aan het onthaal met kamerbadge om beschikbaarheid te weten en de toegang te activeren.\n\nHet gebruik van het zwembad is gratis voor onze hotelgasten ; voor externe gebruikers is het betalend en pas toegankelijk na registratie aan het onthaal.\n\nOpeningsuren: Dagelijks van 07u00 tot 23u00.\nBadlinnen: Gebruik van eigen handdoeken is toegestaan. Handdoeken te verkrijgen aan het onthaal aan € 5 per handdoek.\n\nVoor meer info kan u steeds terecht aan het onthaal.",
     "timestamp": 1769804810543,
-    "guidelines_es": [],
-    "guidelines_de": [],
-    "name_es": "",
-    "name_de": "",
-    "operation_es": "",
-    "operation_de": ""
+    "guidelines_es": [
+      "Es obligatorio llevar bañador, traje de baño o bikini.",
+      "Dúchate antes de entrar en la piscina.",
+      "Nuestra piscina es un lugar de descanso y tranquilidad, no una zona de juegos. Gracias por respetarlo.",
+      "No correr ni gritar.",
+      "No se permiten juguetes hinchables.",
+      "No está permitido zambullirse; la profundidad es de solo 1,40 m.",
+      "No realizar saltos tipo bomba, especialmente desde la plataforma de descanso.",
+      "No se permite consumir comida ni bebida en la zona de la piscina.",
+      "El hotel no se hace responsable de accidentes."
+    ],
+    "guidelines_de": [
+      "Badehose, Badeanzug oder Bikini sind verpflichtend.",
+      "Bitte zuerst duschen und danach schwimmen.",
+      "Unser Pool ist ein Ort der Ruhe und Zurückhaltung, kein Spielplatz. Bitte respektieren Sie dies.",
+      "Nicht rennen und nicht laut rufen.",
+      "Aufblasbare Spielgeräte sind nicht gestattet.",
+      "Tauchen ist nicht erlaubt; die Tiefe beträgt nur 1,40 m.",
+      "Keine Sprünge ins Wasser, insbesondere nicht von der Ruheplattform.",
+      "Speisen und Getränke sind im Poolbereich nicht gestattet.",
+      "Das Hotel übernimmt keine Haftung für Unfälle."
+    ],
+    "name_es": "PISCINA",
+    "name_de": "POOL",
+    "operation_es": "Regístrate en recepción con la tarjeta de tu habitación para comprobar la disponibilidad y activar el acceso.\n\nEl uso de la piscina es gratuito para los huéspedes del hotel. Para usuarios externos es de pago y solo se permite el acceso tras registrarse en recepción.\n\nHorario: todos los días de 07:00 a 23:00.\nToallas: puedes utilizar tus propias toallas. También hay toallas disponibles en recepción por 5 € por unidad.\n\nPara más información, puedes dirigirte en cualquier momento a recepción.",
+    "operation_de": "Melden Sie sich mit Ihrer Zimmerkarte an der Rezeption an, um die Verfügbarkeit zu prüfen und den Zugang freischalten zu lassen.\n\nDie Nutzung des Pools ist für Hotelgäste kostenlos. Externe Gäste zahlen eine Gebühr und erhalten Zugang ausschließlich nach Anmeldung an der Rezeption.\n\nÖffnungszeiten: täglich von 07:00 bis 23:00 Uhr.\nHandtücher: Eigene Handtücher dürfen verwendet werden. Handtücher sind außerdem an der Rezeption für 5 € pro Stück erhältlich.\n\nFür weitere Informationen steht Ihnen die Rezeption jederzeit gerne zur Verfügung."
   },
   "facility_1769888022008": {
     "guidelines_en": [
@@ -64,11 +84,15 @@
     "operation_fr": "Bientôt ouvert !",
     "operation_nl": "Binnenkort geopend!",
     "timestamp": 1769888022008,
-    "guidelines_es": [],
-    "guidelines_de": [],
-    "name_es": "",
-    "name_de": "",
-    "operation_es": "",
-    "operation_de": ""
+    "guidelines_es": [
+      "¡Próximamente! Mantente atento."
+    ],
+    "guidelines_de": [
+      "Demnächst verfügbar. Bleiben Sie gespannt."
+    ],
+    "name_es": "SPA",
+    "name_de": "SPA",
+    "operation_es": "¡Próxima apertura!",
+    "operation_de": "Eröffnung in Kürze!"
   }
 }

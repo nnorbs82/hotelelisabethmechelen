@@ -3,64 +3,64 @@
     "en": "Check-in is possible from 3 PM\nA valid credit or debit card is required at check-in, or a €200 security deposit must be paid until the day of check-out.",
     "nl": "Mogelijk vanaf 15u00\nOp aanvraag en indien kamer reeds gepoetst, vroeger\nBij het inchecken is een geldige creditcard of debetkaart vereist, of er dient een waarborg van €200 te worden betaald tot de dag van uitchecken.",
     "fr": "Check-in possible à partir de 15h\nUne carte de crédit ou de débit valide est requise lors de l’enregistrement, ou un dépôt de garantie de 200 € devra être versé jusqu’au jour du départ.",
-    "es": "",
-    "de": ""
+    "es": "El check-in es posible a partir de las 15:00.\nSe requiere una tarjeta de crédito o débito válida al hacer el check-in, o deberá abonarse un depósito de seguridad de 200 € hasta el día de salida.",
+    "de": "Der Check-in ist ab 15:00 Uhr möglich.\nBeim Check-in ist eine gültige Kredit- oder Debitkarte erforderlich. Alternativ muss bis zum Abreisetag eine Kaution von 200 € hinterlegt werden."
   },
   "checkout": {
     "en": "During both weekdays and weekends, we kindly ask that rooms be vacated by 11:00 AM at the latest. In case of a later departure, an additional overnight charge may apply.",
     "nl": "Zowel op weekdagen als in het weekend verzoeken wij u vriendelijk de kamer uiterlijk om 11:00 uur te verlaten. Bij een later vertrek kan een extra overnachting in rekening worden gebracht.",
     "fr": "En semaine comme le week-end, nous vous prions de bien vouloir libérer votre chambre au plus tard à 11h00. En cas de départ tardif, une nuit supplémentaire pourra être facturée.",
-    "es": "",
-    "de": ""
+    "es": "Tanto entre semana como durante el fin de semana, te pedimos que dejes la habitación como muy tarde a las 11:00. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
+    "de": "Sowohl unter der Woche als auch am Wochenende bitten wir Sie, das Zimmer spätestens um 11:00 Uhr zu verlassen. Bei einer späteren Abreise kann eine zusätzliche Übernachtung berechnet werden."
   },
   "breakfast": {
     "en": "WEEK: 7 am – 10 am\nWEEKEND: 7 am – 11 am",
     "nl": "Weekdagen: van 07u00 tot ten laatste 10u00\n\nWeekend: van 07u00 tot ten laatste 11u00",
     "fr": "SEMAINE : 7h – 10h\nWEEK-END : 7h – 11h",
-    "es": "",
-    "de": ""
+    "es": "ENTRE SEMANA: 07:00 - 10:00\nFIN DE SEMANA: 07:00 - 11:00",
+    "de": "WOCHENTAGS: 07:00 - 10:00 Uhr\nWOCHENENDE: 07:00 - 11:00 Uhr"
   },
   "parking": {
     "en": "If you’d like the comfort of a car park under the hotel, please say hello at the reception first. Your license plate will be registered, and you’re assigned a numbered place.  \n\nPlease note that while the hotel offers a number of parking spaces, availability is limited. As such, parking is provided on a first-come, first-served basis. Parking can also be booked in advance by contacting our front desk team. Thank you for your understanding.\n\nOn the check-out date, the car should be removed from the parking latest by 2 PM! We appreciate your understanding.\n\n€24/24h ",
     "nl": "Als u het comfort van een parkeerplaats onder het hotel wenst, kom dan eerst even bij de receptie langs. \n\nUw kenteken wordt geregistreerd en u krijgt een genummerde parkeerplaats toegewezen. \n\nHoud er rekening mee dat het hotel wel over een aantal parkeerplaatsen beschikt, maar dat de beschikbaarheid beperkt is. Daarom worden parkeerplaatsen aangeboden op basis van wie het eerst komt, het eerst maalt. Parkeren kan ook vooraf worden gereserveerd door contact op te nemen met ons receptieteam. Bedankt voor uw begrip.\n\nLet wel, op de uitcheckdatum dient u de parkeerplaats ten lààtste om 14:00 uur weer vrij te maken! Dank voor uw begrip.\n\n€24/24u\n",
     "fr": "Si vous souhaitez profiter du confort d’un parking situé sous l’hôtel, veuillez d’abord vous présenter à la réception. Votre plaque d’immatriculation sera enregistrée et une place de parking numérotée vous sera attribuée.\n\nVeuillez noter que l’hôtel dispose d’un certain nombre de places de parking, mais que celles-ci sont limitées. Le parking est donc attribué selon le principe du premier arrivé, premier servi. Il est également possible de réserver une place de parking à l’avance en contactant notre équipe de réception. Merci de votre compréhension.\n\nLe jour du départ, le véhicule doit être retiré du parking au plus tard à 14h00. Nous vous remercions de votre compréhension.\n\n24 € / 24h",
-    "es": "",
-    "de": ""
+    "es": "Si deseas la comodidad de aparcar debajo del hotel, pasa primero por recepción. Registraremos tu matrícula y te asignaremos una plaza numerada.\n\nTen en cuenta que el hotel dispone de un número limitado de plazas. Por ello, el aparcamiento se ofrece por orden de llegada. También puede reservarse con antelación contactando con recepción. Gracias por tu comprensión.\n\nEl día de salida, el vehículo deberá retirarse del aparcamiento como muy tarde a las 14:00. Gracias por tu comprensión.\n\n24 € / 24 h",
+    "de": "Wenn Sie den Komfort unseres Parkplatzes unter dem Hotel nutzen möchten, melden Sie sich bitte zuerst an der Rezeption. Ihr Kennzeichen wird registriert und Ihnen wird ein nummerierter Stellplatz zugewiesen.\n\nBitte beachten Sie, dass das Hotel nur über eine begrenzte Anzahl an Parkplätzen verfügt. Die Vergabe erfolgt daher nach Verfügbarkeit. Ein Parkplatz kann auch im Voraus über unser Rezeptionsteam reserviert werden. Vielen Dank für Ihr Verständnis.\n\nAm Abreisetag muss das Fahrzeug spätestens um 14:00 Uhr aus der Garage entfernt werden. Vielen Dank für Ihr Verständnis.\n\n24 € / 24 Std."
   },
   "traffic": {
     "en": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11am – 6pm  \n\nVAN HOEYSTRAAT  \n\n11am – 6pm  \n\nNB! The registration of your number plate only applies to the Van Hoeystraat, as our parking garage is located there.\n\nWe cannot grant you access to the other streets.\nWe recommend that you enter the centre of Mechelen via the Sint-Katelijnstraat. \n\nttps://www.mechelen.be/autoluw",
     "nl": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11 – 18u  \n\nVAN HOEYSTRAAT  \n\n11 – 18u  \n\nLet op! De registratie van uw nummerplaat geldt enkel voor de Van Hoeystraat vermits onze parkeergarage daar gelegen is.\n\nVoor de andere straten kunnen wij u geen toegang verlenen.\nWij raden u aan het centrum van Mechelen binnen te rijden via de Sint-Katelijnstraat.\n\nttps://www.mechelen.be/autoluw",
     "fr": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11h – 6h \n\nVAN HOEYSTRAAT  \n\n11h – 6h  \n\nNB ! L'enregistrement de votre plaque d'immatriculation ne s'applique qu'à la Van Hoeystraat, car notre parking s'y trouve.\n\nNous ne pouvons pas vous donner accès aux autres rues.\nNous vous recommandons d'entrer dans le centre de Malines par la Sint-Katelijnstraat.",
-    "es": "",
-    "de": ""
+    "es": "SINT-JANSTRAAT Y SINT-JANSKERKHOF\n\n11:00 - 18:00\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00\n\nIMPORTANTE: el registro de tu matrícula solo es válido para Van Hoeystraat, ya que nuestro garaje se encuentra allí.\n\nNo podemos autorizar el acceso a las demás calles.\nRecomendamos entrar en el centro de Malinas por Sint-Katelijnstraat.\n\nttps://www.mechelen.be/autoluw",
+    "de": "SINT-JANSTRAAT UND SINT-JANSKERKHOF\n\n11:00 - 18:00 Uhr\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00 Uhr\n\nWICHTIG: Die Registrierung Ihres Kennzeichens gilt ausschließlich für die Van Hoeystraat, da sich dort unsere Parkgarage befindet.\n\nFür die anderen Straßen können wir keine Zufahrtsgenehmigung erteilen.\nWir empfehlen, über die Sint-Katelijnstraat ins Zentrum von Mechelen zu fahren.\n\nttps://www.mechelen.be/autoluw"
   },
   "camera": {
     "en": "At the beginning of each car-restricted/atomic-free zone, you'll see  a traffic sign stating: NO PASSAGE BETWEEN CERTAIN HOURS AND PERMIT HOLDERS.   \n\nIt is therefore recognisable by a traffic bid with THE SIGN 'C3' WITH THE LIST OF THE EXCEPTIONS BELOW.  If you pass this traffic sign during low-traffic hours without a permit, the camera will register your number plate, and you will receive a fine of 58 euros.  ",
     "nl": "Aan het begin van elke autoluwe/autovrije straat/zone staat een verkeersbord met vermelding: VERBODEN DOORGANG TUSSEN BEPAALDE UREN EN VERGUNNINGHOUDERS.  \n\nHet verkeersbod heeft het teken 'C3' MET DAARONDER DE OPLIJSTING VAN DE UITZONDERINGEN. \nPasseer je dit verkeersbord tijdens de autoluwe uren zonder vergunning, dan registreert de camera jouw nummerplaat en ontvang ",
     "fr": "Si vous Au début de chaque rue/zone sans voiture un panneau de signalisation indique: PASSAGE INTERDIT ENTRE CERTAINES HEURES ET TITULAIRES DE PERMIS. \n\nL'ordre de circulation a le signe C3 AVEC LA LISTE DES EXCEPTIONS EN-DESSOUS. Si vous dépassez ce panneau de signalisation pendant les heures de faible trafic sans permis, la caméra enregistra votre plaque d'immatriculation et vous recevrez une amende de 58 €. ",
-    "es": "",
-    "de": ""
+    "es": "Al comienzo de cada calle o zona de tráfico restringido encontrarás una señal que indica que el paso está prohibido durante determinadas horas, salvo para titulares de una autorización.\n\nLa zona se reconoce por la señal C3, acompañada de la lista de excepciones. Si pasas esta señal durante las horas restringidas sin autorización, la cámara registrará tu matrícula y recibirás una multa de 58 €.",
+    "de": "Am Beginn jeder verkehrsberuhigten oder autofreien Straße bzw. Zone steht ein Verkehrszeichen, das die Durchfahrt zu bestimmten Zeiten untersagt - ausgenommen sind Inhaber einer entsprechenden Genehmigung.\n\nErkennbar ist die Zone am Verkehrszeichen C3 mit der darunter aufgeführten Liste der Ausnahmen. Wenn Sie dieses Schild während der beschränkten Zeiten ohne Genehmigung passieren, wird Ihr Kennzeichen von der Kamera erfasst und es wird ein Bußgeld von 58 € verhängt."
   },
   "services": {
     "en": "- 24-hour front desk\n- Luggage storage\n- Fax/photocopying\n- Ironing service, Shoe shine\n- Internet services\n- Food & drinks\n- Bar\n- Breakfast buffet, Packed lunches",
     "nl": "- 24u. permanentie\n- Beveiligde Bagage-opslag\n- Kopiëren\n- Bar\n- Ontbijt\n- Lunchpakket\n- Spa in aanbouw: sauna-hammam-zwembad",
     "fr": "- Réception ouverte 24h/24\n- Compartiment de bagage\n- Télécopie/photocopie\n- Service de repassage, Cirage de chaussures\n- Services Internet\n- Nourriture et boissons\n- Bar\n- Petit-déjeuner buffet, Paniers-repas",
-    "es": "",
-    "de": ""
+    "es": "- Recepción 24 horas\n- Consigna de equipaje segura\n- Fotocopias\n- Bar\n- Desayuno\n- Almuerzo para llevar\n- Spa en construcción: sauna, hammam y piscina",
+    "de": "- 24-Stunden-Rezeption\n- Sichere Gepäckaufbewahrung\n- Kopierservice\n- Bar\n- Frühstück\n- Lunchpakete\n- Spa im Bau: Sauna, Hammam und Pool"
   },
   "payment": {
     "en": "- Mastercard\n- Visa\n- American Express\n- Bancontact",
     "nl": "- Mastercard\n- Visa\n- American Express\n- Bancontact",
     "fr": "- Mastercard\n- Visa\n- American Express\n- Bancontact",
-    "es": "",
-    "de": ""
+    "es": "- Mastercard\n- Visa\n- American Express\n- Bancontact",
+    "de": "- Mastercard\n- Visa\n- American Express\n- Bancontact"
   },
   "general": {
     "en": "- Non-smoking rooms\n- Accessible Facilities for Guests with Reduced Mobility\n- Family rooms\n- Terrace\n- Meeting Room\n- Centrally located to City Centre",
     "nl": "- Familiekamers (Suites & Triple rooms)\n- Toegankelijke faciliteiten voor gasten met beperkte mobiliteit\n- Olijfboomterras\n- Parkeren onder het hotel\n- Vlàkbij centrum",
     "fr": "- Chambres non-fumeur\n- Installations accessibles pour les personnes à mobilité réduite\n- Chambres familiales\n- Terrasse\n- Salle de réunion\n- Situé au centre-ville\n",
-    "es": "",
-    "de": ""
+    "es": "- Habitaciones para familias, incluidas suites y habitaciones triples\n- Instalaciones accesibles para huéspedes con movilidad reducida\n- Terraza de los olivos\n- Aparcamiento debajo del hotel\n- Muy cerca del centro",
+    "de": "- Familienzimmer, darunter Suiten und Dreibettzimmer\n- Barrierearme Einrichtungen für Gäste mit eingeschränkter Mobilität\n- Olivenbaum-Terrasse\n- Parken unter dem Hotel\n- Direkt in der Nähe des Zentrums"
   },
   "fooddrinks": {
     "en": "",

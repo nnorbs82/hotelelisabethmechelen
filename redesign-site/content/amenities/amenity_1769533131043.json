@@ -3,8 +3,8 @@
   "name_fr": "Station d'accueil",
   "name_nl": "Docking station",
   "timestamp": 1769533131043,
-  "name_es": "",
-  "name_de": "",
+  "name_es": "Estación de conexión",
+  "name_de": "Dockingstation",
   "id": "amenity_1769533131043",
   "order": 3
 }

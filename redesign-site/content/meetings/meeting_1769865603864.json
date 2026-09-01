@@ -48,20 +48,38 @@
     "Theatre-Shape - max 35 p"
   ],
   "timestamp": 1769865603864,
-  "accommodation_es": "",
-  "accommodation_de": "",
-  "description_es": "",
-  "description_de": "",
-  "facilities_es": [],
-  "facilities_de": [],
-  "food_es": "",
-  "food_de": "",
-  "name_es": "",
-  "name_de": "",
-  "parking_es": "",
-  "parking_de": "",
-  "setupStyles_es": [],
-  "setupStyles_de": [],
+  "accommodation_es": "Combina tu reunión con una noche en una de nuestras 66 habitaciones contemporáneas y muy confortables.",
+  "accommodation_de": "Verbinden Sie Ihre Tagung mit einer Übernachtung in einem unserer 66 modern und besonders komfortabel eingerichteten Zimmer.",
+  "description_es": "Bienvenido a nuestra sala de reuniones Oud Huys.\n\nMucho espacio, abundante luz natural y acceso directo a la terraza de los olivos de Hotel Elisabeth.",
+  "description_de": "Willkommen in unserem Tagungsraum Oud Huys.\n\nViel Platz, reichlich Tageslicht und direkt an die Olivenbaum-Terrasse des Hotel Elisabeth angrenzend.",
+  "facilities_es": [
+    "Wi-Fi de alto rendimiento",
+    "Proyector",
+    "Flipchart",
+    "Pizarra blanca",
+    "Posibilidad de oscurecer completamente la sala"
+  ],
+  "facilities_de": [
+    "Leistungsstarkes WLAN",
+    "Projektor",
+    "Flipchart",
+    "Whiteboard",
+    "Vollständig verdunkelbar"
+  ],
+  "food_es": "Hotel Elisabeth ofrece una selección de pausas de café cuidadosamente preparadas, opciones flexibles de almuerzo y, si lo deseas, propuestas para la cena que complementan tu reunión o evento.",
+  "food_de": "Hotel Elisabeth bietet sorgfältig zusammengestellte Kaffeepausen, flexible Mittagsoptionen und auf Wunsch auch Dinnerarrangements als Ergänzung zu Ihrer Tagung oder Veranstaltung.",
+  "name_es": "OUD HUY'S MEETING ROOM",
+  "name_de": "OUD HUY'S MEETING ROOM",
+  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en una de las 18 plazas situadas debajo del hotel.",
+  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie auf einem der 18 Stellplätze direkt unter dem Hotel.",
+  "setupStyles_es": [
+    "Forma en U - máx. 22 personas",
+    "Teatro - máx. 35 personas"
+  ],
+  "setupStyles_de": [
+    "U-Form - max. 22 Personen",
+    "Theaterbestuhlung - max. 35 Personen"
+  ],
   "id": "meeting_1769865603864",
   "order": 1,
   "gallery": [
