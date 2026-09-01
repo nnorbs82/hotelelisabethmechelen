@@ -1,0 +1,41 @@
+name: Format migration content
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/format-migration-content.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Pretty-print JSON migration files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          folder=Path('redesign/legacy-content')
+          for path in folder.glob('*.json'):
+              data=json.loads(path.read_text(encoding='utf-8'))
+              path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/format-migration-content.yml
+
+      - name: Commit formatted migration source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign/legacy-content .github/workflows/format-migration-content.yml
+          git commit -m 'chore: format public migration content'
+          git push origin HEAD:elisabeth-redesign
