@@ -55,10 +55,13 @@
   }
 
   function loadAnalytics(){
-    if (window.__elisabethAnalyticsLoaded) return;
     window[`ga-disable-${GA_ID}`] = false;
     window.dataLayer = window.dataLayer || [];
     window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+    if (window.__elisabethAnalyticsLoaded) {
+      window.gtag('consent','update',{analytics_storage:'granted'});
+      return;
+    }
     window.gtag('consent','default',{analytics_storage:'granted'});
     window.gtag('js',new Date());
     window.gtag('config',GA_ID);
