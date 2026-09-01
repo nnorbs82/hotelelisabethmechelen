@@ -1,0 +1,30 @@
+name: Rebuild current Elisabeth content once
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/rebuild-current-content-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+      - name: Build static content indexes
+        run: python tools/build_redesign_content.py
+      - name: Commit generated indexes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign-site/content/generated
+          git diff --cached --quiet && exit 0
+          git commit -m 'content: rebuild aligned hotel information'
+          git push origin HEAD:elisabeth-redesign
