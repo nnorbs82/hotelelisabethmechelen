@@ -69,6 +69,35 @@ jobs:
           print('Production route and metadata shell validated')
           PY
 
+      - name: Validate final CMS-driven homepage release
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          home=json.loads(Path('dist/content/generated/homepage.json').read_text(encoding='utf-8'))
+          if len(home.get('heroImages',[])) != 4:
+              raise SystemExit(f"Expected 4 active homepage slideshow images, got {len(home.get('heroImages',[]))}")
+          if len(home.get('paceImages',[])) != 3: raise SystemExit('Homepage atmosphere ribbon is incomplete')
+          if len(home.get('facts',[])) != 4: raise SystemExit('Homepage facts are incomplete')
+          for image in home.get('heroImages',[]):
+              value=image.get('image','')
+              if not value.startswith('images/elisabeth/home/'):
+                  raise SystemExit(f'Production homepage image path invalid: {value}')
+              if not Path('dist',value).exists(): raise SystemExit(f'Production homepage image missing: {value}')
+          closing=home.get('closingImage','')
+          if not closing.startswith('images/elisabeth/home/') or not Path('dist',closing).exists():
+              raise SystemExit('Production homepage closing image invalid')
+          html=Path('dist/index.html').read_text(encoding='utf-8')
+          js=Path('dist/assets/home.js').read_text(encoding='utf-8')
+          if 'data-home-manifesto-title' not in html or 'class="hero-total"' not in html:
+              raise SystemExit('Homepage CMS hooks did not survive production assembly')
+          if "homepage: 'content/generated/homepage.json'" not in js:
+              raise SystemExit('Production homepage JS is not reading generated CMS content')
+          if 'setInterval(()=>showHero(heroIndex+1),6500)' not in js:
+              raise SystemExit('Continuous homepage slideshow loop missing')
+          print('Final CMS-driven homepage release validated')
+          PY
+
       - name: Validate production internal references
         run: |
           python - <<'PY'
