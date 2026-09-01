@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  /* hero slideshow - prototype only; actual homepage is CMS-driven in assets/home.js */
   const isRedesignPreview = location.pathname.includes('/redesign-site/');
   const isLegacyPreview = /design-preview-v2\.html$/i.test(location.pathname);
   const corePath = isRedesignPreview ? '../design-preview-v2-core.js' : (isLegacyPreview ? 'design-preview-v2-core.js' : 'assets/design-preview-v2-core.js');
