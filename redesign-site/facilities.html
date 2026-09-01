@@ -11,15 +11,35 @@
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/content-pages.css">
 </head>
-<body class="actual-site content-page">
+<body class="actual-site content-page facilities-signature">
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
   <header class="site-header scrolled"><div class="container-wide header-inner"><a class="brand" data-site-link href="index.html" aria-label="Hotel Elisabeth home"><img src="../logo/elitext.png" alt="Hotel Elisabeth Mechelen"></a><nav class="main-nav" aria-label="Main navigation"><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" aria-current="page" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="index.html#info" data-i18n="nav.info">Info</a><a data-site-link href="index.html#group" data-i18n="nav.group">Group request</a></nav><div class="header-actions"><div class="lang"><button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span> ⌄</button><div class="lang-menu"><button type="button" data-lang="en">English</button><button type="button" data-lang="nl">Nederlands</button><button type="button" data-lang="fr">Français</button><button type="button" data-lang="es">Español</button><button type="button" data-lang="de">Deutsch</button></div></div><a class="btn btn-solid header-book" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button></div></div></header>
   <div class="mobile-menu"><nav><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="index.html#info" data-i18n="nav.info">Info</a><a data-site-link href="index.html#group" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a></nav><div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div></div>
 
   <main>
-    <section class="subhero"><img src="../headers/facilities.webp" alt="Facilities at Hotel Elisabeth Mechelen" fetchpriority="high"><div class="container-wide subhero-content"><p class="eyebrow" data-facility-i18n="eyebrow">Facilities & services</p><h1 class="display" data-facility-i18n="title">Space to switch off.</h1><p data-facility-i18n="intro">The pool and wellness spaces are part of the stay, not an afterthought. Explore the actual facilities, opening information and guest guidelines below.</p></div></section>
-    <section class="content-intro"><div class="container content-intro-grid reveal"><p class="eyebrow" data-facility-i18n="eyebrow">Facilities & services</p><div><h2 class="display" data-facility-i18n="title">Space to switch off.</h2><p data-facility-i18n="intro">The pool and wellness spaces are part of the stay, not an afterthought. Explore the actual facilities, opening information and guest guidelines below.</p></div></div></section>
-    <section class="content-section white"><div class="container-wide"><div class="facility-stack" id="facilities-list"><p class="rooms-loading">Loading facilities…</p></div></div></section>
+    <section class="facilities-opening">
+      <div class="facilities-opening-media"><img src="../headers/facilities.webp" alt="Hotel Elisabeth wellness facilities" fetchpriority="high"><div class="facilities-opening-stamp"><strong>01</strong><span>Hotel Elisabeth<br>Mechelen</span></div></div>
+      <div class="facilities-opening-copy">
+        <p class="eyebrow" data-facility-i18n="eyebrow">Facilities & services</p>
+        <h1 class="display" data-facility-i18n="title">Space to switch off.</h1>
+        <p data-facility-i18n="intro">The pool and wellness spaces are part of the stay, not an afterthought. Explore the actual facilities, opening information and guest guidelines below.</p>
+        <a href="#facility-explorer" class="text-link" data-facility-i18n="explore">Explore the spaces</a>
+      </div>
+    </section>
+
+    <section class="facility-explorer-section" id="facility-explorer">
+      <div class="container-wide">
+        <div class="facility-explorer" id="facilities-list" aria-live="polite"><p class="rooms-loading">Loading facilities…</p></div>
+      </div>
+    </section>
+
+    <section class="facility-breathing-room">
+      <div class="container facility-breathing-grid reveal">
+        <p class="eyebrow" data-facility-i18n="pauseEyebrow">A quieter side of the stay</p>
+        <div><h2 class="display" data-facility-i18n="pauseTitle">From city pace to pool pace.</h2><p data-facility-i18n="pauseBody">Hotel Elisabeth gives you space to move between Mechelen and a slower moment without leaving the building.</p></div>
+      </div>
+    </section>
+
     <section class="interior-booking"><div class="container"><div class="section-head reveal"><p class="eyebrow" data-i18n="booking.note">Direct booking through Mews</p><div><h2 class="display" data-i18n="closing.title">Arrive. Exhale. Stay a little longer.</h2></div></div><form class="booking-panel" onsubmit="return false;"><label class="book-field"><span data-i18n="booking.checkin">Check-in</span><input id="preview-checkin" type="date" aria-label="Check-in"></label><label class="book-field"><span data-i18n="booking.checkout">Check-out</span><input id="preview-checkout" type="date" aria-label="Check-out"></label><div class="book-field guest-field"><span data-i18n="booking.guests">Guests</span><div class="guest-value" tabindex="0">2 adults · 0 children</div><div class="guest-popover"><div class="guest-row"><div><strong data-i18n="booking.adults">Adults</strong><small>13+</small></div><div class="counter"><button type="button" data-counter="adults" data-delta="-1">−</button><span data-count="adults">2</span><button type="button" data-counter="adults" data-delta="1">+</button></div></div><div class="guest-row"><div><strong data-i18n="booking.children">Children</strong><small>0-12</small></div><div class="counter"><button type="button" data-counter="children" data-delta="-1">−</button><span data-count="children">0</span><button type="button" data-counter="children" data-delta="1">+</button></div></div></div></div><button class="booking-submit" id="preview-book" type="button" data-i18n="booking.check">Check availability</button></form></div></section>
   </main>
 
