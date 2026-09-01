@@ -86,7 +86,6 @@ jobs:
               if missing:
                   print(f'NOTICE: {legal_name} still requires reviewed translations for {missing}')
 
-          # Every CMS-native media path used by source records must exist in Git.
           def check_media(value, context):
               if not isinstance(value,str) or not value.startswith('/images/'):
                   return
@@ -121,6 +120,7 @@ jobs:
                   if tag in ('a','link') and d.get('href'): self.refs.append(d['href'])
                   if tag in ('img','script') and d.get('src'): self.refs.append(d['src'])
 
+          external_schemes=('http:','https:','mailto:','tel:','sms:','javascript:','data:')
           for page in pages:
               text=page.read_text(encoding='utf-8')
               HTMLParser().feed(text)
@@ -128,8 +128,10 @@ jobs:
                   raise SystemExit(f'Preview indexing protection missing: {page}')
               parser=Parser(); parser.feed(text)
               for ref in parser.refs:
+                  if not ref or ref.startswith(('#','/')) or ref.startswith(external_schemes):
+                      continue
                   clean=urlsplit(ref).path
-                  if not clean or clean.startswith('/') or clean.startswith(('http:','https:','mailto:','tel:')):
+                  if not clean:
                       continue
                   target=(page.parent/clean).resolve()
                   if not target.exists():
