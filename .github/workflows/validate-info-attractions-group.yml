@@ -1,0 +1,113 @@
+name: Validate info attractions group milestone
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/validate-info-attractions-group.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Tighten group step validation and connect navigation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p=Path('redesign-site/assets/grouprequest.js')
+          s=p.read_text(encoding='utf-8')
+          old="const nav=event.target.closest('[data-group-step-nav]');if(nav){const target=Number(nav.dataset.groupStepNav);if(target<=step||validateStep(step))showStep(target);return;}"
+          new="const nav=event.target.closest('[data-group-step-nav]');if(nav){const target=Number(nav.dataset.groupStepNav);if(target<=step){showStep(target);return;}for(let i=step;i<target;i++){if(!validateStep(i)){showStep(i);return;}}showStep(target);return;}"
+          if old not in s: raise SystemExit('Group step navigation anchor not found')
+          s=s.replace(old,new,1)
+          old="if(!validateStep(3))return;\n    const l=t();"
+          new="for(let i=0;i<4;i++){if(!validateStep(i)){showStep(i);return;}}\n    const l=t();"
+          if old not in s: raise SystemExit('Group submit validation anchor not found')
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+
+          for name in ['index.html','rooms.html','facilities.html','packages.html','meetings.html']:
+              p=Path('redesign-site')/name
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('href="index.html#info"','href="info.html"')
+              s=s.replace('href="index.html#group"','href="grouprequest.html"')
+              p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Validate JavaScript
+        run: |
+          node --check redesign-site/assets/info.js
+          node --check redesign-site/assets/attractions.js
+          node --check redesign-site/assets/grouprequest.js
+
+      - name: Validate source collections and form coverage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          info=json.loads(Path('redesign/legacy-content/hotelInfo.json').read_text(encoding='utf-8'))
+          attractions=json.loads(Path('redesign/legacy-content/attractions.json').read_text(encoding='utf-8'))
+          assert len(info)==10, f'Expected 10 hotel info blocks, found {len(info)}'
+          assert len(attractions)>=5, f'Expected at least 5 attractions, found {len(attractions)}'
+          group=Path('redesign-site/grouprequest.html').read_text(encoding='utf-8')
+          required=['first-name','last-name','email','telephone','checkin-date-group','checkout-date-group','total-guests','single-rooms','twin-rooms','double-rooms','triple-rooms','group-type','meal-option','message','consent']
+          for field in required:
+              assert f'id="{field}"' in group, f'Missing group request field {field}'
+          js=Path('redesign-site/assets/grouprequest.js').read_text(encoding='utf-8')
+          for token in ['service_iu8cxtm','template_3syt07l','emailjs.send','for(let i=0;i<4;i++)']:
+              assert token in js, f'Missing group workflow token {token}'
+          print('Source collections and group workflow validated')
+          PY
+
+      - name: Validate HTML and local references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import re
+          pages=list(Path('redesign-site').glob('*.html'))
+          for p in pages:
+              text=p.read_text(encoding='utf-8')
+              HTMLParser().feed(text)
+              if p.name in {'info.html','attractions.html','grouprequest.html'} and 'noindex,nofollow' not in text.replace(' ',''):
+                  raise SystemExit(f'noindex missing from {p}')
+              for value in re.findall(r'\b(?:src|href)=["\']([^"\']+)["\']',text,re.I):
+                  if value.startswith(('#','http://','https://','mailto:','tel:','data:')): continue
+                  local=(p.parent/value.split('?',1)[0].split('#',1)[0]).resolve()
+                  if value and not local.exists():
+                      raise SystemExit(f'Missing local reference in {p}: {value}')
+          print(f'Validated {len(pages)} redesign pages')
+          PY
+
+      - name: Verify distinct design hooks
+        run: |
+          grep -q 'info-desk-shell' redesign-site/info.html
+          grep -q 'city-journey' redesign-site/attractions.html
+          grep -q 'group-planner-shell' redesign-site/grouprequest.html
+          grep -q 'info-desk-shell' redesign-site/assets/experience-pages.css
+          grep -q 'city-track' redesign-site/assets/experience-pages.css
+          grep -q 'group-planner-shell' redesign-site/assets/experience-pages.css
+
+      - name: Guard production branch
+        run: |
+          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/validate-info-attractions-group.yml
+
+      - name: Commit validated milestone
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'build: connect and validate info attractions group experiences'
+          git push origin HEAD:elisabeth-redesign
