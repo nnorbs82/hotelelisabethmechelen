@@ -9,7 +9,7 @@
 - Hotel Information services and general facilities aligned across all supported languages.
 - Low-traffic access URL, hours and camera guidance repaired.
 - Meeting-room parking copy no longer states a fixed number of parking spaces.
-- Meetings room presentation now uses a paired editorial spread: Oud Huys and Rooftop remain visible together on desktop, each room has its own independent photo carousel and on-image thumbnail strip, and browsing either gallery does not move the page vertically or hide the other room.
+- Meetings room presentation now uses compact asymmetric editorial collages: only three curated images are shown per room on the page, while clicking an image or the photo-count link opens the complete room gallery in a fullscreen lightbox with arrows, thumbnails, keyboard navigation and focus containment.
 - Package, meeting-room, room and attraction content audited for stale or contradictory information.
 - City Suite bathtub amenity corrected after room-detail verification.
 - Current Visit Mechelen links and time-sensitive attraction guidance refreshed.
