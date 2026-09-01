@@ -1,0 +1,72 @@
+/* Mobile viewport containment for the Hotel Elisabeth homepage.
+   Prevents elastic horizontal page drift while preserving all intended vertical motion. */
+
+@media (max-width: 1099px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  body.home-page {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body.home-page main,
+  body.home-page .site-header,
+  body.home-page .mobile-menu,
+  body.home-page .transition-scene,
+  body.home-page .transition-sticky,
+  body.home-page .transition-layer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.home-page .transition-scene,
+  body.home-page .transition-sticky,
+  body.home-page .transition-layer,
+  body.home-page .transition-front,
+  body.home-page .transition-back {
+    transform: none !important;
+  }
+
+  body.home-page .container,
+  body.home-page .container-wide,
+  body.home-page .hero-layout,
+  body.home-page .booking-panel,
+  body.home-page .pace-layout,
+  body.home-page .pace-gallery,
+  body.home-page .facts-strip,
+  body.home-page .home-room-grid,
+  body.home-page .editorial-cards,
+  body.home-page .home-meeting-grid,
+  body.home-page .experience-layout,
+  body.home-page .home-quick-grid,
+  body.home-page .footer-grid {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  body.home-page .pace-shot,
+  body.home-page .home-room-card,
+  body.home-page .editorial-card,
+  body.home-page .home-meeting-card,
+  body.home-page .experience-tabs,
+  body.home-page .experience-media,
+  body.home-page .home-quick-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@supports not (overflow: clip) {
+  @media (max-width: 1099px) {
+    html,
+    body {
+      overflow-x: hidden;
+    }
+  }
+}
