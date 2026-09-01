@@ -1,0 +1,450 @@
+media:
+  - name: room_images
+    label: Room photography
+    input: images/elisabeth/rooms
+    output: /images/elisabeth/rooms
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: package_images
+    label: Package photography
+    input: images/elisabeth/packages
+    output: /images/elisabeth/packages
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: facility_images
+    label: Facilities photography
+    input: images/elisabeth/facilities
+    output: /images/elisabeth/facilities
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: meeting_images
+    label: Meetings photography
+    input: images/elisabeth/meetings
+    output: /images/elisabeth/meetings
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: attraction_images
+    label: Mechelen photography
+    input: images/elisabeth/attractions
+    output: /images/elisabeth/attractions
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: career_images
+    label: Careers photography
+    input: images/elisabeth/careers
+    output: /images/elisabeth/careers
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+
+content:
+  - name: accommodation
+    label: Rooms & accommodation
+    type: group
+    items:
+      - name: amenities
+        label: Room amenities
+        type: collection
+        path: redesign-site/content/amenities
+        format: json
+        filename:
+          template: "{primary}.json"
+          field: false
+        subfolders: false
+        view:
+          primary: name_en
+          fields: [name_en, name_nl, name_fr]
+          sort: [name_en]
+          default: { sort: name_en, order: asc }
+        fields:
+          - { name: id, label: Internal ID, type: string, hidden: true }
+          - { name: order, label: Display order, type: number }
+          - { name: name_en, label: "Name - English", type: string, required: true }
+          - { name: name_nl, label: "Name - Dutch", type: string }
+          - { name: name_fr, label: "Name - French", type: string }
+          - { name: name_es, label: "Name - Spanish", type: string }
+          - { name: name_de, label: "Name - German", type: string }
+
+      - name: rooms
+        label: Rooms & suites
+        type: collection
+        path: redesign-site/content/rooms
+        format: json
+        filename:
+          template: "{primary}.json"
+          field: false
+        subfolders: false
+        view:
+          primary: name_en
+          fields: [name_en, status, order, roomSize, maxOccupancy]
+          sort: [order, name_en]
+          default: { sort: order, order: asc }
+        fields:
+          - { name: id, label: Internal ID, type: string, hidden: true }
+          - { name: order, label: Display order, type: number, required: true }
+          - name: status
+            label: Website status
+            type: select
+            required: true
+            options:
+              values:
+                - { name: available, label: Visible / available }
+                - { name: unavailable, label: Hidden / unavailable }
+          - { name: maxOccupancy, label: Maximum occupancy, type: number }
+          - { name: roomSize, label: Room size in m², type: number }
+          - { name: name_en, label: "Room name - English", type: string, required: true }
+          - { name: name_nl, label: "Room name - Dutch", type: string }
+          - { name: name_fr, label: "Room name - French", type: string }
+          - { name: name_es, label: "Room name - Spanish", type: string }
+          - { name: name_de, label: "Room name - German", type: string }
+          - { name: bedType_en, label: "Bed type - English", type: string }
+          - { name: bedType_nl, label: "Bed type - Dutch", type: string }
+          - { name: bedType_fr, label: "Bed type - French", type: string }
+          - { name: bedType_es, label: "Bed type - Spanish", type: string }
+          - { name: bedType_de, label: "Bed type - German", type: string }
+          - { name: description_en, label: "Description - English", type: text }
+          - { name: description_nl, label: "Description - Dutch", type: text }
+          - { name: description_fr, label: "Description - French", type: text }
+          - { name: description_es, label: "Description - Spanish", type: text }
+          - { name: description_de, label: "Description - German", type: text }
+          - name: amenityIds
+            label: Amenities
+            type: reference
+            options:
+              collection: amenities
+              multiple: true
+              search: "name_en,name_nl,name_fr"
+              value: "{name}"
+              label: "{fields.name_en}"
+          - name: gallery
+            label: Room gallery
+            type: image
+            options:
+              media: room_images
+              multiple: { max: 30 }
+              unique: true
+              extensions: [jpg, jpeg, png, webp]
+          - { name: videoUrl, label: Video URL, type: string }
+
+  - name: offers
+    label: Packages & offers
+    type: collection
+    path: redesign-site/content/packages
+    format: json
+    filename:
+      template: "{primary}.json"
+      field: false
+    subfolders: false
+    view:
+      primary: title_en
+      fields: [title_en, status, showInOurPicks, order]
+      sort: [order, title_en]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: id, label: Internal ID, type: string, hidden: true }
+      - { name: order, label: Display order, type: number, required: true }
+      - name: status
+        label: Website status
+        type: select
+        required: true
+        options:
+          values:
+            - { name: active, label: Active }
+            - { name: inactive, label: Inactive }
+      - { name: showInOurPicks, label: Show on homepage, type: boolean }
+      - { name: title_en, label: "Title - English", type: string, required: true }
+      - { name: title_nl, label: "Title - Dutch", type: string }
+      - { name: title_fr, label: "Title - French", type: string }
+      - { name: title_es, label: "Title - Spanish", type: string }
+      - { name: title_de, label: "Title - German", type: string }
+      - { name: description_en, label: "Description - English", type: text }
+      - { name: description_nl, label: "Description - Dutch", type: text }
+      - { name: description_fr, label: "Description - French", type: text }
+      - { name: description_es, label: "Description - Spanish", type: text }
+      - { name: description_de, label: "Description - German", type: text }
+      - { name: inclusions_en, label: "Inclusions - English", type: text }
+      - { name: inclusions_nl, label: "Inclusions - Dutch", type: text }
+      - { name: inclusions_fr, label: "Inclusions - French", type: text }
+      - { name: inclusions_es, label: "Inclusions - Spanish", type: text }
+      - { name: inclusions_de, label: "Inclusions - German", type: text }
+      - { name: goodToKnow_en, label: "Good to know - English", type: text }
+      - { name: goodToKnow_nl, label: "Good to know - Dutch", type: text }
+      - { name: goodToKnow_fr, label: "Good to know - French", type: text }
+      - { name: goodToKnow_es, label: "Good to know - Spanish", type: text }
+      - { name: goodToKnow_de, label: "Good to know - German", type: text }
+      - name: image
+        label: Main package image
+        type: image
+        options: { media: package_images, extensions: [jpg, jpeg, png, webp] }
+      - { name: imageUrl, label: Legacy image URL, type: string, hidden: true }
+      - { name: bookingLink, label: Mews package booking URL, type: string }
+
+  - name: facilities
+    label: Facilities
+    type: collection
+    path: redesign-site/content/facilities
+    format: json
+    filename:
+      template: "{primary}.json"
+      field: false
+    subfolders: false
+    view:
+      primary: name_en
+      fields: [name_en, order]
+      sort: [order, name_en]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: id, label: Internal ID, type: string, hidden: true }
+      - { name: order, label: Display order, type: number, required: true }
+      - { name: name_en, label: "Name - English", type: string, required: true }
+      - { name: name_nl, label: "Name - Dutch", type: string }
+      - { name: name_fr, label: "Name - French", type: string }
+      - { name: name_es, label: "Name - Spanish", type: string }
+      - { name: name_de, label: "Name - German", type: string }
+      - { name: operation_en, label: "Practical information - English", type: text }
+      - { name: operation_nl, label: "Practical information - Dutch", type: text }
+      - { name: operation_fr, label: "Practical information - French", type: text }
+      - { name: operation_es, label: "Practical information - Spanish", type: text }
+      - { name: operation_de, label: "Practical information - German", type: text }
+      - { name: guidelines_en, label: "Guest guidelines - English", type: string, list: true }
+      - { name: guidelines_nl, label: "Guest guidelines - Dutch", type: string, list: true }
+      - { name: guidelines_fr, label: "Guest guidelines - French", type: string, list: true }
+      - { name: guidelines_es, label: "Guest guidelines - Spanish", type: string, list: true }
+      - { name: guidelines_de, label: "Guest guidelines - German", type: string, list: true }
+      - name: gallery
+        label: Facility gallery
+        type: image
+        options:
+          media: facility_images
+          multiple: { max: 30 }
+          unique: true
+          extensions: [jpg, jpeg, png, webp]
+      - { name: legacyPhotos, label: Legacy photo records, type: object, list: true, hidden: true, fields: [{ name: url, type: string }, { name: filename, type: string }, { name: order, type: number }] }
+
+  - name: meetings
+    label: Meetings & events
+    type: collection
+    path: redesign-site/content/meetings
+    format: json
+    filename:
+      template: "{primary}.json"
+      field: false
+    subfolders: false
+    view:
+      primary: name_en
+      fields: [name_en, order]
+      sort: [order, name_en]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: id, label: Internal ID, type: string, hidden: true }
+      - { name: order, label: Display order, type: number, required: true }
+      - { name: name_en, label: "Name - English", type: string, required: true }
+      - { name: name_nl, label: "Name - Dutch", type: string }
+      - { name: name_fr, label: "Name - French", type: string }
+      - { name: name_es, label: "Name - Spanish", type: string }
+      - { name: name_de, label: "Name - German", type: string }
+      - { name: description_en, label: "Description - English", type: text }
+      - { name: description_nl, label: "Description - Dutch", type: text }
+      - { name: description_fr, label: "Description - French", type: text }
+      - { name: description_es, label: "Description - Spanish", type: text }
+      - { name: description_de, label: "Description - German", type: text }
+      - { name: setupStyles_en, label: "Room layouts - English", type: string, list: true }
+      - { name: setupStyles_nl, label: "Room layouts - Dutch", type: string, list: true }
+      - { name: setupStyles_fr, label: "Room layouts - French", type: string, list: true }
+      - { name: setupStyles_es, label: "Room layouts - Spanish", type: string, list: true }
+      - { name: setupStyles_de, label: "Room layouts - German", type: string, list: true }
+      - { name: facilities_en, label: "Equipment - English", type: string, list: true }
+      - { name: facilities_nl, label: "Equipment - Dutch", type: string, list: true }
+      - { name: facilities_fr, label: "Equipment - French", type: string, list: true }
+      - { name: facilities_es, label: "Equipment - Spanish", type: string, list: true }
+      - { name: facilities_de, label: "Equipment - German", type: string, list: true }
+      - { name: food_en, label: "Food & drink - English", type: text }
+      - { name: food_nl, label: "Food & drink - Dutch", type: text }
+      - { name: food_fr, label: "Food & drink - French", type: text }
+      - { name: food_es, label: "Food & drink - Spanish", type: text }
+      - { name: food_de, label: "Food & drink - German", type: text }
+      - { name: parking_en, label: "Parking - English", type: text }
+      - { name: parking_nl, label: "Parking - Dutch", type: text }
+      - { name: parking_fr, label: "Parking - French", type: text }
+      - { name: parking_es, label: "Parking - Spanish", type: text }
+      - { name: parking_de, label: "Parking - German", type: text }
+      - { name: accommodation_en, label: "Accommodation - English", type: text }
+      - { name: accommodation_nl, label: "Accommodation - Dutch", type: text }
+      - { name: accommodation_fr, label: "Accommodation - French", type: text }
+      - { name: accommodation_es, label: "Accommodation - Spanish", type: text }
+      - { name: accommodation_de, label: "Accommodation - German", type: text }
+      - name: gallery
+        label: Meeting-space gallery
+        type: image
+        options:
+          media: meeting_images
+          multiple: { max: 30 }
+          unique: true
+          extensions: [jpg, jpeg, png, webp]
+      - { name: videoUrl, label: Video URL, type: string }
+      - { name: legacyPhotos, label: Legacy photo records, type: object, list: true, hidden: true, fields: [{ name: url, type: string }, { name: filename, type: string }, { name: order, type: number }] }
+
+  - name: city
+    label: Explore Mechelen
+    type: collection
+    path: redesign-site/content/attractions
+    format: json
+    filename:
+      template: "{primary}.json"
+      field: false
+    subfolders: false
+    view:
+      primary: title_en
+      fields: [title_en, order]
+      sort: [order, title_en]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: id, label: Internal ID, type: string, hidden: true }
+      - { name: order, label: Display order, type: number, required: true }
+      - { name: title_en, label: "Title - English", type: string, required: true }
+      - { name: title_nl, label: "Title - Dutch", type: string }
+      - { name: title_fr, label: "Title - French", type: string }
+      - { name: title_es, label: "Title - Spanish", type: string }
+      - { name: title_de, label: "Title - German", type: string }
+      - { name: description_en, label: "Description - English", type: text }
+      - { name: description_nl, label: "Description - Dutch", type: text }
+      - { name: description_fr, label: "Description - French", type: text }
+      - { name: description_es, label: "Description - Spanish", type: text }
+      - { name: description_de, label: "Description - German", type: text }
+      - name: imageFile
+        label: Attraction image
+        type: image
+        options: { media: attraction_images, extensions: [jpg, jpeg, png, webp] }
+      - { name: image, label: Legacy image record, type: object, hidden: true, fields: [{ name: filename, type: string }, { name: url, type: string }] }
+      - { name: link, label: External information URL, type: string }
+
+  - name: hotel_information
+    label: Hotel information
+    type: file
+    path: redesign-site/content/hotel-info.json
+    format: json
+    fields:
+      - name: entries
+        label: Information topics
+        type: object
+        list: true
+        fields:
+          - { name: id, label: Internal ID, type: string, readonly: true }
+          - { name: order, label: Display order, type: number }
+          - { name: title_en, label: "Heading - English", type: string }
+          - { name: body_en, label: "Content - English", type: text }
+          - { name: title_nl, label: "Heading - Dutch", type: string }
+          - { name: body_nl, label: "Content - Dutch", type: text }
+          - { name: title_fr, label: "Heading - French", type: string }
+          - { name: body_fr, label: "Content - French", type: text }
+          - { name: title_es, label: "Heading - Spanish", type: string }
+          - { name: body_es, label: "Content - Spanish", type: text }
+          - { name: title_de, label: "Heading - German", type: string }
+          - { name: body_de, label: "Content - German", type: text }
+
+  - name: careers
+    label: Careers
+    type: collection
+    path: redesign-site/content/careers
+    exclude: [.gitkeep]
+    format: json
+    filename:
+      template: "{primary}.json"
+      field: false
+    subfolders: false
+    view:
+      primary: title
+      fields: [title, department, type, status, order]
+      sort: [order, title]
+      default: { sort: order, order: asc }
+    fields:
+      - { name: id, label: Internal ID, type: string, hidden: true }
+      - { name: order, label: Display order, type: number }
+      - name: status
+        label: Website status
+        type: select
+        required: true
+        options:
+          values:
+            - { name: active, label: Active }
+            - { name: inactive, label: Inactive }
+      - { name: title, label: Job title, type: string, required: true }
+      - name: type
+        label: Employment type
+        type: select
+        options:
+          values: [Full-time, Part-time, Contract, Temporary, Internship]
+      - { name: department, label: Department, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: description, label: Description, type: text }
+      - { name: requirements, label: Requirements, type: text }
+      - name: image
+        label: Optional job image
+        type: image
+        options: { media: career_images, extensions: [jpg, jpeg, png, webp] }
+
+  - name: legal
+    label: Legal
+    type: group
+    items:
+      - name: privacy
+        label: Privacy Policy
+        type: file
+        path: redesign-site/content/privacy.json
+        format: json
+        fields:
+          - name: en
+            label: English
+            type: rich-text
+            options: { format: html, media: false }
+          - name: nl
+            label: Dutch
+            type: rich-text
+            options: { format: html, media: false }
+          - name: fr
+            label: French
+            type: rich-text
+            options: { format: html, media: false }
+          - name: es
+            label: Spanish
+            type: rich-text
+            options: { format: html, media: false }
+          - name: de
+            label: German
+            type: rich-text
+            options: { format: html, media: false }
+
+      - name: terms
+        label: Terms & Conditions
+        type: file
+        path: redesign-site/content/terms.json
+        format: json
+        fields:
+          - name: en
+            label: English
+            type: rich-text
+            options: { format: html, media: false }
+          - name: nl
+            label: Dutch
+            type: rich-text
+            options: { format: html, media: false }
+          - name: fr
+            label: French
+            type: rich-text
+            options: { format: html, media: false }
+          - name: es
+            label: Spanish
+            type: rich-text
+            options: { format: html, media: false }
+          - name: de
+            label: German
+            type: rich-text
+            options: { format: html, media: false }
+
+settings:
+  commit:
+    identity: app
+    templates:
+      create: "content: create {path}"
+      update: "content: update {path}"
+      delete: "content: delete {path}"
+      rename: "content: rename {oldPath} to {newPath}"
