@@ -1,0 +1,102 @@
+name: Technical site polish once
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/technical-site-polish-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Apply site accessibility fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace(path, old, new):
+              p=Path(path)
+              text=p.read_text(encoding='utf-8')
+              if old not in text:
+                  raise SystemExit(f'Expected text not found in {path}: {old[:100]}')
+              p.write_text(text.replace(old,new),encoding='utf-8')
+
+          replace(
+              'redesign-site/assets/meetings.js',
+              "    const date=document.getElementById('meetingDate');if(date)date.min=new Date().toISOString().split('T')[0];",
+              "    const date=document.getElementById('meetingDate');if(date){const now=new Date();date.min=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;}"
+          )
+          replace(
+              'redesign-site/assets/meetings.js',
+              "document.querySelector(`[data-meeting-thumb=\"${next}\"][data-meeting=\"${CSS.escape(id)}\"]`)?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});",
+              "document.querySelector(`[data-meeting-thumb=\"${next}\"][data-meeting=\"${CSS.escape(id)}\"]`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest',inline:'center'});"
+          )
+          replace(
+              'redesign-site/assets/grouprequest.js',
+              "    document.querySelectorAll('.group-step').forEach((node,index)=>node.classList.toggle('active',index===step));\n    document.querySelectorAll('.group-step-nav').forEach((node,index)=>{node.classList.toggle('active',index===step);node.classList.toggle('complete',index<step);});",
+              "    document.querySelectorAll('.group-step').forEach((node,index)=>{const active=index===step;node.classList.toggle('active',active);node.setAttribute('aria-hidden',String(!active));});\n    document.querySelectorAll('.group-step-nav').forEach((node,index)=>{const active=index===step;node.classList.toggle('active',active);node.classList.toggle('complete',index<step);if(active)node.setAttribute('aria-current','step');else node.removeAttribute('aria-current');});"
+          )
+          replace(
+              'redesign-site/assets/grouprequest.js',
+              "      alert(t().invalidPhone);document.getElementById('telephone')?.focus();return false;",
+              "      const status=document.getElementById('group-status');if(status){status.textContent=t().invalidPhone;status.className='group-status show error';}document.getElementById('telephone')?.focus();return false;"
+          )
+
+          group_replacements={
+            "Tell us the shape of the group first. We will collect the room mix, occasion and contact details step by step - without removing anything from the current request.":"Travelling with colleagues, family, friends or a tour group? Share your dates, group size and room needs and our team will prepare a proposal for your stay.",
+            "Vertel ons eerst hoe de groep eruitziet. We verzamelen stap voor stap de kamerindeling, gelegenheid en contactgegevens - zonder iets uit de huidige aanvraag te schrappen.":"Reist u met collega’s, familie, vrienden of een reisgroep? Deel uw data, groepsgrootte en kamerwensen en ons team maakt een voorstel voor uw verblijf.",
+            "Commencez par nous décrire le groupe. Nous recueillons ensuite étape par étape la répartition des chambres, l’occasion et vos coordonnées, sans supprimer aucun élément de la demande actuelle.":"Vous voyagez avec des collègues, en famille, entre amis ou en groupe organisé ? Indiquez vos dates, le nombre de personnes et vos besoins en chambres, et notre équipe préparera une proposition.",
+            "Cuéntanos primero cómo es el grupo. Recogeremos paso a paso la distribución de habitaciones, la ocasión y los datos de contacto, sin eliminar nada de la solicitud actual.":"¿Viajas con compañeros, familia, amigos o un grupo organizado? Indícanos las fechas, el número de huéspedes y las habitaciones que necesitas, y nuestro equipo preparará una propuesta.",
+            "Beschreiben Sie uns zuerst die Gruppe. Zimmeraufteilung, Anlass und Kontaktdaten erfassen wir Schritt für Schritt, ohne etwas aus der bestehenden Anfrage zu entfernen.":"Reisen Sie mit Kollegen, Familie, Freunden oder einer Reisegruppe? Teilen Sie uns Ihre Daten, Gruppengröße und Zimmerwünsche mit, und unser Team erstellt ein passendes Angebot."
+          }
+          gp=Path('redesign-site/assets/grouprequest.js')
+          gt=gp.read_text(encoding='utf-8')
+          for old,new in group_replacements.items():
+              if old not in gt: raise SystemExit(f'Missing group fallback text: {old[:60]}')
+              gt=gt.replace(old,new)
+          gp.write_text(gt,encoding='utf-8')
+
+          replace(
+              'redesign-site/assets/home.js',
+              "    if(heroSlides.length>1) heroTimer=setInterval(()=>showHero(heroIndex+1),6500);",
+              "    if(heroSlides.length>1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroTimer=setInterval(()=>showHero(heroIndex+1),6500);"
+          )
+          replace(
+              'design-preview-v2.js',
+              "      slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);",
+              "      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);"
+          )
+
+          css=Path('redesign-site/assets/site.css')
+          text=css.read_text(encoding='utf-8')
+          marker='/* Accessibility focus treatment */'
+          if marker not in text:
+              text += "\n\n/* Accessibility focus treatment */\n.actual-site :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #c9ccb7!important;outline-offset:3px!important}\n.actual-site .pace-shot:focus-visible{outline-color:#fff!important;outline-offset:-4px!important}\n"
+              css.write_text(text,encoding='utf-8')
+          PY
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check redesign-site/assets/meetings.js
+          node --check redesign-site/assets/grouprequest.js
+          node --check redesign-site/assets/home.js
+          node --check design-preview-v2.js
+
+      - name: Commit site fixes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign-site/assets/meetings.js redesign-site/assets/grouprequest.js redesign-site/assets/home.js redesign-site/assets/site.css design-preview-v2.js
+          git diff --cached --quiet && exit 0
+          git commit -m 'qa: improve accessibility and local date handling'
+          git push origin HEAD:elisabeth-redesign
