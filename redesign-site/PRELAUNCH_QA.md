@@ -9,6 +9,7 @@
 - Hotel Information services and general facilities aligned across all supported languages.
 - Low-traffic access URL, hours and camera guidance repaired.
 - Meeting-room parking copy no longer states a fixed number of parking spaces.
+- Meetings room presentation redesigned as a horizontal editorial gallery: room switching happens above one full-width image stage, the entire photo filmstrip and arrows stay inside the image, capacities are overlaid on the image and practical details open as an in-place drawer without expanding the page.
 - Package, meeting-room, room and attraction content audited for stale or contradictory information.
 - City Suite bathtub amenity corrected after room-detail verification.
 - Current Visit Mechelen links and time-sensitive attraction guidance refreshed.
