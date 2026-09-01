@@ -27,10 +27,10 @@
 - Missing meta descriptions corrected on Careers, Hotel Policies, Privacy Policy and Terms & Conditions.
 - Mews booking links and EmailJS meeting/group integrations remain covered by production validation.
 - Firebase Storage is absent from the active production assembly.
+- Final mobile visual QA completed across the redesign after the Home, Hotel Information and Meetings horizontal-drift fixes. Shared mobile viewport containment now protects all guest-facing redesign pages while preserving intentional component scrollers, and the final phone check was approved on 1 September 2026.
 
 ## Still required before launch
 
-- Recheck the Hotel Information page on mobile after the topic-list overflow fix, then complete the final mobile visual QA sign-off.
 - Final human/legal review of translated Privacy Policy and Terms & Conditions.
 - Explicit launch approval before any change to `main`, CNAME, GitHub Pages or Firebase.
 - Post-launch verification before retiring the legacy Firebase backup.
