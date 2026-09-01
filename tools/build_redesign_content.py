@@ -189,14 +189,16 @@ def normalize_hotel_info(entry_id: str, values: dict):
             "en": "Check-out is by 11:00 AM on both weekdays and weekends. In case of a later departure, an additional overnight charge may apply.",
             "nl": "Uitchecken is zowel op weekdagen als in het weekend uiterlijk om 11:00 uur. Bij een later vertrek kan een extra overnachting in rekening worden gebracht.",
             "fr": "Le départ est prévu au plus tard à 11h00, en semaine comme le week-end. En cas de départ tardif, une nuit supplémentaire pourra être facturée.",
-            "es": "El check-out es como muy tarde a las 11:00, tanto entre semana como durante el fin de semana. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
+            "es": "El check-out es como muy tarde a las 11:00, tanto entre semana als tijdens het fin de semana. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
             "de": "Der Check-out ist sowohl an Wochentagen als auch am Wochenende spätestens um 11:00 Uhr. Bei einer späteren Abreise kann eine zusätzliche Übernachtung berechnet werden.",
         }
     elif entry_id == "traffic":
         values = {lang: value.replace("ttps://www.mechelen.be/autoluw", "https://www.mechelen.be/autoluw") for lang, value in values.items()}
         values["fr"] = values["fr"].replace("11h – 6h", "11h – 18h")
     elif entry_id == "camera":
+        values["en"] = "At the beginning of each low-traffic or car-free street or zone, you will see a traffic sign indicating that passage is prohibited during certain hours except for permit holders.\n\nThe zone is identified by traffic sign C3 with the applicable exceptions listed below it. If you pass this sign during restricted hours without authorization, the camera will register your number plate and you may receive a €58 fine."
         values["nl"] = "Aan het begin van elke autoluwe/autovrije straat of zone staat een verkeersbord dat de doorgang tijdens bepaalde uren verbiedt, behalve voor vergunninghouders.\n\nDe zone is herkenbaar aan verkeersbord C3 met daaronder de uitzonderingen. Passeert u dit bord tijdens de autoluwe uren zonder vergunning, dan registreert de camera uw nummerplaat en ontvangt u een boete van €58."
+        values["fr"] = "Au début de chaque rue ou zone à circulation limitée ou interdite aux voitures, un panneau indique que le passage est interdit pendant certaines heures, sauf pour les titulaires d’une autorisation.\n\nLa zone est signalée par le panneau C3, accompagné de la liste des exceptions. Si vous franchissez ce panneau pendant les heures de restriction sans autorisation, la caméra enregistrera votre plaque d’immatriculation et vous pourrez recevoir une amende de 58 €."
     return values
 
 
