@@ -76,8 +76,8 @@ jobs:
           import json
           from pathlib import Path
           home=json.loads(Path('dist/content/generated/homepage.json').read_text(encoding='utf-8'))
-          if len(home.get('heroImages',[])) != 4:
-              raise SystemExit(f"Expected 4 active homepage slideshow images, got {len(home.get('heroImages',[]))}")
+          if len(home.get('heroImages',[])) != 5:
+              raise SystemExit(f"Expected 5 active homepage slideshow images, got {len(home.get('heroImages',[]))}")
           if len(home.get('paceImages',[])) != 3: raise SystemExit('Homepage atmosphere ribbon is incomplete')
           if len(home.get('facts',[])) != 4: raise SystemExit('Homepage facts are incomplete')
           for image in home.get('heroImages',[]):
