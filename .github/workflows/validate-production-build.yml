@@ -1,0 +1,123 @@
+name: Validate Elisabeth production build
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - 'redesign-site/**'
+      - 'images/elisabeth/**'
+      - 'logo/**'
+      - 'headers/**'
+      - 'mainslide/**'
+      - 'design-preview-v2.css'
+      - 'design-preview-v2.js'
+      - 'tools/build_redesign_content.py'
+      - 'tools/build_production_site.py'
+      - '.github/workflows/validate-production-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-elisabeth-production-build
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+
+      - name: Rebuild content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Assemble production output
+        run: python tools/build_production_site.py dist
+
+      - name: Validate production routes and SEO shell
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          dist=Path('dist')
+          expected=['index.html','rooms.html','facilities.html','packages.html','meetings.html','info.html','attractions.html','grouprequest.html','careers.html','policies.html','privacypolicy.html','termsandconditions.html']
+          for name in expected:
+              path=dist/name
+              if not path.exists(): raise SystemExit(f'Missing production route {name}')
+              text=path.read_text(encoding='utf-8')
+              if 'noindex' in text.lower(): raise SystemExit(f'Production noindex remains in {name}')
+              if 'Development build' in text or 'Isolated redesign' in text: raise SystemExit(f'Development chrome remains in {name}')
+              if '<link rel="canonical" href="https://hotelelisabethmechelen.com' not in text: raise SystemExit(f'Canonical missing in {name}')
+              if '<meta property="og:title"' not in text: raise SystemExit(f'OpenGraph metadata missing in {name}')
+              HTMLParser().feed(text)
+          if (dist/'privacy.html').exists() or (dist/'terms.html').exists():
+              raise SystemExit('Non-canonical legal routes leaked into production output')
+          home=(dist/'index.html').read_text(encoding='utf-8')
+          match=re.search(r'<script type="application/ld\+json">(.*?)</script>',home,re.S)
+          if not match: raise SystemExit('Hotel structured data missing')
+          schema=json.loads(match.group(1))
+          if schema.get('telephone') != '+32 15 28 84 00': raise SystemExit('Hotel schema telephone incorrect')
+          address=schema.get('address',{})
+          if address.get('streetAddress') != 'Goswin de Stassartstraat 26/28' or address.get('postalCode') != '2800':
+              raise SystemExit('Hotel schema address incorrect')
+          print('Production route and metadata shell validated')
+          PY
+
+      - name: Validate production internal references
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          dist=Path('dist')
+          class P(HTMLParser):
+              def __init__(self): super().__init__(); self.refs=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  for key in ('href','src'):
+                      if d.get(key): self.refs.append(d[key])
+          schemes=('http:','https:','mailto:','tel:','sms:','javascript:','data:')
+          for page in dist.glob('*.html'):
+              p=P(); p.feed(page.read_text(encoding='utf-8'))
+              for ref in p.refs:
+                  if not ref or ref.startswith(('#','/')) or ref.startswith(schemes): continue
+                  clean=urlsplit(ref).path
+                  if not clean: continue
+                  target=(page.parent/clean).resolve()
+                  if not target.exists(): raise SystemExit(f'Broken production reference in {page.name}: {ref}')
+          print('Production internal references validated')
+          PY
+
+      - name: Validate runtime paths and search files
+        run: |
+          if grep -R -n 'firebasestorage.googleapis.com' dist; then
+            echo 'Firebase Storage dependency remains in production output' >&2
+            exit 1
+          fi
+          if grep -R -n '../headers\|../mainslide\|../images\|../logo' dist --include='*.js' --include='*.html' --include='*.json'; then
+            echo 'Preview parent-relative runtime path remains in production output' >&2
+            exit 1
+          fi
+          grep -q 'Sitemap: https://hotelelisabethmechelen.com/sitemap.xml' dist/robots.txt
+          grep -q '<loc>https://hotelelisabethmechelen.com/rooms.html</loc>' dist/sitemap.xml
+          grep -q '<loc>https://hotelelisabethmechelen.com/privacypolicy.html</loc>' dist/sitemap.xml
+          grep -q 'privacypolicy.html' dist/meetings.html
+          grep -q 'termsandconditions.html' dist/index.html
+
+      - name: Validate form and booking integrations survive release build
+        run: |
+          grep -R -q 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e' dist
+          grep -q 'service_iu8cxtm' dist/assets/meetings.js
+          grep -q 'template_8txu2md' dist/assets/meetings.js
+          grep -q 'service_iu8cxtm' dist/assets/grouprequest.js
+          grep -q 'template_3syt07l' dist/assets/grouprequest.js
+
+      - name: Guard live production branch
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
