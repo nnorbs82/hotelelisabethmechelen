@@ -34,7 +34,7 @@ jobs:
           import json
           from pathlib import Path
           folder=Path('redesign-site/content/generated')
-          required=['rooms.json','packages.json','facilities.json','facilitiesLibrary.json','meetings.json','meetingsPhotos.json','attractions.json','careers.json','amenitiesMaster.json','hotelInfo.json','privacyPolicy.json','termsAndConditions.json']
+          required=['homepage.json','rooms.json','packages.json','facilities.json','facilitiesLibrary.json','meetings.json','meetingsPhotos.json','attractions.json','careers.json','amenitiesMaster.json','hotelInfo.json','privacyPolicy.json','termsAndConditions.json']
           for name in required:
               path=folder/name
               if not path.exists(): raise SystemExit(f'Missing {path}')
