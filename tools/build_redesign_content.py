@@ -189,7 +189,7 @@ def normalize_hotel_info(entry_id: str, values: dict):
             "en": "Check-out is by 11:00 AM on both weekdays and weekends. In case of a later departure, an additional overnight charge may apply.",
             "nl": "Uitchecken is zowel op weekdagen als in het weekend uiterlijk om 11:00 uur. Bij een later vertrek kan een extra overnachting in rekening worden gebracht.",
             "fr": "Le départ est prévu au plus tard à 11h00, en semaine comme le week-end. En cas de départ tardif, une nuit supplémentaire pourra être facturée.",
-            "es": "El check-out es como muy tarde a las 11:00, tanto entre semana als tijdens het fin de semana. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
+            "es": "El check-out es como muy tarde a las 11:00, tanto entre semana como durante el fin de semana. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
             "de": "Der Check-out ist sowohl an Wochentagen als auch am Wochenende spätestens um 11:00 Uhr. Bei einer späteren Abreise kann eine zusätzliche Übernachtung berechnet werden.",
         }
     elif entry_id == "traffic":
