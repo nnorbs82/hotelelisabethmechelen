@@ -64,11 +64,11 @@
       "title_fr": "Restrictions de circulation",
       "title_es": "Restricciones de tráfico",
       "title_de": "Verkehrsbeschränkungen",
-      "body_en": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11am – 6pm  \n\nVAN HOEYSTRAAT  \n\n11am – 6pm  \n\nNB! The registration of your number plate only applies to the Van Hoeystraat, as our parking garage is located there.\n\nWe cannot grant you access to the other streets.\nWe recommend that you enter the centre of Mechelen via the Sint-Katelijnstraat. \n\nttps://www.mechelen.be/autoluw",
-      "body_nl": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11 – 18u  \n\nVAN HOEYSTRAAT  \n\n11 – 18u  \n\nLet op! De registratie van uw nummerplaat geldt enkel voor de Van Hoeystraat vermits onze parkeergarage daar gelegen is.\n\nVoor de andere straten kunnen wij u geen toegang verlenen.\nWij raden u aan het centrum van Mechelen binnen te rijden via de Sint-Katelijnstraat.\n\nttps://www.mechelen.be/autoluw",
-      "body_fr": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11h – 6h \n\nVAN HOEYSTRAAT  \n\n11h – 6h  \n\nNB ! L'enregistrement de votre plaque d'immatriculation ne s'applique qu'à la Van Hoeystraat, car notre parking s'y trouve.\n\nNous ne pouvons pas vous donner accès aux autres rues.\nNous vous recommandons d'entrer dans le centre de Malines par la Sint-Katelijnstraat.",
-      "body_es": "SINT-JANSTRAAT Y SINT-JANSKERKHOF\n\n11:00 - 18:00\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00\n\nIMPORTANTE: el registro de tu matrícula solo es válido para Van Hoeystraat, ya que nuestro garaje se encuentra allí.\n\nNo podemos autorizar el acceso a las demás calles.\nRecomendamos entrar en el centro de Malinas por Sint-Katelijnstraat.\n\nttps://www.mechelen.be/autoluw",
-      "body_de": "SINT-JANSTRAAT UND SINT-JANSKERKHOF\n\n11:00 - 18:00 Uhr\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00 Uhr\n\nWICHTIG: Die Registrierung Ihres Kennzeichens gilt ausschließlich für die Van Hoeystraat, da sich dort unsere Parkgarage befindet.\n\nFür die anderen Straßen können wir keine Zufahrtsgenehmigung erteilen.\nWir empfehlen, über die Sint-Katelijnstraat ins Zentrum von Mechelen zu fahren.\n\nttps://www.mechelen.be/autoluw"
+      "body_en": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11am – 6pm  \n\nVAN HOEYSTRAAT  \n\n11am – 6pm  \n\nNB! The registration of your number plate only applies to the Van Hoeystraat, as our parking garage is located there.\n\nWe cannot grant you access to the other streets.\nWe recommend that you enter the centre of Mechelen via the Sint-Katelijnstraat. \n\nhttps://www.mechelen.be/autoluw",
+      "body_nl": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11 – 18u  \n\nVAN HOEYSTRAAT  \n\n11 – 18u  \n\nLet op! De registratie van uw nummerplaat geldt enkel voor de Van Hoeystraat vermits onze parkeergarage daar gelegen is.\n\nVoor de andere straten kunnen wij u geen toegang verlenen.\nWij raden u aan het centrum van Mechelen binnen te rijden via de Sint-Katelijnstraat.\n\nhttps://www.mechelen.be/autoluw",
+      "body_fr": "SINT-JANSTRAAT EN SINT-JANSKERKHOF  \n\n11h – 18h \n\nVAN HOEYSTRAAT  \n\n11h – 18h  \n\nNB ! L'enregistrement de votre plaque d'immatriculation ne s'applique qu'à la Van Hoeystraat, car notre parking s'y trouve.\n\nNous ne pouvons pas vous donner accès aux autres rues.\nNous vous recommandons d'entrer dans le centre de Malines par la Sint-Katelijnstraat.",
+      "body_es": "SINT-JANSTRAAT Y SINT-JANSKERKHOF\n\n11:00 - 18:00\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00\n\nIMPORTANTE: el registro de tu matrícula solo es válido para Van Hoeystraat, ya que nuestro garaje se encuentra allí.\n\nNo podemos autorizar el acceso a las demás calles.\nRecomendamos entrar en el centro de Malinas por Sint-Katelijnstraat.\n\nhttps://www.mechelen.be/autoluw",
+      "body_de": "SINT-JANSTRAAT UND SINT-JANSKERKHOF\n\n11:00 - 18:00 Uhr\n\nVAN HOEYSTRAAT\n\n11:00 - 18:00 Uhr\n\nWICHTIG: Die Registrierung Ihres Kennzeichens gilt ausschließlich für die Van Hoeystraat, da sich dort unsere Parkgarage befindet.\n\nFür die anderen Straßen können wir keine Zufahrtsgenehmigung erteilen.\nWir empfehlen, über die Sint-Katelijnstraat ins Zentrum von Mechelen zu fahren.\n\nhttps://www.mechelen.be/autoluw"
     },
     {
       "id": "camera",
@@ -78,9 +78,9 @@
       "title_fr": "Caméras de zone à circulation limitée",
       "title_es": "Cámaras de zona restringida",
       "title_de": "Kameras in verkehrsberuhigten Zonen",
-      "body_en": "At the beginning of each car-restricted/atomic-free zone, you'll see  a traffic sign stating: NO PASSAGE BETWEEN CERTAIN HOURS AND PERMIT HOLDERS.   \n\nIt is therefore recognisable by a traffic bid with THE SIGN 'C3' WITH THE LIST OF THE EXCEPTIONS BELOW.  If you pass this traffic sign during low-traffic hours without a permit, the camera will register your number plate, and you will receive a fine of 58 euros.  ",
-      "body_nl": "Aan het begin van elke autoluwe/autovrije straat/zone staat een verkeersbord met vermelding: VERBODEN DOORGANG TUSSEN BEPAALDE UREN EN VERGUNNINGHOUDERS.  \n\nHet verkeersbod heeft het teken 'C3' MET DAARONDER DE OPLIJSTING VAN DE UITZONDERINGEN. \nPasseer je dit verkeersbord tijdens de autoluwe uren zonder vergunning, dan registreert de camera jouw nummerplaat en ontvang ",
-      "body_fr": "Si vous Au début de chaque rue/zone sans voiture un panneau de signalisation indique: PASSAGE INTERDIT ENTRE CERTAINES HEURES ET TITULAIRES DE PERMIS. \n\nL'ordre de circulation a le signe C3 AVEC LA LISTE DES EXCEPTIONS EN-DESSOUS. Si vous dépassez ce panneau de signalisation pendant les heures de faible trafic sans permis, la caméra enregistra votre plaque d'immatriculation et vous recevrez une amende de 58 €. ",
+      "body_en": "At the beginning of each low-traffic or car-free street or zone, you will see a traffic sign indicating that passage is prohibited during certain hours except for permit holders.\n\nThe zone is identified by traffic sign C3 with the applicable exceptions listed below it. If you pass this sign during restricted hours without authorization, the camera will register your number plate and you may receive a €58 fine.",
+      "body_nl": "Aan het begin van elke autoluwe/autovrije straat of zone staat een verkeersbord dat de doorgang tijdens bepaalde uren verbiedt, behalve voor vergunninghouders.\n\nDe zone is herkenbaar aan verkeersbord C3 met daaronder de uitzonderingen. Passeert u dit bord tijdens de autoluwe uren zonder vergunning, dan registreert de camera uw nummerplaat en ontvangt u een boete van €58.",
+      "body_fr": "Au début de chaque rue ou zone à circulation limitée ou interdite aux voitures, un panneau indique que le passage est interdit pendant certaines heures, sauf pour les titulaires d’une autorisation.\n\nLa zone est signalée par le panneau C3, accompagné de la liste des exceptions. Si vous franchissez ce panneau pendant les heures de restriction sans autorisation, la caméra enregistrera votre plaque d’immatriculation et vous pourrez recevoir une amende de 58 €.",
       "body_es": "Al comienzo de cada calle o zona de tráfico restringido encontrarás una señal que indica que el paso está prohibido durante determinadas horas, salvo para titulares de una autorización.\n\nLa zona se reconoce por la señal C3, acompañada de la lista de excepciones. Si pasas esta señal durante las horas restringidas sin autorización, la cámara registrará tu matrícula y recibirás una multa de 58 €.",
       "body_de": "Am Beginn jeder verkehrsberuhigten oder autofreien Straße bzw. Zone steht ein Verkehrszeichen, das die Durchfahrt zu bestimmten Zeiten untersagt - ausgenommen sind Inhaber einer entsprechenden Genehmigung.\n\nErkennbar ist die Zone am Verkehrszeichen C3 mit der darunter aufgeführten Liste der Ausnahmen. Wenn Sie dieses Schild während der beschränkten Zeiten ohne Genehmigung passieren, wird Ihr Kennzeichen von der Kamera erfasst und es wird ein Bußgeld von 58 € verhängt."
     },
@@ -92,11 +92,11 @@
       "title_fr": "Services",
       "title_es": "Servicios",
       "title_de": "Services",
-      "body_en": "- 24-hour front desk\n- Luggage storage\n- Fax/photocopying\n- Ironing service, Shoe shine\n- Internet services\n- Food & drinks\n- Bar\n- Breakfast buffet, Packed lunches",
-      "body_nl": "- 24u. permanentie\n- Beveiligde Bagage-opslag\n- Kopiëren\n- Bar\n- Ontbijt\n- Lunchpakket\n- Spa in aanbouw: sauna-hammam-zwembad",
-      "body_fr": "- Réception ouverte 24h/24\n- Compartiment de bagage\n- Télécopie/photocopie\n- Service de repassage, Cirage de chaussures\n- Services Internet\n- Nourriture et boissons\n- Bar\n- Petit-déjeuner buffet, Paniers-repas",
-      "body_es": "- Recepción 24 horas\n- Consigna de equipaje segura\n- Fotocopias\n- Bar\n- Desayuno\n- Almuerzo para llevar\n- Spa en construcción: sauna, hammam y piscina",
-      "body_de": "- 24-Stunden-Rezeption\n- Sichere Gepäckaufbewahrung\n- Kopierservice\n- Bar\n- Frühstück\n- Lunchpakete\n- Spa im Bau: Sauna, Hammam und Pool"
+      "body_en": "- 24-hour front desk\n- Luggage storage\n- Wi-Fi\n- Breakfast buffet\n- Bar\n- Underground parking\n- Indoor pool - daily 07:00-23:00\n- Spa - opening soon",
+      "body_nl": "- 24-uursreceptie\n- Bagageopslag\n- WiFi\n- Ontbijtbuffet\n- Bar\n- Ondergrondse parking\n- Binnenzwembad - dagelijks 07:00-23:00\n- Spa - binnenkort geopend",
+      "body_fr": "- Réception ouverte 24h/24\n- Consigne à bagages\n- Wi-Fi\n- Petit-déjeuner buffet\n- Bar\n- Parking souterrain\n- Piscine intérieure - tous les jours de 07h00 à 23h00\n- Spa - ouverture prochaine",
+      "body_es": "- Recepción 24 horas\n- Consigna de equipaje\n- Wi-Fi\n- Desayuno buffet\n- Bar\n- Aparcamiento subterráneo\n- Piscina interior - todos los días de 07:00 a 23:00\n- Spa - próxima apertura",
+      "body_de": "- 24-Stunden-Rezeption\n- Gepäckaufbewahrung\n- WLAN\n- Frühstücksbuffet\n- Bar\n- Tiefgarage\n- Innenpool - täglich von 07:00 bis 23:00 Uhr\n- Spa - Eröffnung in Kürze"
     },
     {
       "id": "payment",
@@ -120,11 +120,11 @@
       "title_fr": "Informations générales",
       "title_es": "Información general",
       "title_de": "Allgemeine Informationen",
-      "body_en": "- Non-smoking rooms\n- Accessible Facilities for Guests with Reduced Mobility\n- Family rooms\n- Terrace\n- Meeting Room\n- Centrally located to City Centre",
-      "body_nl": "- Familiekamers (Suites & Triple rooms)\n- Toegankelijke faciliteiten voor gasten met beperkte mobiliteit\n- Olijfboomterras\n- Parkeren onder het hotel\n- Vlàkbij centrum",
-      "body_fr": "- Chambres non-fumeur\n- Installations accessibles pour les personnes à mobilité réduite\n- Chambres familiales\n- Terrasse\n- Salle de réunion\n- Situé au centre-ville\n",
-      "body_es": "- Habitaciones para familias, incluidas suites y habitaciones triples\n- Instalaciones accesibles para huéspedes con movilidad reducida\n- Terraza de los olivos\n- Aparcamiento debajo del hotel\n- Muy cerca del centro",
-      "body_de": "- Familienzimmer, darunter Suiten und Dreibettzimmer\n- Barrierearme Einrichtungen für Gäste mit eingeschränkter Mobilität\n- Olivenbaum-Terrasse\n- Parken unter dem Hotel\n- Direkt in der Nähe des Zentrums"
+      "body_en": "- Non-smoking rooms\n- Accessible facilities for guests with reduced mobility\n- Family rooms and suites\n- Olive-tree courtyard and terrace\n- Meeting rooms\n- Central location in Mechelen",
+      "body_nl": "- Rookvrije kamers\n- Toegankelijke faciliteiten voor gasten met beperkte mobiliteit\n- Familiekamers en suites\n- Olijfboom-binnenplaats en terras\n- Vergaderruimtes\n- Centrale ligging in Mechelen",
+      "body_fr": "- Chambres non-fumeurs\n- Installations accessibles aux personnes à mobilité réduite\n- Chambres familiales et suites\n- Cour et terrasse aux oliviers\n- Salles de réunion\n- Emplacement central à Malines",
+      "body_es": "- Habitaciones para no fumadores\n- Instalaciones accesibles para huéspedes con movilidad reducida\n- Habitaciones familiares y suites\n- Patio y terraza de los olivos\n- Salas de reuniones\n- Ubicación céntrica en Malinas",
+      "body_de": "- Nichtraucherzimmer\n- Barrierearme Einrichtungen für Gäste mit eingeschränkter Mobilität\n- Familienzimmer und Suiten\n- Olivenbaum-Innenhof und Terrasse\n- Tagungsräume\n- Zentrale Lage in Mechelen"
     },
     {
       "id": "fooddrinks",
