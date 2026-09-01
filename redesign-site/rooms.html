@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>Rooms & Suites - Hotel Elisabeth Mechelen - Redesign Development</title>
-  <meta name="description" content="Development preview of the new Hotel Elisabeth Mechelen Rooms and Suites page.">
+  <meta name="description" content="Development preview of the new Hotel Elisabeth Mechelen Rooms and Suites experience.">
   <link rel="icon" type="image/png" href="../logo/elicircle.png">
   <link rel="preload" as="image" href="../headers/rooms.webp">
   <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/rooms-experience.css">
 </head>
 <body class="actual-site rooms-page-main">
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
@@ -33,30 +34,48 @@
     </div>
   </header>
 
-  <div class="mobile-menu"><nav><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a></nav><div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div></div>
+  <div class="mobile-menu"><nav><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="attractions.html">Explore Mechelen</a></nav><div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div></div>
 
   <main>
-    <section class="subhero">
-      <img src="../headers/rooms.webp" alt="Rooms and suites at Hotel Elisabeth Mechelen" fetchpriority="high">
-      <div class="container-wide subhero-content">
-        <p class="eyebrow" data-i18n="rooms.eyebrow">Rooms & suites</p>
-        <h1 class="display" data-i18n="rooms.title">Stay your way.</h1>
-        <p data-i18n="rooms.body">Every active category keeps its real name, translated description, occupancy, bed configuration, size, amenities, photographs, gallery order and booking action.</p>
+    <section class="rooms-editorial-hero">
+      <div class="rooms-editorial-hero-media"><img src="../headers/rooms.webp" alt="Rooms and suites at Hotel Elisabeth Mechelen" fetchpriority="high"></div>
+      <div class="rooms-editorial-hero-border" aria-hidden="true"></div>
+      <div class="container-wide rooms-editorial-hero-copy">
+        <p class="eyebrow" data-room-i18n="eyebrow">The room collection</p>
+        <h1 class="display" data-room-i18n="hero">Find the room that feels like yours.</h1>
+        <p data-room-i18n="heroBody">From efficient city rooms to spacious suites and studios, move through the collection at your own pace.</p>
+        <div class="rooms-editorial-meta"><span><strong id="published-room-count">-</strong><span data-room-i18n="categories">room categories</span></span><span><strong>66</strong><span data-room-i18n="hotelRooms">rooms in the hotel</span></span><span><strong>4★</strong><span>Hotel Elisabeth</span></span></div>
       </div>
     </section>
 
-    <section class="page-intro">
-      <div class="container page-intro-grid reveal">
+    <section class="rooms-collection-intro">
+      <div class="container rooms-collection-intro-grid reveal">
         <p class="eyebrow">Hotel Elisabeth · Mechelen</p>
         <div>
-          <h2 class="display" data-i18n="rooms.title">Stay your way.</h2>
-          <p data-i18n="rooms.body">Every active category keeps its real name, translated description, occupancy, bed configuration, size, amenities, photographs, gallery order and booking action.</p>
+          <h2 class="display" data-room-i18n="collectionTitle">One collection. Different ways to stay.</h2>
+          <p data-room-i18n="collectionBody">Scroll through the rooms as a collection rather than a catalogue. The photography, room facts and atmosphere change with each category, while the full gallery and detailed amenities remain one click away.</p>
+          <span class="rooms-scroll-hint" data-room-i18n="scrollHint">Scroll to move through the collection</span>
         </div>
       </div>
     </section>
 
-    <section aria-live="polite" aria-busy="true">
-      <div class="rooms-list" id="rooms-list"><p class="rooms-loading">Loading rooms…</p></div>
+    <section class="room-journey" id="room-journey" aria-label="Room collection">
+      <div class="room-journey-sticky">
+        <div class="room-journey-visuals" id="room-journey-visuals"></div>
+        <nav class="room-journey-rail" id="room-journey-rail" aria-label="Room categories"></nav>
+        <div class="room-journey-content" id="room-journey-content" aria-live="polite"></div>
+        <div class="room-journey-room-nav"><span class="room-journey-room-nav-label" data-room-i18n="roomNav">Change room</span><button type="button" data-journey-room="prev" aria-label="Previous room">←</button><button type="button" data-journey-room="next" aria-label="Next room">→</button></div>
+        <div class="room-journey-gallery" id="room-journey-gallery"></div>
+      </div>
+    </section>
+
+    <section class="room-mobile-collection" id="room-mobile-collection" aria-label="Room collection"></section>
+
+    <section class="room-compare">
+      <div class="container-wide">
+        <div class="room-compare-head reveal"><p class="eyebrow" data-room-i18n="compareEyebrow">At a glance</p><div><h2 class="display" data-room-i18n="compareTitle">Find your fit quickly.</h2><p data-room-i18n="compareBody">Prefer to compare the essentials? Scan occupancy, size and bed configuration here, then jump straight into the room you want to explore.</p></div></div>
+        <div class="room-compare-table" id="room-compare-table"></div>
+      </div>
     </section>
 
     <section class="interior-booking">
@@ -74,7 +93,7 @@
 
   <div class="room-dialog" id="room-dialog" aria-live="polite"></div>
 
-  <footer class="footer"><div class="container-wide"><div class="footer-grid"><div><img class="footer-logo" src="../logo/elitext.png" alt="Hotel Elisabeth"><p data-i18n="footer.about">A contemporary four-star hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking.</p></div><div><h3 data-i18n="footer.explore">Explore</h3><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a></div><div><h3 data-i18n="footer.plan">Plan</h3><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a><a href="#">Hotel policies</a></div><div><h3 data-i18n="footer.contact">Contact</h3><a href="tel:+3215288400">+32 15 28 84 00</a><a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a><a href="#">Privacy policy</a><a href="#">Terms & conditions</a></div></div><div class="footer-bottom"><span>© 2026 Hotel Elisabeth Mechelen</span><span>Development build - production website unchanged.</span></div></div></footer>
+  <footer class="footer"><div class="container-wide"><div class="footer-grid"><div><img class="footer-logo" src="../logo/elitext.png" alt="Hotel Elisabeth"><p data-i18n="footer.about">A contemporary four-star hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking.</p></div><div><h3 data-i18n="footer.explore">Explore</h3><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="attractions.html">Explore Mechelen</a></div><div><h3 data-i18n="footer.plan">Plan</h3><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a><a href="#">Hotel policies</a></div><div><h3 data-i18n="footer.contact">Contact</h3><a href="tel:+3215288400">+32 15 28 84 00</a><a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a><a href="#">Privacy policy</a><a href="#">Terms & conditions</a></div></div><div class="footer-bottom"><span>© 2026 Hotel Elisabeth Mechelen</span><span>Development build - production website unchanged.</span></div></div></footer>
   <div class="dev-note">Isolated redesign development build · not the live Hotel Elisabeth website</div>
 
   <script src="../design-preview-v2.js"></script>
