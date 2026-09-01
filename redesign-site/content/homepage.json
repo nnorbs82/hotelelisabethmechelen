@@ -16,6 +16,14 @@
   "heroBody_de": "Für Städtereisen, Geschäftsaufenthalte und entspannte Wochenenden - mit Innenpool, ruhigem Innenhof und Mechelen direkt vor der Tür.",
   "heroImages": [
     {
+      "image": "/images/elisabeth/home/cathedralviewroom1.webp",
+      "alt_en": "Cathedral view room at Hotel Elisabeth Mechelen",
+      "alt_nl": "Kamer met uitzicht op de Sint-Romboutskathedraal in Hotel Elisabeth",
+      "alt_fr": "Chambre avec vue sur la cathédrale Saint-Rombaut à l’Hotel Elisabeth",
+      "alt_es": "Habitación con vistas a la catedral de San Rumoldo en Hotel Elisabeth",
+      "alt_de": "Zimmer mit Blick auf die St.-Rombouts-Kathedrale im Hotel Elisabeth"
+    },
+    {
       "image": "/images/elisabeth/home/1.webp",
       "alt_en": "Hotel Elisabeth Mechelen",
       "alt_nl": "Hotel Elisabeth Mechelen",
