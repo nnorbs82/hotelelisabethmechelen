@@ -152,6 +152,19 @@ def photo_index(items):
     return result
 
 
+def legal_content(name: str):
+    """Return five-language legal content, using reviewed translation files when CMS fields are empty."""
+    source = read_json(CONTENT / f"{name}.json", {}) or {}
+    output = {lang: source.get(lang, "") for lang in ("en", "nl", "fr", "es", "de")}
+    for lang in ("es", "de"):
+        if output[lang].strip():
+            continue
+        override = CONTENT / "legal" / f"{name}-{lang}.html"
+        if override.exists():
+            output[lang] = override.read_text(encoding="utf-8").strip()
+    return output
+
+
 rooms = collection("rooms")
 packages = collection("packages")
 facilities = collection("facilities")
@@ -188,10 +201,8 @@ for entry in info.get("entries", []):
     }
 write_json(GENERATED / "hotelInfo.json", info_out)
 
-privacy = read_json(CONTENT / "privacy.json", {}) or {}
-terms = read_json(CONTENT / "terms.json", {}) or {}
-write_json(GENERATED / "privacyPolicy.json", {lang: privacy.get(lang, "") for lang in ("en","nl","fr","es","de")})
-write_json(GENERATED / "termsAndConditions.json", {lang: terms.get(lang, "") for lang in ("en","nl","fr","es","de")})
+write_json(GENERATED / "privacyPolicy.json", legal_content("privacy"))
+write_json(GENERATED / "termsAndConditions.json", legal_content("terms"))
 
 print(
     "Generated content indexes:",
