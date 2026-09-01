@@ -6,7 +6,11 @@
 - Canonical policies enforced: check-in 15:00, check-out 11:00 every day, security deposit €200.
 - Hotel star-rating claims removed and guarded by validation.
 - Homepage package visibility and guest-facing supporting copy reviewed.
+- Homepage opening slideshow now contains five images, with the Cathedral View room image first and multilingual alt text for all five supported languages.
+- Pages CMS editing flow tested end-to-end on `elisabeth-redesign`: a homepage text change was saved, rebuilt into generated content, verified in preview and restored successfully.
+- Pages CMS media management tested end-to-end: a new homepage WebP image was uploaded into the Git-managed media library and successfully consumed by the CMS-driven slideshow.
 - Hotel Information services and general facilities aligned across all supported languages.
+- Homepage shared-space feature corrected to Courtyard, Lobby, Patio and Bar, with localized labels and supporting copy across EN, NL, FR, ES and DE.
 - Low-traffic access URL, hours and camera guidance repaired.
 - Meeting-room parking copy no longer states a fixed number of parking spaces.
 - Meetings final presentation reviewed and approved in preview: cinematic two-space experience related to the Rooms visual language, with a prominent Oud Huys / Rooftop selector, fixed in-view photo navigation, full-screen image viewing, planning-details drawer and direct request CTA.
