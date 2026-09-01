@@ -24,9 +24,23 @@
       document.body.appendChild(script);
     }
   }
-  const scheduleDatePicker=()=>setTimeout(loadDatePicker,0);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scheduleDatePicker,{once:true});
-  else scheduleDatePicker();
+
+  function loadHomepageMobileStability(){
+    if(!document.body?.classList.contains('home-page'))return;
+    if(document.getElementById('elisabeth-home-mobile-stability'))return;
+    const link=document.createElement('link');
+    link.id='elisabeth-home-mobile-stability';
+    link.rel='stylesheet';
+    link.href='assets/home-mobile-stability.css';
+    document.head.appendChild(link);
+  }
+
+  const scheduleEnhancements=()=>setTimeout(()=>{
+    loadDatePicker();
+    loadHomepageMobileStability();
+  },0);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scheduleEnhancements,{once:true});
+  else scheduleEnhancements();
 
   const spaces = {
     en:{labels:['Courtyard','Lobby','Patio','Bar'],body:'Step into the courtyard, settle into the lobby, take a moment on the patio or stop by the bar - the spaces around your room are part of the stay too.'},
