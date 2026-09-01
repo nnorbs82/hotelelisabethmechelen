@@ -88,6 +88,7 @@ content:
             options:
               values:
                 - { name: available, label: Visible / available }
+                - { name: offline, label: Hidden / offline }
                 - { name: unavailable, label: Hidden / unavailable }
           - { name: maxOccupancy, label: Maximum occupancy, type: number }
           - { name: roomSize, label: Room size in m², type: number }
