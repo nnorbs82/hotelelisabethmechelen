@@ -7,6 +7,25 @@
   const corePath = isRedesignPreview ? '../design-preview-v2-core.js' : (isLegacyPreview ? 'design-preview-v2-core.js' : 'assets/design-preview-v2-core.js');
   document.write(`<script src="${corePath}"><\/script>`);
 
+  function loadDatePicker(){
+    if(!document.body?.classList.contains('actual-site'))return;
+    if(!document.getElementById('elisabeth-date-picker-style')){
+      const link=document.createElement('link');
+      link.id='elisabeth-date-picker-style';
+      link.rel='stylesheet';
+      link.href='assets/date-picker.css';
+      document.head.appendChild(link);
+    }
+    if(!document.getElementById('elisabeth-date-picker-script')){
+      const script=document.createElement('script');
+      script.id='elisabeth-date-picker-script';
+      script.src='assets/date-picker.js';
+      document.body.appendChild(script);
+    }
+  }
+  if(document.readyState==='complete')loadDatePicker();
+  else window.addEventListener('load',loadDatePicker,{once:true});
+
   const spaces = {
     en:{labels:['Courtyard','Lobby','Patio','Bar'],body:'Step into the courtyard, settle into the lobby, take a moment on the patio or stop by the bar - the spaces around your room are part of the stay too.'},
     nl:{labels:['Binnentuin','Lobby','Patio','Bar'],body:'Stap de binnentuin in, kom tot rust in de lobby, neem plaats op de patio of ga even langs de bar - ook de ruimtes rond uw kamer maken deel uit van het verblijf.'},
