@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Hotel Elisabeth Mechelen - Redesign Development</title>
+  <meta name="description" content="Development preview of the new Hotel Elisabeth Mechelen website.">
+  <link rel="icon" type="image/png" href="../logo/elicircle.png">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="actual-site home-page">
+  <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container-wide header-inner">
+      <a class="brand" data-site-link href="index.html" aria-label="Hotel Elisabeth home"><img src="../logo/elitext.png" alt="Hotel Elisabeth Mechelen"></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a data-site-link href="index.html" aria-current="page" data-i18n="nav.home">Home</a>
+        <a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a>
+        <a data-site-link href="index.html#facilities" data-i18n="nav.facilities">Facilities</a>
+        <a data-site-link href="index.html#packages" data-i18n="nav.packages">Packages</a>
+        <a data-site-link href="index.html#meetings" data-i18n="nav.meetings">Meetings</a>
+        <a data-site-link href="index.html#info" data-i18n="nav.info">Info</a>
+        <a data-site-link href="index.html#group" data-i18n="nav.group">Group request</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang"><button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span> ⌄</button><div class="lang-menu"><button type="button" data-lang="en">English</button><button type="button" data-lang="nl">Nederlands</button><button type="button" data-lang="fr">Français</button><button type="button" data-lang="es">Español</button><button type="button" data-lang="de">Deutsch</button></div></div>
+        <a class="btn btn-solid header-book" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu"><nav><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="index.html#facilities" data-i18n="nav.facilities">Facilities</a><a data-site-link href="index.html#packages" data-i18n="nav.packages">Packages</a><a data-site-link href="index.html#meetings" data-i18n="nav.meetings">Meetings</a><a data-site-link href="index.html#info" data-i18n="nav.info">Info</a><a data-site-link href="index.html#group" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a></nav><div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div></div>
+
+  <main>
+    <section class="hero anchor-marker" id="home">
+      <div class="hero-frame"><div class="hero-slides"><div class="hero-slide active"><img src="../mainslide/1.webp" alt="Hotel Elisabeth Mechelen"></div><div class="hero-slide"><img src="../mainslide/4.webp" alt="Hotel Elisabeth pool"></div><div class="hero-slide"><img src="../mainslide/6.webp" alt="Hotel Elisabeth interior"></div><div class="hero-slide"><img src="../mainslide/8.webp" alt="Hotel Elisabeth Mechelen atmosphere"></div></div></div>
+      <div class="hero-border" aria-hidden="true"></div>
+      <div class="container-wide hero-layout"><div class="hero-copy"><p class="eyebrow" data-i18n="hero.eyebrow">A contemporary four-star stay in Mechelen</p><h1 class="display hero-title" data-i18n="hero.title">A modern pause in the heart of the city.</h1><p class="hero-subtitle" data-i18n="hero.body">Designed for city breaks, business stays and unhurried weekends - with an indoor pool, quiet courtyard and Mechelen just outside.</p></div><div class="hero-meta"><div class="hero-count"><span class="hero-current">01</span> / 04</div><div class="hero-progress"><span></span></div><div class="hero-controls"><button class="hero-prev" type="button" aria-label="Previous image">←</button><button class="hero-next" type="button" aria-label="Next image">→</button></div></div></div>
+      <span class="scroll-cue" data-i18n="common.scroll">Scroll to explore</span>
+    </section>
+
+    <div class="container booking-wrap"><form class="booking-panel" onsubmit="return false;"><label class="book-field"><span data-i18n="booking.checkin">Check-in</span><input id="preview-checkin" type="date" aria-label="Check-in"></label><label class="book-field"><span data-i18n="booking.checkout">Check-out</span><input id="preview-checkout" type="date" aria-label="Check-out"></label><div class="book-field guest-field"><span data-i18n="booking.guests">Guests</span><div class="guest-value" tabindex="0">2 adults · 0 children</div><div class="guest-popover"><div class="guest-row"><div><strong data-i18n="booking.adults">Adults</strong><small>13+</small></div><div class="counter"><button type="button" data-counter="adults" data-delta="-1">−</button><span data-count="adults">2</span><button type="button" data-counter="adults" data-delta="1">+</button></div></div><div class="guest-row"><div><strong data-i18n="booking.children">Children</strong><small>0-12</small></div><div class="counter"><button type="button" data-counter="children" data-delta="-1">−</button><span data-count="children">0</span><button type="button" data-counter="children" data-delta="1">+</button></div></div></div></div><button class="booking-submit" id="preview-book" type="button" data-i18n="booking.check">Check availability</button></form><p class="booking-note" data-i18n="booking.note">Direct booking through Mews</p></div>
+
+    <div class="transition-scene" id="pace-transition">
+      <div class="transition-sticky">
+        <section class="section transition-layer transition-front anchor-marker" id="concept"><div class="container"><div class="section-head reveal"><p class="eyebrow" data-i18n="manifesto.eyebrow">Hotel Elisabeth · Mechelen</p><div><h2 class="display manifesto-title" data-i18n-html="manifesto.title">More than a room.<br><span>A change of pace.</span></h2></div></div><div class="pace-layout"><div class="pace-gallery reveal" aria-label="Hotel Elisabeth atmosphere"><figure class="pace-shot primary" tabindex="0"><img src="../mainslide/2.webp" alt="Hotel Elisabeth interior"><figcaption>Interior</figcaption></figure><figure class="pace-shot" tabindex="0"><img src="../mainslide/5.webp" alt="Hotel Elisabeth courtyard"><figcaption>Courtyard</figcaption></figure><figure class="pace-shot" tabindex="0"><img src="../mainslide/4.webp" alt="Hotel Elisabeth pool"><figcaption>Pool</figcaption></figure></div><div class="pace-copy reveal"><h3 data-i18n="manifesto.subtitle">Contemporary comfort with room to breathe.</h3><p data-i18n="manifesto.body">Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.</p><div class="facts-strip"><div class="fact-card"><strong>66</strong><span data-i18n="facts.rooms">Rooms</span></div><div class="fact-card"><strong>1</strong><span data-i18n="facts.pool">Indoor pool</span></div><div class="fact-card"><strong>24/7</strong><span data-i18n="facts.doorstep">Mechelen on your doorstep</span></div><div class="fact-card"><strong>P</strong><span data-i18n="facts.parking">Underground parking</span></div></div></div></div></div></section>
+        <section class="section transition-layer transition-back home-room-back"><div class="container-wide home-room-inner"><div class="section-head"><p class="eyebrow" data-i18n="rooms.eyebrow">Rooms & suites</p><div><h2 class="display" data-i18n="rooms.title">Stay your way.</h2><p class="lead" data-i18n="rooms.body">Every active category keeps its real name, description, occupancy, bed configuration, size, amenities and photographs.</p></div></div><div class="home-room-grid" id="home-room-preview"></div><div class="home-room-cta"><a class="btn btn-dark" data-site-link href="rooms.html" data-i18n="common.view">View details</a></div></div></section>
+      </div>
+    </div>
+
+    <section class="section dark anchor-marker" id="facilities"><div class="container-wide"><div class="section-head reveal"><p class="eyebrow" data-i18n="facilities.eyebrow">Facilities</p><div><h2 class="display" data-i18n="facilities.title">The spaces around the room matter too.</h2><p class="lead" data-i18n="facilities.body">Pool, courtyard, breakfast, underground parking and practical services remain visible, detailed and easy to explore.</p></div></div><div class="experience-layout reveal"><div class="experience-tabs"><button class="experience-tab active" type="button" data-experience="0"><span class="num">01</span><h3 data-i18n="facilities.pool">Indoor pool</h3><span>→</span></button><button class="experience-tab" type="button" data-experience="1"><span class="num">02</span><h3 data-i18n="facilities.courtyard">Courtyard</h3><span>→</span></button><button class="experience-tab" type="button" data-experience="2"><span class="num">03</span><h3 data-i18n="facilities.breakfast">Breakfast</h3><span>→</span></button><button class="experience-tab" type="button" data-experience="3"><span class="num">04</span><h3 data-i18n="facilities.parking">Underground parking</h3><span>→</span></button></div><div class="experience-media"><img class="active" src="../mainslide/4.webp" alt="Indoor pool"><img src="../mainslide/5.webp" alt="Courtyard"><img src="../mainslide/6.webp" alt="Breakfast"><img src="../mainslide/1.webp" alt="Hotel arrival"><div class="experience-caption"><p data-i18n="facilities.caption">Move between city energy and quieter moments without leaving the hotel.</p><span class="eyebrow" data-i18n="common.select">Select a space</span></div></div></div></div></section>
+
+    <section class="section anchor-marker" id="packages"><div class="container-wide"><div class="section-head reveal"><p class="eyebrow" data-i18n="packages.eyebrow">Packages & offers</p><div><h2 class="display" data-i18n="packages.title">Offers presented like campaigns, not database cards.</h2><p class="lead" data-i18n="packages.body">Active Hotel Elisabeth offers are presented with their real imagery, inclusions and booking route.</p></div></div><div class="editorial-cards" id="home-packages"></div></div></section>
+
+    <section class="section white anchor-marker" id="meetings"><div class="container-wide"><div class="section-head reveal"><p class="eyebrow" data-i18n="meetings.eyebrow">Meetings & events</p><div><h2 class="display" data-i18n="meetings.title">Space to meet. Room to think.</h2><p class="lead" data-i18n="meetings.body">Meeting rooms, layouts, capacities, equipment, catering and the full quotation workflow stay together.</p></div></div><div class="home-meeting-grid" id="home-meetings"></div></div></section>
+
+    <section class="section mist anchor-marker" id="info"><div class="container"><div class="section-head reveal"><p class="eyebrow" data-i18n="info.eyebrow">Hotel information</p><div><h2 class="display" data-i18n="info.title">Everything useful. Nothing buried.</h2><p class="lead" data-i18n="info.body">Arrival, parking, breakfast, pool, access, services and policies will retain all of the current Hotel Elisabeth information in a clearer dedicated page.</p></div></div></div></section>
+
+    <section class="section dark anchor-marker" id="group"><div class="container"><div class="section-head reveal"><p class="eyebrow" data-i18n="group.eyebrow">Group accommodation</p><div><h2 class="display" data-i18n="group.title">Bring the group. Keep the planning clear.</h2><p class="lead" data-i18n="group.body">The full existing group request - dates, guests, room mix, group type, meal option and message - remains part of the new website.</p></div></div></div></section>
+
+    <section class="closing"><img src="../mainslide/1.webp" alt="Hotel Elisabeth Mechelen"><div class="container closing-copy reveal"><p class="eyebrow" data-i18n="closing.eyebrow">Your stay in Mechelen</p><h2 class="display" data-i18n="closing.title">Arrive. Exhale. Stay a little longer.</h2><a class="btn btn-light" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a></div></section>
+  </main>
+
+  <footer class="footer"><div class="container-wide"><div class="footer-grid"><div><img class="footer-logo" src="../logo/elitext.png" alt="Hotel Elisabeth"><p data-i18n="footer.about">A contemporary four-star hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking.</p></div><div><h3 data-i18n="footer.explore">Explore</h3><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="index.html#facilities" data-i18n="nav.facilities">Facilities</a><a data-site-link href="index.html#packages" data-i18n="nav.packages">Packages</a><a data-site-link href="index.html#meetings" data-i18n="nav.meetings">Meetings</a></div><div><h3 data-i18n="footer.plan">Plan</h3><a data-site-link href="index.html#info" data-i18n="nav.info">Info</a><a data-site-link href="index.html#group" data-i18n="nav.group">Group request</a><a data-site-link href="index.html#careers" data-i18n="nav.careers">Careers</a><a href="#">Hotel policies</a></div><div><h3 data-i18n="footer.contact">Contact</h3><a href="tel:+3215288400">+32 15 28 84 00</a><a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a><a href="#">Privacy policy</a><a href="#">Terms & conditions</a></div></div><div class="footer-bottom"><span>© 2026 Hotel Elisabeth Mechelen</span><span>Development build - production website unchanged.</span></div></div></footer>
+  <div class="dev-note">Isolated redesign development build · not the live Hotel Elisabeth website</div>
+
+  <script src="../design-preview-v2.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/home.js"></script>
+</body>
+</html>
