@@ -84,13 +84,10 @@ jobs:
       - name: Guard production branch
         run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
 
-      - name: Remove one-time integration files
-        run: rm .github/workflows/setup-homepage-cms.yml tools/setup_homepage_cms.py
-
-      - name: Commit homepage CMS milestone
+      - name: Commit non-workflow homepage CMS milestone
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .pages.yml design-preview-v2.js redesign-site/index.html redesign-site/content/generated tools/build_redesign_content.py .github/workflows/rebuild-redesign-content.yml .github/workflows/validate-redesign.yml images/elisabeth/home .github/workflows/setup-homepage-cms.yml tools/setup_homepage_cms.py
+          git add .pages.yml design-preview-v2.js redesign-site/index.html redesign-site/content/generated tools/build_redesign_content.py images/elisabeth/home
           git commit -m 'cms: complete editable homepage content system'
           git push origin HEAD:elisabeth-redesign
