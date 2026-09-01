@@ -20,11 +20,13 @@
       const script=document.createElement('script');
       script.id='elisabeth-date-picker-script';
       script.src='assets/date-picker.js';
+      script.async=false;
       document.body.appendChild(script);
     }
   }
-  if(document.readyState==='complete')loadDatePicker();
-  else window.addEventListener('load',loadDatePicker,{once:true});
+  const scheduleDatePicker=()=>setTimeout(loadDatePicker,0);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',scheduleDatePicker,{once:true});
+  else scheduleDatePicker();
 
   const spaces = {
     en:{labels:['Courtyard','Lobby','Patio','Bar'],body:'Step into the courtyard, settle into the lobby, take a moment on the patio or stop by the bar - the spaces around your room are part of the stay too.'},
