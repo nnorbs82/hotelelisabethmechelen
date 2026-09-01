@@ -8,8 +8,16 @@
     meetingPhotos: 'content/generated/meetingsPhotos.json'
   };
   const cache = {};
+  const ui = {
+    en:{package:'Package',discoverPackage:'Discover package',meetings:'Meetings'},
+    nl:{package:'Arrangement',discoverPackage:'Ontdek arrangement',meetings:'Meetings'},
+    fr:{package:'Forfait',discoverPackage:'Découvrir le forfait',meetings:'Réunions'},
+    es:{package:'Paquete',discoverPackage:'Descubrir paquete',meetings:'Reuniones'},
+    de:{package:'Paket',discoverPackage:'Paket entdecken',meetings:'Tagungen'}
+  };
 
   const lang = () => window.ElisabethSite?.getLanguage?.() || document.documentElement.lang || 'en';
+  const labels = () => ui[lang()] || ui.en;
   const localized = (item, base) => item?.[`${base}_${lang()}`] || item?.[`${base}_en`] || '';
   const escape = value => String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
   const compact = (value, max = 145) => {
@@ -57,16 +65,19 @@
     if (!target) return;
     try {
       const raw = await data('packages');
-      const active = Object.entries(raw || {}).filter(([,item]) => (item.status || 'active') === 'active').slice(0,3);
+      const c = labels();
+      const active = Object.entries(raw || {})
+        .filter(([,item]) => (item.status || 'active') === 'active' && item.showInOurPicks === true)
+        .slice(0,3);
       if (!active.length) { if(section) section.hidden = true; return; }
       if(section) section.hidden = false;
       target.innerHTML = active.map(([id,item],index) => `<a class="editorial-card" data-site-link href="packages.html#package-${escape(id)}">
         <img src="${escape(item.imageUrl || '../mainslide/5.webp')}" alt="${escape(localized(item,'title'))}" loading="lazy" decoding="async">
         <div class="editorial-card-copy">
-          <p class="eyebrow">${String(index+1).padStart(2,'0')} · Package</p>
+          <p class="eyebrow">${String(index+1).padStart(2,'0')} · ${escape(c.package)}</p>
           <h3>${escape(localized(item,'title'))}</h3>
           <p>${escape(compact(localized(item,'description'),155))}</p>
-          <span class="text-link">Discover package</span>
+          <span class="text-link">${escape(c.discoverPackage)}</span>
         </div>
       </a>`).join('');
       window.ElisabethSite?.syncInternalLinks?.();
@@ -81,12 +92,13 @@
     if (!target) return;
     try {
       const [raw,photoRaw] = await Promise.all([data('meetings'), data('meetingPhotos')]);
+      const c = labels();
       target.innerHTML = Object.entries(raw || {}).map(([id,item],index) => {
         const photoList = Object.values(photoRaw?.[id] || {}).sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));
         return `<a class="home-meeting-card" data-site-link href="meetings.html#meeting-${escape(id)}">
           <img src="${escape(photoList[0]?.url || '../headers/meetings.webp')}" alt="${escape(localized(item,'name'))}" loading="lazy" decoding="async">
           <div class="home-meeting-copy">
-            <p class="eyebrow">${String(index+1).padStart(2,'0')} · Meetings</p>
+            <p class="eyebrow">${String(index+1).padStart(2,'0')} · ${escape(c.meetings)}</p>
             <h3>${escape(localized(item,'name'))}</h3>
             <p>${escape(compact(localized(item,'description'),190))}</p>
           </div>
