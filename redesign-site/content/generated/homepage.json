@@ -76,6 +76,19 @@
   "paceImages": [
     {
       "image": "../images/elisabeth/home/2.webp",
+      "caption_en": "Pool",
+      "caption_nl": "Zwembad",
+      "caption_fr": "Piscine",
+      "caption_es": "Piscina",
+      "caption_de": "Pool",
+      "alt_en": "Hotel Elisabeth pool",
+      "alt_nl": "Zwembad van Hotel Elisabeth",
+      "alt_fr": "Piscine de l’Hotel Elisabeth",
+      "alt_es": "Piscina de Hotel Elisabeth",
+      "alt_de": "Pool im Hotel Elisabeth"
+    },
+    {
+      "image": "../images/elisabeth/home/5.webp",
       "caption_en": "Interior",
       "caption_nl": "Interieur",
       "caption_fr": "Intérieur",
@@ -88,7 +101,7 @@
       "alt_de": "Interieur des Hotel Elisabeth"
     },
     {
-      "image": "../images/elisabeth/home/5.webp",
+      "image": "../images/elisabeth/home/4.webp",
       "caption_en": "Courtyard",
       "caption_nl": "Binnentuin",
       "caption_fr": "Cour",
@@ -99,19 +112,6 @@
       "alt_fr": "Cour de l’Hotel Elisabeth",
       "alt_es": "Patio de Hotel Elisabeth",
       "alt_de": "Innenhof des Hotel Elisabeth"
-    },
-    {
-      "image": "../images/elisabeth/home/4.webp",
-      "caption_en": "Pool",
-      "caption_nl": "Zwembad",
-      "caption_fr": "Piscine",
-      "caption_es": "Piscina",
-      "caption_de": "Pool",
-      "alt_en": "Hotel Elisabeth pool",
-      "alt_nl": "Zwembad van Hotel Elisabeth",
-      "alt_fr": "Piscine de l’Hotel Elisabeth",
-      "alt_es": "Piscina de Hotel Elisabeth",
-      "alt_de": "Pool im Hotel Elisabeth"
     }
   ],
   "facts": [
