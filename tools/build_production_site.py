@@ -13,7 +13,6 @@ import json
 import re
 import shutil
 from pathlib import Path
-from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'redesign-site'
@@ -26,10 +25,29 @@ CANONICAL_MAP = {
     'terms.html': 'termsandconditions.html',
 }
 
+STAR_RATING_REPLACEMENTS = {
+    'A contemporary four-star stay in Mechelen': 'A contemporary stay in Mechelen',
+    'Een eigentijds viersterrenverblijf in Mechelen': 'Een eigentijds verblijf in Mechelen',
+    'Un séjour quatre étoiles contemporain à Malines': 'Un séjour contemporain à Malines',
+    'Una estancia contemporánea de cuatro estrellas en Malinas': 'Una estancia contemporánea en Malinas',
+    'Ein zeitgemäßer Vier-Sterne-Aufenthalt in Mechelen': 'Ein zeitgemäßer Aufenthalt in Mechelen',
+    'A contemporary four-star hotel in central Mechelen': 'A contemporary hotel in central Mechelen',
+    'Een eigentijds viersterrenhotel in centraal Mechelen': 'Een eigentijds hotel in centraal Mechelen',
+    'Un hôtel quatre étoiles contemporain au centre de Malines': 'Un hôtel contemporain au centre de Malines',
+    'Un hotel contemporáneo de cuatro estrellas en el centro de Malinas': 'Un hotel contemporáneo en el centro de Malinas',
+    'Ein zeitgemäßes Vier-Sterne-Hotel im Zentrum von Mechelen': 'Ein zeitgemäßes Hotel im Zentrum von Mechelen',
+}
+
 
 def rewrite_route_refs(text: str) -> str:
     text = text.replace('privacy.html', 'privacypolicy.html')
     text = text.replace('terms.html', 'termsandconditions.html')
+    return text
+
+
+def remove_star_rating_claims(text: str) -> str:
+    for old, new in STAR_RATING_REPLACEMENTS.items():
+        text = text.replace(old, new)
     return text
 
 
@@ -42,7 +60,6 @@ def production_schema() -> dict:
         'telephone': SITE['telephone'],
         'email': SITE['email'],
         'image': SITE['baseUrl'] + '/mainslide/1.webp',
-        'starRating': {'@type': 'Rating', 'ratingValue': '4'},
         'address': {
             '@type': 'PostalAddress',
             **SITE['address'],
@@ -80,7 +97,6 @@ def inject_meta(text: str, route: str) -> str:
     if 'name="robots"' not in text:
         text = text.replace('</title>', '</title>\n  <meta name="robots" content="index,follow,max-image-preview:large">', 1)
 
-    # Production canonical and social metadata only exist in the generated release.
     extras = [
         f'<link rel="canonical" href="{canonical}">',
         '<meta property="og:type" content="website">',
@@ -114,7 +130,6 @@ def build(target: Path):
         shutil.rmtree(target)
     target.mkdir(parents=True)
 
-    # Runtime assets.
     shutil.copytree(SOURCE / 'assets', target / 'assets')
     shutil.copytree(SOURCE / 'content' / 'generated', target / 'content' / 'generated')
     for folder in ['logo', 'headers', 'mainslide']:
@@ -123,7 +138,6 @@ def build(target: Path):
     shutil.copy2(ROOT / 'design-preview-v2.css', target / 'design-preview-v2.css')
     shutil.copy2(ROOT / 'design-preview-v2.js', target / 'design-preview-v2.js')
 
-    # Canonical HTML routes.
     for source_page in sorted(SOURCE.glob('*.html')):
         source_name = source_page.name
         target_name = CANONICAL_MAP.get(source_name, source_name)
@@ -132,6 +146,7 @@ def build(target: Path):
         text = source_page.read_text(encoding='utf-8')
         text = rewrite_route_refs(text)
         text = clean_development_chrome(text)
+        text = remove_star_rating_claims(text)
         text = text.replace('../logo/', 'logo/')
         text = text.replace('../headers/', 'headers/')
         text = text.replace('../mainslide/', 'mainslide/')
@@ -139,28 +154,28 @@ def build(target: Path):
         text = inject_meta(text, target_name)
         (target / target_name).write_text(text, encoding='utf-8')
 
-    # JavaScript creates document-relative URLs, so convert preview parent paths.
     for path in (target / 'assets').glob('*.js'):
         text = path.read_text(encoding='utf-8')
         for prefix in ['headers', 'mainslide', 'logo', 'images']:
             text = text.replace(f'../{prefix}/', f'{prefix}/')
         text = rewrite_route_refs(text)
+        text = remove_star_rating_claims(text)
         path.write_text(text, encoding='utf-8')
 
-    # CSS is one directory below the output root.
+    preview_js = target / 'design-preview-v2.js'
+    preview_js.write_text(remove_star_rating_claims(preview_js.read_text(encoding='utf-8')), encoding='utf-8')
+
     css = target / 'assets' / 'site.css'
     text = css.read_text(encoding='utf-8').replace("../../design-preview-v2.css", "../design-preview-v2.css")
     css.write_text(text, encoding='utf-8')
 
-    # Generated image URLs are inserted into pages and therefore resolve relative
-    # to the document root, not relative to the JSON file.
     for path in (target / 'content' / 'generated').glob('*.json'):
         text = path.read_text(encoding='utf-8').replace('../images/', 'images/')
+        text = remove_star_rating_claims(text)
         path.write_text(text, encoding='utf-8')
 
-    # Search-engine files are generated only in the release output.
     routes = list(PAGE_META)
-    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/sitemap/0.9">']
     for route in routes:
         loc = SITE['baseUrl'].rstrip('/') + ('/' if route == 'index.html' else '/' + route)
         sitemap.append(f'  <url><loc>{html.escape(loc)}</loc></url>')
@@ -168,7 +183,6 @@ def build(target: Path):
     (target / 'sitemap.xml').write_text('\n'.join(sitemap) + '\n', encoding='utf-8')
     (target / 'robots.txt').write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE['baseUrl']}/sitemap.xml\n", encoding='utf-8')
 
-    # A small host-agnostic marker useful for QA/deployment scripts.
     (target / 'release-manifest.json').write_text(json.dumps({
         'site': SITE['name'],
         'baseUrl': SITE['baseUrl'],
