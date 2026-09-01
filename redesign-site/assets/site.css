@@ -151,3 +151,8 @@
 #main-content:focus{outline:none}
 @media(pointer:coarse){button,.btn,.text-link,.main-nav a,.mobile-menu a{min-height:44px}}
 @media(prefers-reduced-motion:reduce){.skip-link{transition:none}}
+
+
+/* Accessibility focus treatment */
+.actual-site :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #c9ccb7!important;outline-offset:3px!important}
+.actual-site .pace-shot:focus-visible{outline-color:#fff!important;outline-offset:-4px!important}

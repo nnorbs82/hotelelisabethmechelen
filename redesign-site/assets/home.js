@@ -138,7 +138,7 @@
 
   function restartHeroTimer(){
     clearInterval(heroTimer);
-    if(heroSlides.length>1) heroTimer=setInterval(()=>showHero(heroIndex+1),6500);
+    if(heroSlides.length>1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) heroTimer=setInterval(()=>showHero(heroIndex+1),6500);
   }
 
   function bindHeroControls(){

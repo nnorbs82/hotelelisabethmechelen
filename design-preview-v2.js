@@ -197,7 +197,7 @@
     let slideTimer;
     const restartSlideTimer=()=>{
       clearInterval(slideTimer);
-      slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
     };
     document.querySelector('.hero-prev')?.addEventListener('click',()=>{showSlide(slideIndex-1);restartSlideTimer();});
     document.querySelector('.hero-next')?.addEventListener('click',()=>{showSlide(slideIndex+1);restartSlideTimer();});
