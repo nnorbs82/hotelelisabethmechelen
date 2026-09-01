@@ -27,10 +27,10 @@
 - Missing meta descriptions corrected on Careers, Hotel Policies, Privacy Policy and Terms & Conditions.
 - Mews booking links and EmailJS meeting/group integrations remain covered by production validation.
 - Firebase Storage is absent from the active production assembly.
+- Human visual review completed across desktop and mobile on the current redesign release candidate, including the branded date picker and final CMS content changes.
 
 ## Still required before launch
 
-- Human visual review on desktop and mobile after the final QA snapshot.
 - Final human/legal review of translated Privacy Policy and Terms & Conditions.
 - Explicit launch approval before any change to `main`, CNAME, GitHub Pages or Firebase.
 - Post-launch verification before retiring the legacy Firebase backup.
