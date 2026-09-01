@@ -57,10 +57,10 @@
     if (!target) return;
     try {
       const raw = await data('packages');
-      const active = Object.values(raw || {}).filter(item => (item.status || 'active') === 'active').slice(0,3);
+      const active = Object.entries(raw || {}).filter(([,item]) => (item.status || 'active') === 'active').slice(0,3);
       if (!active.length) { if(section) section.hidden = true; return; }
       if(section) section.hidden = false;
-      target.innerHTML = active.map((item,index) => `<a class="editorial-card" href="${escape(item.bookingLink || '#')}" ${item.bookingLink ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+      target.innerHTML = active.map(([id,item],index) => `<a class="editorial-card" data-site-link href="packages.html#package-${escape(id)}">
         <img src="${escape(item.imageUrl || '../mainslide/5.webp')}" alt="${escape(localized(item,'title'))}" loading="lazy" decoding="async">
         <div class="editorial-card-copy">
           <p class="eyebrow">${String(index+1).padStart(2,'0')} · Package</p>
@@ -69,6 +69,7 @@
           <span class="text-link">Discover package</span>
         </div>
       </a>`).join('');
+      window.ElisabethSite?.syncInternalLinks?.();
     } catch (error) {
       console.error(error);
       if(section) section.hidden = true;
@@ -82,7 +83,7 @@
       const [raw,photoRaw] = await Promise.all([data('meetings'), data('meetingPhotos')]);
       target.innerHTML = Object.entries(raw || {}).map(([id,item],index) => {
         const photoList = Object.values(photoRaw?.[id] || {}).sort((a,b)=>(Number(a.order)||0)-(Number(b.order)||0));
-        return `<a class="home-meeting-card" data-site-link href="index.html#meetings">
+        return `<a class="home-meeting-card" data-site-link href="meetings.html#meeting-${escape(id)}">
           <img src="${escape(photoList[0]?.url || '../headers/meetings.webp')}" alt="${escape(localized(item,'name'))}" loading="lazy" decoding="async">
           <div class="home-meeting-copy">
             <p class="eyebrow">${String(index+1).padStart(2,'0')} · Meetings</p>
