@@ -1,0 +1,66 @@
+/* Distinct Careers, Policies and Legal reading experiences */
+.careers-page,.policies-page,.legal-page{background:var(--paper)}
+
+/* Careers - editorial people-first page */
+.careers-hero{min-height:92vh;background:var(--black);color:#fff;display:grid;grid-template-columns:.86fr 1.14fr;overflow:hidden}
+.careers-hero-copy{padding:150px clamp(38px,6vw,105px) 80px;display:flex;flex-direction:column;justify-content:flex-end}
+.careers-hero-copy .eyebrow{color:var(--stone)}
+.careers-hero-copy h1{font-size:clamp(62px,8.2vw,132px);margin:18px 0 28px}
+.careers-hero-copy p{max-width:600px;color:rgba(255,255,255,.65);font-size:17px}
+.careers-hero-media{position:relative;min-height:720px;overflow:hidden}
+.careers-hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.03)}
+.careers-hero-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,7,.55),transparent 35%),linear-gradient(0deg,rgba(7,8,7,.3),transparent 50%)}
+.careers-manifesto{padding:135px 0;background:#fff}
+.careers-manifesto-grid{display:grid;grid-template-columns:.45fr 1.55fr;gap:72px}
+.careers-manifesto h2{font-size:clamp(48px,6vw,92px);max-width:950px}
+.careers-manifesto p{max-width:760px;color:var(--muted);font-size:18px;line-height:1.85;margin:28px 0 0}
+.careers-board{padding:110px 0 135px;background:var(--mist)}
+.careers-board-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:42px}
+.careers-board-head h2{font-size:clamp(46px,5vw,76px)}
+.career-list{border-top:1px solid var(--line)}
+.career-row{display:grid;grid-template-columns:90px 1.25fr .65fr .55fr auto;gap:26px;align-items:center;padding:27px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .25s ease,background .25s ease}
+.career-row:hover{padding-left:18px;padding-right:18px;background:#fff}
+.career-row-index{font-family:var(--display);font-size:10px;letter-spacing:.16em;color:var(--sage-dark)}
+.career-row h3{font-family:var(--display);font-size:29px;font-weight:300;margin:0;letter-spacing:-.03em}
+.career-meta{font-size:12px;color:var(--muted)}
+.career-arrow{width:45px;height:45px;border:1px solid var(--line);display:grid;place-items:center;font-size:17px}
+.careers-empty{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;padding:48px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.careers-empty h3{font-family:var(--display);font-size:clamp(32px,4vw,54px);font-weight:300;margin:0 0 12px}.careers-empty p{margin:0;color:var(--muted);max-width:720px}
+
+/* Policies - operational handbook */
+.policy-hero{min-height:66vh;background:var(--sage-dark);color:#fff;display:flex;align-items:end;padding:140px 0 72px;position:relative;overflow:hidden}
+.policy-hero::after{content:'POLICIES';position:absolute;right:-2vw;bottom:-6vw;font-family:var(--display);font-size:clamp(110px,22vw,360px);font-weight:200;letter-spacing:-.08em;color:rgba(255,255,255,.055);line-height:.7;pointer-events:none}
+.policy-hero h1{font-size:clamp(65px,9vw,136px);max-width:1020px}.policy-hero p{max-width:620px;color:rgba(255,255,255,.73);font-size:18px}
+.policy-hub{padding:110px 0 130px;background:#fff}
+.policy-layout{display:grid;grid-template-columns:.65fr 1.35fr;min-height:680px;border:1px solid var(--line)}
+.policy-index{background:var(--black);color:#fff;padding:18px 0;max-height:760px;overflow:auto}
+.policy-tab{width:100%;border:0;border-bottom:1px solid rgba(255,255,255,.11);background:transparent;color:rgba(255,255,255,.62);padding:20px 24px;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;text-align:left;cursor:pointer;transition:.25s ease}
+.policy-tab:hover,.policy-tab.active{color:#fff;background:rgba(255,255,255,.065);padding-left:32px}
+.policy-tab .num{font-family:var(--display);font-size:10px;letter-spacing:.16em;color:var(--stone)}
+.policy-tab strong{font-family:var(--display);font-size:17px;font-weight:400}
+.policy-panel{padding:clamp(45px,7vw,96px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.policy-panel-number{position:absolute;right:25px;top:-25px;font-family:var(--display);font-size:180px;font-weight:200;color:rgba(149,147,128,.08);line-height:1}
+.policy-panel .eyebrow{color:var(--sage-dark)}
+.policy-panel h2{font-family:var(--display);font-size:clamp(48px,5.7vw,82px);font-weight:300;letter-spacing:-.05em;line-height:.95;margin:16px 0 30px;position:relative}
+.policy-copy{white-space:pre-line;color:var(--muted);font-size:16px;line-height:1.9;max-width:790px;position:relative}
+.policy-controls{display:flex;justify-content:flex-end;gap:7px;margin-top:35px}.policy-controls button{width:48px;height:48px;border:1px solid var(--line);background:transparent;cursor:pointer}.policy-controls button:hover{background:var(--black);color:#fff}
+
+/* Privacy and Terms - deliberately calm reading interface */
+.legal-hero{background:var(--black);color:#fff;padding:165px 0 85px;border-bottom:1px solid rgba(255,255,255,.12)}
+.legal-hero-grid{display:grid;grid-template-columns:.4fr 1.6fr;gap:70px;align-items:end}
+.legal-hero h1{font-size:clamp(62px,8vw,124px);max-width:1100px}.legal-hero p{color:rgba(255,255,255,.6);max-width:620px}
+.legal-reading{background:#fff;padding:90px 0 135px}
+.legal-layout{display:grid;grid-template-columns:260px minmax(0,840px);gap:90px;justify-content:center}
+.legal-aside{position:sticky;top:125px;align-self:start;border-top:1px solid var(--line)}
+.legal-aside a{display:block;padding:14px 0;border-bottom:1px solid var(--line);font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+.legal-aside a:hover{color:var(--black)}
+.legal-progress{position:fixed;z-index:500;left:0;top:0;height:2px;width:0;background:var(--sage);pointer-events:none}
+.legal-content{font-size:15px;line-height:1.9;color:#494d49}
+.legal-content p{margin:0 0 17px}.legal-content p:empty{display:none}
+.legal-content .legal-section-title{font-family:var(--display);font-size:clamp(28px,3vw,39px);font-weight:300;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin:52px 0 20px}
+.legal-content .legal-section-title:first-child{margin-top:0}
+.legal-content a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+.legal-meta{font-family:var(--display);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:26px}
+
+@media(max-width:1050px){.careers-hero{grid-template-columns:1fr}.careers-hero-copy{min-height:620px}.careers-hero-media{min-height:580px}.careers-manifesto-grid,.policy-layout,.legal-hero-grid,.legal-layout{grid-template-columns:1fr}.policy-index{display:flex;overflow:auto;padding:0}.policy-tab{min-width:210px;border-right:1px solid rgba(255,255,255,.11);border-bottom:0}.legal-aside{position:static;display:flex;overflow:auto;border-bottom:1px solid var(--line)}.legal-aside a{white-space:nowrap;padding-right:22px;margin-right:22px;border-bottom:0}.career-row{grid-template-columns:65px 1fr .6fr auto}.career-row .career-location{display:none}}
+@media(max-width:760px){.careers-hero-copy{padding:125px 22px 55px;min-height:580px}.careers-hero-media{min-height:420px}.careers-manifesto,.careers-board{padding:80px 0}.careers-manifesto-grid{gap:28px}.careers-board-head{align-items:start;flex-direction:column}.career-row{grid-template-columns:45px 1fr auto;gap:13px}.career-row .career-type,.career-row .career-location{display:none}.careers-empty{grid-template-columns:1fr}.policy-hero{padding:125px 0 55px;min-height:570px}.policy-hub{padding:70px 0}.policy-panel{padding:48px 22px}.policy-index{margin:0 -17px}.policy-tab{min-width:185px;padding:17px}.legal-hero{padding:130px 0 60px}.legal-hero-grid{gap:28px}.legal-reading{padding:60px 0 90px}.legal-layout{gap:40px}.legal-content{font-size:14px}}
