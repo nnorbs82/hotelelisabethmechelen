@@ -1,0 +1,82 @@
+name: Migrate Elisabeth Firebase images
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/migrate-firebase-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Download public Firebase media into Git
+        run: python tools/migrate_firebase_images.py
+
+      - name: Rebuild static content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Validate local media migration
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('redesign-site/content')
+          checks=[('rooms','gallery'),('facilities','gallery'),('meetings','gallery')]
+          for folder,field in checks:
+              for path in (base/folder).glob('*.json'):
+                  item=json.loads(path.read_text(encoding='utf-8'))
+                  legacy=item.get('photos') if folder=='rooms' else item.get('legacyPhotos')
+                  if legacy and not item.get(field):
+                      raise SystemExit(f'Missing migrated {field}: {path}')
+          for path in (base/'packages').glob('*.json'):
+              item=json.loads(path.read_text(encoding='utf-8'))
+              if item.get('imageUrl') and not item.get('image'): raise SystemExit(f'Missing package image: {path}')
+          for path in (base/'attractions').glob('*.json'):
+              item=json.loads(path.read_text(encoding='utf-8'))
+              if (item.get('image') or {}).get('url') and not item.get('imageFile'): raise SystemExit(f'Missing attraction image: {path}')
+          generated=base/'generated'
+          for path in generated.glob('*.json'):
+              text=path.read_text(encoding='utf-8')
+              if 'firebasestorage.googleapis.com' in text:
+                  raise SystemExit(f'Runtime Firebase media dependency remains in {path}')
+          files=[p for p in Path('images/elisabeth').rglob('*') if p.is_file()]
+          if not files: raise SystemExit('No local Elisabeth media files were created')
+          print(f'Validated {len(files)} locally migrated media files')
+          PY
+
+      - name: Validate frontend has no Firebase runtime media references
+        run: |
+          if grep -R -n 'firebasestorage.googleapis.com' redesign-site --exclude-dir=content; then
+            echo 'Firebase Storage reference remains in active redesign files' >&2
+            exit 1
+          fi
+          for file in redesign-site/assets/*.js; do node --check "$file"; done
+
+      - name: Guard production branch
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
+
+      - name: Record migration status
+        run: |
+          cat >> redesign-site/BUILD_STATUS.md <<'EOF'
+          - Public room/package/facility/meeting/attraction media copied from Firebase Storage into Git-managed CMS media folders; active redesign indexes no longer depend on Firebase Storage URLs.
+          EOF
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/migrate-firebase-images.yml
+
+      - name: Commit local media migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images/elisabeth redesign-site/content redesign-site/BUILD_STATUS.md .github/workflows/migrate-firebase-images.yml
+          git commit -m 'media: migrate Elisabeth website images out of Firebase'
+          git push origin HEAD:elisabeth-redesign
