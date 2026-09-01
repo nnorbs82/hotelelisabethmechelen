@@ -1,0 +1,58 @@
+name: Rebuild Elisabeth content indexes
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - 'redesign-site/content/**'
+      - '!redesign-site/content/generated/**'
+      - 'tools/build_redesign_content.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: elisabeth-content-indexes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Build static content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Validate generated JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          folder=Path('redesign-site/content/generated')
+          required=['rooms.json','packages.json','facilities.json','facilitiesLibrary.json','meetings.json','meetingsPhotos.json','attractions.json','careers.json','amenitiesMaster.json','hotelInfo.json','privacyPolicy.json','termsAndConditions.json']
+          for name in required:
+              path=folder/name
+              if not path.exists(): raise SystemExit(f'Missing {path}')
+              json.loads(path.read_text(encoding='utf-8'))
+          print('Generated CMS indexes are valid JSON')
+          PY
+
+      - name: Guard production branch
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
+
+      - name: Commit generated indexes when changed
+        run: |
+          if git diff --quiet -- redesign-site/content/generated; then
+            echo 'No generated index changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign-site/content/generated
+          git commit -m 'content: rebuild website indexes'
+          git push origin HEAD:elisabeth-redesign
