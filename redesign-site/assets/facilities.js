@@ -127,7 +127,7 @@
   async function init(){
     translateStatic();
     try{
-      const [f,l] = await Promise.all([fetch(FACILITIES_PATH,{cache:'no-store'}),fetch(LIBRARY_PATH,{cache:'no-store'})]);
+      const [f,l] = await Promise.all([fetch(FACILITIES_PATH),fetch(LIBRARY_PATH)]);
       if (!f.ok || !l.ok) throw new Error('Facilities data unavailable');
       facilities = await f.json();
       library = await l.json();

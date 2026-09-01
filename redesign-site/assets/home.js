@@ -28,7 +28,7 @@
 
   async function data(key){
     if (cache[key]) return cache[key];
-    const response = await fetch(paths[key], {cache:'no-store'});
+    const response = await fetch(paths[key]);
     if (!response.ok) throw new Error(`Unable to load ${key}`);
     cache[key] = await response.json();
     return cache[key];

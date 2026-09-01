@@ -28,7 +28,7 @@
   }
   function show(i){active=(i+order.length)%order.length;renderPanel();}
   document.addEventListener('click',e=>{const tab=e.target.closest('[data-policy-index]');if(tab){show(Number(tab.dataset.policyIndex));return;}const nav=e.target.closest('[data-policy-nav]');if(nav)show(active+(nav.dataset.policyNav==='next'?1:-1));});
-  async function init(){translate();try{const r=await fetch(PATH,{cache:'no-store'});if(!r.ok)throw new Error('policies unavailable');data=await r.json();renderPanel();}catch(error){console.error(error);renderIndex();}}
+  async function init(){translate();try{const r=await fetch(PATH);if(!r.ok)throw new Error('policies unavailable');data=await r.json();renderPanel();}catch(error){console.error(error);renderIndex();}}
   document.addEventListener('DOMContentLoaded',init);
   new MutationObserver(m=>{if(m.some(x=>x.attributeName==='lang')){translate();renderPanel();}}).observe(document.documentElement,{attributes:true});
 })();

@@ -24,7 +24,7 @@
     if(aside)aside.innerHTML=links.slice(0,12).map(([id,title])=>`<a href="#${id}">${title}</a>`).join('');
   }
   function updateProgress(){const max=document.documentElement.scrollHeight-innerHeight;const pct=max>0?Math.min(1,Math.max(0,scrollY/max)):0;const bar=document.querySelector('.legal-progress');if(bar)bar.style.width=`${pct*100}%`;}
-  async function init(){staticText();try{const r=await fetch(source,{cache:'no-store'});if(!r.ok)throw new Error('legal content unavailable');data=await r.json();render();}catch(error){console.error(error);document.getElementById('legal-content').textContent='Content is temporarily unavailable in this development preview.';}updateProgress();}
+  async function init(){staticText();try{const r=await fetch(source);if(!r.ok)throw new Error('legal content unavailable');data=await r.json();render();}catch(error){console.error(error);document.getElementById('legal-content').textContent='Content is temporarily unavailable in this development preview.';}updateProgress();}
   document.addEventListener('DOMContentLoaded',init);addEventListener('scroll',updateProgress,{passive:true});
   new MutationObserver(m=>{if(m.some(x=>x.attributeName==='lang')&&Object.keys(data).length)render();}).observe(document.documentElement,{attributes:true});
 })();

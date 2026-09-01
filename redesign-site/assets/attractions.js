@@ -62,7 +62,7 @@
 
   async function init(){
     translateStatic();
-    try{const response=await fetch(SOURCE,{cache:'no-store'});if(!response.ok)throw new Error('Attractions unavailable');attractions=await response.json();render();}
+    try{const response=await fetch(SOURCE);if(!response.ok)throw new Error('Attractions unavailable');attractions=await response.json();render();}
     catch(error){console.error(error);const mobile=document.getElementById('city-mobile-list');if(mobile)mobile.innerHTML='<p class="rooms-loading">Attractions are temporarily unavailable in this development preview.</p>';}
   }
   document.addEventListener('DOMContentLoaded',init);

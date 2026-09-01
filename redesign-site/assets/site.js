@@ -2,11 +2,17 @@
   'use strict';
 
   const supported = ['en','nl','fr','es','de'];
+  const skipLabels = {en:'Skip to main content',nl:'Ga naar hoofdinhoud',fr:'Aller au contenu principal',es:'Ir al contenido principal',de:'Zum Hauptinhalt springen'};
   const language = () => {
     const q = new URLSearchParams(location.search).get('lang');
     if (supported.includes(q)) return q;
     const stored = localStorage.getItem('elisabeth_redesign_preview_language');
     return supported.includes(stored) ? stored : 'en';
+  };
+
+  const syncSkipLink = () => {
+    const link = document.querySelector('[data-site-skip]');
+    if (link) link.textContent = skipLabels[language()] || skipLabels.en;
   };
 
   const syncInternalLinks = () => {
@@ -21,14 +27,15 @@
   };
 
   document.querySelectorAll('[data-lang]').forEach(button => {
-    button.addEventListener('click', () => setTimeout(syncInternalLinks, 30));
+    button.addEventListener('click', () => setTimeout(() => { syncInternalLinks(); syncSkipLink(); }, 30));
   });
 
-  document.addEventListener('DOMContentLoaded', syncInternalLinks);
-  window.addEventListener('pageshow', syncInternalLinks);
+  document.addEventListener('DOMContentLoaded', () => { syncInternalLinks(); syncSkipLink(); });
+  window.addEventListener('pageshow', () => { syncInternalLinks(); syncSkipLink(); });
 
   window.ElisabethSite = {
     getLanguage: language,
-    syncInternalLinks
+    syncInternalLinks,
+    syncSkipLink
   };
 })();

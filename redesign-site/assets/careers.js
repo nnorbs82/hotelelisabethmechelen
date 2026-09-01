@@ -32,7 +32,7 @@
       return `<a class="career-row" href="mailto:info@elisabeth-hotel.be?subject=${subject}" id="job-${escape(id)}"><span class="career-row-index">${String(i+1).padStart(2,'0')}</span><h3>${escape(title)}</h3><span class="career-meta career-type">${escape(type)}</span><span class="career-meta career-location">${escape(locationText)}</span><span class="career-arrow">↗</span></a>`;
     }).join('');
   }
-  async function init(){translate();try{const r=await fetch(PATH,{cache:'no-store'});if(!r.ok)throw new Error('careers unavailable');const data=await r.json();render(data);}catch{render(null);}}
+  async function init(){translate();try{const r=await fetch(PATH);if(!r.ok)throw new Error('careers unavailable');const data=await r.json();render(data);}catch{render(null);}}
   document.addEventListener('DOMContentLoaded',init);
   new MutationObserver(m=>{if(m.some(x=>x.attributeName==='lang'))init();}).observe(document.documentElement,{attributes:true});
 })();

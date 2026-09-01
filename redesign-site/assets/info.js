@@ -74,7 +74,7 @@
 
   async function init(){
     translateStatic();
-    try{const response=await fetch(SOURCE,{cache:'no-store'});if(!response.ok)throw new Error('Hotel information unavailable');data=await response.json();render();}
+    try{const response=await fetch(SOURCE);if(!response.ok)throw new Error('Hotel information unavailable');data=await response.json();render();}
     catch(error){console.error(error);const body=document.getElementById('info-active-body');if(body)body.textContent='Hotel information is temporarily unavailable in this development preview.';}
   }
   document.addEventListener('DOMContentLoaded',init);

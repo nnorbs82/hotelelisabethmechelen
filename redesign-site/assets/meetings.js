@@ -59,7 +59,7 @@
     });
   }
 
-  async function init(){translateStatic();setupForm();try{const [m,p]=await Promise.all([fetch(MEETINGS_PATH,{cache:'no-store'}),fetch(PHOTOS_PATH,{cache:'no-store'})]);if(!m.ok||!p.ok)throw new Error('Meeting content unavailable');meetings=await m.json();photoLibrary=await p.json();render();}catch(error){console.error(error);const target=document.getElementById('meetings-list');if(target)target.innerHTML='<p class="rooms-loading">Meeting information is temporarily unavailable in this development preview.</p>';}}
+  async function init(){translateStatic();setupForm();try{const [m,p]=await Promise.all([fetch(MEETINGS_PATH),fetch(PHOTOS_PATH)]);if(!m.ok||!p.ok)throw new Error('Meeting content unavailable');meetings=await m.json();photoLibrary=await p.json();render();}catch(error){console.error(error);const target=document.getElementById('meetings-list');if(target)target.innerHTML='<p class="rooms-loading">Meeting information is temporarily unavailable in this development preview.</p>';}}
   document.addEventListener('DOMContentLoaded',init);
   new MutationObserver(m=>{if(m.some(x=>x.attributeName==='lang')){translateStatic();if(Object.keys(meetings).length)render();}}).observe(document.documentElement,{attributes:true});
 })();

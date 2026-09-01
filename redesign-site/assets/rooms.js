@@ -176,7 +176,7 @@
   async function init(){
     translateStatic();
     try{
-      const [roomResponse,amenityResponse]=await Promise.all([fetch(ROOM_PATH,{cache:'no-store'}),fetch(AMENITY_PATH,{cache:'no-store'})]);
+      const [roomResponse,amenityResponse]=await Promise.all([fetch(ROOM_PATH),fetch(AMENITY_PATH)]);
       if(!roomResponse.ok||!amenityResponse.ok)throw new Error('Room content could not be loaded');
       rooms=await roomResponse.json();amenities=await amenityResponse.json();renderJourneyShell();requestScrollUpdate();
       const hash=decodeURIComponent(location.hash);if(hash.startsWith('#room-')){const id=hash.slice(6);if(rooms[id])setTimeout(()=>openRoom(id,{updateHash:false}),80);}

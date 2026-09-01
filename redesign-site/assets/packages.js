@@ -68,7 +68,7 @@
   async function init(){
     translateStatic();
     try{
-      const response=await fetch(PACKAGES_PATH,{cache:'no-store'});
+      const response=await fetch(PACKAGES_PATH);
       if(!response.ok)throw new Error('Packages data unavailable');
       packages=await response.json();
       render();
