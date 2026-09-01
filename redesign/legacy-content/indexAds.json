@@ -1,1 +1,47 @@
-{"ad1":{"bottomText_en":"WE HANDLE THE REST... AND YOU","bottomText_fr":"NOUS GERONS LE RESTE... ET VOUS","bottomText_nl":"DAT WORDT EEN HEERLIJKE NACHT","buttonTitle_en":"SEE THE ROOMS","buttonTitle_fr":"VIOR LES CHAMBRES","buttonTitle_nl":"KAMERS KIJKEN","filename":"index-ads/ad1-1769449750075-cathedral1.webp","imageUrl":"https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad1-1769449750075-cathedral1.webp?alt=media&token=eb95825e-51ba-450b-9878-770907fa58a3","link":"https://hotelelisabethmechelen.com/rooms.html","timestamp":1769449926379,"topText_en":"YOU PICK A ROOM","topText_fr":"VOUES CHOISISSEZ UNE CHAMBRE","topText_nl":""},"ad2":{"bottomText_en":"WEDDINGS OR REUNIONS","bottomText_fr":"MARIAGE OU REUNIONS","bottomText_nl":"HUWELIJK OF REUNIES","buttonTitle_en":"SEE THE ROOMS","buttonTitle_fr":"VOIR LES CHAMBRES","buttonTitle_nl":"KAMERS KIJKEN","filename":"index-ads/ad2-1769449967442-citysuite1.webp","imageUrl":"https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad2-1769449967442-citysuite1.webp?alt=media&token=26d6fbb1-2290-42ed-9952-06dd24c70a84","link":"https://hotelelisabethmechelen.com/rooms.html","timestamp":1769450135950,"topText_en":"CITY SUITE","topText_fr":"CITY SUITE","topText_nl":"CITY SUITE"},"ad3":{"bottomText_en":"BUSINESS / COUPLES / GROUPS","bottomText_fr":"AFFAIRES / GROUPES / COUPLES","bottomText_nl":"BEDRIJF / KEPPELS / GROEPEN","buttonTitle_en":"SEE THE ROOMS","buttonTitle_fr":"VOIR LES CHAMBRES","buttonTitle_nl":"KAMERS KIJKEN","filename":"index-ads/ad3-1769450159252-olivetree1.webp","imageUrl":"https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad3-1769450159252-olivetree1.webp?alt=media&token=54bf7ace-2374-4283-b96f-212c613cb9d8","link":"https://hotelelisabethmechelen.com/rooms.html","timestamp":1769450294874,"topText_en":"CATHEDRAL VIEW","topText_fr":"CATHEDRAL VIEW","topText_nl":"CATHEDRAL VIEW"}}
+{
+  "ad1": {
+    "bottomText_en": "WE HANDLE THE REST... AND YOU",
+    "bottomText_fr": "NOUS GERONS LE RESTE... ET VOUS",
+    "bottomText_nl": "DAT WORDT EEN HEERLIJKE NACHT",
+    "buttonTitle_en": "SEE THE ROOMS",
+    "buttonTitle_fr": "VIOR LES CHAMBRES",
+    "buttonTitle_nl": "KAMERS KIJKEN",
+    "filename": "index-ads/ad1-1769449750075-cathedral1.webp",
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad1-1769449750075-cathedral1.webp?alt=media&token=eb95825e-51ba-450b-9878-770907fa58a3",
+    "link": "https://hotelelisabethmechelen.com/rooms.html",
+    "timestamp": 1769449926379,
+    "topText_en": "YOU PICK A ROOM",
+    "topText_fr": "VOUES CHOISISSEZ UNE CHAMBRE",
+    "topText_nl": ""
+  },
+  "ad2": {
+    "bottomText_en": "WEDDINGS OR REUNIONS",
+    "bottomText_fr": "MARIAGE OU REUNIONS",
+    "bottomText_nl": "HUWELIJK OF REUNIES",
+    "buttonTitle_en": "SEE THE ROOMS",
+    "buttonTitle_fr": "VOIR LES CHAMBRES",
+    "buttonTitle_nl": "KAMERS KIJKEN",
+    "filename": "index-ads/ad2-1769449967442-citysuite1.webp",
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad2-1769449967442-citysuite1.webp?alt=media&token=26d6fbb1-2290-42ed-9952-06dd24c70a84",
+    "link": "https://hotelelisabethmechelen.com/rooms.html",
+    "timestamp": 1769450135950,
+    "topText_en": "CITY SUITE",
+    "topText_fr": "CITY SUITE",
+    "topText_nl": "CITY SUITE"
+  },
+  "ad3": {
+    "bottomText_en": "BUSINESS / COUPLES / GROUPS",
+    "bottomText_fr": "AFFAIRES / GROUPES / COUPLES",
+    "bottomText_nl": "BEDRIJF / KEPPELS / GROEPEN",
+    "buttonTitle_en": "SEE THE ROOMS",
+    "buttonTitle_fr": "VOIR LES CHAMBRES",
+    "buttonTitle_nl": "KAMERS KIJKEN",
+    "filename": "index-ads/ad3-1769450159252-olivetree1.webp",
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/index-ads%2Fad3-1769450159252-olivetree1.webp?alt=media&token=54bf7ace-2374-4283-b96f-212c613cb9d8",
+    "link": "https://hotelelisabethmechelen.com/rooms.html",
+    "timestamp": 1769450294874,
+    "topText_en": "CATHEDRAL VIEW",
+    "topText_fr": "CATHEDRAL VIEW",
+    "topText_nl": "CATHEDRAL VIEW"
+  }
+}

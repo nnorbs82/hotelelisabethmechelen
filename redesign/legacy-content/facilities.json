@@ -1,1 +1,62 @@
-{"facility_1769804810543":{"guidelines_en":["Swimming trunks, bathing suit/bikini compulsory","Shower first, then swim","Our swimming pool is a place of rest and discretion. No playground. Please respect this.","Do not run; don't shout","No inflatable play items","No diving (depth is only 1.40m)","Not a 'bomb', certainly not from the resting platform","No use of drinks and food in the pool area","The hotel is not responsible for any accidents"],"guidelines_fr":["Maillot de bain, maillot de bain/bikini obligatoire","Douche d'abord, puis nage","Notre piscine est un lieu de repos et de discrétion. Pas de terrain de jeu. Merci de respecter cela.","Ne cours pas; ne crie pas","Pas d'articles de jeu gonflables","Pas de plongée (la profondeur n'est que de 1,40 m)","Pas une \"bombe\", certainement pas de la plate-forme de repos","Pas d'utilisation de boissons et de nourriture dans la piscine","L'hôtel n'est pas responsable des accidents"],"guidelines_nl":["Zwembroek, badpak/bikini verplicht","Eerst douchen dan zwemmen","Ons zwembad is een plaats van rust en discretie. Geen speeltuin. Gelieve dit te respecteren.","Niet rennen ; niet roepen","Geen opblaasbare speelvoorwerpen","Verboden te duiken (diepte is slechts 1,40m)","Geen ‘bommetje', zeker niet vanop het rustplatform","Geen gebruik van drank en voedingswaren in de zwembadruimte","Het hotel is niet verantwoordelijk voor gebeurlijke ongevallen"],"name_en":"POOL","name_fr":"PISCINE","name_nl":"ZWEMBAD","operation_en":"Register at the reception with a room badge to check availability and to activate access.\n\nThe use of the swimming pool is free for our hotel guests; it is payable for external users and only accessible after registration at the reception.\n\nOpening hours: Daily from 07:00 to 23:00.\nTowels: Use of your own towels are allowed. Towels are available at the reception for € 5 per towel.\n\nFor more information, you can always contact reception.","operation_fr":"Inscrivez-vous à la réception avec un badge de chambre pour vérifier la disponibilité et activer l'accès.\n\nL'utilisation de la piscine est gratuite pour nos clients de l'hôtel ; il est payant pour les utilisateurs externes et n'est accessible qu'après inscription à l'accueil.\n\nHoraires d'ouverture : Tous les jours de 07h00 à 23h00.\nServiettes : L'utilisation de vos propres serviettes est autorisée. Serviettes disponibles à la réception à 5 € par serviette.\n\nPour plus d'informations, vous pouvez toujours contacter la réception.","operation_nl":"Aanmelden aan het onthaal met kamerbadge om beschikbaarheid te weten en de toegang te activeren.\n\nHet gebruik van het zwembad is gratis voor onze hotelgasten ; voor externe gebruikers is het betalend en pas toegankelijk na registratie aan het onthaal.\n\nOpeningsuren: Dagelijks van 07u00 tot 23u00.\nBadlinnen: Gebruik van eigen handdoeken is toegestaan. Handdoeken te verkrijgen aan het onthaal aan € 5 per handdoek.\n\nVoor meer info kan u steeds terecht aan het onthaal.","timestamp":1769804810543},"facility_1769888022008":{"guidelines_en":["Soon to come! Stay Tuned"],"guidelines_fr":["Bientôt disponible ! Restez à l’écoute."],"guidelines_nl":["Binnenkort beschikbaar! Blijf op de hoogte."],"name_en":"SPA","name_fr":"SPA","name_nl":"SPA","operation_en":"Soon to open!","operation_fr":"Bientôt ouvert !","operation_nl":"Binnenkort geopend!","timestamp":1769888022008}}
+{
+  "facility_1769804810543": {
+    "guidelines_en": [
+      "Swimming trunks, bathing suit/bikini compulsory",
+      "Shower first, then swim",
+      "Our swimming pool is a place of rest and discretion. No playground. Please respect this.",
+      "Do not run; don't shout",
+      "No inflatable play items",
+      "No diving (depth is only 1.40m)",
+      "Not a 'bomb', certainly not from the resting platform",
+      "No use of drinks and food in the pool area",
+      "The hotel is not responsible for any accidents"
+    ],
+    "guidelines_fr": [
+      "Maillot de bain, maillot de bain/bikini obligatoire",
+      "Douche d'abord, puis nage",
+      "Notre piscine est un lieu de repos et de discrétion. Pas de terrain de jeu. Merci de respecter cela.",
+      "Ne cours pas; ne crie pas",
+      "Pas d'articles de jeu gonflables",
+      "Pas de plongée (la profondeur n'est que de 1,40 m)",
+      "Pas une \"bombe\", certainement pas de la plate-forme de repos",
+      "Pas d'utilisation de boissons et de nourriture dans la piscine",
+      "L'hôtel n'est pas responsable des accidents"
+    ],
+    "guidelines_nl": [
+      "Zwembroek, badpak/bikini verplicht",
+      "Eerst douchen dan zwemmen",
+      "Ons zwembad is een plaats van rust en discretie. Geen speeltuin. Gelieve dit te respecteren.",
+      "Niet rennen ; niet roepen",
+      "Geen opblaasbare speelvoorwerpen",
+      "Verboden te duiken (diepte is slechts 1,40m)",
+      "Geen ‘bommetje', zeker niet vanop het rustplatform",
+      "Geen gebruik van drank en voedingswaren in de zwembadruimte",
+      "Het hotel is niet verantwoordelijk voor gebeurlijke ongevallen"
+    ],
+    "name_en": "POOL",
+    "name_fr": "PISCINE",
+    "name_nl": "ZWEMBAD",
+    "operation_en": "Register at the reception with a room badge to check availability and to activate access.\n\nThe use of the swimming pool is free for our hotel guests; it is payable for external users and only accessible after registration at the reception.\n\nOpening hours: Daily from 07:00 to 23:00.\nTowels: Use of your own towels are allowed. Towels are available at the reception for € 5 per towel.\n\nFor more information, you can always contact reception.",
+    "operation_fr": "Inscrivez-vous à la réception avec un badge de chambre pour vérifier la disponibilité et activer l'accès.\n\nL'utilisation de la piscine est gratuite pour nos clients de l'hôtel ; il est payant pour les utilisateurs externes et n'est accessible qu'après inscription à l'accueil.\n\nHoraires d'ouverture : Tous les jours de 07h00 à 23h00.\nServiettes : L'utilisation de vos propres serviettes est autorisée. Serviettes disponibles à la réception à 5 € par serviette.\n\nPour plus d'informations, vous pouvez toujours contacter la réception.",
+    "operation_nl": "Aanmelden aan het onthaal met kamerbadge om beschikbaarheid te weten en de toegang te activeren.\n\nHet gebruik van het zwembad is gratis voor onze hotelgasten ; voor externe gebruikers is het betalend en pas toegankelijk na registratie aan het onthaal.\n\nOpeningsuren: Dagelijks van 07u00 tot 23u00.\nBadlinnen: Gebruik van eigen handdoeken is toegestaan. Handdoeken te verkrijgen aan het onthaal aan € 5 per handdoek.\n\nVoor meer info kan u steeds terecht aan het onthaal.",
+    "timestamp": 1769804810543
+  },
+  "facility_1769888022008": {
+    "guidelines_en": [
+      "Soon to come! Stay Tuned"
+    ],
+    "guidelines_fr": [
+      "Bientôt disponible ! Restez à l’écoute."
+    ],
+    "guidelines_nl": [
+      "Binnenkort beschikbaar! Blijf op de hoogte."
+    ],
+    "name_en": "SPA",
+    "name_fr": "SPA",
+    "name_nl": "SPA",
+    "operation_en": "Soon to open!",
+    "operation_fr": "Bientôt ouvert !",
+    "operation_nl": "Binnenkort geopend!",
+    "timestamp": 1769888022008
+  }
+}
