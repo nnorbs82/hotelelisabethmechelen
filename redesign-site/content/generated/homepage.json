@@ -1,0 +1,162 @@
+{
+  "heroEyebrow_en": "A contemporary four-star stay in Mechelen",
+  "heroEyebrow_nl": "Een eigentijds viersterrenverblijf in Mechelen",
+  "heroEyebrow_fr": "Un séjour quatre étoiles contemporain à Malines",
+  "heroEyebrow_es": "Una estancia contemporánea de cuatro estrellas en Malinas",
+  "heroEyebrow_de": "Ein zeitgemäßer Vier-Sterne-Aufenthalt in Mechelen",
+  "heroTitle_en": "A modern pause in the heart of the city.",
+  "heroTitle_nl": "Een moderne pauze in het hart van de stad.",
+  "heroTitle_fr": "Une pause moderne au cœur de la ville.",
+  "heroTitle_es": "Una pausa moderna en el corazón de la ciudad.",
+  "heroTitle_de": "Eine moderne Pause im Herzen der Stadt.",
+  "heroBody_en": "Designed for city breaks, business stays and unhurried weekends - with an indoor pool, quiet courtyard and Mechelen just outside.",
+  "heroBody_nl": "Voor citytrips, zakenverblijven en rustige weekends - met binnenzwembad, stille binnentuin en Mechelen voor de deur.",
+  "heroBody_fr": "Pour les escapades urbaines, les voyages d’affaires et les week-ends tranquilles - avec piscine intérieure, cour calme et Malines à votre porte.",
+  "heroBody_es": "Pensado para escapadas urbanas, viajes de negocios y fines de semana sin prisas - con piscina interior, un tranquilo patio y Malinas justo al salir.",
+  "heroBody_de": "Für Städtereisen, Geschäftsaufenthalte und entspannte Wochenenden - mit Innenpool, ruhigem Innenhof und Mechelen direkt vor der Tür.",
+  "heroImages": [
+    {
+      "image": "../images/elisabeth/home/1.webp",
+      "alt_en": "Hotel Elisabeth Mechelen",
+      "alt_nl": "Hotel Elisabeth Mechelen",
+      "alt_fr": "Hotel Elisabeth Mechelen",
+      "alt_es": "Hotel Elisabeth Mechelen",
+      "alt_de": "Hotel Elisabeth Mechelen"
+    },
+    {
+      "image": "../images/elisabeth/home/4.webp",
+      "alt_en": "Indoor pool at Hotel Elisabeth",
+      "alt_nl": "Binnenzwembad van Hotel Elisabeth",
+      "alt_fr": "Piscine intérieure de l’Hotel Elisabeth",
+      "alt_es": "Piscina interior de Hotel Elisabeth",
+      "alt_de": "Innenpool im Hotel Elisabeth"
+    },
+    {
+      "image": "../images/elisabeth/home/6.webp",
+      "alt_en": "Hotel Elisabeth interior",
+      "alt_nl": "Interieur van Hotel Elisabeth",
+      "alt_fr": "Intérieur de l’Hotel Elisabeth",
+      "alt_es": "Interior de Hotel Elisabeth",
+      "alt_de": "Interieur des Hotel Elisabeth"
+    },
+    {
+      "image": "../images/elisabeth/home/8.webp",
+      "alt_en": "Hotel Elisabeth atmosphere",
+      "alt_nl": "Sfeer in Hotel Elisabeth",
+      "alt_fr": "Ambiance de l’Hotel Elisabeth",
+      "alt_es": "Ambiente de Hotel Elisabeth",
+      "alt_de": "Atmosphäre im Hotel Elisabeth"
+    }
+  ],
+  "manifestoEyebrow_en": "Hotel Elisabeth · Mechelen",
+  "manifestoEyebrow_nl": "Hotel Elisabeth · Mechelen",
+  "manifestoEyebrow_fr": "Hotel Elisabeth · Malines",
+  "manifestoEyebrow_es": "Hotel Elisabeth · Malinas",
+  "manifestoEyebrow_de": "Hotel Elisabeth · Mechelen",
+  "manifestoLine1_en": "More than a room.",
+  "manifestoLine1_nl": "Meer dan een kamer.",
+  "manifestoLine1_fr": "Plus qu’une chambre.",
+  "manifestoLine1_es": "Más que una habitación.",
+  "manifestoLine1_de": "Mehr als ein Zimmer.",
+  "manifestoLine2_en": "A change of pace.",
+  "manifestoLine2_nl": "Een ander ritme.",
+  "manifestoLine2_fr": "Un autre rythme.",
+  "manifestoLine2_es": "Un cambio de ritmo.",
+  "manifestoLine2_de": "Ein anderer Rhythmus.",
+  "manifestoSubtitle_en": "Contemporary comfort with room to breathe.",
+  "manifestoSubtitle_nl": "Hedendaags comfort met ruimte om te ademen.",
+  "manifestoSubtitle_fr": "Le confort contemporain avec de l’espace pour respirer.",
+  "manifestoSubtitle_es": "Confort contemporáneo con espacio para respirar.",
+  "manifestoSubtitle_de": "Zeitgemäßer Komfort mit Raum zum Durchatmen.",
+  "manifestoBody_en": "Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.",
+  "manifestoBody_nl": "Hotel Elisabeth brengt moderne kamers, ontspannen gemeenschappelijke ruimtes en een centrale ligging in Mechelen samen. Van de stad naar de binnentuin, van vergadering naar zwembad - zonder het ritme van uw verblijf te verliezen.",
+  "manifestoBody_fr": "L’Hotel Elisabeth réunit chambres modernes, espaces communs détendus et emplacement central à Malines. De la ville à la cour, de la réunion à la piscine, sans changer le rythme du séjour.",
+  "manifestoBody_es": "Hotel Elisabeth reúne habitaciones modernas, espacios comunes relajados y una ubicación céntrica en Malinas. Pasa de la ciudad al patio, de una reunión a la piscina, sin cambiar el ritmo de tu estancia.",
+  "manifestoBody_de": "Hotel Elisabeth verbindet moderne Zimmer, entspannte Gemeinschaftsbereiche und eine zentrale Lage in Mechelen. Von der Stadt in den Innenhof, vom Meeting zum Pool - ohne den Rhythmus Ihres Aufenthalts zu verlieren.",
+  "paceImages": [
+    {
+      "image": "../images/elisabeth/home/2.webp",
+      "caption_en": "Interior",
+      "caption_nl": "Interieur",
+      "caption_fr": "Intérieur",
+      "caption_es": "Interior",
+      "caption_de": "Interieur",
+      "alt_en": "Hotel Elisabeth interior",
+      "alt_nl": "Interieur van Hotel Elisabeth",
+      "alt_fr": "Intérieur de l’Hotel Elisabeth",
+      "alt_es": "Interior de Hotel Elisabeth",
+      "alt_de": "Interieur des Hotel Elisabeth"
+    },
+    {
+      "image": "../images/elisabeth/home/5.webp",
+      "caption_en": "Courtyard",
+      "caption_nl": "Binnentuin",
+      "caption_fr": "Cour",
+      "caption_es": "Patio",
+      "caption_de": "Innenhof",
+      "alt_en": "Hotel Elisabeth courtyard",
+      "alt_nl": "Binnentuin van Hotel Elisabeth",
+      "alt_fr": "Cour de l’Hotel Elisabeth",
+      "alt_es": "Patio de Hotel Elisabeth",
+      "alt_de": "Innenhof des Hotel Elisabeth"
+    },
+    {
+      "image": "../images/elisabeth/home/4.webp",
+      "caption_en": "Pool",
+      "caption_nl": "Zwembad",
+      "caption_fr": "Piscine",
+      "caption_es": "Piscina",
+      "caption_de": "Pool",
+      "alt_en": "Hotel Elisabeth pool",
+      "alt_nl": "Zwembad van Hotel Elisabeth",
+      "alt_fr": "Piscine de l’Hotel Elisabeth",
+      "alt_es": "Piscina de Hotel Elisabeth",
+      "alt_de": "Pool im Hotel Elisabeth"
+    }
+  ],
+  "facts": [
+    {
+      "value": "66",
+      "label_en": "Rooms",
+      "label_nl": "Kamers",
+      "label_fr": "Chambres",
+      "label_es": "Habitaciones",
+      "label_de": "Zimmer"
+    },
+    {
+      "value": "1",
+      "label_en": "Indoor pool",
+      "label_nl": "Binnenzwembad",
+      "label_fr": "Piscine intérieure",
+      "label_es": "Piscina interior",
+      "label_de": "Innenpool"
+    },
+    {
+      "value": "24/7",
+      "label_en": "Mechelen on your doorstep",
+      "label_nl": "Mechelen voor de deur",
+      "label_fr": "Malines à votre porte",
+      "label_es": "Malinas a tu puerta",
+      "label_de": "Mechelen direkt vor der Tür"
+    },
+    {
+      "value": "P",
+      "label_en": "Underground parking",
+      "label_nl": "Ondergrondse parking",
+      "label_fr": "Parking souterrain",
+      "label_es": "Aparcamiento subterráneo",
+      "label_de": "Tiefgarage"
+    }
+  ],
+  "closingImage": "../images/elisabeth/home/1.webp",
+  "closingEyebrow_en": "Your stay in Mechelen",
+  "closingEyebrow_nl": "Uw verblijf in Mechelen",
+  "closingEyebrow_fr": "Votre séjour à Malines",
+  "closingEyebrow_es": "Tu estancia en Malinas",
+  "closingEyebrow_de": "Ihr Aufenthalt in Mechelen",
+  "closingTitle_en": "Arrive. Exhale. Stay a little longer.",
+  "closingTitle_nl": "Kom aan. Adem uit. Blijf wat langer.",
+  "closingTitle_fr": "Arrivez. Respirez. Restez un peu plus longtemps.",
+  "closingTitle_es": "Llega. Respira. Quédate un poco más.",
+  "closingTitle_de": "Ankommen. Durchatmen. Ein wenig länger bleiben."
+}

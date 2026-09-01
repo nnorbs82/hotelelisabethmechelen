@@ -120,6 +120,21 @@ def career_transform(item):
     return item
 
 
+def homepage_transform(item):
+    item = dict(item or {})
+    for field in ("heroImages", "paceImages"):
+        values = []
+        for raw in item.get(field, []) or []:
+            if not isinstance(raw, dict):
+                continue
+            entry = dict(raw)
+            entry["image"] = browser_media_path(entry.get("image", ""))
+            values.append(entry)
+        item[field] = values
+    item["closingImage"] = browser_media_path(item.get("closingImage", ""))
+    return item
+
+
 def photo_index(items):
     result = {}
     for item in items:
@@ -154,6 +169,9 @@ write_json(GENERATED / "meetingsPhotos.json", photo_index(meetings))
 write_json(GENERATED / "attractions.json", keyed(attractions, attraction_transform))
 write_json(GENERATED / "careers.json", keyed(careers, career_transform))
 write_json(GENERATED / "amenitiesMaster.json", keyed(amenities, lambda item: {k:v for k,v in item.items() if k != "order"}))
+
+homepage = read_json(CONTENT / "homepage.json", {}) or {}
+write_json(GENERATED / "homepage.json", homepage_transform(homepage))
 
 info = read_json(CONTENT / "hotel-info.json", {"entries": []}) or {"entries": []}
 info_out = {}

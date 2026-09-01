@@ -1,4 +1,10 @@
 media:
+  - name: home_images
+    label: Homepage photography
+    input: images/elisabeth/home
+    output: /images/elisabeth/home
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
   - name: room_images
     label: Room photography
     input: images/elisabeth/rooms
@@ -37,6 +43,111 @@ media:
     rename: safe
 
 content:
+  - name: homepage
+    label: Homepage
+    type: file
+    path: redesign-site/content/homepage.json
+    format: json
+    fields:
+      - { name: heroEyebrow_en, label: "Hero eyebrow - English", type: string }
+      - { name: heroEyebrow_nl, label: "Hero eyebrow - Dutch", type: string }
+      - { name: heroEyebrow_fr, label: "Hero eyebrow - French", type: string }
+      - { name: heroEyebrow_es, label: "Hero eyebrow - Spanish", type: string }
+      - { name: heroEyebrow_de, label: "Hero eyebrow - German", type: string }
+      - { name: heroTitle_en, label: "Hero title - English", type: string, required: true }
+      - { name: heroTitle_nl, label: "Hero title - Dutch", type: string }
+      - { name: heroTitle_fr, label: "Hero title - French", type: string }
+      - { name: heroTitle_es, label: "Hero title - Spanish", type: string }
+      - { name: heroTitle_de, label: "Hero title - German", type: string }
+      - { name: heroBody_en, label: "Hero text - English", type: text }
+      - { name: heroBody_nl, label: "Hero text - Dutch", type: text }
+      - { name: heroBody_fr, label: "Hero text - French", type: text }
+      - { name: heroBody_es, label: "Hero text - Spanish", type: text }
+      - { name: heroBody_de, label: "Hero text - German", type: text }
+      - name: heroImages
+        label: Opening slideshow
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Image
+            type: image
+            options: { media: home_images, extensions: [jpg, jpeg, png, webp] }
+          - { name: alt_en, label: "Alt text - English", type: string }
+          - { name: alt_nl, label: "Alt text - Dutch", type: string }
+          - { name: alt_fr, label: "Alt text - French", type: string }
+          - { name: alt_es, label: "Alt text - Spanish", type: string }
+          - { name: alt_de, label: "Alt text - German", type: string }
+      - { name: manifestoEyebrow_en, label: "Manifesto eyebrow - English", type: string }
+      - { name: manifestoEyebrow_nl, label: "Manifesto eyebrow - Dutch", type: string }
+      - { name: manifestoEyebrow_fr, label: "Manifesto eyebrow - French", type: string }
+      - { name: manifestoEyebrow_es, label: "Manifesto eyebrow - Spanish", type: string }
+      - { name: manifestoEyebrow_de, label: "Manifesto eyebrow - German", type: string }
+      - { name: manifestoLine1_en, label: "Manifesto line 1 - English", type: string }
+      - { name: manifestoLine1_nl, label: "Manifesto line 1 - Dutch", type: string }
+      - { name: manifestoLine1_fr, label: "Manifesto line 1 - French", type: string }
+      - { name: manifestoLine1_es, label: "Manifesto line 1 - Spanish", type: string }
+      - { name: manifestoLine1_de, label: "Manifesto line 1 - German", type: string }
+      - { name: manifestoLine2_en, label: "Manifesto line 2 - English", type: string }
+      - { name: manifestoLine2_nl, label: "Manifesto line 2 - Dutch", type: string }
+      - { name: manifestoLine2_fr, label: "Manifesto line 2 - French", type: string }
+      - { name: manifestoLine2_es, label: "Manifesto line 2 - Spanish", type: string }
+      - { name: manifestoLine2_de, label: "Manifesto line 2 - German", type: string }
+      - { name: manifestoSubtitle_en, label: "Manifesto subtitle - English", type: string }
+      - { name: manifestoSubtitle_nl, label: "Manifesto subtitle - Dutch", type: string }
+      - { name: manifestoSubtitle_fr, label: "Manifesto subtitle - French", type: string }
+      - { name: manifestoSubtitle_es, label: "Manifesto subtitle - Spanish", type: string }
+      - { name: manifestoSubtitle_de, label: "Manifesto subtitle - German", type: string }
+      - { name: manifestoBody_en, label: "Manifesto text - English", type: text }
+      - { name: manifestoBody_nl, label: "Manifesto text - Dutch", type: text }
+      - { name: manifestoBody_fr, label: "Manifesto text - French", type: text }
+      - { name: manifestoBody_es, label: "Manifesto text - Spanish", type: text }
+      - { name: manifestoBody_de, label: "Manifesto text - German", type: text }
+      - name: paceImages
+        label: Atmosphere ribbon - exactly 3 images
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Image
+            type: image
+            options: { media: home_images, extensions: [jpg, jpeg, png, webp] }
+          - { name: caption_en, label: "Caption - English", type: string }
+          - { name: caption_nl, label: "Caption - Dutch", type: string }
+          - { name: caption_fr, label: "Caption - French", type: string }
+          - { name: caption_es, label: "Caption - Spanish", type: string }
+          - { name: caption_de, label: "Caption - German", type: string }
+          - { name: alt_en, label: "Alt text - English", type: string }
+          - { name: alt_nl, label: "Alt text - Dutch", type: string }
+          - { name: alt_fr, label: "Alt text - French", type: string }
+          - { name: alt_es, label: "Alt text - Spanish", type: string }
+          - { name: alt_de, label: "Alt text - German", type: string }
+      - name: facts
+        label: Homepage facts - exactly 4
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Value, type: string }
+          - { name: label_en, label: "Label - English", type: string }
+          - { name: label_nl, label: "Label - Dutch", type: string }
+          - { name: label_fr, label: "Label - French", type: string }
+          - { name: label_es, label: "Label - Spanish", type: string }
+          - { name: label_de, label: "Label - German", type: string }
+      - name: closingImage
+        label: Closing image
+        type: image
+        options: { media: home_images, extensions: [jpg, jpeg, png, webp] }
+      - { name: closingEyebrow_en, label: "Closing eyebrow - English", type: string }
+      - { name: closingEyebrow_nl, label: "Closing eyebrow - Dutch", type: string }
+      - { name: closingEyebrow_fr, label: "Closing eyebrow - French", type: string }
+      - { name: closingEyebrow_es, label: "Closing eyebrow - Spanish", type: string }
+      - { name: closingEyebrow_de, label: "Closing eyebrow - German", type: string }
+      - { name: closingTitle_en, label: "Closing title - English", type: string }
+      - { name: closingTitle_nl, label: "Closing title - Dutch", type: string }
+      - { name: closingTitle_fr, label: "Closing title - French", type: string }
+      - { name: closingTitle_es, label: "Closing title - Spanish", type: string }
+      - { name: closingTitle_de, label: "Closing title - German", type: string }
+
   - name: accommodation
     label: Rooms & accommodation
     type: group

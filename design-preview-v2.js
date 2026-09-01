@@ -181,27 +181,29 @@
   document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',event=>{event.stopPropagation();setLanguage(button.dataset.lang);}));
   document.addEventListener('click',()=>langBox?.classList.remove('open'));
 
-  /* hero slideshow */
-  const slides=[...document.querySelectorAll('.hero-slide')];
-  let slideIndex=0;
-  const progress=document.querySelector('.hero-progress span');
-  const counter=document.querySelector('.hero-current');
-  const showSlide=index=>{
-    if(!slides.length)return;
-    slideIndex=(index+slides.length)%slides.length;
-    slides.forEach((slide,i)=>slide.classList.toggle('active',i===slideIndex));
-    if(progress)progress.style.transform=`translateX(${slideIndex*100}%)`;
-    if(counter)counter.textContent=String(slideIndex+1).padStart(2,'0');
-  };
-  let slideTimer;
-  const restartSlideTimer=()=>{
-    clearInterval(slideTimer);
-    slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
-  };
-  document.querySelector('.hero-prev')?.addEventListener('click',()=>{showSlide(slideIndex-1);restartSlideTimer();});
-  document.querySelector('.hero-next')?.addEventListener('click',()=>{showSlide(slideIndex+1);restartSlideTimer();});
-  showSlide(0);
-  restartSlideTimer();
+  /* hero slideshow - prototype only; actual homepage is CMS-driven in assets/home.js */
+  if(!document.body.classList.contains('actual-site')){
+    const slides=[...document.querySelectorAll('.hero-slide')];
+    let slideIndex=0;
+    const progress=document.querySelector('.hero-progress span');
+    const counter=document.querySelector('.hero-current');
+    const showSlide=index=>{
+      if(!slides.length)return;
+      slideIndex=(index+slides.length)%slides.length;
+      slides.forEach((slide,i)=>slide.classList.toggle('active',i===slideIndex));
+      if(progress)progress.style.transform=`translateX(${slideIndex*100}%)`;
+      if(counter)counter.textContent=String(slideIndex+1).padStart(2,'0');
+    };
+    let slideTimer;
+    const restartSlideTimer=()=>{
+      clearInterval(slideTimer);
+      slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
+    };
+    document.querySelector('.hero-prev')?.addEventListener('click',()=>{showSlide(slideIndex-1);restartSlideTimer();});
+    document.querySelector('.hero-next')?.addEventListener('click',()=>{showSlide(slideIndex+1);restartSlideTimer();});
+    showSlide(0);
+    restartSlideTimer();
+  }
 
   /* booking */
   const today=new Date();
