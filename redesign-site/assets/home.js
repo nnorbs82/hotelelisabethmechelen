@@ -2,6 +2,7 @@
   'use strict';
 
   const paths = {
+    homepage: 'content/generated/homepage.json',
     rooms: 'content/generated/rooms.json',
     packages: 'content/generated/packages.json',
     meetings: 'content/generated/meetings.json',
@@ -15,6 +16,11 @@
     es:{package:'Paquete',discoverPackage:'Descubrir paquete',meetings:'Reuniones'},
     de:{package:'Paket',discoverPackage:'Paket entdecken',meetings:'Tagungen'}
   };
+
+  let heroSlides=[];
+  let heroIndex=0;
+  let heroTimer=null;
+  let heroControlsBound=false;
 
   const lang = () => window.ElisabethSite?.getLanguage?.() || document.documentElement.lang || 'en';
   const labels = () => ui[lang()] || ui.en;
@@ -32,6 +38,95 @@
     if (!response.ok) throw new Error(`Unable to load ${key}`);
     cache[key] = await response.json();
     return cache[key];
+  }
+
+  function showHero(index){
+    if(!heroSlides.length) return;
+    heroIndex=(index+heroSlides.length)%heroSlides.length;
+    heroSlides.forEach((slide,i)=>slide.classList.toggle('active',i===heroIndex));
+    const progress=document.querySelector('.hero-progress span');
+    const current=document.querySelector('.hero-current');
+    if(progress){
+      progress.style.width=`${100/heroSlides.length}%`;
+      progress.style.transform=`translateX(${heroIndex*100}%)`;
+    }
+    if(current) current.textContent=String(heroIndex+1).padStart(2,'0');
+  }
+
+  function restartHeroTimer(){
+    clearInterval(heroTimer);
+    if(heroSlides.length>1) heroTimer=setInterval(()=>showHero(heroIndex+1),6500);
+  }
+
+  function bindHeroControls(){
+    if(heroControlsBound) return;
+    heroControlsBound=true;
+    document.querySelector('.hero-prev')?.addEventListener('click',()=>{showHero(heroIndex-1);restartHeroTimer();});
+    document.querySelector('.hero-next')?.addEventListener('click',()=>{showHero(heroIndex+1);restartHeroTimer();});
+  }
+
+  function initializeHeroFromDom(){
+    heroSlides=[...document.querySelectorAll('.hero-slide')];
+    const total=document.querySelector('.hero-total');
+    if(total) total.textContent=String(heroSlides.length).padStart(2,'0');
+    bindHeroControls();
+    showHero(0);
+    restartHeroTimer();
+  }
+
+  function renderHomepageText(home){
+    document.querySelectorAll('[data-home]').forEach(node=>{
+      const value=localized(home,node.dataset.home);
+      if(value) node.textContent=value;
+    });
+    const title=document.querySelector('[data-home-manifesto-title]');
+    if(title){
+      const line1=localized(home,'manifestoLine1');
+      const line2=localized(home,'manifestoLine2');
+      title.innerHTML=`${escape(line1)}<br><span>${escape(line2)}</span>`;
+    }
+    const facts=document.getElementById('home-facts');
+    if(facts && Array.isArray(home.facts)){
+      facts.innerHTML=home.facts.map(fact=>`<div class="fact-card"><strong>${escape(fact.value)}</strong><span>${escape(localized(fact,'label'))}</span></div>`).join('');
+    }
+  }
+
+  function renderHomepageMedia(home){
+    const heroImages=Array.isArray(home.heroImages)?home.heroImages.filter(item=>item?.image):[];
+    const heroTarget=document.querySelector('.hero-slides');
+    if(heroTarget && heroImages.length){
+      heroTarget.innerHTML=heroImages.map((item,index)=>`<div class="hero-slide ${index===0?'active':''}"><img src="${escape(item.image)}" alt="${escape(localized(item,'alt')||'Hotel Elisabeth Mechelen')}" ${index===0?'fetchpriority="high"':'loading="lazy"'} decoding="async"></div>`).join('');
+      heroSlides=[...heroTarget.querySelectorAll('.hero-slide')];
+      heroIndex=0;
+      const total=document.querySelector('.hero-total');
+      if(total) total.textContent=String(heroSlides.length).padStart(2,'0');
+      showHero(0);
+      restartHeroTimer();
+    }
+
+    const pace=Array.isArray(home.paceImages)?home.paceImages.slice(0,3):[];
+    document.querySelectorAll('[data-home-pace]').forEach((figure,index)=>{
+      const item=pace[index];
+      if(!item) return;
+      const image=figure.querySelector('img');
+      const caption=figure.querySelector('figcaption');
+      if(image){image.src=item.image;image.alt=localized(item,'alt')||localized(item,'caption')||'Hotel Elisabeth Mechelen';}
+      if(caption) caption.textContent=localized(item,'caption');
+    });
+
+    const closing=document.querySelector('[data-home-closing-image]');
+    if(closing && home.closingImage) closing.src=home.closingImage;
+  }
+
+  async function renderHomepage(){
+    try{
+      const home=await data('homepage');
+      renderHomepageText(home);
+      renderHomepageMedia(home);
+    }catch(error){
+      console.error(error);
+      if(!heroSlides.length) initializeHeroFromDom();
+    }
   }
 
   async function renderRooms(){
@@ -110,8 +205,8 @@
     }
   }
 
-  const renderAll = () => Promise.allSettled([renderRooms(),renderPackages(),renderMeetings()]);
-  document.addEventListener('DOMContentLoaded', renderAll);
+  const renderAll = () => Promise.allSettled([renderHomepage(),renderRooms(),renderPackages(),renderMeetings()]);
+  document.addEventListener('DOMContentLoaded',()=>{initializeHeroFromDom();renderAll();});
 
   new MutationObserver(mutations => {
     if (mutations.some(m => m.attributeName === 'lang')) renderAll();
