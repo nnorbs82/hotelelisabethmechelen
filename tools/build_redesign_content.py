@@ -162,6 +162,9 @@ def legal_content(name: str):
         override = CONTENT / "legal" / f"{name}-{lang}.html"
         if override.exists():
             output[lang] = override.read_text(encoding="utf-8").strip()
+    missing = [lang for lang, value in output.items() if not isinstance(value, str) or not value.strip()]
+    if missing:
+        raise SystemExit(f"Missing {name} legal content for: {', '.join(missing)}")
     return output
 
 
