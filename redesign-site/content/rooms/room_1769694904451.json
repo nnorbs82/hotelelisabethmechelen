@@ -17,38 +17,6 @@
   "name_en": "City Comfort",
   "name_fr": "City Comfort",
   "name_nl": "City Comfort",
-  "photos": [
-    {
-      "filename": "room-photos/1769947504053-City_Comfort_1_1600.webp",
-      "order": 0,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947504053-City_Comfort_1_1600.webp?alt=media&token=1baf5ee0-f1d4-47c7-84a0-a419dd80e56d"
-    },
-    {
-      "filename": "room-photos/1769947508226-City_Comfort_2_1600.webp",
-      "order": 1,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947508226-City_Comfort_2_1600.webp?alt=media&token=8c827008-2f0c-45d2-b15b-acb8e2e80d39"
-    },
-    {
-      "filename": "room-photos/1769947511896-City_Comfort_3_1600.webp",
-      "order": 2,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947511896-City_Comfort_3_1600.webp?alt=media&token=37e2e69e-9c58-4995-9104-c73dbeefabbc"
-    },
-    {
-      "filename": "room-photos/1769947515686-City_Comfort_4_1600.webp",
-      "order": 3,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947515686-City_Comfort_4_1600.webp?alt=media&token=f6b41bd4-6fd8-4eb4-b298-087089737fe2"
-    },
-    {
-      "filename": "room-photos/1769947519591-City_Comfort_5_1600.webp",
-      "order": 4,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947519591-City_Comfort_5_1600.webp?alt=media&token=9c5f0492-62ce-45fa-8395-c6744aa0cb30"
-    },
-    {
-      "filename": "room-photos/1769947523567-City_Comfort_6_1600.webp",
-      "order": 5,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947523567-City_Comfort_6_1600.webp?alt=media&token=a3a38260-9d1c-46c9-af4d-cdae6a9a9ab1"
-    }
-  ],
   "roomSize": 18,
   "status": "offline",
   "bedType_es": "Cama doble",

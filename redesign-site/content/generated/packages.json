@@ -7,7 +7,6 @@
     "goodToKnow_en": "This package is available only on Fridays",
     "goodToKnow_fr": "Ce forfait est disponible uniquement le vendredi",
     "goodToKnow_nl": "Deze aanbieding is enkel geldig op vrijdag",
-    "imageUrl": "../images/elisabeth/packages/1769510714529-happyfriday.webp",
     "inclusions_en": "Cathedral View Room\nBreakfast\nWelcome drink\nDrink Voucher for Bar Klak\nAccess to the pool\nLate check-out until 12H",
     "inclusions_fr": "Chambre Cathedral View\nPetit-déjeuner\nPot d'accueil\nBon pour une boisson au Bar Klak\nAccès à la piscine\nDépart tardif jusqu'à 12H",
     "inclusions_nl": "Cathedral View Room\nContinentaal ontbijt\nWelkomdrink\nDrink Voucher voor Bar Klak\nGratis toegang tot het zwembad\nLate check-out tot 12u00",
@@ -23,7 +22,8 @@
     "inclusions_es": "Habitación Cathedral View\nDesayuno\nBebida de bienvenida\nVale para una bebida en Bar Klak\nAcceso a la piscina\nSalida tardía hasta las 12:00",
     "inclusions_de": "Cathedral View Zimmer\nFrühstück\nBegrüßungsgetränk\nGetränkegutschein für Bar Klak\nZugang zum Pool\nSpäter Check-out bis 12:00 Uhr",
     "title_es": "Happy Friday!",
-    "title_de": "Happy Friday!"
+    "title_de": "Happy Friday!",
+    "imageUrl": "../images/elisabeth/packages/1769510714529-happyfriday.webp"
   },
   "pkg_1769511129122": {
     "bookingLink": "https://app.mews.com/distributor/46045639-3f77-40b1-8a30-b0c800ecc252",
@@ -33,7 +33,6 @@
     "goodToKnow_en": "This package is available during the weekend on Fridays, Saturdays and Sundays included",
     "goodToKnow_fr": "Qu'il s'agisse d'un anniversaire, d'une fête ou de tout autre jour spécial, nous sommes là pour vous !\nCe forfait est disponible le week-end les vendredis, samedis et dimanches inclus",
     "goodToKnow_nl": "Deze aanbieding is geldig tijdens het weekend op vrijdag, zaterdag en zondag",
-    "imageUrl": "../images/elisabeth/packages/1769511028285-specialday.webp",
     "inclusions_en": "Cathedral View Room, City Suite, Cathedral Suite, Studio Elisabeth or Studio Oud Huys\nBreakfast\nBottle of Cava\nAccess to the pool\nLate check-out until 12H",
     "inclusions_fr": "Chambre Cathedral View, City Suite, Cathedral Suite, Studio Elisabeth ou Studio Oud Huys\nPetit-déjeuner\nBouteille de Cava\nAccès à la piscine\nDépart tardif jusqu'à 12H",
     "inclusions_nl": "Cathedral View Room, City Suite, Cathedral Suite, Studio Elisabeth of Studio Oud Huys\nContinentaal Ontbijt\nFles Cava\nGratis toegang tot het zwembad\nLate check-out tot 12u00!",
@@ -49,7 +48,8 @@
     "inclusions_es": "Habitación Cathedral View, City Suite, Cathedral Suite, Studio Elisabeth o Studio Oud Huys\nDesayuno\nBotella de cava\nAcceso a la piscina\nSalida tardía hasta las 12:00",
     "inclusions_de": "Cathedral View Zimmer, City Suite, Cathedral Suite, Studio Elisabeth oder Studio Oud Huys\nFrühstück\nFlasche Cava\nZugang zum Pool\nSpäter Check-out bis 12:00 Uhr",
     "title_es": "Special Day",
-    "title_de": "Special Day"
+    "title_de": "Special Day",
+    "imageUrl": "../images/elisabeth/packages/1769511028285-specialday.webp"
   },
   "pkg_1769511395358": {
     "bookingLink": "https://app.mews.com/distributor/748107ad-7ee4-4c97-bb5a-ae2400021e8b",
@@ -59,7 +59,6 @@
     "goodToKnow_en": "This package is available any day of the week",
     "goodToKnow_fr": "Réservez dès maintenant et profitez d'une superbe offre d'hôtel avec suite ! Offrez-vous un hébergement luxueux, des chambres spacieuses et des équipements haut de gamme, le tout à un tarif réduit !\n\nCe forfait est disponible tous les jours de la semaine",
     "goodToKnow_nl": "Boek nu en profiteer van onze Suite-deal! Verwen jezelf met een overnachting in een luxe-accommodatie met eersteklas voorzieningen! Uiteraard tegen een sterk gereduceerd tarief!\n\nDeze aanbieding is geldig op elke weekdag",
-    "imageUrl": "../images/elisabeth/packages/1769511309953-sweetsuitedeal.webp",
     "inclusions_en": "Cathedral or City Suite\nBreakfast\nWelcome drink\nLate check-out until 12H",
     "inclusions_fr": "Cathedral ou City Suite\nPetit-déjeuner\nPot d'accueil\nDépart tardif jusqu'à 12H",
     "inclusions_nl": "Cathedral of City Suite\nContinentaal Ontbijt\nWelkomdrink\nLate check-out tot 12u00",
@@ -75,6 +74,7 @@
     "inclusions_es": "Cathedral Suite o City Suite\nDesayuno\nBebida de bienvenida\nSalida tardía hasta las 12:00",
     "inclusions_de": "Cathedral Suite oder City Suite\nFrühstück\nBegrüßungsgetränk\nSpäter Check-out bis 12:00 Uhr",
     "title_es": "Sweet Suite Deal",
-    "title_de": "Sweet Suite Deal"
+    "title_de": "Sweet Suite Deal",
+    "imageUrl": "../images/elisabeth/packages/1769511309953-sweetsuitedeal.webp"
   }
 }

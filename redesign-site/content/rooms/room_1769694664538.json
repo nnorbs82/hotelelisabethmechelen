@@ -17,38 +17,6 @@
   "name_en": "City Triple",
   "name_fr": "City Triple",
   "name_nl": "City Triple",
-  "photos": [
-    {
-      "filename": "room-photos/1769947456429-City_Triple_1_1600.webp",
-      "order": 0,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947456429-City_Triple_1_1600.webp?alt=media&token=fdd71411-9106-494d-8166-abf56198ac92"
-    },
-    {
-      "filename": "room-photos/1769947460643-City_Triple_2_1600.webp",
-      "order": 1,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947460643-City_Triple_2_1600.webp?alt=media&token=458a0c50-a3b5-4ed4-8fd7-d249320b8048"
-    },
-    {
-      "filename": "room-photos/1769947465172-City_Triple_3_1600.webp",
-      "order": 2,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947465172-City_Triple_3_1600.webp?alt=media&token=a065be74-1b2a-4c21-a287-652fad5349cd"
-    },
-    {
-      "filename": "room-photos/1769947469836-City_Triple_4_1600.webp",
-      "order": 3,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947469836-City_Triple_4_1600.webp?alt=media&token=7a3f3fe5-78c6-405e-aade-0f8e3d597f76"
-    },
-    {
-      "filename": "room-photos/1769947477935-City_Triple_5_1600.webp",
-      "order": 4,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947477935-City_Triple_5_1600.webp?alt=media&token=bf959d91-e567-42fa-a565-0a37835329e0"
-    },
-    {
-      "filename": "room-photos/1769947483164-City_Triple_6_1600.webp",
-      "order": 5,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947483164-City_Triple_6_1600.webp?alt=media&token=2457c881-35d5-4a39-902a-d743a901cdbd"
-    }
-  ],
   "roomSize": 24,
   "status": "available",
   "bedType_es": "3 camas individuales",

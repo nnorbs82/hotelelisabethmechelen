@@ -17,53 +17,6 @@
   "name_en": "Cathedral View",
   "name_fr": "Cathedral View",
   "name_nl": "Cathedral View",
-  "photos": [
-    {
-      "filename": "room-photos/1786736631228-Cathedral_View_Room_1.webp",
-      "order": 9,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736631228-Cathedral_View_Room_1.webp?alt=media&token=b11835f2-3bcc-4977-9cbd-ef831e2ac9c3"
-    },
-    {
-      "filename": "room-photos/1769947402832-Cathedral_View_2_1600.webp",
-      "order": 1,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947402832-Cathedral_View_2_1600.webp?alt=media&token=b400aeb3-4ef6-48f4-a6c8-29960e0172f6"
-    },
-    {
-      "filename": "room-photos/1786736639346-Cathedral_View_Room_4.webp",
-      "order": 12,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736639346-Cathedral_View_Room_4.webp?alt=media&token=86baa573-c550-4bcc-866c-5befcb631ec6"
-    },
-    {
-      "filename": "room-photos/1769947411979-Cathedral_View_4_1600.webp",
-      "order": 3,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947411979-Cathedral_View_4_1600.webp?alt=media&token=b8335a5b-9490-4505-90ee-4657bb87b2c9"
-    },
-    {
-      "filename": "room-photos/1786736636886-Cathedral_View_Room_3.webp",
-      "order": 11,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736636886-Cathedral_View_Room_3.webp?alt=media&token=ab7c4f69-c7b0-46c4-82ed-e2c5c2dffe6a"
-    },
-    {
-      "filename": "room-photos/1786736634429-Cathedral_View_Room_2.webp",
-      "order": 10,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736634429-Cathedral_View_Room_2.webp?alt=media&token=3020e1b3-bb3e-452a-bf3f-7c6a35fb2bd8"
-    },
-    {
-      "filename": "room-photos/1769947423875-Cathedral_View_7_1600.webp",
-      "order": 6,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947423875-Cathedral_View_7_1600.webp?alt=media&token=0816191f-89bc-4b4c-8410-72011dc4f2fe"
-    },
-    {
-      "filename": "room-photos/1769947427612-Cathedral_View_8_1600.webp",
-      "order": 7,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947427612-Cathedral_View_8_1600.webp?alt=media&token=ead515c9-1358-4ccf-8e92-9bced17e8938"
-    },
-    {
-      "filename": "room-photos/1769947431325-Cathedral_View_9_1600.webp",
-      "order": 8,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947431325-Cathedral_View_9_1600.webp?alt=media&token=4ef70af2-d2c2-42da-97ff-af26c5b7c5e0"
-    }
-  ],
   "roomSize": 16,
   "status": "available",
   "bedType_es": "Cama doble",

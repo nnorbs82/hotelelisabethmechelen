@@ -20,58 +20,6 @@
   "name_en": "City Suite",
   "name_fr": "City Suite",
   "name_nl": "City Suite",
-  "photos": [
-    {
-      "filename": "room-photos/1769947645298-City_Suite_1_1600.webp",
-      "order": 0,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947645298-City_Suite_1_1600.webp?alt=media&token=163d52de-2bc8-4819-bb65-7bcf9adf6713"
-    },
-    {
-      "filename": "room-photos/1769947648929-City_Suite_2_1600.webp",
-      "order": 1,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947648929-City_Suite_2_1600.webp?alt=media&token=42f2549e-3af2-4ad4-b03c-38b1db53b03c"
-    },
-    {
-      "filename": "room-photos/1769947652796-City_Suite_3_1600.webp",
-      "order": 2,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947652796-City_Suite_3_1600.webp?alt=media&token=de2ee086-8d61-4c65-ae1a-6704834d5712"
-    },
-    {
-      "filename": "room-photos/1769947657834-City_Suite_4_1600.webp",
-      "order": 3,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947657834-City_Suite_4_1600.webp?alt=media&token=49634bb9-855a-43fd-b310-a1e56a4fd8a9"
-    },
-    {
-      "filename": "room-photos/1769947661689-City_Suite_5_1600.webp",
-      "order": 4,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947661689-City_Suite_5_1600.webp?alt=media&token=f6617801-770e-4b1c-b91e-54fec8bd700c"
-    },
-    {
-      "filename": "room-photos/1769947666112-City_Suite_6_1600.webp",
-      "order": 5,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947666112-City_Suite_6_1600.webp?alt=media&token=a6ab2b30-54a2-4717-a0e9-a52284bb77cc"
-    },
-    {
-      "filename": "room-photos/1769947670687-City_Suite_7_1600.webp",
-      "order": 6,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947670687-City_Suite_7_1600.webp?alt=media&token=8d86e663-b46b-4a72-aec0-194eb3911393"
-    },
-    {
-      "filename": "room-photos/1769947675291-City_Suite_8_1600.webp",
-      "order": 7,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947675291-City_Suite_8_1600.webp?alt=media&token=c0699d7a-690a-4174-92aa-09b32e31bfc6"
-    },
-    {
-      "filename": "room-photos/1769947680947-City_Suite_9_1600.webp",
-      "order": 8,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947680947-City_Suite_9_1600.webp?alt=media&token=04f6bea9-3e92-4ef0-a273-1937dc1f8a4a"
-    },
-    {
-      "filename": "room-photos/1769947684753-City_Suite_10_1600.webp",
-      "order": 9,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947684753-City_Suite_10_1600.webp?alt=media&token=e16a3fc8-cb3e-4fef-baee-8182d745bb96"
-    }
-  ],
   "roomSize": 30,
   "status": "available",
   "bedType_es": "Cama doble + sofá cama",

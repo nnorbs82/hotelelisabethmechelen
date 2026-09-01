@@ -17,28 +17,6 @@
   "name_en": "City Twin",
   "name_fr": "City Twin",
   "name_nl": "City Twin",
-  "photos": [
-    {
-      "filename": "room-photos/1769947208490-City_Twin_1_1600w.webp",
-      "order": 0,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947208490-City_Twin_1_1600w.webp?alt=media&token=5fb2c732-c763-4cb0-a779-1925f9faf9be"
-    },
-    {
-      "filename": "room-photos/1769947212387-City_Twin_2_1600w.webp",
-      "order": 1,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947212387-City_Twin_2_1600w.webp?alt=media&token=6d611da2-496d-47bd-b44a-ec1f7128efd1"
-    },
-    {
-      "filename": "room-photos/1769947216362-City_Twin_3_1600w.webp",
-      "order": 2,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947216362-City_Twin_3_1600w.webp?alt=media&token=aa96d0cb-2bd6-4d16-bebd-9d0c7772ebe5"
-    },
-    {
-      "filename": "room-photos/1769947219644-City_Twin_4_1600w.webp",
-      "order": 3,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947219644-City_Twin_4_1600w.webp?alt=media&token=662871de-a393-4dbe-911d-c21271a690e4"
-    }
-  ],
   "roomSize": 14,
   "status": "available",
   "bedType_es": "2 camas individuales",

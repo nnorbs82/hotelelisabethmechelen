@@ -17,38 +17,6 @@
   "name_en": "City Double",
   "name_fr": "City Double",
   "name_nl": "City Double",
-  "photos": [
-    {
-      "filename": "room-photos/1786735785715-City_Double_1.webp",
-      "order": 6,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735785715-City_Double_1.webp?alt=media&token=af711ed2-7d71-485e-8f84-8cf950f338d0"
-    },
-    {
-      "filename": "room-photos/1769947241776-City_Double_1_1600.webp",
-      "order": 0,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947241776-City_Double_1_1600.webp?alt=media&token=600e208d-b1ed-4b9f-8a3d-15595f491b31"
-    },
-    {
-      "filename": "room-photos/1786735789146-City_Double_3.webp",
-      "order": 8,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735789146-City_Double_3.webp?alt=media&token=91fef179-aa0f-4847-b6ea-5e5816b3f310"
-    },
-    {
-      "filename": "room-photos/1769947256936-City_Double_5_1600.webp",
-      "order": 4,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947256936-City_Double_5_1600.webp?alt=media&token=2450e7f1-d404-4f54-a394-a88b17323f9d"
-    },
-    {
-      "filename": "room-photos/1786735787614-City_Double_2.webp",
-      "order": 7,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735787614-City_Double_2.webp?alt=media&token=062dd2fd-b8ff-49ee-bfc3-10d9a8214632"
-    },
-    {
-      "filename": "room-photos/1769947261351-City_Double_6_1600.webp",
-      "order": 5,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947261351-City_Double_6_1600.webp?alt=media&token=4b36179f-d764-4dfa-a702-1ae18c72d7ab"
-    }
-  ],
   "roomSize": 14,
   "status": "available",
   "bedType_es": "Cama doble",

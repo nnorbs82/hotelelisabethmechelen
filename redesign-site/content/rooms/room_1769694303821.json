@@ -17,53 +17,6 @@
   "name_en": "Garden Comfort",
   "name_fr": "Garden Comfort",
   "name_nl": "Garden Comfort",
-  "photos": [
-    {
-      "filename": "room-photos/1786738228157-Garden_Comfort_5.webp",
-      "order": 13,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738228157-Garden_Comfort_5.webp?alt=media&token=ad9a4492-e17c-4395-80ac-9aa2f97b8004"
-    },
-    {
-      "filename": "room-photos/1786738225849-Garden_Comfort_4.webp",
-      "order": 12,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738225849-Garden_Comfort_4.webp?alt=media&token=01bdcc89-4002-4db4-922d-e9a623e8cae6"
-    },
-    {
-      "filename": "room-photos/1786738223258-Garden_Comfort_3.webp",
-      "order": 11,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738223258-Garden_Comfort_3.webp?alt=media&token=6cf0f709-9338-4635-8f50-a6175758b7c5"
-    },
-    {
-      "filename": "room-photos/1786738220922-Garden_Comfort_2.webp",
-      "order": 10,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738220922-Garden_Comfort_2.webp?alt=media&token=f06e51cc-f68f-47db-a1b0-37f36d8eeb3e"
-    },
-    {
-      "filename": "room-photos/1769947343842-Olive_Tree_View_5_1600.webp",
-      "order": 4,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947343842-Olive_Tree_View_5_1600.webp?alt=media&token=744543d2-a0c3-4895-99ab-3806f400f9e1"
-    },
-    {
-      "filename": "room-photos/1769947348031-Olive_Tree_View_6_1600.webp",
-      "order": 5,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947348031-Olive_Tree_View_6_1600.webp?alt=media&token=7ee6745b-21fb-4a75-af9b-b74020f1b986"
-    },
-    {
-      "filename": "room-photos/1786738218973-Garden_Comfort_1.webp",
-      "order": 9,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738218973-Garden_Comfort_1.webp?alt=media&token=3a8a11b4-8721-41fe-ab0b-47f085809e71"
-    },
-    {
-      "filename": "room-photos/1769947368704-Olive_Tree_View_8_1600.webp",
-      "order": 7,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947368704-Olive_Tree_View_8_1600.webp?alt=media&token=d8742d58-6498-4c44-a897-3165e0eb4bcd"
-    },
-    {
-      "filename": "room-photos/1769947373935-Olive_Tree_View_9_1600.webp",
-      "order": 8,
-      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947373935-Olive_Tree_View_9_1600.webp?alt=media&token=e98c2e5f-5d53-4181-be9f-a00604e1b4dc"
-    }
-  ],
   "roomSize": 16,
   "status": "available",
   "bedType_es": "Cama doble",
