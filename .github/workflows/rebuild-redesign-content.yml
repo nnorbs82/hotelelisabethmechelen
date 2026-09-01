@@ -2,7 +2,7 @@ name: Rebuild Elisabeth content indexes
 
 on:
   push:
-    branches: [elisabeth-redesign]
+    branches: [elisabeth-redesign, main]
     paths:
       - 'redesign-site/content/**'
       - '!redesign-site/content/generated/**'
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: elisabeth-content-indexes
+  group: elisabeth-content-indexes-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: elisabeth-redesign
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - name: Build static content indexes
@@ -42,7 +42,8 @@ jobs:
           print('Generated CMS indexes are valid JSON')
           PY
 
-      - name: Guard production branch
+      - name: Protect current live production during redesign
+        if: github.ref_name == 'elisabeth-redesign'
         run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
 
       - name: Commit generated indexes when changed
@@ -55,4 +56,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add redesign-site/content/generated
           git commit -m 'content: rebuild website indexes'
-          git push origin HEAD:elisabeth-redesign
+          git push origin HEAD:${{ github.ref_name }}
