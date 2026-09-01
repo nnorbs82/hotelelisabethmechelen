@@ -1,0 +1,59 @@
+name: Align room status and content QA
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/align-room-status-and-qa.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Apply QA alignment
+        run: python tools/align_room_status_and_qa.py
+
+      - name: Rebuild browser content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Validate changes
+        run: |
+          ruby -e "require 'yaml'; YAML.load_file('.pages.yml'); puts 'Pages CMS YAML valid'"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          cms=Path('.pages.yml').read_text(encoding='utf-8')
+          if 'name: offline, label: Hidden / offline' not in cms:
+              raise SystemExit('Offline room status missing from CMS')
+          room=json.loads(Path('redesign-site/content/rooms/room_1769698293173.json').read_text(encoding='utf-8'))
+          if room.get('maxOccupancy') != 4:
+              raise SystemExit('City Suite occupancy was not corrected')
+          generated=json.loads(Path('redesign-site/content/generated/rooms.json').read_text(encoding='utf-8'))
+          if generated['room_1769698293173'].get('maxOccupancy') != 4:
+              raise SystemExit('Generated City Suite occupancy mismatch')
+          if not Path('redesign-site/CONTENT_QA.md').exists():
+              raise SystemExit('Content QA file missing')
+          print('Room status and content QA alignment validated')
+          PY
+
+      - name: Guard production branch
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
+
+      - name: Remove one-time files
+        run: rm .github/workflows/align-room-status-and-qa.yml tools/align_room_status_and_qa.py
+
+      - name: Commit QA alignment
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .pages.yml redesign-site/content redesign-site/CONTENT_QA.md .github/workflows/align-room-status-and-qa.yml tools/align_room_status_and_qa.py
+          git commit -m 'qa: align room statuses and record content conflicts'
+          git push origin HEAD:elisabeth-redesign
