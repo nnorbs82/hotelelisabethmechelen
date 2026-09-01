@@ -16,6 +16,8 @@ This directory is the permanent development build for the approved Hotel Elisabe
 - Production assembly is handled by `tools/build_production_site.py`.
 - Production validation checks canonical routes, SEO metadata, internal references, Mews booking, meeting/group enquiry integrations, and rejects any Firebase Storage dependency in the assembled output.
 - Current multilingual content audit: Rooms, Packages, Facilities, Meetings, Attractions, Hotel Info, Homepage, Privacy Policy and Terms & Conditions have production content coverage in EN/NL/FR/ES/DE.
+- Guest-facing supporting copy has been polished across the homepage, Rooms, Facilities, Hotel Info, Attractions and Group Request so section introductions describe the hotel experience rather than the website build.
+- The redesign validator rejects hotel star-rating claims in active HTML, JavaScript and JSON and verifies generated Privacy Policy and Terms & Conditions content in all five languages.
 - Spanish and German legal translations are stored as reviewed translation sources under `redesign-site/content/legal/` and are included automatically when the corresponding CMS JSON fields are empty.
 - The content build now fails if Privacy Policy or Terms & Conditions are missing in any of the five supported languages.
 - Final human/legal review of translated legal copy remains a pre-launch QA item.
