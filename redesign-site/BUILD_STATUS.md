@@ -17,6 +17,9 @@ This directory is the permanent development build for the approved Hotel Elisabe
 - Production validation checks canonical routes, SEO metadata, internal references, Mews booking, meeting/group enquiry integrations, and rejects any Firebase Storage dependency in the assembled output.
 - Current multilingual content audit: Rooms, Packages, Facilities, Meetings, Attractions, Hotel Info, Homepage, Privacy Policy and Terms & Conditions have production content coverage in EN/NL/FR/ES/DE.
 - Guest-facing supporting copy has been polished across the homepage, Rooms, Facilities, Hotel Info, Attractions and Group Request so section introductions describe the hotel experience rather than the website build.
+- Hotel Information Services and General Facilities are aligned across EN/NL/FR/ES/DE using current guest-facing facts; legacy fax, shoe-shine and ironing-service claims were removed, pool hours are consistently shown as 07:00-23:00, and the spa is consistently marked as opening soon.
+- Hotel Information low-traffic camera copy has been repaired in the source and generated content, including clear C3-sign guidance and the existing €58 fine information.
+- Meeting-room parking copy no longer states a fixed number of parking spaces in any supported language.
 - The redesign validator rejects hotel star-rating claims in active HTML, JavaScript and JSON and verifies generated Privacy Policy and Terms & Conditions content in all five languages.
 - Spanish and German legal translations are stored as reviewed translation sources under `redesign-site/content/legal/` and are included automatically when the corresponding CMS JSON fields are empty.
 - The content build now fails if Privacy Policy or Terms & Conditions are missing in any of the five supported languages.
