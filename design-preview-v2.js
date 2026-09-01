@@ -193,12 +193,15 @@
     if(progress)progress.style.transform=`translateX(${slideIndex*100}%)`;
     if(counter)counter.textContent=String(slideIndex+1).padStart(2,'0');
   };
-  document.querySelector('.hero-prev')?.addEventListener('click',()=>showSlide(slideIndex-1));
-  document.querySelector('.hero-next')?.addEventListener('click',()=>showSlide(slideIndex+1));
-  let slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
-  document.querySelector('.hero')?.addEventListener('mouseenter',()=>clearInterval(slideTimer));
-  document.querySelector('.hero')?.addEventListener('mouseleave',()=>{clearInterval(slideTimer);slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);});
+  let slideTimer;
+  const restartSlideTimer=()=>{
+    clearInterval(slideTimer);
+    slideTimer=setInterval(()=>showSlide(slideIndex+1),6500);
+  };
+  document.querySelector('.hero-prev')?.addEventListener('click',()=>{showSlide(slideIndex-1);restartSlideTimer();});
+  document.querySelector('.hero-next')?.addEventListener('click',()=>{showSlide(slideIndex+1);restartSlideTimer();});
   showSlide(0);
+  restartSlideTimer();
 
   /* booking */
   const today=new Date();
