@@ -28,9 +28,11 @@
 - Mews booking links and EmailJS meeting/group integrations remain covered by production validation.
 - Firebase Storage is absent from the active production assembly.
 - Final mobile visual QA completed across the redesign after the Home, Hotel Information and Meetings horizontal-drift fixes. Shared mobile viewport containment now protects all guest-facing redesign pages while preserving intentional component scrollers, and the final phone check was approved on 1 September 2026.
+- Privacy Policy and Terms & Conditions revised across EN, NL, FR, ES and DE following management confirmation: rate-plan-specific cancellation rules, group agreement terms, €24 parking periods from 14:00 to 14:00, consumer-law-safe liability wording, and tokenized payment-card handling with no full card storage by the hotel or PMS.
+- Existing Google Analytics property retained behind a multilingual consent interface. Google Analytics is not loaded before consent, optional analytics can be rejected without affecting site access, and visitors can reopen Privacy settings to withdraw or grant consent later.
 
 ## Still required before launch
 
-- Final human/legal review of translated Privacy Policy and Terms & Conditions.
+- Final visual/read sign-off of the revised Privacy Policy, Terms & Conditions and privacy-consent interface.
 - Explicit launch approval before any change to `main`, CNAME, GitHub Pages or Firebase.
 - Post-launch verification before retiring the legacy Firebase backup.
