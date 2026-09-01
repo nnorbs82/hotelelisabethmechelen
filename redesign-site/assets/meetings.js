@@ -53,15 +53,15 @@
   function galleryMarkup(id,name,items){
     const l=t();
     if(!items.length){
-      return `<div class="meeting-studio-stage"><img class="active" src="../headers/meetings.webp" alt="${escape(name)}"><div class="meeting-studio-photo-meta"><strong>01</strong><span>${escape(l.photo)}<br>01 / 01</span></div></div><div class="meeting-studio-thumbs"></div>`;
+      return `<div class="meeting-deck-stage"><img class="active" src="../headers/meetings.webp" alt="${escape(name)}"><div class="meeting-deck-photo-count"><strong>01</strong><span>/ 01</span></div></div>`;
     }
     const current=Math.min(galleryIndex.get(id)||0,items.length-1);galleryIndex.set(id,current);
-    return `<div class="meeting-studio-stage" data-meeting-gallery="${escape(id)}">
+    return `<div class="meeting-deck-stage" data-meeting-gallery="${escape(id)}">
       ${items.map((photo,index)=>`<img class="${index===current?'active':''}" data-meeting-photo="${index}" src="${escape(photo.url)}" alt="${escape(name)} - ${index+1}" loading="${index===0?'eager':'lazy'}" decoding="async">`).join('')}
-      <div class="meeting-studio-photo-meta"><strong data-meeting-photo-number>${String(current+1).padStart(2,'0')}</strong><span>${escape(l.photo)}<br><span data-meeting-photo-count>${String(current+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}</span></span></div>
-      ${items.length>1?`<div class="meeting-studio-arrows"><button type="button" data-meeting-nav="prev" data-meeting="${escape(id)}" aria-label="Previous photo">←</button><button type="button" data-meeting-nav="next" data-meeting="${escape(id)}" aria-label="Next photo">→</button></div>`:''}
-    </div>
-    <div class="meeting-studio-thumbs">${items.map((photo,index)=>`<button type="button" class="meeting-studio-thumb ${index===current?'active':''}" data-meeting-thumb="${index}" data-meeting="${escape(id)}" aria-label="${escape(l.photo)} ${index+1}"><img src="${escape(photo.url)}" alt="" loading="lazy"></button>`).join('')}</div>`;
+      <div class="meeting-deck-photo-count"><strong data-meeting-photo-number>${String(current+1).padStart(2,'0')}</strong><span data-meeting-photo-count>/ ${String(items.length).padStart(2,'0')}</span></div>
+      <div class="meeting-deck-filmstrip" data-meeting-filmstrip>${items.map((photo,index)=>`<button type="button" class="meeting-deck-thumb ${index===current?'active':''}" data-meeting-thumb="${index}" data-meeting="${escape(id)}" aria-label="${escape(l.photo)} ${index+1}"><img src="${escape(photo.url)}" alt="" loading="lazy"></button>`).join('')}</div>
+      ${items.length>1?`<div class="meeting-deck-arrows"><button type="button" data-meeting-nav="prev" data-meeting="${escape(id)}" aria-label="Previous photo">←</button><button type="button" data-meeting-nav="next" data-meeting="${escape(id)}" aria-label="Next photo">→</button></div>`:''}
+    </div>`;
   }
 
   function capacitiesMarkup(styles){
@@ -82,30 +82,38 @@
     const facilities=localizedArray(item,'facilities');
     const images=photos(id);
 
-    target.innerHTML=`<div class="meeting-studio">
-      <aside class="meeting-studio-selector" aria-label="${escape(l.choose)}">
+    target.innerHTML=`<div class="meeting-deck">
+      <header class="meeting-deck-switcher">
         <p class="content-kicker">${escape(l.studio)}</p>
-        <div class="meeting-studio-tabs" role="tablist" aria-label="${escape(l.choose)}">
-          ${entries.map(([entryId,entry],index)=>{const selected=entryId===id;const entryName=localized(entry,'name');return `<button type="button" role="tab" aria-selected="${selected}" class="meeting-studio-tab ${selected?'active':''}" data-meeting-select="${escape(entryId)}"><span class="num">${String(index+1).padStart(2,'0')}</span><span class="name">${escape(shortName(entryName))}</span></button>`;}).join('')}
+        <div class="meeting-deck-tabs" role="tablist" aria-label="${escape(l.choose)}">
+          ${entries.map(([entryId,entry],index)=>{const selected=entryId===id;const entryName=localized(entry,'name');const styles=localizedArray(entry,'setupStyles');const max=capacityParts(styles[styles.length-1]||'').number;return `<button type="button" role="tab" aria-selected="${selected}" class="meeting-deck-tab ${selected?'active':''}" data-meeting-select="${escape(entryId)}"><span>${String(index+1).padStart(2,'0')}</span><strong>${escape(shortName(entryName))}</strong><small>${escape(l.capacity)} ${escape(max)}</small></button>`;}).join('')}
         </div>
-        <p class="meeting-studio-selector-note">${escape(l.choose)}</p>
-      </aside>
-      <div class="meeting-studio-media">${galleryMarkup(id,name,images)}</div>
-      <article class="meeting-studio-copy">
-        <p class="content-kicker">${String(activeIndex+1).padStart(2,'0')} · Hotel Elisabeth</p>
-        <h2>${escape(name)}</h2>
-        <p class="meeting-studio-description">${escape(localized(item,'description'))}</p>
-        <p class="meeting-capacity-label">${escape(l.capacity)}</p>
-        <div class="meeting-capacities">${capacitiesMarkup(setups)}</div>
-        <p class="meeting-equipment-label">${escape(l.equipment)}</p>
-        <div class="meeting-equipment">${facilities.map(value=>`<span>${escape(value)}</span>`).join('')}</div>
-        <button type="button" class="meeting-details-toggle" data-meeting-details aria-expanded="${detailsOpen}">${escape(l.details)}</button>
-        <div class="meeting-details ${detailsOpen?'open':''}" data-meeting-details-panel><div class="meeting-details-inner"><div class="meeting-details-grid">
-          <div class="meeting-detail-row"><strong>${escape(l.food)}</strong><p>${escape(localized(item,'food')||'—')}</p></div>
-          <div class="meeting-detail-row"><strong>${escape(l.parking)}</strong><p>${escape(localized(item,'parking')||'—')}</p></div>
-          <div class="meeting-detail-row"><strong>${escape(l.stay)}</strong><p>${escape(localized(item,'accommodation')||'—')}</p></div>
-        </div></div></div>
-        <div class="meeting-studio-actions"><a class="btn btn-dark" href="#meeting-request">${escape(l.request)}</a></div>
+      </header>
+
+      <article class="meeting-deck-card">
+        <div class="meeting-deck-visual">
+          ${galleryMarkup(id,name,images)}
+          <div class="meeting-deck-heading"><span>${String(activeIndex+1).padStart(2,'0')}</span><h2>${escape(name)}</h2></div>
+          <div class="meeting-deck-capacity-panel"><p>${escape(l.capacity)}</p><div class="meeting-capacities">${capacitiesMarkup(setups)}</div></div>
+          <button type="button" class="meeting-details-toggle" data-meeting-details aria-expanded="${detailsOpen}">${escape(l.details)}</button>
+          <div class="meeting-details ${detailsOpen?'open':''}" data-meeting-details-panel>
+            <button type="button" class="meeting-details-close" data-meeting-details aria-label="${escape(l.details)}">×</button>
+            <div class="meeting-details-inner">
+              <p class="content-kicker">${escape(l.details)}</p>
+              <div class="meeting-details-grid">
+                <div class="meeting-detail-row"><strong>${escape(l.food)}</strong><p>${escape(localized(item,'food')||'—')}</p></div>
+                <div class="meeting-detail-row"><strong>${escape(l.parking)}</strong><p>${escape(localized(item,'parking')||'—')}</p></div>
+                <div class="meeting-detail-row"><strong>${escape(l.stay)}</strong><p>${escape(localized(item,'accommodation')||'—')}</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="meeting-deck-ribbon">
+          <p class="meeting-deck-description">${escape(localized(item,'description'))}</p>
+          <div class="meeting-deck-equipment"><p>${escape(l.equipment)}</p><div>${facilities.map(value=>`<span>${escape(value)}</span>`).join('')}</div></div>
+          <div class="meeting-deck-action"><a class="btn btn-dark" href="#meeting-request">${escape(l.request)}</a></div>
+        </div>
       </article>
     </div>`;
   }
@@ -118,7 +126,9 @@
     const number=gallery.querySelector('[data-meeting-photo-number]');if(number)number.textContent=String(next+1).padStart(2,'0');
     const count=gallery.querySelector('[data-meeting-photo-count]');if(count)count.textContent=`${String(next+1).padStart(2,'0')} / ${String(items.length).padStart(2,'0')}`;
     document.querySelectorAll(`[data-meeting-thumb][data-meeting="${CSS.escape(id)}"]`).forEach((button,i)=>button.classList.toggle('active',i===next));
-    document.querySelector(`[data-meeting-thumb="${next}"][data-meeting="${CSS.escape(id)}"]`)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest',inline:'center'});
+    const thumb=document.querySelector(`[data-meeting-thumb="${next}"][data-meeting="${CSS.escape(id)}"]`);
+    const strip=thumb?.closest('[data-meeting-filmstrip]');
+    if(thumb&&strip){const left=thumb.offsetLeft-(strip.clientWidth-thumb.clientWidth)/2;strip.scrollTo({left:Math.max(0,left),behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
   }
 
   document.addEventListener('click',event=>{
@@ -129,7 +139,7 @@
     const thumb=event.target.closest('[data-meeting-thumb]');
     if(thumb){showPhoto(thumb.dataset.meeting,Number(thumb.dataset.meetingThumb));return;}
     const details=event.target.closest('[data-meeting-details]');
-    if(details){detailsOpen=!detailsOpen;details.setAttribute('aria-expanded',String(detailsOpen));document.querySelector('[data-meeting-details-panel]')?.classList.toggle('open',detailsOpen);}
+    if(details){detailsOpen=!detailsOpen;document.querySelectorAll('[data-meeting-details]').forEach(button=>button.setAttribute('aria-expanded',String(detailsOpen)));document.querySelector('[data-meeting-details-panel]')?.classList.toggle('open',detailsOpen);}
   });
 
   function setupForm(){
