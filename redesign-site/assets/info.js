@@ -10,13 +10,25 @@
     es:{eyebrow:'Información del hotel',hero:'Lo que conviene saber antes de llegar.',intro:'Consulta en un solo lugar los horarios de llegada y salida, el desayuno, el aparcamiento, el acceso a la zona de tráfico restringido, los servicios del hotel y las formas de pago.',index:'Índice de la estancia',hint:'Elige un tema',checkin:'Llegada',checkout:'Salida',breakfast:'Desayuno',parking:'Aparcamiento',traffic:'Zona de tráfico restringido',camera:'Cámaras de tráfico',services:'Servicios del hotel',general:'Instalaciones generales',payment:'Pago',fooddrinks:'Comida y bebida',previous:'Tema anterior',next:'Tema siguiente',quick:'De un vistazo'},
     de:{eyebrow:'Hotelinformationen',hero:'Gut zu wissen vor der Anreise.',intro:'Hier finden Sie Check-in- und Check-out-Zeiten, Frühstückszeiten, Parkinformationen, Hinweise zur verkehrsberuhigten Zone, Hotelservices und Zahlungsarten auf einen Blick.',index:'Aufenthaltsindex',hint:'Thema auswählen',checkin:'Check-in',checkout:'Check-out',breakfast:'Frühstück',parking:'Parken',traffic:'Verkehrsberuhigte Zone',camera:'Verkehrskameras',services:'Hotelservice',general:'Allgemeine Ausstattung',payment:'Zahlung',fooddrinks:'Essen & Getränke',previous:'Vorheriges Thema',next:'Nächstes Thema',quick:'Auf einen Blick'}
   };
+  const parkingPeriod={
+    en:'€24 per parking period - from 14:00 until 14:00 the following day.',
+    nl:'€24 per parkeerperiode - van 14:00 tot 14:00 de volgende dag.',
+    fr:'24 € par période de stationnement - de 14h00 à 14h00 le lendemain.',
+    es:'24 € por periodo de aparcamiento - desde las 14:00 hasta las 14:00 del día siguiente.',
+    de:'24 € pro Parkzeitraum - von 14:00 Uhr bis 14:00 Uhr des folgenden Tages.'
+  };
 
   let data={};
   let active=0;
   let available=[];
   const lang=()=>window.ElisabethSite?.getLanguage?.()||document.documentElement.lang||'en';
   const t=()=>labels[lang()]||labels.en;
-  const valueFor=(key)=>data?.[key]?.[lang()]||data?.[key]?.en||'';
+  const valueFor=(key)=>{
+    const raw=data?.[key]?.[lang()]||data?.[key]?.en||'';
+    if(key!=='parking'||!raw)return raw;
+    const cleaned=String(raw).split('\n').filter(line=>!/(€\s*24|24\s*€).*24\s*(?:h|u|std)/i.test(line)).join('\n').trim();
+    return `${cleaned}\n\n${parkingPeriod[lang()]||parkingPeriod.en}`;
+  };
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
   function translateStatic(){
@@ -55,7 +67,7 @@
     const quick=[
       ['checkin','15:00'],
       ['checkout','11:00'],
-      ['parking','€24 / 24h'],
+      ['parking','€24'],
       ['services','24h']
     ];
     target.innerHTML=quick.map(([key,value],index)=>`<button type="button" class="info-quick-item" data-info-jump="${key}"><span class="eyebrow">0${index+1}</span><strong>${esc(value)}</strong><span>${esc(l[key])}</span></button>`).join('');
