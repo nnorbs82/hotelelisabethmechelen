@@ -15,6 +15,9 @@ This directory is the permanent development build for the approved Hotel Elisabe
 - Legacy Firebase Storage URLs have been removed from the active CMS content and generated redesign indexes.
 - Production assembly is handled by `tools/build_production_site.py`.
 - Production validation checks canonical routes, SEO metadata, internal references, Mews booking, meeting/group enquiry integrations, and rejects any Firebase Storage dependency in the assembled output.
-- Current multilingual content audit: Rooms, Packages, Facilities, Meetings, Attractions, Hotel Info and Homepage have complete EN/NL/FR/ES/DE content coverage. Privacy Policy and Terms & Conditions still require Spanish and German legal translations.
+- Current multilingual content audit: Rooms, Packages, Facilities, Meetings, Attractions, Hotel Info, Homepage, Privacy Policy and Terms & Conditions have production content coverage in EN/NL/FR/ES/DE.
+- Spanish and German legal translations are stored as reviewed translation sources under `redesign-site/content/legal/` and are included automatically when the corresponding CMS JSON fields are empty.
+- The content build now fails if Privacy Policy or Terms & Conditions are missing in any of the five supported languages.
+- Final human/legal review of translated legal copy remains a pre-launch QA item.
 - Firebase remains untouched only as a legacy backup until final launch approval and post-launch verification.
 - No production cutover or change to `main`, CNAME or the live GitHub Pages site is permitted without explicit final approval.
