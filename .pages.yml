@@ -352,9 +352,9 @@ content:
       field: false
     subfolders: false
     view:
-      primary: title
-      fields: [title, department, type, status, order]
-      sort: [order, title]
+      primary: title_en
+      fields: [title_en, department_en, type, status, order]
+      sort: [order, title_en]
       default: { sort: order, order: asc }
     fields:
       - { name: id, label: Internal ID, type: string, hidden: true }
@@ -367,16 +367,36 @@ content:
           values:
             - { name: active, label: Active }
             - { name: inactive, label: Inactive }
-      - { name: title, label: Job title, type: string, required: true }
+      - { name: title_en, label: "Job title - English", type: string, required: true }
+      - { name: title_nl, label: "Job title - Dutch", type: string }
+      - { name: title_fr, label: "Job title - French", type: string }
+      - { name: title_es, label: "Job title - Spanish", type: string }
+      - { name: title_de, label: "Job title - German", type: string }
       - name: type
         label: Employment type
         type: select
         options:
           values: [Full-time, Part-time, Contract, Temporary, Internship]
-      - { name: department, label: Department, type: string }
-      - { name: location, label: Location, type: string }
-      - { name: description, label: Description, type: text }
-      - { name: requirements, label: Requirements, type: text }
+      - { name: department_en, label: "Department - English", type: string }
+      - { name: department_nl, label: "Department - Dutch", type: string }
+      - { name: department_fr, label: "Department - French", type: string }
+      - { name: department_es, label: "Department - Spanish", type: string }
+      - { name: department_de, label: "Department - German", type: string }
+      - { name: location_en, label: "Location - English", type: string }
+      - { name: location_nl, label: "Location - Dutch", type: string }
+      - { name: location_fr, label: "Location - French", type: string }
+      - { name: location_es, label: "Location - Spanish", type: string }
+      - { name: location_de, label: "Location - German", type: string }
+      - { name: description_en, label: "Description - English", type: text }
+      - { name: description_nl, label: "Description - Dutch", type: text }
+      - { name: description_fr, label: "Description - French", type: text }
+      - { name: description_es, label: "Description - Spanish", type: text }
+      - { name: description_de, label: "Description - German", type: text }
+      - { name: requirements_en, label: "Requirements - English", type: text }
+      - { name: requirements_nl, label: "Requirements - Dutch", type: text }
+      - { name: requirements_fr, label: "Requirements - French", type: text }
+      - { name: requirements_es, label: "Requirements - Spanish", type: text }
+      - { name: requirements_de, label: "Requirements - German", type: text }
       - name: image
         label: Optional job image
         type: image
