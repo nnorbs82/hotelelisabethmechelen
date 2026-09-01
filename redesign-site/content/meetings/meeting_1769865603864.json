@@ -1,39 +1,39 @@
 {
-  "accommodation_en": "Combine your meeting with an overnight stay in one of the 66 contemporary and very comfortably furnished rooms.",
-  "accommodation_fr": "66 chambres élégantes offrent un maximum de confort pour combiner votre réunion avec une nuitée.",
-  "accommodation_nl": "Combineer uw meeting met een overnachting in een van de 66 hedendaags en supercomfortabel ingerichte kamers.",
-  "description_en": "Welcome to our meeting room Oud Huys.\nPlenty of space, lots of natural light and adjacent to the olive tree terrace of Hotel Elisabeth!",
-  "description_fr": "Vous cherchez un endroit calme en plein centre-ville pour votre réunion d'affaires ? Cela peut parfois sembler impossible, mais nous avons la solution pour vous.\n\nNotre salle de réunion Oud Huys a beaucoup d'espace, beaucoup de lumière naturelle et est adjacente à la terrasse des oliviers de l'Hôtel Elisabeth !",
-  "description_nl": "Welkom in onze meetingroom Oud Huys.\n\nAlle ruimte, veel natuurlijke lichtinval en grenzend aan het olijfboomterras van Hotel Elisabeth!",
+  "accommodation_en": "Combine your meeting with an overnight stay in one of Hotel Elisabeth's 66 rooms.",
+  "accommodation_fr": "Combinez votre réunion avec une nuitée dans l'une des 66 chambres de l'Hotel Elisabeth.",
+  "accommodation_nl": "Combineer uw meeting met een overnachting in een van de 66 kamers van Hotel Elisabeth.",
+  "description_en": "Oud Huys offers generous space, abundant natural light and direct access to Hotel Elisabeth's olive-tree terrace - a calm setting for meetings in central Mechelen.",
+  "description_fr": "Oud Huys offre beaucoup d'espace, une belle lumière naturelle et un accès direct à la terrasse aux oliviers de l'Hotel Elisabeth - un cadre paisible pour vos réunions au centre de Malines.",
+  "description_nl": "Oud Huys biedt veel ruimte, overvloedig daglicht en directe toegang tot het olijfboomterras van Hotel Elisabeth - een rustige setting voor meetings in het centrum van Mechelen.",
   "facilities_en": [
     "High-performance WiFi",
     "Projector",
-    "Flip Chart",
-    "whiteboard",
-    "Completely black out"
+    "Flipchart",
+    "Whiteboard",
+    "Full blackout possible"
   ],
   "facilities_fr": [
-    "WIFI haut débit gratuit",
+    "Wi-Fi haut débit",
     "Projecteur",
-    "Tableau à feuilles",
+    "Flipchart",
     "Tableau blanc",
-    "La salle peut être complètement occultée, parfaite pour les présentations de réunion"
+    "Occultation complète possible"
   ],
   "facilities_nl": [
     "Performante WiFi",
     "Projector",
-    "Flip Chart",
+    "Flipchart",
     "Whiteboard",
-    "Compleet verduisterbaar"
+    "Volledig verduisterbaar"
   ],
-  "food_en": "Hotel Elisabeth provides a selection of well-prepared coffee breaks, flexible lunch options, and optional dinner arrangements to enhance your meeting or event experience.",
-  "food_fr": "L’Hôtel Elisabeth propose une sélection de pauses-café bien préparées, des options de déjeuner flexibles ainsi que des arrangements de dîner en option pour enrichir votre réunion ou événement.",
-  "food_nl": "Hotel Elisabeth biedt een selectie van goed voorbereide koffiepauzes, flexibele lunchopties en optionele dinerarrangementen om uw vergadering of evenement te verrijken.",
-  "name_en": "OUD HUY'S MEETING ROOM",
-  "name_fr": "OUD HUY'S MEETING ROOM",
-  "name_nl": "OUD HUY'S MEETING ROOM",
+  "food_en": "Coffee breaks, flexible lunch options and dinner arrangements are available on request to complement your meeting or event.",
+  "food_fr": "Des pauses-café, des formules de déjeuner flexibles et des arrangements pour le dîner sont disponibles sur demande pour compléter votre réunion ou événement.",
+  "food_nl": "Koffiepauzes, flexibele lunchopties en dinerarrangementen zijn op aanvraag beschikbaar als aanvulling op uw meeting of evenement.",
+  "name_en": "Oud Huys Meeting Room",
+  "name_fr": "Oud Huys Meeting Room",
+  "name_nl": "Oud Huys Meeting Room",
   "parking_en": "Hotel Elisabeth is easily accessible at all times in the low-traffic heart of Mechelen. Parking is super convenient and easy in one of the parking spaces under the hotel.",
-  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un grand parking souterrain avec des places de parking.",
+  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un parking souterrain pratique sous l'établissement.",
   "parking_nl": "Hotel Elisabeth is op elk ogenblik makkelijk bereikbaar in het verkeersarme hart van Mechelen. Parkeren is superhandig en makkelijk op een van de parkeerplaatsen onder het hotel.",
   "setupStyles_en": [
     "U-Shape - max 22 p",
@@ -41,17 +41,17 @@
   ],
   "setupStyles_fr": [
     "Forme en U - max 22 p",
-    "Théâtre-Forme - max 35 p"
+    "Théâtre - max 35 p"
   ],
   "setupStyles_nl": [
     "U-Shape - max 22 p",
     "Theatre-Shape - max 35 p"
   ],
   "timestamp": 1769865603864,
-  "accommodation_es": "Combina tu reunión con una noche en una de nuestras 66 habitaciones contemporáneas y muy confortables.",
-  "accommodation_de": "Verbinden Sie Ihre Tagung mit einer Übernachtung in einem unserer 66 modern und besonders komfortabel eingerichteten Zimmer.",
-  "description_es": "Bienvenido a nuestra sala de reuniones Oud Huys.\n\nMucho espacio, abundante luz natural y acceso directo a la terraza de los olivos de Hotel Elisabeth.",
-  "description_de": "Willkommen in unserem Tagungsraum Oud Huys.\n\nViel Platz, reichlich Tageslicht und direkt an die Olivenbaum-Terrasse des Hotel Elisabeth angrenzend.",
+  "accommodation_es": "Combina tu reunión con una noche en una de las 66 habitaciones de Hotel Elisabeth.",
+  "accommodation_de": "Verbinden Sie Ihre Tagung mit einer Übernachtung in einem der 66 Zimmer des Hotel Elisabeth.",
+  "description_es": "Oud Huys ofrece amplitud, abundante luz natural y acceso directo a la terraza de los olivos de Hotel Elisabeth - un entorno tranquilo para reuniones en el centro de Malinas.",
+  "description_de": "Oud Huys bietet viel Platz, reichlich Tageslicht und direkten Zugang zur Olivenbaum-Terrasse des Hotel Elisabeth - ein ruhiger Rahmen für Tagungen im Zentrum von Mechelen.",
   "facilities_es": [
     "Wi-Fi de alto rendimiento",
     "Proyector",
@@ -66,12 +66,12 @@
     "Whiteboard",
     "Vollständig verdunkelbar"
   ],
-  "food_es": "Hotel Elisabeth ofrece una selección de pausas de café cuidadosamente preparadas, opciones flexibles de almuerzo y, si lo deseas, propuestas para la cena que complementan tu reunión o evento.",
-  "food_de": "Hotel Elisabeth bietet sorgfältig zusammengestellte Kaffeepausen, flexible Mittagsoptionen und auf Wunsch auch Dinnerarrangements als Ergänzung zu Ihrer Tagung oder Veranstaltung.",
-  "name_es": "OUD HUY'S MEETING ROOM",
-  "name_de": "OUD HUY'S MEETING ROOM",
-  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en una de las plazas situadas debajo del hotel.",
-  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie auf einem der Stellplätze direkt unter dem Hotel.",
+  "food_es": "Hay pausas de café, opciones flexibles de almuerzo y propuestas de cena disponibles bajo petición para complementar tu reunión o evento.",
+  "food_de": "Kaffeepausen, flexible Mittagsoptionen und Dinnerarrangements sind auf Anfrage als Ergänzung zu Ihrer Tagung oder Veranstaltung verfügbar.",
+  "name_es": "Oud Huys Meeting Room",
+  "name_de": "Oud Huys Meeting Room",
+  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en el aparcamiento situado debajo del hotel.",
+  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie in der Tiefgarage direkt unter dem Hotel.",
   "setupStyles_es": [
     "Forma en U - máx. 22 personas",
     "Teatro - máx. 35 personas"
