@@ -76,7 +76,7 @@
   }
 
   document.addEventListener('click',event=>{
-    const nav=event.target.closest('[data-group-step-nav]');if(nav){const target=Number(nav.dataset.groupStepNav);if(target<=step||validateStep(step))showStep(target);return;}
+    const nav=event.target.closest('[data-group-step-nav]');if(nav){const target=Number(nav.dataset.groupStepNav);if(target<=step){showStep(target);return;}for(let i=step;i<target;i++){if(!validateStep(i)){showStep(i);return;}}showStep(target);return;}
     if(event.target.closest('[data-group-prev]')){showStep(step-1);return;}
     if(event.target.closest('[data-group-next]')){if(validateStep(step))showStep(step+1);}
   });
@@ -85,7 +85,7 @@
 
   async function submit(event){
     event.preventDefault();
-    if(!validateStep(3))return;
+    for(let i=0;i<4;i++){if(!validateStep(i)){showStep(i);return;}}
     const l=t();const f=form();const submit=f.querySelector('[type="submit"]');const status=document.getElementById('group-status');
     submit.disabled=true;submit.textContent=l.sending;status.className='group-status';status.textContent='';
     const phone=iti?.getNumber?.()||document.getElementById('telephone').value;
