@@ -15,6 +15,8 @@ CONTENT = ROOT / "redesign-site" / "content"
 GENERATED = CONTENT / "generated"
 GENERATED.mkdir(parents=True, exist_ok=True)
 
+LANGS = ("en", "nl", "fr", "es", "de")
+
 
 def read_json(path: Path, default=None):
     if not path.exists():
@@ -28,7 +30,6 @@ def write_json(path: Path, value):
 
 
 def browser_media_path(value):
-    """Make CMS root media paths work both in redesign-site preview and at final root."""
     if not isinstance(value, str) or not value:
         return value
     if value.startswith("/images/"):
@@ -67,11 +68,7 @@ def room_transform(item):
     gallery = item.pop("gallery", None) or []
     legacy = item.get("photos") if isinstance(item.get("photos"), list) else []
     if gallery:
-        item["photos"] = [
-            {"url": browser_media_path(path), "order": index + 1}
-            for index, path in enumerate(gallery)
-            if path
-        ]
+        item["photos"] = [{"url": browser_media_path(path), "order": index + 1} for index, path in enumerate(gallery) if path]
     elif legacy:
         item["photos"] = legacy
     amenity_ids = item.pop("amenityIds", None)
@@ -90,16 +87,12 @@ def package_transform(item):
 
 
 def facility_transform(item):
-    item.pop("gallery", None)
-    item.pop("legacyPhotos", None)
-    item.pop("order", None)
+    item.pop("gallery", None); item.pop("legacyPhotos", None); item.pop("order", None)
     return item
 
 
 def meeting_transform(item):
-    item.pop("gallery", None)
-    item.pop("legacyPhotos", None)
-    item.pop("order", None)
+    item.pop("gallery", None); item.pop("legacyPhotos", None); item.pop("order", None)
     return item
 
 
@@ -127,9 +120,7 @@ def homepage_transform(item):
         for raw in item.get(field, []) or []:
             if not isinstance(raw, dict):
                 continue
-            entry = dict(raw)
-            entry["image"] = browser_media_path(entry.get("image", ""))
-            values.append(entry)
+            entry = dict(raw); entry["image"] = browser_media_path(entry.get("image", "")); values.append(entry)
         item[field] = values
     item["closingImage"] = browser_media_path(item.get("closingImage", ""))
     return item
@@ -138,44 +129,78 @@ def homepage_transform(item):
 def photo_index(items):
     result = {}
     for item in items:
-        item_id = str(item.get("id", ""))
-        gallery = item.get("gallery") or []
-        legacy = item.get("legacyPhotos") or []
-        if gallery:
-            result[item_id] = [
-                {"url": browser_media_path(path), "order": index + 1}
-                for index, path in enumerate(gallery)
-                if path
-            ]
-        else:
-            result[item_id] = legacy
+        item_id = str(item.get("id", "")); gallery = item.get("gallery") or []; legacy = item.get("legacyPhotos") or []
+        result[item_id] = ([{"url": browser_media_path(path), "order": index + 1} for index, path in enumerate(gallery) if path] if gallery else legacy)
     return result
 
 
+def normalize_terms(output):
+    replacements = {
+        "en": [
+            ("A security deposit of €250 may be required upon booking for certain reservations.", "When a security deposit is required, the amount is €200."),
+            ("Check-in possible from 2 PM.", "Check-in is possible from 3 PM."),
+            ("<p>Check-out time:</p><p>&nbsp;Weekdays: 10 AM&nbsp;Weekends: 11 AM</p>", "<p>Check-out is by 11 AM on both weekdays and weekends.</p>"),
+        ],
+        "nl": [
+            ("Voor bepaalde reserveringen kan een borg van €250 vereist zijn bij het boeken.", "Wanneer een waarborg vereist is, bedraagt deze €200."),
+            ("Inchecken is mogelijk vanaf 14:00 uur.", "Inchecken is mogelijk vanaf 15:00 uur."),
+            ("<p>Uitchecktijden:</p><p>Doordeweeks: 10:00 uur</p><p>Weekends: 11:00 uur</p>", "<p>Uitchecken is zowel op weekdagen als in het weekend uiterlijk om 11:00 uur.</p>"),
+        ],
+        "fr": [
+            ("Un dépôt de garantie de 250 € peut être exigé pour certaines réservations.", "Lorsqu’un dépôt de garantie est requis, son montant est de 200 €."),
+            ("L’enregistrement est possible à partir de 14h00.", "L’enregistrement est possible à partir de 15h00."),
+            ("<p>Heure de départ :</p><p>En semaine : 10h00</p><p>Week-ends : 11h00</p>", "<p>Le départ est prévu au plus tard à 11h00, en semaine comme le week-end.</p>"),
+        ],
+    }
+    for lang, pairs in replacements.items():
+        value = output.get(lang, "")
+        for old, new in pairs:
+            value = value.replace(old, new)
+        output[lang] = value
+    return output
+
+
 def legal_content(name: str):
-    """Return five-language legal content, using reviewed translation files when CMS fields are empty."""
     source = read_json(CONTENT / f"{name}.json", {}) or {}
-    output = {lang: source.get(lang, "") for lang in ("en", "nl", "fr", "es", "de")}
+    output = {lang: source.get(lang, "") for lang in LANGS}
     for lang in ("es", "de"):
-        if output[lang].strip():
-            continue
         override = CONTENT / "legal" / f"{name}-{lang}.html"
         if override.exists():
             output[lang] = override.read_text(encoding="utf-8").strip()
+    if name == "terms":
+        output = normalize_terms(output)
     missing = [lang for lang, value in output.items() if not isinstance(value, str) or not value.strip()]
     if missing:
         raise SystemExit(f"Missing {name} legal content for: {', '.join(missing)}")
     return output
 
 
-rooms = collection("rooms")
-packages = collection("packages")
-facilities = collection("facilities")
-meetings = collection("meetings")
-attractions = collection("attractions")
-careers = collection("careers")
-amenities = collection("amenities")
+def normalize_hotel_info(entry_id: str, values: dict):
+    if entry_id == "checkin":
+        values = {
+            "en": "Check-in is possible from 3 PM\nA valid credit or debit card is required at check-in, or a €200 security deposit must be paid until the day of check-out.",
+            "nl": "Inchecken is mogelijk vanaf 15:00 uur.\nBij het inchecken is een geldige creditcard of debetkaart vereist, of er dient een waarborg van €200 te worden betaald tot de dag van uitchecken.",
+            "fr": "L’enregistrement est possible à partir de 15h00.\nUne carte de crédit ou de débit valide est requise lors de l’enregistrement, ou un dépôt de garantie de 200 € devra être versé jusqu’au jour du départ.",
+            "es": "El check-in es posible a partir de las 15:00.\nSe requiere una tarjeta de crédito o débito válida al hacer el check-in, o deberá abonarse un depósito de seguridad de 200 € hasta el día de salida.",
+            "de": "Der Check-in ist ab 15:00 Uhr möglich.\nBeim Check-in ist eine gültige Kredit- oder Debitkarte erforderlich. Alternativ muss bis zum Abreisetag eine Kaution von 200 € hinterlegt werden.",
+        }
+    elif entry_id == "checkout":
+        values = {
+            "en": "Check-out is by 11:00 AM on both weekdays and weekends. In case of a later departure, an additional overnight charge may apply.",
+            "nl": "Uitchecken is zowel op weekdagen als in het weekend uiterlijk om 11:00 uur. Bij een later vertrek kan een extra overnachting in rekening worden gebracht.",
+            "fr": "Le départ est prévu au plus tard à 11h00, en semaine comme le week-end. En cas de départ tardif, une nuit supplémentaire pourra être facturée.",
+            "es": "El check-out es como muy tarde a las 11:00, tanto entre semana como durante el fin de semana. En caso de una salida posterior, puede aplicarse el cargo de una noche adicional.",
+            "de": "Der Check-out ist sowohl an Wochentagen als auch am Wochenende spätestens um 11:00 Uhr. Bei einer späteren Abreise kann eine zusätzliche Übernachtung berechnet werden.",
+        }
+    elif entry_id == "traffic":
+        values = {lang: value.replace("ttps://www.mechelen.be/autoluw", "https://www.mechelen.be/autoluw") for lang, value in values.items()}
+        values["fr"] = values["fr"].replace("11h – 6h", "11h – 18h")
+    elif entry_id == "camera":
+        values["nl"] = "Aan het begin van elke autoluwe/autovrije straat of zone staat een verkeersbord dat de doorgang tijdens bepaalde uren verbiedt, behalve voor vergunninghouders.\n\nDe zone is herkenbaar aan verkeersbord C3 met daaronder de uitzonderingen. Passeert u dit bord tijdens de autoluwe uren zonder vergunning, dan registreert de camera uw nummerplaat en ontvangt u een boete van €58."
+    return values
 
+
+rooms = collection("rooms"); packages = collection("packages"); facilities = collection("facilities"); meetings = collection("meetings"); attractions = collection("attractions"); careers = collection("careers"); amenities = collection("amenities")
 write_json(GENERATED / "rooms.json", keyed(rooms, room_transform))
 write_json(GENERATED / "packages.json", keyed(packages, package_transform))
 write_json(GENERATED / "facilities.json", keyed(facilities, facility_transform))
@@ -195,20 +220,11 @@ for entry in info.get("entries", []):
     entry_id = entry.get("id")
     if not entry_id:
         continue
-    info_out[entry_id] = {
-        "en": entry.get("body_en", ""),
-        "nl": entry.get("body_nl", ""),
-        "fr": entry.get("body_fr", ""),
-        "es": entry.get("body_es", ""),
-        "de": entry.get("body_de", ""),
-    }
+    values = {lang: entry.get(f"body_{lang}", "") for lang in LANGS}
+    info_out[entry_id] = normalize_hotel_info(entry_id, values)
 write_json(GENERATED / "hotelInfo.json", info_out)
 
 write_json(GENERATED / "privacyPolicy.json", legal_content("privacy"))
 write_json(GENERATED / "termsAndConditions.json", legal_content("terms"))
 
-print(
-    "Generated content indexes:",
-    f"{len(rooms)} rooms, {len(packages)} packages, {len(facilities)} facilities,",
-    f"{len(meetings)} meetings, {len(attractions)} attractions, {len(careers)} careers, {len(amenities)} amenities"
-)
+print("Generated content indexes:", f"{len(rooms)} rooms, {len(packages)} packages, {len(facilities)} facilities,", f"{len(meetings)} meetings, {len(attractions)} attractions, {len(careers)} careers, {len(amenities)} amenities")
