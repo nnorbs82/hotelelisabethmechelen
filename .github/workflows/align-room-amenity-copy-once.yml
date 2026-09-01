@@ -1,0 +1,63 @@
+name: Align room amenity copy once
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/align-room-amenity-copy-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+      - name: Align room descriptions with assigned amenities
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for path in Path('redesign-site/content/rooms').glob('*.json'):
+              data = json.loads(path.read_text(encoding='utf-8'))
+              for lang in ('en','fr','nl','es','de'):
+                  key = f'description_{lang}'
+                  text = data.get(key, '')
+                  if not text:
+                      continue
+                  if lang == 'en':
+                      text = text.replace('plus a docking station, ', '').replace('plus docking station, ', '').replace('docking station, ', '')
+                  elif lang == 'fr':
+                      text = text.replace('station d’accueil, ', '').replace("station d'accueil, ", '')
+                      text = text.replace('minibar', 'mini-frigo')
+                  elif lang == 'nl':
+                      text = text.replace('plus docking station, ', '').replace('docking station, ', '')
+                      text = text.replace('minibar', 'mini-koelkast')
+                  elif lang == 'es':
+                      text = text.replace('estación de conexión, ', '')
+                  elif lang == 'de':
+                      text = text.replace('Dockingstation, ', '')
+                  data[key] = text
+              path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+          amenity = Path('redesign-site/content/amenities/amenity_1769533121368.json')
+          if amenity.exists():
+              data = json.loads(amenity.read_text(encoding='utf-8'))
+              data['name_fr'] = 'Smart TV à écran plat'
+              data['name_nl'] = 'Smart TV met flatscreen'
+              amenity.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+      - name: Commit fixes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign-site/content/rooms redesign-site/content/amenities
+          git diff --cached --quiet && exit 0
+          git commit -m 'content: align room descriptions with amenities'
+          git push origin HEAD:elisabeth-redesign
