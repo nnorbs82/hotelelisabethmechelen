@@ -93,13 +93,12 @@ jobs:
           if not homepage.get('closingImage'): raise SystemExit('Homepage closing image missing')
           if not (generated/'homepage.json').exists(): raise SystemExit('Generated homepage index missing')
 
-          for legal_name in ['privacy.json','terms.json']:
-              legal=json.loads((content/legal_name).read_text(encoding='utf-8'))
-              for lang in ['en','nl','fr']:
-                  if not legal.get(lang): raise SystemExit(f'Missing {lang} content in {legal_name}')
-              missing=[lang for lang in ['es','de'] if not legal.get(lang)]
-              if missing:
-                  print(f'NOTICE: {legal_name} still requires reviewed translations for {missing}')
+          for legal_name in ['privacyPolicy.json','termsAndConditions.json']:
+              legal=json.loads((generated/legal_name).read_text(encoding='utf-8'))
+              for lang in ['en','nl','fr','es','de']:
+                  value=legal.get(lang)
+                  if not isinstance(value,str) or not value.strip():
+                      raise SystemExit(f'Missing generated {lang} content in {legal_name}')
 
           def check_media(value, context):
               if not isinstance(value,str) or not value.startswith('/images/'):
@@ -155,6 +154,39 @@ jobs:
                   if not target.exists():
                       raise SystemExit(f'Broken local reference in {page}: {ref}')
           print(f'Validated {len(pages)} HTML pages and local references')
+          PY
+
+      - name: Validate no hotel star-rating claims
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          patterns = [
+              r'4\s*★',
+              r'4\s*\*',
+              r'4[- ]star',
+              r'four[- ]star',
+              r'viersterren',
+              r'quatre\s+étoiles',
+              r'cuatro\s+estrellas',
+              r'vier[- ]sterne',
+          ]
+          rx = re.compile('|'.join(patterns), re.I)
+          files = [Path('design-preview-v2.js')]
+          for suffix in ('*.html','*.js','*.json'):
+              files.extend(Path('redesign-site').rglob(suffix))
+          hits=[]
+          for file in files:
+              if not file.exists():
+                  continue
+              text=file.read_text(encoding='utf-8',errors='ignore')
+              match=rx.search(text)
+              if match:
+                  hits.append(f'{file}: {match.group(0)}')
+          if hits:
+              raise SystemExit('Hotel star-rating claim found:\n' + '\n'.join(hits))
+          print('No hotel star-rating claims found in active redesign content')
           PY
 
       - name: Validate runtime architecture
