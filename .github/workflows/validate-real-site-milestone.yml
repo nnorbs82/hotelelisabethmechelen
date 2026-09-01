@@ -1,0 +1,98 @@
+name: Validate real redesign site milestone
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/validate-real-site-milestone.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check design-preview-v2.js
+          node --check redesign-site/assets/site.js
+          node --check redesign-site/assets/home.js
+          node --check redesign-site/assets/rooms.js
+
+      - name: Validate HTML, JSON and local references
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import json, re
+
+          html_files = [Path('redesign-site/index.html'), Path('redesign-site/rooms.html')]
+          for path in html_files:
+              text = path.read_text(encoding='utf-8')
+              HTMLParser().feed(text)
+              if 'noindex,nofollow' not in text.replace(' ', ''):
+                  raise SystemExit(f'{path}: preview noindex missing')
+              missing=[]
+              for attr,value in re.findall(r'\b(src|href)=["\']([^"\']+)["\']', text, re.I):
+                  if value.startswith(('#','http://','https://','mailto:','tel:','data:')):
+                      continue
+                  local=value.split('?',1)[0].split('#',1)[0]
+                  candidate=(path.parent/local).resolve()
+                  if local and not candidate.exists():
+                      missing.append(value)
+              if missing:
+                  raise SystemExit(f'{path}: missing local refs: {sorted(set(missing))}')
+
+          css=Path('redesign-site/assets/site.css').read_text(encoding='utf-8')
+          for imported in re.findall(r"@import\s+url\(['\"]?([^'\")]+)", css):
+              if imported.startswith(('http://','https://')):
+                  continue
+              if not (Path('redesign-site/assets')/imported).resolve().exists():
+                  raise SystemExit(f'Missing CSS import: {imported}')
+
+          json_files = [
+              'redesign/legacy-content/rooms.json',
+              'redesign/legacy-content/amenitiesMaster.json',
+              'redesign/legacy-content/packages.json',
+              'redesign/legacy-content/facilities.json',
+              'redesign/legacy-content/meetings.json',
+              'redesign/legacy-content/meetingsPhotos.json',
+              'redesign/legacy-content/hotelInfo.json',
+              'redesign/legacy-content/attractions.json',
+              'redesign/legacy-content/translations.json'
+          ]
+          for filename in json_files:
+              with open(filename, encoding='utf-8') as handle:
+                  json.load(handle)
+
+          rooms=json.load(open('redesign/legacy-content/rooms.json', encoding='utf-8'))
+          if len(rooms) != 10:
+              raise SystemExit(f'Expected 10 migrated room records, got {len(rooms)}')
+          available=[r for r in rooms.values() if r.get('status','available') == 'available']
+          if not available:
+              raise SystemExit('No available rooms in migrated data')
+          print(f'Validated {len(rooms)} room records ({len(available)} published), HTML, JS and JSON.')
+          PY
+
+      - name: Guard production branch
+        run: |
+          MAIN_SHA=$(git ls-remote origin refs/heads/main | cut -f1)
+          test "$MAIN_SHA" = "b881ebc93db57d2409024e9664b0942f62a5e94c" || { echo "Production main moved unexpectedly: $MAIN_SHA"; exit 1; }
+          echo "Production main unchanged: $MAIN_SHA"
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/validate-real-site-milestone.yml
+
+      - name: Commit validation cleanup
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'chore: complete real-site milestone validation'
+          git push origin HEAD:elisabeth-redesign
