@@ -1,0 +1,31 @@
+name: Mobile nav patch once
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/mobile-nav-patch-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+      - name: Patch navigation
+        run: python tools/patch_mobile_nav_accessibility.py
+      - name: Check JavaScript
+        run: node --check design-preview-v2.js
+      - name: Commit navigation
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add design-preview-v2.js
+          git diff --cached --quiet && exit 0
+          git commit -m 'qa: improve mobile menu keyboard navigation'
+          git push origin HEAD:elisabeth-redesign
