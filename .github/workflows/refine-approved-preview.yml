@@ -1,0 +1,234 @@
+name: Refine approved Elisabeth preview
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/refine-approved-preview.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Apply approved design refinements
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          html_path = Path('design-preview-v2.html')
+          html = html_path.read_text(encoding='utf-8')
+
+          # Remove the duplicated large Elisabeth wordmark from the hero.
+          html = html.replace('          <img class="hero-logo" src="logo/elitext.png" alt="Hotel Elisabeth">\n', '')
+
+          replacement = '''<div class="transition-scene" id="pace-transition">
+      <div class="transition-sticky">
+        <section class="section transition-layer transition-front anchor-marker" id="concept">
+          <div class="container">
+            <div class="section-head reveal"><p class="eyebrow" data-i18n="manifesto.eyebrow">Hotel Elisabeth · Mechelen</p><div><h2 class="display manifesto-title" data-i18n-html="manifesto.title">More than a room.<br><span>A change of pace.</span></h2></div></div>
+            <div class="pace-layout">
+              <div class="pace-gallery reveal" aria-label="Hotel Elisabeth atmosphere">
+                <figure class="pace-shot primary" tabindex="0"><img src="mainslide/2.webp" alt="Hotel Elisabeth interior"><figcaption>Interior</figcaption></figure>
+                <figure class="pace-shot" tabindex="0"><img src="mainslide/5.webp" alt="Hotel Elisabeth atmosphere"><figcaption>Courtyard</figcaption></figure>
+                <figure class="pace-shot" tabindex="0"><img src="mainslide/4.webp" alt="Hotel Elisabeth pool"><figcaption>Pool</figcaption></figure>
+              </div>
+              <div class="pace-copy reveal">
+                <h3 data-i18n="manifesto.subtitle">Contemporary comfort with room to breathe.</h3>
+                <p data-i18n="manifesto.body">Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.</p>
+                <div class="facts-strip">
+                  <div class="fact-card"><strong>66</strong><span data-i18n="facts.rooms">Rooms</span></div>
+                  <div class="fact-card"><strong>1</strong><span data-i18n="facts.pool">Indoor pool</span></div>
+                  <div class="fact-card"><strong>24/7</strong><span data-i18n="facts.doorstep">Mechelen on your doorstep</span></div>
+                  <div class="fact-card"><strong>P</strong><span data-i18n="facts.parking">Underground parking</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section mist transition-layer transition-back">
+          <div class="container-wide">
+            <div class="section-head reveal"><p class="eyebrow" data-i18n="pages.eyebrow">The complete hotel website</p><div><h2 class="display" data-i18n="pages.title">Every existing page, redesigned.</h2><p class="lead" data-i18n="pages.body">The final website keeps Rooms, Facilities, Packages, Meetings, Hotel Information, Attractions, Group Requests, Careers and the legal pages.</p></div></div>
+            <div class="page-index reveal">
+              <a href="#rooms"><span class="num">01</span><div><h3 data-i18n="nav.rooms">Rooms</h3><p>Categories, specifications, galleries, videos and direct booking.</p></div></a>
+              <a href="#facilities"><span class="num">02</span><div><h3 data-i18n="nav.facilities">Facilities</h3><p>Pool, courtyard, breakfast, parking and practical services.</p></div></a>
+              <a href="#packages"><span class="num">03</span><div><h3 data-i18n="nav.packages">Packages</h3><p>Active offers presented as refined editorial campaigns.</p></div></a>
+              <a href="#meetings"><span class="num">04</span><div><h3 data-i18n="nav.meetings">Meetings</h3><p>Spaces, capacities, equipment and the complete request form.</p></div></a>
+              <a href="#info"><span class="num">05</span><div><h3 data-i18n="nav.info">Info</h3><p>Every practical hotel detail, clearly organised.</p></div></a>
+              <a href="#group"><span class="num">06</span><div><h3 data-i18n="nav.group">Group request</h3><p>The full accommodation request, not a simplified contact form.</p></div></a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    '''
+
+          pattern = re.compile(
+              r'<section class="section anchor-marker" id="concept">.*?</section>\s*'
+              r'<section class="section mist">.*?</section>\s*'
+              r'(?=<section class="section white anchor-marker" id="rooms">)',
+              re.S
+          )
+          html, count = pattern.subn(replacement, html, count=1)
+          if count != 1:
+              raise SystemExit(f'Expected to replace one manifesto/page-index pair, replaced {count}')
+          html_path.write_text(html, encoding='utf-8')
+
+          css_path = Path('design-preview-v2.css')
+          css = css_path.read_text(encoding='utf-8')
+          css += r'''
+
+/* APPROVED DIRECTION REFINEMENTS */
+.hero-title{font-size:clamp(52px,7.4vw,118px);max-width:1040px}
+.hero-copy{max-width:1040px}
+
+/* One-off section reveal: the pace section slides sideways and exposes the page map below it. */
+.transition-scene{position:relative;height:195vh;background:var(--mist)}
+.transition-sticky{position:sticky;top:0;height:100svh;min-height:720px;overflow:hidden;background:var(--mist)}
+.transition-layer{position:absolute;inset:0;height:100%;overflow:hidden;padding:68px 0 54px}
+.transition-front{z-index:2;background:var(--paper);will-change:transform;box-shadow:18px 0 70px rgba(4,6,4,.16)}
+.transition-back{z-index:1;background:var(--mist)}
+.transition-layer .section-head{margin-bottom:34px}
+.transition-front .manifesto-title{font-size:clamp(48px,5.4vw,82px)}
+.transition-back .section-head h2{font-size:clamp(48px,5.3vw,80px)}
+.transition-back .section-head .lead{margin-top:17px}
+.transition-back .page-index a{min-height:170px;padding:23px 26px}
+.transition-back .page-index h3{font-size:29px}
+.transition-back .page-index p{font-size:13px;margin-top:7px}
+
+/* A new expanding image ribbon - deliberately unlike the 3 Paardekens overlapping-photo composition. */
+.pace-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(45px,5vw,82px);align-items:stretch}
+.pace-gallery{display:flex;height:min(46vh,440px);min-height:340px;gap:9px;overflow:hidden;background:var(--black)}
+.pace-shot{position:relative;flex:.9;margin:0;overflow:hidden;cursor:pointer;transition:flex .72s cubic-bezier(.2,.7,.15,1)}
+.pace-shot.primary{flex:2.15}
+.pace-gallery:hover .pace-shot{flex:.85}
+.pace-gallery .pace-shot:hover,.pace-gallery .pace-shot:focus{flex:2.35;outline:0}
+.pace-shot img{position:absolute;inset:0;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.15,1),filter .5s ease;filter:saturate(.88) contrast(1.02)}
+.pace-shot:hover img,.pace-shot:focus img{transform:scale(1.035);filter:saturate(1) contrast(1.02)}
+.pace-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,5,4,.58),transparent 55%)}
+.pace-shot figcaption{position:absolute;z-index:2;left:16px;bottom:16px;color:#fff;font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+.pace-copy{display:flex;flex-direction:column;justify-content:center}
+.pace-copy h3{font-family:var(--display);font-size:clamp(28px,2.7vw,43px);font-weight:300;letter-spacing:-.035em;line-height:1.08;margin:0 0 18px}
+.pace-copy>p{margin:0;color:var(--muted);font-size:15px;line-height:1.8}
+.facts-strip{display:grid;grid-template-columns:1fr 1fr;margin-top:auto;padding-top:25px}
+.fact-card{min-height:78px;padding:13px 13px 13px 0;border-top:1px solid var(--line);display:flex;align-items:baseline;gap:11px}
+.fact-card:nth-child(odd){border-right:1px solid var(--line);padding-right:16px}
+.fact-card:nth-child(even){padding-left:16px}
+.fact-card strong{font-family:var(--display);font-size:28px;font-weight:300;letter-spacing:-.04em;line-height:1}
+.fact-card span{font-family:var(--display);font-size:8px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);line-height:1.45}
+
+@media(max-width:1099px){
+  .transition-scene{height:auto}
+  .transition-sticky{position:static;height:auto;min-height:0;overflow:visible}
+  .transition-layer{position:relative;height:auto;overflow:visible;padding:95px 0;transform:none!important;pointer-events:auto!important}
+  .transition-front{box-shadow:none}
+  .pace-layout{grid-template-columns:1fr}
+  .pace-gallery{height:500px}
+  .transition-back .page-index a{min-height:200px}
+}
+@media(max-width:760px){
+  .hero-title{font-size:clamp(47px,14.2vw,72px)}
+  .pace-gallery{height:390px;min-height:0}
+  .pace-shot{flex:.75}.pace-shot.primary{flex:1.75}
+  .pace-gallery:hover .pace-shot{flex:.75}
+  .pace-gallery .pace-shot:hover,.pace-gallery .pace-shot:focus{flex:1.75}
+  .facts-strip{grid-template-columns:1fr}
+  .fact-card:nth-child(odd){border-right:0;padding-right:0}
+  .fact-card:nth-child(even){padding-left:0}
+}
+@media(prefers-reduced-motion:reduce){.transition-front{transform:none!important}}
+'''
+          css_path.write_text(css, encoding='utf-8')
+
+          js_path = Path('design-preview-v2.js')
+          js = js_path.read_text(encoding='utf-8')
+
+          replacements = {
+            "'facts.location':'Central Mechelen',": "'facts.location':'Central Mechelen','facts.doorstep':'Mechelen on your doorstep','facts.parking':'Underground parking',",
+            "'facts.location':'Centraal Mechelen',": "'facts.location':'Centraal Mechelen','facts.doorstep':'Mechelen voor de deur','facts.parking':'Ondergrondse parking',",
+            "'facts.location':'Centre de Malines',": "'facts.location':'Centre de Malines','facts.doorstep':'Malines à votre porte','facts.parking':'Parking souterrain',",
+            "'facts.location':'Centro de Malinas',": "'facts.location':'Centro de Malinas','facts.doorstep':'Malinas a tu puerta','facts.parking':'Aparcamiento subterráneo',",
+            "'facts.location':'Zentrales Mechelen',": "'facts.location':'Zentrales Mechelen','facts.doorstep':'Mechelen direkt vor der Tür','facts.parking':'Tiefgarage',"
+          }
+          for old, new in replacements.items():
+              if old not in js:
+                  raise SystemExit(f'Missing translation anchor: {old}')
+              js = js.replace(old, new, 1)
+
+          insert_before = "  /* facilities interaction */"
+          swipe_code = r'''  /* one-off sideways section reveal */
+  const swipeScene = document.querySelector('.transition-scene');
+  const swipeFront = document.querySelector('.transition-front');
+  const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
+  const updateSectionSwipe = () => {
+    if (!swipeScene || !swipeFront) return;
+    if (innerWidth < 1100 || reducedMotion.matches) {
+      swipeFront.style.transform = '';
+      swipeFront.style.pointerEvents = 'auto';
+      return;
+    }
+    const rect = swipeScene.getBoundingClientRect();
+    const travel = Math.max(1, swipeScene.offsetHeight - innerHeight);
+    const raw = Math.max(0, Math.min(1, -rect.top / travel));
+    const progress = Math.max(0, Math.min(1, (raw - .12) / .74));
+    const eased = 1 - Math.pow(1 - progress, 3);
+    swipeFront.style.transform = `translate3d(${-eased * 104}vw,0,0) rotate(${eased * -1.15}deg)`;
+    swipeFront.style.pointerEvents = progress > .58 ? 'none' : 'auto';
+  };
+  addEventListener('scroll', updateSectionSwipe, {passive:true});
+  addEventListener('resize', updateSectionSwipe);
+  reducedMotion.addEventListener?.('change', updateSectionSwipe);
+  updateSectionSwipe();
+
+'''
+          if insert_before not in js:
+              raise SystemExit('Could not find JS insertion point')
+          js = js.replace(insert_before, swipe_code + insert_before, 1)
+          js_path.write_text(js, encoding='utf-8')
+          PY
+
+      - name: Validate revised preview
+        run: |
+          node --check design-preview-v2.js
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+          html=Path('design-preview-v2.html').read_text(encoding='utf-8')
+          HTMLParser().feed(html)
+          if '<img class="hero-logo"' in html:
+              raise SystemExit('Duplicate hero logo remains')
+          for phrase in ['facts.doorstep','facts.parking','transition-scene','pace-gallery']:
+              if phrase not in html and phrase not in Path('design-preview-v2.js').read_text(encoding='utf-8'):
+                  raise SystemExit(f'Missing expected refinement: {phrase}')
+          if 'noindex,nofollow' not in html.replace(' ', ''):
+              raise SystemExit('Preview noindex missing')
+          missing=[]
+          for attr,value in re.findall(r'\b(src|href)=["\']([^"\']+)["\']',html,re.I):
+              if value.startswith(('#','http://','https://','mailto:','tel:','data:')): continue
+              local=value.split('?',1)[0].split('#',1)[0].lstrip('/')
+              if local and not Path(local).exists(): missing.append(local)
+          if missing: raise SystemExit('Missing local references: '+', '.join(sorted(set(missing))))
+          print('Approved preview refinements validated')
+          PY
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/refine-approved-preview.yml
+
+      - name: Commit refinements
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'design: refine approved Elisabeth direction'
+          git push origin HEAD:elisabeth-redesign
