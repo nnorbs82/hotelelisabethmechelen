@@ -1,0 +1,61 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true
+  },
+  "bedType_en": "2 Single",
+  "bedType_fr": "2 Single",
+  "bedType_nl": "2 Single",
+  "description_en": "Our ‘standard’ twin room (though it’s hardly standard) is our smallest, yet cleverly designed for comfort. \n\nEnjoy parquet floors, a modern walk-in shower, and all the must-haves: air conditioning, Smart TV, docking station, tea & coffee setup, mini fridge, phone, and free high-speed WiFi. Compact, cosy, and refreshingly practical.",
+  "description_fr": "Notre chambre twin ‘standard’ (même si elle n’a rien de standard) est la plus petite, mais ingénieusement pensée pour votre confort. \n\nProfitez du parquet, d’une douche à l’italienne moderne et de tous les indispensables : climatisation, Smart TV, station d’accueil, plateau thé & café, minibar, téléphone et Wi-Fi haut débit gratuit. Compacte, cosy et pratique.",
+  "description_nl": "Onze ‘standaard’ twin kamer (al is die allesbehalve standaard) is onze kleinste, maar slim ontworpen voor comfort. \n\nGeniet van parketvloeren, een moderne inloopdouche en alle essentials: airconditioning, Smart TV, docking station, thee- en koffiefaciliteiten, minibar, telefoon en gratis snelle WiFi. Compact, gezellig en praktisch.",
+  "maxOccupancy": 2,
+  "name_en": "City Twin",
+  "name_fr": "City Twin",
+  "name_nl": "City Twin",
+  "photos": [
+    {
+      "filename": "room-photos/1769947208490-City_Twin_1_1600w.webp",
+      "order": 0,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947208490-City_Twin_1_1600w.webp?alt=media&token=5fb2c732-c763-4cb0-a779-1925f9faf9be"
+    },
+    {
+      "filename": "room-photos/1769947212387-City_Twin_2_1600w.webp",
+      "order": 1,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947212387-City_Twin_2_1600w.webp?alt=media&token=6d611da2-496d-47bd-b44a-ec1f7128efd1"
+    },
+    {
+      "filename": "room-photos/1769947216362-City_Twin_3_1600w.webp",
+      "order": 2,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947216362-City_Twin_3_1600w.webp?alt=media&token=aa96d0cb-2bd6-4d16-bebd-9d0c7772ebe5"
+    },
+    {
+      "filename": "room-photos/1769947219644-City_Twin_4_1600w.webp",
+      "order": 3,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947219644-City_Twin_4_1600w.webp?alt=media&token=662871de-a393-4dbe-911d-c21271a690e4"
+    }
+  ],
+  "roomSize": 14,
+  "status": "available",
+  "bedType_es": "",
+  "bedType_de": "",
+  "description_es": "",
+  "description_de": "",
+  "name_es": "",
+  "name_de": "",
+  "id": "room_1769535685071",
+  "order": 1,
+  "gallery": [],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083"
+  ]
+}

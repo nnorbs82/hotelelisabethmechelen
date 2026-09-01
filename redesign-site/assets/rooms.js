@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const ROOM_PATH='../redesign/legacy-content/rooms.json';
-  const AMENITY_PATH='../redesign/legacy-content/amenitiesMaster.json';
+  const ROOM_PATH='content/generated/rooms.json';
+  const AMENITY_PATH='content/generated/amenitiesMaster.json';
   const MEWS='https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e';
   const MEWS_LANG={en:'en-GB',nl:'nl-NL',fr:'fr-FR',es:'es-ES',de:'de-DE'};
   const ui={

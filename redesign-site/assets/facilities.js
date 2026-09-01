@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const FACILITIES_PATH = '../redesign/legacy-content/facilities.json';
-  const LIBRARY_PATH = '../redesign/legacy-content/facilitiesLibrary.json';
+  const FACILITIES_PATH = 'content/generated/facilities.json';
+  const LIBRARY_PATH = 'content/generated/facilitiesLibrary.json';
   const text = {
     en:{eyebrow:'Facilities & services',title:'Space to switch off.',intro:'The pool and wellness spaces are part of the stay, not an afterthought. Explore the actual facilities, opening information and guest guidelines below.',explore:'Explore the spaces',operation:'Practical information',guidelines:'Guest guidelines',coming:'Coming soon',pauseEyebrow:'A quieter side of the stay',pauseTitle:'From city pace to pool pace.',pauseBody:'Hotel Elisabeth gives you space to move between Mechelen and a slower moment without leaving the building.'},
     nl:{eyebrow:'Faciliteiten & diensten',title:'Ruimte om uit te schakelen.',intro:'Het zwembad en de wellnessruimtes maken deel uit van uw verblijf. Ontdek hieronder de actuele faciliteiten, openingsinformatie en richtlijnen voor gasten.',explore:'Ontdek de ruimtes',operation:'Praktische informatie',guidelines:'Richtlijnen voor gasten',coming:'Binnenkort',pauseEyebrow:'De rustigere kant van uw verblijf',pauseTitle:'Van stadsritme naar zwembadritme.',pauseBody:'Hotel Elisabeth geeft u de ruimte om van Mechelen naar een rustiger moment te schakelen zonder het gebouw te verlaten.'},

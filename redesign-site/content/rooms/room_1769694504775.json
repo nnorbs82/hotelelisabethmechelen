@@ -1,0 +1,86 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true
+  },
+  "bedType_en": "Double Bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "If you want to get closer to the cathedral, you’ll have to climb it (reception has the details). From this cosy double room, though, a triptych window with pillows invites you to sit, gaze, or finally open that book you’ve been postponing since 2015. \n\nInside: parquet floors, a walk-in shower, cool air-con, Smart TV for your series, tea & coffee for your rituals, mini fridge for treats, docking station, speedy WiFi, and a handy phone.",
+  "description_fr": "Si vous voulez vous rapprocher de la cathédrale, il faudra la gravir (infos à la réception). Dans cette chambre double cosy, la fenêtre triptyque avec coussins vous invite à vous installer, admirer la vue ou enfin ouvrir ce livre que vous repoussez depuis 2015. \n\nÀ l’intérieur : parquet, douche à l’italienne, clim, Smart TV, plateau thé & café, minibar, station d’accueil, Wi-Fi rapide et téléphone pratique.",
+  "description_nl": "Wil je dichter bij de kathedraal komen, dan moet je haar beklimmen (details bij de receptie). In deze gezellige tweepersoonskamer nodigt het driedelige raam met kussens je uit om neer te ploffen, te genieten van het uitzicht of eindelijk dat boek te lezen dat je al sinds 2015 uitstelt. \n\nBinnen: parketvloeren, een inloopdouche, frisse airco, Smart TV, thee- en koffiefaciliteiten, minibar voor lekkers, docking station, snelle WiFi en een handige telefoon.",
+  "maxOccupancy": 2,
+  "name_en": "Cathedral View",
+  "name_fr": "Cathedral View",
+  "name_nl": "Cathedral View",
+  "photos": [
+    {
+      "filename": "room-photos/1786736631228-Cathedral_View_Room_1.webp",
+      "order": 9,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736631228-Cathedral_View_Room_1.webp?alt=media&token=b11835f2-3bcc-4977-9cbd-ef831e2ac9c3"
+    },
+    {
+      "filename": "room-photos/1769947402832-Cathedral_View_2_1600.webp",
+      "order": 1,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947402832-Cathedral_View_2_1600.webp?alt=media&token=b400aeb3-4ef6-48f4-a6c8-29960e0172f6"
+    },
+    {
+      "filename": "room-photos/1786736639346-Cathedral_View_Room_4.webp",
+      "order": 12,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736639346-Cathedral_View_Room_4.webp?alt=media&token=86baa573-c550-4bcc-866c-5befcb631ec6"
+    },
+    {
+      "filename": "room-photos/1769947411979-Cathedral_View_4_1600.webp",
+      "order": 3,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947411979-Cathedral_View_4_1600.webp?alt=media&token=b8335a5b-9490-4505-90ee-4657bb87b2c9"
+    },
+    {
+      "filename": "room-photos/1786736636886-Cathedral_View_Room_3.webp",
+      "order": 11,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736636886-Cathedral_View_Room_3.webp?alt=media&token=ab7c4f69-c7b0-46c4-82ed-e2c5c2dffe6a"
+    },
+    {
+      "filename": "room-photos/1786736634429-Cathedral_View_Room_2.webp",
+      "order": 10,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736634429-Cathedral_View_Room_2.webp?alt=media&token=3020e1b3-bb3e-452a-bf3f-7c6a35fb2bd8"
+    },
+    {
+      "filename": "room-photos/1769947423875-Cathedral_View_7_1600.webp",
+      "order": 6,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947423875-Cathedral_View_7_1600.webp?alt=media&token=0816191f-89bc-4b4c-8410-72011dc4f2fe"
+    },
+    {
+      "filename": "room-photos/1769947427612-Cathedral_View_8_1600.webp",
+      "order": 7,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947427612-Cathedral_View_8_1600.webp?alt=media&token=ead515c9-1358-4ccf-8e92-9bced17e8938"
+    },
+    {
+      "filename": "room-photos/1769947431325-Cathedral_View_9_1600.webp",
+      "order": 8,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947431325-Cathedral_View_9_1600.webp?alt=media&token=4ef70af2-d2c2-42da-97ff-af26c5b7c5e0"
+    }
+  ],
+  "roomSize": 16,
+  "status": "available",
+  "bedType_es": "",
+  "bedType_de": "",
+  "description_es": "",
+  "description_de": "",
+  "name_es": "",
+  "name_de": "",
+  "id": "room_1769694504775",
+  "order": 4,
+  "gallery": [],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083"
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "amenities": {
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true,
+    "amenity_1769533173842": true,
+    "amenity_1769533181895": true
+  },
+  "bedType_en": "Double Bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios, where you have more 'leeway' than in a hotel room. \n\nOur studios are contemporary, furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, kitchenette with all amenities, walk-in shower, sitting area,…",
+  "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. \n\nNos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, kitchenette tout confort, douche à l'italienne, coin salon,…",
+  "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  \n\nOnze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, kitchenette met alle voorzieningen, inloopdouche, zithoek,…",
+  "maxOccupancy": 2,
+  "name_en": "Studio Oud Huys",
+  "name_fr": "Studio Oud Huys",
+  "name_nl": "Studio Oud Huys",
+  "photos": [
+    {
+      "filename": "room-photos/1769947778322-Studio_Oud_Huys_1_1600.webp",
+      "order": 0,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947778322-Studio_Oud_Huys_1_1600.webp?alt=media&token=002236d3-a7e0-421c-b184-aa7c03c09614"
+    },
+    {
+      "filename": "room-photos/1769947781908-Studio_Oud_Huys_2_1600.webp",
+      "order": 1,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947781908-Studio_Oud_Huys_2_1600.webp?alt=media&token=e1c216b0-8597-4281-858c-0b819f380124"
+    },
+    {
+      "filename": "room-photos/1769947786202-Studio_Oud_Huys_3_1600.webp",
+      "order": 2,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947786202-Studio_Oud_Huys_3_1600.webp?alt=media&token=d05ff2cd-cce2-4bda-8b5b-3a3c8771bdfb"
+    },
+    {
+      "filename": "room-photos/1769947790330-Studio_Oud_Huys_4_1600.webp",
+      "order": 3,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947790330-Studio_Oud_Huys_4_1600.webp?alt=media&token=559edf97-efc4-4f92-8133-d4e40413650f"
+    },
+    {
+      "filename": "room-photos/1769947793801-Studio_Oud_Huys_5_1600.webp",
+      "order": 4,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947793801-Studio_Oud_Huys_5_1600.webp?alt=media&token=f7816ca8-4b07-4e16-9e5b-2ed783ed9df2"
+    },
+    {
+      "filename": "room-photos/1769947799660-Studio_Oud_Huys_6_1600.webp",
+      "order": 5,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947799660-Studio_Oud_Huys_6_1600.webp?alt=media&token=af7e86ff-9e1a-468e-a7b7-0e2619508f80"
+    },
+    {
+      "filename": "room-photos/1769947803580-Studio_Oud_Huys_7_1600.webp",
+      "order": 6,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947803580-Studio_Oud_Huys_7_1600.webp?alt=media&token=b1d1ed6d-20b9-425c-83cc-eab05445e7d2"
+    },
+    {
+      "filename": "room-photos/1769947807901-Studio_Oud_Huys_8_1600.webp",
+      "order": 7,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947807901-Studio_Oud_Huys_8_1600.webp?alt=media&token=ec5dee0a-16d3-4739-99aa-9e2d68493e8d"
+    },
+    {
+      "filename": "room-photos/1769947813026-Studio_Oud_Huys_9_1600.webp",
+      "order": 8,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947813026-Studio_Oud_Huys_9_1600.webp?alt=media&token=923c29ad-8527-48b2-ad57-e6236a4bf418"
+    },
+    {
+      "filename": "room-photos/1769947816957-Studio_Oud_Huys_10_1600.webp",
+      "order": 9,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947816957-Studio_Oud_Huys_10_1600.webp?alt=media&token=0012fd8a-7fc5-4907-9c81-58fe45ddfeca"
+    }
+  ],
+  "roomSize": 35,
+  "status": "available",
+  "bedType_es": "",
+  "bedType_de": "",
+  "description_es": "",
+  "description_de": "",
+  "name_es": "",
+  "name_de": "",
+  "id": "room_1769698933721",
+  "order": 10,
+  "gallery": [],
+  "amenityIds": [
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083",
+    "amenity_1769533173842",
+    "amenity_1769533181895"
+  ]
+}

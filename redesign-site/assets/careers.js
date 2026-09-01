@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const PATH='../redesign/legacy-content/careers.json';
+  const PATH='content/generated/careers.json';
   const labels={
     en:{eyebrow:'Careers at Hotel Elisabeth',title:'People make the stay.',intro:'Hospitality is built by people who notice the details. Explore current opportunities or send an open application if you would like to become part of Hotel Elisabeth.',board:'Open positions',none:'No current openings',noneBody:'There are no active vacancies at the moment, but we are always interested in hearing from talented hospitality professionals.',open:'Send an open application',apply:'Apply by email',type:'Employment',department:'Department',location:'Location'},
     nl:{eyebrow:'Werken bij Hotel Elisabeth',title:'Mensen maken het verblijf.',intro:'Gastvrijheid wordt gemaakt door mensen die de details zien. Ontdek onze vacatures of stuur een spontane sollicitatie als je deel wilt uitmaken van Hotel Elisabeth.',board:'Openstaande vacatures',none:'Momenteel geen vacatures',noneBody:'Er zijn momenteel geen actieve vacatures, maar we horen altijd graag van gemotiveerde hospitality-professionals.',open:'Stuur een spontane sollicitatie',apply:'Solliciteer per e-mail',type:'Tewerkstelling',department:'Afdeling',location:'Locatie'},

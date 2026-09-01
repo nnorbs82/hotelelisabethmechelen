@@ -2,10 +2,10 @@
   'use strict';
 
   const paths = {
-    rooms: '../redesign/legacy-content/rooms.json',
-    packages: '../redesign/legacy-content/packages.json',
-    meetings: '../redesign/legacy-content/meetings.json',
-    meetingPhotos: '../redesign/legacy-content/meetingsPhotos.json'
+    rooms: 'content/generated/rooms.json',
+    packages: 'content/generated/packages.json',
+    meetings: 'content/generated/meetings.json',
+    meetingPhotos: 'content/generated/meetingsPhotos.json'
   };
   const cache = {};
 

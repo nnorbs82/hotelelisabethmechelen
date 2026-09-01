@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const PACKAGES_PATH='../redesign/legacy-content/packages.json';
+  const PACKAGES_PATH='content/generated/packages.json';
   const text={
     en:{eyebrow:'Packages & offers',title:'A little more from the stay.',intro:'Hotel Elisabeth packages combine selected room categories with extras designed around the way you want to spend your time in Mechelen.',included:'Included',know:'Good to know',book:'Book this package',none:'There are currently no active packages.',closingEyebrow:'Pick the mood',closingTitle:'One hotel. Different ways to stay.',closingBody:'Choose the package that matches the weekend, celebration or slower escape you have in mind.'},
     nl:{eyebrow:'Arrangementen & aanbiedingen',title:'Net iets meer uit uw verblijf.',intro:'De arrangementen van Hotel Elisabeth combineren geselecteerde kamercategorieën met extra’s die passen bij de manier waarop u uw tijd in Mechelen wilt beleven.',included:'Inbegrepen',know:'Goed om te weten',book:'Boek dit arrangement',none:'Er zijn momenteel geen actieve arrangementen.',closingEyebrow:'Kies de sfeer',closingTitle:'Eén hotel. Verschillende manieren om te verblijven.',closingBody:'Kies het arrangement dat past bij uw weekend, viering of rustige ontsnapping.'},

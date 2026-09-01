@@ -1,0 +1,706 @@
+{
+  "room_1769535685071": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "2 Single",
+    "bedType_fr": "2 Single",
+    "bedType_nl": "2 Single",
+    "description_en": "Our ‘standard’ twin room (though it’s hardly standard) is our smallest, yet cleverly designed for comfort. \n\nEnjoy parquet floors, a modern walk-in shower, and all the must-haves: air conditioning, Smart TV, docking station, tea & coffee setup, mini fridge, phone, and free high-speed WiFi. Compact, cosy, and refreshingly practical.",
+    "description_fr": "Notre chambre twin ‘standard’ (même si elle n’a rien de standard) est la plus petite, mais ingénieusement pensée pour votre confort. \n\nProfitez du parquet, d’une douche à l’italienne moderne et de tous les indispensables : climatisation, Smart TV, station d’accueil, plateau thé & café, minibar, téléphone et Wi-Fi haut débit gratuit. Compacte, cosy et pratique.",
+    "description_nl": "Onze ‘standaard’ twin kamer (al is die allesbehalve standaard) is onze kleinste, maar slim ontworpen voor comfort. \n\nGeniet van parketvloeren, een moderne inloopdouche en alle essentials: airconditioning, Smart TV, docking station, thee- en koffiefaciliteiten, minibar, telefoon en gratis snelle WiFi. Compact, gezellig en praktisch.",
+    "maxOccupancy": 2,
+    "name_en": "City Twin",
+    "name_fr": "City Twin",
+    "name_nl": "City Twin",
+    "photos": [
+      {
+        "filename": "room-photos/1769947208490-City_Twin_1_1600w.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947208490-City_Twin_1_1600w.webp?alt=media&token=5fb2c732-c763-4cb0-a779-1925f9faf9be"
+      },
+      {
+        "filename": "room-photos/1769947212387-City_Twin_2_1600w.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947212387-City_Twin_2_1600w.webp?alt=media&token=6d611da2-496d-47bd-b44a-ec1f7128efd1"
+      },
+      {
+        "filename": "room-photos/1769947216362-City_Twin_3_1600w.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947216362-City_Twin_3_1600w.webp?alt=media&token=aa96d0cb-2bd6-4d16-bebd-9d0c7772ebe5"
+      },
+      {
+        "filename": "room-photos/1769947219644-City_Twin_4_1600w.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947219644-City_Twin_4_1600w.webp?alt=media&token=662871de-a393-4dbe-911d-c21271a690e4"
+      }
+    ],
+    "roomSize": 14,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769694101096": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "Our City Double Room is a stylish retreat designed for comfort in the heart of the city. With a comfortable double bed, parquet floors, and soft lighting, it’s the perfect place to unwind after a busy day. The modern bathroom with a walk-in shower adds a touch of everyday luxury.\n\nFor your convenience, the room includes air conditioning, high-speed Wi-Fi, a flat-screen TV, and tea and coffee facilities. Ideal for couples or solo travellers, it’s a cosy space where comfort meets convenience.",
+    "description_fr": "Notre Chambre Double City est un espace élégant, conçu pour votre confort au cœur de la ville. Avec un lit double confortable, un parquet chaleureux et un éclairage doux, c’est l’endroit idéal pour se détendre après une journée bien remplie. La salle de bains moderne avec douche à l’italienne ajoute une touche de luxe.\n\nPour votre confort, la chambre comprend la climatisation, le Wi-Fi haut débit, une télévision à écran plat et des installations pour le thé et le café. Idéale pour les couples ou les voyageurs en solo, c’est un cocon où confort et praticité se rencontrent.",
+    "description_nl": "Onze City Double Room is een stijlvolle kamer, ontworpen voor comfort in het hart van de stad. Met een comfortabel tweepersoonsbed, parketvloeren en sfeervolle verlichting is het de ideale plek om te ontspannen na een drukke dag. De moderne badkamer met inloopdouche voegt een vleugje luxe toe.\n\nVoor uw gemak beschikt de kamer over airconditioning, snelle wifi, een flatscreen-tv en koffie- en theefaciliteiten. Ideaal voor koppels of soloreizigers: een knusse ruimte waar comfort en gemak samenkomen.",
+    "maxOccupancy": 2,
+    "name_en": "City Double",
+    "name_fr": "City Double",
+    "name_nl": "City Double",
+    "photos": [
+      {
+        "filename": "room-photos/1786735785715-City_Double_1.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735785715-City_Double_1.webp?alt=media&token=af711ed2-7d71-485e-8f84-8cf950f338d0"
+      },
+      {
+        "filename": "room-photos/1769947241776-City_Double_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947241776-City_Double_1_1600.webp?alt=media&token=600e208d-b1ed-4b9f-8a3d-15595f491b31"
+      },
+      {
+        "filename": "room-photos/1786735789146-City_Double_3.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735789146-City_Double_3.webp?alt=media&token=91fef179-aa0f-4847-b6ea-5e5816b3f310"
+      },
+      {
+        "filename": "room-photos/1769947256936-City_Double_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947256936-City_Double_5_1600.webp?alt=media&token=2450e7f1-d404-4f54-a394-a88b17323f9d"
+      },
+      {
+        "filename": "room-photos/1786735787614-City_Double_2.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735787614-City_Double_2.webp?alt=media&token=062dd2fd-b8ff-49ee-bfc3-10d9a8214632"
+      },
+      {
+        "filename": "room-photos/1769947261351-City_Double_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947261351-City_Double_6_1600.webp?alt=media&token=4b36179f-d764-4dfa-a702-1ae18c72d7ab"
+      }
+    ],
+    "roomSize": 14,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769694303821": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "A calm and comfortable double room located on the quieter garden side of Hotel Elisabeth. Enjoy a more relaxed setting with a pleasant outlook towards the hotel’s inner garden area - and you might even spot our much-loved olive trees, no flight to Spain required.\n\nInside, parquet floors and a stylish walk-in shower set the tone, while air conditioning, Smart TV, tea & coffee setup, mini fridge, docking station, free WiFi, and a direct line phone make your stay effortless.",
+    "description_fr": "Une chambre double calme et confortable, située du côté jardin plus paisible de l’Hotel Elisabeth. Profitez d’une atmosphère plus détendue avec une agréable vue sur le jardin intérieur de l’hôtel - et vous apercevrez peut-être même nos chers oliviers, sans devoir prendre l’avion pour l’Espagne.\n\nÀ l’intérieur, le parquet et l’élégante douche à l’italienne donnent le ton, tandis que la climatisation, la Smart TV, le nécessaire à thé et café, le mini-réfrigérateur, la station d’accueil, le Wi-Fi gratuit et le téléphone direct rendent votre séjour tout simplement confortable.",
+    "description_nl": "Een rustige en comfortabele tweepersoonskamer aan de stillere tuinzijde van Hotel Elisabeth. Geniet van een ontspannen sfeer met een aangenaam uitzicht op de binnentuin van het hotel - en misschien spot u zelfs onze geliefde olijfbomen, zonder dat u daarvoor naar Spanje hoeft te vliegen.\n\nBinnen zorgen parketvloeren en een stijlvolle inloopdouche voor de juiste sfeer, terwijl airconditioning, Smart TV, thee- en koffiefaciliteiten, minikoelkast, docking station, gratis wifi en een directe telefoonlijn uw verblijf moeiteloos comfortabel maken.",
+    "maxOccupancy": 2,
+    "name_en": "Garden Comfort",
+    "name_fr": "Garden Comfort",
+    "name_nl": "Garden Comfort",
+    "photos": [
+      {
+        "filename": "room-photos/1786738228157-Garden_Comfort_5.webp",
+        "order": 13,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738228157-Garden_Comfort_5.webp?alt=media&token=ad9a4492-e17c-4395-80ac-9aa2f97b8004"
+      },
+      {
+        "filename": "room-photos/1786738225849-Garden_Comfort_4.webp",
+        "order": 12,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738225849-Garden_Comfort_4.webp?alt=media&token=01bdcc89-4002-4db4-922d-e9a623e8cae6"
+      },
+      {
+        "filename": "room-photos/1786738223258-Garden_Comfort_3.webp",
+        "order": 11,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738223258-Garden_Comfort_3.webp?alt=media&token=6cf0f709-9338-4635-8f50-a6175758b7c5"
+      },
+      {
+        "filename": "room-photos/1786738220922-Garden_Comfort_2.webp",
+        "order": 10,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738220922-Garden_Comfort_2.webp?alt=media&token=f06e51cc-f68f-47db-a1b0-37f36d8eeb3e"
+      },
+      {
+        "filename": "room-photos/1769947343842-Olive_Tree_View_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947343842-Olive_Tree_View_5_1600.webp?alt=media&token=744543d2-a0c3-4895-99ab-3806f400f9e1"
+      },
+      {
+        "filename": "room-photos/1769947348031-Olive_Tree_View_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947348031-Olive_Tree_View_6_1600.webp?alt=media&token=7ee6745b-21fb-4a75-af9b-b74020f1b986"
+      },
+      {
+        "filename": "room-photos/1786738218973-Garden_Comfort_1.webp",
+        "order": 9,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738218973-Garden_Comfort_1.webp?alt=media&token=3a8a11b4-8721-41fe-ab0b-47f085809e71"
+      },
+      {
+        "filename": "room-photos/1769947368704-Olive_Tree_View_8_1600.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947368704-Olive_Tree_View_8_1600.webp?alt=media&token=d8742d58-6498-4c44-a897-3165e0eb4bcd"
+      },
+      {
+        "filename": "room-photos/1769947373935-Olive_Tree_View_9_1600.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947373935-Olive_Tree_View_9_1600.webp?alt=media&token=e98c2e5f-5d53-4181-be9f-a00604e1b4dc"
+      }
+    ],
+    "roomSize": 16,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769694504775": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you want to get closer to the cathedral, you’ll have to climb it (reception has the details). From this cosy double room, though, a triptych window with pillows invites you to sit, gaze, or finally open that book you’ve been postponing since 2015. \n\nInside: parquet floors, a walk-in shower, cool air-con, Smart TV for your series, tea & coffee for your rituals, mini fridge for treats, docking station, speedy WiFi, and a handy phone.",
+    "description_fr": "Si vous voulez vous rapprocher de la cathédrale, il faudra la gravir (infos à la réception). Dans cette chambre double cosy, la fenêtre triptyque avec coussins vous invite à vous installer, admirer la vue ou enfin ouvrir ce livre que vous repoussez depuis 2015. \n\nÀ l’intérieur : parquet, douche à l’italienne, clim, Smart TV, plateau thé & café, minibar, station d’accueil, Wi-Fi rapide et téléphone pratique.",
+    "description_nl": "Wil je dichter bij de kathedraal komen, dan moet je haar beklimmen (details bij de receptie). In deze gezellige tweepersoonskamer nodigt het driedelige raam met kussens je uit om neer te ploffen, te genieten van het uitzicht of eindelijk dat boek te lezen dat je al sinds 2015 uitstelt. \n\nBinnen: parketvloeren, een inloopdouche, frisse airco, Smart TV, thee- en koffiefaciliteiten, minibar voor lekkers, docking station, snelle WiFi en een handige telefoon.",
+    "maxOccupancy": 2,
+    "name_en": "Cathedral View",
+    "name_fr": "Cathedral View",
+    "name_nl": "Cathedral View",
+    "photos": [
+      {
+        "filename": "room-photos/1786736631228-Cathedral_View_Room_1.webp",
+        "order": 9,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736631228-Cathedral_View_Room_1.webp?alt=media&token=b11835f2-3bcc-4977-9cbd-ef831e2ac9c3"
+      },
+      {
+        "filename": "room-photos/1769947402832-Cathedral_View_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947402832-Cathedral_View_2_1600.webp?alt=media&token=b400aeb3-4ef6-48f4-a6c8-29960e0172f6"
+      },
+      {
+        "filename": "room-photos/1786736639346-Cathedral_View_Room_4.webp",
+        "order": 12,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736639346-Cathedral_View_Room_4.webp?alt=media&token=86baa573-c550-4bcc-866c-5befcb631ec6"
+      },
+      {
+        "filename": "room-photos/1769947411979-Cathedral_View_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947411979-Cathedral_View_4_1600.webp?alt=media&token=b8335a5b-9490-4505-90ee-4657bb87b2c9"
+      },
+      {
+        "filename": "room-photos/1786736636886-Cathedral_View_Room_3.webp",
+        "order": 11,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736636886-Cathedral_View_Room_3.webp?alt=media&token=ab7c4f69-c7b0-46c4-82ed-e2c5c2dffe6a"
+      },
+      {
+        "filename": "room-photos/1786736634429-Cathedral_View_Room_2.webp",
+        "order": 10,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736634429-Cathedral_View_Room_2.webp?alt=media&token=3020e1b3-bb3e-452a-bf3f-7c6a35fb2bd8"
+      },
+      {
+        "filename": "room-photos/1769947423875-Cathedral_View_7_1600.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947423875-Cathedral_View_7_1600.webp?alt=media&token=0816191f-89bc-4b4c-8410-72011dc4f2fe"
+      },
+      {
+        "filename": "room-photos/1769947427612-Cathedral_View_8_1600.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947427612-Cathedral_View_8_1600.webp?alt=media&token=ead515c9-1358-4ccf-8e92-9bced17e8938"
+      },
+      {
+        "filename": "room-photos/1769947431325-Cathedral_View_9_1600.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947431325-Cathedral_View_9_1600.webp?alt=media&token=4ef70af2-d2c2-42da-97ff-af26c5b7c5e0"
+      }
+    ],
+    "roomSize": 16,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769694664538": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "3 Single beds",
+    "bedType_fr": "3 Lits simples",
+    "bedType_nl": "3 Eenpersoonsbedden",
+    "description_en": "It takes two to tango, but three to enjoy our triple room. Here, three single beds await: two side by side in one space and one tucked in an adjoining nook (yes, that makes three). \n\nParquet floors and a roomy walk-in shower add style, while air-con keeps you cool, the Smart TV entertains, tea & coffee keep you fueled, the mini fridge chills your snacks, plus docking station, speedy WiFi, and a phone keep you connected.",
+    "description_fr": "Il faut être deux pour danser le tango, mais trois pour profiter de notre chambre triple. Trois lits simples vous attendent : deux côte à côte dans un espace et un dans un coin attenant (oui, ça fait bien trois). \n\nParquet élégant et douche à l’italienne spacieuse ajoutent du style, tandis que la clim vous rafraîchit, la Smart TV divertit, thé & café réveillent, le minibar garde vos encas au frais, et station d’accueil, Wi-Fi rapide et téléphone vous gardent connectés.",
+    "description_nl": "Twee is voor de tango, drie voor onze triple kamer. Hier wachten drie eenpersoonsbedden: twee naast elkaar in één ruimte en één in een aangrenzende hoek (ja, dat maakt er drie). \n\nParketvloeren en een ruime inloopdouche zorgen voor stijl, terwijl airco je koel houdt, de Smart TV vermaakt, thee & koffie je energie geven, de minibar snacks koelt, en docking station, snelle WiFi en telefoon je verbonden houden.",
+    "maxOccupancy": 3,
+    "name_en": "City Triple",
+    "name_fr": "City Triple",
+    "name_nl": "City Triple",
+    "photos": [
+      {
+        "filename": "room-photos/1769947456429-City_Triple_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947456429-City_Triple_1_1600.webp?alt=media&token=fdd71411-9106-494d-8166-abf56198ac92"
+      },
+      {
+        "filename": "room-photos/1769947460643-City_Triple_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947460643-City_Triple_2_1600.webp?alt=media&token=458a0c50-a3b5-4ed4-8fd7-d249320b8048"
+      },
+      {
+        "filename": "room-photos/1769947465172-City_Triple_3_1600.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947465172-City_Triple_3_1600.webp?alt=media&token=a065be74-1b2a-4c21-a287-652fad5349cd"
+      },
+      {
+        "filename": "room-photos/1769947469836-City_Triple_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947469836-City_Triple_4_1600.webp?alt=media&token=7a3f3fe5-78c6-405e-aade-0f8e3d597f76"
+      },
+      {
+        "filename": "room-photos/1769947477935-City_Triple_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947477935-City_Triple_5_1600.webp?alt=media&token=bf959d91-e567-42fa-a565-0a37835329e0"
+      },
+      {
+        "filename": "room-photos/1769947483164-City_Triple_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947483164-City_Triple_6_1600.webp?alt=media&token=2457c881-35d5-4a39-902a-d743a901cdbd"
+      }
+    ],
+    "roomSize": 24,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769694904451": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "This double bedroom is the grown-up version of our City Twin (because sometimes you just need more space). \n\nFeel like dancing? Go ahead—there’s room for that too! With parquet floors, a sleek walk-in shower, refreshing air-con, a Smart TV for movie nights, tea & coffee to keep you going, a mini fridge for midnight snacks, plus a docking station, speedy WiFi, and a handy phone, comfort comes standard.",
+    "description_fr": "Cette chambre double est la grande sœur de notre City Twin (parfois, on a simplement besoin de plus d’espace). \n\nEnvie de danser ? Allez-y – il y a la place ! Avec parquet élégant, douche à l’italienne moderne, clim rafraîchissante, Smart TV pour vos soirées films, plateau thé & café, minibar pour vos envies nocturnes, ainsi que station d’accueil, Wi-Fi rapide et téléphone pratique, le confort est garanti.",
+    "description_nl": "Deze tweepersoonskamer is de grotere versie van onze City Twin (soms heb je gewoon wat extra ruimte nodig). \n\nZin om te dansen? Ga je gang – er is plek genoeg! Met parketvloeren, een stijlvolle inloopdouche, verfrissende airco, een Smart TV voor filmavonden, thee & koffie bij de hand, een minibar voor middernachtsnacks, plus docking station, snelle WiFi en een handige telefoon is comfort gegarandeerd.",
+    "maxOccupancy": 2,
+    "name_en": "City Comfort",
+    "name_fr": "City Comfort",
+    "name_nl": "City Comfort",
+    "photos": [
+      {
+        "filename": "room-photos/1769947504053-City_Comfort_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947504053-City_Comfort_1_1600.webp?alt=media&token=1baf5ee0-f1d4-47c7-84a0-a419dd80e56d"
+      },
+      {
+        "filename": "room-photos/1769947508226-City_Comfort_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947508226-City_Comfort_2_1600.webp?alt=media&token=8c827008-2f0c-45d2-b15b-acb8e2e80d39"
+      },
+      {
+        "filename": "room-photos/1769947511896-City_Comfort_3_1600.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947511896-City_Comfort_3_1600.webp?alt=media&token=37e2e69e-9c58-4995-9104-c73dbeefabbc"
+      },
+      {
+        "filename": "room-photos/1769947515686-City_Comfort_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947515686-City_Comfort_4_1600.webp?alt=media&token=f6b41bd4-6fd8-4eb4-b298-087089737fe2"
+      },
+      {
+        "filename": "room-photos/1769947519591-City_Comfort_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947519591-City_Comfort_5_1600.webp?alt=media&token=9c5f0492-62ce-45fa-8395-c6744aa0cb30"
+      },
+      {
+        "filename": "room-photos/1769947523567-City_Comfort_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947523567-City_Comfort_6_1600.webp?alt=media&token=a3a38260-9d1c-46c9-af4d-cdae6a9a9ab1"
+      }
+    ],
+    "roomSize": 18,
+    "status": "offline",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769697992814": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true,
+      "amenity_1769533188437": true
+    },
+    "bedType_en": "Double Bed + Sofa Bed",
+    "bedType_fr": "Lit double + canapé-lit",
+    "bedType_nl": "Tweepersoonsbed + slaapbank",
+    "description_en": "Eager to sleep in style with the cathedral in sight? Our Cathedral Suite offers two separate spaces, a comfy double bed, a 2-person sofa bed, a cozy sitting corner, and a handy kitchenette.\n\nAdd parquet floors and a bathtub made for relaxing, plus air-con, Smart TV, tea & coffee facilities, mini fridge, docking station, fast WiFi, lounge area, and phone - and you’ve got comfort at every corner.\n\nAdditional note:\n\nThe standard rate includes accommodation for 2 guests using the main double bed. Should 2 guests wish to use the sofa bed as well, this can be arranged for an additional €40 per night. To ensure everything is ready for your stay, requests must be submitted at least 1 night prior to the check-in date.\n\nFor your comfort and flexibility, fresh bedding for the sofa bed will be placed in the suite upon arrival, allowing guests to set up the sofa bed whenever they are ready to call it a night.\n\nFor bookings of 3 to 4 guests, the use of the sofa bed and the corresponding bedding are already included in the rate.",
+    "description_fr": "Envie de dormir avec style tout en profitant de la vue sur la cathédrale ? Notre Cathedral Suite dispose de deux espaces séparés, d’un confortable lit double, d’un canapé-lit pour 2 personnes, d’un coin salon chaleureux et d’une kitchenette pratique.\n\nAjoutez à cela un parquet élégant et une baignoire idéale pour se détendre, ainsi que la climatisation, une Smart TV, un coin thé et café, un mini-frigo, une station d’accueil, le WiFi rapide, un espace lounge et un téléphone - et vous profiterez d’un confort à chaque instant.\n\nNote complémentaire :\n\nLe tarif standard comprend l’hébergement pour 2 personnes utilisant le lit double principal. Si 2 personnes souhaitent également utiliser le canapé-lit, cela peut être organisé moyennant un supplément de 40 € par nuit. Afin de préparer votre séjour dans les meilleures conditions, nous vous demandons de bien vouloir soumettre votre demande au moins 1 nuit avant la date d’arrivée.\n\nPour votre confort et votre flexibilité, le linge de lit pour le canapé-lit sera déposé dans la suite à votre arrivée, permettant ainsi aux invités d’installer le canapé-lit à leur convenance lorsqu’ils seront prêts à terminer la soirée.\n\nPour les réservations de 3 à 4 personnes, l’utilisation du canapé-lit ainsi que le linge de lit correspondant sont déjà inclus dans le tarif.",
+    "description_nl": "Zin om stijlvol te overnachten met zicht op de kathedraal? Onze Cathedral Suite beschikt over twee aparte ruimtes, een comfortabel tweepersoonsbed, een 2-persoons slaapbank, een gezellige zithoek en een handige kitchenette.\n\nVoeg daar parketvloeren en een ontspannend ligbad aan toe, samen met airconditioning, Smart TV, koffie- en theefaciliteiten, minibar, docking station, snelle WiFi, loungehoek en telefoon - en u geniet van comfort in elke hoek.\n\nExtra informatie:\n\nHet standaardtarief omvat verblijf voor 2 gasten met gebruik van het tweepersoonsbed. Indien 2 gasten ook gebruik wensen te maken van de slaapbank, kan dit geregeld worden voor een extra kost van €40 per nacht. Om alles tijdig voor uw verblijf te voorzien, vragen wij vriendelijk om dit minstens 1 nacht vóór de check-indatum door te geven.\n\nVoor extra comfort en flexibiliteit wordt het beddengoed voor de slaapbank bij aankomst in de suite voorzien, zodat gasten de slaapbank eenvoudig zelf kunnen opmaken wanneer zij klaar zijn om de nacht af te sluiten.\n\nVoor reservaties van 3 tot 4 gasten zijn het gebruik van de slaapbank en het bijhorende beddengoed reeds inbegrepen in het tarief.",
+    "maxOccupancy": 4,
+    "name_en": "Cathedral Suite",
+    "name_fr": "Cathedral Suite",
+    "name_nl": "Cathedral Suite",
+    "photos": [
+      {
+        "filename": "room-photos/1786741115651-Cathedral_Suite_6.webp",
+        "order": 14,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741115651-Cathedral_Suite_6.webp?alt=media&token=b290d798-1cf5-4e4b-8826-4cad79758c57"
+      },
+      {
+        "filename": "room-photos/1786741113908-Cathedral_Suite_5.webp",
+        "order": 13,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741113908-Cathedral_Suite_5.webp?alt=media&token=a0e83a12-d8d6-41fa-a4f1-46d9fe8c7eb8"
+      },
+      {
+        "filename": "room-photos/1786741112568-Cathedral_Suite_4.webp",
+        "order": 12,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741112568-Cathedral_Suite_4.webp?alt=media&token=18e51410-67d9-4ec8-ab93-a3170ef22d0d"
+      },
+      {
+        "filename": "room-photos/1786741111160-Cathedral_Suite_3.webp",
+        "order": 11,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741111160-Cathedral_Suite_3.webp?alt=media&token=da53d323-7ba2-40af-a74a-0095b5c3f2e7"
+      },
+      {
+        "filename": "room-photos/1769947574249-Cathedral_Suite_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947574249-Cathedral_Suite_5_1600.webp?alt=media&token=b4f131a4-ea56-4381-87dc-299620966703"
+      },
+      {
+        "filename": "room-photos/1786741109687-Cathedral_Suite_2.webp",
+        "order": 10,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741109687-Cathedral_Suite_2.webp?alt=media&token=8ef4bf2e-d0e9-4176-b15b-988a9cb70206"
+      },
+      {
+        "filename": "room-photos/1786741108285-Cathedral_Suite_1.webp",
+        "order": 9,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741108285-Cathedral_Suite_1.webp?alt=media&token=72a6209a-296c-471f-8d85-3cad3bc58bee"
+      },
+      {
+        "filename": "room-photos/1786741117374-Cathedral_Suite_7.webp",
+        "order": 15,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741117374-Cathedral_Suite_7.webp?alt=media&token=d302180d-f77c-40de-b21e-64ca04841976"
+      },
+      {
+        "filename": "room-photos/1786741119199-Cathedral_Suite_8.webp",
+        "order": 16,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741119199-Cathedral_Suite_8.webp?alt=media&token=adbdaadb-bcfa-4f36-8bad-8e712942fcc6"
+      },
+      {
+        "filename": "room-photos/1769947603716-Cathedral_Suite_9_1600.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947603716-Cathedral_Suite_9_1600.webp?alt=media&token=7cc4cd2c-12d1-4df5-8cba-066176f7e167"
+      },
+      {
+        "filename": "room-photos/1769947583904-Cathedral_Suite_7_1600.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947583904-Cathedral_Suite_7_1600.webp?alt=media&token=cd957a0b-7880-47d5-aa92-b9c558093e69"
+      }
+    ],
+    "roomSize": 40,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769698293173": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true,
+      "amenity_1769533188437": true
+    },
+    "bedType_en": "Double Bed + Sofa Bed",
+    "bedType_fr": "Lit double + canapé-lit",
+    "bedType_nl": "Tweepersoonsbed + slaapbank",
+    "description_en": "You have style, you have class, you want enough space for your elegance - and perhaps spend the evening in a cosy sitting corner after cooking something in the kitchenette that would make Gordon Ramsay jealous?\n\nWell, welcome to the City Suite! Enjoy 3 separate spaces with a split-level layout, a comfortable double bed, a 2-person sofa bed, a cosy sitting corner, and a handy kitchenette.\n\nAdditional note:\n\nThe standard rate includes accommodation for 2 guests using the main double bed. Should 2 guests wish to use the sofa bed as well, this can be arranged for an additional €40 per night. To ensure everything is ready for your stay, requests must be submitted at least 1 night prior to the check-in date.\n\nFor your comfort and flexibility, fresh bedding for the sofa bed will be placed in the suite upon arrival, allowing guests to set up the sofa bed whenever they are ready to call it a night.\n\nFor bookings of 3 to 4 guests, the use of the sofa bed and the corresponding bedding are already included in the rate.",
+    "description_fr": "Vous avez du style, vous avez de la classe, vous aimez avoir suffisamment d’espace pour votre élégance - et peut-être passer la soirée dans un coin salon chaleureux après avoir préparé quelque chose dans la kitchenette qui rendrait Gordon Ramsay jaloux ?\n\nAlors, bienvenue dans la City Suite ! Profitez de 3 espaces séparés avec une disposition en duplex, un confortable lit double, un canapé-lit pour 2 personnes, un coin salon cosy et une kitchenette pratique.\n\nNote complémentaire :\n\nLe tarif standard comprend l’hébergement pour 2 personnes utilisant le lit double principal. Si 2 personnes souhaitent également utiliser le canapé-lit, cela peut être organisé moyennant un supplément de 40 € par nuit. Afin de préparer votre séjour dans les meilleures conditions, nous vous demandons de bien vouloir soumettre votre demande au moins 1 nuit avant la date d’arrivée.\n\nPour votre confort et votre flexibilité, le linge de lit pour le canapé-lit sera déposé dans la suite à votre arrivée, permettant ainsi aux invités d’installer le canapé-lit à leur convenance lorsqu’ils seront prêts à terminer la soirée.\n\nPour les réservations de 3 à 4 personnes, l’utilisation du canapé-lit ainsi que le linge de lit correspondant sont déjà inclus dans le tarif.",
+    "description_nl": "U heeft stijl, u heeft klasse, u wilt voldoende ruimte voor uw elegantie - en misschien wilt u de avond doorbrengen in een gezellige zithoek nadat u iets heeft klaargemaakt in de kitchenette waar zelfs Gordon Ramsay jaloers op zou zijn?\n\nWel, welkom in de City Suite! Geniet van 3 aparte ruimtes met een split-level indeling, een comfortabel tweepersoonsbed, een 2-persoons slaapbank, een gezellige zithoek en een handige kitchenette.\n\nExtra informatie:\n\nHet standaardtarief omvat verblijf voor 2 gasten met gebruik van het tweepersoonsbed. Indien 2 gasten ook gebruik wensen te maken van de slaapbank, kan dit geregeld worden voor een extra kost van €40 per nacht. Om alles tijdig voor uw verblijf te voorzien, vragen wij vriendelijk om dit minstens 1 nacht vóór de check-indatum door te geven.\n\nVoor extra comfort en flexibiliteit wordt het beddengoed voor de slaapbank bij aankomst in de suite voorzien, zodat gasten de slaapbank eenvoudig zelf kunnen opmaken wanneer zij klaar zijn om de nacht af te sluiten.\n\nVoor reservaties van 3 tot 4 gasten zijn het gebruik van de slaapbank en het bijhorende beddengoed reeds inbegrepen in het tarief.",
+    "maxOccupancy": 14,
+    "name_en": "City Suite",
+    "name_fr": "City Suite",
+    "name_nl": "City Suite",
+    "photos": [
+      {
+        "filename": "room-photos/1769947645298-City_Suite_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947645298-City_Suite_1_1600.webp?alt=media&token=163d52de-2bc8-4819-bb65-7bcf9adf6713"
+      },
+      {
+        "filename": "room-photos/1769947648929-City_Suite_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947648929-City_Suite_2_1600.webp?alt=media&token=42f2549e-3af2-4ad4-b03c-38b1db53b03c"
+      },
+      {
+        "filename": "room-photos/1769947652796-City_Suite_3_1600.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947652796-City_Suite_3_1600.webp?alt=media&token=de2ee086-8d61-4c65-ae1a-6704834d5712"
+      },
+      {
+        "filename": "room-photos/1769947657834-City_Suite_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947657834-City_Suite_4_1600.webp?alt=media&token=49634bb9-855a-43fd-b310-a1e56a4fd8a9"
+      },
+      {
+        "filename": "room-photos/1769947661689-City_Suite_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947661689-City_Suite_5_1600.webp?alt=media&token=f6617801-770e-4b1c-b91e-54fec8bd700c"
+      },
+      {
+        "filename": "room-photos/1769947666112-City_Suite_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947666112-City_Suite_6_1600.webp?alt=media&token=a6ab2b30-54a2-4717-a0e9-a52284bb77cc"
+      },
+      {
+        "filename": "room-photos/1769947670687-City_Suite_7_1600.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947670687-City_Suite_7_1600.webp?alt=media&token=8d86e663-b46b-4a72-aec0-194eb3911393"
+      },
+      {
+        "filename": "room-photos/1769947675291-City_Suite_8_1600.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947675291-City_Suite_8_1600.webp?alt=media&token=c0699d7a-690a-4174-92aa-09b32e31bfc6"
+      },
+      {
+        "filename": "room-photos/1769947680947-City_Suite_9_1600.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947680947-City_Suite_9_1600.webp?alt=media&token=04f6bea9-3e92-4ef0-a273-1937dc1f8a4a"
+      },
+      {
+        "filename": "room-photos/1769947684753-City_Suite_10_1600.webp",
+        "order": 9,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947684753-City_Suite_10_1600.webp?alt=media&token=e16a3fc8-cb3e-4fef-baee-8182d745bb96"
+      }
+    ],
+    "roomSize": 30,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769698611080": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios where you have more 'leeway' than in a hotel room. Our studios are contemporary furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, air conditioning, kitchenette with all amenities, walk-in shower, sitting area,…\n\nPlease keep in mind that some studios have a separate bedroom and seating area while others have an open space concept, the allocation of the rooms depends on availability on the day of arrival/check-in.",
+    "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. Nos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, climatisation, kitchenette tout confort, douche à l'italienne, coin salon,…\n\nVeuillez noter que certains studios disposent d'une chambre et d'un coin salon séparés tandis que d'autres ont un concept d'espace ouvert. L'attribution des chambres dépend de la disponibilité le jour de l'arrivée/de l'enregistrement.",
+    "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  Onze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, airco, kitchenette met alle voorzieningen, inloopdouche, zithoek,…\n\nSommige studio’s zijn ingericht met een aparte slaapkamer en zithoek, terwijl andere een open-spaceconcept hebben. De toewijzing van het type studio is afhankelijk van de beschikbaarheid op de dag van aankomst/inchecken",
+    "maxOccupancy": 2,
+    "name_en": "Studio Elisabeth",
+    "name_fr": "Studio Elisabeth",
+    "name_nl": "Studio Elisabeth",
+    "photos": [
+      {
+        "filename": "room-photos/1769947725780-Studio_Elisabeth_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947725780-Studio_Elisabeth_1_1600.webp?alt=media&token=5dbe4957-a232-45da-a06a-f886b35289d9"
+      },
+      {
+        "filename": "room-photos/1769947729473-Studio_Elisabeth_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947729473-Studio_Elisabeth_2_1600.webp?alt=media&token=9d5b3ce5-f1ee-431a-b18f-2b441c041592"
+      },
+      {
+        "filename": "room-photos/1769947734122-Studio_Elisabeth_3_1600.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947734122-Studio_Elisabeth_3_1600.webp?alt=media&token=a3a1d1a9-9198-4d5f-b241-14efd75ba338"
+      },
+      {
+        "filename": "room-photos/1769947738328-Studio_Elisabeth_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947738328-Studio_Elisabeth_4_1600.webp?alt=media&token=1112e989-0c79-447e-b750-1875d4a854f3"
+      },
+      {
+        "filename": "room-photos/1769947742792-Studio_Elisabeth_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947742792-Studio_Elisabeth_5_1600.webp?alt=media&token=85df86e0-8493-41cf-9499-b02ae699c1ea"
+      },
+      {
+        "filename": "room-photos/1769947747383-Studio_Elisabeth_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947747383-Studio_Elisabeth_6_1600.webp?alt=media&token=114be682-d09b-4bc4-bd88-39d674ad45b0"
+      },
+      {
+        "filename": "room-photos/1769947751805-Studio_Elisabeth_7_1600.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947751805-Studio_Elisabeth_7_1600.webp?alt=media&token=996e2b95-0f4a-421f-8740-d6759f8d4ef9"
+      },
+      {
+        "filename": "room-photos/1769947755394-Studio_Elisabeth_8_1600.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947755394-Studio_Elisabeth_8_1600.webp?alt=media&token=faabff70-f41b-4071-9ea6-6294327a2524"
+      }
+    ],
+    "roomSize": 40,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  },
+  "room_1769698933721": {
+    "amenities": {
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios, where you have more 'leeway' than in a hotel room. \n\nOur studios are contemporary, furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, kitchenette with all amenities, walk-in shower, sitting area,…",
+    "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. \n\nNos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, kitchenette tout confort, douche à l'italienne, coin salon,…",
+    "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  \n\nOnze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, kitchenette met alle voorzieningen, inloopdouche, zithoek,…",
+    "maxOccupancy": 2,
+    "name_en": "Studio Oud Huys",
+    "name_fr": "Studio Oud Huys",
+    "name_nl": "Studio Oud Huys",
+    "photos": [
+      {
+        "filename": "room-photos/1769947778322-Studio_Oud_Huys_1_1600.webp",
+        "order": 0,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947778322-Studio_Oud_Huys_1_1600.webp?alt=media&token=002236d3-a7e0-421c-b184-aa7c03c09614"
+      },
+      {
+        "filename": "room-photos/1769947781908-Studio_Oud_Huys_2_1600.webp",
+        "order": 1,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947781908-Studio_Oud_Huys_2_1600.webp?alt=media&token=e1c216b0-8597-4281-858c-0b819f380124"
+      },
+      {
+        "filename": "room-photos/1769947786202-Studio_Oud_Huys_3_1600.webp",
+        "order": 2,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947786202-Studio_Oud_Huys_3_1600.webp?alt=media&token=d05ff2cd-cce2-4bda-8b5b-3a3c8771bdfb"
+      },
+      {
+        "filename": "room-photos/1769947790330-Studio_Oud_Huys_4_1600.webp",
+        "order": 3,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947790330-Studio_Oud_Huys_4_1600.webp?alt=media&token=559edf97-efc4-4f92-8133-d4e40413650f"
+      },
+      {
+        "filename": "room-photos/1769947793801-Studio_Oud_Huys_5_1600.webp",
+        "order": 4,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947793801-Studio_Oud_Huys_5_1600.webp?alt=media&token=f7816ca8-4b07-4e16-9e5b-2ed783ed9df2"
+      },
+      {
+        "filename": "room-photos/1769947799660-Studio_Oud_Huys_6_1600.webp",
+        "order": 5,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947799660-Studio_Oud_Huys_6_1600.webp?alt=media&token=af7e86ff-9e1a-468e-a7b7-0e2619508f80"
+      },
+      {
+        "filename": "room-photos/1769947803580-Studio_Oud_Huys_7_1600.webp",
+        "order": 6,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947803580-Studio_Oud_Huys_7_1600.webp?alt=media&token=b1d1ed6d-20b9-425c-83cc-eab05445e7d2"
+      },
+      {
+        "filename": "room-photos/1769947807901-Studio_Oud_Huys_8_1600.webp",
+        "order": 7,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947807901-Studio_Oud_Huys_8_1600.webp?alt=media&token=ec5dee0a-16d3-4739-99aa-9e2d68493e8d"
+      },
+      {
+        "filename": "room-photos/1769947813026-Studio_Oud_Huys_9_1600.webp",
+        "order": 8,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947813026-Studio_Oud_Huys_9_1600.webp?alt=media&token=923c29ad-8527-48b2-ad57-e6236a4bf418"
+      },
+      {
+        "filename": "room-photos/1769947816957-Studio_Oud_Huys_10_1600.webp",
+        "order": 9,
+        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947816957-Studio_Oud_Huys_10_1600.webp?alt=media&token=0012fd8a-7fc5-4907-9c81-58fe45ddfeca"
+      }
+    ],
+    "roomSize": 35,
+    "status": "available",
+    "bedType_es": "",
+    "bedType_de": "",
+    "description_es": "",
+    "description_de": "",
+    "name_es": "",
+    "name_de": ""
+  }
+}

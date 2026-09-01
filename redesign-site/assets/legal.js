@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const page=document.body.dataset.legalPage;
-  const source=page==='privacy'?'../redesign/legacy-content/privacyPolicy.json':'../redesign/legacy-content/termsAndConditions.json';
+  const source=page==='privacy'?'content/generated/privacyPolicy.json':'content/generated/termsAndConditions.json';
   const labels={
     en:{privacy:{eyebrow:'Privacy',title:'Privacy, explained clearly.',intro:'How Hotel Elisabeth handles personal data and protects guest information.'},terms:{eyebrow:'Terms & conditions',title:'The terms behind the stay.',intro:'The conditions that apply when you reserve or stay at Hotel Elisabeth.'},contents:'On this page'},
     nl:{privacy:{eyebrow:'Privacy',title:'Privacy, helder uitgelegd.',intro:'Hoe Hotel Elisabeth persoonsgegevens verwerkt en gastgegevens beschermt.'},terms:{eyebrow:'Algemene voorwaarden',title:'De voorwaarden achter uw verblijf.',intro:'De voorwaarden die gelden wanneer u reserveert of verblijft bij Hotel Elisabeth.'},contents:'Op deze pagina'},

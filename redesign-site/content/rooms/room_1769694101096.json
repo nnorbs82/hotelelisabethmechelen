@@ -1,0 +1,71 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true
+  },
+  "bedType_en": "Double Bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "Our City Double Room is a stylish retreat designed for comfort in the heart of the city. With a comfortable double bed, parquet floors, and soft lighting, it’s the perfect place to unwind after a busy day. The modern bathroom with a walk-in shower adds a touch of everyday luxury.\n\nFor your convenience, the room includes air conditioning, high-speed Wi-Fi, a flat-screen TV, and tea and coffee facilities. Ideal for couples or solo travellers, it’s a cosy space where comfort meets convenience.",
+  "description_fr": "Notre Chambre Double City est un espace élégant, conçu pour votre confort au cœur de la ville. Avec un lit double confortable, un parquet chaleureux et un éclairage doux, c’est l’endroit idéal pour se détendre après une journée bien remplie. La salle de bains moderne avec douche à l’italienne ajoute une touche de luxe.\n\nPour votre confort, la chambre comprend la climatisation, le Wi-Fi haut débit, une télévision à écran plat et des installations pour le thé et le café. Idéale pour les couples ou les voyageurs en solo, c’est un cocon où confort et praticité se rencontrent.",
+  "description_nl": "Onze City Double Room is een stijlvolle kamer, ontworpen voor comfort in het hart van de stad. Met een comfortabel tweepersoonsbed, parketvloeren en sfeervolle verlichting is het de ideale plek om te ontspannen na een drukke dag. De moderne badkamer met inloopdouche voegt een vleugje luxe toe.\n\nVoor uw gemak beschikt de kamer over airconditioning, snelle wifi, een flatscreen-tv en koffie- en theefaciliteiten. Ideaal voor koppels of soloreizigers: een knusse ruimte waar comfort en gemak samenkomen.",
+  "maxOccupancy": 2,
+  "name_en": "City Double",
+  "name_fr": "City Double",
+  "name_nl": "City Double",
+  "photos": [
+    {
+      "filename": "room-photos/1786735785715-City_Double_1.webp",
+      "order": 6,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735785715-City_Double_1.webp?alt=media&token=af711ed2-7d71-485e-8f84-8cf950f338d0"
+    },
+    {
+      "filename": "room-photos/1769947241776-City_Double_1_1600.webp",
+      "order": 0,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947241776-City_Double_1_1600.webp?alt=media&token=600e208d-b1ed-4b9f-8a3d-15595f491b31"
+    },
+    {
+      "filename": "room-photos/1786735789146-City_Double_3.webp",
+      "order": 8,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735789146-City_Double_3.webp?alt=media&token=91fef179-aa0f-4847-b6ea-5e5816b3f310"
+    },
+    {
+      "filename": "room-photos/1769947256936-City_Double_5_1600.webp",
+      "order": 4,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947256936-City_Double_5_1600.webp?alt=media&token=2450e7f1-d404-4f54-a394-a88b17323f9d"
+    },
+    {
+      "filename": "room-photos/1786735787614-City_Double_2.webp",
+      "order": 7,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735787614-City_Double_2.webp?alt=media&token=062dd2fd-b8ff-49ee-bfc3-10d9a8214632"
+    },
+    {
+      "filename": "room-photos/1769947261351-City_Double_6_1600.webp",
+      "order": 5,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947261351-City_Double_6_1600.webp?alt=media&token=4b36179f-d764-4dfa-a702-1ae18c72d7ab"
+    }
+  ],
+  "roomSize": 14,
+  "status": "available",
+  "bedType_es": "",
+  "bedType_de": "",
+  "description_es": "",
+  "description_de": "",
+  "name_es": "",
+  "name_de": "",
+  "id": "room_1769694101096",
+  "order": 2,
+  "gallery": [],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083"
+  ]
+}

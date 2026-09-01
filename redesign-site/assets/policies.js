@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const PATH='../redesign/legacy-content/hotelInfo.json';
+  const PATH='content/generated/hotelInfo.json';
   const order=['checkin','checkout','parking','breakfast','services','payment','general','traffic','camera','fooddrinks'];
   const labels={
     en:{eyebrow:'Hotel policies',title:'Know before you arrive.',intro:'The practical rules and information that shape a smooth stay - from arrival and parking to payment and city access.',checkin:'Check-in',checkout:'Check-out',parking:'Parking',breakfast:'Breakfast',services:'Services',payment:'Payment methods',general:'General hotel information',traffic:'Traffic restrictions',camera:'Low-traffic cameras',fooddrinks:'Food & drinks',previous:'Previous',next:'Next'},

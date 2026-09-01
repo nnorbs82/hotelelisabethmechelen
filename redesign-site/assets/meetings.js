@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const MEETINGS_PATH='../redesign/legacy-content/meetings.json';
-  const PHOTOS_PATH='../redesign/legacy-content/meetingsPhotos.json';
+  const MEETINGS_PATH='content/generated/meetings.json';
+  const PHOTOS_PATH='content/generated/meetingsPhotos.json';
   const EMAILJS_PUBLIC_KEY='MEiKFhBHfwDzT-xz1';
   const EMAILJS_SERVICE_ID='service_iu8cxtm';
   const EMAILJS_TEMPLATE_ID='template_8txu2md';

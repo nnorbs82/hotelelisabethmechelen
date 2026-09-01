@@ -1,0 +1,85 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true,
+    "amenity_1769533173842": true,
+    "amenity_1769533181895": true
+  },
+  "bedType_en": "Double Bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios where you have more 'leeway' than in a hotel room. Our studios are contemporary furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, air conditioning, kitchenette with all amenities, walk-in shower, sitting area,…\n\nPlease keep in mind that some studios have a separate bedroom and seating area while others have an open space concept, the allocation of the rooms depends on availability on the day of arrival/check-in.",
+  "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. Nos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, climatisation, kitchenette tout confort, douche à l'italienne, coin salon,…\n\nVeuillez noter que certains studios disposent d'une chambre et d'un coin salon séparés tandis que d'autres ont un concept d'espace ouvert. L'attribution des chambres dépend de la disponibilité le jour de l'arrivée/de l'enregistrement.",
+  "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  Onze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, airco, kitchenette met alle voorzieningen, inloopdouche, zithoek,…\n\nSommige studio’s zijn ingericht met een aparte slaapkamer en zithoek, terwijl andere een open-spaceconcept hebben. De toewijzing van het type studio is afhankelijk van de beschikbaarheid op de dag van aankomst/inchecken",
+  "maxOccupancy": 2,
+  "name_en": "Studio Elisabeth",
+  "name_fr": "Studio Elisabeth",
+  "name_nl": "Studio Elisabeth",
+  "photos": [
+    {
+      "filename": "room-photos/1769947725780-Studio_Elisabeth_1_1600.webp",
+      "order": 0,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947725780-Studio_Elisabeth_1_1600.webp?alt=media&token=5dbe4957-a232-45da-a06a-f886b35289d9"
+    },
+    {
+      "filename": "room-photos/1769947729473-Studio_Elisabeth_2_1600.webp",
+      "order": 1,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947729473-Studio_Elisabeth_2_1600.webp?alt=media&token=9d5b3ce5-f1ee-431a-b18f-2b441c041592"
+    },
+    {
+      "filename": "room-photos/1769947734122-Studio_Elisabeth_3_1600.webp",
+      "order": 2,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947734122-Studio_Elisabeth_3_1600.webp?alt=media&token=a3a1d1a9-9198-4d5f-b241-14efd75ba338"
+    },
+    {
+      "filename": "room-photos/1769947738328-Studio_Elisabeth_4_1600.webp",
+      "order": 3,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947738328-Studio_Elisabeth_4_1600.webp?alt=media&token=1112e989-0c79-447e-b750-1875d4a854f3"
+    },
+    {
+      "filename": "room-photos/1769947742792-Studio_Elisabeth_5_1600.webp",
+      "order": 4,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947742792-Studio_Elisabeth_5_1600.webp?alt=media&token=85df86e0-8493-41cf-9499-b02ae699c1ea"
+    },
+    {
+      "filename": "room-photos/1769947747383-Studio_Elisabeth_6_1600.webp",
+      "order": 5,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947747383-Studio_Elisabeth_6_1600.webp?alt=media&token=114be682-d09b-4bc4-bd88-39d674ad45b0"
+    },
+    {
+      "filename": "room-photos/1769947751805-Studio_Elisabeth_7_1600.webp",
+      "order": 6,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947751805-Studio_Elisabeth_7_1600.webp?alt=media&token=996e2b95-0f4a-421f-8740-d6759f8d4ef9"
+    },
+    {
+      "filename": "room-photos/1769947755394-Studio_Elisabeth_8_1600.webp",
+      "order": 7,
+      "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947755394-Studio_Elisabeth_8_1600.webp?alt=media&token=faabff70-f41b-4071-9ea6-6294327a2524"
+    }
+  ],
+  "roomSize": 40,
+  "status": "available",
+  "bedType_es": "",
+  "bedType_de": "",
+  "description_es": "",
+  "description_de": "",
+  "name_es": "",
+  "name_de": "",
+  "id": "room_1769698611080",
+  "order": 9,
+  "gallery": [],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083",
+    "amenity_1769533173842",
+    "amenity_1769533181895"
+  ]
+}

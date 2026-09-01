@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const SOURCE='../redesign/legacy-content/attractions.json';
+  const SOURCE='content/generated/attractions.json';
   const labels={
     en:{eyebrow:'Mechelen outside the door',hero:'The city becomes part of the stay.',intro:'Hotel Elisabeth sits close enough to Mechelen’s historic centre that discovering the city can begin the moment you leave the lobby. Scroll through the places already recommended by the hotel.',visit:'Discover this place',journey:'City stop',closingEyebrow:'Explore at your pace',closingTitle:'Step outside. Mechelen is already there.',closingBody:'From the Dijle to centuries of architecture, the hotel’s current recommendations become a visual route through the city.'},
     nl:{eyebrow:'Mechelen voor de deur',hero:'De stad wordt deel van uw verblijf.',intro:'Hotel Elisabeth ligt zo dicht bij het historische centrum dat uw ontdekkingstocht kan beginnen zodra u de lobby verlaat. Scroll door de plaatsen die het hotel vandaag al aanbeveelt.',visit:'Ontdek deze plek',journey:'Stadsstop',closingEyebrow:'Ontdek op uw tempo',closingTitle:'Stap naar buiten. Mechelen is er al.',closingBody:'Van de Dijle tot eeuwen architectuur: de huidige hoteltips worden een visuele route door de stad.'},

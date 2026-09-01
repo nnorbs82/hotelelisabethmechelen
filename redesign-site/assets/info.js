@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const SOURCE='../redesign/legacy-content/hotelInfo.json';
+  const SOURCE='content/generated/hotelInfo.json';
   const order=['checkin','checkout','breakfast','parking','traffic','camera','services','general','payment','fooddrinks'];
   const labels={
     en:{eyebrow:'Hotel information',hero:'Know before you arrive.',intro:'Everything useful for your stay, organised like a concierge desk - quick to scan, easy to return to, and based on the hotel information already published today.',index:'Your stay index',hint:'Choose a topic',checkin:'Check-in',checkout:'Check-out',breakfast:'Breakfast',parking:'Parking',traffic:'Low-traffic zone',camera:'Traffic cameras',services:'Hotel services',general:'General facilities',payment:'Payment',fooddrinks:'Food & drinks',previous:'Previous topic',next:'Next topic',quick:'At a glance'},
