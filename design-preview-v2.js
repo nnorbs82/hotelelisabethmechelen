@@ -7,6 +7,16 @@
   const corePath = isRedesignPreview ? '../design-preview-v2-core.js' : (isLegacyPreview ? 'design-preview-v2-core.js' : 'assets/design-preview-v2-core.js');
   document.write(`<script src="${corePath}"><\/script>`);
 
+  function loadMobileStability(){
+    if(!document.body?.classList.contains('actual-site'))return;
+    if(document.getElementById('elisabeth-mobile-stability'))return;
+    const link=document.createElement('link');
+    link.id='elisabeth-mobile-stability';
+    link.rel='stylesheet';
+    link.href='assets/mobile-stability.css';
+    document.head.appendChild(link);
+  }
+
   function loadDatePicker(){
     if(!document.body?.classList.contains('actual-site'))return;
     if(!document.getElementById('elisabeth-date-picker-style')){
@@ -36,6 +46,7 @@
   }
 
   const scheduleEnhancements=()=>setTimeout(()=>{
+    loadMobileStability();
     loadDatePicker();
     loadHomepageMobileStability();
   },0);
