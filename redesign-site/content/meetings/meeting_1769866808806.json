@@ -1,36 +1,36 @@
 {
-  "accommodation_en": "Combine your meeting with an overnight stay in one of the 66 contemporary and very comfortably furnished rooms.",
-  "accommodation_fr": "66 chambres élégantes offrent un maximum de confort pour combiner votre réunion avec une nuitée.",
-  "accommodation_nl": "Combineer uw meeting met een overnachting in een van de 66 hedendaags en supercomfortabel ingerichte kamers.",
-  "description_en": "Looking for a small meeting room in the heart of Mechelen where you can have a quiet meeting in an unusual setting?\nWelcome to our Rooftop meeting room on the roof of Hotel Elisabeth.\n\nYou have a unique view over the city and on the adjacent roof terrace, you can enjoy a literally breathtaking break!",
-  "description_fr": "Vous cherchez un endroit calme en plein centre-ville pour votre réunion d'affaires? Cela peut parfois sembler impossible, mais nous avons la solution pour vous.\n\nNotre salle de réunion sur le toit est la solution idéale pour vos petites réunions en plein cœur de Malines.",
-  "description_nl": "Op zoek naar een kleine meetingruimte in hartje Mechelen waar je rustig kan vergaderen in een niet-alledaags kader?\nWelkom in onze Rooftop meetingroom op het dak van Hotel Elisabeth. \n\nJe hebt er een uniék zicht over de stad en op het aangrenzende dakterras geniet je van een letterlijk adembenemende pauze!",
+  "accommodation_en": "Combine your meeting with an overnight stay in one of Hotel Elisabeth's 66 rooms.",
+  "accommodation_fr": "Combinez votre réunion avec une nuitée dans l'une des 66 chambres de l'Hotel Elisabeth.",
+  "accommodation_nl": "Combineer uw meeting met een overnachting in een van de 66 kamers van Hotel Elisabeth.",
+  "description_en": "The Rooftop Meeting Room is an intimate space above Hotel Elisabeth with a distinctive view across Mechelen and direct access to the adjoining roof terrace - ideal for smaller meetings in a setting that feels a little different.",
+  "description_fr": "La Rooftop Meeting Room est un espace intimiste au sommet de l'Hotel Elisabeth, avec une vue remarquable sur Malines et un accès direct à la terrasse attenante - idéale pour les petites réunions dans un cadre différent.",
+  "description_nl": "De Rooftop Meeting Room is een intieme ruimte boven Hotel Elisabeth met een bijzonder uitzicht over Mechelen en directe toegang tot het aangrenzende dakterras - ideaal voor kleinere meetings in een net iets andere setting.",
   "facilities_en": [
     "High-performance WiFi",
     "Projector",
-    "Flip Chart",
+    "Flipchart",
     "Whiteboard"
   ],
   "facilities_fr": [
-    "WIFI haut débit complémentaire",
+    "Wi-Fi haut débit",
     "Projecteur",
-    "Tableau à feuilles",
+    "Flipchart",
     "Tableau blanc"
   ],
   "facilities_nl": [
     "Performante WiFi",
     "Projector",
-    "Flip Chart",
+    "Flipchart",
     "Whiteboard"
   ],
-  "food_en": "Hotel Elisabeth offers carefully arranged coffee breaks, a variety of lunch formulas, and optional dinner arrangements to complement your meeting or event.",
-  "food_fr": "L’Hôtel Elisabeth propose des pauses-café soigneusement préparées, différentes formules de déjeuner ainsi que des options de dîner pour compléter votre réunion ou événement.",
-  "food_nl": "Hotel Elisabeth biedt zorgvuldig samengestelde koffiepauzes, diverse lunchformules en optionele dinerarrangementen ter aanvulling van uw vergadering of evenement.",
-  "name_en": "MEETING ROOM ROOFTOP",
-  "name_fr": "MEETING ROOM ROOFTOP",
-  "name_nl": "MEETING ROOM ROOFTOP",
+  "food_en": "Coffee breaks, flexible lunch options and dinner arrangements are available on request to complement your meeting or event.",
+  "food_fr": "Des pauses-café, des formules de déjeuner flexibles et des arrangements pour le dîner sont disponibles sur demande pour compléter votre réunion ou événement.",
+  "food_nl": "Koffiepauzes, flexibele lunchopties en dinerarrangementen zijn op aanvraag beschikbaar als aanvulling op uw meeting of evenement.",
+  "name_en": "Rooftop Meeting Room",
+  "name_fr": "Rooftop Meeting Room",
+  "name_nl": "Rooftop Meeting Room",
   "parking_en": "Hotel Elisabeth is easily accessible at all times in the low-traffic heart of Mechelen. Parking is super convenient and easy in one of the parking spaces under the hotel.",
-  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un grand parking souterrain avec des places de parking.",
+  "parking_fr": "L'Elisabeth Hotel est facilement accessible à tout moment de la journée dans le cœur calme de la ville. L'hôtel dispose d'un parking souterrain pratique sous l'établissement.",
   "parking_nl": "Hotel Elisabeth is op elk ogenblik makkelijk bereikbaar in het verkeersarme hart van Mechelen. Parkeren is superhandig en makkelijk op een van de parkeerplaatsen onder het hotel.",
   "setupStyles_en": [
     "U-Shape - max 12 p",
@@ -38,17 +38,17 @@
   ],
   "setupStyles_fr": [
     "Forme en U - max 12 p",
-    "Théâtre-Forme - max 18 p"
+    "Théâtre - max 18 p"
   ],
   "setupStyles_nl": [
     "U-Shape - max 12 p",
     "Theatre-Shape - max 18 p"
   ],
   "timestamp": 1769866808806,
-  "accommodation_es": "Combina tu reunión con una noche en una de nuestras 66 habitaciones contemporáneas y muy confortables.",
-  "accommodation_de": "Verbinden Sie Ihre Tagung mit einer Übernachtung in einem unserer 66 modern und besonders komfortabel eingerichteten Zimmer.",
-  "description_es": "¿Buscas una sala pequeña en pleno centro de Malinas donde reunirte con tranquilidad en un entorno diferente?\n\nBienvenido a nuestra sala Rooftop, en la azotea de Hotel Elisabeth.\n\nDisfrutarás de unas vistas únicas sobre la ciudad y, en la terraza contigua, de una pausa literalmente a otro nivel.",
-  "description_de": "Sie suchen einen kleinen Tagungsraum mitten in Mechelen, in dem Sie in besonderer Atmosphäre ungestört arbeiten können?\n\nWillkommen in unserem Rooftop-Tagungsraum auf dem Dach des Hotel Elisabeth.\n\nHier genießen Sie einen einzigartigen Blick über die Stadt und auf der angrenzenden Dachterrasse eine Pause mit außergewöhnlicher Aussicht.",
+  "accommodation_es": "Combina tu reunión con una noche en una de las 66 habitaciones de Hotel Elisabeth.",
+  "accommodation_de": "Verbinden Sie Ihre Tagung mit einer Übernachtung in einem der 66 Zimmer des Hotel Elisabeth.",
+  "description_es": "La Rooftop Meeting Room es un espacio íntimo en la parte superior de Hotel Elisabeth, con una vista especial sobre Malinas y acceso directo a la terraza contigua - ideal para reuniones pequeñas en un entorno diferente.",
+  "description_de": "Der Rooftop Meeting Room ist ein intimer Raum über dem Hotel Elisabeth mit besonderem Blick über Mechelen und direktem Zugang zur angrenzenden Dachterrasse - ideal für kleinere Tagungen in einem außergewöhnlichen Rahmen.",
   "facilities_es": [
     "Wi-Fi de alto rendimiento",
     "Proyector",
@@ -61,12 +61,12 @@
     "Flipchart",
     "Whiteboard"
   ],
-  "food_es": "Hotel Elisabeth ofrece pausas de café cuidadosamente preparadas, diversas fórmulas de almuerzo y opciones de cena para completar tu reunión o evento.",
-  "food_de": "Hotel Elisabeth bietet sorgfältig arrangierte Kaffeepausen, verschiedene Mittagsangebote und optionale Dinnerarrangements als Ergänzung zu Ihrer Tagung oder Veranstaltung.",
-  "name_es": "MEETING ROOM ROOFTOP",
-  "name_de": "MEETING ROOM ROOFTOP",
-  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en una de las plazas situadas debajo del hotel.",
-  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie auf einem der Stellplätze direkt unter dem Hotel.",
+  "food_es": "Hay pausas de café, opciones flexibles de almuerzo y propuestas de cena disponibles bajo petición para complementar tu reunión o evento.",
+  "food_de": "Kaffeepausen, flexible Mittagsoptionen und Dinnerarrangements sind auf Anfrage als Ergänzung zu Ihrer Tagung oder Veranstaltung verfügbar.",
+  "name_es": "Rooftop Meeting Room",
+  "name_de": "Rooftop Meeting Room",
+  "parking_es": "Hotel Elisabeth es fácilmente accesible en todo momento en el tranquilo centro de Malinas. Puedes aparcar cómodamente en el aparcamiento situado debajo del hotel.",
+  "parking_de": "Hotel Elisabeth ist im verkehrsberuhigten Herzen von Mechelen jederzeit gut erreichbar. Bequem parken können Sie in der Tiefgarage direkt unter dem Hotel.",
   "setupStyles_es": [
     "Forma en U - máx. 12 personas",
     "Teatro - máx. 18 personas"
