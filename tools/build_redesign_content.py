@@ -140,6 +140,10 @@ def normalize_terms(output):
             ("A security deposit of €250 may be required upon booking for certain reservations.", "When a security deposit is required, the amount is €200."),
             ("Check-in possible from 2 PM.", "Check-in is possible from 3 PM."),
             ("<p>Check-out time:</p><p>&nbsp;Weekdays: 10 AM&nbsp;Weekends: 11 AM</p>", "<p>Check-out is by 11 AM on both weekdays and weekends.</p>"),
+            ("<p>9. Parking</p>", "<p>8. Parking</p>"),
+            ("<p>10. Privacy and Data Protection</p>", "<p>9. Privacy and Data Protection</p>"),
+            ("<p>11. Force Majeure</p>", "<p>10. Force Majeure</p>"),
+            ("<p>12. Amendments</p>", "<p>11. Amendments</p>"),
         ],
         "nl": [
             ("Voor bepaalde reserveringen kan een borg van €250 vereist zijn bij het boeken.", "Wanneer een waarborg vereist is, bedraagt deze €200."),
@@ -193,7 +197,10 @@ def normalize_hotel_info(entry_id: str, values: dict):
             "de": "Der Check-out ist sowohl an Wochentagen als auch am Wochenende spätestens um 11:00 Uhr. Bei einer späteren Abreise kann eine zusätzliche Übernachtung berechnet werden.",
         }
     elif entry_id == "traffic":
-        values = {lang: value.replace("ttps://www.mechelen.be/autoluw", "https://www.mechelen.be/autoluw") for lang, value in values.items()}
+        values = {
+            lang: value.replace("hhttps://", "https://").replace("\nttps://", "\nhttps://")
+            for lang, value in values.items()
+        }
         values["fr"] = values["fr"].replace("11h – 6h", "11h – 18h")
     elif entry_id == "camera":
         values["en"] = "At the beginning of each low-traffic or car-free street or zone, you will see a traffic sign indicating that passage is prohibited during certain hours except for permit holders.\n\nThe zone is identified by traffic sign C3 with the applicable exceptions listed below it. If you pass this sign during restricted hours without authorization, the camera will register your number plate and you may receive a €58 fine."
