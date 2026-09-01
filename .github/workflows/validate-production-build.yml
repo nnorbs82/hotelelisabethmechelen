@@ -13,6 +13,7 @@ on:
       - 'design-preview-v2.js'
       - 'tools/build_redesign_content.py'
       - 'tools/build_production_site.py'
+      - 'tools/validate_accessibility.py'
       - '.github/workflows/validate-production-build.yml'
   workflow_dispatch:
 
@@ -95,6 +96,8 @@ jobs:
               raise SystemExit('Production homepage JS is not reading generated CMS content')
           if 'setInterval(()=>showHero(heroIndex+1),6500)' not in js:
               raise SystemExit('Continuous homepage slideshow loop missing')
+          if "prefers-reduced-motion: reduce" not in js:
+              raise SystemExit('Homepage slideshow reduced-motion guard missing')
           print('Final CMS-driven homepage release validated')
           PY
 
@@ -123,6 +126,9 @@ jobs:
           print('Production internal references validated')
           PY
 
+      - name: Validate accessibility shell
+        run: python tools/validate_accessibility.py dist
+
       - name: Validate runtime paths and search files
         run: |
           if grep -R -n 'firebasestorage.googleapis.com' dist; then
@@ -148,6 +154,8 @@ jobs:
           grep -q 'template_8txu2md' dist/assets/meetings.js
           grep -q 'service_iu8cxtm' dist/assets/grouprequest.js
           grep -q 'template_3syt07l' dist/assets/grouprequest.js
+          grep -q 'date.min=`${now.getFullYear()}' dist/assets/meetings.js
+          grep -q "aria-current','step" dist/assets/grouprequest.js
 
       - name: Guard live production branch
         run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
