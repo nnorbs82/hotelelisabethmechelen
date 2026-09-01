@@ -19,7 +19,13 @@ This directory is the permanent development build for the approved Hotel Elisabe
 - Guest-facing supporting copy has been polished across the homepage, Rooms, Facilities, Hotel Info, Attractions and Group Request so section introductions describe the hotel experience rather than the website build.
 - Hotel Information Services and General Facilities are aligned across EN/NL/FR/ES/DE using current guest-facing facts; legacy fax, shoe-shine and ironing-service claims were removed, pool hours are consistently shown as 07:00-23:00, and the spa is consistently marked as opening soon.
 - Hotel Information low-traffic camera copy has been repaired in the source and generated content, including clear C3-sign guidance and the existing €58 fine information.
-- Meeting-room parking copy no longer states a fixed number of parking spaces in any supported language.
+- Package copy and inclusions have been audited across EN/NL/FR/ES/DE. Happy Friday, Special Day and Sweet Suite Deal remain active, their Mews booking links and availability conditions are preserved, and the Sweet Suite inclusions now match its pool-access description.
+- Meeting-room content has been polished across all five languages while preserving the existing capacities and setup styles. Parking copy no longer states a fixed number of parking spaces in any supported language.
+- Attraction content has been refreshed against current Visit Mechelen information. Stale date-specific visitor information was removed or replaced, current guidance is concise and guest-facing, and canonical Visit Mechelen links are used for boat trips, Het Anker, the Palace of Margaret of Austria, the Large Beguinage and the Dyle Towpath.
+- Room descriptions have been reconciled with the amenities assigned in the CMS. Unsupported docking-station claims were removed and mini-fridge terminology was standardised where needed.
+- The City Suite no longer carries the bathtub amenity after current room-detail verification confirmed a shower; the Cathedral Suite retains its bath amenity.
+- Careers has been reviewed: no active vacancies are currently stored, and the page correctly falls back to the open-application option.
+- Generated browser-facing content indexes have been rebuilt after the content QA changes.
 - The redesign validator rejects hotel star-rating claims in active HTML, JavaScript and JSON and verifies generated Privacy Policy and Terms & Conditions content in all five languages.
 - Spanish and German legal translations are stored as reviewed translation sources under `redesign-site/content/legal/` and are included automatically when the corresponding CMS JSON fields are empty.
 - The content build now fails if Privacy Policy or Terms & Conditions are missing in any of the five supported languages.
