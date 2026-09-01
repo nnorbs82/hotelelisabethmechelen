@@ -87,7 +87,19 @@
   "name_de": "",
   "id": "room_1769697992814",
   "order": 7,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947574249-Cathedral_Suite_5_1600.webp",
+    "/images/elisabeth/rooms/1769947583904-Cathedral_Suite_7_1600.webp",
+    "/images/elisabeth/rooms/1769947603716-Cathedral_Suite_9_1600.webp",
+    "/images/elisabeth/rooms/1786741108285-Cathedral_Suite_1.webp",
+    "/images/elisabeth/rooms/1786741109687-Cathedral_Suite_2.webp",
+    "/images/elisabeth/rooms/1786741111160-Cathedral_Suite_3.webp",
+    "/images/elisabeth/rooms/1786741112568-Cathedral_Suite_4.webp",
+    "/images/elisabeth/rooms/1786741113908-Cathedral_Suite_5.webp",
+    "/images/elisabeth/rooms/1786741115651-Cathedral_Suite_6.webp",
+    "/images/elisabeth/rooms/1786741117374-Cathedral_Suite_7.webp",
+    "/images/elisabeth/rooms/1786741119199-Cathedral_Suite_8.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

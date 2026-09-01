@@ -20,24 +20,20 @@
     "name_nl": "City Twin",
     "photos": [
       {
-        "filename": "room-photos/1769947208490-City_Twin_1_1600w.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947208490-City_Twin_1_1600w.webp?alt=media&token=5fb2c732-c763-4cb0-a779-1925f9faf9be"
+        "url": "../images/elisabeth/rooms/1769947208490-City_Twin_1_1600w.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947212387-City_Twin_2_1600w.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947212387-City_Twin_2_1600w.webp?alt=media&token=6d611da2-496d-47bd-b44a-ec1f7128efd1"
+        "url": "../images/elisabeth/rooms/1769947212387-City_Twin_2_1600w.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947216362-City_Twin_3_1600w.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947216362-City_Twin_3_1600w.webp?alt=media&token=aa96d0cb-2bd6-4d16-bebd-9d0c7772ebe5"
+        "url": "../images/elisabeth/rooms/1769947216362-City_Twin_3_1600w.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947219644-City_Twin_4_1600w.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947219644-City_Twin_4_1600w.webp?alt=media&token=662871de-a393-4dbe-911d-c21271a690e4"
+        "url": "../images/elisabeth/rooms/1769947219644-City_Twin_4_1600w.webp",
+        "order": 4
       }
     ],
     "roomSize": 14,
@@ -70,34 +66,28 @@
     "name_nl": "City Double",
     "photos": [
       {
-        "filename": "room-photos/1786735785715-City_Double_1.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735785715-City_Double_1.webp?alt=media&token=af711ed2-7d71-485e-8f84-8cf950f338d0"
+        "url": "../images/elisabeth/rooms/1769947241776-City_Double_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947241776-City_Double_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947241776-City_Double_1_1600.webp?alt=media&token=600e208d-b1ed-4b9f-8a3d-15595f491b31"
+        "url": "../images/elisabeth/rooms/1769947256936-City_Double_5_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1786735789146-City_Double_3.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735789146-City_Double_3.webp?alt=media&token=91fef179-aa0f-4847-b6ea-5e5816b3f310"
+        "url": "../images/elisabeth/rooms/1769947261351-City_Double_6_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947256936-City_Double_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947256936-City_Double_5_1600.webp?alt=media&token=2450e7f1-d404-4f54-a394-a88b17323f9d"
+        "url": "../images/elisabeth/rooms/1786735785715-City_Double_1.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1786735787614-City_Double_2.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786735787614-City_Double_2.webp?alt=media&token=062dd2fd-b8ff-49ee-bfc3-10d9a8214632"
+        "url": "../images/elisabeth/rooms/1786735787614-City_Double_2.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947261351-City_Double_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947261351-City_Double_6_1600.webp?alt=media&token=4b36179f-d764-4dfa-a702-1ae18c72d7ab"
+        "url": "../images/elisabeth/rooms/1786735789146-City_Double_3.webp",
+        "order": 6
       }
     ],
     "roomSize": 14,
@@ -130,49 +120,40 @@
     "name_nl": "Garden Comfort",
     "photos": [
       {
-        "filename": "room-photos/1786738228157-Garden_Comfort_5.webp",
-        "order": 13,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738228157-Garden_Comfort_5.webp?alt=media&token=ad9a4492-e17c-4395-80ac-9aa2f97b8004"
+        "url": "../images/elisabeth/rooms/1769947343842-Olive_Tree_View_5_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1786738225849-Garden_Comfort_4.webp",
-        "order": 12,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738225849-Garden_Comfort_4.webp?alt=media&token=01bdcc89-4002-4db4-922d-e9a623e8cae6"
+        "url": "../images/elisabeth/rooms/1769947348031-Olive_Tree_View_6_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1786738223258-Garden_Comfort_3.webp",
-        "order": 11,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738223258-Garden_Comfort_3.webp?alt=media&token=6cf0f709-9338-4635-8f50-a6175758b7c5"
+        "url": "../images/elisabeth/rooms/1769947368704-Olive_Tree_View_8_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1786738220922-Garden_Comfort_2.webp",
-        "order": 10,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738220922-Garden_Comfort_2.webp?alt=media&token=f06e51cc-f68f-47db-a1b0-37f36d8eeb3e"
+        "url": "../images/elisabeth/rooms/1769947373935-Olive_Tree_View_9_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947343842-Olive_Tree_View_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947343842-Olive_Tree_View_5_1600.webp?alt=media&token=744543d2-a0c3-4895-99ab-3806f400f9e1"
+        "url": "../images/elisabeth/rooms/1786738218973-Garden_Comfort_1.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947348031-Olive_Tree_View_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947348031-Olive_Tree_View_6_1600.webp?alt=media&token=7ee6745b-21fb-4a75-af9b-b74020f1b986"
+        "url": "../images/elisabeth/rooms/1786738220922-Garden_Comfort_2.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1786738218973-Garden_Comfort_1.webp",
-        "order": 9,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786738218973-Garden_Comfort_1.webp?alt=media&token=3a8a11b4-8721-41fe-ab0b-47f085809e71"
+        "url": "../images/elisabeth/rooms/1786738223258-Garden_Comfort_3.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1769947368704-Olive_Tree_View_8_1600.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947368704-Olive_Tree_View_8_1600.webp?alt=media&token=d8742d58-6498-4c44-a897-3165e0eb4bcd"
+        "url": "../images/elisabeth/rooms/1786738225849-Garden_Comfort_4.webp",
+        "order": 8
       },
       {
-        "filename": "room-photos/1769947373935-Olive_Tree_View_9_1600.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947373935-Olive_Tree_View_9_1600.webp?alt=media&token=e98c2e5f-5d53-4181-be9f-a00604e1b4dc"
+        "url": "../images/elisabeth/rooms/1786738228157-Garden_Comfort_5.webp",
+        "order": 9
       }
     ],
     "roomSize": 16,
@@ -205,49 +186,40 @@
     "name_nl": "Cathedral View",
     "photos": [
       {
-        "filename": "room-photos/1786736631228-Cathedral_View_Room_1.webp",
-        "order": 9,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736631228-Cathedral_View_Room_1.webp?alt=media&token=b11835f2-3bcc-4977-9cbd-ef831e2ac9c3"
+        "url": "../images/elisabeth/rooms/1769947402832-Cathedral_View_2_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947402832-Cathedral_View_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947402832-Cathedral_View_2_1600.webp?alt=media&token=b400aeb3-4ef6-48f4-a6c8-29960e0172f6"
+        "url": "../images/elisabeth/rooms/1769947411979-Cathedral_View_4_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1786736639346-Cathedral_View_Room_4.webp",
-        "order": 12,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736639346-Cathedral_View_Room_4.webp?alt=media&token=86baa573-c550-4bcc-866c-5befcb631ec6"
+        "url": "../images/elisabeth/rooms/1769947423875-Cathedral_View_7_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947411979-Cathedral_View_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947411979-Cathedral_View_4_1600.webp?alt=media&token=b8335a5b-9490-4505-90ee-4657bb87b2c9"
+        "url": "../images/elisabeth/rooms/1769947427612-Cathedral_View_8_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1786736636886-Cathedral_View_Room_3.webp",
-        "order": 11,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736636886-Cathedral_View_Room_3.webp?alt=media&token=ab7c4f69-c7b0-46c4-82ed-e2c5c2dffe6a"
+        "url": "../images/elisabeth/rooms/1769947431325-Cathedral_View_9_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1786736634429-Cathedral_View_Room_2.webp",
-        "order": 10,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786736634429-Cathedral_View_Room_2.webp?alt=media&token=3020e1b3-bb3e-452a-bf3f-7c6a35fb2bd8"
+        "url": "../images/elisabeth/rooms/1786736631228-Cathedral_View_Room_1.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1769947423875-Cathedral_View_7_1600.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947423875-Cathedral_View_7_1600.webp?alt=media&token=0816191f-89bc-4b4c-8410-72011dc4f2fe"
+        "url": "../images/elisabeth/rooms/1786736634429-Cathedral_View_Room_2.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1769947427612-Cathedral_View_8_1600.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947427612-Cathedral_View_8_1600.webp?alt=media&token=ead515c9-1358-4ccf-8e92-9bced17e8938"
+        "url": "../images/elisabeth/rooms/1786736636886-Cathedral_View_Room_3.webp",
+        "order": 8
       },
       {
-        "filename": "room-photos/1769947431325-Cathedral_View_9_1600.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947431325-Cathedral_View_9_1600.webp?alt=media&token=4ef70af2-d2c2-42da-97ff-af26c5b7c5e0"
+        "url": "../images/elisabeth/rooms/1786736639346-Cathedral_View_Room_4.webp",
+        "order": 9
       }
     ],
     "roomSize": 16,
@@ -280,34 +252,28 @@
     "name_nl": "City Triple",
     "photos": [
       {
-        "filename": "room-photos/1769947456429-City_Triple_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947456429-City_Triple_1_1600.webp?alt=media&token=fdd71411-9106-494d-8166-abf56198ac92"
+        "url": "../images/elisabeth/rooms/1769947456429-City_Triple_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947460643-City_Triple_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947460643-City_Triple_2_1600.webp?alt=media&token=458a0c50-a3b5-4ed4-8fd7-d249320b8048"
+        "url": "../images/elisabeth/rooms/1769947460643-City_Triple_2_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947465172-City_Triple_3_1600.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947465172-City_Triple_3_1600.webp?alt=media&token=a065be74-1b2a-4c21-a287-652fad5349cd"
+        "url": "../images/elisabeth/rooms/1769947465172-City_Triple_3_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947469836-City_Triple_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947469836-City_Triple_4_1600.webp?alt=media&token=7a3f3fe5-78c6-405e-aade-0f8e3d597f76"
+        "url": "../images/elisabeth/rooms/1769947469836-City_Triple_4_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947477935-City_Triple_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947477935-City_Triple_5_1600.webp?alt=media&token=bf959d91-e567-42fa-a565-0a37835329e0"
+        "url": "../images/elisabeth/rooms/1769947477935-City_Triple_5_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947483164-City_Triple_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947483164-City_Triple_6_1600.webp?alt=media&token=2457c881-35d5-4a39-902a-d743a901cdbd"
+        "url": "../images/elisabeth/rooms/1769947483164-City_Triple_6_1600.webp",
+        "order": 6
       }
     ],
     "roomSize": 24,
@@ -340,34 +306,28 @@
     "name_nl": "City Comfort",
     "photos": [
       {
-        "filename": "room-photos/1769947504053-City_Comfort_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947504053-City_Comfort_1_1600.webp?alt=media&token=1baf5ee0-f1d4-47c7-84a0-a419dd80e56d"
+        "url": "../images/elisabeth/rooms/1769947504053-City_Comfort_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947508226-City_Comfort_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947508226-City_Comfort_2_1600.webp?alt=media&token=8c827008-2f0c-45d2-b15b-acb8e2e80d39"
+        "url": "../images/elisabeth/rooms/1769947508226-City_Comfort_2_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947511896-City_Comfort_3_1600.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947511896-City_Comfort_3_1600.webp?alt=media&token=37e2e69e-9c58-4995-9104-c73dbeefabbc"
+        "url": "../images/elisabeth/rooms/1769947511896-City_Comfort_3_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947515686-City_Comfort_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947515686-City_Comfort_4_1600.webp?alt=media&token=f6b41bd4-6fd8-4eb4-b298-087089737fe2"
+        "url": "../images/elisabeth/rooms/1769947515686-City_Comfort_4_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947519591-City_Comfort_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947519591-City_Comfort_5_1600.webp?alt=media&token=9c5f0492-62ce-45fa-8395-c6744aa0cb30"
+        "url": "../images/elisabeth/rooms/1769947519591-City_Comfort_5_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947523567-City_Comfort_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947523567-City_Comfort_6_1600.webp?alt=media&token=a3a38260-9d1c-46c9-af4d-cdae6a9a9ab1"
+        "url": "../images/elisabeth/rooms/1769947523567-City_Comfort_6_1600.webp",
+        "order": 6
       }
     ],
     "roomSize": 18,
@@ -403,59 +363,48 @@
     "name_nl": "Cathedral Suite",
     "photos": [
       {
-        "filename": "room-photos/1786741115651-Cathedral_Suite_6.webp",
-        "order": 14,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741115651-Cathedral_Suite_6.webp?alt=media&token=b290d798-1cf5-4e4b-8826-4cad79758c57"
+        "url": "../images/elisabeth/rooms/1769947574249-Cathedral_Suite_5_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1786741113908-Cathedral_Suite_5.webp",
-        "order": 13,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741113908-Cathedral_Suite_5.webp?alt=media&token=a0e83a12-d8d6-41fa-a4f1-46d9fe8c7eb8"
+        "url": "../images/elisabeth/rooms/1769947583904-Cathedral_Suite_7_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1786741112568-Cathedral_Suite_4.webp",
-        "order": 12,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741112568-Cathedral_Suite_4.webp?alt=media&token=18e51410-67d9-4ec8-ab93-a3170ef22d0d"
+        "url": "../images/elisabeth/rooms/1769947603716-Cathedral_Suite_9_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1786741111160-Cathedral_Suite_3.webp",
-        "order": 11,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741111160-Cathedral_Suite_3.webp?alt=media&token=da53d323-7ba2-40af-a74a-0095b5c3f2e7"
+        "url": "../images/elisabeth/rooms/1786741108285-Cathedral_Suite_1.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947574249-Cathedral_Suite_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947574249-Cathedral_Suite_5_1600.webp?alt=media&token=b4f131a4-ea56-4381-87dc-299620966703"
+        "url": "../images/elisabeth/rooms/1786741109687-Cathedral_Suite_2.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1786741109687-Cathedral_Suite_2.webp",
-        "order": 10,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741109687-Cathedral_Suite_2.webp?alt=media&token=8ef4bf2e-d0e9-4176-b15b-988a9cb70206"
+        "url": "../images/elisabeth/rooms/1786741111160-Cathedral_Suite_3.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1786741108285-Cathedral_Suite_1.webp",
-        "order": 9,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741108285-Cathedral_Suite_1.webp?alt=media&token=72a6209a-296c-471f-8d85-3cad3bc58bee"
+        "url": "../images/elisabeth/rooms/1786741112568-Cathedral_Suite_4.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1786741117374-Cathedral_Suite_7.webp",
-        "order": 15,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741117374-Cathedral_Suite_7.webp?alt=media&token=d302180d-f77c-40de-b21e-64ca04841976"
+        "url": "../images/elisabeth/rooms/1786741113908-Cathedral_Suite_5.webp",
+        "order": 8
       },
       {
-        "filename": "room-photos/1786741119199-Cathedral_Suite_8.webp",
-        "order": 16,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1786741119199-Cathedral_Suite_8.webp?alt=media&token=adbdaadb-bcfa-4f36-8bad-8e712942fcc6"
+        "url": "../images/elisabeth/rooms/1786741115651-Cathedral_Suite_6.webp",
+        "order": 9
       },
       {
-        "filename": "room-photos/1769947603716-Cathedral_Suite_9_1600.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947603716-Cathedral_Suite_9_1600.webp?alt=media&token=7cc4cd2c-12d1-4df5-8cba-066176f7e167"
+        "url": "../images/elisabeth/rooms/1786741117374-Cathedral_Suite_7.webp",
+        "order": 10
       },
       {
-        "filename": "room-photos/1769947583904-Cathedral_Suite_7_1600.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947583904-Cathedral_Suite_7_1600.webp?alt=media&token=cd957a0b-7880-47d5-aa92-b9c558093e69"
+        "url": "../images/elisabeth/rooms/1786741119199-Cathedral_Suite_8.webp",
+        "order": 11
       }
     ],
     "roomSize": 40,
@@ -491,54 +440,44 @@
     "name_nl": "City Suite",
     "photos": [
       {
-        "filename": "room-photos/1769947645298-City_Suite_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947645298-City_Suite_1_1600.webp?alt=media&token=163d52de-2bc8-4819-bb65-7bcf9adf6713"
+        "url": "../images/elisabeth/rooms/1769947645298-City_Suite_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947648929-City_Suite_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947648929-City_Suite_2_1600.webp?alt=media&token=42f2549e-3af2-4ad4-b03c-38b1db53b03c"
+        "url": "../images/elisabeth/rooms/1769947648929-City_Suite_2_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947652796-City_Suite_3_1600.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947652796-City_Suite_3_1600.webp?alt=media&token=de2ee086-8d61-4c65-ae1a-6704834d5712"
+        "url": "../images/elisabeth/rooms/1769947652796-City_Suite_3_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947657834-City_Suite_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947657834-City_Suite_4_1600.webp?alt=media&token=49634bb9-855a-43fd-b310-a1e56a4fd8a9"
+        "url": "../images/elisabeth/rooms/1769947657834-City_Suite_4_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947661689-City_Suite_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947661689-City_Suite_5_1600.webp?alt=media&token=f6617801-770e-4b1c-b91e-54fec8bd700c"
+        "url": "../images/elisabeth/rooms/1769947661689-City_Suite_5_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947666112-City_Suite_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947666112-City_Suite_6_1600.webp?alt=media&token=a6ab2b30-54a2-4717-a0e9-a52284bb77cc"
+        "url": "../images/elisabeth/rooms/1769947666112-City_Suite_6_1600.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1769947670687-City_Suite_7_1600.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947670687-City_Suite_7_1600.webp?alt=media&token=8d86e663-b46b-4a72-aec0-194eb3911393"
+        "url": "../images/elisabeth/rooms/1769947670687-City_Suite_7_1600.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1769947675291-City_Suite_8_1600.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947675291-City_Suite_8_1600.webp?alt=media&token=c0699d7a-690a-4174-92aa-09b32e31bfc6"
+        "url": "../images/elisabeth/rooms/1769947675291-City_Suite_8_1600.webp",
+        "order": 8
       },
       {
-        "filename": "room-photos/1769947680947-City_Suite_9_1600.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947680947-City_Suite_9_1600.webp?alt=media&token=04f6bea9-3e92-4ef0-a273-1937dc1f8a4a"
+        "url": "../images/elisabeth/rooms/1769947680947-City_Suite_9_1600.webp",
+        "order": 9
       },
       {
-        "filename": "room-photos/1769947684753-City_Suite_10_1600.webp",
-        "order": 9,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947684753-City_Suite_10_1600.webp?alt=media&token=e16a3fc8-cb3e-4fef-baee-8182d745bb96"
+        "url": "../images/elisabeth/rooms/1769947684753-City_Suite_10_1600.webp",
+        "order": 10
       }
     ],
     "roomSize": 30,
@@ -573,44 +512,36 @@
     "name_nl": "Studio Elisabeth",
     "photos": [
       {
-        "filename": "room-photos/1769947725780-Studio_Elisabeth_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947725780-Studio_Elisabeth_1_1600.webp?alt=media&token=5dbe4957-a232-45da-a06a-f886b35289d9"
+        "url": "../images/elisabeth/rooms/1769947725780-Studio_Elisabeth_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947729473-Studio_Elisabeth_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947729473-Studio_Elisabeth_2_1600.webp?alt=media&token=9d5b3ce5-f1ee-431a-b18f-2b441c041592"
+        "url": "../images/elisabeth/rooms/1769947729473-Studio_Elisabeth_2_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947734122-Studio_Elisabeth_3_1600.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947734122-Studio_Elisabeth_3_1600.webp?alt=media&token=a3a1d1a9-9198-4d5f-b241-14efd75ba338"
+        "url": "../images/elisabeth/rooms/1769947734122-Studio_Elisabeth_3_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947738328-Studio_Elisabeth_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947738328-Studio_Elisabeth_4_1600.webp?alt=media&token=1112e989-0c79-447e-b750-1875d4a854f3"
+        "url": "../images/elisabeth/rooms/1769947738328-Studio_Elisabeth_4_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947742792-Studio_Elisabeth_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947742792-Studio_Elisabeth_5_1600.webp?alt=media&token=85df86e0-8493-41cf-9499-b02ae699c1ea"
+        "url": "../images/elisabeth/rooms/1769947742792-Studio_Elisabeth_5_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947747383-Studio_Elisabeth_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947747383-Studio_Elisabeth_6_1600.webp?alt=media&token=114be682-d09b-4bc4-bd88-39d674ad45b0"
+        "url": "../images/elisabeth/rooms/1769947747383-Studio_Elisabeth_6_1600.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1769947751805-Studio_Elisabeth_7_1600.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947751805-Studio_Elisabeth_7_1600.webp?alt=media&token=996e2b95-0f4a-421f-8740-d6759f8d4ef9"
+        "url": "../images/elisabeth/rooms/1769947751805-Studio_Elisabeth_7_1600.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1769947755394-Studio_Elisabeth_8_1600.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947755394-Studio_Elisabeth_8_1600.webp?alt=media&token=faabff70-f41b-4071-9ea6-6294327a2524"
+        "url": "../images/elisabeth/rooms/1769947755394-Studio_Elisabeth_8_1600.webp",
+        "order": 8
       }
     ],
     "roomSize": 40,
@@ -644,54 +575,44 @@
     "name_nl": "Studio Oud Huys",
     "photos": [
       {
-        "filename": "room-photos/1769947778322-Studio_Oud_Huys_1_1600.webp",
-        "order": 0,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947778322-Studio_Oud_Huys_1_1600.webp?alt=media&token=002236d3-a7e0-421c-b184-aa7c03c09614"
+        "url": "../images/elisabeth/rooms/1769947778322-Studio_Oud_Huys_1_1600.webp",
+        "order": 1
       },
       {
-        "filename": "room-photos/1769947781908-Studio_Oud_Huys_2_1600.webp",
-        "order": 1,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947781908-Studio_Oud_Huys_2_1600.webp?alt=media&token=e1c216b0-8597-4281-858c-0b819f380124"
+        "url": "../images/elisabeth/rooms/1769947781908-Studio_Oud_Huys_2_1600.webp",
+        "order": 2
       },
       {
-        "filename": "room-photos/1769947786202-Studio_Oud_Huys_3_1600.webp",
-        "order": 2,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947786202-Studio_Oud_Huys_3_1600.webp?alt=media&token=d05ff2cd-cce2-4bda-8b5b-3a3c8771bdfb"
+        "url": "../images/elisabeth/rooms/1769947786202-Studio_Oud_Huys_3_1600.webp",
+        "order": 3
       },
       {
-        "filename": "room-photos/1769947790330-Studio_Oud_Huys_4_1600.webp",
-        "order": 3,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947790330-Studio_Oud_Huys_4_1600.webp?alt=media&token=559edf97-efc4-4f92-8133-d4e40413650f"
+        "url": "../images/elisabeth/rooms/1769947790330-Studio_Oud_Huys_4_1600.webp",
+        "order": 4
       },
       {
-        "filename": "room-photos/1769947793801-Studio_Oud_Huys_5_1600.webp",
-        "order": 4,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947793801-Studio_Oud_Huys_5_1600.webp?alt=media&token=f7816ca8-4b07-4e16-9e5b-2ed783ed9df2"
+        "url": "../images/elisabeth/rooms/1769947793801-Studio_Oud_Huys_5_1600.webp",
+        "order": 5
       },
       {
-        "filename": "room-photos/1769947799660-Studio_Oud_Huys_6_1600.webp",
-        "order": 5,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947799660-Studio_Oud_Huys_6_1600.webp?alt=media&token=af7e86ff-9e1a-468e-a7b7-0e2619508f80"
+        "url": "../images/elisabeth/rooms/1769947799660-Studio_Oud_Huys_6_1600.webp",
+        "order": 6
       },
       {
-        "filename": "room-photos/1769947803580-Studio_Oud_Huys_7_1600.webp",
-        "order": 6,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947803580-Studio_Oud_Huys_7_1600.webp?alt=media&token=b1d1ed6d-20b9-425c-83cc-eab05445e7d2"
+        "url": "../images/elisabeth/rooms/1769947803580-Studio_Oud_Huys_7_1600.webp",
+        "order": 7
       },
       {
-        "filename": "room-photos/1769947807901-Studio_Oud_Huys_8_1600.webp",
-        "order": 7,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947807901-Studio_Oud_Huys_8_1600.webp?alt=media&token=ec5dee0a-16d3-4739-99aa-9e2d68493e8d"
+        "url": "../images/elisabeth/rooms/1769947807901-Studio_Oud_Huys_8_1600.webp",
+        "order": 8
       },
       {
-        "filename": "room-photos/1769947813026-Studio_Oud_Huys_9_1600.webp",
-        "order": 8,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947813026-Studio_Oud_Huys_9_1600.webp?alt=media&token=923c29ad-8527-48b2-ad57-e6236a4bf418"
+        "url": "../images/elisabeth/rooms/1769947813026-Studio_Oud_Huys_9_1600.webp",
+        "order": 9
       },
       {
-        "filename": "room-photos/1769947816957-Studio_Oud_Huys_10_1600.webp",
-        "order": 9,
-        "url": "https://firebasestorage.googleapis.com/v0/b/hotelelisabethmechelen-9dd98.firebasestorage.app/o/room-photos%2F1769947816957-Studio_Oud_Huys_10_1600.webp?alt=media&token=0012fd8a-7fc5-4907-9c81-58fe45ddfeca"
+        "url": "../images/elisabeth/rooms/1769947816957-Studio_Oud_Huys_10_1600.webp",
+        "order": 10
       }
     ],
     "roomSize": 35,

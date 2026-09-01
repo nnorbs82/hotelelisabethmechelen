@@ -64,7 +64,17 @@
   "setupStyles_de": [],
   "id": "meeting_1769865603864",
   "order": 1,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/meetings/1769865614261-oudhuysmeeting1.webp",
+    "/images/elisabeth/meetings/1769865621702-oudhuysmeeting2.webp",
+    "/images/elisabeth/meetings/1769865627104-oudhuysmeeting3.webp",
+    "/images/elisabeth/meetings/1769865631717-oudhuysmeeting4.webp",
+    "/images/elisabeth/meetings/1769865636680-oudhuysmeeting5.webp",
+    "/images/elisabeth/meetings/1769865641883-oudhuysmeeting6.webp",
+    "/images/elisabeth/meetings/1769865646597-oudhuysmeeting7.webp",
+    "/images/elisabeth/meetings/1769865651737-oudhuysmeeting8.webp",
+    "/images/elisabeth/meetings/1769865657356-oudhuysmeeting9.webp"
+  ],
   "legacyPhotos": [
     {
       "filename": "meetings-photos/meeting_1769865603864/1769865614261-oudhuysmeeting1.webp",

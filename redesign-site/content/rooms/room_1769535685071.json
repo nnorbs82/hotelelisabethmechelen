@@ -49,7 +49,12 @@
   "name_de": "",
   "id": "room_1769535685071",
   "order": 1,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947208490-City_Twin_1_1600w.webp",
+    "/images/elisabeth/rooms/1769947212387-City_Twin_2_1600w.webp",
+    "/images/elisabeth/rooms/1769947216362-City_Twin_3_1600w.webp",
+    "/images/elisabeth/rooms/1769947219644-City_Twin_4_1600w.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

@@ -23,7 +23,10 @@
   "operation_de": "",
   "id": "facility_1769888022008",
   "order": 2,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/facilities/1769888042097-poolsunbeds.webp",
+    "/images/elisabeth/facilities/1769888053313-pool2.webp"
+  ],
   "legacyPhotos": [
     {
       "filename": "facilities-library/1769888042097-poolsunbeds.webp",

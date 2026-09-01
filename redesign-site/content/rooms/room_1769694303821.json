@@ -74,7 +74,17 @@
   "name_de": "",
   "id": "room_1769694303821",
   "order": 3,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947343842-Olive_Tree_View_5_1600.webp",
+    "/images/elisabeth/rooms/1769947348031-Olive_Tree_View_6_1600.webp",
+    "/images/elisabeth/rooms/1769947368704-Olive_Tree_View_8_1600.webp",
+    "/images/elisabeth/rooms/1769947373935-Olive_Tree_View_9_1600.webp",
+    "/images/elisabeth/rooms/1786738218973-Garden_Comfort_1.webp",
+    "/images/elisabeth/rooms/1786738220922-Garden_Comfort_2.webp",
+    "/images/elisabeth/rooms/1786738223258-Garden_Comfort_3.webp",
+    "/images/elisabeth/rooms/1786738225849-Garden_Comfort_4.webp",
+    "/images/elisabeth/rooms/1786738228157-Garden_Comfort_5.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

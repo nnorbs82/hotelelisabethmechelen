@@ -59,7 +59,14 @@
   "name_de": "",
   "id": "room_1769694904451",
   "order": 6,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947504053-City_Comfort_1_1600.webp",
+    "/images/elisabeth/rooms/1769947508226-City_Comfort_2_1600.webp",
+    "/images/elisabeth/rooms/1769947511896-City_Comfort_3_1600.webp",
+    "/images/elisabeth/rooms/1769947515686-City_Comfort_4_1600.webp",
+    "/images/elisabeth/rooms/1769947519591-City_Comfort_5_1600.webp",
+    "/images/elisabeth/rooms/1769947523567-City_Comfort_6_1600.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

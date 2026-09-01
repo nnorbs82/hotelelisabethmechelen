@@ -74,7 +74,17 @@
   "name_de": "",
   "id": "room_1769694504775",
   "order": 4,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947402832-Cathedral_View_2_1600.webp",
+    "/images/elisabeth/rooms/1769947411979-Cathedral_View_4_1600.webp",
+    "/images/elisabeth/rooms/1769947423875-Cathedral_View_7_1600.webp",
+    "/images/elisabeth/rooms/1769947427612-Cathedral_View_8_1600.webp",
+    "/images/elisabeth/rooms/1769947431325-Cathedral_View_9_1600.webp",
+    "/images/elisabeth/rooms/1786736631228-Cathedral_View_Room_1.webp",
+    "/images/elisabeth/rooms/1786736634429-Cathedral_View_Room_2.webp",
+    "/images/elisabeth/rooms/1786736636886-Cathedral_View_Room_3.webp",
+    "/images/elisabeth/rooms/1786736639346-Cathedral_View_Room_4.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

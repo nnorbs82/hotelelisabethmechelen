@@ -71,7 +71,16 @@
   "name_de": "",
   "id": "room_1769698611080",
   "order": 9,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947725780-Studio_Elisabeth_1_1600.webp",
+    "/images/elisabeth/rooms/1769947729473-Studio_Elisabeth_2_1600.webp",
+    "/images/elisabeth/rooms/1769947734122-Studio_Elisabeth_3_1600.webp",
+    "/images/elisabeth/rooms/1769947738328-Studio_Elisabeth_4_1600.webp",
+    "/images/elisabeth/rooms/1769947742792-Studio_Elisabeth_5_1600.webp",
+    "/images/elisabeth/rooms/1769947747383-Studio_Elisabeth_6_1600.webp",
+    "/images/elisabeth/rooms/1769947751805-Studio_Elisabeth_7_1600.webp",
+    "/images/elisabeth/rooms/1769947755394-Studio_Elisabeth_8_1600.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

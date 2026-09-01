@@ -61,7 +61,18 @@
   "setupStyles_de": [],
   "id": "meeting_1769866808806",
   "order": 2,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/meetings/1769866844753-rooftop10_fast.webp",
+    "/images/elisabeth/meetings/1769866852264-rooftop9_fast.webp",
+    "/images/elisabeth/meetings/1769866860522-rooftop8_fast.webp",
+    "/images/elisabeth/meetings/1769866865220-rooftop7_fast.webp",
+    "/images/elisabeth/meetings/1769866870171-rooftop6_fast.webp",
+    "/images/elisabeth/meetings/1769866875472-rooftop5_fast.webp",
+    "/images/elisabeth/meetings/1769866879683-rooftop4_fast.webp",
+    "/images/elisabeth/meetings/1769866883792-rooftop3_fast.webp",
+    "/images/elisabeth/meetings/1769866887840-rooftop2_fast.webp",
+    "/images/elisabeth/meetings/1769866892047-rooftop1_fast.webp"
+  ],
   "legacyPhotos": [
     {
       "filename": "meetings-photos/meeting_1769866808806/1769866844753-rooftop10_fast.webp",

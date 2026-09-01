@@ -80,7 +80,18 @@
   "name_de": "",
   "id": "room_1769698933721",
   "order": 10,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947778322-Studio_Oud_Huys_1_1600.webp",
+    "/images/elisabeth/rooms/1769947781908-Studio_Oud_Huys_2_1600.webp",
+    "/images/elisabeth/rooms/1769947786202-Studio_Oud_Huys_3_1600.webp",
+    "/images/elisabeth/rooms/1769947790330-Studio_Oud_Huys_4_1600.webp",
+    "/images/elisabeth/rooms/1769947793801-Studio_Oud_Huys_5_1600.webp",
+    "/images/elisabeth/rooms/1769947799660-Studio_Oud_Huys_6_1600.webp",
+    "/images/elisabeth/rooms/1769947803580-Studio_Oud_Huys_7_1600.webp",
+    "/images/elisabeth/rooms/1769947807901-Studio_Oud_Huys_8_1600.webp",
+    "/images/elisabeth/rooms/1769947813026-Studio_Oud_Huys_9_1600.webp",
+    "/images/elisabeth/rooms/1769947816957-Studio_Oud_Huys_10_1600.webp"
+  ],
   "amenityIds": [
     "amenity_1769533121368",
     "amenity_1769533140373",

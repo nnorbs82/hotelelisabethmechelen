@@ -47,7 +47,13 @@
   "operation_de": "",
   "id": "facility_1769804810543",
   "order": 1,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/facilities/1769805187284-pool1.webp",
+    "/images/elisabeth/facilities/1769805194649-pool2.webp",
+    "/images/elisabeth/facilities/1769805200269-pool3.webp",
+    "/images/elisabeth/facilities/1769805205485-poolsunbeds.webp",
+    "/images/elisabeth/facilities/1770216529290-Backyard_2_1200_light.webp"
+  ],
   "legacyPhotos": [
     {
       "filename": "facilities-library/1769805187284-pool1.webp",

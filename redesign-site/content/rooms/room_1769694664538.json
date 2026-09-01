@@ -59,7 +59,14 @@
   "name_de": "",
   "id": "room_1769694664538",
   "order": 5,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947456429-City_Triple_1_1600.webp",
+    "/images/elisabeth/rooms/1769947460643-City_Triple_2_1600.webp",
+    "/images/elisabeth/rooms/1769947465172-City_Triple_3_1600.webp",
+    "/images/elisabeth/rooms/1769947469836-City_Triple_4_1600.webp",
+    "/images/elisabeth/rooms/1769947477935-City_Triple_5_1600.webp",
+    "/images/elisabeth/rooms/1769947483164-City_Triple_6_1600.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",

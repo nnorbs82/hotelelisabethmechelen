@@ -82,7 +82,18 @@
   "name_de": "",
   "id": "room_1769698293173",
   "order": 8,
-  "gallery": [],
+  "gallery": [
+    "/images/elisabeth/rooms/1769947645298-City_Suite_1_1600.webp",
+    "/images/elisabeth/rooms/1769947648929-City_Suite_2_1600.webp",
+    "/images/elisabeth/rooms/1769947652796-City_Suite_3_1600.webp",
+    "/images/elisabeth/rooms/1769947657834-City_Suite_4_1600.webp",
+    "/images/elisabeth/rooms/1769947661689-City_Suite_5_1600.webp",
+    "/images/elisabeth/rooms/1769947666112-City_Suite_6_1600.webp",
+    "/images/elisabeth/rooms/1769947670687-City_Suite_7_1600.webp",
+    "/images/elisabeth/rooms/1769947675291-City_Suite_8_1600.webp",
+    "/images/elisabeth/rooms/1769947680947-City_Suite_9_1600.webp",
+    "/images/elisabeth/rooms/1769947684753-City_Suite_10_1600.webp"
+  ],
   "amenityIds": [
     "amenity_1769533060845",
     "amenity_1769533121368",
