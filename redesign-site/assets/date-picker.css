@@ -1,0 +1,54 @@
+/* Hotel Elisabeth custom date picker */
+.eli-date-shell{position:relative;display:block;width:100%;min-width:0}
+.eli-date-shell .eli-date-input{position:relative;z-index:1;width:100%;cursor:pointer;color:transparent!important;-webkit-text-fill-color:transparent!important;caret-color:transparent!important;padding-right:48px!important}
+.eli-date-shell .eli-date-input::-webkit-datetime-edit,.eli-date-shell .eli-date-input::-webkit-date-and-time-value{color:transparent!important;-webkit-text-fill-color:transparent!important}
+.eli-date-shell .eli-date-input::-webkit-calendar-picker-indicator{opacity:0;pointer-events:none;width:0;height:0;margin:0;padding:0}
+.eli-date-shell .eli-date-input::-moz-calendar-picker-indicator{opacity:0;pointer-events:none}
+.eli-date-display{position:absolute;z-index:2;left:0;right:44px;top:50%;transform:translateY(-50%);pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:inherit;font:inherit;line-height:1.2}
+.eli-date-display.is-placeholder{opacity:.55}
+.eli-date-glyph{position:absolute;z-index:2;right:2px;top:50%;width:32px;height:32px;transform:translateY(-50%);display:grid;place-items:center;pointer-events:none;border-left:1px solid currentColor;border-color:color-mix(in srgb,currentColor 20%,transparent);opacity:.72}
+.eli-date-glyph svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.55;stroke-linecap:round;stroke-linejoin:round}
+.eli-date-shell:focus-within .eli-date-glyph{opacity:1}
+.eli-date-shell.is-invalid .eli-date-input{outline-color:#9a4949!important}
+
+/* Homepage booking strip has its own compact spacing. */
+.book-field .eli-date-shell{margin-top:2px}
+.book-field .eli-date-display{left:0;font-size:15px;letter-spacing:-.01em}
+.book-field .eli-date-glyph{right:0}
+
+.eli-calendar{position:fixed;z-index:12000;width:min(360px,calc(100vw - 24px));padding:18px;background:rgba(10,12,11,.985);color:#f6f6f2;border:1px solid rgba(255,255,255,.16);box-shadow:0 28px 90px rgba(0,0,0,.42);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(8px) scale(.985);transition:opacity .18s ease,transform .18s ease,visibility .18s ease}
+.eli-calendar.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.eli-calendar::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,rgba(255,255,255,.035),transparent 38%)}
+.eli-calendar-top{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:1px 1px 15px;border-bottom:1px solid rgba(255,255,255,.11)}
+.eli-calendar-kicker{display:block;margin-bottom:5px;font-family:var(--display,Arial,sans-serif);font-size:8px;font-weight:650;letter-spacing:.17em;text-transform:uppercase;color:var(--sage,#aab5a1)}
+.eli-calendar-title{margin:0;font-family:var(--display,Arial,sans-serif);font-size:24px;font-weight:350;letter-spacing:-.035em;line-height:1.05}
+.eli-calendar-close{flex:0 0 34px;width:34px;height:34px;border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;font-size:20px;line-height:1;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.eli-calendar-close:hover,.eli-calendar-close:focus-visible{background:#f3f4ef;color:#080a09;border-color:#f3f4ef}
+.eli-calendar-nav{position:relative;display:grid;grid-template-columns:38px 1fr 38px;align-items:center;gap:7px;padding:13px 0 11px}
+.eli-calendar-month{font-family:var(--display,Arial,sans-serif);font-size:12px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;text-align:center;color:rgba(255,255,255,.88)}
+.eli-calendar-nav button{width:38px;height:38px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#fff;cursor:pointer;font-size:16px;transition:background .2s ease,border-color .2s ease}
+.eli-calendar-nav button:hover,.eli-calendar-nav button:focus-visible{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+.eli-calendar-weekdays,.eli-calendar-days{position:relative;display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.eli-calendar-weekdays{padding:0 0 7px}
+.eli-calendar-weekdays span{padding:5px 0;text-align:center;font-family:var(--display,Arial,sans-serif);font-size:8px;font-weight:650;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.eli-calendar-day{aspect-ratio:1;border:0;background:transparent;color:rgba(255,255,255,.88);font-family:var(--display,Arial,sans-serif);font-size:12px;font-weight:500;cursor:pointer;position:relative;transition:background .16s ease,color .16s ease,transform .16s ease}
+.eli-calendar-day:hover:not(:disabled),.eli-calendar-day:focus-visible{outline:none;background:rgba(255,255,255,.11)}
+.eli-calendar-day:focus-visible{box-shadow:inset 0 0 0 1px rgba(255,255,255,.52)}
+.eli-calendar-day.is-outside{color:rgba(255,255,255,.28)}
+.eli-calendar-day.is-today::after{content:'';position:absolute;left:50%;bottom:5px;width:3px;height:3px;border-radius:50%;transform:translateX(-50%);background:var(--sage,#aab5a1)}
+.eli-calendar-day.is-selected{background:#f1f2ed;color:#080a09;font-weight:700}
+.eli-calendar-day.is-selected::after{background:#080a09}
+.eli-calendar-day:disabled{cursor:not-allowed;color:rgba(255,255,255,.13)}
+.eli-calendar-footer{position:relative;display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+.eli-calendar-hint{font-family:var(--display,Arial,sans-serif);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+.eli-calendar-today{border:0;background:transparent;color:#fff;padding:8px 0;font-family:var(--display,Arial,sans-serif);font-size:9px;font-weight:650;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.36)}
+.eli-calendar-today:hover,.eli-calendar-today:focus-visible{border-color:#fff;outline:none}
+.eli-calendar-today:disabled{opacity:.25;cursor:not-allowed}
+
+@media(max-width:640px){
+  .eli-calendar{left:12px!important;right:12px!important;bottom:12px!important;top:auto!important;width:auto;padding:19px;border-radius:0;transform:translateY(16px)}
+  .eli-calendar.open{transform:translateY(0)}
+  .eli-calendar-day{font-size:13px}
+}
+
+@media(prefers-reduced-motion:reduce){.eli-calendar,.eli-calendar-day{transition:none!important}}
