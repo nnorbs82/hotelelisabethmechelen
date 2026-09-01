@@ -15,10 +15,38 @@
   "heroBody_es": "Pensado para escapadas urbanas, viajes de negocios y fines de semana sin prisas - con piscina interior, un tranquilo patio y Malinas justo al salir.",
   "heroBody_de": "Für Städtereisen, Geschäftsaufenthalte und entspannte Wochenenden - mit Innenpool, ruhigem Innenhof und Mechelen direkt vor der Tür.",
   "heroImages": [
-    {"image":"/images/elisabeth/home/1.webp","alt_en":"Hotel Elisabeth Mechelen","alt_nl":"Hotel Elisabeth Mechelen","alt_fr":"Hotel Elisabeth Mechelen","alt_es":"Hotel Elisabeth Mechelen","alt_de":"Hotel Elisabeth Mechelen"},
-    {"image":"/images/elisabeth/home/4.webp","alt_en":"Indoor pool at Hotel Elisabeth","alt_nl":"Binnenzwembad van Hotel Elisabeth","alt_fr":"Piscine intérieure de l’Hotel Elisabeth","alt_es":"Piscina interior de Hotel Elisabeth","alt_de":"Innenpool im Hotel Elisabeth"},
-    {"image":"/images/elisabeth/home/6.webp","alt_en":"Hotel Elisabeth interior","alt_nl":"Interieur van Hotel Elisabeth","alt_fr":"Intérieur de l’Hotel Elisabeth","alt_es":"Interior de Hotel Elisabeth","alt_de":"Interieur des Hotel Elisabeth"},
-    {"image":"/images/elisabeth/home/8.webp","alt_en":"Hotel Elisabeth atmosphere","alt_nl":"Sfeer in Hotel Elisabeth","alt_fr":"Ambiance de l’Hotel Elisabeth","alt_es":"Ambiente de Hotel Elisabeth","alt_de":"Atmosphäre im Hotel Elisabeth"}
+    {
+      "image": "/images/elisabeth/home/1.webp",
+      "alt_en": "Hotel Elisabeth Mechelen",
+      "alt_nl": "Hotel Elisabeth Mechelen",
+      "alt_fr": "Hotel Elisabeth Mechelen",
+      "alt_es": "Hotel Elisabeth Mechelen",
+      "alt_de": "Hotel Elisabeth Mechelen"
+    },
+    {
+      "image": "/images/elisabeth/home/4.webp",
+      "alt_en": "Indoor pool at Hotel Elisabeth",
+      "alt_nl": "Binnenzwembad van Hotel Elisabeth",
+      "alt_fr": "Piscine intérieure de l’Hotel Elisabeth",
+      "alt_es": "Piscina interior de Hotel Elisabeth",
+      "alt_de": "Innenpool im Hotel Elisabeth"
+    },
+    {
+      "image": "/images/elisabeth/home/6.webp",
+      "alt_en": "Hotel Elisabeth interior",
+      "alt_nl": "Interieur van Hotel Elisabeth",
+      "alt_fr": "Intérieur de l’Hotel Elisabeth",
+      "alt_es": "Interior de Hotel Elisabeth",
+      "alt_de": "Interieur des Hotel Elisabeth"
+    },
+    {
+      "image": "/images/elisabeth/home/8.webp",
+      "alt_en": "Hotel Elisabeth atmosphere",
+      "alt_nl": "Sfeer in Hotel Elisabeth",
+      "alt_fr": "Ambiance de l’Hotel Elisabeth",
+      "alt_es": "Ambiente de Hotel Elisabeth",
+      "alt_de": "Atmosphäre im Hotel Elisabeth"
+    }
   ],
   "manifestoEyebrow_en": "Hotel Elisabeth · Mechelen",
   "manifestoEyebrow_nl": "Hotel Elisabeth · Mechelen",
@@ -46,15 +74,79 @@
   "manifestoBody_es": "Hotel Elisabeth reúne habitaciones modernas, espacios comunes relajados y una ubicación céntrica en Malinas. Pasa de la ciudad al patio, de una reunión a la piscina, sin cambiar el ritmo de tu estancia.",
   "manifestoBody_de": "Hotel Elisabeth verbindet moderne Zimmer, entspannte Gemeinschaftsbereiche und eine zentrale Lage in Mechelen. Von der Stadt in den Innenhof, vom Meeting zum Pool - ohne den Rhythmus Ihres Aufenthalts zu verlieren.",
   "paceImages": [
-    {"image":"/images/elisabeth/home/2.webp","caption_en":"Interior","caption_nl":"Interieur","caption_fr":"Intérieur","caption_es":"Interior","caption_de":"Interieur","alt_en":"Hotel Elisabeth interior","alt_nl":"Interieur van Hotel Elisabeth","alt_fr":"Intérieur de l’Hotel Elisabeth","alt_es":"Interior de Hotel Elisabeth","alt_de":"Interieur des Hotel Elisabeth"},
-    {"image":"/images/elisabeth/home/5.webp","caption_en":"Courtyard","caption_nl":"Binnentuin","caption_fr":"Cour","caption_es":"Patio","caption_de":"Innenhof","alt_en":"Hotel Elisabeth courtyard","alt_nl":"Binnentuin van Hotel Elisabeth","alt_fr":"Cour de l’Hotel Elisabeth","alt_es":"Patio de Hotel Elisabeth","alt_de":"Innenhof des Hotel Elisabeth"},
-    {"image":"/images/elisabeth/home/4.webp","caption_en":"Pool","caption_nl":"Zwembad","caption_fr":"Piscine","caption_es":"Piscina","caption_de":"Pool","alt_en":"Hotel Elisabeth pool","alt_nl":"Zwembad van Hotel Elisabeth","alt_fr":"Piscine de l’Hotel Elisabeth","alt_es":"Piscina de Hotel Elisabeth","alt_de":"Pool im Hotel Elisabeth"}
+    {
+      "image": "/images/elisabeth/home/2.webp",
+      "caption_en": "Pool",
+      "caption_nl": "Zwembad",
+      "caption_fr": "Piscine",
+      "caption_es": "Piscina",
+      "caption_de": "Pool",
+      "alt_en": "Hotel Elisabeth pool",
+      "alt_nl": "Zwembad van Hotel Elisabeth",
+      "alt_fr": "Piscine de l’Hotel Elisabeth",
+      "alt_es": "Piscina de Hotel Elisabeth",
+      "alt_de": "Pool im Hotel Elisabeth"
+    },
+    {
+      "image": "/images/elisabeth/home/5.webp",
+      "caption_en": "Interior",
+      "caption_nl": "Interieur",
+      "caption_fr": "Intérieur",
+      "caption_es": "Interior",
+      "caption_de": "Interieur",
+      "alt_en": "Hotel Elisabeth interior",
+      "alt_nl": "Interieur van Hotel Elisabeth",
+      "alt_fr": "Intérieur de l’Hotel Elisabeth",
+      "alt_es": "Interior de Hotel Elisabeth",
+      "alt_de": "Interieur des Hotel Elisabeth"
+    },
+    {
+      "image": "/images/elisabeth/home/4.webp",
+      "caption_en": "Courtyard",
+      "caption_nl": "Binnentuin",
+      "caption_fr": "Cour",
+      "caption_es": "Patio",
+      "caption_de": "Innenhof",
+      "alt_en": "Hotel Elisabeth courtyard",
+      "alt_nl": "Binnentuin van Hotel Elisabeth",
+      "alt_fr": "Cour de l’Hotel Elisabeth",
+      "alt_es": "Patio de Hotel Elisabeth",
+      "alt_de": "Innenhof des Hotel Elisabeth"
+    }
   ],
   "facts": [
-    {"value":"66","label_en":"Rooms","label_nl":"Kamers","label_fr":"Chambres","label_es":"Habitaciones","label_de":"Zimmer"},
-    {"value":"1","label_en":"Indoor pool","label_nl":"Binnenzwembad","label_fr":"Piscine intérieure","label_es":"Piscina interior","label_de":"Innenpool"},
-    {"value":"24/7","label_en":"Mechelen on your doorstep","label_nl":"Mechelen voor de deur","label_fr":"Malines à votre porte","label_es":"Malinas a tu puerta","label_de":"Mechelen direkt vor der Tür"},
-    {"value":"P","label_en":"Underground parking","label_nl":"Ondergrondse parking","label_fr":"Parking souterrain","label_es":"Aparcamiento subterráneo","label_de":"Tiefgarage"}
+    {
+      "value": "66",
+      "label_en": "Rooms",
+      "label_nl": "Kamers",
+      "label_fr": "Chambres",
+      "label_es": "Habitaciones",
+      "label_de": "Zimmer"
+    },
+    {
+      "value": "1",
+      "label_en": "Indoor pool",
+      "label_nl": "Binnenzwembad",
+      "label_fr": "Piscine intérieure",
+      "label_es": "Piscina interior",
+      "label_de": "Innenpool"
+    },
+    {
+      "value": "24/7",
+      "label_en": "Mechelen on your doorstep",
+      "label_nl": "Mechelen voor de deur",
+      "label_fr": "Malines à votre porte",
+      "label_es": "Malinas a tu puerta",
+      "label_de": "Mechelen direkt vor der Tür"
+    },
+    {
+      "value": "P",
+      "label_en": "Underground parking",
+      "label_nl": "Ondergrondse parking",
+      "label_fr": "Parking souterrain",
+      "label_es": "Aparcamiento subterráneo",
+      "label_de": "Tiefgarage"
+    }
   ],
   "closingImage": "/images/elisabeth/home/1.webp",
   "closingEyebrow_en": "Your stay in Mechelen",
