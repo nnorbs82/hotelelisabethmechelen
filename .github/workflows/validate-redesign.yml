@@ -78,6 +78,21 @@ jobs:
                   if not entry.get(f'body_{lang}'):
                       raise SystemExit(f'Missing hotel info {lang}: {entry.get("id")}')
 
+          homepage=json.loads((content/'homepage.json').read_text(encoding='utf-8'))
+          multilingual=['heroEyebrow','heroTitle','heroBody','manifestoEyebrow','manifestoLine1','manifestoLine2','manifestoSubtitle','manifestoBody','closingEyebrow','closingTitle']
+          for field in multilingual:
+              for lang in ['en','nl','fr','es','de']:
+                  if not homepage.get(f'{field}_{lang}'):
+                      raise SystemExit(f'Missing homepage {field}_{lang}')
+          hero=homepage.get('heroImages') or []
+          pace=homepage.get('paceImages') or []
+          facts=homepage.get('facts') or []
+          if not (2 <= len(hero) <= 8): raise SystemExit(f'Homepage slideshow requires 2-8 images, got {len(hero)}')
+          if len(pace) != 3: raise SystemExit(f'Homepage atmosphere ribbon requires exactly 3 images, got {len(pace)}')
+          if len(facts) != 4: raise SystemExit(f'Homepage facts require exactly 4 entries, got {len(facts)}')
+          if not homepage.get('closingImage'): raise SystemExit('Homepage closing image missing')
+          if not (generated/'homepage.json').exists(): raise SystemExit('Generated homepage index missing')
+
           for legal_name in ['privacy.json','terms.json']:
               legal=json.loads((content/legal_name).read_text(encoding='utf-8'))
               for lang in ['en','nl','fr']:
@@ -91,6 +106,9 @@ jobs:
                   return
               path=root/value.lstrip('/')
               if not path.exists(): raise SystemExit(f'Missing media {path} referenced by {context}')
+          for image in homepage.get('heroImages',[]): check_media(image.get('image',''), 'homepage hero')
+          for image in homepage.get('paceImages',[]): check_media(image.get('image',''), 'homepage atmosphere')
+          check_media(homepage.get('closingImage',''), 'homepage closing image')
           for folder in ['rooms','packages','facilities','meetings','attractions']:
               for item in items(folder):
                   check_media(item.get('image',''), f'{folder}/{item.get("id")}')
@@ -150,7 +168,9 @@ jobs:
             exit 1
           fi
           grep -q 'showInOurPicks === true' redesign-site/assets/home.js
-          grep -q 'content/generated/' redesign-site/assets/home.js
+          grep -q "homepage: 'content/generated/homepage.json'" redesign-site/assets/home.js
+          grep -q 'data-home-manifesto-title' redesign-site/index.html
+          grep -q 'hero slideshow - prototype only' design-preview-v2.js
 
       - name: Guard live production branch
         run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
