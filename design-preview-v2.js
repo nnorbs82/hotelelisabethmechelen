@@ -17,6 +17,24 @@
     document.head.appendChild(link);
   }
 
+  function loadPrivacyConsent(){
+    if(!document.body?.classList.contains('actual-site'))return;
+    if(!document.getElementById('elisabeth-privacy-consent-style')){
+      const link=document.createElement('link');
+      link.id='elisabeth-privacy-consent-style';
+      link.rel='stylesheet';
+      link.href='assets/privacy-consent.css';
+      document.head.appendChild(link);
+    }
+    if(!document.getElementById('elisabeth-privacy-consent-script')){
+      const script=document.createElement('script');
+      script.id='elisabeth-privacy-consent-script';
+      script.src='assets/privacy-consent.js';
+      script.async=false;
+      document.body.appendChild(script);
+    }
+  }
+
   function loadDatePicker(){
     if(!document.body?.classList.contains('actual-site'))return;
     if(!document.getElementById('elisabeth-date-picker-style')){
@@ -47,6 +65,7 @@
 
   const scheduleEnhancements=()=>setTimeout(()=>{
     loadMobileStability();
+    loadPrivacyConsent();
     loadDatePicker();
     loadHomepageMobileStability();
   },0);
