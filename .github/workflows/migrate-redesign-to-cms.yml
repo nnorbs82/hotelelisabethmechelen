@@ -1,0 +1,87 @@
+name: Migrate redesign to Pages CMS content
+
+on:
+  push:
+    branches: [elisabeth-redesign]
+    paths:
+      - '.github/workflows/migrate-redesign-to-cms.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: elisabeth-redesign
+          fetch-depth: 0
+
+      - name: Seed editable content records
+        run: python tools/migrate_redesign_to_cms.py
+
+      - name: Build browser indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Validate Pages CMS configuration
+        run: ruby -e "require 'yaml'; YAML.load_file('.pages.yml'); puts 'Pages CMS YAML valid'"
+
+      - name: Validate JavaScript and content routing
+        run: |
+          for file in redesign-site/assets/*.js; do node --check "$file"; done
+          if grep -R --include='*.js' -n '../redesign/legacy-content/' redesign-site/assets; then
+            echo 'Frontend still references temporary legacy content' >&2
+            exit 1
+          fi
+          grep -R --include='*.js' -q 'content/generated/' redesign-site/assets
+
+      - name: Validate migrated content
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('redesign-site/content')
+          expected={'rooms':10,'packages':3,'facilities':2,'meetings':2,'attractions':5,'amenities':10}
+          for name,count in expected.items():
+              files=list((base/name).glob('*.json'))
+              if len(files)!=count: raise SystemExit(f'{name}: expected {count}, got {len(files)}')
+              for p in files: json.loads(p.read_text(encoding='utf-8'))
+          for name in ['hotel-info.json','privacy.json','terms.json']:
+              json.loads((base/name).read_text(encoding='utf-8'))
+          generated=base/'generated'
+          for name in ['rooms.json','packages.json','facilities.json','facilitiesLibrary.json','meetings.json','meetingsPhotos.json','attractions.json','careers.json','amenitiesMaster.json','hotelInfo.json','privacyPolicy.json','termsAndConditions.json']:
+              json.loads((generated/name).read_text(encoding='utf-8'))
+          rooms=json.loads((generated/'rooms.json').read_text(encoding='utf-8'))
+          packages=json.loads((generated/'packages.json').read_text(encoding='utf-8'))
+          if len(rooms)!=10 or len(packages)!=3: raise SystemExit('Generated collection count mismatch')
+          print('CMS migration data validated')
+          PY
+
+      - name: Validate redesign pages and noindex protection
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          pages=list(Path('redesign-site').glob('*.html'))
+          if not pages: raise SystemExit('No redesign pages found')
+          for p in pages:
+              HTMLParser().feed(p.read_text(encoding='utf-8'))
+              if 'noindex,nofollow' not in p.read_text(encoding='utf-8').replace(' ', ''):
+                  raise SystemExit(f'Preview indexing protection missing: {p}')
+          print(f'Validated {len(pages)} redesign HTML pages')
+          PY
+
+      - name: Guard production branch
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "b881ebc93db57d2409024e9664b0942f62a5e94c"
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/migrate-redesign-to-cms.yml
+
+      - name: Commit CMS migration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add redesign-site/content redesign-site/assets redesign-site/BUILD_STATUS.md .github/workflows/migrate-redesign-to-cms.yml
+          git commit -m 'cms: migrate redesign to editable static content'
+          git push origin HEAD:elisabeth-redesign
