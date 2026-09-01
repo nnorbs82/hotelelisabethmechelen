@@ -69,7 +69,6 @@
       <div class="hero-border" aria-hidden="true"></div>
       <div class="container-wide hero-layout">
         <div class="hero-copy">
-          <img class="hero-logo" src="logo/elitext.png" alt="Hotel Elisabeth">
           <p class="eyebrow" data-i18n="hero.eyebrow">A contemporary four-star stay in Mechelen</p>
           <h1 class="display hero-title" data-i18n="hero.title">A modern pause in the heart of the city.</h1>
           <p class="hero-subtitle" data-i18n="hero.body">Designed for city breaks, business stays and unhurried weekends - with an indoor pool, quiet courtyard and Mechelen just outside.</p>
@@ -96,31 +95,46 @@
       <p class="booking-note" data-i18n="booking.note">Direct booking through Mews</p>
     </div>
 
-    <section class="section anchor-marker" id="concept">
-      <div class="container">
-        <div class="section-head reveal"><p class="eyebrow" data-i18n="manifesto.eyebrow">Hotel Elisabeth · Mechelen</p><div><h2 class="display manifesto-title" data-i18n-html="manifesto.title">More than a room.<br><span>A change of pace.</span></h2></div></div>
-        <div class="manifesto-grid">
-          <div class="image-stack reveal"><img class="main" src="mainslide/2.webp" alt="Hotel Elisabeth interior"><img class="small" src="mainslide/5.webp" alt="Hotel Elisabeth detail"></div>
-          <div class="manifesto-copy reveal"><h3 data-i18n="manifesto.subtitle">Contemporary comfort with room to breathe.</h3><p data-i18n="manifesto.body">Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.</p>
-            <div class="facts"><div class="fact"><strong>66</strong><span data-i18n="facts.rooms">Rooms</span></div><div class="fact"><strong>4★</strong><span data-i18n="facts.hotel">Hotel</span></div><div class="fact"><strong>Indoor</strong><span data-i18n="facts.pool">Indoor pool</span></div><div class="fact"><strong>Central</strong><span data-i18n="facts.location">Central Mechelen</span></div></div>
+    <div class="transition-scene" id="pace-transition">
+      <div class="transition-sticky">
+        <section class="section transition-layer transition-front anchor-marker" id="concept">
+          <div class="container">
+            <div class="section-head reveal"><p class="eyebrow" data-i18n="manifesto.eyebrow">Hotel Elisabeth · Mechelen</p><div><h2 class="display manifesto-title" data-i18n-html="manifesto.title">More than a room.<br><span>A change of pace.</span></h2></div></div>
+            <div class="pace-layout">
+              <div class="pace-gallery reveal" aria-label="Hotel Elisabeth atmosphere">
+                <figure class="pace-shot primary" tabindex="0"><img src="mainslide/2.webp" alt="Hotel Elisabeth interior"><figcaption>Interior</figcaption></figure>
+                <figure class="pace-shot" tabindex="0"><img src="mainslide/5.webp" alt="Hotel Elisabeth atmosphere"><figcaption>Courtyard</figcaption></figure>
+                <figure class="pace-shot" tabindex="0"><img src="mainslide/4.webp" alt="Hotel Elisabeth pool"><figcaption>Pool</figcaption></figure>
+              </div>
+              <div class="pace-copy reveal">
+                <h3 data-i18n="manifesto.subtitle">Contemporary comfort with room to breathe.</h3>
+                <p data-i18n="manifesto.body">Hotel Elisabeth brings together modern rooms, relaxed shared spaces and a central Mechelen location. Move from the city to the courtyard, from meetings to the pool, without changing the pace of your stay.</p>
+                <div class="facts-strip">
+                  <div class="fact-card"><strong>66</strong><span data-i18n="facts.rooms">Rooms</span></div>
+                  <div class="fact-card"><strong>1</strong><span data-i18n="facts.pool">Indoor pool</span></div>
+                  <div class="fact-card"><strong>24/7</strong><span data-i18n="facts.doorstep">Mechelen on your doorstep</span></div>
+                  <div class="fact-card"><strong>P</strong><span data-i18n="facts.parking">Underground parking</span></div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section class="section mist">
-      <div class="container-wide">
-        <div class="section-head reveal"><p class="eyebrow" data-i18n="pages.eyebrow">The complete hotel website</p><div><h2 class="display" data-i18n="pages.title">Every existing page, redesigned.</h2><p class="lead" data-i18n="pages.body">The final website keeps Rooms, Facilities, Packages, Meetings, Hotel Information, Attractions, Group Requests, Careers and the legal pages.</p></div></div>
-        <div class="page-index reveal">
-          <a href="#rooms"><span class="num">01</span><div><h3 data-i18n="nav.rooms">Rooms</h3><p>Categories, specifications, galleries, videos and direct booking.</p></div></a>
-          <a href="#facilities"><span class="num">02</span><div><h3 data-i18n="nav.facilities">Facilities</h3><p>Pool, courtyard, breakfast, parking and practical services.</p></div></a>
-          <a href="#packages"><span class="num">03</span><div><h3 data-i18n="nav.packages">Packages</h3><p>Active offers presented as refined editorial campaigns.</p></div></a>
-          <a href="#meetings"><span class="num">04</span><div><h3 data-i18n="nav.meetings">Meetings</h3><p>Spaces, capacities, equipment and the complete request form.</p></div></a>
-          <a href="#info"><span class="num">05</span><div><h3 data-i18n="nav.info">Info</h3><p>Every practical hotel detail, clearly organised.</p></div></a>
-          <a href="#group"><span class="num">06</span><div><h3 data-i18n="nav.group">Group request</h3><p>The full accommodation request, not a simplified contact form.</p></div></a>
-        </div>
+        <section class="section mist transition-layer transition-back">
+          <div class="container-wide">
+            <div class="section-head reveal"><p class="eyebrow" data-i18n="pages.eyebrow">The complete hotel website</p><div><h2 class="display" data-i18n="pages.title">Every existing page, redesigned.</h2><p class="lead" data-i18n="pages.body">The final website keeps Rooms, Facilities, Packages, Meetings, Hotel Information, Attractions, Group Requests, Careers and the legal pages.</p></div></div>
+            <div class="page-index reveal">
+              <a href="#rooms"><span class="num">01</span><div><h3 data-i18n="nav.rooms">Rooms</h3><p>Categories, specifications, galleries, videos and direct booking.</p></div></a>
+              <a href="#facilities"><span class="num">02</span><div><h3 data-i18n="nav.facilities">Facilities</h3><p>Pool, courtyard, breakfast, parking and practical services.</p></div></a>
+              <a href="#packages"><span class="num">03</span><div><h3 data-i18n="nav.packages">Packages</h3><p>Active offers presented as refined editorial campaigns.</p></div></a>
+              <a href="#meetings"><span class="num">04</span><div><h3 data-i18n="nav.meetings">Meetings</h3><p>Spaces, capacities, equipment and the complete request form.</p></div></a>
+              <a href="#info"><span class="num">05</span><div><h3 data-i18n="nav.info">Info</h3><p>Every practical hotel detail, clearly organised.</p></div></a>
+              <a href="#group"><span class="num">06</span><div><h3 data-i18n="nav.group">Group request</h3><p>The full accommodation request, not a simplified contact form.</p></div></a>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
 
     <section class="section white anchor-marker" id="rooms">
       <div class="container-wide">
