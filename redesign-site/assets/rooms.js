@@ -99,7 +99,13 @@
       <button class="room-dialog-close" type="button" data-close-room aria-label="${escape(l.close)}">×</button>
       <div class="room-dialog-grid">
         <div class="room-dialog-gallery">
-          <div class="room-dialog-main"><img src="${escape(image)}" alt="${escape(name)}" id="room-dialog-main-image"></div>
+          <div class="room-dialog-main">
+            <img src="${escape(image)}" alt="${escape(name)}" id="room-dialog-main-image">
+            ${images.length>1 ? `<div class="room-dialog-main-nav" aria-label="Room gallery navigation">
+              <div class="room-dialog-counter" aria-live="polite"><span data-dialog-current>${String(activeDialogPhoto+1).padStart(2,'0')}</span><span class="room-dialog-counter-sep">/</span><span data-dialog-total>${String(images.length).padStart(2,'0')}</span></div>
+              <div class="room-dialog-main-controls"><button type="button" data-dialog-nav="prev" aria-label="Previous photo">←</button><button type="button" data-dialog-nav="next" aria-label="Next photo">→</button></div>
+            </div>` : ''}
+          </div>
           ${images.length>1 ? `<div class="room-dialog-thumbs">${images.map((photo,index)=>`<button class="room-dialog-thumb ${index===activeDialogPhoto?'active':''}" type="button" data-dialog-photo="${index}" aria-label="Photo ${index+1}"><img src="${escape(photo.url)}" alt="" loading="lazy"></button>`).join('')}</div>`:''}
         </div>
         <div class="room-dialog-copy">
@@ -146,7 +152,11 @@
     activeDialogPhoto = (index+images.length)%images.length;
     const main = document.getElementById('room-dialog-main-image');
     if (main) main.src = images[activeDialogPhoto].url;
+    const current = document.querySelector('[data-dialog-current]');
+    if (current) current.textContent = String(activeDialogPhoto+1).padStart(2,'0');
     document.querySelectorAll('[data-dialog-photo]').forEach((button,i)=>button.classList.toggle('active',i===activeDialogPhoto));
+    const activeThumb = document.querySelector(`[data-dialog-photo="${activeDialogPhoto}"]`);
+    activeThumb?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   }
 
   document.addEventListener('click',event=>{
@@ -160,6 +170,8 @@
     const opener=event.target.closest('[data-open-room]');
     if(opener){openRoom(opener.dataset.openRoom);return;}
     if(event.target.closest('[data-close-room]')){closeRoom();return;}
+    const dialogNav=event.target.closest('[data-dialog-nav]');
+    if(dialogNav){showDialogPhoto(activeDialogPhoto+(dialogNav.dataset.dialogNav==='next'?1:-1));return;}
     const thumb=event.target.closest('[data-dialog-photo]');
     if(thumb){showDialogPhoto(Number(thumb.dataset.dialogPhoto));return;}
     if(event.target.id==='room-dialog') closeRoom();
