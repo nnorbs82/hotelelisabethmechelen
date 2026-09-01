@@ -1,0 +1,37 @@
+{
+  "production_branch": "main",
+  "redesign_branch": "elisabeth-redesign",
+  "production_safety": "Do not replace or merge production until the redesigned site is fully approved and tested.",
+  "languages": ["en", "nl", "fr", "es", "de"],
+  "fixed_ui_strategy": "Navigation, buttons, calendars, form labels, validation, cookie controls, accessibility labels and other constant interface text are translated in code and are not CMS-editable.",
+  "editable_content_strategy": "Only hotel-managed content that can reasonably change is exposed in Pages CMS, with five-language fields where appropriate.",
+  "pages": [
+    {"page":"Home","legacy_file":"index.html","firebase_paths":["mainBanner","indexAds","indexBackground","aboutUs","adsBottom","packages","translations"]},
+    {"page":"Rooms","legacy_file":"rooms.html","firebase_paths":["rooms","amenitiesMaster","amenities","translations"]},
+    {"page":"Facilities","legacy_file":"facilities.html","firebase_paths":["facilities","facilitiesHero","facilitiesLibrary","translations"]},
+    {"page":"Packages","legacy_file":"packages.html","firebase_paths":["packages","translations"]},
+    {"page":"Meetings","legacy_file":"meetings.html","firebase_paths":["meetings","meetingsPhotos","translations"],"preserve_form":true},
+    {"page":"Hotel Information","legacy_file":"info.html","firebase_paths":["hotelInfo","translations"]},
+    {"page":"Attractions","legacy_file":"attractions.html","firebase_paths":["attractions","attractionsMainImage","translations"]},
+    {"page":"Group Request","legacy_file":"grouprequest.html","firebase_paths":["groupMainImage","translations"],"preserve_form":true},
+    {"page":"Careers","legacy_file":"careers.html","firebase_paths":["careers","translations"]},
+    {"page":"Hotel Policies","legacy_file":"policies.html","firebase_paths":[]},
+    {"page":"Privacy Policy","legacy_file":"privacypolicy.html","firebase_paths":["privacyPolicy","translations"]},
+    {"page":"Terms and Conditions","legacy_file":"termsandconditions.html","firebase_paths":["termsAndConditions","translations"]}
+  ],
+  "forms": {
+    "meetings": ["first_name","last_name","email","telephone","participants","meeting_date","message","privacy_consent"],
+    "group_request": ["first_name","last_name","email","telephone","checkin","checkout","total_guests","single_rooms","twin_rooms","double_rooms","triple_rooms","group_type","meal_option","message","privacy_consent"]
+  },
+  "booking": {
+    "provider": "Mews",
+    "distributor": "https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e"
+  },
+  "next_steps": [
+    "Inventory and export public hotel content and required Firebase Storage photography without publishing private form submissions or credentials.",
+    "Create the shared five-language redesign shell and proper individual pages on elisabeth-redesign.",
+    "Move editable content into Git-based JSON or Markdown files and configure Pages CMS.",
+    "Replace Firebase reads page by page on the redesign branch only.",
+    "Validate Mews booking, meeting request, group request, SEO, accessibility, performance and mobile layouts before any production cutover."
+  ]
+}
