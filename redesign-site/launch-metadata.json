@@ -1,0 +1,64 @@
+{
+  "site": {
+    "name": "Hotel Elisabeth Mechelen",
+    "baseUrl": "https://hotelelisabethmechelen.com",
+    "telephone": "+32 15 28 84 00",
+    "email": "info@elisabeth-hotel.be",
+    "address": {
+      "streetAddress": "Goswin de Stassartstraat 26/28",
+      "postalCode": "2800",
+      "addressLocality": "Mechelen",
+      "addressCountry": "BE"
+    }
+  },
+  "pages": {
+    "index.html": {
+      "title": "Hotel Elisabeth Mechelen | 4-Star Hotel in Mechelen City Centre",
+      "description": "Stay at Hotel Elisabeth, a contemporary 4-star hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking."
+    },
+    "rooms.html": {
+      "title": "Rooms & Suites | Hotel Elisabeth Mechelen",
+      "description": "Explore the rooms, studios and suites at Hotel Elisabeth Mechelen, with real room photography, amenities, flexible options and direct booking."
+    },
+    "facilities.html": {
+      "title": "Pool & Hotel Facilities | Hotel Elisabeth Mechelen",
+      "description": "Discover Hotel Elisabeth Mechelen facilities including the indoor pool, wellness information and practical guest services in the heart of Mechelen."
+    },
+    "packages.html": {
+      "title": "Hotel Packages & Offers | Hotel Elisabeth Mechelen",
+      "description": "Discover current Hotel Elisabeth Mechelen packages and direct-booking offers for weekend stays, celebrations and suite escapes."
+    },
+    "meetings.html": {
+      "title": "Meeting Rooms & Events | Hotel Elisabeth Mechelen",
+      "description": "Host meetings and events at Hotel Elisabeth Mechelen with flexible layouts, natural light, catering options, parking and overnight accommodation."
+    },
+    "info.html": {
+      "title": "Hotel Information | Hotel Elisabeth Mechelen",
+      "description": "Find practical Hotel Elisabeth information including check-in, check-out, breakfast, parking, traffic access, services and payment methods."
+    },
+    "attractions.html": {
+      "title": "Things to Do in Mechelen | Hotel Elisabeth",
+      "description": "Explore Mechelen from Hotel Elisabeth with selected local attractions, heritage, brewery visits, walks and experiences in the city centre."
+    },
+    "grouprequest.html": {
+      "title": "Group Accommodation | Hotel Elisabeth Mechelen",
+      "description": "Plan a group stay at Hotel Elisabeth Mechelen and request a tailored quotation with dates, room mix, meal options and group requirements."
+    },
+    "careers.html": {
+      "title": "Careers | Hotel Elisabeth Mechelen",
+      "description": "Explore current hospitality career opportunities at Hotel Elisabeth Mechelen or send an open application to join the hotel team."
+    },
+    "policies.html": {
+      "title": "Hotel Policies | Hotel Elisabeth Mechelen",
+      "description": "Read practical Hotel Elisabeth guest policies and information covering arrival, departure, parking, services, payments and hotel guidelines."
+    },
+    "privacypolicy.html": {
+      "title": "Privacy Policy | Hotel Elisabeth Mechelen",
+      "description": "Read the Hotel Elisabeth Mechelen privacy policy and information about how guest and website data is processed and protected."
+    },
+    "termsandconditions.html": {
+      "title": "Terms & Conditions | Hotel Elisabeth Mechelen",
+      "description": "Read the terms and conditions that apply to reservations and stays at Hotel Elisabeth Mechelen."
+    }
+  }
+}
