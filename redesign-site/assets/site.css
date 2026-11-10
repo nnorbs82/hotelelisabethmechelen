@@ -156,3 +156,12 @@
 /* Accessibility focus treatment */
 .actual-site :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:3px solid #c9ccb7!important;outline-offset:3px!important}
 .actual-site .pace-shot:focus-visible{outline-color:#fff!important;outline-offset:-4px!important}
+
+/* Shared optional promotion-code controls: Home, Rooms and Facilities. */
+.booking-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px}.booking-foot .booking-note{margin:0}.promo-toggle{display:inline-flex;align-items:center;gap:12px;padding:6px 0;border:0;background:transparent;font-size:12px;font-weight:400;color:var(--muted);cursor:pointer;text-align:left;max-width:65%}.promo-toggle:hover{color:var(--text)}[data-promo-summary]{overflow-wrap:anywhere}[data-promo-symbol]{font-size:17px;line-height:1}.promo-panel{width:min(370px,100%);margin-top:10px;border:1px solid var(--line);padding:20px;background:var(--paper);box-shadow:0 12px 28px rgba(23,25,23,.06)}.promo-panel>label{display:block;font-family:var(--display);font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px;color:var(--muted)}.promo-entry{display:flex;gap:9px}.promo-entry input{min-width:0;width:100%;padding:10px 12px;font-size:16px;border:1px solid var(--line);background:white;border-radius:0;outline-offset:2px}.promo-entry input:focus{outline:1px solid var(--sage-dark)}.promo-entry button{padding:10px 17px;text-transform:uppercase;letter-spacing:.1em;background:var(--sage);color:white;border:0;font-size:12px;cursor:pointer}.promo-entry button:hover{background:var(--sage-dark)}.promo-help-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px}.promo-help-row small{font-size:11px;color:var(--muted)}[data-promo-remove]{font-size:11px;padding:0;border:0;background:transparent;text-decoration:underline;cursor:pointer;color:var(--muted)}
+
+.booking-form [hidden]{display:none!important}
+.booking-form{margin:0}
+.booking-error{color:#8b2626;font-size:13px;margin:12px 0 0}
+.promo-toggle:focus-visible,.promo-entry button:focus-visible,[data-promo-remove]:focus-visible{outline:2px solid var(--sage-dark);outline-offset:3px}
+@media(max-width:760px){.booking-foot{align-items:flex-start;gap:12px}.promo-toggle{font-size:11px;padding-top:0}.booking-foot .booking-note{max-width:45%;font-size:8px;text-align:right;padding-top:3px}.promo-panel{padding:17px}.promo-help-row small{font-size:10px}}

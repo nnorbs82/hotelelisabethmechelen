@@ -257,6 +257,8 @@
   }));
   document.addEventListener('click',event=>{if(guestField&&!guestField.contains(event.target))guestField.classList.remove('open');});
   document.getElementById('preview-book')?.addEventListener('click',()=>{
+    // Redesigned bars share the form submit handler in booking-promotions.js.
+    if(document.getElementById('preview-book').closest('[data-booking-form]'))return;
     const url=new URL(MEWS_URL);
     url.searchParams.set('mewsRoute','rooms');
     if(checkin?.value)url.searchParams.set('mewsStart',checkin.value);
