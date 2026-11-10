@@ -1,0 +1,49 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true
+  },
+  "bedType_en": "Double bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "A calm and comfortable double room located on the quieter garden side of Hotel Elisabeth. Enjoy a more relaxed setting with a pleasant outlook towards the hotel’s inner garden area - and you might even spot our much-loved olive trees, no flight to Spain required.\n\nInside, parquet floors and a stylish walk-in shower set the tone, while air conditioning, Smart TV, tea & coffee setup, mini fridge, free WiFi, and a direct line phone make your stay effortless.",
+  "description_fr": "Une chambre double calme et confortable, située du côté jardin plus paisible de l’Hotel Elisabeth. Profitez d’une atmosphère plus détendue avec une agréable vue sur le jardin intérieur de l’hôtel - et vous apercevrez peut-être même nos chers oliviers, sans devoir prendre l’avion pour l’Espagne.\n\nÀ l’intérieur, le parquet et l’élégante douche à l’italienne donnent le ton, tandis que la climatisation, la Smart TV, le nécessaire à thé et café, le mini-réfrigérateur, la le Wi-Fi gratuit et le téléphone direct rendent votre séjour tout simplement confortable.",
+  "description_nl": "Een rustige en comfortabele tweepersoonskamer aan de stillere tuinzijde van Hotel Elisabeth. Geniet van een ontspannen sfeer met een aangenaam uitzicht op de binnentuin van het hotel - en misschien spot u zelfs onze geliefde olijfbomen, zonder dat u daarvoor naar Spanje hoeft te vliegen.\n\nBinnen zorgen parketvloeren en een stijlvolle inloopdouche voor de juiste sfeer, terwijl airconditioning, Smart TV, thee- en koffiefaciliteiten, minikoelkast, gratis wifi en een directe telefoonlijn uw verblijf moeiteloos comfortabel maken.",
+  "maxOccupancy": 2,
+  "name_en": "Garden Comfort",
+  "name_fr": "Garden Comfort",
+  "name_nl": "Garden Comfort",
+  "roomSize": 16,
+  "status": "available",
+  "bedType_es": "Cama doble",
+  "bedType_de": "Doppelbett",
+  "description_es": "Una habitación doble tranquila y confortable situada en el lado más sereno del jardín de Hotel Elisabeth. Disfruta de un ambiente relajado con agradables vistas hacia el jardín interior - y quizá incluso veas nuestros queridos olivos, sin necesidad de volar a España.\n\nEn el interior, el suelo de parquet y una elegante ducha a ras de suelo marcan el estilo, mientras que el aire acondicionado, Smart TV, tetera y cafetera, mininevera, Wi-Fi gratuito y teléfono directo hacen que tu estancia resulte muy cómoda.",
+  "description_de": "Ein ruhiges und komfortables Doppelzimmer auf der stilleren Gartenseite des Hotel Elisabeth. Genießen Sie eine entspannte Atmosphäre mit angenehmem Blick in den Innenhof - vielleicht entdecken Sie sogar unsere beliebten Olivenbäume, ganz ohne Flug nach Spanien.\n\nIm Zimmer sorgen Parkettboden und eine stilvolle ebenerdige Dusche für das passende Ambiente. Klimaanlage, Smart-TV, Tee- und Kaffeezubereitung, Minikühlschrank, kostenloses WLAN und Direktwahltelefon machen den Aufenthalt rundum unkompliziert.",
+  "name_es": "Garden Comfort",
+  "name_de": "Garden Comfort",
+  "id": "room_1769694303821",
+  "order": 3,
+  "gallery": [
+    "/images/elisabeth/rooms/1769947343842-Olive_Tree_View_5_1600.webp",
+    "/images/elisabeth/rooms/1769947348031-Olive_Tree_View_6_1600.webp",
+    "/images/elisabeth/rooms/1769947368704-Olive_Tree_View_8_1600.webp",
+    "/images/elisabeth/rooms/1769947373935-Olive_Tree_View_9_1600.webp",
+    "/images/elisabeth/rooms/1786738218973-Garden_Comfort_1.webp",
+    "/images/elisabeth/rooms/1786738220922-Garden_Comfort_2.webp",
+    "/images/elisabeth/rooms/1786738223258-Garden_Comfort_3.webp",
+    "/images/elisabeth/rooms/1786738225849-Garden_Comfort_4.webp",
+    "/images/elisabeth/rooms/1786738228157-Garden_Comfort_5.webp"
+  ],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083"
+  ]
+}

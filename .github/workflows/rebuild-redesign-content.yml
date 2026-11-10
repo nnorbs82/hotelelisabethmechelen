@@ -1,0 +1,85 @@
+name: Rebuild Elisabeth website
+
+on:
+  push:
+    branches: [elisabeth-redesign, main]
+    paths:
+      - 'redesign-site/**'
+      - '!redesign-site/content/generated/**'
+      - 'tools/build_redesign_content.py'
+      - 'tools/build_production_site.py'
+      - 'tools/promote_production_site.py'
+      - 'images/elisabeth/**'
+      - 'logo/**'
+      - 'headers/**'
+      - 'mainslide/**'
+      - 'design-preview-v2.css'
+      - 'design-preview-v2.js'
+      - '.github/workflows/rebuild-redesign-content.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: elisabeth-content-indexes-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Build static content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Validate generated JSON
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          folder=Path('redesign-site/content/generated')
+          required=['homepage.json','rooms.json','packages.json','facilities.json','facilitiesLibrary.json','meetings.json','meetingsPhotos.json','attractions.json','careers.json','amenitiesMaster.json','hotelInfo.json','privacyPolicy.json','termsAndConditions.json']
+          for name in required:
+              path=folder/name
+              if not path.exists(): raise SystemExit(f'Missing {path}')
+              json.loads(path.read_text(encoding='utf-8'))
+          print('Generated CMS indexes are valid JSON')
+          PY
+
+      - name: Build and publish the main website
+        if: github.ref_name == 'main'
+        run: python tools/promote_production_site.py
+
+      - name: Commit generated website when changed
+        id: generated
+        run: |
+          git add redesign-site/content/generated
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            python - <<'PYTHON'
+          from pathlib import Path
+          import subprocess
+          paths=[str(p.relative_to('dist')) for p in Path('dist').rglob('*') if p.is_file()]
+          subprocess.run(['git','add','--','.nojekyll',*paths],check=True)
+          PYTHON
+          fi
+          if git diff --cached --quiet; then
+            echo 'No generated website changes.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'content: rebuild website'
+          git push origin HEAD:${{ github.ref_name }}
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+
+      - name: Request Pages build after automated content commit
+        if: github.ref_name == 'main' && steps.generated.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds"

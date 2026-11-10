@@ -1,3 +1,19 @@
+# Hotel Elisabeth website
+
+The approved redesign is the main website at https://hotelelisabethmechelen.com/.
+GitHub Pages serves the generated production files from the root of `main`.
+
+Edit website source in `redesign-site/`; Pages CMS continues to use `.pages.yml`.
+Run `python3 tools/promote_production_site.py` to rebuild content and publish the
+production pages, assets and SEO files to the repository root. Never pass the
+repository root to `build_production_site.py`, which clears its output directory.
+The rebuild workflow automatically updates production files after source or CMS
+changes on `main` and requests a Pages rebuild after its generated commit.
+
+All booking bars use the shared promotion-code handler. Search and Check
+availability submit the same dates, guest counts, language and `mewsVoucherCode`
+(including an empty code) to the Mews booking engine.
+
 # Hotel Elisabeth Mechelen
 
 A modern hotel website with Firebase-powered admin dashboard for content management.

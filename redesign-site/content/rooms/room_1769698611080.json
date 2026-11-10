@@ -1,0 +1,52 @@
+{
+  "amenities": {
+    "amenity_1769533060845": true,
+    "amenity_1769533121368": true,
+    "amenity_1769533140373": true,
+    "amenity_1769533148850": true,
+    "amenity_1769533158793": true,
+    "amenity_1769533166083": true,
+    "amenity_1769533173842": true,
+    "amenity_1769533181895": true
+  },
+  "bedType_en": "Double Bed",
+  "bedType_fr": "Grand lit",
+  "bedType_nl": "Tweepersoonsbed",
+  "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios where you have more 'leeway' than in a hotel room. Our studios are contemporary furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, air conditioning, kitchenette with all amenities, walk-in shower, sitting area,…\n\nPlease keep in mind that some studios have a separate bedroom and seating area while others have an open space concept, the allocation of the rooms depends on availability on the day of arrival/check-in.",
+  "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. Nos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, climatisation, kitchenette tout confort, douche à l'italienne, coin salon,…\n\nVeuillez noter que certains studios disposent d'une chambre et d'un coin salon séparés tandis que d'autres ont un concept d'espace ouvert. L'attribution des chambres dépend de la disponibilité le jour de l'arrivée/de l'enregistrement.",
+  "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  Onze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, airco, kitchenette met alle voorzieningen, inloopdouche, zithoek,…\n\nSommige studio’s zijn ingericht met een aparte slaapkamer en zithoek, terwijl andere een open-spaceconcept hebben. De toewijzing van het type studio is afhankelijk van de beschikbaarheid op de dag van aankomst/inchecken",
+  "maxOccupancy": 2,
+  "name_en": "Studio Elisabeth",
+  "name_fr": "Studio Elisabeth",
+  "name_nl": "Studio Elisabeth",
+  "roomSize": 40,
+  "status": "available",
+  "bedType_es": "Cama doble",
+  "bedType_de": "Doppelbett",
+  "description_es": "Si quieres pasar una temporada más larga en Malinas, probablemente te sentirás todavía más cómodo en uno de nuestros estudios, donde dispones de más libertad y espacio que en una habitación de hotel. Nuestros estudios tienen un diseño contemporáneo y cuentan con todo lo necesario para hacer agradable la estancia: suelo de parquet, abundante luz natural, aire acondicionado, cocina americana totalmente equipada, ducha a ras de suelo, zona de estar y mucho más.\n\nTen en cuenta que algunos estudios disponen de dormitorio y zona de estar separados, mientras que otros siguen un concepto de espacio abierto. La asignación depende de la disponibilidad el día de llegada/check-in.",
+  "description_de": "Wenn Sie für längere Zeit in Mechelen bleiben möchten, werden Sie sich in einem unserer Studios wahrscheinlich besonders wohlfühlen, denn hier haben Sie mehr Freiraum als in einem klassischen Hotelzimmer. Unsere Studios sind modern eingerichtet und mit allem ausgestattet, was einen angenehmen Aufenthalt ausmacht: Parkettboden, viel Tageslicht, Klimaanlage, voll ausgestattete Kitchenette, ebenerdige Dusche, Sitzecke und vieles mehr.\n\nBitte beachten Sie, dass einige Studios über ein separates Schlafzimmer und einen getrennten Sitzbereich verfügen, während andere offen gestaltet sind. Die Zuteilung richtet sich nach der Verfügbarkeit am Anreise- bzw. Check-in-Tag.",
+  "name_es": "Studio Elisabeth",
+  "name_de": "Studio Elisabeth",
+  "id": "room_1769698611080",
+  "order": 9,
+  "gallery": [
+    "/images/elisabeth/rooms/1769947725780-Studio_Elisabeth_1_1600.webp",
+    "/images/elisabeth/rooms/1769947729473-Studio_Elisabeth_2_1600.webp",
+    "/images/elisabeth/rooms/1769947734122-Studio_Elisabeth_3_1600.webp",
+    "/images/elisabeth/rooms/1769947738328-Studio_Elisabeth_4_1600.webp",
+    "/images/elisabeth/rooms/1769947742792-Studio_Elisabeth_5_1600.webp",
+    "/images/elisabeth/rooms/1769947747383-Studio_Elisabeth_6_1600.webp",
+    "/images/elisabeth/rooms/1769947751805-Studio_Elisabeth_7_1600.webp",
+    "/images/elisabeth/rooms/1769947755394-Studio_Elisabeth_8_1600.webp"
+  ],
+  "amenityIds": [
+    "amenity_1769533060845",
+    "amenity_1769533121368",
+    "amenity_1769533140373",
+    "amenity_1769533148850",
+    "amenity_1769533158793",
+    "amenity_1769533166083",
+    "amenity_1769533173842",
+    "amenity_1769533181895"
+  ]
+}

@@ -1,0 +1,65 @@
+/* Shared mobile viewport containment for all Hotel Elisabeth redesign pages.
+   Prevents page-level horizontal drift while preserving intentional component scrollers. */
+
+@media (max-width: 1099px) {
+  html,
+  body.actual-site {
+    max-width: 100%;
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  body.actual-site,
+  body.actual-site main,
+  body.actual-site .site-header,
+  body.actual-site .mobile-menu,
+  body.actual-site footer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.actual-site .container,
+  body.actual-site .container-wide,
+  body.actual-site section,
+  body.actual-site article,
+  body.actual-site form {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Keep the Meetings story edge-to-edge without mobile 100vw arithmetic. */
+  body.actual-site .meeting-list {
+    width: calc(100% + 48px);
+    margin-left: -24px;
+  }
+
+  /* Long guest-facing strings must wrap instead of widening the viewport. */
+  body.actual-site .legal-content,
+  body.actual-site .policy-copy,
+  body.actual-site .meeting-story-drawer,
+  body.actual-site .group-planner-form,
+  body.actual-site .facility-console-copy {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Mobile containers use 17px side gutters, so this remains exactly full-bleed. */
+  body.actual-site .meeting-list {
+    width: calc(100% + 34px);
+    margin-left: -17px;
+  }
+}
+
+@supports not (overflow: clip) {
+  @media (max-width: 1099px) {
+    html,
+    body.actual-site {
+      overflow-x: hidden;
+    }
+  }
+}

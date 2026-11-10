@@ -1,0 +1,234 @@
+{
+  "aboutUs": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "left",
+      "right",
+      "title"
+    ]
+  },
+  "adsBottom": {
+    "status": "ok",
+    "type": "object",
+    "items": 4,
+    "top_level_keys": [
+      "ad1",
+      "ad2",
+      "ad3",
+      "titles"
+    ]
+  },
+  "amenities": {
+    "status": "unavailable",
+    "type": "null",
+    "items": 0
+  },
+  "amenitiesMaster": {
+    "status": "ok",
+    "type": "object",
+    "items": 10,
+    "top_level_keys": [
+      "amenity_1769533060845",
+      "amenity_1769533121368",
+      "amenity_1769533131043",
+      "amenity_1769533140373",
+      "amenity_1769533148850",
+      "amenity_1769533158793",
+      "amenity_1769533166083",
+      "amenity_1769533173842",
+      "amenity_1769533181895",
+      "amenity_1769533188437"
+    ]
+  },
+  "attractions": {
+    "status": "ok",
+    "type": "object",
+    "items": 5,
+    "top_level_keys": [
+      "attraction_1769868164287",
+      "attraction_1769868261502",
+      "attraction_1769868330014",
+      "attraction_1769868402831",
+      "attraction_1769868471069"
+    ]
+  },
+  "attractionsMainImage": {
+    "status": "unavailable",
+    "type": "null",
+    "items": 0
+  },
+  "careers": {
+    "status": "unavailable",
+    "type": "null",
+    "items": 0
+  },
+  "facilities": {
+    "status": "ok",
+    "type": "object",
+    "items": 2,
+    "top_level_keys": [
+      "facility_1769804810543",
+      "facility_1769888022008"
+    ]
+  },
+  "facilitiesHero": {
+    "status": "unavailable",
+    "type": "null",
+    "items": 0
+  },
+  "facilitiesLibrary": {
+    "status": "ok",
+    "type": "object",
+    "items": 2,
+    "top_level_keys": [
+      "facility_1769804810543",
+      "facility_1769888022008"
+    ]
+  },
+  "groupMainImage": {
+    "status": "unavailable",
+    "type": "null",
+    "items": 0
+  },
+  "hotelInfo": {
+    "status": "ok",
+    "type": "object",
+    "items": 10,
+    "top_level_keys": [
+      "breakfast",
+      "camera",
+      "checkin",
+      "checkout",
+      "fooddrinks",
+      "general",
+      "parking",
+      "payment",
+      "services",
+      "traffic"
+    ]
+  },
+  "indexAds": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "ad1",
+      "ad2",
+      "ad3"
+    ]
+  },
+  "indexBackground": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "filename",
+      "timestamp",
+      "url"
+    ]
+  },
+  "mainBanner": {
+    "status": "ok",
+    "type": "object",
+    "items": 8,
+    "top_level_keys": [
+      "1770122306980",
+      "1770122319249",
+      "1770122325415",
+      "1770122330889",
+      "1770122342470",
+      "1770122349505",
+      "1770122353895",
+      "1770392117712"
+    ]
+  },
+  "meetings": {
+    "status": "ok",
+    "type": "object",
+    "items": 2,
+    "top_level_keys": [
+      "meeting_1769865603864",
+      "meeting_1769866808806"
+    ]
+  },
+  "meetingsPhotos": {
+    "status": "ok",
+    "type": "object",
+    "items": 2,
+    "top_level_keys": [
+      "meeting_1769865603864",
+      "meeting_1769866808806"
+    ]
+  },
+  "packages": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "pkg_1769510856223",
+      "pkg_1769511129122",
+      "pkg_1769511395358"
+    ]
+  },
+  "privacyPolicy": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "en",
+      "fr",
+      "nl"
+    ]
+  },
+  "rooms": {
+    "status": "ok",
+    "type": "object",
+    "items": 10,
+    "top_level_keys": [
+      "room_1769535685071",
+      "room_1769694101096",
+      "room_1769694303821",
+      "room_1769694504775",
+      "room_1769694664538",
+      "room_1769694904451",
+      "room_1769697992814",
+      "room_1769698293173",
+      "room_1769698611080",
+      "room_1769698933721"
+    ]
+  },
+  "termsAndConditions": {
+    "status": "ok",
+    "type": "object",
+    "items": 3,
+    "top_level_keys": [
+      "en",
+      "fr",
+      "nl"
+    ]
+  },
+  "translations": {
+    "status": "ok",
+    "type": "object",
+    "items": 15,
+    "top_level_keys": [
+      "attractions",
+      "careers",
+      "common",
+      "facilities",
+      "footer",
+      "groupRequest",
+      "home",
+      "info",
+      "meetings",
+      "nav",
+      "packages",
+      "policies",
+      "privacyPolicyPage",
+      "rooms",
+      "termsAndConditionsPage"
+    ]
+  }
+}

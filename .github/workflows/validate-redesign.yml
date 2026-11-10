@@ -1,0 +1,205 @@
+name: Validate Elisabeth redesign
+
+on:
+  push:
+    branches: [elisabeth-redesign, main]
+    paths:
+      - 'redesign-site/**'
+      - 'images/elisabeth/**'
+      - '.pages.yml'
+      - 'tools/build_redesign_content.py'
+      - '.github/workflows/rebuild-redesign-content.yml'
+      - '.github/workflows/validate-redesign.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-elisabeth-redesign-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Validate JavaScript
+        run: |
+          for file in redesign-site/assets/*.js; do node --check "$file"; done
+
+      - name: Validate Pages CMS configuration
+        run: ruby -e "require 'yaml'; YAML.load_file('.pages.yml'); puts 'Pages CMS YAML valid'"
+
+      - name: Validate content, translations and local media
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root=Path('.')
+          content=root/'redesign-site/content'
+          generated=content/'generated'
+
+          for path in generated.glob('*.json'):
+              json.loads(path.read_text(encoding='utf-8'))
+              if 'firebasestorage.googleapis.com' in path.read_text(encoding='utf-8'):
+                  raise SystemExit(f'Firebase runtime media reference in {path}')
+
+          def items(folder):
+              return [json.loads(p.read_text(encoding='utf-8')) for p in (content/folder).glob('*.json')]
+
+          checks={
+            'amenities': ['name'],
+            'rooms': ['name','bedType','description'],
+            'packages': ['title','description','inclusions','goodToKnow'],
+            'facilities': ['name','operation','guidelines'],
+            'meetings': ['name','description','setupStyles','facilities','food','parking','accommodation'],
+            'attractions': ['title','description'],
+          }
+          for folder, fields in checks.items():
+              for item in items(folder):
+                  for lang in ['en','nl','fr','es','de']:
+                      for field in fields:
+                          value=item.get(f'{field}_{lang}')
+                          if value in (None,'',[]):
+                              raise SystemExit(f'Missing {field}_{lang} in {folder}/{item.get("id","unknown")}')
+
+          info=json.loads((content/'hotel-info.json').read_text(encoding='utf-8'))
+          if len(info.get('entries',[])) != 10:
+              raise SystemExit('Hotel information must contain 10 topics')
+          for entry in info['entries']:
+              if entry.get('id') == 'fooddrinks':
+                  continue
+              for lang in ['en','nl','fr','es','de']:
+                  if not entry.get(f'body_{lang}'):
+                      raise SystemExit(f'Missing hotel info {lang}: {entry.get("id")}')
+
+          homepage=json.loads((content/'homepage.json').read_text(encoding='utf-8'))
+          multilingual=['heroEyebrow','heroTitle','heroBody','manifestoEyebrow','manifestoLine1','manifestoLine2','manifestoSubtitle','manifestoBody','closingEyebrow','closingTitle']
+          for field in multilingual:
+              for lang in ['en','nl','fr','es','de']:
+                  if not homepage.get(f'{field}_{lang}'):
+                      raise SystemExit(f'Missing homepage {field}_{lang}')
+          hero=homepage.get('heroImages') or []
+          pace=homepage.get('paceImages') or []
+          facts=homepage.get('facts') or []
+          if not (2 <= len(hero) <= 8): raise SystemExit(f'Homepage slideshow requires 2-8 images, got {len(hero)}')
+          if len(pace) != 3: raise SystemExit(f'Homepage atmosphere ribbon requires exactly 3 images, got {len(pace)}')
+          if len(facts) != 4: raise SystemExit(f'Homepage facts require exactly 4 entries, got {len(facts)}')
+          if not homepage.get('closingImage'): raise SystemExit('Homepage closing image missing')
+          if not (generated/'homepage.json').exists(): raise SystemExit('Generated homepage index missing')
+
+          for legal_name in ['privacyPolicy.json','termsAndConditions.json']:
+              legal=json.loads((generated/legal_name).read_text(encoding='utf-8'))
+              for lang in ['en','nl','fr','es','de']:
+                  value=legal.get(lang)
+                  if not isinstance(value,str) or not value.strip():
+                      raise SystemExit(f'Missing generated {lang} content in {legal_name}')
+
+          def check_media(value, context):
+              if not isinstance(value,str) or not value.startswith('/images/'):
+                  return
+              path=root/value.lstrip('/')
+              if not path.exists(): raise SystemExit(f'Missing media {path} referenced by {context}')
+          for image in homepage.get('heroImages',[]): check_media(image.get('image',''), 'homepage hero')
+          for image in homepage.get('paceImages',[]): check_media(image.get('image',''), 'homepage atmosphere')
+          check_media(homepage.get('closingImage',''), 'homepage closing image')
+          for folder in ['rooms','packages','facilities','meetings','attractions']:
+              for item in items(folder):
+                  check_media(item.get('image',''), f'{folder}/{item.get("id")}')
+                  check_media(item.get('imageFile',''), f'{folder}/{item.get("id")}')
+                  for image in item.get('gallery',[]) or []:
+                      check_media(image, f'{folder}/{item.get("id")}')
+
+          print('Content and media validation passed')
+          PY
+
+      - name: Validate HTML and internal file references
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          base=Path('redesign-site')
+          pages=list(base.glob('*.html'))
+          if len(pages) < 12: raise SystemExit(f'Expected at least 12 redesign pages, got {len(pages)}')
+
+          class Parser(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.refs=[]
+              def handle_starttag(self, tag, attrs):
+                  d=dict(attrs)
+                  if tag in ('a','link') and d.get('href'): self.refs.append(d['href'])
+                  if tag in ('img','script') and d.get('src'): self.refs.append(d['src'])
+
+          external_schemes=('http:','https:','mailto:','tel:','sms:','javascript:','data:')
+          for page in pages:
+              text=page.read_text(encoding='utf-8')
+              HTMLParser().feed(text)
+              if 'noindex,nofollow' not in text.replace(' ', ''):
+                  raise SystemExit(f'Preview indexing protection missing: {page}')
+              parser=Parser(); parser.feed(text)
+              for ref in parser.refs:
+                  if not ref or ref.startswith(('#','/')) or ref.startswith(external_schemes):
+                      continue
+                  clean=urlsplit(ref).path
+                  if not clean:
+                      continue
+                  target=(page.parent/clean).resolve()
+                  if not target.exists():
+                      raise SystemExit(f'Broken local reference in {page}: {ref}')
+          print(f'Validated {len(pages)} HTML pages and local references')
+          PY
+
+      - name: Validate no hotel star-rating claims
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          patterns = [
+              r'4\s*★',
+              r'4\s*\*',
+              r'4[- ]star',
+              r'four[- ]star',
+              r'viersterren',
+              r'quatre\s+étoiles',
+              r'cuatro\s+estrellas',
+              r'vier[- ]sterne',
+          ]
+          rx = re.compile('|'.join(patterns), re.I)
+          files = [Path('design-preview-v2.js')]
+          for suffix in ('*.html','*.js','*.json'):
+              files.extend(Path('redesign-site').rglob(suffix))
+          hits=[]
+          for file in files:
+              if not file.exists():
+                  continue
+              text=file.read_text(encoding='utf-8',errors='ignore')
+              match=rx.search(text)
+              if match:
+                  hits.append(f'{file}: {match.group(0)}')
+          if hits:
+              raise SystemExit('Hotel star-rating claim found:\n' + '\n'.join(hits))
+          print('No hotel star-rating claims found in active redesign content')
+          PY
+
+      - name: Validate runtime architecture
+        run: |
+          if grep -R --include='*.js' -n '../redesign/legacy-content/' redesign-site/assets; then
+            echo 'Active frontend still references frozen legacy content' >&2
+            exit 1
+          fi
+          if grep -R -n 'firebasestorage.googleapis.com' redesign-site --exclude-dir=content; then
+            echo 'Active redesign still references Firebase Storage' >&2
+            exit 1
+          fi
+          grep -q 'showInOurPicks === true' redesign-site/assets/home.js
+          grep -q "homepage: 'content/generated/homepage.json'" redesign-site/assets/home.js
+          grep -q 'data-home-manifesto-title' redesign-site/index.html
+          grep -q 'hero slideshow - prototype only' design-preview-v2.js

@@ -1,0 +1,158 @@
+name: Validate Elisabeth production build
+
+on:
+  push:
+    branches: [elisabeth-redesign, main]
+    paths:
+      - 'redesign-site/**'
+      - 'images/elisabeth/**'
+      - 'logo/**'
+      - 'headers/**'
+      - 'mainslide/**'
+      - 'design-preview-v2.css'
+      - 'design-preview-v2.js'
+      - 'tools/build_redesign_content.py'
+      - 'tools/build_production_site.py'
+      - 'tools/validate_accessibility.py'
+      - '.github/workflows/validate-production-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-elisabeth-production-build-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Rebuild content indexes
+        run: python tools/build_redesign_content.py
+
+      - name: Assemble production output
+        run: python tools/build_production_site.py dist
+
+      - name: Validate production routes and SEO shell
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          dist=Path('dist')
+          expected=['index.html','rooms.html','facilities.html','packages.html','meetings.html','info.html','attractions.html','grouprequest.html','careers.html','policies.html','privacypolicy.html','termsandconditions.html']
+          for name in expected:
+              path=dist/name
+              if not path.exists(): raise SystemExit(f'Missing production route {name}')
+              text=path.read_text(encoding='utf-8')
+              if 'noindex' in text.lower(): raise SystemExit(f'Production noindex remains in {name}')
+              if 'Development build' in text or 'Isolated redesign' in text: raise SystemExit(f'Development chrome remains in {name}')
+              if '<link rel="canonical" href="https://hotelelisabethmechelen.com' not in text: raise SystemExit(f'Canonical missing in {name}')
+              if '<meta property="og:title"' not in text: raise SystemExit(f'OpenGraph metadata missing in {name}')
+              HTMLParser().feed(text)
+          if (dist/'privacy.html').exists() or (dist/'terms.html').exists():
+              raise SystemExit('Non-canonical legal routes leaked into production output')
+          home=(dist/'index.html').read_text(encoding='utf-8')
+          match=re.search(r'<script type="application/ld\+json">(.*?)</script>',home,re.S)
+          if not match: raise SystemExit('Hotel structured data missing')
+          schema=json.loads(match.group(1))
+          if schema.get('telephone') != '+32 15 28 84 00': raise SystemExit('Hotel schema telephone incorrect')
+          address=schema.get('address',{})
+          if address.get('streetAddress') != 'Goswin de Stassartstraat 26/28' or address.get('postalCode') != '2800':
+              raise SystemExit('Hotel schema address incorrect')
+          print('Production route and metadata shell validated')
+          PY
+
+      - name: Validate final CMS-driven homepage release
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          home=json.loads(Path('dist/content/generated/homepage.json').read_text(encoding='utf-8'))
+          if len(home.get('heroImages',[])) != 5:
+              raise SystemExit(f"Expected 5 active homepage slideshow images, got {len(home.get('heroImages',[]))}")
+          if len(home.get('paceImages',[])) != 3: raise SystemExit('Homepage atmosphere ribbon is incomplete')
+          if len(home.get('facts',[])) != 4: raise SystemExit('Homepage facts are incomplete')
+          for image in home.get('heroImages',[]):
+              value=image.get('image','')
+              if not value.startswith('images/elisabeth/home/'):
+                  raise SystemExit(f'Production homepage image path invalid: {value}')
+              if not Path('dist',value).exists(): raise SystemExit(f'Production homepage image missing: {value}')
+          closing=home.get('closingImage','')
+          if not closing.startswith('images/elisabeth/home/') or not Path('dist',closing).exists():
+              raise SystemExit('Production homepage closing image invalid')
+          html=Path('dist/index.html').read_text(encoding='utf-8')
+          js=Path('dist/assets/home.js').read_text(encoding='utf-8')
+          if 'data-home-manifesto-title' not in html or 'class="hero-total"' not in html:
+              raise SystemExit('Homepage CMS hooks did not survive production assembly')
+          if "homepage: 'content/generated/homepage.json'" not in js:
+              raise SystemExit('Production homepage JS is not reading generated CMS content')
+          if 'setInterval(()=>showHero(heroIndex+1),6500)' not in js:
+              raise SystemExit('Continuous homepage slideshow loop missing')
+          if "prefers-reduced-motion: reduce" not in js:
+              raise SystemExit('Homepage slideshow reduced-motion guard missing')
+          print('Final CMS-driven homepage release validated')
+          PY
+
+      - name: Validate production internal references
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          dist=Path('dist')
+          class P(HTMLParser):
+              def __init__(self): super().__init__(); self.refs=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  for key in ('href','src'):
+                      if d.get(key): self.refs.append(d[key])
+          schemes=('http:','https:','mailto:','tel:','sms:','javascript:','data:')
+          for page in dist.glob('*.html'):
+              p=P(); p.feed(page.read_text(encoding='utf-8'))
+              for ref in p.refs:
+                  if not ref or ref.startswith(('#','/')) or ref.startswith(schemes): continue
+                  clean=urlsplit(ref).path
+                  if not clean: continue
+                  target=(page.parent/clean).resolve()
+                  if not target.exists(): raise SystemExit(f'Broken production reference in {page.name}: {ref}')
+          print('Production internal references validated')
+          PY
+
+      - name: Validate accessibility shell
+        run: python tools/validate_accessibility.py dist
+
+      - name: Validate runtime paths and search files
+        run: |
+          if grep -R -n 'firebasestorage.googleapis.com' dist; then
+            echo 'Firebase Storage dependency remains in production output' >&2
+            exit 1
+          fi
+          for token in '../headers/' '../mainslide/' '../images/' '../logo/'; do
+            if grep -R -F -n "$token" dist --include='*.js' --include='*.html' --include='*.json'; then
+              echo "Preview parent-relative runtime path remains in production output: $token" >&2
+              exit 1
+            fi
+          done
+          grep -q 'Sitemap: https://hotelelisabethmechelen.com/sitemap.xml' dist/robots.txt
+          grep -q '<loc>https://hotelelisabethmechelen.com/rooms.html</loc>' dist/sitemap.xml
+          grep -q '<loc>https://hotelelisabethmechelen.com/privacypolicy.html</loc>' dist/sitemap.xml
+          grep -q 'privacypolicy.html' dist/meetings.html
+          grep -q 'termsandconditions.html' dist/index.html
+
+      - name: Validate form and booking integrations survive release build
+        run: |
+          grep -R -q 'https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e' dist
+          grep -q 'service_iu8cxtm' dist/assets/meetings.js
+          grep -q 'template_8txu2md' dist/assets/meetings.js
+          grep -q 'service_iu8cxtm' dist/assets/grouprequest.js
+          grep -q 'template_3syt07l' dist/assets/grouprequest.js
+          grep -q 'date.min=`${now.getFullYear()}' dist/assets/meetings.js
+          grep -q "aria-current','step" dist/assets/grouprequest.js

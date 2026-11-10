@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Rooms & Suites - Hotel Elisabeth Mechelen - Redesign Development</title>
+  <meta name="theme-color" content="#070807">
+  <meta name="description" content="Development preview of the new Hotel Elisabeth Mechelen Rooms and Suites experience.">
+  <link rel="icon" type="image/png" href="../logo/elicircle.png">
+  <link rel="preload" as="image" href="../headers/rooms.webp">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/rooms-experience.css">
+</head>
+<body class="actual-site rooms-page-main">
+  <a class="skip-link" href="#main-content" data-site-skip>Skip to main content</a>
+  <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+
+  <header class="site-header scrolled">
+    <div class="container-wide header-inner">
+      <a class="brand" data-site-link href="index.html" aria-label="Hotel Elisabeth home"><img src="../logo/elitext.png" alt="Hotel Elisabeth Mechelen"></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a data-site-link href="index.html" data-i18n="nav.home">Home</a>
+        <a data-site-link href="rooms.html" aria-current="page" data-i18n="nav.rooms">Rooms</a>
+        <a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a>
+        <a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a>
+        <a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a>
+        <a data-site-link href="info.html" data-i18n="nav.info">Info</a>
+        <a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang"><button class="lang-toggle" type="button" aria-label="Language selector"><span class="lang-current">EN</span> ⌄</button><div class="lang-menu"><button type="button" data-lang="en">English</button><button type="button" data-lang="nl">Nederlands</button><button type="button" data-lang="fr">Français</button><button type="button" data-lang="es">Español</button><button type="button" data-lang="de">Deutsch</button></div></div>
+        <a class="btn btn-solid header-book" href="https://app.mews.com/distributor/6e37d724-4c4d-4df9-9247-49442b7dd19e" target="_blank" rel="noopener noreferrer" data-i18n="nav.book">Book now</a>
+        <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu"><nav><a data-site-link href="index.html" data-i18n="nav.home">Home</a><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="attractions.html">Explore Mechelen</a></nav><div class="mobile-menu-foot"><span>+32 15 28 84 00</span><span>info@elisabeth-hotel.be</span><span>Goswin de Stassartstraat 26-28 · 2800 Mechelen</span></div></div>
+
+  <main id="main-content" tabindex="-1">
+    <section class="rooms-editorial-hero">
+      <div class="rooms-editorial-hero-media"><img src="../headers/rooms.webp" alt="Rooms and suites at Hotel Elisabeth Mechelen" fetchpriority="high"></div>
+      <div class="rooms-editorial-hero-border" aria-hidden="true"></div>
+      <div class="container-wide rooms-editorial-hero-copy">
+        <p class="eyebrow" data-room-i18n="eyebrow">The room collection</p>
+        <h1 class="display" data-room-i18n="hero">Find the room that feels like yours.</h1>
+        <p data-room-i18n="heroBody">From practical city rooms to cathedral views, studios and spacious suites, find the layout, bed and atmosphere that suit your stay in Mechelen.</p>
+        <div class="rooms-editorial-meta"><span><strong id="published-room-count">-</strong><span data-room-i18n="categories">room categories</span></span><span><strong>66</strong><span data-room-i18n="hotelRooms">rooms in the hotel</span></span><span><strong>1</strong><span>Indoor pool</span></span></div>
+      </div>
+    </section>
+
+    <section class="rooms-collection-intro">
+      <div class="container rooms-collection-intro-grid reveal">
+        <p class="eyebrow">Hotel Elisabeth · Mechelen</p>
+        <div>
+          <h2 class="display" data-room-i18n="collectionTitle">One collection. Different ways to stay.</h2>
+          <p data-room-i18n="collectionBody">Some stays call for a simple city base, others for extra space, a kitchenette or a view of St Rumbold’s Cathedral. Explore the room types and choose what fits your trip.</p>
+          <span class="rooms-scroll-hint" data-room-i18n="scrollHint">Scroll to move through the collection</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="room-journey" id="room-journey" aria-label="Room collection">
+      <div class="room-journey-sticky">
+        <div class="room-journey-visuals" id="room-journey-visuals"></div>
+        <nav class="room-journey-rail" id="room-journey-rail" aria-label="Room categories"></nav>
+        <div class="room-journey-content" id="room-journey-content" aria-live="polite"></div>
+        <div class="room-journey-room-nav"><span class="room-journey-room-nav-label" data-room-i18n="roomNav">Change room</span><button type="button" data-journey-room="prev" aria-label="Previous room">←</button><button type="button" data-journey-room="next" aria-label="Next room">→</button></div>
+        <div class="room-journey-gallery" id="room-journey-gallery"></div>
+      </div>
+    </section>
+
+    <section class="room-mobile-collection" id="room-mobile-collection" aria-label="Room collection"></section>
+
+    <section class="room-compare">
+      <div class="container-wide">
+        <div class="room-compare-head reveal"><p class="eyebrow" data-room-i18n="compareEyebrow">At a glance</p><div><h2 class="display" data-room-i18n="compareTitle">Find your fit quickly.</h2><p data-room-i18n="compareBody">Compare guest capacity, room size and bed setup side by side, then open the room that best fits your stay.</p></div></div>
+        <div class="room-compare-table" id="room-compare-table"></div>
+      </div>
+    </section>
+
+    <section class="interior-booking">
+      <div class="container">
+        <div class="section-head reveal"><p class="eyebrow" data-i18n="booking.note">Direct booking through Mews</p><div><h2 class="display" data-i18n="closing.title">Arrive. Exhale. Stay a little longer.</h2></div></div>
+        <form class="booking-form" data-booking-form><div class="booking-panel">
+          <label class="book-field"><span data-i18n="booking.checkin">Check-in</span><input id="preview-checkin" data-booking-arrival required type="date" aria-label="Check-in"></label>
+          <label class="book-field"><span data-i18n="booking.checkout">Check-out</span><input id="preview-checkout" data-booking-departure required type="date" aria-label="Check-out"></label>
+          <div class="book-field guest-field"><span data-i18n="booking.guests">Guests</span><div class="guest-value" tabindex="0">2 adults · 0 children</div><div class="guest-popover"><div class="guest-row"><div><strong data-i18n="booking.adults">Adults</strong><small>13+</small></div><div class="counter"><button type="button" data-counter="adults" data-delta="-1">−</button><span data-count="adults">2</span><button type="button" data-counter="adults" data-delta="1">+</button></div></div><div class="guest-row"><div><strong data-i18n="booking.children">Children</strong><small>0-12</small></div><div class="counter"><button type="button" data-counter="children" data-delta="-1">−</button><span data-count="children">0</span><button type="button" data-counter="children" data-delta="1">+</button></div></div></div></div>
+          <button class="booking-submit" id="preview-book" type="submit" data-i18n="booking.check">Check availability</button>
+        </div><div class="booking-foot"><button class="promo-toggle" type="button" data-promo-toggle aria-expanded="false" aria-controls="booking-promo-panel"><span data-promo-summary>Have a promotional code?</span><span data-promo-symbol aria-hidden="true">+</span></button><p class="booking-note" data-i18n="booking.note">Direct booking through Mews</p></div>
+          <div id="booking-promo-panel" class="promo-panel" data-promo-panel hidden><label for="booking-promo-code" data-promo-copy="label">Promotion code</label><div class="promo-entry"><input id="booking-promo-code" data-promo-code name="promoCode" type="text" placeholder="Enter your code" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="booking-promo-hint"><button type="submit" data-promo-search data-promo-copy="search">Search</button></div><div class="promo-help-row"><small id="booking-promo-hint" data-promo-copy="hint">Your code will be checked in Mews.</small><button type="button" data-promo-remove data-promo-copy="remove" hidden>Remove</button></div></div>
+          <p class="booking-error" data-booking-error role="alert" hidden>Please select an arrival date and a later departure date.</p></form>
+      </div>
+    </section>
+  </main>
+
+  <div class="room-dialog" id="room-dialog" aria-live="polite"></div>
+
+  <footer class="footer"><div class="container-wide"><div class="footer-grid"><div><img class="footer-logo" src="../logo/elitext.png" alt="Hotel Elisabeth"><p data-i18n="footer.about">A contemporary hotel in central Mechelen with 66 rooms, an indoor pool, courtyard, meeting spaces and underground parking.</p></div><div><h3 data-i18n="footer.explore">Explore</h3><a data-site-link href="rooms.html" data-i18n="nav.rooms">Rooms</a><a data-site-link href="facilities.html" data-i18n="nav.facilities">Facilities</a><a data-site-link href="packages.html" data-i18n="nav.packages">Packages</a><a data-site-link href="meetings.html" data-i18n="nav.meetings">Meetings</a><a data-site-link href="attractions.html">Explore Mechelen</a></div><div><h3 data-i18n="footer.plan">Plan</h3><a data-site-link href="info.html" data-i18n="nav.info">Info</a><a data-site-link href="grouprequest.html" data-i18n="nav.group">Group request</a><a data-site-link href="careers.html" data-i18n="nav.careers">Careers</a><a data-site-link href="policies.html">Hotel policies</a></div><div><h3 data-i18n="footer.contact">Contact</h3><a href="tel:+3215288400">+32 15 28 84 00</a><a href="mailto:info@elisabeth-hotel.be">info@elisabeth-hotel.be</a><a data-site-link href="privacy.html">Privacy policy</a><a data-site-link href="terms.html">Terms & conditions</a></div></div><div class="footer-bottom"><span>© 2026 Hotel Elisabeth Mechelen</span><span>Development build - production website unchanged.</span></div></div></footer>
+  <div class="dev-note">Isolated redesign development build · not the live Hotel Elisabeth website</div>
+
+  <script src="../design-preview-v2.js"></script>
+  <script src="assets/site.js"></script>
+  <script src="assets/booking-promotions.js"></script>
+  <script src="assets/rooms.js"></script>
+</body>
+</html>

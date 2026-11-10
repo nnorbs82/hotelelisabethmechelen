@@ -1,0 +1,19 @@
+{
+  "site": "Hotel Elisabeth Mechelen",
+  "baseUrl": "https://hotelelisabethmechelen.com",
+  "routes": [
+    "index.html",
+    "rooms.html",
+    "facilities.html",
+    "packages.html",
+    "meetings.html",
+    "info.html",
+    "attractions.html",
+    "grouprequest.html",
+    "careers.html",
+    "policies.html",
+    "privacypolicy.html",
+    "termsandconditions.html"
+  ],
+  "source": "redesign-site"
+}

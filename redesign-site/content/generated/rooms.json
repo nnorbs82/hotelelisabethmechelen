@@ -1,0 +1,626 @@
+{
+  "room_1769535685071": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "2 Single",
+    "bedType_fr": "2 Single",
+    "bedType_nl": "2 Single",
+    "description_en": "Our ‘standard’ twin room (though it’s hardly standard) is our smallest, yet cleverly designed for comfort. \n\nEnjoy parquet floors, a modern walk-in shower, and all the must-haves: air conditioning, Smart TV, tea & coffee setup, mini fridge, phone, and free high-speed WiFi. Compact, cosy, and refreshingly practical.",
+    "description_fr": "Notre chambre twin ‘standard’ (même si elle n’a rien de standard) est la plus petite, mais ingénieusement pensée pour votre confort. \n\nProfitez du parquet, d’une douche à l’italienne moderne et de tous les indispensables : climatisation, Smart TV, plateau thé & café, mini-frigo, téléphone et Wi-Fi haut débit gratuit. Compacte, cosy et pratique.",
+    "description_nl": "Onze ‘standaard’ twin kamer (al is die allesbehalve standaard) is onze kleinste, maar slim ontworpen voor comfort. \n\nGeniet van parketvloeren, een moderne inloopdouche en alle essentials: airconditioning, Smart TV, thee- en koffiefaciliteiten, mini-koelkast, telefoon en gratis snelle WiFi. Compact, gezellig en praktisch.",
+    "maxOccupancy": 2,
+    "name_en": "City Twin",
+    "name_fr": "City Twin",
+    "name_nl": "City Twin",
+    "roomSize": 14,
+    "status": "available",
+    "bedType_es": "2 camas individuales",
+    "bedType_de": "2 Einzelbetten",
+    "description_es": "Nuestra habitación twin “estándar” - aunque de estándar tiene poco - es la más pequeña, pero está ingeniosamente diseñada para ofrecer comodidad.\n\nDisfruta de suelo de parquet, una moderna ducha a ras de suelo y todo lo imprescindible: aire acondicionado, Smart TV, tetera y cafetera, mininevera, teléfono y Wi-Fi gratuito de alta velocidad. Compacta, acogedora y refrescantemente práctica.",
+    "description_de": "Unser „Standard“-Twin-Zimmer - obwohl es alles andere als gewöhnlich ist - ist unser kleinstes Zimmer und dennoch clever auf Komfort ausgelegt.\n\nFreuen Sie sich auf Parkettboden, eine moderne ebenerdige Dusche und alles, was dazugehört: Klimaanlage, Smart-TV, Tee- und Kaffeezubereitung, Minikühlschrank, Telefon und kostenloses Highspeed-WLAN. Kompakt, gemütlich und angenehm unkompliziert.",
+    "name_es": "City Twin",
+    "name_de": "City Twin",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947208490-City_Twin_1_1600w.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947212387-City_Twin_2_1600w.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947216362-City_Twin_3_1600w.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947219644-City_Twin_4_1600w.webp",
+        "order": 4
+      }
+    ]
+  },
+  "room_1769694101096": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "Our City Double Room is a stylish retreat designed for comfort in the heart of the city. With a comfortable double bed, parquet floors, and soft lighting, it’s the perfect place to unwind after a busy day. The modern bathroom with a walk-in shower adds a touch of everyday luxury.\n\nFor your convenience, the room includes air conditioning, high-speed Wi-Fi, a flat-screen TV, and tea and coffee facilities. Ideal for couples or solo travellers, it’s a cosy space where comfort meets convenience.",
+    "description_fr": "Notre Chambre Double City est un espace élégant, conçu pour votre confort au cœur de la ville. Avec un lit double confortable, un parquet chaleureux et un éclairage doux, c’est l’endroit idéal pour se détendre après une journée bien remplie. La salle de bains moderne avec douche à l’italienne ajoute une touche de luxe.\n\nPour votre confort, la chambre comprend la climatisation, le Wi-Fi haut débit, une télévision à écran plat et des installations pour le thé et le café. Idéale pour les couples ou les voyageurs en solo, c’est un cocon où confort et praticité se rencontrent.",
+    "description_nl": "Onze City Double Room is een stijlvolle kamer, ontworpen voor comfort in het hart van de stad. Met een comfortabel tweepersoonsbed, parketvloeren en sfeervolle verlichting is het de ideale plek om te ontspannen na een drukke dag. De moderne badkamer met inloopdouche voegt een vleugje luxe toe.\n\nVoor uw gemak beschikt de kamer over airconditioning, snelle wifi, een flatscreen-tv en koffie- en theefaciliteiten. Ideaal voor koppels of soloreizigers: een knusse ruimte waar comfort en gemak samenkomen.",
+    "maxOccupancy": 2,
+    "name_en": "City Double",
+    "name_fr": "City Double",
+    "name_nl": "City Double",
+    "roomSize": 14,
+    "status": "available",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Nuestra City Double es un refugio elegante diseñado para descansar con comodidad en pleno centro. Con una confortable cama doble, suelo de parquet y una iluminación suave, es el lugar perfecto para desconectar después de un día intenso. El baño moderno con ducha a ras de suelo aporta un pequeño toque de lujo cotidiano.\n\nPara que no te falte nada, la habitación cuenta con aire acondicionado, Wi-Fi de alta velocidad, Smart TV de pantalla plana y tetera y cafetera. Ideal para parejas o viajeros en solitario, es un espacio acogedor donde comodidad y practicidad van de la mano.",
+    "description_de": "Unser City Double ist ein stilvoller Rückzugsort mitten in der Stadt, ganz auf Komfort ausgelegt. Ein bequemes Doppelbett, Parkettboden und sanftes Licht machen es zum idealen Ort, um nach einem erlebnisreichen Tag abzuschalten. Das moderne Badezimmer mit ebenerdiger Dusche sorgt für einen Hauch von Alltagsluxus.\n\nFür zusätzlichen Komfort bietet das Zimmer Klimaanlage, Highspeed-WLAN, einen Flachbild-Smart-TV sowie Tee- und Kaffeezubereitungsmöglichkeiten. Ideal für Paare oder Alleinreisende - gemütlich, komfortabel und unkompliziert.",
+    "name_es": "City Double",
+    "name_de": "City Double",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947241776-City_Double_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947256936-City_Double_5_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947261351-City_Double_6_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786735785715-City_Double_1.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786735787614-City_Double_2.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786735789146-City_Double_3.webp",
+        "order": 6
+      }
+    ]
+  },
+  "room_1769694303821": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "A calm and comfortable double room located on the quieter garden side of Hotel Elisabeth. Enjoy a more relaxed setting with a pleasant outlook towards the hotel’s inner garden area - and you might even spot our much-loved olive trees, no flight to Spain required.\n\nInside, parquet floors and a stylish walk-in shower set the tone, while air conditioning, Smart TV, tea & coffee setup, mini fridge, free WiFi, and a direct line phone make your stay effortless.",
+    "description_fr": "Une chambre double calme et confortable, située du côté jardin plus paisible de l’Hotel Elisabeth. Profitez d’une atmosphère plus détendue avec une agréable vue sur le jardin intérieur de l’hôtel - et vous apercevrez peut-être même nos chers oliviers, sans devoir prendre l’avion pour l’Espagne.\n\nÀ l’intérieur, le parquet et l’élégante douche à l’italienne donnent le ton, tandis que la climatisation, la Smart TV, le nécessaire à thé et café, le mini-réfrigérateur, la le Wi-Fi gratuit et le téléphone direct rendent votre séjour tout simplement confortable.",
+    "description_nl": "Een rustige en comfortabele tweepersoonskamer aan de stillere tuinzijde van Hotel Elisabeth. Geniet van een ontspannen sfeer met een aangenaam uitzicht op de binnentuin van het hotel - en misschien spot u zelfs onze geliefde olijfbomen, zonder dat u daarvoor naar Spanje hoeft te vliegen.\n\nBinnen zorgen parketvloeren en een stijlvolle inloopdouche voor de juiste sfeer, terwijl airconditioning, Smart TV, thee- en koffiefaciliteiten, minikoelkast, gratis wifi en een directe telefoonlijn uw verblijf moeiteloos comfortabel maken.",
+    "maxOccupancy": 2,
+    "name_en": "Garden Comfort",
+    "name_fr": "Garden Comfort",
+    "name_nl": "Garden Comfort",
+    "roomSize": 16,
+    "status": "available",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Una habitación doble tranquila y confortable situada en el lado más sereno del jardín de Hotel Elisabeth. Disfruta de un ambiente relajado con agradables vistas hacia el jardín interior - y quizá incluso veas nuestros queridos olivos, sin necesidad de volar a España.\n\nEn el interior, el suelo de parquet y una elegante ducha a ras de suelo marcan el estilo, mientras que el aire acondicionado, Smart TV, tetera y cafetera, mininevera, Wi-Fi gratuito y teléfono directo hacen que tu estancia resulte muy cómoda.",
+    "description_de": "Ein ruhiges und komfortables Doppelzimmer auf der stilleren Gartenseite des Hotel Elisabeth. Genießen Sie eine entspannte Atmosphäre mit angenehmem Blick in den Innenhof - vielleicht entdecken Sie sogar unsere beliebten Olivenbäume, ganz ohne Flug nach Spanien.\n\nIm Zimmer sorgen Parkettboden und eine stilvolle ebenerdige Dusche für das passende Ambiente. Klimaanlage, Smart-TV, Tee- und Kaffeezubereitung, Minikühlschrank, kostenloses WLAN und Direktwahltelefon machen den Aufenthalt rundum unkompliziert.",
+    "name_es": "Garden Comfort",
+    "name_de": "Garden Comfort",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947343842-Olive_Tree_View_5_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947348031-Olive_Tree_View_6_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947368704-Olive_Tree_View_8_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947373935-Olive_Tree_View_9_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786738218973-Garden_Comfort_1.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786738220922-Garden_Comfort_2.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786738223258-Garden_Comfort_3.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786738225849-Garden_Comfort_4.webp",
+        "order": 8
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786738228157-Garden_Comfort_5.webp",
+        "order": 9
+      }
+    ]
+  },
+  "room_1769694504775": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you want to get closer to the cathedral, you’ll have to climb it (reception has the details). From this cosy double room, though, a triptych window with pillows invites you to sit, gaze, or finally open that book you’ve been postponing since 2015. \n\nInside: parquet floors, a walk-in shower, cool air-con, Smart TV for your series, tea & coffee for your rituals, mini fridge for treats, speedy WiFi, and a handy phone.",
+    "description_fr": "Si vous voulez vous rapprocher de la cathédrale, il faudra la gravir (infos à la réception). Dans cette chambre double cosy, la fenêtre triptyque avec coussins vous invite à vous installer, admirer la vue ou enfin ouvrir ce livre que vous repoussez depuis 2015. \n\nÀ l’intérieur : parquet, douche à l’italienne, clim, Smart TV, plateau thé & café, mini-frigo, Wi-Fi rapide et téléphone pratique.",
+    "description_nl": "Wil je dichter bij de kathedraal komen, dan moet je haar beklimmen (details bij de receptie). In deze gezellige tweepersoonskamer nodigt het driedelige raam met kussens je uit om neer te ploffen, te genieten van het uitzicht of eindelijk dat boek te lezen dat je al sinds 2015 uitstelt. \n\nBinnen: parketvloeren, een inloopdouche, frisse airco, Smart TV, thee- en koffiefaciliteiten, mini-koelkast voor lekkers, snelle WiFi en een handige telefoon.",
+    "maxOccupancy": 2,
+    "name_en": "Cathedral View",
+    "name_fr": "Cathedral View",
+    "name_nl": "Cathedral View",
+    "roomSize": 16,
+    "status": "available",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Si quieres acercarte todavía más a la catedral, tendrás que subir a la torre - en recepción te contamos cómo. Pero desde esta acogedora habitación doble, una ventana panorámica de tres cuerpos con cojines te invita a sentarte, contemplar las vistas o, por fin, abrir ese libro que llevas posponiendo desde 2015.\n\nDentro encontrarás suelo de parquet, ducha a ras de suelo, aire acondicionado, Smart TV para tus series, tetera y cafetera para tus rituales, mininevera para algún capricho, Wi-Fi rápido y un práctico teléfono.",
+    "description_de": "Wenn Sie der Kathedrale noch näher kommen möchten, müssen Sie hinaufsteigen - an der Rezeption erfahren Sie mehr. In diesem gemütlichen Doppelzimmer lädt Sie jedoch schon das dreiteilige Fenster mit Sitzkissen dazu ein, Platz zu nehmen, den Ausblick zu genießen oder endlich das Buch aufzuschlagen, das Sie seit 2015 vor sich herschieben.\n\nDrinnen erwarten Sie Parkettboden, eine ebenerdige Dusche, angenehm kühle Klimaanlage, Smart-TV für Ihre Serien, Tee und Kaffee für Ihre Rituale, ein Minikühlschrank für kleine Leckereien sowie schnelles WLAN und Telefon.",
+    "name_es": "Cathedral View",
+    "name_de": "Cathedral View",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947402832-Cathedral_View_2_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947411979-Cathedral_View_4_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947423875-Cathedral_View_7_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947427612-Cathedral_View_8_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947431325-Cathedral_View_9_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786736631228-Cathedral_View_Room_1.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786736634429-Cathedral_View_Room_2.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786736636886-Cathedral_View_Room_3.webp",
+        "order": 8
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786736639346-Cathedral_View_Room_4.webp",
+        "order": 9
+      }
+    ]
+  },
+  "room_1769694664538": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "3 Single beds",
+    "bedType_fr": "3 Lits simples",
+    "bedType_nl": "3 Eenpersoonsbedden",
+    "description_en": "It takes two to tango, but three to enjoy our triple room. Here, three single beds await: two side by side in one space and one tucked in an adjoining nook (yes, that makes three). \n\nParquet floors and a roomy walk-in shower add style, while air-con keeps you cool, the Smart TV entertains, tea & coffee keep you fueled, the mini fridge chills your snacks, speedy WiFi, and a phone keep you connected.",
+    "description_fr": "Il faut être deux pour danser le tango, mais trois pour profiter de notre chambre triple. Trois lits simples vous attendent : deux côte à côte dans un espace et un dans un coin attenant (oui, ça fait bien trois). \n\nParquet élégant et douche à l’italienne spacieuse ajoutent du style, tandis que la clim vous rafraîchit, la Smart TV divertit, thé & café réveillent, le mini-frigo garde vos encas au frais, et Wi-Fi rapide et téléphone vous gardent connectés.",
+    "description_nl": "Twee is voor de tango, drie voor onze triple kamer. Hier wachten drie eenpersoonsbedden: twee naast elkaar in één ruimte en één in een aangrenzende hoek (ja, dat maakt er drie). \n\nParketvloeren en een ruime inloopdouche zorgen voor stijl, terwijl airco je koel houdt, de Smart TV vermaakt, thee & koffie je energie geven, de mini-koelkast snacks koelt, en snelle WiFi en telefoon je verbonden houden.",
+    "maxOccupancy": 3,
+    "name_en": "City Triple",
+    "name_fr": "City Triple",
+    "name_nl": "City Triple",
+    "roomSize": 24,
+    "status": "available",
+    "bedType_es": "3 camas individuales",
+    "bedType_de": "3 Einzelbetten",
+    "description_es": "Para bailar un tango hacen falta dos, pero para disfrutar de nuestra habitación triple hacen falta tres. Aquí te esperan tres camas individuales: dos juntas en un espacio y una tercera en un rincón contiguo - sí, tres en total.\n\nEl suelo de parquet y una amplia ducha a ras de suelo aportan estilo, mientras que el aire acondicionado mantiene el ambiente fresco, la Smart TV entretiene, el té y el café dan energía, la mininevera mantiene fríos tus tentempiés y la el Wi-Fi rápido y el teléfono te mantienen conectado.",
+    "description_de": "Zum Tango gehören zwei, für unser Dreibettzimmer dürfen es drei sein. Hier warten drei Einzelbetten: zwei nebeneinander in einem Bereich und eines in einer angrenzenden Nische - ja, das macht tatsächlich drei.\n\nParkettboden und eine großzügige ebenerdige Dusche sorgen für Stil. Die Klimaanlage hält das Zimmer angenehm kühl, der Smart-TV unterhält, Tee und Kaffee sorgen für Energie, der Minikühlschrank hält Snacks frisch und schnelles WLAN und Telefon halten Sie verbunden.",
+    "name_es": "City Triple",
+    "name_de": "City Triple",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947456429-City_Triple_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947460643-City_Triple_2_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947465172-City_Triple_3_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947469836-City_Triple_4_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947477935-City_Triple_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947483164-City_Triple_6_1600.webp",
+        "order": 6
+      }
+    ]
+  },
+  "room_1769694904451": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "This double bedroom is the grown-up version of our City Twin (because sometimes you just need more space). \n\nFeel like dancing? Go ahead—there’s room for that too! With parquet floors, a sleek walk-in shower, refreshing air-con, a Smart TV for movie nights, tea & coffee to keep you going, a mini fridge for midnight snacks, speedy WiFi, and a handy phone, comfort comes standard.",
+    "description_fr": "Cette chambre double est la grande sœur de notre City Twin (parfois, on a simplement besoin de plus d’espace). \n\nEnvie de danser ? Allez-y – il y a la place ! Avec parquet élégant, douche à l’italienne moderne, clim rafraîchissante, Smart TV pour vos soirées films, plateau thé & café, mini-frigo pour vos envies nocturnes, ainsi que Wi-Fi rapide et téléphone pratique, le confort est garanti.",
+    "description_nl": "Deze tweepersoonskamer is de grotere versie van onze City Twin (soms heb je gewoon wat extra ruimte nodig). \n\nZin om te dansen? Ga je gang – er is plek genoeg! Met parketvloeren, een stijlvolle inloopdouche, verfrissende airco, een Smart TV voor filmavonden, thee & koffie bij de hand, een mini-koelkast voor middernachtsnacks, snelle WiFi en een handige telefoon is comfort gegarandeerd.",
+    "maxOccupancy": 2,
+    "name_en": "City Comfort",
+    "name_fr": "City Comfort",
+    "name_nl": "City Comfort",
+    "roomSize": 18,
+    "status": "offline",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Esta habitación doble es la versión más adulta de nuestra City Twin - porque a veces simplemente hace falta un poco más de espacio.\n\n¿Te apetece bailar? Adelante, también hay sitio para eso. Con suelo de parquet, una elegante ducha a ras de suelo, aire acondicionado, Smart TV para noches de cine, tetera y cafetera, mininevera para los antojos de medianoche, además de Wi-Fi rápido y teléfono, la comodidad viene de serie.",
+    "description_de": "Dieses Doppelzimmer ist die erwachsenere Version unseres City Twin - denn manchmal braucht man einfach etwas mehr Platz.\n\nLust zu tanzen? Nur zu, dafür ist ebenfalls Raum. Parkettboden, eine elegante ebenerdige Dusche, erfrischende Klimaanlage, Smart-TV für Filmabende, Tee und Kaffee, ein Minikühlschrank für Mitternachtssnacks sowie schnelles WLAN und Telefon machen Komfort hier zur Selbstverständlichkeit.",
+    "name_es": "City Comfort",
+    "name_de": "City Comfort",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947504053-City_Comfort_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947508226-City_Comfort_2_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947511896-City_Comfort_3_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947515686-City_Comfort_4_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947519591-City_Comfort_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947523567-City_Comfort_6_1600.webp",
+        "order": 6
+      }
+    ]
+  },
+  "room_1769697992814": {
+    "status": "available",
+    "maxOccupancy": 4,
+    "roomSize": 40,
+    "name_en": "Cathedral Suite",
+    "name_nl": "Cathedral Suite",
+    "name_fr": "Cathedral Suite",
+    "name_es": "Cathedral Suite",
+    "name_de": "Cathedral Suite",
+    "bedType_en": "Double Bed + Sofa Bed",
+    "bedType_nl": "Tweepersoonsbed + slaapbank",
+    "bedType_fr": "Lit double + canapé-lit",
+    "bedType_es": "Cama doble + sofá cama",
+    "bedType_de": "Doppelbett + Schlafsofa",
+    "description_en": "Eager to sleep in style with the cathedral in sight? Our Cathedral Suite offers two separate spaces, a comfy double bed, a 2-person sofa bed, a cozy sitting corner, and a handy kitchenette.\n\nAdd parquet floors and a bathtub made for relaxing, plus air-con, Smart TV, tea & coffee facilities, mini fridge, fast WiFi, lounge area, and phone - and you’ve got comfort at every corner.\n\nAdditional note:\n\nThe standard rate includes accommodation for 2 guests using the main double bed. Should 2 guests wish to use the sofa bed as well, this can be arranged for an additional €40 per night. To ensure everything is ready for your stay, requests must be submitted at least 1 night prior to the check-in date.\n\nFor your comfort and flexibility, fresh bedding for the sofa bed will be placed in the suite upon arrival, allowing guests to set up the sofa bed whenever they are ready to call it a night.\n\nFor bookings of 3 to 4 guests, the use of the sofa bed and the corresponding bedding are already included in the rate.",
+    "description_nl": "Zin om stijlvol te overnachten met zicht op de kathedraal? Onze Cathedral Suite beschikt over twee aparte ruimtes, een comfortabel tweepersoonsbed, een 2-persoons slaapbank, een gezellige zithoek en een handige kitchenette.\n\nVoeg daar parketvloeren en een ontspannend ligbad aan toe, samen met airconditioning, Smart TV, koffie- en theefaciliteiten, mini-koelkast, snelle WiFi, loungehoek en telefoon - en u geniet van comfort in elke hoek.\n\nExtra informatie:\n\nHet standaardtarief omvat verblijf voor 2 gasten met gebruik van het tweepersoonsbed. Indien 2 gasten ook gebruik wensen te maken van de slaapbank, kan dit geregeld worden voor een extra kost van €40 per nacht. Om alles tijdig voor uw verblijf te voorzien, vragen wij vriendelijk om dit minstens 1 nacht vóór de check-indatum door te geven.\n\nVoor extra comfort en flexibiliteit wordt het beddengoed voor de slaapbank bij aankomst in de suite voorzien, zodat gasten de slaapbank eenvoudig zelf kunnen opmaken wanneer zij klaar zijn om de nacht af te sluiten.\n\nVoor reservaties van 3 tot 4 gasten zijn het gebruik van de slaapbank en het bijhorende beddengoed reeds inbegrepen in het tarief.",
+    "description_fr": "Envie de dormir avec style tout en profitant de la vue sur la cathédrale ? Notre Cathedral Suite dispose de deux espaces séparés, d’un confortable lit double, d’un canapé-lit pour 2 personnes, d’un coin salon chaleureux et d’une kitchenette pratique.\n\nAjoutez à cela un parquet élégant et une baignoire idéale pour se détendre, ainsi que la climatisation, une Smart TV, un coin thé et café, un mini-frigo, une le WiFi rapide, un espace lounge et un téléphone - et vous profiterez d’un confort à chaque instant.\n\nNote complémentaire :\n\nLe tarif standard comprend l’hébergement pour 2 personnes utilisant le lit double principal. Si 2 personnes souhaitent également utiliser le canapé-lit, cela peut être organisé moyennant un supplément de 40 € par nuit. Afin de préparer votre séjour dans les meilleures conditions, nous vous demandons de bien vouloir soumettre votre demande au moins 1 nuit avant la date d’arrivée.\n\nPour votre confort et votre flexibilité, le linge de lit pour le canapé-lit sera déposé dans la suite à votre arrivée, permettant ainsi aux invités d’installer le canapé-lit à leur convenance lorsqu’ils seront prêts à terminer la soirée.\n\nPour les réservations de 3 à 4 personnes, l’utilisation du canapé-lit ainsi que le linge de lit correspondant sont déjà inclus dans le tarif.",
+    "description_es": "¿Te apetece dormir con estilo y con la catedral a la vista? Nuestra Cathedral Suite ofrece dos espacios separados, una cómoda cama doble, un sofá cama para 2 personas, una acogedora zona de estar y una práctica cocina americana.\n\nAñade suelo de parquet y una bañera hecha para relajarse, además de aire acondicionado, Smart TV, tetera y cafetera, mininevera, Wi-Fi rápido, zona lounge y teléfono - comodidad en cada rincón.\n\nInformación adicional:\n\nLa tarifa estándar incluye alojamiento para 2 huéspedes utilizando la cama doble principal. Si 2 huéspedes desean utilizar también el sofá cama, puede prepararse por un suplemento de 40 € por noche. Para que todo esté listo a tu llegada, la solicitud debe realizarse al menos 1 noche antes de la fecha de check-in.\n\nPara mayor comodidad y flexibilidad, la ropa de cama limpia para el sofá cama se dejará en la suite a la llegada, de modo que los huéspedes puedan prepararlo cuando estén listos para ir a dormir.\n\nEn reservas de 3 a 4 huéspedes, el uso del sofá cama y la ropa de cama correspondiente ya están incluidos en la tarifa.",
+    "description_de": "Stilvoll schlafen und dabei die Kathedrale im Blick behalten? Unsere Cathedral Suite bietet zwei getrennte Bereiche, ein bequemes Doppelbett, ein Schlafsofa für 2 Personen, eine gemütliche Sitzecke und eine praktische Kitchenette.\n\nDazu kommen Parkettboden und eine Badewanne zum Entspannen sowie Klimaanlage, Smart-TV, Tee- und Kaffeezubereitung, Minikühlschrank, schnelles WLAN, Lounge-Bereich und Telefon - Komfort in jeder Ecke.\n\nZusätzliche Information:\n\nDer Standardpreis umfasst die Unterkunft für 2 Gäste im Hauptdoppelbett. Wenn 2 Gäste zusätzlich das Schlafsofa nutzen möchten, kann dies gegen einen Aufpreis von 40 € pro Nacht arrangiert werden. Damit bei Ihrer Anreise alles bereit ist, muss die Anfrage mindestens 1 Nacht vor dem Check-in-Datum erfolgen.\n\nFür Komfort und Flexibilität wird frische Bettwäsche für das Schlafsofa bei der Ankunft in der Suite bereitgelegt, sodass die Gäste das Sofa selbst beziehen können, sobald sie schlafen gehen möchten.\n\nBei Buchungen für 3 bis 4 Gäste sind die Nutzung des Schlafsofas und die entsprechende Bettwäsche bereits im Preis enthalten.",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1786741115651-Cathedral_Suite_6.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741119199-Cathedral_Suite_8.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741109687-Cathedral_Suite_2.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741112568-Cathedral_Suite_4.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947574249-Cathedral_Suite_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741108285-Cathedral_Suite_1.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947603716-Cathedral_Suite_9_1600.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741111160-Cathedral_Suite_3.webp",
+        "order": 8
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741113908-Cathedral_Suite_5.webp",
+        "order": 9
+      },
+      {
+        "url": "../images/elisabeth/rooms/1786741117374-Cathedral_Suite_7.webp",
+        "order": 10
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947583904-Cathedral_Suite_7_1600.webp",
+        "order": 11
+      }
+    ],
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true,
+      "amenity_1769533188437": true
+    }
+  },
+  "room_1769698293173": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true
+    },
+    "bedType_en": "Double Bed + Sofa Bed",
+    "bedType_fr": "Lit double + canapé-lit",
+    "bedType_nl": "Tweepersoonsbed + slaapbank",
+    "description_en": "You have style, you have class, you want enough space for your elegance - and perhaps spend the evening in a cosy sitting corner after cooking something in the kitchenette that would make Gordon Ramsay jealous?\n\nWell, welcome to the City Suite! Enjoy 3 separate spaces with a split-level layout, a comfortable double bed, a 2-person sofa bed, a cosy sitting corner, and a handy kitchenette.\n\nAdditional note:\n\nThe standard rate includes accommodation for 2 guests using the main double bed. Should 2 guests wish to use the sofa bed as well, this can be arranged for an additional €40 per night. To ensure everything is ready for your stay, requests must be submitted at least 1 night prior to the check-in date.\n\nFor your comfort and flexibility, fresh bedding for the sofa bed will be placed in the suite upon arrival, allowing guests to set up the sofa bed whenever they are ready to call it a night.\n\nFor bookings of 3 to 4 guests, the use of the sofa bed and the corresponding bedding are already included in the rate.",
+    "description_fr": "Vous avez du style, vous avez de la classe, vous aimez avoir suffisamment d’espace pour votre élégance - et peut-être passer la soirée dans un coin salon chaleureux après avoir préparé quelque chose dans la kitchenette qui rendrait Gordon Ramsay jaloux ?\n\nAlors, bienvenue dans la City Suite ! Profitez de 3 espaces séparés avec une disposition en duplex, un confortable lit double, un canapé-lit pour 2 personnes, un coin salon cosy et une kitchenette pratique.\n\nNote complémentaire :\n\nLe tarif standard comprend l’hébergement pour 2 personnes utilisant le lit double principal. Si 2 personnes souhaitent également utiliser le canapé-lit, cela peut être organisé moyennant un supplément de 40 € par nuit. Afin de préparer votre séjour dans les meilleures conditions, nous vous demandons de bien vouloir soumettre votre demande au moins 1 nuit avant la date d’arrivée.\n\nPour votre confort et votre flexibilité, le linge de lit pour le canapé-lit sera déposé dans la suite à votre arrivée, permettant ainsi aux invités d’installer le canapé-lit à leur convenance lorsqu’ils seront prêts à terminer la soirée.\n\nPour les réservations de 3 à 4 personnes, l’utilisation du canapé-lit ainsi que le linge de lit correspondant sont déjà inclus dans le tarif.",
+    "description_nl": "U heeft stijl, u heeft klasse, u wilt voldoende ruimte voor uw elegantie - en misschien wilt u de avond doorbrengen in een gezellige zithoek nadat u iets heeft klaargemaakt in de kitchenette waar zelfs Gordon Ramsay jaloers op zou zijn?\n\nWel, welkom in de City Suite! Geniet van 3 aparte ruimtes met een split-level indeling, een comfortabel tweepersoonsbed, een 2-persoons slaapbank, een gezellige zithoek en een handige kitchenette.\n\nExtra informatie:\n\nHet standaardtarief omvat verblijf voor 2 gasten met gebruik van het tweepersoonsbed. Indien 2 gasten ook gebruik wensen te maken van de slaapbank, kan dit geregeld worden voor een extra kost van €40 per nacht. Om alles tijdig voor uw verblijf te voorzien, vragen wij vriendelijk om dit minstens 1 nacht vóór de check-indatum door te geven.\n\nVoor extra comfort en flexibiliteit wordt het beddengoed voor de slaapbank bij aankomst in de suite voorzien, zodat gasten de slaapbank eenvoudig zelf kunnen opmaken wanneer zij klaar zijn om de nacht af te sluiten.\n\nVoor reservaties van 3 tot 4 gasten zijn het gebruik van de slaapbank en het bijhorende beddengoed reeds inbegrepen in het tarief.",
+    "maxOccupancy": 4,
+    "name_en": "City Suite",
+    "name_fr": "City Suite",
+    "name_nl": "City Suite",
+    "roomSize": 30,
+    "status": "available",
+    "bedType_es": "Cama doble + sofá cama",
+    "bedType_de": "Doppelbett + Schlafsofa",
+    "description_es": "Tienes estilo, tienes clase y quieres espacio suficiente para toda esa elegancia - ¿y quizá terminar el día en una acogedora zona de estar después de preparar algo en la cocina americana que pondría celoso a Gordon Ramsay?\n\nBienvenido a la City Suite. Disfruta de 3 espacios separados en una distribución a distintos niveles, una cómoda cama doble, un sofá cama para 2 personas, una acogedora zona de estar y una práctica cocina americana.\n\nInformación adicional:\n\nLa tarifa estándar incluye alojamiento para 2 huéspedes utilizando la cama doble principal. Si 2 huéspedes desean utilizar también el sofá cama, puede prepararse por un suplemento de 40 € por noche. Para que todo esté listo a tu llegada, la solicitud debe realizarse al menos 1 noche antes de la fecha de check-in.\n\nPara mayor comodidad y flexibilidad, la ropa de cama limpia para el sofá cama se dejará en la suite a la llegada, de modo que los huéspedes puedan prepararlo cuando estén listos para ir a dormir.\n\nEn reservas de 3 a 4 huéspedes, el uso del sofá cama y la ropa de cama correspondiente ya están incluidos en la tarifa.",
+    "description_de": "Sie haben Stil, Sie haben Klasse und möchten genug Platz für all diese Eleganz - und vielleicht den Abend in einer gemütlichen Sitzecke verbringen, nachdem Sie in der Kitchenette etwas gezaubert haben, auf das Gordon Ramsay neidisch wäre?\n\nWillkommen in der City Suite. Freuen Sie sich auf 3 getrennte Bereiche in einer Split-Level-Aufteilung, ein bequemes Doppelbett, ein Schlafsofa für 2 Personen, eine gemütliche Sitzecke und eine praktische Kitchenette.\n\nZusätzliche Information:\n\nDer Standardpreis umfasst die Unterkunft für 2 Gäste im Hauptdoppelbett. Wenn 2 Gäste zusätzlich das Schlafsofa nutzen möchten, kann dies gegen einen Aufpreis von 40 € pro Nacht arrangiert werden. Damit bei Ihrer Anreise alles bereit ist, muss die Anfrage mindestens 1 Nacht vor dem Check-in-Datum erfolgen.\n\nFür Komfort und Flexibilität wird frische Bettwäsche für das Schlafsofa bei der Ankunft in der Suite bereitgelegt, sodass die Gäste das Sofa selbst beziehen können, sobald sie schlafen gehen möchten.\n\nBei Buchungen für 3 bis 4 Gäste sind die Nutzung des Schlafsofas und die entsprechende Bettwäsche bereits im Preis enthalten.",
+    "name_es": "City Suite",
+    "name_de": "City Suite",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947645298-City_Suite_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947648929-City_Suite_2_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947652796-City_Suite_3_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947657834-City_Suite_4_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947661689-City_Suite_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947666112-City_Suite_6_1600.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947670687-City_Suite_7_1600.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947675291-City_Suite_8_1600.webp",
+        "order": 8
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947680947-City_Suite_9_1600.webp",
+        "order": 9
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947684753-City_Suite_10_1600.webp",
+        "order": 10
+      }
+    ]
+  },
+  "room_1769698611080": {
+    "amenities": {
+      "amenity_1769533060845": true,
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios where you have more 'leeway' than in a hotel room. Our studios are contemporary furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, air conditioning, kitchenette with all amenities, walk-in shower, sitting area,…\n\nPlease keep in mind that some studios have a separate bedroom and seating area while others have an open space concept, the allocation of the rooms depends on availability on the day of arrival/check-in.",
+    "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. Nos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, climatisation, kitchenette tout confort, douche à l'italienne, coin salon,…\n\nVeuillez noter que certains studios disposent d'une chambre et d'un coin salon séparés tandis que d'autres ont un concept d'espace ouvert. L'attribution des chambres dépend de la disponibilité le jour de l'arrivée/de l'enregistrement.",
+    "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  Onze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, airco, kitchenette met alle voorzieningen, inloopdouche, zithoek,…\n\nSommige studio’s zijn ingericht met een aparte slaapkamer en zithoek, terwijl andere een open-spaceconcept hebben. De toewijzing van het type studio is afhankelijk van de beschikbaarheid op de dag van aankomst/inchecken",
+    "maxOccupancy": 2,
+    "name_en": "Studio Elisabeth",
+    "name_fr": "Studio Elisabeth",
+    "name_nl": "Studio Elisabeth",
+    "roomSize": 40,
+    "status": "available",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Si quieres pasar una temporada más larga en Malinas, probablemente te sentirás todavía más cómodo en uno de nuestros estudios, donde dispones de más libertad y espacio que en una habitación de hotel. Nuestros estudios tienen un diseño contemporáneo y cuentan con todo lo necesario para hacer agradable la estancia: suelo de parquet, abundante luz natural, aire acondicionado, cocina americana totalmente equipada, ducha a ras de suelo, zona de estar y mucho más.\n\nTen en cuenta que algunos estudios disponen de dormitorio y zona de estar separados, mientras que otros siguen un concepto de espacio abierto. La asignación depende de la disponibilidad el día de llegada/check-in.",
+    "description_de": "Wenn Sie für längere Zeit in Mechelen bleiben möchten, werden Sie sich in einem unserer Studios wahrscheinlich besonders wohlfühlen, denn hier haben Sie mehr Freiraum als in einem klassischen Hotelzimmer. Unsere Studios sind modern eingerichtet und mit allem ausgestattet, was einen angenehmen Aufenthalt ausmacht: Parkettboden, viel Tageslicht, Klimaanlage, voll ausgestattete Kitchenette, ebenerdige Dusche, Sitzecke und vieles mehr.\n\nBitte beachten Sie, dass einige Studios über ein separates Schlafzimmer und einen getrennten Sitzbereich verfügen, während andere offen gestaltet sind. Die Zuteilung richtet sich nach der Verfügbarkeit am Anreise- bzw. Check-in-Tag.",
+    "name_es": "Studio Elisabeth",
+    "name_de": "Studio Elisabeth",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947725780-Studio_Elisabeth_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947729473-Studio_Elisabeth_2_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947734122-Studio_Elisabeth_3_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947738328-Studio_Elisabeth_4_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947742792-Studio_Elisabeth_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947747383-Studio_Elisabeth_6_1600.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947751805-Studio_Elisabeth_7_1600.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947755394-Studio_Elisabeth_8_1600.webp",
+        "order": 8
+      }
+    ]
+  },
+  "room_1769698933721": {
+    "amenities": {
+      "amenity_1769533121368": true,
+      "amenity_1769533140373": true,
+      "amenity_1769533148850": true,
+      "amenity_1769533158793": true,
+      "amenity_1769533166083": true,
+      "amenity_1769533173842": true,
+      "amenity_1769533181895": true
+    },
+    "bedType_en": "Double Bed",
+    "bedType_fr": "Grand lit",
+    "bedType_nl": "Tweepersoonsbed",
+    "description_en": "If you wish to stay in Mechelen for a longer period of time, you will undoubtedly be happier in one of our studios, where you have more 'leeway' than in a hotel room. \n\nOur studios are contemporary, furnished and equipped with all the features to make your stay pleasant. Parquet floor, pleasant daylight, kitchenette with all amenities, walk-in shower, sitting area,…",
+    "description_fr": "Si vous souhaitez séjourner plus longtemps à Malines, vous serez sans aucun doute plus heureux dans l'un de nos studios où vous aurez plus de 'liberté' que dans une chambre d'hôtel. \n\nNos studios sont concus de façon contemporaine et équipés de toutes les fonctionnalités pour rendre votre séjour agréable. Parquet, agréable luminosité, kitchenette tout confort, douche à l'italienne, coin salon,…",
+    "description_nl": "Indien u voor langere tijd in Mechelen wenst te verblijven, dan wordt u ongetwijfeld gelukkiger in een van onze studios waar u meer ‘speelruimte’ heeft dan in een hotelkamer.  \n\nOnze studio’s zijn eigentijds ingericht en voorzien van alle features om uw verblijf aangenaam te maken. Parketvloer, gezellige lichtinval, kitchenette met alle voorzieningen, inloopdouche, zithoek,…",
+    "maxOccupancy": 2,
+    "name_en": "Studio Oud Huys",
+    "name_fr": "Studio Oud Huys",
+    "name_nl": "Studio Oud Huys",
+    "roomSize": 35,
+    "status": "available",
+    "bedType_es": "Cama doble",
+    "bedType_de": "Doppelbett",
+    "description_es": "Si quieres pasar una temporada más larga en Malinas, probablemente te sentirás todavía más cómodo en uno de nuestros estudios, donde dispones de más libertad y espacio que en una habitación de hotel.\n\nNuestros estudios tienen un diseño contemporáneo y cuentan con todo lo necesario para hacer agradable la estancia: suelo de parquet, abundante luz natural, cocina americana totalmente equipada, ducha a ras de suelo, zona de estar y mucho más.",
+    "description_de": "Wenn Sie für längere Zeit in Mechelen bleiben möchten, werden Sie sich in einem unserer Studios wahrscheinlich besonders wohlfühlen, denn hier haben Sie mehr Freiraum als in einem klassischen Hotelzimmer.\n\nUnsere Studios sind modern eingerichtet und mit allem ausgestattet, was einen angenehmen Aufenthalt ausmacht: Parkettboden, viel Tageslicht, voll ausgestattete Kitchenette, ebenerdige Dusche, Sitzecke und vieles mehr.",
+    "name_es": "Studio Oud Huys",
+    "name_de": "Studio Oud Huys",
+    "photos": [
+      {
+        "url": "../images/elisabeth/rooms/1769947778322-Studio_Oud_Huys_1_1600.webp",
+        "order": 1
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947781908-Studio_Oud_Huys_2_1600.webp",
+        "order": 2
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947786202-Studio_Oud_Huys_3_1600.webp",
+        "order": 3
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947790330-Studio_Oud_Huys_4_1600.webp",
+        "order": 4
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947793801-Studio_Oud_Huys_5_1600.webp",
+        "order": 5
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947799660-Studio_Oud_Huys_6_1600.webp",
+        "order": 6
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947803580-Studio_Oud_Huys_7_1600.webp",
+        "order": 7
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947807901-Studio_Oud_Huys_8_1600.webp",
+        "order": 8
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947813026-Studio_Oud_Huys_9_1600.webp",
+        "order": 9
+      },
+      {
+        "url": "../images/elisabeth/rooms/1769947816957-Studio_Oud_Huys_10_1600.webp",
+        "order": 10
+      }
+    ]
+  }
+}

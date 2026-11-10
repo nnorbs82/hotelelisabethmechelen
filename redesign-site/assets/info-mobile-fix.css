@@ -1,0 +1,90 @@
+/* Mobile containment fixes for the Hotel Information experience. */
+.info-desk-shell,
+.info-desk-index,
+.info-desk-tabs,
+.info-desk-panel {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.info-desk-body {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 800px) {
+  .info-desk,
+  .info-desk .container-wide,
+  .info-desk-shell,
+  .info-desk-index,
+  .info-desk-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .info-desk,
+  .info-desk .container-wide,
+  .info-desk-shell,
+  .info-desk-index {
+    overflow-x: hidden;
+  }
+
+  .info-desk-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .info-desk-tab {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 8px;
+    padding: 15px 14px;
+    border-right: 1px solid rgba(255,255,255,.1);
+  }
+
+  .info-desk-tab:hover,
+  .info-desk-tab.active {
+    padding-left: 14px;
+  }
+
+  .info-desk-tab .label,
+  .info-desk-panel h2,
+  .info-desk-body,
+  .info-desk-actions .info-progress {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .info-desk-tab .label {
+    line-height: 1.25;
+  }
+
+  .info-desk-panel {
+    overflow: hidden;
+  }
+
+  .info-desk-actions {
+    min-width: 0;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 420px) {
+  .info-desk-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .info-desk-tab {
+    border-right: 0;
+  }
+}

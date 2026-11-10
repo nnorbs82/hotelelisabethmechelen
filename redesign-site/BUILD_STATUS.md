@@ -1,0 +1,41 @@
+# Hotel Elisabeth redesign site
+
+This directory is the permanent development build for the approved Hotel Elisabeth redesign.
+
+- Development branch: `elisabeth-redesign`
+- Production branch `main` remains untouched at the protected legacy production checkpoint.
+- Visual architecture complete for Home, Rooms, Facilities, Packages, Meetings, Info, Attractions, Group Request, Careers, Hotel Policies, Privacy and Terms.
+- Five-language interface: EN / NL / FR / ES / DE.
+- CMS: Pages CMS configuration is present in `.pages.yml`.
+- Editable hotel content is stored under `redesign-site/content/`.
+- Frontend reads generated static indexes under `redesign-site/content/generated/`.
+- CMS edits automatically rebuild browser-facing indexes through `.github/workflows/rebuild-redesign-content.yml`.
+- Rooms, packages, facilities, meetings, attractions, amenities, careers, homepage, hotel information and legal content are represented in the CMS model.
+- Public room, package, facility, meeting, attraction and homepage media have been migrated into Git-managed `images/elisabeth/` folders.
+- Legacy Firebase Storage URLs have been removed from the active CMS content and generated redesign indexes.
+- Production assembly is handled by `tools/build_production_site.py`.
+- Production validation checks canonical routes, SEO metadata, internal references, Mews booking, meeting/group enquiry integrations, accessibility structure and rejects any Firebase Storage dependency in the assembled output.
+- Current multilingual content audit: Rooms, Packages, Facilities, Meetings, Attractions, Hotel Info, Homepage, Privacy Policy and Terms & Conditions have production content coverage in EN/NL/FR/ES/DE.
+- Guest-facing supporting copy has been polished across the homepage, Rooms, Facilities, Hotel Info, Attractions and Group Request so section introductions describe the hotel experience rather than the website build.
+- Hotel Information Services and General Facilities are aligned across EN/NL/FR/ES/DE using current guest-facing facts; legacy fax, shoe-shine and ironing-service claims were removed, pool hours are consistently shown as 07:00-23:00, and the spa is consistently marked as opening soon.
+- Hotel Information low-traffic camera copy has been repaired in the source and generated content, including clear C3-sign guidance and the existing €58 fine information.
+- Package copy and inclusions have been audited across EN/NL/FR/ES/DE. Happy Friday, Special Day and Sweet Suite Deal remain active, their Mews booking links and availability conditions are preserved, and the Sweet Suite inclusions now match its pool-access description.
+- Meeting-room content has been polished across all five languages while preserving the existing capacities and setup styles. Parking copy no longer states a fixed number of parking spaces in any supported language.
+- Attraction content has been refreshed against current Visit Mechelen information. Stale date-specific visitor information was removed or replaced, current guidance is concise and guest-facing, and canonical Visit Mechelen links are used for boat trips, Het Anker, the Palace of Margaret of Austria, the Large Beguinage and the Dyle Towpath.
+- Room descriptions have been reconciled with the amenities assigned in the CMS. Unsupported docking-station claims were removed and mini-fridge terminology was standardised where needed.
+- The City Suite no longer carries the bathtub amenity after current room-detail verification confirmed a shower; the Cathedral Suite retains its bath amenity.
+- Careers has been reviewed: no active vacancies are currently stored, and the page correctly falls back to the open-application option.
+- Generated browser-facing content indexes have been rebuilt after the content QA changes.
+- The redesign validator rejects hotel star-rating claims in active HTML, JavaScript and JSON and verifies generated Privacy Policy and Terms & Conditions content in all five languages.
+- Spanish and German legal translations are stored as reviewed translation sources under `redesign-site/content/legal/` and are included automatically when the corresponding CMS JSON fields are empty.
+- The content build now fails if Privacy Policy or Terms & Conditions are missing in any of the five supported languages.
+- Technical QA now uses browser-local dates for the meeting request form, consistent with the main booking and group-request date flows.
+- Group Request exposes the active multi-step state to assistive technology and displays telephone validation through the form status region rather than an alert-only message.
+- Keyboard users receive a consistent visible focus treatment across interactive controls.
+- Homepage auto-advance and meeting gallery scrolling respect the visitor's reduced-motion preference.
+- A reusable production accessibility validator checks page language, viewport and meta descriptions, duplicate IDs, image alt attributes, safe new-tab links, skip/main structure, H1 structure, labelled form controls and accessible button names.
+- The accessibility pass identified and corrected missing meta descriptions on Careers, Hotel Policies, Privacy Policy and Terms & Conditions.
+- Mews booking URLs and both EmailJS enquiry integrations remain guarded by the production build validation.
+- Final human/legal review of translated legal copy remains a pre-launch QA item.
+- Firebase remains untouched only as a legacy backup until final launch approval and post-launch verification.
+- No production cutover or change to `main`, CNAME or the live GitHub Pages site is permitted without explicit final approval.
